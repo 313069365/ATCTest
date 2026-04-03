@@ -1,0 +1,201 @@
+/* 字体定义 */
+@font-face {
+  font-family: 'Material Symbols Rounded';
+  src: url('./assets/fonts/MaterialSymbols.woff2') format('woff2');
+  font-weight: 100 700;
+  font-style: normal;
+  font-display: block;
+}
+
+/* ========== 变量 ========== */
+:root {
+  /* 布局 */
+  --app-max-height: 100vh;
+  --app-max-width: 400px;
+
+  /* 字体 */
+  --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --line-height-tight: 1.25;
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.75;
+
+  /* 字号 - 7档 */
+  --font-size-mn: 10px;
+  --font-size-sm: 12px;
+  --font-size-md: 14px;
+  --font-size-lg: 16px;
+  --font-size-xl: 18px;
+  --font-size-2xl: 20px;
+  --font-size-3xl: 24px;
+  --font-size-xxl: 36px;
+
+  /* 字重 */
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-extrabold: 800;
+  --font-weight-black: 900;
+
+  /* 主色 */
+  --primary: #005bbf;
+  --primary-dark: #03468f;
+  --primary-light: #d8e2ff;
+  --primary-container: #d8e2ff;
+  --on-primary: #ffffff;
+  --primary-gradient-end: #1a73e8;
+
+  /* 次要色 */
+  --secondary: #b78d77;
+  --secondary-light: #fcf5e2;
+
+  /* 强调色 */
+  --accent: #e67e22;
+  --accent-light: #fef3e0;
+  --accent-gradient-end: #f39c12;
+
+  /* 文字 */
+  --on-surface: #1f1f1f;
+  --on-surface-variant: #444746;
+  --text-primary: #181c20;
+  --text-secondary: #727785;
+  --text-disabled: #9e9e9e;
+
+  /* 图标颜色 */
+  --icon-color: #414754;
+  --icon-color-secondary: #727785;
+
+  /* 背景 */
+  --background: #ffffff;
+  --background-secondary: #f1f1f1;
+  --background-surface: #f8f9fa;
+  --surface-variant: #f1f1f1;
+
+  /* 边框 */
+  --border-color: rgba(116, 119, 117, 0.1);
+  --border-color-strong: rgba(193, 198, 214, 0.3);
+  --border-color-light: rgba(193, 198, 214, 0.1);
+
+  /* 状态 */
+  --success: #34a853;
+  --success-light: #e6f4ea;
+  --warning: #f9a825;
+  --warning-light: #fef7e0;
+  --error: #ea4335;
+  --error-light: #fce8e6;
+
+  /* 遮罩 */
+  --overlay-white: rgba(255, 255, 255, 0.5);
+  --overlay-dark: rgba(0, 0, 0, 0.5);
+
+  /* 灰度 */
+  --color-gray-100: #f7f9ff;
+  --color-gray-200: #e5e8ee;
+  --color-gray-300: #dfe3e8;
+  --color-gray-400: #d8e2ff;
+  --color-gray-500: #c7c7cc;
+  --color-gray-600: #727785;
+  --color-gray-700: #414754;
+  --color-gray-800: #181c20;
+
+  /* 间距 */
+  --spacing-mn: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  --spacing-2xl: 48px;
+  --safe-area: 80px;
+
+  /* 圆角 */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-full: 9999px;
+
+  /* 阴影 */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 2px 8px rgba(0, 0, 0, 0.04);
+  --shadow-lg: 0 4px 12px rgba(0, 0, 0, 0.08);
+
+  /* 层级 */
+  --z-sticky: 50;
+  --z-fixed: 100;
+  --z-dropdown: 150;
+  --z-popup: 200;
+
+
+  /* 过渡 */
+  --transition-fast: 0.15s;
+  --transition-normal: 0.2s;
+}
+
+/* ========== 基础样式 ========== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  font-family: var(--font-family);
+  background: #e8e8e8;
+  color: var(--on-surface);
+  line-height: var(--line-height-normal);
+}
+
+#app {
+  min-height: 100vh;
+  max-width: var(--app-max-width);
+  margin: 0 auto;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: inherit;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+input, textarea {
+  font-family: inherit;
+}
+
+/* 页面容器 */
+.page {
+  min-height: 100vh;
+  background: var(--background);
+  width: 100%;
+  max-width: var(--app-max-width);
+  margin: 0 auto;
+}
+
+/* Material Icons */
+.material-symbols-outlined {
+  font-family: 'Material Symbols Rounded';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  user-select: none;
+}
+
+/* 通用标题 */
+h1 { font-size: var(--font-size-2xl); font-weight: var(--font-weight-bold); }
+h2 { font-size: var(--font-size-xl); font-weight: var(--font-weight-bold); }
+h3 { font-size: var(--font-size-lg); font-weight: var(--font-weight-bold); }
+h4 { font-size: var(--font-size-md); font-weight: var(--font-weight-bold); }
