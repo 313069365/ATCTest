@@ -11,6 +11,19 @@
 
       <div class="answer-card-body">
         <div class="progress-stats">
+          <div class="practice-info" v-if="settings">
+            <div class="tags-row">
+              <span class="info-tag">{{ settings.order }} {{ settings.mode === 'study' ? '背题' : '答题'
+                }}</span>
+              <span class="info-tag" v-if="settings.mode === 'practice'">
+                {{ settings.showAnswer === 'immediate' ? '立即显示' : '按需显示' }}
+              </span>
+              <span class="info-tag" v-if="settings.mode === 'practice' && settings.autoJump">
+                自动跳转
+              </span>
+            </div>
+          </div>
+
           <div class="legend">
             <div class="legend-item">
               <span class="legend-dot correct"></span>
@@ -46,9 +59,18 @@
 </template>
 
 <script setup>
+import { ref } from 'vue'
+
 defineProps({
   questions: Array,
   currentIndex: Number
+})
+
+const settings = ref({
+  order: '随机',
+  mode: 'study',
+  showAnswer: 'immediate',
+  autoJump: true
 })
 
 defineEmits(['close', 'go', 'exit'])

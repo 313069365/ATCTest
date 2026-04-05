@@ -6,7 +6,7 @@
           <span class="material-symbols-outlined">close</span>
         </button>
         <div class="header-title">
-          <h1>空管英语 - 听力专项</h1>
+          <h1>空管英语</h1>
           <span class="header-subtitle">空管题库 • 基础题库</span>
         </div>
       </div>
@@ -25,13 +25,13 @@
       <div class="progress-bar">
         <div class="progress" style="width: 85%"></div>
       </div>
-      <span class="progress-text">17/20</span>
+      <span class="progress-text">172/200</span>
     </div>
 
     <main class="content">
       <div class="question-meta">
         <span class="question-type-tag">单选题</span>
-        <span class="question-id">题目编号：Q001</span>
+        <span class="question-id">题目编号： 001 </span>
         <button class="fav-btn">
           <span class="material-symbols-outlined">kid_star</span>
         </button>
@@ -43,23 +43,30 @@
         </h2>
       </div>
 
-      <div class="options-list">
-        <div class="option-item">
-          <span class="option-radio"></span>
-          <span class="option-text">A. 塔台</span>
-        </div>
-        <div class="option-item">
-          <span class="option-radio"></span>
-          <span class="option-text">B. 地面</span>
-        </div>
-        <div class="option-item selected">
-          <span class="option-radio selected"></span>
-          <span class="option-text">C. 进近</span>
-        </div>
-        <div class="option-item">
-          <span class="option-radio"></span>
-          <span class="option-text">D. 管制</span>
-        </div>
+      <div class="options">
+        <button class="option-btn">
+          <span class="option-marker">A</span>
+          <span class="option-text">塔台</span>
+        </button>
+        <button class="option-btn">
+          <span class="option-marker">B</span>
+          <span class="option-text">地面</span>
+        </button>
+        <button class="option-btn">
+          <span class="option-marker">C</span>
+          <span class="option-text">进近</span>
+        </button>
+        <button class="option-btn">
+          <span class="option-marker">D</span>
+          <span class="option-text">管制</span>
+        </button>
+      </div>
+
+      <div class="check-answer" v-if="showCheckBtn">
+        <button class="check-btn" @click="$emit('check')">
+          <span class="material-symbols-outlined">verified</span>
+          查看答案
+        </button>
       </div>
 
       <div class="explanation-section" v-if="showExplanation">
@@ -76,20 +83,6 @@
     <AnswerCard v-if="showExplanation" @close="closeAnswerCard" @exit="exitQuiz" />
 
     <QustionNavbar />
-    <!-- <footer class="question-footer">
-      <button class="footer-btn prev">
-        <span class="material-symbols-outlined">arrow_back</span>
-        上一题
-      </button>
-      <button class="footer-btn check" @click="showExplanation = !showExplanation">
-        <span class="material-symbols-outlined">check_circle</span>
-        确认答案
-      </button>
-      <button class="footer-btn next">
-        下一题
-        <span class="material-symbols-outlined">arrow_forward</span>
-      </button>
-    </footer> -->
   </div>
 </template>
 
@@ -102,6 +95,7 @@ import QustionNavbar from '@/components/layout/QuestionNavbar.vue'
 const router = useRouter()
 const route = useRoute()
 
+const showCheckBtn = ref(true)
 const showExplanation = ref(false)
 const practiceData = ref(null)
 
@@ -115,7 +109,7 @@ const closeAnswerCard = () => {
 
 const exitQuiz = () => {
   if (confirm('确定要退出答题吗？')) {
-    router.back()
+    router.push({ name: 'PracticeResult', query: { practiceData: JSON.stringify(practiceData.value) } })
   }
 }
 
@@ -157,7 +151,7 @@ onMounted(() => {
 <style scoped>
 .page {
   min-height: 100vh;
-  background: var(--background);
+  background: var(--background-secondary);
   max-width: var(--app-max-width);
   margin: 0 auto;
   padding-bottom: 80px;
@@ -184,8 +178,8 @@ onMounted(() => {
 }
 
 .back-btn {
-  width: 40px;
-  height: 40px;
+  /* width: 40px;
+  height: 40px; */
   border: none;
   background: transparent;
   border-radius: 50%;
@@ -220,22 +214,30 @@ onMounted(() => {
   gap: var(--spacing-mn);
   padding: var(--spacing-sm) var(--spacing-md);
   background: var(--color-gray-100);
-  border-radius: var(--radius-md);
-  font-size: var(--font-size-sm);
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-md);
   color: var(--primary);
   font-weight: var(--font-weight-semibold);
 }
 
+.timer-display material .material-symbols-outlined {
+  font-size: var(--font-size-md);
+}
+
 .grid-btn {
-  width: 40px;
-  height: 40px;
+  width: 45px;
+  height: 45px;
   border: none;
-  background: var(--color-gray-100);
-  border-radius: var(--radius-md);
+  /* background: var(--color-gray-100); */
+  /* border-radius: var(--radius-full); */
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
+}
+
+.grid-btn .material-symbols-outlined {
+  font-size: var(--font-size-2xl);
 }
 
 .progress-bar-container {
@@ -320,7 +322,7 @@ onMounted(() => {
   gap: var(--spacing-sm);
 }
 
-.option-item {
+/* .option-item {
   display: flex;
   align-items: center;
   gap: var(--spacing-md);
@@ -363,7 +365,119 @@ onMounted(() => {
 .option-text {
   font-size: var(--font-size-md);
   color: var(--on-surface);
+} */
+
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
+
+.option-btn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: var(--spacing-sm);
+  background: #fff;
+  border: 1px solid transparent;
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: left;
+  width: 100%;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+}
+
+.option-btn:active {
+  transform: scale(0.99);
+}
+
+.option-btn.selected {
+  border-color: var(--primary);
+  box-shadow: 0 4px 12px rgba(0, 91, 191, 0.08);
+}
+
+.option-btn.correct {
+  color: var(--success);
+  border-color: var(--success);
+  background: #e6f4ea;
+}
+
+.option-btn.wrong {
+  border-color: var(--error);
+  background: #fce8e6;
+}
+
+.option-marker {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-lg);
+  background: #f1f4f7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 14px;
+  color: #414754;
+  flex-shrink: 0;
+}
+
+.option-btn.selected .option-marker {
+  background: var(--primary);
+  color: #fff;
+}
+
+.option-btn.correct .option-marker {
+  background: var(--success);
+  color: #fff;
+}
+
+.option-btn.wrong .option-marker {
+  background: var(--error);
+  color: #fff;
+}
+
+.option-text {
+  flex: 1;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+/* 检查答案按钮 */
+.check-answer {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.check-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-sm) var(--spacing-lg);
+  border: 1px solid #c1c6d6;
+  border-radius: var(--radius-full);
+  background: #fff;
+  color: var(--primary);
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-bold);
+  cursor: pointer;
+  transition: all 0.2s;
+  gap: var(--spacing-mn);
+}
+
+.check-btn:hover {
+  background: #f1f4f7;
+}
+
+.check-btn:active {
+  transform: scale(0.98);
+}
+
+.check-btn .material-symbols-outlined {
+  font-size: var(--font-size-xl);
+}
+
 
 .explanation-section {
   margin-top: var(--spacing-lg);

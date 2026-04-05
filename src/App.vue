@@ -1,10 +1,3 @@
-<script setup>
-import { RouterView } from 'vue-router'
-import Navbar from './components/layout/Navbar.vue'
-import { useRoute } from 'vue-router'
-const route = useRoute()
-</script>
-
 <template>
   <div class="app-container">
     <RouterView />
@@ -12,9 +5,17 @@ const route = useRoute()
   </div>
 </template>
 
+<script setup>
+import { RouterView } from 'vue-router'
+import Navbar from './components/layout/Navbar.vue'
+import { useRoute } from 'vue-router'
+const route = useRoute()
+
+</script>
+
 <style scoped>
 .app-container {
-  min-height: 100vh;
+  height: 100vh;
   position: relative;
   background: var(--background-secondary);
   max-width: var(--app-max-width);

@@ -108,6 +108,22 @@ const props = defineProps({
   subject: {
     type: Object,
     default: null
+  },
+  order: {
+    type: String,
+    default: 'sequence'
+  },
+  mode: {
+    type: String,
+    default: 'answer'
+  },
+  showAnswerMode: {
+    type: String,
+    default: 'immediate'
+  },
+  autoNext: {
+    type: Boolean,
+    default: false
   }
 })
 
@@ -117,10 +133,10 @@ const gotopage = () => {
   const practiceData = {
     subject: props.subject?.name || '航空气象',
     questionCount: props.subject?.count || 30,
-    mode: '答题模式',
-    order: '顺序',
-    showAnswerMode: '立即显示',
-    autoNext: false
+    mode: props.mode,
+    order: props.order,
+    showAnswerMode: props.showAnswerMode,
+    autoNext: props.autoNext
   }
   router.push({
     path: '/practice/quiz',

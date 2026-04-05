@@ -14,23 +14,23 @@
     <main class="content">
       <section class="stats-bento">
         <div class="stat-card">
-          <span class="stat-label">题库总数</span>
+          <span class="stat-label">今日练习</span>
           <div class="stat-value-wrap">
-            <span class="stat-value">{{ questionCount }}</span>
+            <span class="stat-value">{{ answeredToday }}</span>
             <span class="stat-unit">题</span>
           </div>
         </div>
         <div class="stat-card">
-          <span class="stat-label">分类数</span>
+          <span class="stat-label">正确率</span>
           <div class="stat-value-wrap">
-            <span class="stat-value">{{ categories.length }}</span>
-            <span class="stat-unit primary">类</span>
+            <span class="stat-value">{{ accuracy }}</span>
+            <span class="stat-unit primary">%</span>
           </div>
         </div>
       </section>
 
       <section class="main-actions">
-        <button class="action-btn practice" @click="router.push('/practice')">
+        <button class="action-btn practice" @click="pageTo('/practice')">
           <div class="action-text">
             <span class="action-title">练习模式</span>
             <span class="action-subtitle">回顾章节重点与小测验</span>
@@ -39,7 +39,7 @@
             <span class="material-symbols-outlined">menu_book</span>
           </div>
         </button>
-        <button class="action-btn exam" @click="router.push('/exam')">
+        <button class="action-btn exam" @click="pageTo('/exam')">
           <div class="action-text">
             <span class="action-title">模拟考试</span>
             <span class="action-subtitle">模拟执照题库限时考试</span>
@@ -60,7 +60,7 @@
               </div>
               <h3 class="placeholder-title">还没有练习记录</h3>
               <p class="placeholder-subtitle">开始你的第一次练习吧</p>
-              <button class="continue-btn">开始练习</button>
+              <button class="continue-btn" @click="pageTo('/practice')">开始练习</button>
             </div>
           </div>
         </div>
@@ -70,13 +70,25 @@
 </template>
 
 <script setup>
+import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useQuestionStore } from '@/stores/questions'
 import { storeToRefs } from 'pinia'
 
 const router = useRouter()
-const store = useQuestionStore()
-const { questionCount, categories } = storeToRefs(store)
+
+const answeredToday = ref(0)
+const accuracy = ref(0.00)
+// 1.从统计信息里面读取今日练习和正确率 stats，Today，作答题目数，正确率
+// 2.从上次练习记录里面读取上次练习的科目 ，lastPractice，科目，题目位置，练习设置，上次作答记录
+
+// 跳转，直接跳转，不传递参数
+// 跳转到上次练习，传递上次练习的科目
+const lastPractice = ref(null)
+const pageTo = (path) => {
+  router.push(path, {params: lastPractice.value })
+}
+
 </script>
 
 <style scoped>
@@ -91,7 +103,7 @@ const { questionCount, categories } = storeToRefs(store)
   position: sticky;
   top: 0;
   z-index: 100;
-  background: rgba(255, 255, 255, 0.95);
+  background: var(--background);
   backdrop-filter: blur(8px);
   display: flex;
   align-items: center;

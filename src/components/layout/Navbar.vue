@@ -1,26 +1,25 @@
 <template>
   <nav class="navbar">
-    <router-link to="/" class="nav-item" active-class="active">
-      <span class="material-symbols-outlined icon">home</span>
-      <span class="label">首页</span>
-    </router-link>
-    <router-link to="/practice" class="nav-item" active-class="active">
-      <span class="material-symbols-outlined icon">quiz</span>
-      <span class="label">练习</span>
-    </router-link>
-    <router-link to="/exam" class="nav-item" active-class="active">
-      <span class="material-symbols-outlined icon">assignment</span>
-      <span class="label">考试</span>
-    </router-link>
-    <router-link to="/profile" class="nav-item" active-class="active">
-      <span class="material-symbols-outlined icon">person</span>
-      <span class="label">我的</span>
+    <router-link v-for="item in navbarItems" 
+      :key="item.name" 
+      :to="item.link" 
+      class="nav-item" 
+      active-class="active">
+        <span class="material-symbols-outlined icon">{{ item.icon }}</span>
+        <span class="label">{{ item.name }}</span>
     </router-link>
   </nav>
 </template>
 
 <script setup>
+import { ref } from 'vue';
 
+const navbarItems = ref([
+  { name: '首页', icon: 'home', link: '/' },
+  { name: '练习', icon: 'edit_note', link: '/practice' },
+  { name: '考试', icon: 'assignment', link: '/exam' },
+  { name: '我的', icon: 'person', link: '/profile' },
+])
 
 </script>
 
@@ -62,5 +61,11 @@
 
 .nav-item.active {
   color: var(--primary);
+}
+
+.nav-item.active .material-symbols-outlined {
+  transform: scale(1.1);
+  font-variation-settings: 'FILL' 1;
+  text-shadow: 0 2px 4px rgba(0, 91, 191, 0.3);
 }
 </style>

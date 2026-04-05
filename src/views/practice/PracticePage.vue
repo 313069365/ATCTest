@@ -19,7 +19,7 @@
             @click="electedCategory = cat.value"
           >
             <span class="material-symbols-outlined">
-              {{ cat.value === 'atc' ? 'flight' : cat.value === 'airport' ? 'apartment' : cat.value === 'airline' ? 'connecting_airports' : 'work' }}
+              {{ subjectIconMap[cat.name] }}
             </span>
             <span>{{ cat.name }}</span>
           </button>
@@ -36,7 +36,7 @@
             :class="{ active: electedScope === scope.value }"
             @click="electedScope = scope.value"
           >
-            <span class="material-symbols-outlined tab-icon">{{ scope.icon }}</span>
+            <span class="material-symbols-outlined tab-icon">{{ subjectIconMap[scope.name] }}</span>
             <span>{{ scope.name }}</span>
           </button>
         </div>
@@ -47,8 +47,8 @@
         <div class="subject-list">
           <div class="subject-card" v-for="subject in SubjectsOptions" :key="subject.name">
             <div class="subject-header">
-              <div class="subject-icon" style="background: var(--primary)">
-                <span class="material-symbols-outlined">{{ subject.icon }}</span>
+              <div class="subject-icon">
+                <span class="material-symbols-outlined">{{ subjectIconMap[subject.name] }}</span>
               </div>
               <div class="subject-info">
                 <h4>{{ subject.name }}</h4>
@@ -74,11 +74,14 @@ import PracticeSetting from '@/components/page/PracticeSettings.vue'
 import BankImport from '@/components/page/BankImport.vue'
 // import { useQuestionStore } from '@/stores/questions'
 // import { storeToRefs } from 'pinia'
+import { subjectIconMap } from '@/assets/fonts/IconMaps.js'
 import base from '/public/data/atc/base.json'
 import professional from '/public/data/atc/professional.json'
 import english from '/public/data/atc/english_translated.json'
 // const store = useQuestionStore()
 // const { questions, categories } = storeToRefs(store)
+
+// 加载题库数据，并初始化题库数据
 
 const showPracticeSetting = ref(false)
 const showImportModal = ref(false)
@@ -93,9 +96,9 @@ const bank_atc = reactive([
 ])
 
 const categoryOptions = computed(() => [
-  { value: 'atc', name: '空管' },
-  { value: 'airport', name: '机场' },
-  { value: 'airline', name: '航司' }
+  { value: 'atc', name: '空管', icon: 'flight'},
+  { value: 'airport', name: '机场', icon: 'apartment'},
+  { value: 'airline', name: '航司', icon: 'connecting_airports'},
 ])
 
 const scopeOptions = computed(() => [
@@ -111,7 +114,7 @@ const SubjectsOptions = computed(() => {
       subjects.add(q.meta.subject)
     })
   console.log(subjects)
-  const subjectsOptions = [...subjects].map(subject => ({ name:subject, count: 10, icon: 'menu_book' }))
+  const subjectsOptions = [...subjects].map(subject => ({ name:subject, count: bank_atc.filter(q => q.meta.category === electedCategory.value && q.meta.scope === electedScope.value && q.meta.subject === subject).length }))
   return subjectsOptions
 })
 
@@ -308,6 +311,9 @@ const handleImportSuccess = (result) => {
 .subject-icon {
   width: 48px;
   height: 48px;
+  background: var(--secondary);
+  color: var(--on-primary);
+  font-size: 24px;
   border-radius: var(--radius-md);
   display: flex;
   align-items: center;
