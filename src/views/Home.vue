@@ -16,15 +16,15 @@
         <div class="stat-card">
           <span class="stat-label">题库总数</span>
           <div class="stat-value-wrap">
-            <span class="stat-value">0</span>
+            <span class="stat-value">{{ questionCount }}</span>
             <span class="stat-unit">题</span>
           </div>
         </div>
         <div class="stat-card">
-          <span class="stat-label">正确率</span>
+          <span class="stat-label">分类数</span>
           <div class="stat-value-wrap">
-            <span class="stat-value">0.0</span>
-            <span class="stat-unit primary">%</span>
+            <span class="stat-value">{{ categories.length }}</span>
+            <span class="stat-unit primary">类</span>
           </div>
         </div>
       </section>
@@ -71,8 +71,12 @@
 
 <script setup>
 import { useRouter } from 'vue-router'
+import { useQuestionStore } from '@/stores/questions'
+import { storeToRefs } from 'pinia'
 
 const router = useRouter()
+const store = useQuestionStore()
+const { questionCount, categories } = storeToRefs(store)
 </script>
 
 <style scoped>

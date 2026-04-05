@@ -12,124 +12,108 @@
       <section class="category-area">
         <div class="bank-grid">
           <button 
-            v-for="category in categories" 
-            :key="category"
+            v-for="cat in categoryOptions" 
+            :key="cat.value"
             class="bank-btn"
-            :class="{ active: electedCategory === category }"
-            @click="electedCategory = category"
+            :class="{ active: electedCategory === cat.value }"
+            @click="electedCategory = cat.value"
           >
             <span class="material-symbols-outlined">
-              {{ category.value === 'atc' ? 'school' : category.value === 'airport' ? 'work' : 'flight' }}
+              {{ cat.value === 'atc' ? 'flight' : cat.value === 'airport' ? 'apartment' : cat.value === 'airline' ? 'connecting_airports' : 'work' }}
             </span>
-            <span>{{ category.name }}</span>
+            <span>{{ cat.name }}</span>
           </button>
         </div>
       </section>
 
       <!-- Level 2: 分类Tab -->
-      <section class="scope-area">
+      <section class="scope-area" v-if="scopeOptions.length > 0">
         <div class="scope-tabs">
           <button 
-            v-for="scope in scopes" 
+            v-for="scope in scopeOptions" 
             :key="scope"
-            :class="{ 'scope-tab active': electedScope === scope }"
-            @click="electedScope = scope"
+            class="scope-tab"
+            :class="{ active: electedScope === scope.value }"
+            @click="electedScope = scope.value"
           >
-            <span class="material-symbols-outlined tab-icon">flight</span>
-            <span>{{ scope }}</span>
+            <span class="material-symbols-outlined tab-icon">{{ scope.icon }}</span>
+            <span>{{ scope.name }}</span>
           </button>
         </div>
       </section>
 
       <!-- Level 3: 科目卡片 -->
-      <!-- <section class="level3">
+      <section class="level3">
         <div class="subject-list">
-          <div class="subject-card" v-for="subject in subjects" :key="subject.name">
+          <div class="subject-card" v-for="subject in SubjectsOptions" :key="subject.name">
             <div class="subject-header">
-              <div class="subject-icon" :style="{ background: subject.color }">
+              <div class="subject-icon" style="background: var(--primary)">
                 <span class="material-symbols-outlined">{{ subject.icon }}</span>
               </div>
               <div class="subject-info">
-                <h4>{{ subject }}</h4>
-                <p>{{ }} 题</p>
+                <h4>{{ subject.name }}</h4>
+                <p>{{ subject.count }} 题</p>
               </div>
               <button class="enter-btn" @click="newQuizWith(subject)">新的练习</button>
             </div>
           </div>
         </div>
-      </section> -->
+      </section>
 
-      <PracticeSetting :visible="showPracticeSetting" @close="showPracticeSetting = false" @start="showPracticeSetting = false" />
-      <BankImport :visible="showImportModal" @close="showImportModal = false" @import-success="handleImportSuccess" />
-      <!-- <router-view /> -->
       
     </main>
+    <PracticeSetting :visible="showPracticeSetting" :subject="selectedSubject" @close="showPracticeSetting = false" @start="showPracticeSetting = false" />
+    <BankImport :visible="showImportModal" @close="showImportModal = false" @import-success="handleImportSuccess" />
+      
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted, computed, watch } from 'vue'
+import { ref, reactive, onMounted, computed, watch } from 'vue'
 import PracticeSetting from '@/components/page/PracticeSettings.vue'
 import BankImport from '@/components/page/BankImport.vue'
-import baseQuestions from '/public/data/atc/base.json'
-import professionalQuestions from '/public/data/atc/professional.json'
-import englishQuestions from '/public/data/atc/english.json'
-
-// 这里需要一个 key 或者数据库用来保存一个类别的所有题目，比如 atc 就是所有 atc 的题目，airport 就是所有 airport 的题目
-const atcQuestions = [
-  ...baseQuestions,
-  ...professionalQuestions,
-  ...englishQuestions
-]
-
-const categories = computed(() => {
-  // 返回题库中meta.category中所有的唯一值， atc/airport/airlines/qita 的所有
-  return [
-    { value: 'atc', name: '空管' },
-    { value: 'airport', name: '机场' },
-    { value: 'airline', name: '航司' }
-  ]
-})
-
-// 必须基于三个题库做一个预处理包成一个对象，说明里面的类别，范围和科目
-const scopes = computed(() => {
-  const scopeMap = new Set()
-  
-  atcQuestions.forEach(question => {
-    if (question.meta && question.meta.scope) {
-      scopeMap.add(question.meta.scope)
-    }
-  })
-  
-  return [...scopeMap]
-})
-
-
-
-
-
-
-// const scopes = computed(() => {
-//   // 返回题库中meta.scope中所有的唯一值， atc/airport/airlines/qita 的所有
-//   // 每个category下，scope是唯一的
-//   return categoryScopeMap[electedCategory.value] || []
-// })
-
-// const subjects = computed(() => {
-//   // 返回题库中meta.subject中所有的唯一值， atc/airport/airlines/qita 的所有
-//   // 每个scope下，subject是唯一的
-//   return scopeSubjectMap[electedScope.value] || []
-// })
-
-
+// import { useQuestionStore } from '@/stores/questions'
+// import { storeToRefs } from 'pinia'
+import base from '/public/data/atc/base.json'
+import professional from '/public/data/atc/professional.json'
+import english from '/public/data/atc/english_translated.json'
+// const store = useQuestionStore()
+// const { questions, categories } = storeToRefs(store)
 
 const showPracticeSetting = ref(false)
 const showImportModal = ref(false)
 const selectedSubject = ref(null)
-const electedCategory = ref('空管')
+const electedCategory = ref('atc')
 const electedScope = ref('base')
 
+const bank_atc = reactive([
+  ...base,
+  ...professional,
+  ...english,
+])
 
+const categoryOptions = computed(() => [
+  { value: 'atc', name: '空管' },
+  { value: 'airport', name: '机场' },
+  { value: 'airline', name: '航司' }
+])
+
+const scopeOptions = computed(() => [
+  {value: 'base', name: '基础题库', icon: 'flight'},
+  {value: 'professional', name: '专业题库', icon: 'work'},
+  {value: 'english', name: '英文题库', icon: 'language'},
+])
+
+const SubjectsOptions = computed(() => {
+  const subjects = new Set()
+  bank_atc.forEach(q => {
+    if(q.meta.category === electedCategory.value && q.meta.scope === electedScope.value) 
+      subjects.add(q.meta.subject)
+    })
+  console.log(subjects)
+  const subjectsOptions = [...subjects].map(subject => ({ name:subject, count: 10, icon: 'menu_book' }))
+  return subjectsOptions
+})
 
 
 const newQuizWith = (subject) => {
@@ -140,25 +124,21 @@ const newQuizWith = (subject) => {
 const handleImportSuccess = (result) => {
   console.log('导入成功:', result)
 }
-
-onMounted(async () => {
-
-})
-
 </script>
 
 <style scoped>
 .page {
-  min-height: 100vh;
+  position: relative;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
   background: var(--color-gray-100);
-  padding-bottom: 100px;
+  padding-bottom: var(--safe-area) ;
   max-width: var(--app-max-width);
   margin: 0 auto;
 }
 
 .top-bar {
-  position: sticky;
-  top: 0;
   z-index: 100;
   background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(8px);
@@ -170,6 +150,7 @@ onMounted(async () => {
   border-bottom: 1px solid var(--border-color);
   box-sizing: border-box;
   position: relative;
+  flex-shrink: 0;
 }
 
 .import-btn {
@@ -202,8 +183,11 @@ onMounted(async () => {
 }
 
 .content {
+  flex: 1;
+  overflow-y: auto;
   padding: var(--spacing-lg);
   padding-bottom: var(--spacing-bm);
+  -webkit-overflow-scrolling: touch;
 }
 
 .category-area {
@@ -226,6 +210,7 @@ onMounted(async () => {
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: var(--spacing-sm);
   padding: var(--spacing-lg) var(--spacing-xl);
   border: 1px solid var(--border-color-strong);
   border-radius: var(--radius-md);
@@ -241,7 +226,7 @@ onMounted(async () => {
 }
 
 .bank-btn .material-symbols-outlined {
-  font-size: 32px;
+  font-size: 24px;
 }
 
 .bank-btn span:last-child {
@@ -256,9 +241,9 @@ onMounted(async () => {
 .scope-tabs {
   display: flex;
   gap: var(--spacing-sm);
+  /* padding: var(--spacing-md); */
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
-  padding-bottom: 4px;
 }
 
 .scope-tab::-webkit-scrollbar {
@@ -270,11 +255,11 @@ onMounted(async () => {
   display: flex;
   align-items: center;
   gap: 2px;
-  /* padding: var(--spacing-sm); */
+  padding: var(--spacing-sm);
   border: none;
   border-radius: var(--radius-lg);
-  /* font-size: var(--font-size-md); */
-  /* font-weight: var(--font-weight-bold); */
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-bold);
   color: var(--icon-color);
   cursor: pointer;
   white-space: nowrap;
@@ -295,9 +280,9 @@ onMounted(async () => {
   bottom: 0;
   left: 0;
   right: 0;
-  height: 2px;
+  height: 3px;
   background: var(--primary);
-  border-radius: 1px;
+  border-radius: 3px;
 }
 
 .subject-list {

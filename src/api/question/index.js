@@ -2,11 +2,10 @@ const QUESTION_FILES = {
   atc: {
     base: '/data/atc/base.json',
     professional: '/data/atc/professional.json',
-    english: '/data/atc/english.json'
+    english: '/data/atc/english_translated.json'
   },
   airport:{},
   airlines:{}
-
 }
 
 function transformQuestion(q) {

@@ -100,11 +100,23 @@ import { useRouter } from 'vue-router'
 
 const router = useRouter()
 
+const props = defineProps({
+  visible: {
+    type: Boolean,
+    default: false
+  },
+  subject: {
+    type: Object,
+    default: null
+  }
+})
+
+const emit = defineEmits(['close', 'start'])
+
 const gotopage = () => {
-  // 模拟练习数据
-  const mockPracticeData = {
-    subject: '航空气象',
-    questionCount: 30,
+  const practiceData = {
+    subject: props.subject?.name || '航空气象',
+    questionCount: props.subject?.count || 30,
     mode: '答题模式',
     order: '顺序',
     showAnswerMode: '立即显示',
@@ -112,18 +124,10 @@ const gotopage = () => {
   }
   router.push({
     path: '/practice/quiz',
-    query: { practiceData: JSON.stringify(mockPracticeData) }
+    query: { practiceData: JSON.stringify(practiceData) }
   })
+  emit('close')
 }
-
-defineProps({
-  visible: {
-    type: Boolean,
-    default: false
-  }
-})
-
-defineEmits(['close', 'start'])
 </script>
 
 <style scoped>
