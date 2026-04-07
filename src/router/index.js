@@ -8,10 +8,10 @@ const routes = [
   },
   {
     path: '/practice',
-    name: 'Practice',
     children: [
       {
         path: '',
+        name: 'Practice',
         component: () => import('../views/practice/PracticePage.vue')
       },
       {
@@ -33,10 +33,10 @@ const routes = [
   },
   {
     path: '/exam',
-    name: 'Exam',
     children: [
       {
         path: '',
+        name: 'Exam',
         component: () => import('../views/exam/ExamManage.vue')
       },
       {

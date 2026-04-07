@@ -5,51 +5,47 @@
         <button class="close-btn" @click="$emit('close')">
           <span class="material-symbols-outlined">arrow_back</span>
         </button>
-        <h2>练习设置</h2>
+        <h2>{{ t('practiceSettings') }}</h2>
         <div class="spacer"></div>
       </header>
 
       <main class="settings-main">
         <section class="settings-section">
-          <h3>习题顺序</h3>
+          <h3>{{ t('questionOrder') }}</h3>
           <div class="order-options">
-            <button class="order-btn active">
-              <span class="material-symbols-outlined">east</span>
-              顺序
-            </button>
-            <button class="order-btn">
-              <span class="material-symbols-outlined">west</span>
-              逆序
-            </button>
-            <button class="order-btn">
-              <span class="material-symbols-outlined">shuffle</span>
-              乱序
+            <button v-for="sort in QUESTIONS_SORT" :key="sort" class="order-btn"
+              :class="{ active: settings.questionSort === sort }" @click="settings.questionSort = sort">
+              <span class="material-symbols-outlined">{{ iconMap[sort] }}</span>
+              {{ t(sort) }}
             </button>
           </div>
         </section>
 
         <section class="settings-section">
-          <h3>练习模式</h3>
+          <h3>{{ t('practiceMode') }}</h3>
           <div class="mode-cards">
-            <div class="mode-card">
+            <div class="mode-card" :class="{ active: settings.practiceMode === 'review' }"
+              @click="settings.practiceMode = 'review'">
               <div class="mode-icon">
                 <span class="material-symbols-outlined">menu_book</span>
               </div>
               <div class="mode-info">
-                <h4>背题模式</h4>
-                <p>直接显示正确答案和解析</p>
+                <h4>{{ t('reviewMode') }}</h4>
+                <p>{{ t('reviewModeDesc') }}</p>
               </div>
               <div class="mode-check">
                 <span class="material-symbols-outlined">check</span>
               </div>
             </div>
-            <div class="mode-card active">
+
+            <div class="mode-card" :class="{ active: settings.practiceMode === 'answer' }"
+              @click="settings.practiceMode = 'answer'">
               <div class="mode-icon">
                 <span class="material-symbols-outlined">edit_note</span>
               </div>
               <div class="mode-info">
-                <h4>答题模式</h4>
-                <p>先作答后看解析</p>
+                <h4>{{ t('answerMode') }}</h4>
+                <p>{{ t('answerModeDesc') }}</p>
               </div>
               <div class="mode-check">
                 <span class="material-symbols-outlined">check</span>
@@ -58,36 +54,50 @@
           </div>
         </section>
 
-        <section class="settings-section">
-          <h3>答案显示方式</h3>
+        <section class="settings-section" v-if="settings.practiceMode === 'answer'">
+          <h3>{{ t('answerDisplay') }}</h3>
           <div class="mode-toggle">
-            <button class="mode-toggle-btn active">
-              <span class="material-symbols-outlined">bolt</span>
-              立即显示
-            </button>
-            <button class="mode-toggle-btn">
-              <span class="material-symbols-outlined">touch_app</span>
-              按需显示
+            <button v-for="option in SHOW_ANSWER_MODE" :key="option.value" class="mode-toggle-btn"
+              :class="{ active: settings.showAnswerMode === option.value }"
+              @click="settings.showAnswerMode = option.value">
+              <span class="material-symbols-outlined">{{ option.icon }}</span>
+              {{ t(option.label) }}
             </button>
           </div>
         </section>
 
-        <section class="settings-section">
+        <section class="settings-section" v-if="settings.practiceMode === 'answer'">
           <div class="toggle-option">
             <div class="toggle-info">
-              <span class="toggle-title">答对自动跳转下一题</span>
-              <span class="toggle-desc">减少操作步骤，提升刷题效率</span>
+              <span class="toggle-title">{{ t('autoJump') }}</span>
+              <span class="toggle-desc">{{ t('autoJumpDesc') }}</span>
             </div>
-            <button class="toggle-btn">
+            <button class="toggle-btn" :class="{ active: settings.autoJump }"
+              @click="settings.autoJump = !settings.autoJump">
               <span class="toggle-knob"></span>
             </button>
           </div>
         </section>
+
+        <section class="settings-section" v-if="settings.practiceMode === 'answer'">
+          <h3>{{ t('optionOrder') }}</h3>
+          <div class="toggle-option">
+            <div class="toggle-info">
+              <span class="toggle-title">{{ t('shuffleOptions') }}</span>
+              <span class="toggle-desc">{{ t('shuffleOptionsDesc') }}</span>
+            </div>
+            <button class="toggle-btn" :class="{ active: settings.optionsSort }"
+              @click="settings.optionsSort = !settings.optionsSort">
+              <span class="toggle-knob"></span>
+            </button>
+          </div>
+        </section>
+
       </main>
 
       <footer class="settings-footer">
         <button class="start-btn" @click="gotopage">
-          开始练习
+          {{ t('startPractice') }}
           <span class="material-symbols-outlined">play_arrow</span>
         </button>
       </footer>
@@ -97,8 +107,23 @@
 
 <script setup>
 import { useRouter } from 'vue-router'
-
+import { watch, reactive } from 'vue'
+import { iconMap } from '@/assets/fonts/IconMaps.js'
+import { t, setLanguage, getLanguage } from '@/utils/i18n.js'
 const router = useRouter()
+
+// 习题顺序配置
+const QUESTIONS_SORT = [
+  'sequence',
+  'reverse',
+  'shuffle'
+]
+
+
+const SHOW_ANSWER_MODE = [
+  { value: 'immediate', label: 'showImmediately', icon: 'bolt' },
+  { value: 'manual', label: 'showOnDemand', icon: 'touch_app' }
+]
 
 const props = defineProps({
   visible: {
@@ -108,42 +133,49 @@ const props = defineProps({
   subject: {
     type: Object,
     default: null
-  },
-  order: {
-    type: String,
-    default: 'sequence'
-  },
-  mode: {
-    type: String,
-    default: 'answer'
-  },
-  showAnswerMode: {
-    type: String,
-    default: 'immediate'
-  },
-  autoNext: {
-    type: Boolean,
-    default: false
   }
 })
 
 const emit = defineEmits(['close', 'start'])
 
+// 默认配置
+const DEFAULT_SETTINGS = {
+  questionSort: 'sequence',
+  optionsSort: false,
+  practiceMode: 'answer',
+  showAnswerMode: 'immediate',
+  autoJump: false
+}
+
+// 使用 reactive 统一管理状态
+const settings = reactive({ ...DEFAULT_SETTINGS })
+
+// 弹窗打开时重置状态
+watch(() => props.visible, (newVal) => {
+  if (newVal) {
+    Object.assign(settings, DEFAULT_SETTINGS)
+  }
+})
+
 const gotopage = () => {
   const practiceData = {
-    subject: props.subject?.name || '航空气象',
-    questionCount: props.subject?.count || 30,
-    mode: props.mode,
-    order: props.order,
-    showAnswerMode: props.showAnswerMode,
-    autoNext: props.autoNext
+    subject: props.subject,
+    category: props.subject.category,
+    scope: props.subject.scope,
+    practiceMode: settings.practiceMode,
+    questionSort: settings.questionSort,
+    optionsSort: settings.optionsSort,
+    showAnswerMode: settings.showAnswerMode,
+    autoJump: settings.autoJump
   }
+  // setItem('practiceMeta', JSON.stringify(practiceData))
+  emit('close')
   router.push({
     path: '/practice/quiz',
     query: { practiceData: JSON.stringify(practiceData) }
   })
-  emit('close')
 }
+
 </script>
 
 <style scoped>
@@ -164,7 +196,7 @@ const gotopage = () => {
   background: var(--background-secondary);
   width: 100%;
   max-width: 100%;
-  max-height: 90%;
+  /* max-height: 90%; */
   border-radius: var(--radius-xl) var(--radius-xl) 0 0;
   overflow: hidden;
   display: flex;
@@ -175,7 +207,7 @@ const gotopage = () => {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: var(--spacing-sm);
+  /* padding: var(--spacing-sm); */
   background: rgba(247, 250, 253, 0.8);
   backdrop-filter: blur(12px);
 }
@@ -209,7 +241,7 @@ const gotopage = () => {
 
 .settings-section {
   max-width: var(--app-max-width);
-  margin-bottom: var(--spacing-md);
+  margin-bottom: var(--spacing-sm);
 }
 
 .settings-section h3 {
@@ -217,7 +249,7 @@ const gotopage = () => {
   font-weight: var(--font-weight-bold);
   text-transform: uppercase;
   color: var(--icon-color);
-  margin-bottom: var(--spacing-md);
+  margin-bottom: var(--spacing-mn);
 }
 
 .order-options {
@@ -262,7 +294,7 @@ const gotopage = () => {
   display: flex;
   gap: 4px;
   padding: var(--spacing-mn);
-  background: var(--background-surface-dark);
+  background: var(--primary-container);
   border-radius: var(--radius-lg);
 }
 
@@ -296,7 +328,7 @@ const gotopage = () => {
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: var(--spacing-md);
+  padding: var(--spacing-sm);
   background: #fff;
   border: 2px solid transparent;
   border-radius: var(--radius-lg);

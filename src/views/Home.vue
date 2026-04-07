@@ -53,16 +53,36 @@
       <section class="continue-section">
         <h2 class="section-title">上次练习</h2>
         <div class="continue-card">
-          <div class="continue-inner placeholder">
-            <div class="placeholder-content">
-              <div class="placeholder-icon">
-                <span class="material-symbols-outlined">book</span>
+          <template v-if="lastPractice">
+            <div class="continue-inner" @click="continueLastPractice">
+              <div class="continue-icon">
+                <span class="material-symbols-outlined">menu_book</span>
               </div>
-              <h3 class="placeholder-title">还没有练习记录</h3>
-              <p class="placeholder-subtitle">开始你的第一次练习吧</p>
-              <button class="continue-btn" @click="pageTo('/practice')">开始练习</button>
+              <div class="continue-info">
+                <h3 class="continue-title">{{ lastPractice.subject?.name || '练习' }}</h3>
+                <p class="continue-subtitle">{{ lastPractice.category }} • {{ lastPractice.scope }}</p>
+                <div class="progress-bar">
+                  <div class="progress" :style="{ width: lastPracticeProgress + '%' }"></div>
+                </div>
+                <span class="progress-text">已练习 {{ lastPractice.currentIndex + 1 }} / {{ totalQuestions }} 题</span>
+              </div>
+              <button class="continue-action-btn">
+                <span class="material-symbols-outlined">play_arrow</span>
+              </button>
             </div>
-          </div>
+          </template>
+          <template v-else>
+            <div class="continue-inner placeholder">
+              <div class="placeholder-content">
+                <div class="placeholder-icon">
+                  <span class="material-symbols-outlined">book</span>
+                </div>
+                <h3 class="placeholder-title">还没有练习记录</h3>
+                <p class="placeholder-subtitle">开始你的第一次练习吧</p>
+                <button class="continue-btn" @click="pageTo('/practice')">开始练习</button>
+              </div>
+            </div>
+          </template>
         </div>
       </section>
     </main>
@@ -70,25 +90,69 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
-import { useQuestionStore } from '@/stores/questions'
-import { storeToRefs } from 'pinia'
+import { useAppStore } from '@/stores/store'
 
 const router = useRouter()
+const store = useAppStore()
 
 const answeredToday = ref(0)
 const accuracy = ref(0.00)
-// 1.从统计信息里面读取今日练习和正确率 stats，Today，作答题目数，正确率
-// 2.从上次练习记录里面读取上次练习的科目 ，lastPractice，科目，题目位置，练习设置，上次作答记录
 
-// 跳转，直接跳转，不传递参数
-// 跳转到上次练习，传递上次练习的科目
-const lastPractice = ref(null)
-const pageTo = (path) => {
-  router.push(path, {params: lastPractice.value })
+// 上次练习
+const lastPractice = computed(() => {
+  return store.practiceProgress
+})
+
+// 计算总题数（需要从题库获取）
+const totalQuestions = computed(() => {
+  if (!lastPractice.value) return 0
+  const { category, scope, subject } = lastPractice.value
+  const subjectName = typeof subject === 'object' ? subject.name : subject
+  return store.rawQuestions.filter(q =>
+    q.meta.category === category &&
+    q.meta.scope === scope &&
+    q.meta.subject === subjectName
+  ).length
+})
+
+// 练习进度百分比
+const lastPracticeProgress = computed(() => {
+  if (!lastPractice.value || !totalQuestions.value) return 0
+  return Math.round(((lastPractice.value.currentIndex + 1) / totalQuestions.value) * 100)
+})
+
+// 继续上次练习
+const continueLastPractice = () => {
+  if (!lastPractice.value) return
+  const practiceData = {
+    subject: lastPractice.value.subject,
+    category: lastPractice.value.category,
+    scope: lastPractice.value.scope,
+    practiceMode: lastPractice.value.practiceMode,
+    questionSort: lastPractice.value.questionSort,
+    optionsSort: lastPractice.value.optionsSort,
+    showAnswerMode: lastPractice.value.showAnswerMode,
+    autoJump: lastPractice.value.autoJump
+  }
+  router.push({
+    path: '/practice/quiz',
+    query: { practiceData: JSON.stringify(practiceData), continue: 'true' }
+  })
 }
 
+// 页面跳转
+const pageTo = (path) => {
+  router.push(path)
+}
+
+// 加载数据
+onMounted(async () => {
+  if (store.rawQuestions.length === 0) {
+    await store.loadQuestions()
+  }
+})
 </script>
 
 <style scoped>
@@ -374,5 +438,83 @@ const pageTo = (path) => {
 .continue-btn:hover {
   background: var(--color-gray-400);
   color: var(--primary-dark);
+}
+
+.continue-inner:not(.placeholder) {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  cursor: pointer;
+}
+
+.continue-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-lg);
+  background: rgba(0, 91, 191, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary);
+  flex-shrink: 0;
+}
+
+.continue-icon .material-symbols-outlined {
+  font-size: 28px;
+}
+
+.continue-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.continue-title {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-primary);
+  margin-bottom: 2px;
+}
+
+.continue-subtitle {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+}
+
+.progress-bar {
+  height: 4px;
+  background: var(--color-gray-300);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+  margin-bottom: 4px;
+}
+
+.progress {
+  height: 100%;
+  background: var(--primary);
+  border-radius: var(--radius-full);
+}
+
+.progress-text {
+  font-size: var(--font-size-xs);
+  color: var(--text-secondary);
+}
+
+.continue-action-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--primary);
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.continue-action-btn .material-symbols-outlined {
+  color: #fff;
+  font-size: 24px;
 }
 </style>

@@ -2,26 +2,26 @@
   <div class="page">
     <header class="top-bar">
       <h1 class="title">练习题库</h1>
-      <button class="import-btn" @click="showImportModal = true">
-        <span class="material-symbols-outlined">import_export</span>
-      </button>
+      <div class="header-actions">
+        <!-- <button class="lang-btn" @click="toggleLanguage">
+          {{ getLanguage() === 'zh' ? 'EN' : '中' }}
+        </button> -->
+        <button class="import-btn" @click="showImportModal = true">
+          <span class="material-symbols-outlined">import_export</span>
+        </button>
+      </div>
     </header>
 
     <main class="content">
       <!-- Level 1: 题库选择 -->
       <section class="category-area">
         <div class="bank-grid">
-          <button 
-            v-for="cat in categoryOptions" 
-            :key="cat.value"
-            class="bank-btn"
-            :class="{ active: electedCategory === cat.value }"
-            @click="electedCategory = cat.value"
-          >
+          <button v-for="cat in categoryOptions" :key="cat" class="bank-btn"
+            :class="{ active: selectedCategory === cat }" @click="selectedCategory = cat">
             <span class="material-symbols-outlined">
-              {{ subjectIconMap[cat.name] }}
+              {{ iconMap[cat] }}
             </span>
-            <span>{{ cat.name }}</span>
+            <span>{{ t(cat) }}</span>
           </button>
         </div>
       </section>
@@ -29,15 +29,10 @@
       <!-- Level 2: 分类Tab -->
       <section class="scope-area" v-if="scopeOptions.length > 0">
         <div class="scope-tabs">
-          <button 
-            v-for="scope in scopeOptions" 
-            :key="scope"
-            class="scope-tab"
-            :class="{ active: electedScope === scope.value }"
-            @click="electedScope = scope.value"
-          >
-            <span class="material-symbols-outlined tab-icon">{{ subjectIconMap[scope.name] }}</span>
-            <span>{{ scope.name }}</span>
+          <button v-for="scope in scopeOptions" :key="scope" class="scope-tab"
+            :class="{ active: selectedScope === scope }" @click="selectedScope = scope">
+            <span class="material-symbols-outlined tab-icon">{{ iconMap[scope] }}</span>
+            <span>{{ t(scope) }}</span>
           </button>
         </div>
       </section>
@@ -48,85 +43,136 @@
           <div class="subject-card" v-for="subject in SubjectsOptions" :key="subject.name">
             <div class="subject-header">
               <div class="subject-icon">
-                <span class="material-symbols-outlined">{{ subjectIconMap[subject.name] }}</span>
+                <span class="material-symbols-outlined">{{ iconMap[subject.name] }}</span>
               </div>
               <div class="subject-info">
-                <h4>{{ subject.name }}</h4>
-                <p>{{ subject.count }} 题</p>
+                <h4>{{ t(subject.name) }}</h4>
+                <p>{{ subject.count }} {{ t('题') || '题' }}</p>
               </div>
-              <button class="enter-btn" @click="newQuizWith(subject)">新的练习</button>
+              <div class="subject-actions">
+                <button v-if="hasProgress(subject)" class="continue-btn" @click="continuePractice(subject)">
+                  继续练习
+                </button>
+                <button class="new-btn" @click="newQuizWith(subject)">新的练习</button>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      
+
     </main>
-    <PracticeSetting :visible="showPracticeSetting" :subject="selectedSubject" @close="showPracticeSetting = false" @start="showPracticeSetting = false" />
+    <PracticeSetting :visible="showPracticeSetting" :subject="selectedSubject" @close="showPracticeSetting = false"
+      @start="showPracticeSetting = false" />
     <BankImport :visible="showImportModal" @close="showImportModal = false" @import-success="handleImportSuccess" />
-      
+
   </div>
 </template>
 
 <script setup>
-import { ref, reactive, onMounted, computed, watch } from 'vue'
+import { ref, computed, onMounted } from 'vue'
+import { useRouter } from 'vue-router'
 import PracticeSetting from '@/components/page/PracticeSettings.vue'
 import BankImport from '@/components/page/BankImport.vue'
-// import { useQuestionStore } from '@/stores/questions'
-// import { storeToRefs } from 'pinia'
-import { subjectIconMap } from '@/assets/fonts/IconMaps.js'
-import base from '/public/data/atc/base.json'
-import professional from '/public/data/atc/professional.json'
-import english from '/public/data/atc/english_translated.json'
-// const store = useQuestionStore()
-// const { questions, categories } = storeToRefs(store)
+import { iconMap } from '@/assets/fonts/IconMaps.js'
+import { t, setLanguage, getLanguage } from '@/utils/i18n.js'
+import { useAppStore } from '@/stores/store'
 
-// 加载题库数据，并初始化题库数据
+// 创建 Store 实例
+const store = useAppStore()
+const router = useRouter()
 
 const showPracticeSetting = ref(false)
 const showImportModal = ref(false)
 const selectedSubject = ref(null)
-const electedCategory = ref('atc')
-const electedScope = ref('base')
+const selectedCategory = ref('atc')
+const selectedScope = ref('base')
 
-const bank_atc = reactive([
-  ...base,
-  ...professional,
-  ...english,
-])
+// 从 Store 获取题库数据
+const bank_atc = computed(() => store.rawQuestions)
 
-const categoryOptions = computed(() => [
-  { value: 'atc', name: '空管', icon: 'flight'},
-  { value: 'airport', name: '机场', icon: 'apartment'},
-  { value: 'airline', name: '航司', icon: 'connecting_airports'},
-])
-
-const scopeOptions = computed(() => [
-  {value: 'base', name: '基础题库', icon: 'flight'},
-  {value: 'professional', name: '专业题库', icon: 'work'},
-  {value: 'english', name: '英文题库', icon: 'language'},
-])
+const categoryOptions = computed(() => ['atc', 'airport', 'airline',])
+const scopeOptions = computed(() => ['base', 'professional', 'english'])
 
 const SubjectsOptions = computed(() => {
   const subjects = new Set()
-  bank_atc.forEach(q => {
-    if(q.meta.category === electedCategory.value && q.meta.scope === electedScope.value) 
+  bank_atc.value.forEach(q => {
+    if (q.meta.category === selectedCategory.value && q.meta.scope === selectedScope.value)
       subjects.add(q.meta.subject)
-    })
-  console.log(subjects)
-  const subjectsOptions = [...subjects].map(subject => ({ name:subject, count: bank_atc.filter(q => q.meta.category === electedCategory.value && q.meta.scope === electedScope.value && q.meta.subject === subject).length }))
+  })
+  const subjectsOptions = [...subjects].map(subject => ({ name: subject, count: bank_atc.value.filter(q => q.meta.category === selectedCategory.value && q.meta.scope === selectedScope.value && q.meta.subject === subject).length }))
   return subjectsOptions
 })
 
+// 页面加载时自动加载题库
+onMounted(() => {
+  if (store.rawQuestions.length === 0) {
+    store.loadQuestions()
+  }
+})
 
 const newQuizWith = (subject) => {
-  selectedSubject.value = subject
-  showPracticeSetting.value = true
+  selectedSubject.value = {
+    name: subject.name,
+    category: selectedCategory.value,
+    scope: selectedScope.value
+  }
+  
+  // 检查是否有保存的进度
+  if (hasProgress(subject)) {
+    if (confirm('已有练习进度，是否重新开始？')) {
+      // 清除进度
+      store.savePracticeProgress(null)
+      showPracticeSetting.value = true
+    }
+    // 取消则不操作
+  } else {
+    showPracticeSetting.value = true
+  }
+}
+
+// 检查是否有保存的进度
+const hasProgress = (subject) => {
+  const progress = store.practiceProgress
+  if (!progress || !progress.subject) return false
+  const subjectName = typeof subject === 'object' ? subject.name : subject
+  return progress.subject.name === subjectName
+}
+
+// 继续练习
+const continuePractice = (subject) => {
+  const progress = store.practiceProgress
+  if (!progress) return
+  
+  const practiceData = {
+    subject: progress.subject,
+    category: progress.category,
+    scope: progress.scope,
+    practiceMode: progress.practiceMode,
+    questionSort: progress.questionSort,
+    optionsSort: progress.optionsSort,
+    showAnswerMode: progress.showAnswerMode,
+    autoJump: progress.autoJump
+  }
+  
+  router.push({
+    path: '/practice/quiz',
+    query: { practiceData: JSON.stringify(practiceData), continue: 'true' }
+  })
 }
 
 const handleImportSuccess = (result) => {
   console.log('导入成功:', result)
 }
+
+const toggleLanguage = () => {
+  const current = getLanguage()
+  setLanguage(current === 'zh' ? 'en' : 'zh')
+  window.location.reload()
+}
+
+
+
 </script>
 
 <style scoped>
@@ -136,7 +182,7 @@ const handleImportSuccess = (result) => {
   display: flex;
   flex-direction: column;
   background: var(--color-gray-100);
-  padding-bottom: var(--safe-area) ;
+  padding-bottom: var(--safe-area);
   max-width: var(--app-max-width);
   margin: 0 auto;
 }
@@ -154,6 +200,32 @@ const handleImportSuccess = (result) => {
   box-sizing: border-box;
   position: relative;
   flex-shrink: 0;
+}
+
+.header-actions {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  gap: 8px;
+}
+
+.lang-btn {
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--border-color);
+  background: transparent;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--text-primary);
+  transition: all 0.2s;
+}
+
+.lang-btn:hover {
+  background: var(--color-gray-100);
 }
 
 .import-btn {
@@ -340,6 +412,35 @@ const handleImportSuccess = (result) => {
 }
 
 .enter-btn {
+  background: rgba(0, 91, 191, 0.1);
+  color: var(--primary);
+  border: none;
+  border-radius: var(--radius-full);
+  padding: 6px 14px;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.subject-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.continue-btn {
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-full);
+  padding: 6px 14px;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.new-btn {
   background: rgba(0, 91, 191, 0.1);
   color: var(--primary);
   border: none;

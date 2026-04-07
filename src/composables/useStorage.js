@@ -1,30 +1,120 @@
-import { ref, computed } from 'vue'
-
+/**
+ * Storage Key 定义
+ * 统一管理所有 localStorage 的 key
+ * 
+ * 命名规则: 大类_小类 (全部大写下划线分隔)
+ */
 export const STORAGE_KEY = {
-  // 应用全局通用
-  APP: '',
-    
-  // 题库相关
-  BANK: 'bank_',
-  BANK_HASH: 'bank_hash_',
+  // 题库相关 (BANK)
+  BANK: 'bank',
+  BANK_HASH: 'bank_hash',
 
-  // 练习相关  PRACTICE
-  PRACTICE_PROGRESS: 'practice_progress',  // 题库（分类/范围/科目），模式，进度，作答记录
-  PRACTICE_HISTORY: 'practice_history',    // 题库（分类/范围/科目），模式，进度，作答记录
+  // 导入题库配置 (IMPORT)
+  IMPORT_CONFIG: 'import_config',
 
-  // 考试相关 EXAM
-  EXAM_PAPERS: 'exam_papers',        // 考试卷信息：试卷ID，试卷名称，试卷类型，试卷时间，试卷题目数量，试卷题目信息
-  EXAM_PRESETS: 'exam_presets',      // 考试预设：  题库范围科目，数量，分值等的组合
-  EXAM_HISTORY: 'exam_history',      // 考试历史记录：考试ID，考试时间，考试成绩，考试题目数量，考试题目
+  // 练习相关 (PRACTICE)
+  PRACTICE_PROGRESS: 'practice_progress',
+  PRACTICE_HISTORY: 'practice_history',
 
-  // 用户相关 USER
-  USER_INFO: 'user_info',             // 用户信息：用户名，密码，邮箱，手机号，角色，状态
-  USER_WRONG_BOOK: 'user_wrongbook',  // 用户错误的题目：题目ID（题干，正确完整答案），错误次数，错误时间
-  USER_FAVORITES: 'user_favorites',    // 用户收藏的题目：题目ID（题干，正确答案）收藏时间
+  // 考试相关 (EXAM)
+  EXAM_PAPERS: 'exam_papers',
+  EXAM_PRESETS: 'exam_presets',
+  EXAM_HISTORY: 'exam_history',
+
+  // 用户相关 (USER)
+  USER_INFO: 'user_info',
+  USER_WRONG_BOOK: 'user_wrongbook',
+  USER_FAVORITES: 'user_favorites',
   
-  // 统计相关 STATS
-  STATS_TODAY: 'stats_today',         // 今日统计：今日练习数量， 正确率
-  STATS_TOTAL: 'stats_total',         // 总统计：练习天数；练习次数，正确率；考试次数，平均分，通过率; 总做题数量（包含重复）正确题目数量，错误题目数量，总正确率
-  STATS_SUBJECT: 'stats_subject',     // 科目统计：科目，正确题目数量，错误题目数量，正确率
-
+  // 统计相关 (STATS)
+  STATS_TODAY: 'stats_today',
+  STATS_TOTAL: 'stats_total',
+  STATS_SUBJECT: 'stats_subject',
 }
+
+// 命名空间前缀
+const PREFIX = 'atc_'
+
+/**
+ * Storage 封装
+ * 统一管理 localStorage 操作，自动处理 JSON 转换
+ */
+export const storage = {
+  /**
+   * 存储数据
+   */
+  setItem(key, value) {
+    try {
+      const data = JSON.stringify(value)
+      localStorage.setItem(PREFIX + key, data)
+    } catch (e) {
+      console.error('Storage setItem 失败:', e)
+    }
+  },
+
+  /**
+   * 获取数据
+   */
+  getItem(key) {
+    try {
+      const data = localStorage.getItem(PREFIX + key)
+      return data ? JSON.parse(data) : null
+    } catch (e) {
+      console.error('Storage getItem 失败:', e)
+      return null
+    }
+  },
+
+  /**
+   * 移除数据
+   */
+  removeItem(key) {
+    localStorage.removeItem(PREFIX + key)
+  },
+
+  /**
+   * 清空所有数据
+   */
+  clear() {
+    const keys = Object.keys(localStorage)
+    keys.forEach(key => {
+      if (key.startsWith(PREFIX)) {
+        localStorage.removeItem(key)
+      }
+    })
+  },
+
+  /**
+   * 设置带过期时间的数据
+   * @param {string} key - 存储键名
+   * @param {any} value - 要存储的数据
+   * @param {number} ttl - 过期时间（毫秒）
+   */
+  setWithExpiry(key, value, ttl) {
+    const data = {
+      value,
+      expiry: Date.now() + ttl
+    }
+    this.setItem(key, data)
+  },
+
+  /**
+   * 获取带过期时间的数据
+   * @param {string} key - 存储键名
+   * @returns {any} 过期返回 null，否则返回数据
+   */
+  getWithExpiry(key) {
+    const data = this.getItem(key)
+    if (!data) return null
+    
+    // 检查是否过期
+    if (data.expiry && Date.now() > data.expiry) {
+      this.removeItem(key)
+      return null
+    }
+    
+    return data.value
+  }
+}
+
+export default storage

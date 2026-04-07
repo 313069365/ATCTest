@@ -6,8 +6,9 @@
           <span class="material-symbols-outlined">close</span>
         </button>
         <div class="header-title">
-          <h1>空管英语</h1>
-          <span class="header-subtitle">空管题库 • 基础题库</span>
+          <h1>{{ t(subjectDisplay) }}</h1>
+          <span class="header-subtitle">{{ t(practiceData?.category) || practiceData?.category || "" }} •
+            {{ t(practiceData?.scope) || practiceData?.scope || "" }}</span>
         </div>
       </div>
       <div class="top-bar-right">
@@ -21,131 +22,410 @@
       </div>
     </header>
 
-    <div class="progress-bar-container">
-      <div class="progress-bar">
-        <div class="progress" style="width: 85%"></div>
-      </div>
-      <span class="progress-text">172/200</span>
-    </div>
-
     <main class="content">
-      <div class="question-meta">
-        <span class="question-type-tag">单选题</span>
-        <span class="question-id">题目编号： 001 </span>
-        <button class="fav-btn">
-          <span class="material-symbols-outlined">kid_star</span>
-        </button>
-      </div>
-
-      <div class="question-section">
-        <h2 class="question-text">
-          在无线电话中，机场管制服务管制员的呼号是__________。
-        </h2>
-      </div>
-
-      <div class="options">
-        <button class="option-btn">
-          <span class="option-marker">A</span>
-          <span class="option-text">塔台</span>
-        </button>
-        <button class="option-btn">
-          <span class="option-marker">B</span>
-          <span class="option-text">地面</span>
-        </button>
-        <button class="option-btn">
-          <span class="option-marker">C</span>
-          <span class="option-text">进近</span>
-        </button>
-        <button class="option-btn">
-          <span class="option-marker">D</span>
-          <span class="option-text">管制</span>
-        </button>
-      </div>
-
-      <div class="check-answer" v-if="showCheckBtn">
-        <button class="check-btn" @click="$emit('check')">
-          <span class="material-symbols-outlined">verified</span>
-          查看答案
-        </button>
-      </div>
-
-      <div class="explanation-section" v-if="showExplanation">
-        <div class="explanation-header">
-          <span class="material-symbols-outlined">lightbulb</span>
-          <span>解析</span>
+      <div class="progress-bar-container">
+        <div class="progress-bar">
+          <div class="progress" :style="{ width: progress + '%' }"></div>
         </div>
-        <div class="explanation-content">
-          在无线电话通讯中，机场管制服务管制员的呼号是"Tower"。
+        <span class="progress-text">{{ currentIndex + 1 }}/{{ bank.length }}</span>
+      </div>
+
+      <div class="question-container">
+        <div v-if="loading" style="text-align: center; padding: 40px">
+          <p>{{ t("loadingQuestions") }}</p>
         </div>
+        <template v-else>
+          <div v-if="currentQuestion">
+            <div class="question-meta">
+              <span class="question-type-tag">{{
+                t(currentQuestion.type)
+                }}</span>
+              <span class="question-id">{{ t("questionId") }}: {{ currentQuestion.id }}</span>
+              <button class="fav-btn" :class="{ active: isFavorited }" @click="toggleFavorite">
+                <span class="material-symbols-outlined">{{ isFavorited ? 'kid_star' : 'star' }}</span>
+              </button>
+            </div>
+
+            <QuestionRenderer :question="currentQuestionWithOptions" :mode="practiceMode" :user-answer="userAnswers[currentQuestion?.id]"
+              :show-answer="isAnswerChecked" :disabled="isAnswerChecked" @answer="handleAnswer" />
+
+            <div class="check-answer" v-if="showCheckBtn && hasUserAnswer && practiceMode !== 'review'">
+              <button class="check-btn" @click="checkAnswer">
+                <span class="material-symbols-outlined">verified</span>
+                {{ t("checkAnswer") }}
+              </button>
+            </div>
+          </div>
+
+          <div v-else style="text-align: center; padding: 40px">
+            <p>
+              {{ bank.length === 0 ? t("noQuestions") : t("loadingQuestions") }}
+            </p>
+          </div>
+        </template>
       </div>
     </main>
 
-    <AnswerCard v-if="showExplanation" @close="closeAnswerCard" @exit="exitQuiz" />
-
-    <QustionNavbar />
+    <QustionNavbar :prevDisabled="currentIndex === 0" :isLast="currentIndex === bank.length - 1" @prev="
+      () => {
+        if (currentIndex > 0) {
+          currentIndex--;
+          resetQuestionState();
+        }
+      }
+    " @next="nextQuestion" @submit="
+      () => {
+        router.push({
+          name: 'PracticeResult',
+          query: { practiceData: JSON.stringify(practiceData) },
+        });
+      }
+    " />
+    <AnswerCard v-if="showAnswerCard" :questions="bank" :currentIndex="currentIndex" :settings="practiceData"
+      @close="closeAnswerCard" @exit="exitQuiz" @go="
+        (idx) => {
+          currentIndex = idx;
+          resetQuestionState();
+          closeAnswerCard();
+        }
+      " />
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
-import { useRouter, useRoute } from 'vue-router'
-import AnswerCard from '@/components/page/AnswerCard.vue'
-import QustionNavbar from '@/components/layout/QuestionNavbar.vue'
+import { ref, onMounted, onUnmounted, computed } from "vue";
+import { useRouter, useRoute } from "vue-router";
+import AnswerCard from "@/components/page/AnswerCard.vue";
+import QustionNavbar from "@/components/layout/QuestionNavbar.vue";
+import QuestionRenderer from "@/components/question/QuestionRenderer.vue";
+import { useAppStore } from "@/stores/store";
+import { t } from "@/utils/i18n.js";
 
-const router = useRouter()
-const route = useRoute()
+const router = useRouter();
+const route = useRoute();
+const store = useAppStore();
 
-const showCheckBtn = ref(true)
-const showExplanation = ref(false)
-const practiceData = ref(null)
+const showAnswerCard = ref(false);
+const showCheckBtn = ref(true);
+const showAnswerExplanation = ref(false);
+const practiceData = ref(null);
+const bank = ref([]);
+const currentIndex = ref(0);
+const userAnswers = ref({});
+const shuffledOptionsCache = ref({}); // 缓存选项乱序结果
+const isAnswerChecked = ref(false);
+const loading = ref(true);
 
-const toggleAnswerCard = () => {
-  showExplanation.value = !showExplanation.value
-}
-
-const closeAnswerCard = () => {
-  showExplanation.value = false
-}
-
-const exitQuiz = () => {
-  if (confirm('确定要退出答题吗？')) {
-    router.push({ name: 'PracticeResult', query: { practiceData: JSON.stringify(practiceData.value) } })
+onMounted(async () => {
+  // 确保 Store 已加载题库数据
+  if (store.rawQuestions.length === 0) {
+    await store.loadQuestions();
   }
-}
 
-
-
-onMounted(() => {
-  // 从路由参数中获取练习数据
-  const practiceDataStr = route.query.practiceData
-  if (practiceDataStr) {
+  // 从 query 获取练习数据
+  if (route.query.practiceData) {
     try {
-      practiceData.value = JSON.parse(practiceDataStr)
-      console.log('练习数据:', practiceData.value)
-    } catch (error) {
-      console.error('解析练习数据失败:', error)
-      // 使用默认mock数据
-      practiceData.value = {
-        subject: '航空气象',
-        questionCount: 30,
-        mode: '答题模式',
-        order: '顺序',
-        showAnswerMode: '立即显示',
-        autoNext: false
+      practiceData.value = JSON.parse(route.query.practiceData);
+      const { category, scope, subject, questionSort } = practiceData.value;
+
+      // subject 可能是对象 { name, category, scope } 或字符串
+      const subjectName = typeof subject === "object" ? subject.name : subject;
+
+      console.log("QuizPage 接收参数:", {
+        category,
+        scope,
+        subject: subjectName,
+        questionSort,
+      });
+      console.log("Store 题库数量:", store.rawQuestions.length);
+
+      // 从 Store 获取题目并过滤
+      let filtered = store.rawQuestions.filter(
+        (q) =>
+          q.meta &&
+          q.meta.category === category &&
+          q.meta.scope === scope &&
+          q.meta.subject === subjectName,
+      );
+
+      console.log("过滤后题目数量:", filtered.length);
+
+      // 加载已保存的进度
+      const savedProgress = store.practiceProgress;
+      const isSameSubject = savedProgress?.subject?.name === subjectName;
+      
+      // 排序：优先使用保存的题目顺序
+      if (isSameSubject && savedProgress?.questionIds && savedProgress.questionIds.length > 0) {
+        // 按保存的题目 ID 顺序恢复
+        const questionIdSet = new Set(savedProgress.questionIds);
+        // 只保留仍存在的题目
+        const existingQuestions = new Set(filtered.map(q => q.id));
+        const validIds = savedProgress.questionIds.filter(id => existingQuestions.has(id));
+        
+        bank.value = validIds.map(id => filtered.find(q => q.id === id)).filter(Boolean);
+        console.log("已恢复题目顺序，题数:", bank.value.length);
+      } else {
+        // 新练习：按设置排序
+        if (questionSort === "shuffle") {
+          filtered = filtered.sort(() => Math.random() - 0.5);
+        } else if (questionSort === "reverse") {
+          filtered = filtered.reverse();
+        }
+        bank.value = filtered;
       }
+      
+      // 缓存选项乱序
+      cacheShuffledOptions();
+      console.log("bank.value 长度:", bank.value.length);
+      
+      // 加载练习进度（断点续练）
+      loadPracticeProgress();
+      
+      // 背题模式：初始化时直接显示答案
+      if (practiceData.value?.practiceMode === 'review') {
+        isAnswerChecked.value = true;
+        showAnswerExplanation.value = true;
+        showCheckBtn.value = false;
+      }
+    } catch (e) {
+      console.error("解析练习数据失败:", e);
+      router.push({ name: "Practice" });
     }
   } else {
-    // 使用默认mock数据
-    practiceData.value = {
-      subject: '航空气象',
-      questionCount: 30,
-      mode: '答题模式',
-      order: '顺序',
-      showAnswerMode: '立即显示',
-      autoNext: false
+    router.push({ name: "Practice" });
+  }
+  loading.value = false;
+});
+
+// 页面卸载时保存进度（刷新、关闭页面等）
+onUnmounted(() => {
+  savePracticeProgress();
+});
+
+// 进度计算
+const progress = computed(() => {
+  if (bank.value.length === 0) return 0;
+  return Math.round(((currentIndex.value + 1) / bank.value.length) * 100);
+});
+
+// 当前题目
+const currentQuestion = computed(() => {
+  if (bank.value && bank.value.length > 0 && bank.value[currentIndex.value]) {
+    return bank.value[currentIndex.value];
+  }
+  return null;
+});
+
+// 科目显示名称
+const subjectDisplay = computed(() => {
+  if (!practiceData.value) return "练习";
+  const subject = practiceData.value.subject;
+  return typeof subject === "object" ? subject.name : subject;
+});
+
+// 缓存选项乱序结果
+const cacheShuffledOptions = () => {
+  if (!practiceData.value?.optionsSort) return;
+  
+  shuffledOptionsCache.value = {};
+  bank.value.forEach((question, index) => {
+    if (question && question.options) {
+      const shuffled = [...question.options].sort(() => Math.random() - 0.5);
+      shuffledOptionsCache.value[question.id] = shuffled;
+    }
+  });
+  console.log("已缓存选项乱序，题数:", Object.keys(shuffledOptionsCache.value).length);
+};
+
+// 获取带乱序选项的题目（使用缓存）
+const getQuestionWithShuffledOptions = (question) => {
+  if (!question || !question.options) return question;
+  
+  // 如果设置了选项乱序，使用缓存
+  if (practiceData.value?.optionsSort) {
+    const cached = shuffledOptionsCache.value[question.id];
+    if (cached) {
+      return { ...question, options: cached };
+    }
+    // 如果没有缓存，重新打乱并缓存
+    const shuffled = [...question.options].sort(() => Math.random() - 0.5);
+    shuffledOptionsCache.value[question.id] = shuffled;
+    return { ...question, options: shuffled };
+  }
+  return question;
+};
+
+// 当前题目（带乱序选项）
+const currentQuestionWithOptions = computed(() => {
+  if (!currentQuestion.value) return null;
+  return getQuestionWithShuffledOptions(currentQuestion.value);
+});
+
+// 切换答案卡片
+const toggleAnswerCard = () => {
+  showAnswerCard.value = !showAnswerCard.value;
+};
+
+const closeAnswerCard = () => {
+  showAnswerCard.value = false;
+};
+
+// 退出答题
+const exitQuiz = () => {
+  if (confirm("确定要退出答题吗？")) {
+    // 保存当前进度再退出
+    savePracticeProgress();
+    router.push({ name: "Practice" });
+  }
+};
+
+// 练习模式
+const practiceMode = computed(() => {
+  return practiceData.value?.practiceMode || "answer";
+});
+
+// 是否有用户答案（使用题目 ID 查询）
+const hasUserAnswer = computed(() => {
+  if (!currentQuestion.value) return false;
+  const answer = userAnswers.value[currentQuestion.value.id];
+  if (answer === null || answer === undefined) return false;
+  if (Array.isArray(answer)) return answer.length > 0;
+  if (typeof answer === "string") return answer.trim().length > 0;
+  return !!answer;
+});
+
+// 是否已收藏
+const isFavorited = computed(() => {
+  if (!currentQuestion.value) return false;
+  return store.favorites.some(q => q.id === currentQuestion.value.id);
+});
+
+// 切换收藏
+const toggleFavorite = () => {
+  if (!currentQuestion.value) return;
+  if (isFavorited.value) {
+    store.removeFavorite(currentQuestion.value.id);
+  } else {
+    store.addFavorite(currentQuestion.value);
+  }
+};
+
+// 处理用户作答
+const handleAnswer = (answer) => {
+  // 使用题目 ID 存储答案，而非索引
+  if (currentQuestion.value) {
+    userAnswers.value[currentQuestion.value.id] = answer;
+  }
+
+  // 如果是立即显示模式且不是背题模式，自动检查答案
+  if (
+    practiceData.value?.showAnswerMode === "immediate" &&
+    practiceMode.value !== "review"
+  ) {
+    checkAnswer();
+    
+    // 自动跳转下一题
+    if (practiceData.value?.autoJump) {
+      setTimeout(() => {
+        nextQuestion();
+      }, 500);
     }
   }
-})
+};
+
+// 检查答案
+const checkAnswer = () => {
+  isAnswerChecked.value = true;
+  showCheckBtn.value = false;
+  showAnswerExplanation.value = true;
+
+  // 保存进度
+  savePracticeProgress();
+};
+
+// 加载练习进度（断点续练）
+const loadPracticeProgress = () => {
+  const progress = store.practiceProgress;
+  if (progress && progress.subject) {
+    // 检查是否是同一个练习
+    const sameSubject = progress.subject.name === subjectDisplay.value;
+    if (sameSubject) {
+      currentIndex.value = progress.currentIndex || 0;
+      userAnswers.value = progress.userAnswers || {};
+      
+      // 恢复答案检查状态
+      if (progress.isAnswerChecked) {
+        isAnswerChecked.value = true;
+        showCheckBtn.value = false;
+        showAnswerExplanation.value = true;
+      }
+      
+      // 根据恢复的练习模式决定是否显示答案
+      const mode = progress.practiceMode || practiceData.value?.practiceMode;
+      if (mode === 'review') {
+        isAnswerChecked.value = true;
+        showCheckBtn.value = false;
+        showAnswerExplanation.value = true;
+      }
+      
+      console.log('已恢复练习进度:', { 
+        currentIndex: currentIndex.value, 
+        answeredCount: Object.keys(userAnswers.value).length,
+        isAnswerChecked: isAnswerChecked.value
+      });
+    }
+  }
+};
+
+// 保存练习进度
+const savePracticeProgress = () => {
+  store.savePracticeProgress({
+    subject: practiceData.value?.subject,
+    category: practiceData.value?.category,
+    scope: practiceData.value?.scope,
+    currentIndex: currentIndex.value,
+    userAnswers: userAnswers.value,
+    questionIds: bank.value.map(q => q.id), // 保存题目顺序
+    isAnswerChecked: isAnswerChecked.value,
+    practiceMode: practiceData.value?.practiceMode,
+    questionSort: practiceData.value?.questionSort,
+    optionsSort: practiceData.value?.optionsSort,
+    showAnswerMode: practiceData.value?.showAnswerMode,
+    autoJump: practiceData.value?.autoJump,
+    timestamp: Date.now()
+  });
+};
+
+// 下一题
+const nextQuestion = () => {
+  if (currentIndex.value < bank.value.length - 1) {
+    currentIndex.value++;
+    resetQuestionState();
+  } else {
+    // 已完成所有题目
+    router.push({
+      name: "PracticeResult",
+      query: { practiceData: JSON.stringify(practiceData.value) },
+    });
+  }
+};
+
+// 重置题目状态
+const resetQuestionState = () => {
+  // 背题模式保持显示答案
+  if (practiceMode.value === "review") {
+    isAnswerChecked.value = true;
+    showCheckBtn.value = false;
+    showAnswerExplanation.value = true;
+  } else {
+    isAnswerChecked.value = false;
+    showCheckBtn.value = true;
+    showAnswerExplanation.value = false;
+  }
+  
+  // 保存进度
+  savePracticeProgress();
+};
 </script>
 
 <style scoped>
@@ -270,6 +550,10 @@ onMounted(() => {
 }
 
 .content {
+  /* padding: var(--spacing-md); */
+}
+
+.question-container {
   padding: var(--spacing-md);
 }
 
@@ -305,7 +589,20 @@ onMounted(() => {
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  color: var(--text-secondary);
+  transition: all 0.2s;
+}
+
+.fav-btn:active {
+  transform: scale(0.95);
+}
+
+.fav-btn.active {
   color: var(--warning);
+}
+
+.fav-btn .material-symbols-outlined {
+  font-size: 20px;
 }
 
 .question-text {
@@ -314,133 +611,6 @@ onMounted(() => {
   color: var(--on-surface);
   line-height: 1.6;
   margin-bottom: var(--spacing-lg);
-}
-
-.options-list {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-sm);
-}
-
-/* .option-item {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-md);
-  padding: var(--spacing-md);
-  background: var(--background-surface);
-  border: 1px solid var(--border-color-light);
-  border-radius: var(--radius-md);
-  cursor: pointer;
-}
-
-.option-item.selected {
-  border-color: var(--success);
-  background: var(--success-light);
-}
-
-.option-item.correct {
-  border-color: var(--success);
-  background: var(--success-light);
-}
-
-.option-item.wrong {
-  border-color: var(--error);
-  background: var(--error-light);
-}
-
-.option-radio {
-  width: 20px;
-  height: 20px;
-  border: 2px solid var(--border-color-strong);
-  border-radius: 50%;
-  flex-shrink: 0;
-}
-
-.option-radio.selected {
-  border-color: var(--success);
-  background: var(--success);
-  box-shadow: inset 0 0 0 3px var(--background);
-}
-
-.option-text {
-  font-size: var(--font-size-md);
-  color: var(--on-surface);
-} */
-
-.options {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.option-btn {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: var(--spacing-sm);
-  background: #fff;
-  border: 1px solid transparent;
-  border-radius: var(--radius-lg);
-  cursor: pointer;
-  transition: all 0.2s;
-  text-align: left;
-  width: 100%;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
-}
-
-.option-btn:active {
-  transform: scale(0.99);
-}
-
-.option-btn.selected {
-  border-color: var(--primary);
-  box-shadow: 0 4px 12px rgba(0, 91, 191, 0.08);
-}
-
-.option-btn.correct {
-  color: var(--success);
-  border-color: var(--success);
-  background: #e6f4ea;
-}
-
-.option-btn.wrong {
-  border-color: var(--error);
-  background: #fce8e6;
-}
-
-.option-marker {
-  width: 40px;
-  height: 40px;
-  border-radius: var(--radius-lg);
-  background: #f1f4f7;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 700;
-  font-size: 14px;
-  color: #414754;
-  flex-shrink: 0;
-}
-
-.option-btn.selected .option-marker {
-  background: var(--primary);
-  color: #fff;
-}
-
-.option-btn.correct .option-marker {
-  background: var(--success);
-  color: #fff;
-}
-
-.option-btn.wrong .option-marker {
-  background: var(--error);
-  color: #fff;
-}
-
-.option-text {
-  flex: 1;
-  font-size: 16px;
-  font-weight: 500;
 }
 
 /* 检查答案按钮 */
@@ -476,69 +646,5 @@ onMounted(() => {
 
 .check-btn .material-symbols-outlined {
   font-size: var(--font-size-xl);
-}
-
-
-.explanation-section {
-  margin-top: var(--spacing-lg);
-  padding: var(--spacing-md);
-  background: var(--color-gray-100);
-  border-radius: var(--radius-md);
-}
-
-.explanation-header {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-sm);
-  margin-bottom: var(--spacing-sm);
-  color: var(--primary);
-  font-weight: var(--font-weight-semibold);
-}
-
-.explanation-content {
-  font-size: var(--font-size-md);
-  color: var(--on-surface);
-  line-height: 1.6;
-}
-
-.question-footer {
-  position: fixed;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100%;
-  max-width: var(--app-max-width);
-  display: flex;
-  justify-content: space-between;
-  padding: var(--spacing-sm) var(--spacing-md);
-  background: var(--background);
-  border-top: 1px solid var(--border-color-light);
-}
-
-.footer-btn {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-sm);
-  padding: var(--spacing-md) var(--spacing-md);
-  border: none;
-  border-radius: var(--radius-md);
-  font-size: var(--font-size-md);
-  font-weight: var(--font-weight-semibold);
-  cursor: pointer;
-}
-
-.footer-btn.prev {
-  background: var(--background-surface);
-  color: var(--on-surface);
-}
-
-.footer-btn.check {
-  background: var(--success);
-  color: var(--on-primary);
-}
-
-.footer-btn.next {
-  background: var(--primary);
-  color: var(--on-primary);
 }
 </style>

@@ -13,12 +13,11 @@
         <div class="progress-stats">
           <div class="practice-info" v-if="settings">
             <div class="tags-row">
-              <span class="info-tag">{{ settings.order }} {{ settings.mode === 'study' ? '背题' : '答题'
-                }}</span>
-              <span class="info-tag" v-if="settings.mode === 'practice'">
-                {{ settings.showAnswer === 'immediate' ? '立即显示' : '按需显示' }}
+              <span class="info-tag">{{ orderDisplay }} {{ modeDisplay }}</span>
+              <span class="info-tag" v-if="settings.mode === 'answer'">
+                {{ showAnswerDisplay }}
               </span>
-              <span class="info-tag" v-if="settings.mode === 'practice' && settings.autoJump">
+              <span class="info-tag" v-if="settings.mode === 'answer' && settings.autoJump">
                 自动跳转
               </span>
             </div>
@@ -49,8 +48,14 @@
         </div>
 
         <div class="question-list">
-          <button class="question-btn" v-for="i in 10" :key="i">
-            {{ i }}
+          <button 
+            class="question-btn" 
+            v-for="(q, i) in questions" 
+            :key="i"
+            @click="$emit('go', i)"
+            :class="{ current: currentIndex === i }"
+          >
+            {{ i + 1 }}
           </button>
         </div>
       </div>
@@ -59,21 +64,45 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { computed } from 'vue'
 
-defineProps({
-  questions: Array,
-  currentIndex: Number
+const props = defineProps({
+  questions: {
+    type: Array,
+    default: () => []
+  },
+  currentIndex: {
+    type: Number,
+    default: 0
+  },
+  settings: {
+    type: Object,
+    default: null
+  }
 })
 
-const settings = ref({
-  order: '随机',
-  mode: 'study',
-  showAnswer: 'immediate',
-  autoJump: true
+const emit = defineEmits(['close', 'go', 'exit'])
+
+// 格式化显示设置
+const orderDisplay = computed(() => {
+  if (!props.settings) return '顺序'
+  const orderMap = {
+    'sequence': '顺序',
+    'reverse': '逆序',
+    'shuffle': '乱序',
+  }
+  return orderMap[props.settings.order] || '顺序'
 })
 
-defineEmits(['close', 'go', 'exit'])
+const modeDisplay = computed(() => {
+  if (!props.settings) return '答题'
+  return props.settings.mode === 'review' ? '背题' : '答题'
+})
+
+const showAnswerDisplay = computed(() => {
+  if (!props.settings) return '立即显示'
+  return props.settings.showAnswerMode === 'immediate' ? '立即显示' : '按需显示'
+})
 </script>
 
 <style scoped>
