@@ -152,15 +152,14 @@ onMounted(async () => {
 
       // 加载已保存的进度
       const savedProgress = store.practiceProgress;
-      const isSameSubject = savedProgress?.subject?.name === subjectName;
+      const isSameSubject = savedProgress?.config?.bank?.subject === subjectName;
       
       // 排序：优先使用保存的题目顺序
-      if (isSameSubject && savedProgress?.questionIds && savedProgress.questionIds.length > 0) {
+      if (isSameSubject && savedProgress?.progress?.questionIds && savedProgress.progress.questionIds.length > 0) {
         // 按保存的题目 ID 顺序恢复
-        const questionIdSet = new Set(savedProgress.questionIds);
-        // 只保留仍存在的题目
+        const savedQuestionIds = savedProgress.progress.questionIds;
         const existingQuestions = new Set(filtered.map(q => q.id));
-        const validIds = savedProgress.questionIds.filter(id => existingQuestions.has(id));
+        const validIds = savedQuestionIds.filter(id => existingQuestions.has(id));
         
         bank.value = validIds.map(id => filtered.find(q => q.id === id)).filter(Boolean);
         console.log("已恢复题目顺序，题数:", bank.value.length);
@@ -353,13 +352,22 @@ const checkAnswer = () => {
 // 加载练习进度（断点续练）
 const loadPracticeProgress = () => {
   const progress = store.practiceProgress;
-  if (progress && progress.subject) {
+  if (progress && progress.config?.bank) {
     // 检查是否是同一个练习
-    const sameSubject = progress.subject.name === subjectDisplay.value;
+    const sameSubject = progress.config.bank.subject === subjectDisplay.value;
     if (sameSubject) {
-      currentIndex.value = progress.currentIndex || 0;
-      userAnswers.value = progress.userAnswers || {};
-      answerChecked.value = progress.answerChecked || {};
+      currentIndex.value = progress.progress.currentIndex || 0;
+      
+      // 恢复 answers 数据
+      const answersData = progress.progress.answers || {};
+      const userAnswersMap = {};
+      const answerCheckedMap = {};
+      Object.keys(answersData).forEach(questionId => {
+        userAnswersMap[questionId] = answersData[questionId].selected;
+        answerCheckedMap[questionId] = answersData[questionId].checked;
+      });
+      userAnswers.value = userAnswersMap;
+      answerChecked.value = answerCheckedMap;
       
       // 恢复当前题目的答案检查状态
       const currentQ = bank.value[currentIndex.value];
@@ -369,7 +377,7 @@ const loadPracticeProgress = () => {
       }
       
       // 根据恢复的练习模式决定是否显示答案
-      const mode = progress.practiceMode || practiceData.value?.practiceMode;
+      const mode = progress.config.mode || practiceData.value?.practiceMode;
       if (mode === 'review') {
         // 背题模式：所有题目都显示答案
         showCheckBtn.value = false;
@@ -387,21 +395,36 @@ const loadPracticeProgress = () => {
 
 // 保存练习进度
 const savePracticeProgress = () => {
+  const answers = {}
+  Object.keys(userAnswers.value).forEach(questionId => {
+    answers[questionId] = {
+      selected: userAnswers.value[questionId],
+      checked: answerChecked.value[questionId] || false
+    }
+  })
+  
   store.savePracticeProgress({
-    subject: practiceData.value?.subject,
-    category: practiceData.value?.category,
-    scope: practiceData.value?.scope,
-    currentIndex: currentIndex.value,
-    userAnswers: userAnswers.value,
-    answerChecked: answerChecked.value,
-    questionIds: bank.value.map(q => q.id), // 保存题目顺序
-    practiceMode: practiceData.value?.practiceMode,
-    questionSort: practiceData.value?.questionSort,
-    optionsSort: practiceData.value?.optionsSort,
-    showAnswerMode: practiceData.value?.showAnswerMode,
-    autoJump: practiceData.value?.autoJump,
-    timestamp: Date.now()
-  });
+    config: {
+      bank: {
+        subject: practiceData.value?.subject?.name,
+        category: practiceData.value?.subject?.category,
+        scope: practiceData.value?.subject?.scope
+      },
+      mode: practiceData.value?.practiceMode,
+      questionSort: practiceData.value?.questionSort,
+      optionsSort: practiceData.value?.optionsSort,
+      showAnswerMode: practiceData.value?.showAnswerMode,
+      autoJump: practiceData.value?.autoJump
+    },
+    progress: {
+      currentIndex: currentIndex.value,
+      questionIds: bank.value.map(q => q.id),
+      answers: answers
+    },
+    meta: {
+      timestamp: Date.now()
+    }
+  })
 };
 
 // 下一题

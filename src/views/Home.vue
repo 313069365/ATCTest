@@ -108,7 +108,9 @@ const lastPractice = computed(() => {
 // 计算总题数（需要从题库获取）
 const totalQuestions = computed(() => {
   if (!lastPractice.value) return 0
-  const { category, scope, subject } = lastPractice.value
+  const config = lastPractice.value.config
+  if (!config?.bank) return 0
+  const { category, scope, subject } = config.bank
   const subjectName = typeof subject === 'object' ? subject.name : subject
   return store.rawQuestions.filter(q =>
     q.meta.category === category &&
@@ -120,21 +122,20 @@ const totalQuestions = computed(() => {
 // 练习进度百分比
 const lastPracticeProgress = computed(() => {
   if (!lastPractice.value || !totalQuestions.value) return 0
-  return Math.round(((lastPractice.value.currentIndex + 1) / totalQuestions.value) * 100)
+  return Math.round(((lastPractice.value.progress.currentIndex + 1) / totalQuestions.value) * 100)
 })
 
 // 继续上次练习
 const continueLastPractice = () => {
-  if (!lastPractice.value) return
+  if (!lastPractice.value || !lastPractice.value.config) return
+  const config = lastPractice.value.config
   const practiceData = {
-    subject: lastPractice.value.subject,
-    category: lastPractice.value.category,
-    scope: lastPractice.value.scope,
-    practiceMode: lastPractice.value.practiceMode,
-    questionSort: lastPractice.value.questionSort,
-    optionsSort: lastPractice.value.optionsSort,
-    showAnswerMode: lastPractice.value.showAnswerMode,
-    autoJump: lastPractice.value.autoJump
+    subject: config.bank,
+    practiceMode: config.mode,
+    questionSort: config.questionSort,
+    optionsSort: config.optionsSort,
+    showAnswerMode: config.showAnswerMode,
+    autoJump: config.autoJump
   }
   router.push({
     path: '/practice/quiz',

@@ -134,25 +134,23 @@ const newQuizWith = (subject) => {
 // 检查是否有保存的进度
 const hasProgress = (subject) => {
   const progress = store.practiceProgress
-  if (!progress || !progress.subject) return false
+  if (!progress || !progress.config?.bank) return false
   const subjectName = typeof subject === 'object' ? subject.name : subject
-  return progress.subject.name === subjectName
+  return progress.config.bank.subject === subjectName
 }
 
 // 继续练习
 const continuePractice = (subject) => {
   const progress = store.practiceProgress
-  if (!progress) return
+  if (!progress || !progress.config) return
   
   const practiceData = {
-    subject: progress.subject,
-    category: progress.category,
-    scope: progress.scope,
-    practiceMode: progress.practiceMode,
-    questionSort: progress.questionSort,
-    optionsSort: progress.optionsSort,
-    showAnswerMode: progress.showAnswerMode,
-    autoJump: progress.autoJump
+    subject: progress.config.bank,
+    practiceMode: progress.config.mode,
+    questionSort: progress.config.questionSort,
+    optionsSort: progress.config.optionsSort,
+    showAnswerMode: progress.config.showAnswerMode,
+    autoJump: progress.config.autoJump
   }
   
   router.push({
