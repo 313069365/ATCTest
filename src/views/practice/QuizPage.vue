@@ -47,7 +47,7 @@
             </div>
 
             <QuestionRenderer :question="currentQuestionWithOptions" :mode="practiceMode" :user-answer="userAnswers[currentQuestion?.id]"
-              :show-answer="isAnswerChecked" :disabled="isAnswerChecked" @answer="handleAnswer" />
+              :show-answer="isCurrentAnswerChecked" :disabled="isCurrentAnswerChecked" @answer="handleAnswer" />
 
             <div class="check-answer" v-if="showCheckBtn && hasUserAnswer && practiceMode !== 'review'">
               <button class="check-btn" @click="checkAnswer">
@@ -112,8 +112,8 @@ const practiceData = ref(null);
 const bank = ref([]);
 const currentIndex = ref(0);
 const userAnswers = ref({});
+const answerChecked = ref({}); // 每个题目的答案检查状态
 const shuffledOptionsCache = ref({}); // 缓存选项乱序结果
-const isAnswerChecked = ref(false);
 const loading = ref(true);
 
 onMounted(async () => {
@@ -183,9 +183,8 @@ onMounted(async () => {
       
       // 背题模式：初始化时直接显示答案
       if (practiceData.value?.practiceMode === 'review') {
-        isAnswerChecked.value = true;
-        showAnswerExplanation.value = true;
         showCheckBtn.value = false;
+        showAnswerExplanation.value = true;
       }
     } catch (e) {
       console.error("解析练习数据失败:", e);
@@ -294,6 +293,12 @@ const hasUserAnswer = computed(() => {
   return !!answer;
 });
 
+// 当前题目是否已检查答案
+const isCurrentAnswerChecked = computed(() => {
+  if (!currentQuestion.value) return false;
+  return answerChecked.value[currentQuestion.value.id] || false;
+});
+
 // 是否已收藏
 const isFavorited = computed(() => {
   if (!currentQuestion.value) return false;
@@ -335,7 +340,9 @@ const handleAnswer = (answer) => {
 
 // 检查答案
 const checkAnswer = () => {
-  isAnswerChecked.value = true;
+  if (currentQuestion.value) {
+    answerChecked.value[currentQuestion.value.id] = true;
+  }
   showCheckBtn.value = false;
   showAnswerExplanation.value = true;
 
@@ -352,10 +359,11 @@ const loadPracticeProgress = () => {
     if (sameSubject) {
       currentIndex.value = progress.currentIndex || 0;
       userAnswers.value = progress.userAnswers || {};
+      answerChecked.value = progress.answerChecked || {};
       
-      // 恢复答案检查状态
-      if (progress.isAnswerChecked) {
-        isAnswerChecked.value = true;
+      // 恢复当前题目的答案检查状态
+      const currentQ = bank.value[currentIndex.value];
+      if (currentQ && answerChecked.value[currentQ.id]) {
         showCheckBtn.value = false;
         showAnswerExplanation.value = true;
       }
@@ -363,7 +371,7 @@ const loadPracticeProgress = () => {
       // 根据恢复的练习模式决定是否显示答案
       const mode = progress.practiceMode || practiceData.value?.practiceMode;
       if (mode === 'review') {
-        isAnswerChecked.value = true;
+        // 背题模式：所有题目都显示答案
         showCheckBtn.value = false;
         showAnswerExplanation.value = true;
       }
@@ -371,7 +379,7 @@ const loadPracticeProgress = () => {
       console.log('已恢复练习进度:', { 
         currentIndex: currentIndex.value, 
         answeredCount: Object.keys(userAnswers.value).length,
-        isAnswerChecked: isAnswerChecked.value
+        checkedCount: Object.keys(answerChecked.value).length
       });
     }
   }
@@ -385,8 +393,8 @@ const savePracticeProgress = () => {
     scope: practiceData.value?.scope,
     currentIndex: currentIndex.value,
     userAnswers: userAnswers.value,
+    answerChecked: answerChecked.value,
     questionIds: bank.value.map(q => q.id), // 保存题目顺序
-    isAnswerChecked: isAnswerChecked.value,
     practiceMode: practiceData.value?.practiceMode,
     questionSort: practiceData.value?.questionSort,
     optionsSort: practiceData.value?.optionsSort,
@@ -412,15 +420,20 @@ const nextQuestion = () => {
 
 // 重置题目状态
 const resetQuestionState = () => {
-  // 背题模式保持显示答案
+  // 背题模式：所有题目都显示答案
   if (practiceMode.value === "review") {
-    isAnswerChecked.value = true;
     showCheckBtn.value = false;
     showAnswerExplanation.value = true;
   } else {
-    isAnswerChecked.value = false;
-    showCheckBtn.value = true;
-    showAnswerExplanation.value = false;
+    // 检查当前题目是否已检查过答案
+    const currentQ = bank.value[currentIndex.value];
+    if (currentQ && answerChecked.value[currentQ.id]) {
+      showCheckBtn.value = false;
+      showAnswerExplanation.value = true;
+    } else {
+      showCheckBtn.value = true;
+      showAnswerExplanation.value = false;
+    }
   }
   
   // 保存进度
