@@ -53,7 +53,10 @@
             v-for="(q, i) in questions" 
             :key="i"
             @click="$emit('go', i)"
-            :class="{ current: currentIndex === i }"
+            :class="[
+              getQuestionStatus(q, i),
+              { current: currentIndex === i }
+            ]"
           >
             {{ i + 1 }}
           </button>
@@ -78,6 +81,14 @@ const props = defineProps({
   settings: {
     type: Object,
     default: null
+  },
+  answerChecked: {
+    type: Object,
+    default: () => ({})
+  },
+  userAnswers: {
+    type: Object,
+    default: () => ({})
   }
 })
 
@@ -91,18 +102,96 @@ const orderDisplay = computed(() => {
     'reverse': '逆序',
     'shuffle': '乱序',
   }
-  return orderMap[props.settings.order] || '顺序'
+  return orderMap[props.settings.questionSort] || '顺序'
 })
 
 const modeDisplay = computed(() => {
   if (!props.settings) return '答题'
-  return props.settings.mode === 'review' ? '背题' : '答题'
+  return props.settings.practiceMode === 'review' ? '背题' : '答题'
 })
 
 const showAnswerDisplay = computed(() => {
   if (!props.settings) return '立即显示'
   return props.settings.showAnswerMode === 'immediate' ? '立即显示' : '按需显示'
 })
+
+// 获取题目的状态：'unanswered' | 'correct' | 'wrong' | 'unknown'
+const getQuestionStatus = (question, index) => {
+  const isChecked = props.answerChecked[question.id]
+  const userAnswer = props.userAnswers[question.id]
+  
+  // 如果没有检查答案，则未作答
+  if (!isChecked) {
+    return 'unanswered'
+  }
+  
+  // 背题模式不显示对错状态
+  if (props.settings?.practiceMode === 'review') {
+    return 'unanswered'
+  }
+  
+  // 判断题型是否可自动判分
+  const autoCheckableTypes = ['single', 'boolean', 'multiple']
+  if (!autoCheckableTypes.includes(question.type)) {
+    return 'unknown'
+  }
+  
+  // 可自动判分的题型，计算正确性
+  return isAnswerCorrect(question, userAnswer) ? 'correct' : 'wrong'
+}
+
+// 检查答案是否正确
+const isAnswerCorrect = (question, userAnswer) => {
+  if (!question.answer || userAnswer === undefined || userAnswer === null) {
+    return false
+  }
+  
+  if (question.type === 'single' || question.type === 'boolean') {
+    // 单选或判断题
+    const correctIndex = getCorrectOptionIndex(question)
+    return userAnswer === correctIndex
+  } else if (question.type === 'multiple') {
+    // 多选题
+    const correctIndices = getCorrectOptionIndices(question)
+    if (!Array.isArray(userAnswer) || userAnswer.length !== correctIndices.length) {
+      return false
+    }
+    return userAnswer.every(index => correctIndices.includes(index)) &&
+           correctIndices.every(index => userAnswer.includes(index))
+  }
+  return false
+}
+
+// 获取单选/判断题的正确选项索引
+const getCorrectOptionIndex = (question) => {
+  if (!question.answer || !question.answer[0] || !question.options) return -1
+  
+  const answerStr = String(question.answer[0])
+  if (question.type === 'boolean') {
+    return answerStr.toUpperCase().includes('T') ? 0 : 1
+  }
+  
+  const correctAnswerText = answerStr.replace(/^[A-Z]\.\s*/, '')
+  return question.options.findIndex(opt => {
+    const optText = opt.replace(/^[A-Z]\.\s*/, '')
+    return optText === correctAnswerText
+  })
+}
+
+// 获取多选题的正确选项索引
+const getCorrectOptionIndices = (question) => {
+  if (!question.answer || !question.options) return []
+  
+  return question.answer.reduce((indices, ans) => {
+    const correctAnswerText = String(ans).replace(/^[A-Z]\.\s*/, '')
+    const idx = question.options.findIndex(opt => {
+      const optText = opt.replace(/^[A-Z]\.\s*/, '')
+      return optText === correctAnswerText
+    })
+    if (idx !== -1) indices.push(idx)
+    return indices
+  }, [])
+}
 </script>
 
 <style scoped>

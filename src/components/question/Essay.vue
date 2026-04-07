@@ -4,12 +4,13 @@
       <h2 class="question-text">{{ question.stem }}</h2>
     </div>
 
-    <div class="answer-input">
+    <div class="answer-input" v-if="mode !== 'review'">
       <textarea
         class="textarea-input"
         :class="{
           correct: showAnswer && isCorrect,
-          wrong: showAnswer && !isCorrect
+          wrong: showAnswer && !isCorrect,
+          unknown: showAnswer && !isAutoCheckable
         }"
         :value="userAnswer"
         @input="handleInput"
@@ -23,7 +24,7 @@
       <span class="tip-text">提示：简答题需要人工批改，请输入您的答案</span>
     </div>
 
-    <div class="correct-answer" v-if="showAnswer && question.answer">
+    <div class="correct-answer" v-if="(showAnswer || mode === 'review') && question.answer">
       <div class="answer-header">
         <span class="material-symbols-outlined">check_circle</span>
         <span>参考答案</span>
@@ -67,6 +68,11 @@ const placeholder = computed(() => props.mode === 'review' ? '' : '请输入您�
 const isCorrect = computed(() => {
   if (!props.question.answer || !props.userAnswer) return false
   return props.userAnswer.trim() === props.question.answer.trim()
+})
+
+const isAutoCheckable = computed(() => {
+  // 简答题视为需要人工判断的题型
+  return false
 })
 
 const handleInput = (e) => {
@@ -126,6 +132,11 @@ const handleInput = (e) => {
 .textarea-input.wrong {
   border-color: var(--error);
   background: #fce8e6;
+}
+
+.textarea-input.unknown {
+  border-color: var(--warning);
+  background: #fff9e6;
 }
 
 .answer-tip {

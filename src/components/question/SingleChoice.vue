@@ -5,19 +5,12 @@
     </div>
 
     <div class="options">
-      <button
-        v-for="(option, i) in question.options"
-        :key="i"
-        class="option-btn"
-        :class="{
-          selected: isSelected(i),
-          correct: showAnswer && isCorrectOption(i),
-          wrong: showAnswer && isWrongOption(i),
-          review: mode === 'review'
-        }"
-        @click="handleSelect(i)"
-        :disabled="disabled || (showAnswer && mode !== 'review')"
-      >
+      <button v-for="(option, i) in question.options" :key="i" class="option-btn" :class="{
+        selected: isSelected(i),
+        correct: showAnswer && isCorrectOption(i),
+        wrong: showAnswer && isWrongOption(i),
+        review: mode === 'review'
+      }" @click="handleSelect(i)" :disabled="disabled || (showAnswer && mode !== 'review')">
         <span class="option-marker">{{ String.fromCharCode(65 + i) }}</span>
         <span class="option-text" v-if="option">{{ formatOption(option) }}</span>
       </button>
@@ -65,18 +58,18 @@ const isSelected = (index) => {
 const isCorrectOption = (index) => {
   if (!props.question.answer || !props.question.answer[0]) return false
   const answerStr = props.question.answer[0]
-  
+
   // 获取当前选项的原始内容（移除 A. 前缀）
   const currentOption = props.question.options?.[index]
   if (!currentOption) return false
   const currentOptionText = currentOption.replace(/^[A-Z]\.\s*/, '')
-  
+
   // 获取正确答案的原始内容
   const correctAnswerText = answerStr.replace(/^[A-Z]\.\s*/, '')
-  
+
   // 比较选项内容（支持乱序）
   const isCorrect = currentOptionText === correctAnswerText
-  
+
   // 背题模式下所有选项都可以显示正确状态
   if (props.mode === 'review') {
     return isCorrect
@@ -108,7 +101,11 @@ const handleSelect = (index) => {
 }
 
 .question-stem {
-  margin-bottom: var(--spacing-lg);
+  padding: var(--spacing-sm) var(--spacing-md);
+  background: #fff;
+  border: 1px solid transparent;
+  margin-bottom: var(--spacing-md);
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
 }
 
 .question-text {

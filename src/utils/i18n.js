@@ -79,6 +79,8 @@ const translations = {
     multiple: "Multiple Choice",
     boolean: "True/False",
     noExplanation: "No explanation available",
+    readingMaterial: "Reading Material",
+    correctAnswer: "Correct Answer",
   },
 
   zh: {
@@ -162,6 +164,8 @@ const translations = {
     multiple: "多选题",
     boolean: "判断题",
     noExplanation: "暂无解析",
+    readingMaterial: "阅读材料",
+    correctAnswer: "正确答案",
   },
 };
 

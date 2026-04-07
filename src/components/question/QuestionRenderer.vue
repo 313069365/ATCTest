@@ -2,8 +2,9 @@
   <div class="question-renderer">
     <component
       :is="rendererComponent"
-      v-bind="$props"
+      v-bind="allProps"
       @answer="handleAnswer"
+      @next-question="handleNextQuestion"
     />
     
     <div class="explanation-section" v-if="showExplanation">
@@ -38,7 +39,7 @@ const props = defineProps({
     default: 'answer'
   },
   userAnswer: {
-    type: [String, Array],
+    type: [String, Array, Object],
     default: null
   },
   showAnswer: {
@@ -48,10 +49,18 @@ const props = defineProps({
   disabled: {
     type: Boolean,
     default: false
+  },
+  showAnswerMode: {
+    type: String,
+    default: 'manual'
+  },
+  autoJump: {
+    type: Boolean,
+    default: false
   }
 })
 
-const emit = defineEmits(['answer'])
+const emit = defineEmits(['answer', 'next-question'])
 
 const componentMap = {
   single: SingleChoice,
@@ -61,6 +70,16 @@ const componentMap = {
   essay: Essay,
   reading: Reading
 }
+
+const allProps = computed(() => ({
+  question: props.question,
+  mode: props.mode,
+  userAnswer: props.userAnswer,
+  showAnswer: props.showAnswer,
+  disabled: props.disabled,
+  showAnswerMode: props.showAnswerMode,
+  autoJump: props.autoJump
+}))
 
 const rendererComponent = computed(() => {
   if (!props.question) return null
@@ -73,6 +92,10 @@ const showExplanation = computed(() => {
 
 const handleAnswer = (answer) => {
   emit('answer', answer)
+}
+
+const handleNextQuestion = () => {
+  emit('next-question')
 }
 </script>
 

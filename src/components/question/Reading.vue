@@ -1,54 +1,74 @@
 <template>
   <div class="reading-question">
-    <div class="article-section" v-if="question.article">
-      <div class="article-header">
-        <span class="material-symbols-outlined">article</span>
-        <span>阅读材料</span>
+    <div class="reading-section" v-if="question.media?.article">
+      <div class="reading-header" @click="toggleReading">
+        <span class="material-symbols-outlined">description</span>
+        <span>{{ t('readingMaterial') || '阅读材料' }}</span>
+        <span class="material-symbols-outlined expand-icon">{{ readingExpanded ? 'expand_less' : 'expand_more' }}</span>
       </div>
-      <div class="article-content">{{ question.article }}</div>
-    </div>
-
-    <div class="sub-questions" v-if="question.subQuestions && question.subQuestions.length > 0">
-      <div v-for="(sub, index) in question.subQuestions" :key="index" class="sub-question">
-        <div class="sub-question-header">
-          <span class="sub-number">{{ index + 1 }}</span>
-          <span class="sub-type">{{ t(sub.type) }}</span>
-        </div>
-        
-        <div class="sub-question-stem">
-          <p>{{ sub.question }}</p>
-        </div>
-
-        <div class="sub-options" v-if="sub.options">
-          <button
-            v-for="(option, i) in sub.options"
-            :key="i"
-            class="option-btn"
-            :class="{
-              selected: isSubSelected(index, i),
-              correct: showAnswer && isSubCorrect(index, i),
-              wrong: showAnswer && isSubWrong(index, i)
-            }"
-            @click="handleSubSelect(index, i)"
-            :disabled="disabled || showAnswer"
-          >
-            <span class="option-marker">{{ String.fromCharCode(65 + i) }}</span>
-            <span class="option-text">{{ formatOption(option) }}</span>
-          </button>
-        </div>
-
-        <div class="sub-answer-tip" v-if="showAnswer && sub.answer">
-          <span class="correct-label">正确答案：</span>
-          <span class="correct-answer">{{ sub.answer.join(', ') }}</span>
-        </div>
+      <div class="reading-content" v-show="readingExpanded">
+        {{ question.media.article }}
       </div>
     </div>
+
+    <div class="sub-question-section" v-if="question.subs && question.subs.length > 0">
+      <div class="sub-question-header">
+        <span class="sub-index">{{ currentSubIndex + 1 }}.</span>
+        <span class="sub-type-tag">{{ t(currentSub?.type) || currentSub?.type }}</span>
+      </div>
+
+      <component :is="componentMap[currentSub?.type] || SingleChoice" :question="wrappedSub"
+        :user-answer="wrappedUserAnswer" :mode="mode" :show-answer="currentSubShowAnswer" :disabled="isSubAnswerDisabled"
+        @answer="handleSubAnswer" />
+
+      <div class="sub-explanation" v-if="currentSubShowAnswer && currentSub?.explanation">
+        <div class="explanation-header">
+          <span class="material-symbols-outlined">lightbulb</span>
+          <span>{{ t('explanation') }}</span>
+        </div>
+        <div class="explanation-content">
+          {{ currentSub.explanation }}
+        </div>
+      </div>
+
+      <!-- 检查答案按钮（答题模式，非立即显示或需要手动检查的题型） -->
+      <div class="sub-check-answer" v-if="mode !== 'review' && hasCurrentSubAnswer && !currentSubShowAnswer && shouldShowCheckBtn">
+        <button class="check-btn" @click="checkSubAnswer(currentSubIndex)">
+          <span class="material-symbols-outlined">verified</span>
+          {{ t("checkAnswer") }}
+        </button>
+      </div>
+    </div>
+
+    <div class="sub-nav" v-if="question.subs && question.subs.length > 1">
+      <button v-for="(sub, index) in question.subs" :key="index" class="sub-nav-btn" :class="{
+        active: currentSubIndex === index,
+        answered: isSubAnswered(index)
+      }" @click="goToSub(index)">
+        {{ index + 1 }}
+      </button>
+    </div>
+
+
   </div>
 </template>
 
 <script setup>
-import { computed } from 'vue'
+import { ref, computed, watch } from 'vue'
 import { t } from '@/utils/i18n.js'
+import SingleChoice from './SingleChoice.vue'
+import MultipleChoice from './MultipleChoice.vue'
+import BooleanQuestion from './BooleanQuestion.vue'
+import Essay from './Essay.vue'
+import FillIn from './FillIn.vue'
+
+const componentMap = {
+  single: SingleChoice,
+  multiple: MultipleChoice,
+  boolean: BooleanQuestion,
+  essay: Essay,
+  fillin: FillIn
+}
 
 const props = defineProps({
   question: {
@@ -70,77 +90,278 @@ const props = defineProps({
   disabled: {
     type: Boolean,
     default: false
+  },
+  showAnswerMode: {
+    type: String,
+    default: 'manual'
+  },
+  autoJump: {
+    type: Boolean,
+    default: false
   }
 })
 
-const emit = defineEmits(['answer'])
+const emit = defineEmits(['answer', 'checkSub', 'next-question'])
+
+const readingExpanded = ref(true)
+const currentSubIndex = ref(0)
+const subAnswerChecked = ref({})
+
+const currentSub = computed(() => {
+  if (!props.question.subs || props.question.subs.length === 0) return null
+  return props.question.subs[currentSubIndex.value]
+})
+
+const wrappedSub = computed(() => {
+  if (!currentSub.value) return null
+  return {
+    stem: currentSub.value.stem,
+    options: currentSub.value.options,
+    answer: currentSub.value.answer,
+    type: currentSub.value.type,
+    explanation: currentSub.value.explanation
+  }
+})
+
+const wrappedUserAnswer = computed(() => {
+  return getSubAnswer(currentSubIndex.value)
+})
 
 const getSubAnswer = (subIndex) => {
   if (!props.userAnswer || typeof props.userAnswer !== 'object') return null
   return props.userAnswer[subIndex]
 }
 
-const isSubSelected = (subIndex, optionIndex) => {
+const isSubAnswered = (subIndex) => {
+  const answer = getSubAnswer(subIndex)
+  if (answer === null || answer === undefined) return false
+  if (Array.isArray(answer)) return answer.length > 0
+  if (typeof answer === 'string') return answer.trim().length > 0
+  return !!answer
+}
+
+const hasCurrentSubAnswer = computed(() => {
+  return isSubAnswered(currentSubIndex.value)
+})
+
+// 是否应该显示检查答案按钮
+const shouldShowCheckBtn = computed(() => {
+  if (!currentSub.value) return false
+  const needsManualCheck = ['multiple', 'fillin', 'essay'].includes(currentSub.value.type);
+  return needsManualCheck || props.showAnswerMode !== "immediate";
+})
+
+const isSubAnswerDisabled = computed(() => {
+  // 背题模式不禁用
   if (props.mode === 'review') return false
-  const subAnswer = getSubAnswer(subIndex)
-  if (Array.isArray(subAnswer)) {
-    return subAnswer.includes(optionIndex)
-  }
-  return subAnswer === optionIndex
+  // 当前子题已检查则禁用
+  return isSubAnswerChecked(currentSubIndex.value)
+})
+
+const toggleReading = () => {
+  readingExpanded.value = !readingExpanded.value
 }
 
-const isSubCorrect = (subIndex, optionIndex) => {
-  const sub = props.question.subQuestions?.[subIndex]
-  if (!sub || !sub.answer || sub.answer.length === 0) return false
-  return sub.answer.some(ans => {
-    const correctIndex = String(ans).charCodeAt(0) - 65
-    return optionIndex === correctIndex
-  })
+const goToSub = (index) => {
+  currentSubIndex.value = index
 }
 
-const isSubWrong = (subIndex, optionIndex) => {
-  if (!isSubSelected(subIndex, optionIndex)) return false
-  return !isSubCorrect(subIndex, optionIndex)
-}
-
-const formatOption = (option) => {
-  return option.replace(/^[A-Z]\.\s*/, '')
-}
-
-const handleSubSelect = (subIndex, optionIndex) => {
-  if (props.disabled || props.showAnswer) return
-  
-  let currentSubAnswer = getSubAnswer(subIndex) || []
-  if (!Array.isArray(currentSubAnswer)) {
-    currentSubAnswer = []
-  }
-  
-  if (currentSubAnswer.includes(optionIndex)) {
-    currentSubAnswer = currentSubAnswer.filter(i => i !== optionIndex)
-  } else {
-    currentSubAnswer = [...currentSubAnswer, optionIndex]
-  }
-  
+const handleSubAnswer = (answer) => {
   const newAnswer = { ...(props.userAnswer || {}) }
-  newAnswer[subIndex] = currentSubAnswer
+  newAnswer[currentSubIndex.value] = answer
   emit('answer', newAnswer)
+  
+  // 立即显示模式下，仅对单选和判断题自动标记为已检查
+  if (props.mode !== 'review' && props.showAnswerMode === 'immediate') {
+    const canImmediateCheck = ['single', 'boolean'].includes(currentSub.value.type);
+    if (canImmediateCheck) {
+      subAnswerChecked.value[currentSubIndex.value] = true
+      
+      // 自动跳转下一题
+      if (props.autoJump) {
+        setTimeout(() => {
+          goToNextSubOrNextQuestion()
+        }, 500);
+      }
+    }
+  }
 }
+
+// 导航到下一个子题或下一题
+const goToNextSubOrNextQuestion = () => {
+  const subs = props.question?.subs || []
+  if (currentSubIndex.value < subs.length - 1) {
+    currentSubIndex.value++
+  } else {
+    emit('next-question')
+  }
+}
+
+const checkSubAnswer = (index) => {
+  subAnswerChecked.value[index] = true
+}
+
+const isSubAnswerChecked = (index) => {
+  // 背题模式：始终显示答案
+  if (props.mode === 'review') return true
+  return subAnswerChecked.value[index] === true
+}
+
+// 获取当前子题的 showAnswer 状态
+const currentSubShowAnswer = computed(() => {
+  return isSubAnswerChecked(currentSubIndex.value)
+})
+
+watch(() => props.question, () => {
+  currentSubIndex.value = 0
+  readingExpanded.value = true
+  subAnswerChecked.value = {}
+})
+
+// 监听 userAnswer 变化，自动推断子题检查状态
+watch(() => props.userAnswer, (newAnswer) => {
+  if (!newAnswer || typeof newAnswer !== 'object') return
+  // 背题模式：所有子题都显示答案
+  if (props.mode === 'review') {
+    const subs = props.question?.subs || []
+    subs.forEach((_, index) => {
+      subAnswerChecked.value[index] = true
+    })
+    return
+  }
+  // 答题模式：有答案的子题视为已检查
+  Object.keys(newAnswer).forEach(subIndex => {
+    const answer = newAnswer[subIndex]
+    if (answer !== null && answer !== undefined && answer !== '') {
+      if (Array.isArray(answer) && answer.length === 0) return
+      subAnswerChecked.value[subIndex] = true
+    }
+  })
+}, { immediate: true, deep: true })
 </script>
 
 <style scoped>
 .reading-question {
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
 }
 
-.article-section {
-  margin-bottom: var(--spacing-lg);
+.reading-section {
+  /* border: 0.5px solid var(--border-color-light); */
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+  overflow: hidden;
+}
+
+.reading-header {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-sm) var(--spacing-md);
+  background: var(--background);
+  color: var(--primary);
+  font-weight: var(--font-weight-semibold);
+  cursor: pointer;
+  user-select: none;
+}
+
+.reading-header .material-symbols-outlined:first-child {
+  font-size: 20px;
+}
+
+.expand-icon {
+  margin-left: auto;
+  font-size: 20px;
+}
+
+.reading-content {
+  padding: var(--spacing-md);
+  background: var(--background);
+  color: var(--on-surface);
+  line-height: 1.8;
+  white-space: pre-wrap;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.sub-nav {
+  display: flex;
+  justify-content: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-sm) 0;
+  border-bottom: 1px solid var(--border-color-light);
+  flex-wrap: wrap;
+}
+
+.sub-nav-btn {
+  min-width: 36px;
+  height: 36px;
+  padding: 0 var(--spacing-sm);
+  border: 1px solid var(--border-color-light);
+  border-radius: var(--radius-md);
+  background: #fff;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.sub-nav-btn:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.sub-nav-btn.active {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #fff;
+}
+
+.sub-nav-btn.answered:not(.active) {
+  background: var(--success-light);
+  border-color: var(--success);
+  color: var(--success);
+}
+
+.sub-question-section {
+  display: flex;
+  flex-direction: column;
+  /* gap: var(--spacing-md); */
+}
+
+.sub-question-header {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-md) var(--spacing-md) 0 var(--spacing-md);
+  background: var(--background);
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+}
+
+.sub-index {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  color: var(--primary);
+}
+
+.sub-type-tag {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  background: var(--color-gray-100);
+  padding: 2px 8px;
+  border-radius: var(--radius-sm);
+}
+
+.sub-explanation {
+  margin-top: var(--spacing-md);
   padding: var(--spacing-md);
   background: var(--color-gray-100);
-  border-radius: var(--radius-lg);
-  border-left: 4px solid var(--primary);
+  border-radius: var(--radius-md);
 }
 
-.article-header {
+.sub-explanation .explanation-header {
   display: flex;
   align-items: center;
   gap: var(--spacing-sm);
@@ -149,155 +370,39 @@ const handleSubSelect = (subIndex, optionIndex) => {
   font-weight: var(--font-weight-semibold);
 }
 
-.article-content {
-  color: var(--on-surface);
-  line-height: 1.8;
-  white-space: pre-wrap;
-}
-
-.sub-questions {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-lg);
-}
-
-.sub-question {
-  padding: var(--spacing-md);
-  background: #fff;
-  border-radius: var(--radius-lg);
-  border: 1px solid var(--border-color-light);
-}
-
-.sub-question-header {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-sm);
-  margin-bottom: var(--spacing-md);
-}
-
-.sub-number {
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  background: var(--primary);
-  color: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 700;
-  font-size: var(--font-size-sm);
-}
-
-.sub-type {
-  font-size: var(--font-size-sm);
-  color: var(--text-secondary);
-}
-
-.sub-question-stem {
-  margin-bottom: var(--spacing-md);
-}
-
-.sub-question-stem p {
+.sub-explanation .explanation-content {
   font-size: var(--font-size-md);
-  font-weight: var(--font-weight-medium);
   color: var(--on-surface);
   line-height: 1.6;
 }
 
-.sub-options {
+.sub-check-answer {
   display: flex;
-  flex-direction: column;
-  gap: 8px;
+  justify-content: center;
+  margin-top: var(--spacing-md);
 }
 
-.option-btn {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: var(--spacing-sm);
-  background: #fff;
-  border: 1px solid var(--border-color-light);
-  border-radius: var(--radius-md);
-  cursor: pointer;
-  transition: all 0.2s;
-  text-align: left;
-  width: 100%;
-}
-
-.option-btn:active {
-  transform: scale(0.99);
-}
-
-.option-btn:disabled {
-  cursor: not-allowed;
-  opacity: 0.7;
-}
-
-.option-btn.selected {
-  border-color: var(--primary);
-  box-shadow: 0 2px 8px rgba(0, 91, 191, 0.1);
-}
-
-.option-btn.correct {
-  border-color: var(--success);
-  background: #e6f4ea;
-}
-
-.option-btn.wrong {
-  border-color: var(--error);
-  background: #fce8e6;
-}
-
-.option-marker {
-  width: 32px;
-  height: 32px;
-  border-radius: var(--radius-md);
-  background: var(--color-gray-100);
+.sub-check-answer .check-btn {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-weight: 700;
-  font-size: 12px;
-  color: var(--text-secondary);
-  flex-shrink: 0;
-}
-
-.option-btn.selected .option-marker {
-  background: var(--primary);
-  color: #fff;
-}
-
-.option-btn.correct .option-marker {
-  background: var(--success);
-  color: #fff;
-}
-
-.option-btn.wrong .option-marker {
-  background: var(--error);
-  color: #fff;
-}
-
-.option-text {
-  flex: 1;
+  padding: var(--spacing-sm) var(--spacing-lg);
+  border: 1px solid #c1c6d6;
+  border-radius: var(--radius-full);
+  background: #fff;
+  color: var(--primary);
   font-size: var(--font-size-md);
-}
-
-.sub-answer-tip {
-  margin-top: var(--spacing-sm);
-  padding: var(--spacing-sm);
-  background: #e6f4ea;
-  border-radius: var(--radius-md);
-  font-size: var(--font-size-sm);
-}
-
-.correct-label {
-  font-weight: var(--font-weight-semibold);
-  color: var(--text-secondary);
-}
-
-.correct-answer {
-  color: var(--success);
   font-weight: var(--font-weight-bold);
-  margin-left: var(--spacing-sm);
+  cursor: pointer;
+  transition: all 0.2s;
+  gap: var(--spacing-mn);
+}
+
+.sub-check-answer .check-btn:hover {
+  background: #f1f4f7;
+}
+
+.sub-check-answer .check-btn:active {
+  transform: scale(0.98);
 }
 </style>

@@ -1,16 +1,17 @@
 /**
  * 数据源层
  * 统一管理题库数据的获取和自动发现
- * 
+ *
  * 功能:
  * - 多来源支持: 本地文件 / API / 用户导入
  * - 自动发现题库结构 (category -> scope -> subject)
  */
 
-import { storage, STORAGE_KEY } from '@/composables/useStorage'
-import base from '@/../public/data/atc/base.json'
-import professional from '@/../public/data/atc/professional.json'
-import english from '@/../public/data/atc/english_translated.json'
+import { storage, STORAGE_KEY } from "@/composables/useStorage";
+import base from "@/../public/data/atc/base.json";
+import professional from "@/../public/data/atc/professional.json";
+import english_singleChoice from "@/../public/data/atc/english_translated.json";
+import enlish_reading from "@/../public/data/atc/english_reading.json";
 
 // ==================== 配置 ====================
 
@@ -19,9 +20,9 @@ const DATA_SOURCES = {
   atc: {
     base: base,
     professional: professional,
-    english: english
-  }
-}
+    english: [...english_singleChoice, ...enlish_reading],
+  },
+};
 
 // ==================== 核心功能 ====================
 
@@ -31,37 +32,37 @@ const DATA_SOURCES = {
  * @returns {Object} 题库结构
  */
 function discover(questions) {
-  const bank = {}
-  
-  questions.forEach(q => {
-    const { category, scope, subject } = q.meta || {}
-    if (!category) return
-    
+  const bank = {};
+
+  questions.forEach((q) => {
+    const { category, scope, subject } = q.meta || {};
+    if (!category) return;
+
     if (!bank[category]) {
       bank[category] = {
         scopes: new Set(),
-        subjects: new Set()
-      }
+        subjects: new Set(),
+      };
     }
-    if (scope) bank[category].scopes.add(scope)
-    if (subject) bank[category].subjects.add(subject)
-  })
-  
+    if (scope) bank[category].scopes.add(scope);
+    if (subject) bank[category].subjects.add(subject);
+  });
+
   // Set 转 Array
-  Object.values(bank).forEach(item => {
-    item.scopes = [...item.scopes]
-    item.subjects = [...item.subjects]
-  })
-  
+  Object.values(bank).forEach((item) => {
+    item.scopes = [...item.scopes];
+    item.subjects = [...item.subjects];
+  });
+
   // 合并导入配置
-  const imports = storage.getItem(STORAGE_KEY.IMPORT_CONFIG) || {}
+  const imports = storage.getItem(STORAGE_KEY.IMPORT_CONFIG) || {};
   Object.entries(imports).forEach(([cat, info]) => {
     if (!bank[cat]) {
-      bank[cat] = { scopes: [info.scope], subjects: [] }
+      bank[cat] = { scopes: [info.scope], subjects: [] };
     }
-  })
-  
-  return bank
+  });
+
+  return bank;
 }
 
 // ==================== 导出函数 ====================
@@ -70,29 +71,29 @@ function discover(questions) {
  * 获取所有题目
  */
 export function fetchAllQuestions() {
-  const results = []
-  
+  const results = [];
+
   for (const scopes of Object.values(DATA_SOURCES)) {
     for (const data of Object.values(scopes)) {
-      results.push(...data)
+      results.push(...data);
     }
   }
-  
-  return results
+
+  return results;
 }
 
 /**
  * 条件过滤获取题目
  */
 export function fetchQuestions({ category, scope, subject }) {
-  const all = fetchAllQuestions()
-  return all.filter(q => {
-    const m = q.meta || {}
-    if (category && m.category !== category) return false
-    if (scope && m.scope !== scope) return false
-    if (subject && m.subject !== subject) return false
-    return true
-  })
+  const all = fetchAllQuestions();
+  return all.filter((q) => {
+    const m = q.meta || {};
+    if (category && m.category !== category) return false;
+    if (scope && m.scope !== scope) return false;
+    if (subject && m.subject !== subject) return false;
+    return true;
+  });
 }
 
 /**
@@ -100,54 +101,55 @@ export function fetchQuestions({ category, scope, subject }) {
  */
 export function getQuestionBankStructure(questions) {
   if (!questions || questions.length === 0) {
-    questions = fetchAllQuestions()
+    questions = fetchAllQuestions();
   }
-  return discover(questions)
+  return discover(questions);
 }
 
 /**
  * 获取题库列表
  */
 export function getQuestionBanks() {
-  const structure = getQuestionBankStructure()
-  return Object.keys(structure)
+  const structure = getQuestionBankStructure();
+  return Object.keys(structure);
 }
 
 /**
  * 获取某个题库信息
  */
 export function getQuestionBankInfo(category) {
-  const structure = getQuestionBankStructure()
-  return structure[category] || null
+  const structure = getQuestionBankStructure();
+  return structure[category] || null;
 }
 
 /**
  * 导入题库文件
  */
 export async function importQuestions(file, options = {}) {
-  const { category = 'import', scope = 'base' } = options
-  
+  const { category = "import", scope = "base" } = options;
+
   return new Promise((resolve, reject) => {
-    const reader = new FileReader()
+    const reader = new FileReader();
     reader.onload = (e) => {
       try {
-        const data = JSON.parse(e.target.result)
-        const questions = (Array.isArray(data) ? data : data.questions || [])
-          .map(q => ({ ...q, meta: { ...q.meta, category, scope } }))
-        
+        const data = JSON.parse(e.target.result);
+        const questions = (
+          Array.isArray(data) ? data : data.questions || []
+        ).map((q) => ({ ...q, meta: { ...q.meta, category, scope } }));
+
         // 保存导入配置
-        const imports = storage.getItem(STORAGE_KEY.IMPORT_CONFIG) || {}
-        imports[category] = { scope, importTime: Date.now() }
-        storage.setItem(STORAGE_KEY.IMPORT_CONFIG, imports)
-        
-        resolve(questions)
+        const imports = storage.getItem(STORAGE_KEY.IMPORT_CONFIG) || {};
+        imports[category] = { scope, importTime: Date.now() };
+        storage.setItem(STORAGE_KEY.IMPORT_CONFIG, imports);
+
+        resolve(questions);
       } catch (err) {
-        reject(err)
+        reject(err);
       }
-    }
-    reader.onerror = reject
-    reader.readAsText(file)
-  })
+    };
+    reader.onerror = reject;
+    reader.readAsText(file);
+  });
 }
 
 export default {
@@ -156,5 +158,5 @@ export default {
   getQuestionBankStructure,
   getQuestionBanks,
   getQuestionBankInfo,
-  importQuestions
-}
+  importQuestions,
+};

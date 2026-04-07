@@ -46,10 +46,12 @@
               </button>
             </div>
 
-            <QuestionRenderer :question="currentQuestionWithOptions" :mode="practiceMode" :user-answer="userAnswers[currentQuestion?.id]"
-              :show-answer="isCurrentAnswerChecked" :disabled="isCurrentAnswerChecked" @answer="handleAnswer" />
+            <QuestionRenderer :question="currentQuestionWithOptions" :mode="practiceMode"
+              :user-answer="userAnswers[currentQuestion?.id]" :show-answer="isCurrentAnswerChecked"
+              :disabled="isCurrentAnswerDisabled" :show-answer-mode="practiceData?.showAnswerMode"
+              :auto-jump="practiceData?.autoJump" @answer="handleAnswer" @next-question="nextQuestion" />
 
-            <div class="check-answer" v-if="showCheckBtn && hasUserAnswer && practiceMode !== 'review'">
+            <div class="check-answer" v-if="showCheckBtn && hasUserAnswer && practiceMode !== 'review' && currentQuestion?.type !== 'reading' && shouldShowCheckBtn">
               <button class="check-btn" @click="checkAnswer">
                 <span class="material-symbols-outlined">verified</span>
                 {{ t("checkAnswer") }}
@@ -82,6 +84,7 @@
       }
     " />
     <AnswerCard v-if="showAnswerCard" :questions="bank" :currentIndex="currentIndex" :settings="practiceData"
+      :answer-checked="answerChecked" :user-answers="userAnswers"
       @close="closeAnswerCard" @exit="exitQuiz" @go="
         (idx) => {
           currentIndex = idx;
@@ -153,14 +156,14 @@ onMounted(async () => {
       // 加载已保存的进度
       const savedProgress = store.practiceProgress;
       const isSameSubject = savedProgress?.config?.bank?.subject === subjectName;
-      
+
       // 排序：优先使用保存的题目顺序
       if (isSameSubject && savedProgress?.progress?.questionIds && savedProgress.progress.questionIds.length > 0) {
         // 按保存的题目 ID 顺序恢复
         const savedQuestionIds = savedProgress.progress.questionIds;
         const existingQuestions = new Set(filtered.map(q => q.id));
         const validIds = savedQuestionIds.filter(id => existingQuestions.has(id));
-        
+
         bank.value = validIds.map(id => filtered.find(q => q.id === id)).filter(Boolean);
         console.log("已恢复题目顺序，题数:", bank.value.length);
       } else {
@@ -172,14 +175,14 @@ onMounted(async () => {
         }
         bank.value = filtered;
       }
-      
+
       // 缓存选项乱序
       cacheShuffledOptions();
       console.log("bank.value 长度:", bank.value.length);
-      
+
       // 加载练习进度（断点续练）
       loadPracticeProgress();
-      
+
       // 背题模式：初始化时直接显示答案
       if (practiceData.value?.practiceMode === 'review') {
         showCheckBtn.value = false;
@@ -224,7 +227,7 @@ const subjectDisplay = computed(() => {
 // 缓存选项乱序结果
 const cacheShuffledOptions = () => {
   if (!practiceData.value?.optionsSort) return;
-  
+
   shuffledOptionsCache.value = {};
   bank.value.forEach((question, index) => {
     if (question && question.options) {
@@ -238,7 +241,7 @@ const cacheShuffledOptions = () => {
 // 获取带乱序选项的题目（使用缓存）
 const getQuestionWithShuffledOptions = (question) => {
   if (!question || !question.options) return question;
-  
+
   // 如果设置了选项乱序，使用缓存
   if (practiceData.value?.optionsSort) {
     const cached = shuffledOptionsCache.value[question.id];
@@ -282,19 +285,48 @@ const practiceMode = computed(() => {
   return practiceData.value?.practiceMode || "answer";
 });
 
+// 是否应该显示检查答案按钮
+// 多选题、填空题、简答题等始终显示检查按钮（按需显示）
+const shouldShowCheckBtn = computed(() => {
+  if (!currentQuestion.value) return false;
+  const needsManualCheck = ['multiple', 'fillin', 'essay'].includes(currentQuestion.value.type);
+  return needsManualCheck || practiceData.value?.showAnswerMode !== "immediate";
+});
+
 // 是否有用户答案（使用题目 ID 查询）
 const hasUserAnswer = computed(() => {
   if (!currentQuestion.value) return false;
   const answer = userAnswers.value[currentQuestion.value.id];
+  
+  // Reading 题型：检查是否有任意子题有答案
+  if (currentQuestion.value.type === 'reading') {
+    if (!answer || typeof answer !== 'object') return false;
+    return Object.values(answer).some(val => {
+      if (val === null || val === undefined) return false;
+      if (Array.isArray(val)) return val.length > 0;
+      if (typeof val === 'string') return val.trim().length > 0;
+      return !!val;
+    });
+  }
+  
+  // 普通题型
   if (answer === null || answer === undefined) return false;
   if (Array.isArray(answer)) return answer.length > 0;
-  if (typeof answer === "string") return answer.trim().length > 0;
+  if (typeof answer === 'string') return answer.trim().length > 0;
   return !!answer;
 });
 
 // 当前题目是否已检查答案
 const isCurrentAnswerChecked = computed(() => {
   if (!currentQuestion.value) return false;
+  return answerChecked.value[currentQuestion.value.id] || false;
+});
+
+// 当前题目是否禁用（Reading 题型由内部管理）
+const isCurrentAnswerDisabled = computed(() => {
+  if (!currentQuestion.value) return false;
+  // Reading 题型由内部组件管理禁用状态
+  if (currentQuestion.value.type === 'reading') return false;
   return answerChecked.value[currentQuestion.value.id] || false;
 });
 
@@ -321,13 +353,17 @@ const handleAnswer = (answer) => {
     userAnswers.value[currentQuestion.value.id] = answer;
   }
 
-  // 如果是立即显示模式且不是背题模式，自动检查答案
+  // 立即显示模式且不是背题模式，仅对单选和判断题自动检查答案
+  // Reading 题型由其内部组件管理子题检查
+  const canImmediateCheck = ['single', 'boolean'].includes(currentQuestion.value.type);
   if (
     practiceData.value?.showAnswerMode === "immediate" &&
-    practiceMode.value !== "review"
+    practiceMode.value !== "review" &&
+    currentQuestion.value.type !== 'reading' &&
+    canImmediateCheck
   ) {
     checkAnswer();
-    
+
     // 自动跳转下一题
     if (practiceData.value?.autoJump) {
       setTimeout(() => {
@@ -357,7 +393,7 @@ const loadPracticeProgress = () => {
     const sameSubject = progress.config.bank.subject === subjectDisplay.value;
     if (sameSubject) {
       currentIndex.value = progress.progress.currentIndex || 0;
-      
+
       // 恢复 answers 数据
       const answersData = progress.progress.answers || {};
       const userAnswersMap = {};
@@ -368,14 +404,14 @@ const loadPracticeProgress = () => {
       });
       userAnswers.value = userAnswersMap;
       answerChecked.value = answerCheckedMap;
-      
+
       // 恢复当前题目的答案检查状态
       const currentQ = bank.value[currentIndex.value];
       if (currentQ && answerChecked.value[currentQ.id]) {
         showCheckBtn.value = false;
         showAnswerExplanation.value = true;
       }
-      
+
       // 根据恢复的练习模式决定是否显示答案
       const mode = progress.config.mode || practiceData.value?.practiceMode;
       if (mode === 'review') {
@@ -383,9 +419,9 @@ const loadPracticeProgress = () => {
         showCheckBtn.value = false;
         showAnswerExplanation.value = true;
       }
-      
-      console.log('已恢复练习进度:', { 
-        currentIndex: currentIndex.value, 
+
+      console.log('已恢复练习进度:', {
+        currentIndex: currentIndex.value,
         answeredCount: Object.keys(userAnswers.value).length,
         checkedCount: Object.keys(answerChecked.value).length
       });
@@ -402,7 +438,7 @@ const savePracticeProgress = () => {
       checked: answerChecked.value[questionId] || false
     }
   })
-  
+
   store.savePracticeProgress({
     config: {
       bank: {
@@ -458,7 +494,7 @@ const resetQuestionState = () => {
       showAnswerExplanation.value = false;
     }
   }
-  
+
   // 保存进度
   savePracticeProgress();
 };
@@ -597,14 +633,17 @@ const resetQuestionState = () => {
   display: flex;
   align-items: center;
   gap: var(--spacing-sm);
-  margin-bottom: var(--spacing-md);
+  padding: var(--spacing-sm) var(--spacing-md);
+  background: #fff;
+  border: 1px solid transparent;
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
 }
 
 .question-type-tag {
   padding: var(--spacing-mn) var(--spacing-sm);
   background: var(--primary-light);
   color: var(--primary);
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius-full);
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-semibold);
 }

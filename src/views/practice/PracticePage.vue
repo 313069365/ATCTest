@@ -145,7 +145,9 @@ const continuePractice = (subject) => {
   if (!progress || !progress.config) return
   
   const practiceData = {
-    subject: progress.config.bank,
+    category: progress.config.bank.category,
+    scope: progress.config.bank.scope,
+    subject: progress.config.bank.subject,
     practiceMode: progress.config.mode,
     questionSort: progress.config.questionSort,
     optionsSort: progress.config.optionsSort,
