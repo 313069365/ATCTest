@@ -86,6 +86,10 @@
   --warning-light: #fef7e0;
   --error: #ea4335;
   --error-light: #fce8e6;
+  --partial: #66bb6a;
+  --partial-light: #e8f5e9;
+  --unchecked: #64b5f6;
+  --unchecked-light: #e3f2fd;
 
   /* 遮罩 */
   --overlay-white: rgba(255, 255, 255, 0.5);

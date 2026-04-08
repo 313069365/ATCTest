@@ -13,11 +13,14 @@
         <div class="progress-stats">
           <div class="practice-info" v-if="settings">
             <div class="tags-row">
-              <span class="info-tag">{{ orderDisplay }} {{ modeDisplay }}</span>
-              <span class="info-tag" v-if="settings.mode === 'answer'">
+              <span class="info-tag">{{ orderDisplay }}{{ modeDisplay }}</span>
+              <span class="info-tag" v-if="settings.practiceMode === 'answer'">
                 {{ showAnswerDisplay }}
               </span>
-              <span class="info-tag" v-if="settings.mode === 'answer' && settings.autoJump">
+              <span class="info-tag" v-if="settings.practiceMode === 'answer' && settings.optionsSort">
+                选项乱序
+              </span>
+              <span class="info-tag" v-if="settings.practiceMode === 'answer' && settings.autoJump">
                 自动跳转
               </span>
             </div>
@@ -27,6 +30,14 @@
             <div class="legend-item">
               <span class="legend-dot correct"></span>
               <span>正确</span>
+            </div>
+            <div class="legend-item" v-if="settings?.practiceMode !== 'review'">
+              <span class="legend-dot partial"></span>
+              <span>部分正确</span>
+            </div>
+            <div class="legend-item" v-if="settings?.practiceMode !== 'review'">
+              <span class="legend-dot unchecked"></span>
+              <span>未检查</span>
             </div>
             <div class="legend-item">
               <span class="legend-dot wrong"></span>
@@ -48,18 +59,26 @@
         </div>
 
         <div class="question-list">
-          <button 
-            class="question-btn" 
-            v-for="(q, i) in questions" 
-            :key="i"
-            @click="$emit('go', i)"
-            :class="[
-              getQuestionStatus(q, i),
-              { current: currentIndex === i }
-            ]"
-          >
-            {{ i + 1 }}
-          </button>
+          <template v-for="(q, idx) in questions" :key="idx">
+            <template v-if="q.type === 'reading' && q.subs">
+              <div class="question-group">
+                <div class="group-header">
+                  <span class="group-title">{{ t('readingMaterial') || '阅读理解' }}: {{ q.id }}</span>
+                </div>
+                <div class="sub-question-grid">
+                  <button v-for="(sq, sqIdx) in q.subs" :key="sqIdx" class="question-btn"
+                    :class="getSubQuestionBtnClass(idx, sqIdx, sq)" @click="$emit('go', idx, sqIdx)">
+                    {{ sqIdx + 1 }}
+                  </button>
+                </div>
+              </div>
+            </template>
+            <template v-else>
+              <button class="question-btn" :class="getQuestionBtnClass(idx, q)" @click="$emit('go', idx)">
+                {{ idx + 1 }}
+              </button>
+            </template>
+          </template>
         </div>
       </div>
     </div>
@@ -68,6 +87,8 @@
 
 <script setup>
 import { computed } from 'vue'
+import { t } from '@/utils/i18n.js'
+import { useAnswerDisplay } from '@/composables/useAnswerDisplay'
 
 const props = defineProps({
   questions: {
@@ -75,6 +96,10 @@ const props = defineProps({
     default: () => []
   },
   currentIndex: {
+    type: Number,
+    default: 0
+  },
+  currentSubIndex: {
     type: Number,
     default: 0
   },
@@ -86,6 +111,10 @@ const props = defineProps({
     type: Object,
     default: () => ({})
   },
+  answerStatus: {
+    type: Object,
+    default: () => ({})
+  },
   userAnswers: {
     type: Object,
     default: () => ({})
@@ -94,7 +123,6 @@ const props = defineProps({
 
 const emit = defineEmits(['close', 'go', 'exit'])
 
-// 格式化显示设置
 const orderDisplay = computed(() => {
   if (!props.settings) return '顺序'
   const orderMap = {
@@ -115,82 +143,33 @@ const showAnswerDisplay = computed(() => {
   return props.settings.showAnswerMode === 'immediate' ? '立即显示' : '按需显示'
 })
 
-// 获取题目的状态：'unanswered' | 'correct' | 'wrong' | 'unknown'
-const getQuestionStatus = (question, index) => {
-  const isChecked = props.answerChecked[question.id]
-  const userAnswer = props.userAnswers[question.id]
-  
-  // 如果没有检查答案，则未作答
-  if (!isChecked) {
-    return 'unanswered'
-  }
-  
-  // 背题模式不显示对错状态
-  if (props.settings?.practiceMode === 'review') {
-    return 'unanswered'
-  }
-  
-  // 判断题型是否可自动判分
-  const autoCheckableTypes = ['single', 'boolean', 'multiple']
-  if (!autoCheckableTypes.includes(question.type)) {
-    return 'unknown'
-  }
-  
-  // 可自动判分的题型，计算正确性
-  return isAnswerCorrect(question, userAnswer) ? 'correct' : 'wrong'
+
+// 获取按钮状态（简化：直接使用 answerStatus）
+function getQuestionBtnClass(idx, q) {
+  // 当前题目显示蓝色
+  if (idx === props.currentIndex) return 'current'
+
+  // 直接使用 answerStatus
+  const status = props.answerStatus[q.id]
+  if (!status) return ''
+
+  // 背题模式不显示状态
+  if (props.settings?.practiceMode === 'review') return ''
+
+  return status
 }
 
-// 检查答案是否正确
-const isAnswerCorrect = (question, userAnswer) => {
-  if (!question.answer || userAnswer === undefined || userAnswer === null) {
-    return false
-  }
-  
-  if (question.type === 'single' || question.type === 'boolean') {
-    // 单选或判断题
-    const correctIndex = getCorrectOptionIndex(question)
-    return userAnswer === correctIndex
-  } else if (question.type === 'multiple') {
-    // 多选题
-    const correctIndices = getCorrectOptionIndices(question)
-    if (!Array.isArray(userAnswer) || userAnswer.length !== correctIndices.length) {
-      return false
-    }
-    return userAnswer.every(index => correctIndices.includes(index)) &&
-           correctIndices.every(index => userAnswer.includes(index))
-  }
-  return false
-}
+function getSubQuestionBtnClass(qIdx, sqIdx, sq) {
+  // 当前题目显示蓝色
+  if (props.currentIndex === qIdx && props.currentSubIndex === sqIdx) return 'current'
 
-// 获取单选/判断题的正确选项索引
-const getCorrectOptionIndex = (question) => {
-  if (!question.answer || !question.answer[0] || !question.options) return -1
-  
-  const answerStr = String(question.answer[0])
-  if (question.type === 'boolean') {
-    return answerStr.toUpperCase().includes('T') ? 0 : 1
-  }
-  
-  const correctAnswerText = answerStr.replace(/^[A-Z]\.\s*/, '')
-  return question.options.findIndex(opt => {
-    const optText = opt.replace(/^[A-Z]\.\s*/, '')
-    return optText === correctAnswerText
-  })
-}
+  const parentId = props.questions[qIdx].id
+  const status = props.answerStatus[parentId]?.[sqIdx]
+  if (!status) return ''
 
-// 获取多选题的正确选项索引
-const getCorrectOptionIndices = (question) => {
-  if (!question.answer || !question.options) return []
-  
-  return question.answer.reduce((indices, ans) => {
-    const correctAnswerText = String(ans).replace(/^[A-Z]\.\s*/, '')
-    const idx = question.options.findIndex(opt => {
-      const optText = opt.replace(/^[A-Z]\.\s*/, '')
-      return optText === correctAnswerText
-    })
-    if (idx !== -1) indices.push(idx)
-    return indices
-  }, [])
+  if (props.settings?.practiceMode === 'review') return ''
+
+  return status
 }
 </script>
 
@@ -275,12 +254,32 @@ const getCorrectOptionIndices = (question) => {
   background-color: var(--background);
 }
 
+.practice-info {
+  padding-bottom: var(--spacing-sm);
+}
+
+.tags-row {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  flex-wrap: wrap;
+}
+
+.info-tag {
+  font-size: 12px;
+  padding: 4px 10px;
+  background: var(--primary-light);
+  color: var(--primary);
+  border-radius: var(--radius-lg);
+  font-weight: 500;
+}
+
 .legend {
   display: flex;
   flex-wrap: wrap;
   gap: var(--spacing-md);
   padding-top: var(--spacing-md);
-  border-top: 1px solid #ebeef2;
+  border-top: 1px solid var(--border-color-strong);
 }
 
 .legend-item {
@@ -314,10 +313,52 @@ const getCorrectOptionIndices = (question) => {
   background: var(--primary);
 }
 
+.legend-dot.partial {
+  background: var(--partial);
+}
+
+.legend-dot.unchecked {
+  background: var(--unchecked);
+}
+
 .question-list {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
+}
+
+.question-group {
+  width: 100%;
+  margin-bottom: var(--spacing-sm);
+}
+
+.group-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--spacing-sm);
+  background: var(--surface-variant);
+  border-radius: var(--radius-md);
+  margin-bottom: var(--spacing-sm);
+}
+
+.group-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--icon-color);
+}
+
+.sub-question-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding-left: var(--spacing-sm);
+}
+
+.sub-question-grid .question-btn {
+  min-width: 45px;
+  font-size: var(--font-size-md);
+  border-radius: 50%;
 }
 
 .question-list .question-btn {
@@ -326,10 +367,10 @@ const getCorrectOptionIndices = (question) => {
   margin: 0 auto;
   border: none;
   border-radius: var(--radius-md);
-  background: #e0e3e6;
+  background: var(--color-gray-300);
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-bold);
-  color: #414754;
+  color: var(--icon-color);
   cursor: pointer;
 }
 
@@ -348,12 +389,22 @@ const getCorrectOptionIndices = (question) => {
 }
 
 .question-btn.unknown {
-  background: #fbbc04;
+  background: var(--warning);
   color: #181c1f;
 }
 
 .question-btn.current {
   background: var(--primary);
+  color: #fff;
+}
+
+.question-btn.unchecked {
+  background: var(--unchecked);
+  color: #fff;
+}
+
+.question-btn.partial {
+  background: var(--partial);
   color: #fff;
 }
 </style>

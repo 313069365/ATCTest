@@ -65,8 +65,11 @@ const isSelected = (index) => {
 
 const isCorrectOption = (index) => {
   if (!props.question.answer || !props.question.answer[0]) return false
-  const answerStr = props.question.answer[0].toUpperCase()
-  const correctIndex = answerStr.includes('T') ? 0 : 1
+  const answerStr = props.question.answer[0]
+  // 检查答案是否包含"正"（中文）或"T"(英文 TRUE)
+  const isCorrect = answerStr.includes('正') || answerStr.toUpperCase().includes('T')
+  // 正确答案为 index 0，错误答案为 index 1
+  const correctIndex = isCorrect ? 0 : 1
   // 背题模式下显示正确答案
   if (props.mode === 'review') {
     return index === correctIndex
@@ -76,6 +79,7 @@ const isCorrectOption = (index) => {
 }
 
 const isWrongOption = (index) => {
+  if (!props.showAnswer) return false
   if (props.mode === 'review') return false
   if (!isSelected(index)) return false
   return !isCorrectOption(index)

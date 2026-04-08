@@ -5,6 +5,7 @@
       v-bind="allProps"
       @answer="handleAnswer"
       @next-question="handleNextQuestion"
+      @checkSub="handleCheckSub"
     />
     
     <div class="explanation-section" v-if="showExplanation">
@@ -60,7 +61,7 @@ const props = defineProps({
   }
 })
 
-const emit = defineEmits(['answer', 'next-question'])
+const emit = defineEmits(['answer', 'next-question', 'checkSub'])
 
 const componentMap = {
   single: SingleChoice,
@@ -96,6 +97,10 @@ const handleAnswer = (answer) => {
 
 const handleNextQuestion = () => {
   emit('next-question')
+}
+
+const handleCheckSub = (index) => {
+  emit('checkSub', index)
 }
 </script>
 
