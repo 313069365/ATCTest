@@ -369,6 +369,7 @@ export const useAppStore = defineStore("app", () => {
     practiceProgress,
     practiceHistory,
     savePracticeProgress,
+    loadPracticeProgress,
     addPracticeHistory,
 
     // 统计

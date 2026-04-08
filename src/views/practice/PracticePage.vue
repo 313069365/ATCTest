@@ -48,7 +48,7 @@
               </div>
               <div class="subject-actions">
                 <button v-if="hasProgress(subject)" class="continue-btn" @click="continuePractice(subject)">
-                  继续练习
+                  {{ t('continue') }}
                 </button>
                 <button class="new-btn" @click="newQuizWith(subject)">{{ t('new') }}</button>
               </div>
@@ -67,7 +67,7 @@
 </template>
 
 <script setup>
-import { ref, computed, watch } from 'vue'
+import { ref, computed, watch, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import PracticeSetting from '@/components/page/PracticeSettings.vue'
 import BankImport from '@/components/page/BankImport.vue'
@@ -87,6 +87,11 @@ const selectedScope = ref('base')
 
 // 从 Store 获取题库元数据
 const bankMeta = computed(() => store.bankMeta)
+
+// 每次页面显示时刷新练习进度（从 localStorage 加载最新数据）
+onMounted(() => {
+  store.loadPracticeProgress()
+})
 
 // 使用 bankMeta 直接获取选项
 const categoryOptions = computed(() => Object.keys(bankMeta.value))
@@ -144,12 +149,27 @@ const newQuizWith = (subject) => {
   }
 }
 
-// 检查是否有保存的进度
+// 检查是否有保存的进度（且有实际答题记录）
 const hasProgress = (subject) => {
   const progress = store.practiceProgress
   if (!progress || !progress.config?.bank) return false
   const subjectName = typeof subject === 'object' ? subject.name : subject
-  return progress.config.bank.subject === subjectName
+  if (progress.config.bank.subject !== subjectName) return false
+
+  // 检查是否有实际的用户答案
+  const answers = progress.progress?.answers
+  if (!answers) return false
+
+  const hasUserAnswers = Object.keys(answers).some(qId => {
+    const ans = answers[qId]
+    if (!ans || !ans.selected) return false
+    const selected = ans.selected
+    if (Array.isArray(selected)) return selected.length > 0
+    if (typeof selected === 'string') return selected.trim().length > 0
+    return !!selected
+  })
+
+  return hasUserAnswers
 }
 
 // 继续练习
@@ -160,7 +180,11 @@ const continuePractice = (subject) => {
   const practiceData = {
     category: progress.config.bank.category,
     scope: progress.config.bank.scope,
-    subject: progress.config.bank.subject,
+    subject: {
+      name: progress.config.bank.subject,
+      category: progress.config.bank.category,
+      scope: progress.config.bank.scope
+    },
     practiceMode: progress.config.mode,
     questionSort: progress.config.questionSort,
     optionsSort: progress.config.optionsSort,
@@ -170,7 +194,11 @@ const continuePractice = (subject) => {
 
   router.push({
     path: '/practice/quiz',
-    query: { practiceData: JSON.stringify(practiceData), continue: 'true' }
+    query: {
+      practiceData: JSON.stringify(practiceData),
+      // practiceData: encodeURIComponent(JSON.stringify(practiceData)),
+      continue: 'true'
+    }
   })
 }
 

@@ -52,7 +52,8 @@
               :auto-jump="practiceData?.autoJump" :answerChecked="answerChecked" :answerStatus="answerStatus"
               @answer="handleAnswer" @next-question="nextQuestion" @checkSub="handleCheckSub" />
 
-            <div class="check-answer" v-if="showCheckBtn && hasUserAnswer && practiceMode !== 'review' && currentQuestion?.type !== 'reading' && shouldShowCheckBtn">
+            <div class="check-answer"
+              v-if="showCheckBtn && hasUserAnswer && practiceMode !== 'review' && currentQuestion?.type !== 'reading' && shouldShowCheckBtn">
               <button class="check-btn" @click="checkAnswer">
                 <span class="material-symbols-outlined">verified</span>
                 {{ t("checkAnswer") }}
@@ -84,8 +85,8 @@
         });
       }
     " />
-    <AnswerCard v-if="showAnswerCard" :questions="bank" :currentIndex="currentIndex" :currentSubIndex="currentSubIndex" :settings="practiceData"
-      :answerChecked="answerChecked" :answerStatus="answerStatus" :userAnswers="userAnswers"
+    <AnswerCard v-if="showAnswerCard" :questions="bank" :currentIndex="currentIndex" :currentSubIndex="currentSubIndex"
+      :settings="practiceData" :answerChecked="answerChecked" :answerStatus="answerStatus" :userAnswers="userAnswers"
       @close="closeAnswerCard" @exit="exitQuiz" @go="
         (idx, sqIdx) => {
           currentIndex = idx;
@@ -388,7 +389,7 @@ const handleAnswer = (answer) => {
     // Reading 组件已经传入了完整对象 {0: 2}，直接使用
     // 如果 answer 是对象，直接合并；如果是数字才需要构建
     let cleanAnswers = {}
-    
+
     if (typeof answer === 'object' && answer !== null) {
       // 传入的是完整对象，直接使用
       cleanAnswers = { ...answer }
@@ -396,18 +397,18 @@ const handleAnswer = (answer) => {
       // 数字格式：构建对象
       const existing = userAnswers.value[question.id] || {}
       console.log('[QuizPage handleAnswer] existing:', existing)
-      
+
       // 过滤：只保留数字格式的值
       Object.entries(existing).forEach(([key, val]) => {
         if (typeof val === 'number' && !isNaN(val)) {
           cleanAnswers[key] = val
         }
       })
-      
+
       // 添加当前答案
       cleanAnswers[currentSubIndex.value] = answer
     }
-    
+
     userAnswers.value[question.id] = cleanAnswers
     console.log('[QuizPage handleAnswer] saved:', userAnswers.value[question.id])
   } else {
@@ -469,11 +470,11 @@ const checkAnswer = () => {
   } else {
     // 复合题型（阅读理解）：检查所有子题
     const subs = question.subs || []
-    
+
     // 保存嵌套结构
     if (!answerStatus.value[questionId]) answerStatus.value[questionId] = {}
     if (!answerChecked.value[questionId]) answerChecked.value[questionId] = {}
-    
+
     // 遍历所有子题
     subs.forEach((sub, idx) => {
       const subAnswer = userAnswer?.[idx]
@@ -496,7 +497,7 @@ const getQuestionStatus = (question, userAnswer) => {
   if (!question.answer || !question.answer[0]) return 'unknown'
 
   const correctAnswer = question.answer[0].replace(/^[A-Z]\.\s*/, '')
-  
+
   if (question.type === 'multiple') {
     // 多选题：比较选项内容
     if (!Array.isArray(userAnswer)) return 'wrong'
@@ -604,10 +605,10 @@ const loadPracticeProgress = () => {
       Object.keys(answersData).forEach(questionId => {
         const data = answersData[questionId];
         userAnswersMap[questionId] = data.selected;
-        
+
         const checked = data.checked;
         const status = data.status;
-        
+
         // 判断是否为复合题型（从当前题库中查找）
         const question = bank.value.find(q => q.id === questionId);
         if (question?.type === 'reading') {
@@ -628,7 +629,7 @@ const loadPracticeProgress = () => {
       // 恢复当前题目的答案检查状态
       const currentQ = bank.value[currentIndex.value];
       if (currentQ) {
-        const isChecked = currentQ.type === 'reading' 
+        const isChecked = currentQ.type === 'reading'
           ? answerChecked.value[currentQ.id]?.[currentSubIndex.value]
           : answerChecked.value[currentQ.id]
         if (isChecked) {

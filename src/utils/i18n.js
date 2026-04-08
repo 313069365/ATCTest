@@ -42,6 +42,7 @@ const translations = {
 
     practice: "Practice",
     new: "new",
+    continue: "continue",
     sort: "Sort",
     sequence: "sequence",
     reverse: "Reverse",
@@ -139,7 +140,7 @@ const translations = {
     practice: "练习",
     exam: "考试",
     profile: "我的",
-
+    continue: "继续练习",
     new: "新的练习",
     sort: "排序",
     sequence: "顺序",
