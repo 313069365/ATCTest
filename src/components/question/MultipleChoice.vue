@@ -42,7 +42,7 @@ const props = defineProps({
     default: 'answer'
   },
   userAnswer: {
-    type: [String, Array],
+    type: [String, Array, Number],
     default: null
   },
   showAnswer: {

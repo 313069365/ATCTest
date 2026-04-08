@@ -49,7 +49,7 @@
             <QuestionRenderer :question="currentQuestionWithOptions" :mode="practiceMode"
               :user-answer="userAnswers[currentQuestion?.id]" :show-answer="isCurrentAnswerChecked"
               :disabled="isCurrentAnswerDisabled" :show-answer-mode="practiceData?.showAnswerMode"
-              :auto-jump="practiceData?.autoJump" :answerChecked="answerChecked"
+              :auto-jump="practiceData?.autoJump" :answerChecked="answerChecked" :answerStatus="answerStatus"
               @answer="handleAnswer" @next-question="nextQuestion" @checkSub="handleCheckSub" />
 
             <div class="check-answer" v-if="showCheckBtn && hasUserAnswer && practiceMode !== 'review' && currentQuestion?.type !== 'reading' && shouldShowCheckBtn">
@@ -429,10 +429,8 @@ const handleAnswer = (answer) => {
   // 判断是否需要自动检查
   let autoCheck = false
   if (question.type === 'reading') {
-    // 阅读理解：检查当前子题是否支持自动批改
     autoCheck = shouldAutoCheckForQuestion(question, question.subs?.[currentSubIndex.value])
   } else {
-    // 普通题型：直接检查
     autoCheck = shouldAutoCheckForQuestion(question)
   }
 
@@ -468,18 +466,23 @@ const checkAnswer = () => {
     answerStatus.value[questionId] = status
     answerChecked.value[questionId] = true
   } else {
-    // 复合题型（阅读理解）：检查当前子题
-    const subAnswer = userAnswer?.[currentSubIndex.value]
-    let status = 'unanswered'
-    if (subAnswer !== undefined && subAnswer !== null) {
-      status = getSubQuestionStatus(question.subs?.[currentSubIndex.value], subAnswer)
-    }
+    // 复合题型（阅读理解）：检查所有子题
+    const subs = question.subs || []
     
     // 保存嵌套结构
     if (!answerStatus.value[questionId]) answerStatus.value[questionId] = {}
     if (!answerChecked.value[questionId]) answerChecked.value[questionId] = {}
-    answerStatus.value[questionId][currentSubIndex.value] = status
-    answerChecked.value[questionId][currentSubIndex.value] = true
+    
+    // 遍历所有子题
+    subs.forEach((sub, idx) => {
+      const subAnswer = userAnswer?.[idx]
+      let status = 'unanswered'
+      if (subAnswer !== undefined && subAnswer !== null) {
+        status = getSubQuestionStatus(sub, subAnswer)
+      }
+      answerStatus.value[questionId][idx] = status
+      answerChecked.value[questionId][idx] = true
+    })
   }
 
   showCheckBtn.value = false

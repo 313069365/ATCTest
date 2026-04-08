@@ -31,14 +31,6 @@
               <span class="legend-dot correct"></span>
               <span>正确</span>
             </div>
-            <div class="legend-item" v-if="settings?.practiceMode !== 'review'">
-              <span class="legend-dot partial"></span>
-              <span>部分正确</span>
-            </div>
-            <div class="legend-item" v-if="settings?.practiceMode !== 'review'">
-              <span class="legend-dot unchecked"></span>
-              <span>未检查</span>
-            </div>
             <div class="legend-item">
               <span class="legend-dot wrong"></span>
               <span>错误</span>
@@ -144,31 +136,51 @@ const showAnswerDisplay = computed(() => {
 })
 
 
-// 获取按钮状态（简化：直接使用 answerStatus）
+// 获取按钮状态
 function getQuestionBtnClass(idx, q) {
-  // 当前题目显示蓝色
-  if (idx === props.currentIndex) return 'current'
+  // 背题模式
+  if (props.settings?.practiceMode === 'review') {
+    return idx === props.currentIndex ? 'current' : ''
+  }
 
-  // 直接使用 answerStatus
   const status = props.answerStatus[q.id]
+
+  // 当前题目：返回组合类名
+  if (idx === props.currentIndex) {
+    if (!status || status === 'unanswered') return 'current'
+    // partial 归为 wrong
+    if (status === 'partial') return 'current-wrong'
+    return `current-${status}`
+  }
+
+  // 非当前题目
   if (!status) return ''
-
-  // 背题模式不显示状态
-  if (props.settings?.practiceMode === 'review') return ''
-
+  // partial 归为 wrong
+  if (status === 'partial') return 'wrong'
   return status
 }
 
 function getSubQuestionBtnClass(qIdx, sqIdx, sq) {
-  // 当前题目显示蓝色
-  if (props.currentIndex === qIdx && props.currentSubIndex === sqIdx) return 'current'
+  // 背题模式
+  if (props.settings?.practiceMode === 'review') {
+    return props.currentIndex === qIdx && props.currentSubIndex === sqIdx ? 'current' : ''
+  }
 
   const parentId = props.questions[qIdx].id
   const status = props.answerStatus[parentId]?.[sqIdx]
+
+  // 当前题目：返回组合类名
+  if (props.currentIndex === qIdx && props.currentSubIndex === sqIdx) {
+    if (!status || status === 'unanswered') return 'current'
+    // partial 归为 wrong
+    if (status === 'partial') return 'current-wrong'
+    return `current-${status}`
+  }
+
+  // 非当前题目
   if (!status) return ''
-
-  if (props.settings?.practiceMode === 'review') return ''
-
+  // partial 归为 wrong
+  if (status === 'partial') return 'wrong'
   return status
 }
 </script>
@@ -313,14 +325,6 @@ function getSubQuestionBtnClass(qIdx, sqIdx, sq) {
   background: var(--primary);
 }
 
-.legend-dot.partial {
-  background: var(--partial);
-}
-
-.legend-dot.unchecked {
-  background: var(--unchecked);
-}
-
 .question-list {
   display: flex;
   flex-wrap: wrap;
@@ -395,16 +399,25 @@ function getSubQuestionBtnClass(qIdx, sqIdx, sq) {
 
 .question-btn.current {
   background: var(--primary);
+  border: 3px solid var(--primary);
   color: #fff;
 }
 
-.question-btn.unchecked {
-  background: var(--unchecked);
+.question-btn.current-correct {
+  background: var(--success);
+  border: 3px solid var(--primary);
   color: #fff;
 }
 
-.question-btn.partial {
-  background: var(--partial);
+.question-btn.current-wrong {
+  background: var(--error);
+  border: 3px solid var(--primary);
   color: #fff;
+}
+
+.question-btn.current-unknown {
+  background: var(--warning);
+  border: 3px solid var(--primary);
+  color: #181c1f;
 }
 </style>

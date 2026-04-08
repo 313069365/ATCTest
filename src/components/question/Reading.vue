@@ -41,10 +41,8 @@
     </div>
 
     <div class="sub-nav" v-if="question.subs && question.subs.length > 1">
-      <button v-for="(sub, index) in question.subs" :key="index" class="sub-nav-btn" :class="{
-        active: currentSubIndex === index,
-        answered: isSubAnswered(index)
-      }" @click="goToSub(index)">
+      <button v-for="(sub, index) in question.subs" :key="index" class="sub-nav-btn"
+        :class="getSubNavBtnClass(index)" @click="goToSub(index)">
         {{ index + 1 }}
       </button>
     </div>
@@ -84,7 +82,7 @@ const props = defineProps({
     default: null
   },
   showAnswer: {
-    type: Boolean,
+    type: [Boolean, Object],
     default: false
   },
   disabled: {
@@ -98,6 +96,14 @@ const props = defineProps({
   autoJump: {
     type: Boolean,
     default: false
+  },
+  answerChecked: {
+    type: Object,
+    default: () => ({})
+  },
+  answerStatus: {
+    type: Object,
+    default: () => ({})
   }
 })
 
@@ -138,6 +144,57 @@ const isSubAnswered = (subIndex) => {
   if (Array.isArray(answer)) return answer.length > 0
   if (typeof answer === 'string') return answer.trim().length > 0
   return !!answer
+}
+
+const getSubStatus = (subIndex) => {
+  if (!props.question?.id) return ''
+  // 优先使用 props.answerStatus（从答题卡传递）
+  if (props.answerStatus && props.answerStatus[props.question.id]) {
+    const status = props.answerStatus[props.question.id]
+    if (typeof status === 'object') {
+      return status[subIndex] || ''
+    }
+    return status
+  }
+  // 备用：使用本地 subAnswerChecked
+  const isChecked = subAnswerChecked.value[subIndex]
+  if (!isChecked) return ''
+  // 背题模式不显示状态
+  if (props.mode === 'review') return ''
+  return 'checked'
+}
+
+const getSubNavBtnClass = (subIndex) => {
+  const classes = {}
+  
+  // 当前题目优先显示
+  if (currentSubIndex.value === subIndex) {
+    classes.active = true
+    return classes
+  }
+  
+  // 背题模式不显示状态
+  if (props.mode === 'review') {
+    return classes
+  }
+  
+  const status = getSubStatus(subIndex)
+  const answered = isSubAnswered(subIndex)
+  
+  // 已作答（但未检查/待定）
+  if (answered && !status) {
+    classes.answered = true
+  }
+  // partial 归为 wrong
+  else if (status === 'partial') {
+    classes.wrong = true
+  }
+  // 其他状态（correct/wrong/unknown）
+  else if (status) {
+    classes[status] = true
+  }
+  
+  return classes
 }
 
 const hasCurrentSubAnswer = computed(() => {
@@ -326,10 +383,34 @@ watch(() => props.userAnswer, (newAnswer) => {
   color: #fff;
 }
 
+.sub-nav-btn.correct {
+  background: var(--success);
+  border-color: var(--success);
+  color: #fff;
+}
+
+.sub-nav-btn.wrong {
+  background: var(--error);
+  border-color: var(--error);
+  color: #fff;
+}
+
+.sub-nav-btn.unknown {
+  background: var(--warning);
+  border-color: var(--warning);
+  color: #181c1f;
+}
+
 .sub-nav-btn.answered:not(.active) {
-  background: var(--success-light);
+  background: #e8f5e9;
   border-color: var(--success);
   color: var(--success);
+}
+
+.sub-nav-btn.no-answer {
+  background: var(--color-gray-200);
+  border-color: var(--border-color-light);
+  color: var(--text-secondary);
 }
 
 .sub-question-section {

@@ -40,11 +40,11 @@ const props = defineProps({
     default: 'answer'
   },
   userAnswer: {
-    type: [String, Array, Object],
+    type: [String, Array, Object, Number],
     default: null
   },
   showAnswer: {
-    type: Boolean,
+    type: [Boolean, Object],
     default: false
   },
   disabled: {
@@ -58,6 +58,14 @@ const props = defineProps({
   autoJump: {
     type: Boolean,
     default: false
+  },
+  answerChecked: {
+    type: Object,
+    default: () => ({})
+  },
+  answerStatus: {
+    type: Object,
+    default: () => ({})
   }
 })
 
@@ -79,7 +87,9 @@ const allProps = computed(() => ({
   showAnswer: props.showAnswer,
   disabled: props.disabled,
   showAnswerMode: props.showAnswerMode,
-  autoJump: props.autoJump
+  autoJump: props.autoJump,
+  answerChecked: props.answerChecked,
+  answerStatus: props.answerStatus
 }))
 
 const rendererComponent = computed(() => {
