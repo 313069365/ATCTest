@@ -30,9 +30,9 @@ const translations = {
     readingComprehension: "Reading Comprehension",
 
     // common
-    base: "Base Exam",
-    professional: "Professional Exam",
-    english: "English Exam",
+    base: "Base",
+    professional: "Professional",
+    english: "English",
 
     atc: "ATC",
     airport: "Airport",
@@ -50,8 +50,22 @@ const translations = {
     review: "review",
     answer: "answer",
 
-    // Practice Settings
-    practiceSettings: "Practice Settings",
+    // Home
+    learningPlatform: "Learning Platform",
+    practiceToday: "Practice Today",
+    totally: "totally",
+    questions: "questions",
+    accuracy: "Accuracy",
+    practiceMode: "Practice Mode",
+    reviewKeyPoints: "Review key points and quizzes",
+    mockExam: "Mock Exam",
+    timedExam: "Timed license exam simulation",
+    lastPractice: "Last Practice",
+    practice: "Practice",
+    noPracticeRecord: "No practice record yet",
+    startFirstPractice: "Start your first practice",
+    startPractice: "Start Practice",
+    practiced: "Practiced",
     questionOrder: "Question Order",
     practiceMode: "Practice Mode",
     answerDisplay: "Answer Display",
@@ -135,6 +149,20 @@ const translations = {
     review: "背题模式",
     answer: "答题模式",
 
+    // Home
+    learningPlatform: "学习平台",
+    practiceToday: "今日练习",
+    questions: "题",
+    accuracy: "正确率",
+    practiceMode: "练习模式",
+    reviewKeyPoints: "回顾章节重点与小测验",
+    mockExam: "模拟考试",
+    timedExam: "模拟执照题库限时考试",
+    lastPractice: "上次练习",
+    noPracticeRecord: "还没有练习记录",
+    startFirstPractice: "开始你的第一次练习吧",
+    practiced: "已练习",
+
     // Practice Settings
     practiceSettings: "练习设置",
     questionOrder: "习题顺序",
@@ -156,6 +184,7 @@ const translations = {
     // Quiz Page
     loadingQuestions: "加载题目中...",
     noQuestions: "暂无题目",
+    totally: "共",
     questions: "题",
     questionId: "题目编号",
     checkAnswer: "查看答案",

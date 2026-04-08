@@ -2,11 +2,11 @@
   <div class="home">
     <header class="top-bar">
       <div class="top-bar-left">
-        <h1 class="title">学习平台</h1>
+        <h1 class="title">{{ t('learningPlatform') }}</h1>
       </div>
       <div class="header-actions">
-        <button class="icon-btn">
-          <span class="material-symbols-outlined">notifications</span>
+        <button class="lang-btn" @click="toggleLanguage">
+          {{ getLanguage() === 'zh' ? 'EN' : '中' }}
         </button>
       </div>
     </header>
@@ -14,14 +14,14 @@
     <main class="content">
       <section class="stats-bento">
         <div class="stat-card">
-          <span class="stat-label">今日练习</span>
+          <span class="stat-label">{{ t('practiceToday') }}</span>
           <div class="stat-value-wrap">
             <span class="stat-value">{{ answeredToday }}</span>
-            <span class="stat-unit">题</span>
+            <span class="stat-unit">{{ t('questions') }}</span>
           </div>
         </div>
         <div class="stat-card">
-          <span class="stat-label">正确率</span>
+          <span class="stat-label">{{ t('accuracy') }}</span>
           <div class="stat-value-wrap">
             <span class="stat-value">{{ accuracy }}</span>
             <span class="stat-unit primary">%</span>
@@ -32,8 +32,8 @@
       <section class="main-actions">
         <button class="action-btn practice" @click="pageTo('/practice')">
           <div class="action-text">
-            <span class="action-title">练习模式</span>
-            <span class="action-subtitle">回顾章节重点与小测验</span>
+            <span class="action-title">{{ t('practiceMode') }}</span>
+            <span class="action-subtitle">{{ t('reviewKeyPoints') }}</span>
           </div>
           <div class="action-icon-wrap">
             <span class="material-symbols-outlined">menu_book</span>
@@ -41,8 +41,8 @@
         </button>
         <button class="action-btn exam" @click="pageTo('/exam')">
           <div class="action-text">
-            <span class="action-title">模拟考试</span>
-            <span class="action-subtitle">模拟执照题库限时考试</span>
+            <span class="action-title">{{ t('mockExam') }}</span>
+            <span class="action-subtitle">{{ t('timedExam') }}</span>
           </div>
           <div class="action-icon-wrap">
             <span class="material-symbols-outlined">timer</span>
@@ -51,7 +51,7 @@
       </section>
 
       <section class="continue-section">
-        <h2 class="section-title">上次练习</h2>
+        <h2 class="section-title">{{ t('lastPractice') }}</h2>
         <div class="continue-card">
           <template v-if="lastPractice">
             <div class="continue-inner" @click="continueLastPractice">
@@ -64,7 +64,8 @@
                 <div class="progress-bar">
                   <div class="progress" :style="{ width: lastPracticeProgress + '%' }"></div>
                 </div>
-                <span class="progress-text">已练习 {{ lastPractice.currentIndex + 1 }} / {{ totalQuestions }} 题</span>
+                <span class="progress-text">{{ t('practiced') }} {{ lastPractice.currentIndex + 1 }} / {{ totalQuestions
+                  }} {{ t('questions') }}</span>
               </div>
               <button class="continue-action-btn">
                 <span class="material-symbols-outlined">play_arrow</span>
@@ -77,9 +78,9 @@
                 <div class="placeholder-icon">
                   <span class="material-symbols-outlined">book</span>
                 </div>
-                <h3 class="placeholder-title">还没有练习记录</h3>
-                <p class="placeholder-subtitle">开始你的第一次练习吧</p>
-                <button class="continue-btn" @click="pageTo('/practice')">开始练习</button>
+                <h3 class="placeholder-title">{{ t('noPracticeRecord') }}</h3>
+                <p class="placeholder-subtitle">{{ t('startFirstPractice') }}</p>
+                <button class="continue-btn" @click="pageTo('/practice')">{{ t('startPractice') }}</button>
               </div>
             </div>
           </template>
@@ -93,19 +94,24 @@
 import { ref, computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAppStore } from '@/stores/store'
+import { t, setLanguage, getLanguage } from '@/utils/i18n.js'
 
 const router = useRouter()
 const store = useAppStore()
 
 const answeredToday = ref(0)
-const accuracy = ref(0.00)
+const accuracy = ref(0.0)
 
 // 上次练习
+// ?？这里需要完善加载上次练习，缺少初始化
 const lastPractice = computed(() => {
-  return store.practiceProgress
+  const lastPracticeProgress = store.practiceProgress
+  // [0]
+  return lastPracticeProgress
 })
 
 // 计算总题数（需要从题库获取）
+// ?？这里也需要直接从记录中加载，基于上一个调整
 const totalQuestions = computed(() => {
   if (!lastPractice.value) return 0
   const config = lastPractice.value.config
@@ -120,26 +126,35 @@ const totalQuestions = computed(() => {
 })
 
 // 练习进度百分比
+// ?? 同样需要修复
 const lastPracticeProgress = computed(() => {
   if (!lastPractice.value || !totalQuestions.value) return 0
   return Math.round(((lastPractice.value.progress.currentIndex + 1) / totalQuestions.value) * 100)
 })
 
 // 继续上次练习
+// ?? 上次练习的
 const continueLastPractice = () => {
-  if (!lastPractice.value || !lastPractice.value.config) return
+  if (!lastPractice.value || !lastPractice.value.config) return null
   const config = lastPractice.value.config
-  const practiceData = {
-    subject: config.bank,
-    practiceMode: config.mode,
-    questionSort: config.questionSort,
-    optionsSort: config.optionsSort,
-    showAnswerMode: config.showAnswerMode,
-    autoJump: config.autoJump
+  if (!config?.bank) return null
+  const practiceSetting = {
+    bank: {
+      category: config.bank.category,
+      scope: config.bank.scope,
+      subject: config.bank.subject,
+    },
+    modeSetting: {
+      questionSort: config.questionSort,
+      practiceMode: config.mode,
+      showAnswerMode: config.showAnswerMode,
+      optionsSort: config.optionsSort,
+      autoJump: config.autoJump
+    }
   }
   router.push({
     path: '/practice/quiz',
-    query: { practiceData: JSON.stringify(practiceData), continue: 'true' }
+    query: { practiceSetting: JSON.stringify(practiceSetting), continue: 'true' }
   })
 }
 
@@ -153,7 +168,15 @@ onMounted(async () => {
   if (store.rawQuestions.length === 0) {
     await store.loadQuestions()
   }
+  // store init
 })
+
+// 切换中英文
+const toggleLanguage = () => {
+  const current = getLanguage()
+  setLanguage(current === 'zh' ? 'en' : 'zh')
+  window.location.reload()
+}
 </script>
 
 <style scoped>
@@ -218,6 +241,23 @@ onMounted(async () => {
 
 .icon-btn:active {
   background: var(--color-gray-400);
+}
+
+.lang-btn {
+  width: 40px;
+  height: 40px;
+  /* border: 1px solid var(--border-color); */
+  background: transparent;
+  /* border-radius: var(--radius-full); */
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--text-primary);
+  transition: all 0.2s;
+}
+
+.lang-btn:hover {
+  background: var(--color-gray-100);
 }
 
 .content {
@@ -517,5 +557,6 @@ onMounted(async () => {
 .continue-action-btn .material-symbols-outlined {
   color: #fff;
   font-size: 24px;
+  fill: 1;
 }
 </style>

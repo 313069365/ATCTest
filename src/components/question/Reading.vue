@@ -145,15 +145,22 @@ const hasCurrentSubAnswer = computed(() => {
 })
 
 // 是否应该显示检查答案按钮
+// - 背题模式：不需要
+// - 按需显示模式：所有题型都需要
+// - 直接显示模式：只有不支持自动批改的题型（多选、填空、简答、翻译）需要
 const shouldShowCheckBtn = computed(() => {
   if (!currentSub.value) return false
-  const needsManualCheck = ['multiple', 'fillin', 'essay'].includes(currentSub.value.type);
-  return needsManualCheck || props.showAnswerMode !== "immediate";
+  if (props.mode === 'review') return false
+  // 按需显示模式
+  if (props.showAnswerMode !== "immediate") return true
+  // 直接显示模式：只有不支持自动批改的题型需要
+  const needsManualCheck = ['multiple', 'fillin', 'essay', 'translation'].includes(currentSub.value.type);
+  return needsManualCheck;
 })
 
 const isSubAnswerDisabled = computed(() => {
-  // 背题模式不禁用
-  if (props.mode === 'review') return false
+  // 背题模式禁用交互，只能浏览
+  if (props.mode === 'review') return true
   // 当前子题已检查则禁用
   return isSubAnswerChecked(currentSubIndex.value)
 })
@@ -171,9 +178,9 @@ const handleSubAnswer = (answer) => {
   newAnswer[currentSubIndex.value] = answer
   emit('answer', newAnswer)
   
-  // 立即显示模式下，仅对单选和判断题自动标记为已检查
+  // 立即显示模式下，仅对单选、判断、媒体题自动标记为已检查
   if (props.mode !== 'review' && props.showAnswerMode === 'immediate') {
-    const canImmediateCheck = ['single', 'boolean'].includes(currentSub.value.type);
+    const canImmediateCheck = ['single', 'boolean', 'media'].includes(currentSub.value.type);
     if (canImmediateCheck) {
       subAnswerChecked.value[currentSubIndex.value] = true
       

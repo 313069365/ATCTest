@@ -120,11 +120,6 @@ const shuffledOptionsCache = ref({}); // 缓存选项乱序结果
 const loading = ref(true);
 
 onMounted(async () => {
-  // 确保 Store 已加载题库数据
-  if (store.rawQuestions.length === 0) {
-    await store.loadQuestions();
-  }
-
   // 从 query 获取练习数据
   if (route.query.practiceData) {
     try {
@@ -140,18 +135,14 @@ onMounted(async () => {
         subject: subjectName,
         questionSort,
       });
-      console.log("Store 题库数量:", store.rawQuestions.length);
 
-      // 从 Store 获取题目并过滤
-      let filtered = store.rawQuestions.filter(
-        (q) =>
-          q.meta &&
-          q.meta.category === category &&
-          q.meta.scope === scope &&
-          q.meta.subject === subjectName,
-      );
+      // 加载该科目的题目
+      await store.loadSubjectQuestions(subjectName);
 
-      console.log("过滤后题目数量:", filtered.length);
+      // 使用加载的题目
+      let filtered = [...store.rawQuestions];
+
+      console.log("题目数量:", filtered.length);
 
       // 加载已保存的进度
       const savedProgress = store.practiceProgress;
@@ -286,11 +277,21 @@ const practiceMode = computed(() => {
 });
 
 // 是否应该显示检查答案按钮
-// 多选题、填空题、简答题等始终显示检查按钮（按需显示）
+// - 背题模式：不需要检查按钮（直接显示）
+// - 按需显示模式：所有题型都需要
+// - 直接显示模式：只有不支持自动批改的题型（多选、填空、简答、翻译）需要
 const shouldShowCheckBtn = computed(() => {
   if (!currentQuestion.value) return false;
-  const needsManualCheck = ['multiple', 'fillin', 'essay'].includes(currentQuestion.value.type);
-  return needsManualCheck || practiceData.value?.showAnswerMode !== "immediate";
+
+  // 背题模式不需要检查按钮
+  if (practiceMode.value === 'review') return false;
+
+  // 按需显示模式：所有题型都需要检查按钮
+  if (practiceData.value?.showAnswerMode !== "immediate") return true;
+
+  // 直接显示模式：只有不支持自动批改的题型需要
+  const needsManualCheck = ['multiple', 'fillin', 'essay', 'translation'].includes(currentQuestion.value.type);
+  return needsManualCheck;
 });
 
 // 是否有用户答案（使用题目 ID 查询）
@@ -319,12 +320,16 @@ const hasUserAnswer = computed(() => {
 // 当前题目是否已检查答案
 const isCurrentAnswerChecked = computed(() => {
   if (!currentQuestion.value) return false;
+  // 背题模式：直接显示答案
+  if (practiceMode.value === 'review') return true;
   return answerChecked.value[currentQuestion.value.id] || false;
 });
 
 // 当前题目是否禁用（Reading 题型由内部管理）
 const isCurrentAnswerDisabled = computed(() => {
   if (!currentQuestion.value) return false;
+  // 背题模式：禁用交互，只能浏览
+  if (practiceMode.value === 'review') return true;
   // Reading 题型由内部组件管理禁用状态
   if (currentQuestion.value.type === 'reading') return false;
   return answerChecked.value[currentQuestion.value.id] || false;
@@ -353,9 +358,9 @@ const handleAnswer = (answer) => {
     userAnswers.value[currentQuestion.value.id] = answer;
   }
 
-  // 立即显示模式且不是背题模式，仅对单选和判断题自动检查答案
+  // 立即显示模式且不是背题模式，仅对单选、判断、媒体题自动检查答案
   // Reading 题型由其内部组件管理子题检查
-  const canImmediateCheck = ['single', 'boolean'].includes(currentQuestion.value.type);
+  const canImmediateCheck = ['single', 'boolean', 'media'].includes(currentQuestion.value.type);
   if (
     practiceData.value?.showAnswerMode === "immediate" &&
     practiceMode.value !== "review" &&

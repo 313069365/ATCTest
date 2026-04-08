@@ -68,6 +68,56 @@ function discover(questions) {
 // ==================== 导出函数 ====================
 
 /**
+ * 获取所有 category
+ */
+export function getAllCategories() {
+  return Object.keys(DATA_SOURCES);
+}
+
+/**
+ * 辅助函数：按 key 分组
+ */
+function groupBy(arr, keyFn) {
+  return arr.reduce((result, item) => {
+    const key = keyFn(item);
+    if (!result[key]) result[key] = [];
+    result[key].push(item);
+    return result;
+  }, {});
+}
+
+/**
+ * 生成题库元数据
+ */
+export function generateBankMeta() {
+  const meta = {};
+
+  for (const [category, scopes] of Object.entries(DATA_SOURCES)) {
+    meta[category] = {
+      scopes: [],
+      subjects: {},
+    };
+
+    for (const [scope, questions] of Object.entries(scopes)) {
+      if (!meta[category].scopes.includes(scope)) {
+        meta[category].scopes.push(scope);
+      }
+
+      const grouped = groupBy(questions, (q) => q.meta?.subject);
+      for (const [subject, qs] of Object.entries(grouped)) {
+        if (!subject) continue;
+        meta[category].subjects[subject] = {
+          scope,
+          count: qs.length,
+        };
+      }
+    }
+  }
+
+  return meta;
+}
+
+/**
  * 获取所有题目
  */
 export function fetchAllQuestions() {
@@ -80,6 +130,19 @@ export function fetchAllQuestions() {
   }
 
   return results;
+}
+
+/**
+ * 按 subject 获取题目
+ */
+export function fetchQuestionsBySubject(subject) {
+  for (const scopes of Object.values(DATA_SOURCES)) {
+    for (const questions of Object.values(scopes)) {
+      const filtered = questions.filter((q) => q.meta?.subject === subject);
+      if (filtered.length > 0) return filtered;
+    }
+  }
+  return [];
 }
 
 /**
@@ -153,8 +216,11 @@ export async function importQuestions(file, options = {}) {
 }
 
 export default {
+  getAllCategories,
+  generateBankMeta,
   fetchAllQuestions,
   fetchQuestions,
+  fetchQuestionsBySubject,
   getQuestionBankStructure,
   getQuestionBanks,
   getQuestionBankInfo,

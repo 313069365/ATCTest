@@ -3,9 +3,6 @@
     <header class="top-bar">
       <h1 class="title">练习题库</h1>
       <div class="header-actions">
-        <!-- <button class="lang-btn" @click="toggleLanguage">
-          {{ getLanguage() === 'zh' ? 'EN' : '中' }}
-        </button> -->
         <button class="import-btn" @click="showImportModal = true">
           <span class="material-symbols-outlined">import_export</span>
         </button>
@@ -47,13 +44,13 @@
               </div>
               <div class="subject-info">
                 <h4>{{ t(subject.name) }}</h4>
-                <p>{{ subject.count }} {{ t('题') || '题' }}</p>
+                <p>{{ `${t('totally')} ${subject.count} ${t('questions')}` }}</p>
               </div>
               <div class="subject-actions">
                 <button v-if="hasProgress(subject)" class="continue-btn" @click="continuePractice(subject)">
                   继续练习
                 </button>
-                <button class="new-btn" @click="newQuizWith(subject)">新的练习</button>
+                <button class="new-btn" @click="newQuizWith(subject)">{{ t('new') }}</button>
               </div>
             </div>
           </div>
@@ -70,7 +67,7 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, watch } from 'vue'
 import { useRouter } from 'vue-router'
 import PracticeSetting from '@/components/page/PracticeSettings.vue'
 import BankImport from '@/components/page/BankImport.vue'
@@ -88,26 +85,42 @@ const selectedSubject = ref(null)
 const selectedCategory = ref('atc')
 const selectedScope = ref('base')
 
-// 从 Store 获取题库数据
-const bank_atc = computed(() => store.rawQuestions)
+// 从 Store 获取题库元数据
+const bankMeta = computed(() => store.bankMeta)
 
-const categoryOptions = computed(() => ['atc', 'airport', 'airline',])
-const scopeOptions = computed(() => ['base', 'professional', 'english'])
+// 使用 bankMeta 直接获取选项
+const categoryOptions = computed(() => Object.keys(bankMeta.value))
 
-const SubjectsOptions = computed(() => {
-  const subjects = new Set()
-  bank_atc.value.forEach(q => {
-    if (q.meta.category === selectedCategory.value && q.meta.scope === selectedScope.value)
-      subjects.add(q.meta.subject)
-  })
-  const subjectsOptions = [...subjects].map(subject => ({ name: subject, count: bank_atc.value.filter(q => q.meta.category === selectedCategory.value && q.meta.scope === selectedScope.value && q.meta.subject === subject).length }))
-  return subjectsOptions
+const scopeOptions = computed(() => {
+  const catMeta = bankMeta.value[selectedCategory.value]
+  return catMeta?.scopes || []
 })
 
-// 页面加载时自动加载题库
-onMounted(() => {
-  if (store.rawQuestions.length === 0) {
-    store.loadQuestions()
+const SubjectsOptions = computed(() => {
+  const catMeta = bankMeta.value[selectedCategory.value]
+  if (!catMeta) return []
+  return Object.entries(catMeta.subjects)
+    .filter(([_, info]) => info.scope === selectedScope.value)
+    .map(([name, info]) => ({ name, count: info.count }))
+})
+
+// 首次加载时默认选中第一个 category
+watch(bankMeta, (newMeta) => {
+  if (newMeta && Object.keys(newMeta).length > 0) {
+    const categories = Object.keys(newMeta)
+    if (categories.length > 0 && !categories.includes(selectedCategory.value)) {
+      selectedCategory.value = categories[0]
+    }
+  }
+}, { immediate: true })
+
+// 选中 category 变化时，默认选中第一个 scope
+watch(() => selectedCategory.value, (newCat) => {
+  if (newCat && bankMeta.value[newCat]) {
+    const scopes = bankMeta.value[newCat].scopes
+    if (scopes.length > 0 && !scopes.includes(selectedScope.value)) {
+      selectedScope.value = scopes[0]
+    }
   }
 })
 
@@ -117,7 +130,7 @@ const newQuizWith = (subject) => {
     category: selectedCategory.value,
     scope: selectedScope.value
   }
-  
+
   // 检查是否有保存的进度
   if (hasProgress(subject)) {
     if (confirm('已有练习进度，是否重新开始？')) {
@@ -143,7 +156,7 @@ const hasProgress = (subject) => {
 const continuePractice = (subject) => {
   const progress = store.practiceProgress
   if (!progress || !progress.config) return
-  
+
   const practiceData = {
     category: progress.config.bank.category,
     scope: progress.config.bank.scope,
@@ -154,7 +167,7 @@ const continuePractice = (subject) => {
     showAnswerMode: progress.config.showAnswerMode,
     autoJump: progress.config.autoJump
   }
-  
+
   router.push({
     path: '/practice/quiz',
     query: { practiceData: JSON.stringify(practiceData), continue: 'true' }
@@ -165,11 +178,7 @@ const handleImportSuccess = (result) => {
   console.log('导入成功:', result)
 }
 
-const toggleLanguage = () => {
-  const current = getLanguage()
-  setLanguage(current === 'zh' ? 'en' : 'zh')
-  window.location.reload()
-}
+
 
 
 
@@ -209,23 +218,6 @@ const toggleLanguage = () => {
   transform: translateY(-50%);
   display: flex;
   gap: 8px;
-}
-
-.lang-btn {
-  width: 40px;
-  height: 40px;
-  border: 1px solid var(--border-color);
-  background: transparent;
-  border-radius: 8px;
-  cursor: pointer;
-  font-weight: 600;
-  font-size: 14px;
-  color: var(--text-primary);
-  transition: all 0.2s;
-}
-
-.lang-btn:hover {
-  background: var(--color-gray-100);
 }
 
 .import-btn {
