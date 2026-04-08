@@ -241,7 +241,7 @@ const handleImportSuccess = (result) => {
 
 .header-actions {
   position: absolute;
-  right: 16px;
+  right: 0px;
   top: 50%;
   transform: translateY(-50%);
   display: flex;

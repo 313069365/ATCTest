@@ -771,6 +771,10 @@ const resetQuestionState = () => {
   color: var(--text-secondary);
 }
 
+.back-btn .material-symbols-outlined {
+  font-size: var(--font-size-3xl);
+}
+
 .header-title h1 {
   font-size: var(--font-size-md);
   font-weight: var(--font-weight-semibold);
@@ -801,8 +805,8 @@ const resetQuestionState = () => {
   font-weight: var(--font-weight-semibold);
 }
 
-.timer-display material .material-symbols-outlined {
-  font-size: var(--font-size-md);
+.timer-display .material-symbols-outlined {
+  font-size: var(--font-size-2xl);
 }
 
 .grid-btn {
@@ -818,7 +822,7 @@ const resetQuestionState = () => {
 }
 
 .grid-btn .material-symbols-outlined {
-  font-size: var(--font-size-2xl);
+  font-size: var(--font-size-3xl);
 }
 
 .progress-bar-container {

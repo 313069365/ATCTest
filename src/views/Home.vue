@@ -59,13 +59,12 @@
                 <span class="material-symbols-outlined">menu_book</span>
               </div>
               <div class="continue-info">
-                <h3 class="continue-title">{{ lastPractice.subject?.name || '练习' }}</h3>
-                <p class="continue-subtitle">{{ lastPractice.category }} • {{ lastPractice.scope }}</p>
+                <h3 class="continue-title">{{ t(lastPractice.subject?.name) || '练习' }}</h3>
+                <p class="continue-subtitle">{{ t(lastPractice.category) }} • {{ t(lastPractice.scope) }}</p>
                 <div class="progress-bar">
                   <div class="progress" :style="{ width: lastPracticeProgress + '%' }"></div>
                 </div>
-                <span class="progress-text">{{ t('practiced') }} {{ lastPractice.currentIndex + 1 }} / {{ totalQuestions
-                  }} {{ t('questions') }}</span>
+                <span class="progress-text">{{ t('practiced') }} {{ t(lastPractice.currentIndex + 1) }} / {{ t(totalQuestions) }} {{ t('questions') }}</span>
               </div>
               <button class="continue-action-btn">
                 <span class="material-symbols-outlined">play_arrow</span>
@@ -103,58 +102,60 @@ const answeredToday = ref(0)
 const accuracy = ref(0.0)
 
 // 上次练习
-// ?？这里需要完善加载上次练习，缺少初始化
 const lastPractice = computed(() => {
-  const lastPracticeProgress = store.practiceProgress
-  // [0]
-  return lastPracticeProgress
+  const progress = store.practiceProgress
+  if (!progress || !progress.config?.bank) return null
+  
+  return {
+    subject: {
+      name: progress.config.bank.subject,
+      category: progress.config.bank.category,
+      scope: progress.config.bank.scope
+    },
+    category: progress.config.bank.category,
+    scope: progress.config.bank.scope,
+    currentIndex: progress.progress.currentIndex || 0,
+    questionIds: progress.progress.questionIds || []
+  }
 })
 
-// 计算总题数（需要从题库获取）
-// ?？这里也需要直接从记录中加载，基于上一个调整
+// 计算总题数 - 从保存的 progress 中获取
 const totalQuestions = computed(() => {
-  if (!lastPractice.value) return 0
-  const config = lastPractice.value.config
-  if (!config?.bank) return 0
-  const { category, scope, subject } = config.bank
-  const subjectName = typeof subject === 'object' ? subject.name : subject
-  return store.rawQuestions.filter(q =>
-    q.meta.category === category &&
-    q.meta.scope === scope &&
-    q.meta.subject === subjectName
-  ).length
+  return lastPractice.value?.questionIds?.length || 0
 })
 
 // 练习进度百分比
-// ?? 同样需要修复
 const lastPracticeProgress = computed(() => {
   if (!lastPractice.value || !totalQuestions.value) return 0
-  return Math.round(((lastPractice.value.progress.currentIndex + 1) / totalQuestions.value) * 100)
+  return Math.round(((lastPractice.value.currentIndex + 1) / totalQuestions.value) * 100)
 })
 
 // 继续上次练习
-// ?? 上次练习的
 const continueLastPractice = () => {
-  if (!lastPractice.value || !lastPractice.value.config) return null
-  const config = lastPractice.value.config
-  if (!config?.bank) return null
-  const practiceSetting = {
-    bank: {
-      category: config.bank.category,
-      scope: config.bank.scope,
-      subject: config.bank.subject,
+  const progress = store.practiceProgress
+  if (!progress || !progress.config) return
+  
+  const practiceData = {
+    category: progress.config.bank.category,
+    scope: progress.config.bank.scope,
+    subject: {
+      name: progress.config.bank.subject,
+      category: progress.config.bank.category,
+      scope: progress.config.bank.scope
     },
-    modeSetting: {
-      questionSort: config.questionSort,
-      practiceMode: config.mode,
-      showAnswerMode: config.showAnswerMode,
-      optionsSort: config.optionsSort,
-      autoJump: config.autoJump
-    }
+    practiceMode: progress.config.mode,
+    questionSort: progress.config.questionSort,
+    optionsSort: progress.config.optionsSort,
+    showAnswerMode: progress.config.showAnswerMode,
+    autoJump: progress.config.autoJump
   }
+
   router.push({
     path: '/practice/quiz',
-    query: { practiceSetting: JSON.stringify(practiceSetting), continue: 'true' }
+    query: { 
+      practiceData: JSON.stringify(practiceData), 
+      continue: 'true' 
+    }
   })
 }
 

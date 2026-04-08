@@ -125,7 +125,7 @@ const handleSelect = (index) => {
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: var(--spacing-sm);
+  padding: var(--spacing-md);
   background: #fff;
   border: 1px solid transparent;
   border-radius: var(--radius-lg);
@@ -162,9 +162,9 @@ const handleSelect = (index) => {
 }
 
 .option-marker {
-  width: 40px;
-  height: 40px;
-  border-radius: var(--radius-lg);
+  width: 30px;
+  height: 30px;
+  border-radius: var(--radius-full);
   background: #f1f4f7;
   display: flex;
   align-items: center;
