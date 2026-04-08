@@ -7,6 +7,13 @@
  */
 
 import { computed } from "vue";
+import {
+  canAutoCheck,
+  needsManualCheck,
+  isCompositeType,
+} from "@/utils/questionStatus";
+
+export { canAutoCheck, needsManualCheck, isCompositeType };
 
 /**
  * 答案状态枚举
@@ -35,57 +42,6 @@ export const SHOW_ANSWER_MODE = {
   IMMEDIATE: "immediate", // 立即显示
   MANUAL: "manual", // 按需显示
 };
-
-/**
- * 可自动批改的题型
- */
-const AUTO_CHECK_TYPES = ["single", "boolean", "media"];
-
-/**
- * 需要手动检查的题型
- */
-const MANUAL_CHECK_TYPES = ["multiple", "fillin", "essay", "translation", "reading"];
-
-/**
- * 复合题型列表（包含子题）
- */
-const COMPOSITE_TYPES = ["reading"];
-
-/**
- * 判断题型是否可自动批改
- * @param {string} questionType - 题目类型
- * @returns {boolean}
- */
-export function canAutoCheck(questionType) {
-  return AUTO_CHECK_TYPES.includes(questionType);
-}
-
-/**
- * 判断题型是否需要手动检查（需要点击检查按钮）
- * @param {string} questionType - 题目类型
- * @returns {boolean}
- */
-export function needsManualCheck(questionType) {
-  return MANUAL_CHECK_TYPES.includes(questionType);
-}
-
-/**
- * 判断是否为复合题型（包含子题）
- * @param {string} questionType - 题目类型
- * @returns {boolean}
- */
-export function isCompositeType(questionType) {
-  return COMPOSITE_TYPES.includes(questionType);
-}
-
-/**
- * 判断是否为简单题型（不含子题）
- * @param {string} questionType - 题目类型
- * @returns {boolean}
- */
-export function isSimpleType(questionType) {
-  return !isCompositeType(questionType);
-}
 
 /**
  * 创建答案显示逻辑 hook

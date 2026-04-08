@@ -80,7 +80,14 @@
 <script setup>
 import { computed } from 'vue'
 import { t } from '@/utils/i18n.js'
-import { useAnswerDisplay } from '@/composables/useAnswerDisplay'
+
+// 标准化状态
+function normalizeStatus(status) {
+  if (!status) return ''
+  if (status === 'partial') return 'wrong'
+  if (status === 'unchecked') return ''
+  return status
+}
 
 const props = defineProps({
   questions: {
@@ -138,50 +145,40 @@ const showAnswerDisplay = computed(() => {
 
 // 获取按钮状态
 function getQuestionBtnClass(idx, q) {
-  // 背题模式
-  if (props.settings?.practiceMode === 'review') {
-    return idx === props.currentIndex ? 'current' : ''
-  }
-
-  const status = props.answerStatus[q.id]
-
-  // 当前题目：返回组合类名
   if (idx === props.currentIndex) {
-    if (!status || status === 'unanswered') return 'current'
-    // partial 归为 wrong
-    if (status === 'partial') return 'current-wrong'
-    return `current-${status}`
+    var status = props.answerStatus[q.id] || ''
+    status = normalizeStatus(status)
+    var mode = props.settings ? props.settings.practiceMode : 'answer'
+    if (!status || status === 'unanswered') {
+      return 'current'
+    }
+    var baseClass = status === 'wrong' ? 'wrong' : status
+    return 'current-' + baseClass
   }
-
-  // 非当前题目
+  var status = props.answerStatus[q.id] || ''
+  status = normalizeStatus(status)
   if (!status) return ''
-  // partial 归为 wrong
-  if (status === 'partial') return 'wrong'
-  return status
+  return status === 'wrong' ? 'wrong' : status
 }
 
+// 获取子题按钮状态
 function getSubQuestionBtnClass(qIdx, sqIdx, sq) {
-  // 背题模式
-  if (props.settings?.practiceMode === 'review') {
-    return props.currentIndex === qIdx && props.currentSubIndex === sqIdx ? 'current' : ''
-  }
-
-  const parentId = props.questions[qIdx].id
-  const status = props.answerStatus[parentId]?.[sqIdx]
-
-  // 当前题目：返回组合类名
   if (props.currentIndex === qIdx && props.currentSubIndex === sqIdx) {
-    if (!status || status === 'unanswered') return 'current'
-    // partial 归为 wrong
-    if (status === 'partial') return 'current-wrong'
-    return `current-${status}`
+    var parentId = props.questions[qIdx].id
+    var status = props.answerStatus[parentId] ? props.answerStatus[parentId][sqIdx] : ''
+    status = normalizeStatus(status)
+    var mode = props.settings ? props.settings.practiceMode : 'answer'
+    if (!status || status === 'unanswered') {
+      return 'current'
+    }
+    var baseClass = status === 'wrong' ? 'wrong' : status
+    return 'current-' + baseClass
   }
-
-  // 非当前题目
+  var parentId = props.questions[qIdx].id
+  var status = props.answerStatus[parentId] ? props.answerStatus[parentId][sqIdx] : ''
+  status = normalizeStatus(status)
   if (!status) return ''
-  // partial 归为 wrong
-  if (status === 'partial') return 'wrong'
-  return status
+  return status === 'wrong' ? 'wrong' : status
 }
 </script>
 

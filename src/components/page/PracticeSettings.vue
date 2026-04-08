@@ -66,7 +66,8 @@
           </div>
         </section>
 
-        <section class="settings-section" v-if="settings.practiceMode === 'answer'">
+        <section class="settings-section"
+          v-if="settings.practiceMode === 'answer' && settings.showAnswerMode === 'immediate'">
           <div class="toggle-option">
             <div class="toggle-info">
               <span class="toggle-title">{{ t('autoJump') }}</span>

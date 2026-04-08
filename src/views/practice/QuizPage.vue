@@ -107,7 +107,8 @@ import QustionNavbar from "@/components/layout/QuestionNavbar.vue";
 import QuestionRenderer from "@/components/question/QuestionRenderer.vue";
 import { useAppStore } from "@/stores/store";
 import { t } from "@/utils/i18n.js";
-import { useAnswerDisplay, canAutoCheck } from "@/composables/useAnswerDisplay";
+import { useAnswerDisplay } from "@/composables/useAnswerDisplay";
+import { canAutoCheck } from "@/utils/questionStatus";
 
 const router = useRouter();
 const route = useRoute();

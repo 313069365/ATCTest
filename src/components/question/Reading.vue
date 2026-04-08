@@ -54,6 +54,7 @@
 <script setup>
 import { ref, computed, watch } from 'vue'
 import { t } from '@/utils/i18n.js'
+import { normalizeStatus, getStatusClass, getCurrentStatusClass } from '@/utils/questionStatus'
 import SingleChoice from './SingleChoice.vue'
 import MultipleChoice from './MultipleChoice.vue'
 import BooleanQuestion from './BooleanQuestion.vue'
@@ -165,36 +166,25 @@ const getSubStatus = (subIndex) => {
 }
 
 const getSubNavBtnClass = (subIndex) => {
-  const classes = {}
+  const isCurrent = currentSubIndex.value === subIndex
+  const mode = props.mode || 'answer'
   
-  // 当前题目优先显示
-  if (currentSubIndex.value === subIndex) {
-    classes.active = true
-    return classes
+  // 当前题目优先返回
+  if (isCurrent) {
+    return getCurrentStatusClass('', mode)
   }
   
-  // 背题模式不显示状态
-  if (props.mode === 'review') {
-    return classes
-  }
-  
-  const status = getSubStatus(subIndex)
+  // 非当前题目
+  const status = normalizeStatus(getSubStatus(subIndex))
   const answered = isSubAnswered(subIndex)
   
-  // 已作答（但未检查/待定）
+  // 已作答但未检查
   if (answered && !status) {
-    classes.answered = true
-  }
-  // partial 归为 wrong
-  else if (status === 'partial') {
-    classes.wrong = true
-  }
-  // 其他状态（correct/wrong/unknown）
-  else if (status) {
-    classes[status] = true
+    return 'answered'
   }
   
-  return classes
+  // 使用标准状态类名
+  return getStatusClass(status, { isCurrent, mode })
 }
 
 const hasCurrentSubAnswer = computed(() => {
