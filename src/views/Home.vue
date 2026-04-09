@@ -59,12 +59,13 @@
                 <span class="material-symbols-outlined">menu_book</span>
               </div>
               <div class="continue-info">
-                <h3 class="continue-title">{{ t(lastPractice.subject?.name) || '练习' }}</h3>
+                <h3 class="continue-title">{{ t(lastPractice.subject?.name) || '' }}</h3>
                 <p class="continue-subtitle">{{ t(lastPractice.category) }} • {{ t(lastPractice.scope) }}</p>
                 <div class="progress-bar">
                   <div class="progress" :style="{ width: lastPracticeProgress + '%' }"></div>
                 </div>
-                <span class="progress-text">{{ t('practiced') }} {{ t(lastPractice.currentIndex + 1) }} / {{ t(totalQuestions) }} {{ t('questions') }}</span>
+                <span class="progress-text">{{ t('practiced') }} {{ t(lastPractice.currentIndex + 1) }} / {{
+                  t(totalQuestions) }} {{ t('questions') }}</span>
               </div>
               <button class="continue-action-btn">
                 <span class="material-symbols-outlined">play_arrow</span>
@@ -105,7 +106,7 @@ const accuracy = ref(0.0)
 const lastPractice = computed(() => {
   const progress = store.practiceProgress
   if (!progress || !progress.config?.bank) return null
-  
+
   return {
     subject: {
       name: progress.config.bank.subject,
@@ -134,7 +135,7 @@ const lastPracticeProgress = computed(() => {
 const continueLastPractice = () => {
   const progress = store.practiceProgress
   if (!progress || !progress.config) return
-  
+
   const practiceData = {
     category: progress.config.bank.category,
     scope: progress.config.bank.scope,
@@ -152,9 +153,9 @@ const continueLastPractice = () => {
 
   router.push({
     path: '/practice/quiz',
-    query: { 
-      practiceData: JSON.stringify(practiceData), 
-      continue: 'true' 
+    query: {
+      practiceData: JSON.stringify(practiceData),
+      continue: 'true'
     }
   })
 }
@@ -514,21 +515,19 @@ const toggleLanguage = () => {
   font-size: var(--font-size-lg);
   font-weight: var(--font-weight-semibold);
   color: var(--text-primary);
-  margin-bottom: 2px;
 }
 
 .continue-subtitle {
   font-size: var(--font-size-sm);
   color: var(--text-secondary);
-  margin-bottom: 8px;
 }
 
 .progress-bar {
-  height: 4px;
+  height: 5px;
   background: var(--color-gray-300);
   border-radius: var(--radius-full);
   overflow: hidden;
-  margin-bottom: 4px;
+  margin-top: 4px;
 }
 
 .progress {
@@ -538,7 +537,7 @@ const toggleLanguage = () => {
 }
 
 .progress-text {
-  font-size: var(--font-size-xs);
+  font-size: var(--font-size-sm);
   color: var(--text-secondary);
 }
 

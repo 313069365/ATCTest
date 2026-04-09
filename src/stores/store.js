@@ -209,14 +209,17 @@ export const useAppStore = defineStore("app", () => {
    */
   function addWrongQuestion(question) {
     const exists = wrongBook.value.find((q) => q.id === question.id);
-    if (!exists) {
+    if (exists) {
+      exists.wrongCount = (exists.wrongCount || 1) + 1;
+      exists.wrongTime = Date.now();
+    } else {
       wrongBook.value.push({
         ...question,
         wrongTime: Date.now(),
         wrongCount: 1,
       });
-      storage.setItem(STORAGE_KEY.USER_WRONG_BOOK, wrongBook.value);
     }
+    storage.setItem(STORAGE_KEY.USER_WRONG_BOOK, wrongBook.value);
   }
 
   /**
@@ -354,12 +357,14 @@ export const useAppStore = defineStore("app", () => {
     // 错题本
     wrongBook,
     wrongBookCount,
+    loadWrongBook,
     addWrongQuestion,
     removeWrongQuestion,
 
     // 收藏
     favorites,
     favoritesCount,
+    loadFavorites,
     addFavorite,
     removeFavorite,
 
@@ -368,6 +373,7 @@ export const useAppStore = defineStore("app", () => {
     practiceHistory,
     savePracticeProgress,
     loadPracticeProgress,
+    loadPracticeHistory,
     addPracticeHistory,
 
     // 统计

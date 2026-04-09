@@ -1,62 +1,72 @@
 <template>
   <div class="page">
     <header class="top-bar">
-      <h1>答题结果</h1>
+      <h1>{{ t('practiceResult') }}</h1>
     </header>
 
     <main class="content">
       <div class="result-card">
         <div class="result-header">
-          <div class="result-icon">🎉</div>
-          <h2 class="result-title">完成练习</h2>
+          <div class="result-icon">{{ accuracy >= 80 ? '🎉' : accuracy >= 60 ? '👍' : '💪' }}</div>
+          <h2 class="result-title">{{ accuracy >= 80 ? t('awesome') : accuracy >= 60 ? t('good') : t('keepGoing') }}
+          </h2>
         </div>
 
         <div class="accuracy-circle">
           <svg viewBox="0 0 100 100">
             <circle class="bg" cx="50" cy="50" r="45" />
-            <circle class="progress" cx="50" cy="50" r="45" style="stroke-dasharray: 282.7; stroke-dashoffset: 42.4;" />
+            <circle class="progress" cx="50" cy="50" r="45"
+              :style="{ strokeDasharray: '282.7', strokeDashoffset: 282.7 * (1 - accuracy / 100) }" />
           </svg>
-          <span class="accuracy-text">85%</span>
+          <span class="accuracy-text">{{ accuracy }}%</span>
+        </div>
+
+        <div class="meta-row">
+          <div class="meta-item">
+            <span class="meta-subject">{{ t(subjectName) }}</span>
+          </div>
+          <div class="meta-divider"></div>
+          <div class="meta-item">
+            <span class="meta-time">{{ formattedTime }}</span>
+            <span class="meta-label">{{ t('timeUsed') }}</span>
+          </div>
         </div>
 
         <div class="stats">
           <div class="stat-item">
-            <span class="stat-value correct">17</span>
-            <span class="stat-label">正确</span>
+            <span class="stat-value correct">{{ correctCount }}</span>
+            <span class="stat-label">{{ t('correct') }}</span>
           </div>
           <div class="stat-item">
-            <span class="stat-value wrong">3</span>
-            <span class="stat-label">错误</span>
+            <span class="stat-value wrong">{{ wrongCount }}</span>
+            <span class="stat-label">{{ t('wrong') }}</span>
           </div>
           <div class="stat-item">
-            <span class="stat-value unknown">0</span>
-            <span class="stat-label">待定</span>
+            <span class="stat-value unknown">{{ unknownCount }}</span>
+            <span class="stat-label">{{ t('pending') }}</span>
           </div>
           <div class="stat-item">
-            <span class="stat-value unanswered">0</span>
-            <span class="stat-label">未答</span>
+            <span class="stat-value unanswered">{{ unansweredCount }}</span>
+            <span class="stat-label">{{ t('unanswered') }}</span>
           </div>
         </div>
 
-        <div class="time-info">
-          <span class="stat-value">15:30</span>
-          <span class="stat-label">用时</span>
-        </div>
+
       </div>
 
       <div class="actions">
-        <button class="action-btn primary">
+        <button class="action-btn primary" @click="goToWrongBook">
           <span class="material-symbols-outlined">visibility</span>
-          查看错题
+          {{ t('viewWrongQuestions') }}
         </button>
         <div class="action-row">
-          <button class="action-btn secondary">
+          <button class="action-btn secondary" @click="practiceAgain">
             <span class="material-symbols-outlined">restart_alt</span>
-            再练一组
+            {{ t('practiceAgain') }}
           </button>
-          <button class="action-btn outline">
+          <button class="action-btn outline" @click="backToHome">
             <span class="material-symbols-outlined">home</span>
-            返回首页
+            {{ t('backToHome') }}
           </button>
         </div>
       </div>
@@ -65,6 +75,99 @@
 </template>
 
 <script setup>
+import { ref, computed, onMounted } from "vue";
+import { useRouter, useRoute } from "vue-router";
+import { useAppStore } from "@/stores/store";
+import { t } from "@/utils/i18n.js";
+
+const router = useRouter();
+const route = useRoute();
+const store = useAppStore();
+
+const practiceData = ref(null);
+const correctCount = ref(0);
+const wrongCount = ref(0);
+const unknownCount = ref(0);
+const unansweredCount = ref(0);
+const elapsedSeconds = ref(0);
+const subjectName = ref('');
+
+const accuracy = computed(() => {
+  const total = correctCount.value + wrongCount.value + unknownCount.value;
+  if (total === 0) return 0;
+  return Math.round((correctCount.value / total) * 100);
+});
+
+const formattedTime = computed(() => {
+  const hours = Math.floor(elapsedSeconds.value / 3600);
+  const minutes = Math.floor((elapsedSeconds.value % 3600) / 60);
+  const seconds = elapsedSeconds.value % 60;
+  if (hours > 0) {
+    return `${hours}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+  }
+  return `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+});
+
+onMounted(async () => {
+  await store.loadPracticeHistory();
+
+  const history = store.practiceHistory[0];
+  if (!history) {
+    router.push({ name: "Home" });
+    return;
+  }
+
+  practiceData.value = history;
+
+  const answers = history.progress?.answers || {};
+  const totalQuestions = Object.keys(answers).length;
+
+  correctCount.value = 0;
+  wrongCount.value = 0;
+  unknownCount.value = 0;
+  unansweredCount.value = 0;
+
+  Object.values(answers).forEach(ans => {
+    if (ans.status === 'correct') {
+      correctCount.value++;
+    } else if (ans.status === 'wrong') {
+      wrongCount.value++;
+    } else if (ans.status === 'unknown') {
+      unknownCount.value++;
+    } else {
+      unansweredCount.value++;
+    }
+  });
+
+  elapsedSeconds.value = history.meta?.elapsedSeconds || 0;
+  subjectName.value = history.config?.bank?.subject || '';
+
+  store.savePracticeProgress(null);
+});
+
+const backToHome = () => {
+  router.push({ name: "Home" });
+};
+
+const goToWrongBook = () => {
+  router.push({ name: "WrongBook" });
+};
+
+const practiceAgain = () => {
+  if (practiceData.value?.config?.bank) {
+    const bank = practiceData.value.config.bank;
+    router.push({
+      name: "Practice",
+      query: {
+        category: bank.category,
+        scope: bank.scope,
+        subject: bank.subject
+      }
+    });
+  } else {
+    router.push({ name: "Practice" });
+  }
+};
 </script>
 
 <style scoped>
@@ -84,8 +187,21 @@
   color: var(--on-primary);
 }
 
+.top-bar .back-btn {
+  width: 40px;
+  height: 40px;
+  border: none;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--on-primary);
+}
+
 .top-bar h1 {
-  font-size: var(--font-size-lg);
+  font-size: var(--font-size-2xl);
   font-weight: var(--font-weight-semibold);
 }
 
@@ -153,13 +269,55 @@
   color: var(--primary);
 }
 
+.meta-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-md);
+  padding: var(--spacing-md);
+  background: var(--background-surface);
+  border-radius: var(--radius-lg);
+  margin-bottom: var(--spacing-md);
+}
+
+.meta-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+}
+
+.meta-subject {
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-semibold);
+  color: var(--on-surface);
+  text-align: center;
+}
+
+.meta-time {
+  font-size: var(--font-size-lg);
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.meta-label {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+}
+
+.meta-divider {
+  width: 1px;
+  height: 40px;
+  background: var(--border-color-light);
+}
+
 .stats {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: var(--spacing-sm);
-  margin-bottom: var(--spacing-md);
-  padding-bottom: var(--spacing-md);
-  border-bottom: 1px solid var(--border-color-light);
+  margin-top: var(--spacing-md);
+  padding-top: var(--spacing-md);
+  border-top: 1px solid var(--border-color-light);
 }
 
 .stat-item {
@@ -192,18 +350,6 @@
 .stat-label {
   font-size: var(--font-size-sm);
   color: var(--text-secondary);
-}
-
-.time-info {
-  text-align: center;
-  padding-top: var(--spacing-md);
-}
-
-.time-info .stat-value {
-  display: block;
-  font-size: var(--font-size-lg);
-  color: var(--on-surface);
-  margin-bottom: var(--spacing-mn);
 }
 
 .actions {

@@ -7,7 +7,7 @@
         <button class="back-btn" @click="goBack">
           <span class="material-symbols-outlined">arrow_back</span>
         </button>
-        <h1>错题本</h1>
+        <h1>{{ t('wrongBook') }}</h1>
         <button class="clear-btn" @click="clearAll" v-if="wrongList.length > 0">
           <span class="material-symbols-outlined">delete_sweep</span>
         </button>
@@ -21,55 +21,48 @@
           <span class="material-symbols-outlined stat-icon">close</span>
           <div class="stat-info">
             <span class="stat-value">{{ wrongList.length }}</span>
-            <span class="stat-label">错题数量</span>
-          </div>
-        </div>
-        <div class="stat-card glass">
-          <span class="material-symbols-outlined stat-icon">folder</span>
-          <div class="stat-info">
-            <span class="stat-value">{{ uniqueBanks }}</span>
-            <span class="stat-label">涉及题库</span>
+            <span class="stat-label">{{ t('wrongQuestions') }}</span>
           </div>
         </div>
         <div class="stat-card glass">
           <span class="material-symbols-outlined stat-icon">repeat</span>
           <div class="stat-info">
             <span class="stat-value">{{ repeatedErrors }}</span>
-            <span class="stat-label">重复错误</span>
+            <span class="stat-label">{{ t('repeatedErrors') }}</span>
           </div>
         </div>
       </div>
 
-
-
       <!-- 错题列表 -->
       <div class="wrong-list" v-if="wrongList.length > 0">
-        <div 
-          class="wrong-card-wrapper" 
-          v-for="(item, index) in wrongList" 
-          :key="item.id"
-        >
+        <div class="wrong-card-wrapper" v-for="(item, index) in wrongList" :key="item.id">
           <div class="wrong-card glass">
             <div class="wrong-header">
               <div class="wrong-meta-top">
-                <span class="wrong-subject">{{ getSubjectName(item.bankId, item.categoryId, item.subjectId) }}</span>
-                <span class="wrong-badge">{{ getBankName(item.bankId) }}</span>
+                <span class="wrong-subject">{{ t(item.meta?.subject) || item.meta?.subject || t('unknown') }}</span>
+                <span class="wrong-badge">{{ t(item.meta?.category) || item.meta?.category || '' }}</span>
               </div>
               <button class="delete-individual-btn" @click.stop="removeWrong(item.id)">
                 <span class="material-symbols-outlined">close</span>
               </button>
             </div>
-            
-            <p class="wrong-question">{{ item.question }}</p>
-            
+
+            <div>
+              <p class="wrong-question">{{ item.stem }}</p>
+            </div>
+
             <div class="wrong-answer-section">
-              <span class="answer-label">正确答案：</span>
+              <span class="answer-label">{{ t('correctAnswer') }}：</span>
               <span class="answer-correct">{{ formatAnswer(item.answer) }}</span>
             </div>
-            
+
+            <div class="wrong-answer-section">
+              <span class="answer-correct">{{ item.explanation }}</span>
+            </div>
+
             <div class="wrong-footer">
               <span class="wrong-count" v-if="getWrongCount(item.id) > 1">
-                错误 {{ getWrongCount(item.id) }} 次
+                {{ t('wrongCount') }} {{ getWrongCount(item.id) }} {{ t('times') }}
               </span>
             </div>
           </div>
@@ -92,33 +85,22 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
-import { useWrongBook } from '../../composables/useStorage'
-import atcData from '../../data/data-atc.js'
-import airportData from '../../data/data-airport.js'
+import { useAppStore } from '@/stores/store'
+import { t } from '@/utils/i18n.js'
 
 const router = useRouter()
-const { getAll, removeWrong: removeWrongItem, clearAll: clearAllWrong } = useWrongBook()
+const store = useAppStore()
 
-// 响应式数据
-const wrongList = ref([])
-const wrongStats = ref({})
-
-// 数据映射
-const dataMap = {
-  atc: atcData,
-  airport: airportData
-}
-
-// 计算属性
-const uniqueBanks = computed(() => {
-  return new Set(wrongList.value.map(item => item.bankId)).size
-})
+const wrongList = computed(() => store.wrongBook)
 
 const repeatedErrors = computed(() => {
-  return Object.values(wrongStats.value).filter(count => count > 1).length
+  return wrongList.value.filter(item => (item.wrongCount || 1) > 1).length
 })
 
-// 方法
+onMounted(() => {
+  store.loadWrongBook()
+})
+
 function goBack() {
   router.back()
 }
@@ -127,17 +109,16 @@ function goPractice() {
   router.push('/practice')
 }
 
-function getBankName(bankId) {
-  return dataMap[bankId]?.name || '未知题库'
+function removeWrong(id) {
+  if (confirm(t('confirmRemoveWrong'))) {
+    store.removeWrongQuestion(id)
+  }
 }
 
-function getSubjectName(bankId, categoryId, subjectId) {
-  const bank = dataMap[bankId]
-  if (!bank?.children) return '未知科目'
-  const category = bank.children[categoryId]
-  if (!category?.children) return '未知科目'
-  const subject = category.children[subjectId]
-  return subject?.name || '未知科目'
+function clearAll() {
+  if (confirm(t('confirmClearAll'))) {
+    store.wrongBook.forEach(q => store.removeWrongQuestion(q.id))
+  }
 }
 
 function formatAnswer(answer) {
@@ -149,69 +130,9 @@ function formatAnswer(answer) {
 }
 
 function getWrongCount(questionId) {
-  return wrongStats.value[questionId] || 1
+  const item = store.wrongBook.find(q => q.id === questionId)
+  return item?.wrongCount || 1
 }
-
-function removeWrong(id) {
-  if (confirm('确定要从错题本移除这道题吗？')) {
-    removeWrongItem(id)
-    loadWrongBook()
-  }
-}
-
-function clearAll() {
-  if (confirm('确定要清空整个错题本吗？此操作不可恢复')) {
-    clearAllWrong()
-    wrongList.value = []
-    wrongStats.value = {}
-  }
-}
-
-function loadWrongBook() {
-  const wrongBook = getAll()
-  const ids = wrongBook.ids || []
-  wrongStats.value = wrongBook.stats || {}
-  const meta = wrongBook.meta || {}
-  
-  const questions = []
-  ids.forEach(id => {
-    const q = findQuestionById(id)
-    if (q) {
-      const m = meta[id] || {}
-      questions.push({
-        ...q,
-        bankId: m.bankId || 'test',
-        categoryId: m.categoryId || 'single_choice',
-        subjectId: m.subjectId || 'single_example',
-        timestamp: m.timestamp
-      })
-    }
-  })
-  wrongList.value = questions
-}
-
-function findQuestionById(id) {
-  for (const bankKey in dataMap) {
-    const bank = dataMap[bankKey]
-    if (!bank.children) continue
-    for (const catKey in bank.children) {
-      const category = bank.children[catKey]
-      if (!category.children) continue
-      for (const subKey in category.children) {
-        const subject = category.children[subKey]
-        if (!subject.questions) continue
-        const q = subject.questions.find(q => q.id === id)
-        if (q) return q
-      }
-    }
-  }
-  return null
-}
-
-// 生命周期
-onMounted(() => {
-  loadWrongBook()
-})
 </script>
 
 <style scoped>
@@ -237,11 +158,9 @@ onMounted(() => {
   left: 0;
   right: 0;
   height: 50%;
-  background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0.25) 0%,
-    rgba(255, 255, 255, 0) 100%
-  );
+  background: linear-gradient(180deg,
+      rgba(255, 255, 255, 0.25) 0%,
+      rgba(255, 255, 255, 0) 100%);
   pointer-events: none;
 }
 
@@ -389,6 +308,7 @@ onMounted(() => {
     opacity: 0;
     transform: translateY(20px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -437,8 +357,8 @@ onMounted(() => {
 }
 
 .delete-individual-btn {
-  width: 32px;
-  height: 32px;
+  width: 25px;
+  height: 25px;
   border: none;
   background: rgba(211, 47, 47, 0.1);
   border-radius: 50%;

@@ -7,7 +7,7 @@
         <button class="back-btn" @click="goBack">
           <span class="material-symbols-outlined">arrow_back</span>
         </button>
-        <h1>收藏夹</h1>
+        <h1>{{ t('favorites') }}</h1>
         <button class="clear-btn" @click="clearAll" v-if="favoritesList.length > 0">
           <span class="material-symbols-outlined">delete_sweep</span>
         </button>
@@ -21,47 +21,32 @@
           <span class="material-symbols-outlined stat-icon">star</span>
           <div class="stat-info">
             <span class="stat-value">{{ favoritesList.length }}</span>
-            <span class="stat-label">收藏数量</span>
-          </div>
-        </div>
-        <div class="stat-card glass">
-          <span class="material-symbols-outlined stat-icon">folder</span>
-          <div class="stat-info">
-            <span class="stat-value">{{ getBankCount() }}</span>
-            <span class="stat-label">涉及题库</span>
-          </div>
-        </div>
-        <div class="stat-card glass">
-          <span class="material-symbols-outlined stat-icon">category</span>
-          <div class="stat-info">
-            <span class="stat-value">{{ getCategoryCount() }}</span>
-            <span class="stat-label">涉及分类</span>
+            <span class="stat-label">{{ t('favoritesCount') }}</span>
           </div>
         </div>
       </div>
 
       <!-- 收藏列表 -->
       <div class="favorites-list" v-if="favoritesList.length > 0">
-        <div 
-          class="favorite-card-wrapper" 
-          v-for="(item, index) in favoritesList" 
-          :key="item.id"
-        >
+        <div class="favorite-card-wrapper" v-for="(item, index) in favoritesList" :key="item.id">
           <div class="favorite-card glass">
             <div class="favorite-header">
               <div class="favorite-meta-top">
-                <span class="favorite-subject">{{ getSubjectName(item.bankId, item.categoryId, item.subjectId) }}</span>
-                <span class="favorite-badge">{{ getBankName(item.bankId) }}</span>
+                <span class="favorite-subject">{{ t(item.meta?.subject) || item.meta?.subject || t('unknown') }}</span>
+                <span class="favorite-badge">{{ t(item.meta?.category) || item.meta?.category || '' }}</span>
               </div>
               <button class="delete-individual-btn" @click="removeFavorite(item.id)">
                 <span class="material-symbols-outlined">close</span>
               </button>
             </div>
-            
-            <p class="favorite-question">{{ item.question }}</p>
-            
+
+            <p class="favorite-question">{{ item.stem }}</p>
+
             <div class="favorite-footer">
-              <span class="favorite-type-tag">答案:{{ item.answer.join('') }}</span>
+              <span class="favorite-type-tag">{{ t('answer') }}: {{ formatAnswer(item.answer) }}</span>
+            </div>
+            <div class="favorite-footer">
+              <span class="favorite-type-tag">{{ item.explanation }}</span>
             </div>
           </div>
         </div>
@@ -72,30 +57,28 @@
         <div class="empty-icon-wrapper">
           <span class="material-symbols-outlined">star_border</span>
         </div>
-        <h3>暂无收藏</h3>
-        <p>在答题时点击星标图标收藏题目</p>
-        <button class="start-btn" @click="goPractice">开始练习</button>
+        <h3>{{ t('noFavorites') }}</h3>
+        <p>{{ t('favoritesDesc') }}</p>
+        <button class="start-btn" @click="goPractice">{{ t('startPractice') }}</button>
       </div>
     </main>
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
-import { useFavorites } from '../../composables/useStorage'
-import atcData from '../../data/data-atc.js'
-import airportData from '../../data/data-airport.js'
+import { useAppStore } from '@/stores/store'
+import { t } from '@/utils/i18n.js'
 
 const router = useRouter()
-const { getAllFavorites, removeFavorite: removeFav, clearAll: clearAllFavorites } = useFavorites()
+const store = useAppStore()
 
-const favoritesList = ref([])
+const favoritesList = computed(() => store.favorites)
 
-const dataMap = {
-  atc: atcData,
-  airport: airportData
-}
+onMounted(() => {
+  store.loadFavorites()
+})
 
 function goBack() {
   router.back()
@@ -105,103 +88,25 @@ function goPractice() {
   router.push('/practice')
 }
 
-function getTypeText(type) {
-  const types = { 
-    single: '单选题', 
-    multiple: '多选题', 
-    boolean: '判断题', 
-    fillin: '填空题', 
-    essay: '简答题',
-    reading: '阅读理解'
-  }
-  return types[type] || '未知题型'
-}
-
-function getBankName(bankId) {
-  return dataMap[bankId]?.name || '未知题库'
-}
-
-function getCategoryName(bankId, categoryId) {
-  return dataMap[bankId]?.children?.[categoryId]?.name || '未知分类'
-}
-
-function getSubjectName(bankId, categoryId, subjectId) {
-  const bank = dataMap[bankId]
-  if (!bank?.children) return '未知科目'
-  const category = bank.children[categoryId]
-  if (!category?.children) return '未知科目'
-  const subject = category.children[subjectId]
-  return subject?.name || '未知科目'
-}
-
-function getBankCount() {
-  const banks = new Set(favoritesList.value.map(f => f.bankId))
-  return banks.size
-}
-
-function getCategoryCount() {
-  const categories = new Set(favoritesList.value.map(f => f.categoryId))
-  return categories.size
-}
-
 function removeFavorite(id) {
-  if (confirm('确定要从收藏夹移除这道题吗？')) {
-    removeFav(id)
-    loadFavorites()
+  if (confirm(t('confirmRemoveFavorite'))) {
+    store.removeFavorite(id)
   }
 }
 
 function clearAll() {
-  if (confirm('确定要清空整个收藏夹吗？此操作不可恢复')) {
-    clearAllFavorites()
-    favoritesList.value = []
+  if (confirm(t('confirmClearFavorites'))) {
+    store.favorites.forEach(q => store.removeFavorite(q.id))
   }
 }
 
-function loadFavorites() {
-  const favorites = getAllFavorites()
-  const ids = favorites.ids || []
-  const meta = favorites.meta || {}
-  
-  const questions = []
-  ids.forEach(id => {
-    const q = findQuestionById(id)
-    if (q) {
-      const m = meta[id] || {}
-      questions.push({
-        ...q,
-        bankId: m.bankId || 'test',
-        categoryId: m.categoryId || 'single_choice',
-        subjectId: m.subjectId || 'single_example',
-        answers: m.answers || []
-      })
-    }
-  })
-  console.log(questions)
-  favoritesList.value = questions
-}
-
-function findQuestionById(id) {
-  for (const bankKey in dataMap) {
-    const bank = dataMap[bankKey]
-    if (!bank.children) continue
-    for (const catKey in bank.children) {
-      const category = bank.children[catKey]
-      if (!category.children) continue
-      for (const subKey in category.children) {
-        const subject = category.children[subKey]
-        if (!subject.questions) continue
-        const q = subject.questions.find(q => q.id === id)
-        if (q) return q
-      }
-    }
+function formatAnswer(answer) {
+  if (!answer) return ''
+  if (Array.isArray(answer)) {
+    return answer.join(', ')
   }
-  return null
+  return answer
 }
-
-onMounted(() => {
-  loadFavorites()
-})
 </script>
 
 <style scoped>
@@ -227,11 +132,9 @@ onMounted(() => {
   left: 0;
   right: 0;
   height: 50%;
-  background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0.25) 0%,
-    rgba(255, 255, 255, 0) 100%
-  );
+  background: linear-gradient(180deg,
+      rgba(255, 255, 255, 0.25) 0%,
+      rgba(255, 255, 255, 0) 100%);
   pointer-events: none;
 }
 
@@ -377,6 +280,7 @@ onMounted(() => {
     opacity: 0;
     transform: translateY(20px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -425,8 +329,8 @@ onMounted(() => {
 }
 
 .delete-individual-btn {
-  width: 32px;
-  height: 32px;
+  width: 25px;
+  height: 25px;
   border: none;
   background: rgba(211, 47, 47, 0.1);
   border-radius: 50%;
@@ -465,10 +369,9 @@ onMounted(() => {
 }
 
 .favorite-type-tag {
-  font-size: var(--font-size-xs);
+  font-size: var(--font-size-md);
   color: var(--warning);
   background: var(--warning-container);
-  padding: 4px 10px;
   border-radius: var(--radius-sm);
   font-weight: var(--font-weight-medium);
 }

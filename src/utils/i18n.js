@@ -35,6 +35,7 @@ const translations = {
     english: "English",
 
     atc: "ATC",
+    airTrafficManagement: "airTrafficManagement",
     airport: "Airport",
     airline: "Airline",
 
@@ -96,6 +97,44 @@ const translations = {
     noExplanation: "No explanation available",
     readingMaterial: "Reading Material",
     correctAnswer: "Correct Answer",
+
+    // Practice Result
+    practiceResult: "Practice Result",
+    awesome: "Awesome!",
+    good: "Good job!",
+    keepGoing: "Keep going!",
+    correct: "Correct",
+    wrong: "Wrong",
+    pending: "Pending",
+    unanswered: "Unanswered",
+    timeUsed: "Time Used",
+    viewWrongQuestions: "View Wrong Questions",
+    practiceAgain: "Practice Again",
+    backToHome: "Back to Home",
+
+    // Wrong Book
+    wrongBook: "Wrong Book",
+    wrongQuestions: "Wrong Questions",
+    repeatedErrors: "Repeated Errors",
+    noWrongQuestions: "No Wrong Questions",
+    wrongQuestionDesc: "Wrong questions will be added automatically",
+    removeWrong: "Remove",
+    clearAll: "Clear All",
+    wrongCount: "Wrong",
+    times: "times",
+    startPractice: "Start Practice",
+    unknown: "Unknown",
+    confirmRemoveWrong: "Remove this question from wrong book?",
+    confirmClearAll: "Clear all wrong questions? This cannot be undone.",
+
+    // Favorites
+    favorites: "Favorites",
+    favoritesCount: "Favorites",
+    noFavorites: "No Favorites",
+    favoritesDesc: "Star questions during practice to add them here",
+    confirmRemoveFavorite: "Remove this question from favorites?",
+    confirmClearFavorites: "Clear all favorites? This cannot be undone.",
+    answer: "Answer",
   },
 
   zh: {
@@ -132,6 +171,7 @@ const translations = {
     professional: "专业题库",
     english: "英文题库",
     atc: "空管",
+    airTrafficManagement: "空中交通管理",
     airport: "机场",
     airline: "航司",
     subject: "科目",
@@ -162,7 +202,7 @@ const translations = {
     lastPractice: "上次练习",
     noPracticeRecord: "还没有练习记录",
     startFirstPractice: "开始你的第一次练习吧",
-    practiced: "已练习",
+    practiced: "练习进度",
 
     // Practice Settings
     practiceSettings: "练习设置",
@@ -196,6 +236,44 @@ const translations = {
     noExplanation: "暂无解析",
     readingMaterial: "阅读材料",
     correctAnswer: "正确答案",
+
+    // Practice Result
+    practiceResult: "答题结果",
+    awesome: "太棒了！",
+    good: "不错哦！",
+    keepGoing: "继续加油！",
+    correct: "正确",
+    wrong: "错误",
+    pending: "待定",
+    unanswered: "未答",
+    timeUsed: "用时",
+    viewWrongQuestions: "查看错题",
+    practiceAgain: "再练一组",
+    backToHome: "返回首页",
+
+    // Wrong Book
+    wrongBook: "错题本",
+    wrongQuestions: "错题数量",
+    repeatedErrors: "重复错误",
+    noWrongQuestions: "暂无错题",
+    wrongQuestionDesc: "答错的题目会自动添加到错题本",
+    removeWrong: "移除",
+    clearAll: "清空全部",
+    wrongCount: "错误",
+    times: "次",
+    startPractice: "开始练习",
+    unknown: "未知",
+    confirmRemoveWrong: "确定要从错题本移除这道题吗？",
+    confirmClearAll: "确定要清空整个错题本吗？此操作不可恢复",
+
+    // Favorites
+    favorites: "收藏夹",
+    favoritesCount: "收藏数量",
+    noFavorites: "暂无收藏",
+    favoritesDesc: "在答题时点击星标图标收藏题目",
+    confirmRemoveFavorite: "确定要从收藏夹移除这道题吗？",
+    confirmClearFavorites: "确定要清空整个收藏夹吗？此操作不可恢复",
+    answer: "答案",
   },
 };
 

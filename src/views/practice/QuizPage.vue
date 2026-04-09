@@ -466,6 +466,10 @@ const checkAnswer = () => {
     }
     answerStatus.value[questionId] = status
     answerChecked.value[questionId] = true
+
+    if (status === 'wrong') {
+      store.addWrongQuestion(question)
+    }
   } else {
     // 复合题型（阅读理解）：检查所有子题
     const subs = question.subs || []
@@ -480,6 +484,14 @@ const checkAnswer = () => {
       let status = 'unanswered'
       if (subAnswer !== undefined && subAnswer !== null) {
         status = getSubQuestionStatus(sub, subAnswer)
+        
+        if (status === 'wrong') {
+          store.addWrongQuestion({
+            ...sub,
+            parentId: questionId,
+            type: sub.type
+          })
+        }
       }
       answerStatus.value[questionId][idx] = status
       answerChecked.value[questionId][idx] = true

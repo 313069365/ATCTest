@@ -78,14 +78,14 @@
       <section class="shortcut-section">
         <h3 class="section-title">快速操作</h3>
         <div class="shortcut-list">
-          <div class="shortcut-item">
+          <div class="shortcut-item" @click="goToWrongBook">
             <div class="shortcut-icon error-bg">
               <span class="material-symbols-outlined">error_outline</span>
             </div>
             <span class="shortcut-label">错题本</span>
             <span class="material-symbols-outlined shortcut-arrow">chevron_right</span>
           </div>
-          <div class="shortcut-item">
+          <div class="shortcut-item" @click="goToFavorites">
             <div class="shortcut-icon tertiary-bg">
               <span class="material-symbols-outlined">bookmark</span>
             </div>
@@ -138,6 +138,17 @@
 </template>
 
 <script setup>
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
+
+function goToWrongBook() {
+  router.push({ name: 'WrongBook' })
+}
+
+function goToFavorites() {
+  router.push({ name: 'Favorites' })
+}
 </script>
 
 <style scoped>
