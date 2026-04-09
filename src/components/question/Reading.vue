@@ -14,7 +14,7 @@
         </div>
       </div>
 
-      <component :is="componentMap[currentSub?.type] || SingleChoice" :question="wrappedSub"
+      <component v-if="wrappedSub" :is="componentMap[currentSub?.type] || SingleChoice" :question="wrappedSub"
         :user-answer="wrappedUserAnswer" :mode="mode" :show-answer="currentSubShowAnswer"
         :disabled="isSubAnswerDisabled" @answer="handleSubAnswer" @check="checkSubAnswer(currentSubIndex)" />
 
@@ -34,7 +34,8 @@
 <script setup>
 import { ref, computed, watch } from 'vue'
 import { t } from '@/utils/i18n.js'
-import { normalizeStatus, getStatusClass, getCurrentStatusClass } from '@/utils/questionStatus'
+import { getStatusClass, getCurrentStatusClass, getAnswerStatus } from '@/utils/questionHandlers'
+import { useQuestionHandler, canAutoCheck, normalizeStatus } from '@/composables/useQuestionHandler'
 import SingleChoice from './SingleChoice.vue'
 import MultipleChoice from './MultipleChoice.vue'
 import BooleanQuestion from './BooleanQuestion.vue'
@@ -96,9 +97,33 @@ const props = defineProps({
 const emit = defineEmits(['answer', 'checkSub', 'next-question'])
 
 const readingExpanded = ref(false)
-// 使用外部传入的子题索引，如果未传入则使用本地状态
 const currentSubIndex = ref(0)
 const subAnswerChecked = ref({})
+
+const isSubAnswerChecked = (index) => {
+  if (props.mode === 'review') return true
+  return subAnswerChecked.value[index] === true
+}
+
+const {
+  practiceMode,
+  showAnswerMode,
+  hasUserAnswer,
+  answerState,
+  displayConfig,
+  shouldAutoCheck,
+  getSubAnswer: useGetSubAnswer,
+  getSubStatus: useGetSubStatus,
+  isComplex
+} = useQuestionHandler({
+  question: computed(() => props.question),
+  practiceMode: computed(() => props.mode),
+  userAnswer: computed(() => props.userAnswer),
+  isChecked: computed(() => isSubAnswerChecked(currentSubIndex.value)),
+  showAnswerMode: computed(() => props.showAnswerMode)
+})
+
+const mode = computed(() => practiceMode.value)
 
 // 监听外部传入的子题索引变化
 watch(() => props.currentSubIndex, (newVal) => {
@@ -129,8 +154,7 @@ const wrappedUserAnswer = computed(() => {
 })
 
 const getSubAnswer = (subIndex) => {
-  if (!props.userAnswer || typeof props.userAnswer !== 'object') return null
-  return props.userAnswer[subIndex]
+  return useGetSubAnswer(subIndex)
 }
 
 const isSubAnswered = (subIndex) => {
@@ -142,30 +166,16 @@ const isSubAnswered = (subIndex) => {
 }
 
 const getSubStatus = (subIndex) => {
-  if (!props.question?.id) return ''
-  // 优先使用 props.answerStatus（从答题卡传递）
-  if (props.answerStatus && props.answerStatus[props.question.id]) {
-    const status = props.answerStatus[props.question.id]
-    if (typeof status === 'object') {
-      return status[subIndex] || ''
-    }
-    return status
-  }
-  // 备用：使用本地 subAnswerChecked
-  const isChecked = subAnswerChecked.value[subIndex]
-  if (!isChecked) return ''
-  // 背题模式不显示状态
-  if (props.mode === 'review') return ''
-  return 'checked'
+  return useGetSubStatus(subIndex)
 }
 
 const getSubNavBtnClass = (subIndex) => {
   const isCurrent = currentSubIndex.value === subIndex
-  const mode = props.mode || 'answer'
+  const currentMode = mode.value || 'answer'
 
   // 当前题目优先返回
   if (isCurrent) {
-    return getCurrentStatusClass('', mode)
+    return getCurrentStatusClass('', currentMode)
   }
 
   // 非当前题目
@@ -178,7 +188,7 @@ const getSubNavBtnClass = (subIndex) => {
   }
 
   // 使用标准状态类名
-  return getStatusClass(status, { isCurrent, mode })
+  return getStatusClass(status, { isCurrent, mode: currentMode })
 }
 
 const hasCurrentSubAnswer = computed(() => {
@@ -215,41 +225,11 @@ const goToSub = (index) => {
 }
 
 // 检查子题答案是否正确（立即模式下使用）
+// 使用统一入口函数判断答案正确性
 const checkSubIsCorrect = (sub, answer) => {
   if (!sub || answer === null || answer === undefined) return false
-  const subType = sub.type
-  const correctAnswer = sub.answer?.[0]
-  
-  if (subType === 'single') {
-    // 单选：比较答案
-    // answer 是数字索引，correctAnswer 是选项文本（如 "C.  ..."）
-    if (typeof answer === 'number') {
-      // 用用户答案的索引获取选项文本
-      const selectedOption = sub.options?.[answer]
-      if (selectedOption && correctAnswer) {
-        // 去掉前缀后比较
-        const selectedText = selectedOption.replace(/^[A-Z]\.\s*/, '').trim()
-        const correctText = correctAnswer.replace(/^[A-Z]\.\s*/, '').trim()
-        return selectedText === correctText
-      }
-    } else if (typeof answer === 'string') {
-      // 如果答案是文本，直接比较
-      const selectedText = answer.replace(/^[A-Z]\.\s*/, '').trim()
-      const correctText = correctAnswer.replace(/^[A-Z]\.\s*/, '').trim()
-      return selectedText === correctText
-    }
-    return false
-  } else if (subType === 'boolean') {
-    // 判断：比较答案
-    return answer === correctAnswer
-  } else if (subType === 'multiple') {
-    // 多选：比较数组
-    if (!Array.isArray(answer) || !Array.isArray(sub.answer)) return false
-    const correctSet = new Set(sub.answer)
-    const answerSet = new Set(answer)
-    return correctSet.size === answerSet.size && [...correctSet].every(x => answerSet.has(x))
-  }
-  return false
+  const status = getAnswerStatus(sub, answer)
+  return status === 'correct'
 }
 
 const handleSubAnswer = (answer) => {
@@ -257,15 +237,16 @@ const handleSubAnswer = (answer) => {
   newAnswer[currentSubIndex.value] = answer
   emit('answer', newAnswer)
 
-  // 立即显示模式下，仅对单选、判断、媒体题自动标记为已检查
-  if (props.mode !== 'review' && props.showAnswerMode === 'immediate') {
-    const canImmediateCheck = currentSub.value ? ['single', 'boolean', 'media'].includes(currentSub.value.type) : false
+  // 立即显示模式下，使用统一入口判断是否自动检查
+  if (mode.value !== 'review' && showAnswerMode.value === 'immediate') {
+    const subType = currentSub.value?.type
+    const canImmediateCheck = subType ? canAutoCheck(subType) : false
     if (canImmediateCheck) {
       subAnswerChecked.value[currentSubIndex.value] = true
 
       // 自动跳转下一题（只有答案正确才跳转）
       if (props.autoJump) {
-        const isCorrect = checkSubIsCorrect(currentSub.value, answer)
+        const isCorrect = checkSubIsCorrect(wrappedSub.value, answer)
         if (isCorrect) {
           setTimeout(() => {
             goToNextSubOrNextQuestion()
@@ -292,12 +273,6 @@ const checkSubAnswer = (index) => {
   emit('checkSub', index)
 }
 
-const isSubAnswerChecked = (index) => {
-  // 背题模式：始终显示答案
-  if (props.mode === 'review') return true
-  return subAnswerChecked.value[index] === true
-}
-
 // 获取当前子题的 showAnswer 状态
 const currentSubShowAnswer = computed(() => {
   return isSubAnswerChecked(currentSubIndex.value)
@@ -305,7 +280,7 @@ const currentSubShowAnswer = computed(() => {
 
 watch(() => props.question, () => {
   currentSubIndex.value = 0
-  readingExpanded.value = true
+  readingExpanded.value = false
   subAnswerChecked.value = {}
 })
 

@@ -73,7 +73,7 @@ const componentMap = {
 }
 
 const rendererComponent = computed(() => {
-  if (!props.question) return null
+  if (!props.question) return SingleChoice // 默认显示单选组件，避免 null
   return componentMap[props.question.type] || SingleChoice
 })
 

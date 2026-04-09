@@ -66,9 +66,9 @@ import QustionNavbar from "@/components/layout/QuestionNavbar.vue";
 import QuestionRenderer from "@/components/question/QuestionRenderer.vue";
 import { useAppStore } from "@/stores/store";
 import { t } from "@/utils/i18n.js";
-import { useAnswerDisplay } from "@/composables/useAnswerDisplay";
-import { canAutoCheck } from "@/utils/questionStatus";
+import { useQuestionHandler } from "@/composables/useQuestionHandler";
 import {
+  canAutoCheck,
   getAnswerStatus,
   savePracticeProgress as saveProgress,
   loadPracticeProgress as loadProgress,
@@ -327,7 +327,7 @@ const isCurrentAnswerChecked = computed(() => {
 });
 
 // 当前题目的答案显示逻辑
-const currentQuestionDisplay = useAnswerDisplay({
+const currentQuestionDisplay = useQuestionHandler({
   practiceMode,
   showAnswerMode: computed(() => practiceData.value?.showAnswerMode),
   question: currentQuestion,

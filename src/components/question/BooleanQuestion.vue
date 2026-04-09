@@ -5,7 +5,7 @@
       <span class="question-type-tag">{{ t(question?.type) }}</span>
       <span class="question-id">{{ t('questionId') }}: {{ question?.id }}</span>
       <button class="fav-btn" :class="{ active: isFavorited }" @click="toggleFavorite">
-        <span class="material-symbols-outlined">{{ isFavorited ? 'kid_star' : 'star' }}</span>
+        <span class="material-symbols-outlined">kid_star</span>
       </button>
     </div>
 
@@ -137,7 +137,7 @@ const isCorrectOption = (index) => {
   const answerStr = props.question.answer[0]
   const isCorrect = answerStr.includes('正') || answerStr.toUpperCase().includes('T')
   const correctIndex = isCorrect ? 0 : 1
-  
+
   if (props.mode === 'review') {
     return index === correctIndex
   }
@@ -185,11 +185,14 @@ const handleSelect = (index) => {
   display: flex;
   align-items: center;
   gap: var(--spacing-md);
-  margin-bottom: var(--spacing-md);
+  padding: var(--spacing-sm) var(--spacing-md);
+  background: #fff;
+  border: 1px solid transparent;
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
 }
 
 .question-type-tag {
-  padding: var(--spacing-xs) var(--spacing-sm);
+  padding: var(--spacing-mn) var(--spacing-sm);
   background: var(--primary-light);
   color: var(--primary);
   border-radius: var(--radius-sm);
@@ -215,6 +218,10 @@ const handleSelect = (index) => {
 
 .fav-btn.active {
   color: var(--warning);
+}
+
+.fav-btn.active .material-symbols-outlined {
+  font-variation-settings: 'FILL' 1;
 }
 
 .question-stem {

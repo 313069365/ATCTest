@@ -207,11 +207,9 @@ const handleSelect = (index) => {
   display: flex;
   align-items: center;
   gap: var(--spacing-md);
-  /* margin-bottom: var(--spacing-md); */
   padding: var(--spacing-sm) var(--spacing-md);
   background: #fff;
   border: 1px solid transparent;
-  /* margin-bottom: var(--spacing-md); */
   border-radius: var(--radius-lg) var(--radius-lg) 0 0;
 }
 
