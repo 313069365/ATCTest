@@ -219,8 +219,7 @@ const checkSubIsCorrect = (sub, answer) => {
   if (!sub || answer === null || answer === undefined) return false
   const subType = sub.type
   const correctAnswer = sub.answer?.[0]
-  console.log('[Reading checkSubIsCorrect]', { subType, correctAnswer, answer, options: sub.options })
-
+  
   if (subType === 'single') {
     // 单选：比较答案
     // answer 是数字索引，correctAnswer 是选项文本（如 "C.  ..."）
@@ -231,7 +230,6 @@ const checkSubIsCorrect = (sub, answer) => {
         // 去掉前缀后比较
         const selectedText = selectedOption.replace(/^[A-Z]\.\s*/, '').trim()
         const correctText = correctAnswer.replace(/^[A-Z]\.\s*/, '').trim()
-        console.log('[Reading] comparing:', { selectedText, correctText, equal: selectedText === correctText })
         return selectedText === correctText
       }
     } else if (typeof answer === 'string') {
@@ -259,30 +257,19 @@ const handleSubAnswer = (answer) => {
   newAnswer[currentSubIndex.value] = answer
   emit('answer', newAnswer)
 
-  console.log('[Reading handleSubAnswer]', {
-    mode: props.mode,
-    showAnswerMode: props.showAnswerMode,
-    autoJump: props.autoJump,
-    subType: currentSub.value?.type,
-    canImmediateCheck: currentSub.value ? ['single', 'boolean', 'media'].includes(currentSub.value.type) : false
-  })
-
   // 立即显示模式下，仅对单选、判断、媒体题自动标记为已检查
   if (props.mode !== 'review' && props.showAnswerMode === 'immediate') {
     const canImmediateCheck = currentSub.value ? ['single', 'boolean', 'media'].includes(currentSub.value.type) : false
-    console.log('[Reading] canImmediateCheck:', canImmediateCheck)
     if (canImmediateCheck) {
       subAnswerChecked.value[currentSubIndex.value] = true
 
       // 自动跳转下一题（只有答案正确才跳转）
       if (props.autoJump) {
         const isCorrect = checkSubIsCorrect(currentSub.value, answer)
-        console.log('[Reading] isCorrect:', isCorrect)
         if (isCorrect) {
           setTimeout(() => {
             goToNextSubOrNextQuestion()
-            console.log('[Reading] auto jump triggered')
-          }, 500);
+          }, 500)
         }
       }
     }
@@ -300,7 +287,6 @@ const goToNextSubOrNextQuestion = () => {
 }
 
 const checkSubAnswer = (index) => {
-  console.log('[Reading checkSubAnswer] index:', index)
   subAnswerChecked.value[index] = true
   // 通知 QuizPage 检查子题答案
   emit('checkSub', index)

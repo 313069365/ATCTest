@@ -144,6 +144,15 @@ const isCorrectOption = (index) => {
   return props.showAnswer && index === correctIndex
 }
 
+// 直接比较答案是否正确（不依赖 showAnswer 状态）
+const checkIsCorrect = (index) => {
+  if (!props.question?.answer || !props.question.answer[0]) return false
+  const answerStr = props.question.answer[0]
+  const isCorrect = answerStr.includes('正') || answerStr.toUpperCase().includes('T')
+  const correctIndex = isCorrect ? 0 : 1
+  return index === correctIndex
+}
+
 const isWrongOption = (index) => {
   if (!props.showAnswer) return false
   if (props.mode === 'review') return false
@@ -157,7 +166,7 @@ const handleSelect = (index) => {
 
   // 自动跳转：答题正确后自动跳下一题
   if (props.autoJump && props.showAnswerMode === 'immediate' && !props.mode?.includes('review')) {
-    const isCorrect = isCorrectOption(index)
+    const isCorrect = checkIsCorrect(index)
     if (isCorrect) {
       setTimeout(() => {
         emit('next-question')

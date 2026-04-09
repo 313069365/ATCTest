@@ -121,15 +121,17 @@ onMounted(async () => {
 
   practiceData.value = history;
   
-  // 从 history.progress.questionIds 获取题目ID，然后需要获取题目数据
-  // 这里简化处理：假设答案数据中包含所有必要信息
-  const answers = history.progress?.answers || {};
+  // 获取科目名称并加载题目数据
+  subjectName.value = history.config?.bank?.subject || '';
+  if (subjectName.value) {
+    await store.loadSubjectQuestions(subjectName.value);
+    bank.value = [...store.rawQuestions];
+  }
   
-  // 尝试从 store 获取题目（需要先加载）
+  const answers = history.progress?.answers || {};
   const questionIds = history.progress?.questionIds || [];
   
   // 如果有题目数据，使用工具函数统计
-  // 否则使用兼容模式从 answers 推断
   if (bank.value.length > 0) {
     const stats = getBatchStats(bank.value, answers)
     correctCount.value = stats.correctCount

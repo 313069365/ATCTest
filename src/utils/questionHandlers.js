@@ -340,11 +340,25 @@ export function getSimpleStats(status) {
 
 /**
  * 复合题统计
- * @param {Array} subs - 子题数组
+ * @param {Object|Array} subs - 答案状态（对象或数组）
  * @returns {Object}
  */
 export function getComplexStats(subs) {
   const stats = { correct: 0, wrong: 0, unknown: 0, unanswered: 0 }
+  
+  // 处理对象格式: { 0: "correct", 1: "wrong" }
+  if (subs && typeof subs === 'object' && !Array.isArray(subs)) {
+    Object.values(subs).forEach(status => {
+      const s = normalizeStatus(status)
+      if (s === 'correct') stats.correct++
+      else if (s === 'wrong') stats.wrong++
+      else if (s === 'unknown') stats.unknown++
+      else stats.unanswered++
+    })
+    return stats
+  }
+  
+  // 处理数组格式: [{ status: "correct" }, ...]
   subs?.forEach(sub => {
     const s = normalizeStatus(sub.status)
     if (s === 'correct') stats.correct++
