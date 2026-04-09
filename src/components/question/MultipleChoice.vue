@@ -38,6 +38,14 @@
       <span class="tip-text">提示：多选题，可选择多个答案</span>
     </div>
 
+    <!-- 检查答案按钮 -->
+    <div v-if="shouldShowCheckBtn" class="check-answer">
+      <button class="check-btn" @click="$emit('check')">
+        <span class="material-symbols-outlined">verified</span>
+        {{ t('checkAnswer') }}
+      </button>
+    </div>
+
     <!-- 4. 答案解析区 -->
     <div v-if="showAnswer" class="answer-section">
       <div class="explanation-section">
@@ -48,14 +56,6 @@
         <div class="explanation-content">
           {{ formattedExplanation }}
         </div>
-      </div>
-
-      <!-- 检查答案按钮 -->
-      <div v-if="shouldShowCheckBtn" class="check-answer">
-        <button class="check-btn" @click="$emit('check')">
-          <span class="material-symbols-outlined">verified</span>
-          {{ t('checkAnswer') }}
-        </button>
       </div>
     </div>
   </div>

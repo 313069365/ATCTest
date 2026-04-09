@@ -36,8 +36,10 @@
       <template v-else>
         <div v-if="currentQuestion">
           <QuestionRenderer :question="currentQuestionWithOptions" :mode="practiceMode"
-            :user-answer="userAnswers[currentQuestion?.id]" :show-answer-mode="practiceData?.showAnswerMode"
+            :user-answer="userAnswers[currentQuestion?.id]" :show-answer="currentQuestionDisplay.shouldShowAnswer.value"
+            :show-answer-mode="practiceData?.showAnswerMode"
             :auto-jump="practiceData?.autoJump" :answerChecked="answerChecked" :answerStatus="answerStatus"
+            :current-sub-index="currentSubIndex"
             @answer="handleAnswer" @next-question="nextQuestion" @checkSub="handleCheckSub" @check="checkAnswer" />
         </div>
 
@@ -345,6 +347,12 @@ const handleAnswer = (answer) => {
   const question = currentQuestion.value
   console.log('[QuizPage handleAnswer] answer:', answer, 'questionId:', question.id)
   userAnswers.value[question.id] = answer
+  // 自动检查答案（立即显示模式）
+  if (currentQuestionDisplay.shouldAutoCheck.value) {
+    setTimeout(() => {
+      checkAnswer()
+    }, 100)
+  }
 };
 
 // 检查答案

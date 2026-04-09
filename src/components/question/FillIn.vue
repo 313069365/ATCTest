@@ -31,6 +31,14 @@
       />
     </div>
 
+    <!-- 检查答案按钮 -->
+    <div v-if="shouldShowCheckBtn" class="check-answer">
+      <button class="check-btn" @click="$emit('check')">
+        <span class="material-symbols-outlined">verified</span>
+        {{ t('checkAnswer') }}
+      </button>
+    </div>
+
     <!-- 4. 答案解析区 -->
     <div v-if="(showAnswer || mode === 'review')" class="answer-section">
       <div class="correct-answer" v-if="question?.answer">
@@ -46,14 +54,6 @@
         <div class="explanation-content">
           {{ formattedExplanation }}
         </div>
-      </div>
-
-      <!-- 检查答案按钮 -->
-      <div v-if="shouldShowCheckBtn" class="check-answer">
-        <button class="check-btn" @click="$emit('check')">
-          <span class="material-symbols-outlined">verified</span>
-          {{ t('checkAnswer') }}
-        </button>
       </div>
     </div>
   </div>

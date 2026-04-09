@@ -48,8 +48,6 @@ defineEmits(['prev', 'next', 'submit'])
   align-items: center;
   justify-content: space-between;
   padding: var(--spacing-sm) 2px;
-  backdrop-filter: blur(30px) saturate(200%);
-  -webkit-backdrop-filter: blur(30px) saturate(200%);
   z-index: var(--z-fixed);
   box-sizing: border-box;
   overflow: hidden;

@@ -7,7 +7,7 @@
           <span class="material-symbols-outlined">description</span>
           <span>{{ t('readingMaterial') || '' }}</span>
           <span class="material-symbols-outlined expand-icon">{{ readingExpanded ? 'expand_less' : 'expand_more'
-            }}</span>
+          }}</span>
         </div>
         <div class="reading-content" v-show="readingExpanded">
           {{ question.media.article }}
@@ -103,14 +103,26 @@ const props = defineProps({
   answerStatus: {
     type: Object,
     default: () => ({})
+  },
+  currentSubIndex: {
+    type: Number,
+    default: 0
   }
 })
 
 const emit = defineEmits(['answer', 'checkSub', 'next-question'])
 
 const readingExpanded = ref(false)
+// 使用外部传入的子题索引，如果未传入则使用本地状态
 const currentSubIndex = ref(0)
 const subAnswerChecked = ref({})
+
+// 监听外部传入的子题索引变化
+watch(() => props.currentSubIndex, (newVal) => {
+  if (newVal !== undefined && newVal !== null) {
+    currentSubIndex.value = newVal
+  }
+}, { immediate: true })
 
 const currentSub = computed(() => {
   if (!props.question.subs || props.question.subs.length === 0) return null
@@ -365,8 +377,8 @@ watch(() => props.userAnswer, (newAnswer) => {
   color: var(--primary);
 }
 
-.sub-nav-btn.active {
-  background: var(--primary);
+.sub-nav-btn.current {
+  background-color: var(--primary);
   border-color: var(--primary);
   color: #fff;
 }

@@ -97,7 +97,7 @@ const props = defineProps({
   }
 })
 
-const emit = defineEmits(['answer'])
+const emit = defineEmits(['answer', 'check'])
 
 // 是否已收藏
 const isFavorited = computed(() => {

@@ -359,6 +359,45 @@ function getSubQuestionBtnClass(qIdx, sqIdx, sq) {
   cursor: pointer;
 }
 
+.sub-question-grid .sub-question-btn.correct {
+  background: var(--success);
+  color: #fff;
+}
+
+.sub-question-grid .sub-question-btn.wrong {
+  background: var(--error);
+  color: #fff;
+}
+
+.sub-question-grid .sub-question-btn.unknown {
+  background: var(--warning);
+  color: #181c1f;
+}
+
+.sub-question-grid .sub-question-btn.current {
+  background: var(--primary);
+  border: 3px solid var(--primary);
+  color: #fff;
+}
+
+.sub-question-grid .sub-question-btn.current-correct {
+  background: var(--success);
+  border: 3px solid var(--primary);
+  color: #fff;
+}
+
+.sub-question-grid .sub-question-btn.current-wrong {
+  background: var(--error);
+  border: 3px solid var(--primary);
+  color: #fff;
+}
+
+.sub-question-grid .sub-question-btn.current-unknown {
+  background: var(--warning);
+  border: 3px solid var(--primary);
+  color: #181c1f;
+}
+
 .question-list .question-btn {
   min-width: 50px;
   aspect-ratio: 1;
