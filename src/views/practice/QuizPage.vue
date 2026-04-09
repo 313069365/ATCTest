@@ -70,33 +70,11 @@
       </div>
     </main>
 
-    <QustionNavbar :prevDisabled="currentIndex === 0" :isLast="currentIndex === bank.length - 1" @prev="
-      () => {
-        if (currentIndex > 0) {
-          currentIndex--;
-          resetQuestionState();
-        }
-      }
-    " @next="nextQuestion" @submit="
-      () => {
-        router.push({
-          name: 'PracticeResult',
-          query: { practiceData: JSON.stringify(practiceData) },
-        });
-      }
-    " />
+    <QustionNavbar :prevDisabled="currentIndex === 0" :isLast="currentIndex === bank.length - 1" @prev="prevQuestion"
+      @next="nextQuestion" @submit="finishQuiz" />
     <AnswerCard v-if="showAnswerCard" :questions="bank" :currentIndex="currentIndex" :currentSubIndex="currentSubIndex"
       :settings="practiceData" :answerChecked="answerChecked" :answerStatus="answerStatus" :userAnswers="userAnswers"
-      @close="closeAnswerCard" @exit="exitQuiz" @go="
-        (idx, sqIdx) => {
-          currentIndex = idx;
-          if (sqIdx !== undefined) {
-            currentSubIndex = sqIdx;
-          }
-          resetQuestionState();
-          closeAnswerCard();
-        }
-      " />
+      @close="closeAnswerCard" @exit="exitQuiz" @go="gotoQuesitonIdx" />
   </div>
 </template>
 
@@ -322,6 +300,27 @@ const exitQuiz = () => {
     router.push({ name: "Practice" });
   }
 };
+
+const finishQuiz = () => {
+  if (confirm("确定完成答题并退出吗？")) {
+    // 保存当前进度再退出
+    addPracticeHistory();
+    router.push({
+      name: "PracticeResult",
+      query: { practiceData: JSON.stringify(practiceData.value) },
+    });
+  }
+};
+
+const gotoQuesitonIdx = (idx, sqIdx) => {
+  currentIndex.value = idx;
+  if (sqIdx !== undefined) {
+    currentSubIndex.value = sqIdx;
+  }
+  resetQuestionState();
+  closeAnswerCard();
+
+}
 
 // 练习模式
 const practiceMode = computed(() => {
@@ -692,17 +691,55 @@ const savePracticeProgress = () => {
   })
 };
 
+// 手动添加的
+const addPracticeHistory = () => {
+  const answers = {}
+  Object.keys(userAnswers.value).forEach(questionId => {
+    answers[questionId] = {
+      selected: userAnswers.value[questionId],
+      checked: answerChecked.value[questionId] || false,
+      status: answerStatus.value[questionId] || 'unanswered'
+    }
+  })
+
+  store.addPracticeHistory({
+    config: {
+      bank: {
+        subject: practiceData.value?.subject?.name,
+        category: practiceData.value?.subject?.category,
+        scope: practiceData.value?.subject?.scope
+      },
+      mode: practiceData.value?.practiceMode,
+      questionSort: practiceData.value?.questionSort,
+      optionsSort: practiceData.value?.optionsSort,
+      showAnswerMode: practiceData.value?.showAnswerMode,
+      autoJump: practiceData.value?.autoJump
+    },
+    progress: {
+      currentIndex: currentIndex.value,
+      questionIds: bank.value.map(q => q.id),
+      answers: answers
+    },
+    meta: {
+      timestamp: Date.now(),
+      elapsedSeconds: elapsedSeconds.value
+    }
+  })
+}
+
+// 上一题
+const prevQuestion = () => {
+  if (currentIndex.value > 0) {
+    currentIndex.value--;
+    resetQuestionState();
+  }
+};
+
 // 下一题
 const nextQuestion = () => {
   if (currentIndex.value < bank.value.length - 1) {
     currentIndex.value++;
     resetQuestionState();
-  } else {
-    // 已完成所有题目
-    router.push({
-      name: "PracticeResult",
-      query: { practiceData: JSON.stringify(practiceData.value) },
-    });
   }
 };
 

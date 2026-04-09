@@ -12,7 +12,7 @@
 
     <button v-else class="nav-btn submit" @click="$emit('submit')">
       {{ submitText }}
-      <span v-if="showSubmitIcon" class="material-symbols-outlined">check</span>
+      <span class="material-symbols-outlined">check</span>
     </button>
   </footer>
 </template>
@@ -30,10 +30,6 @@ defineProps({
   submitText: {
     type: String,
     default: '完成'
-  },
-  showSubmitIcon: {
-    type: Boolean,
-    default: false
   }
 })
 

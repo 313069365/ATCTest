@@ -87,7 +87,11 @@ const handleInput = (e) => {
 }
 
 .question-stem {
-  margin-bottom: var(--spacing-lg);
+  padding: var(--spacing-sm) var(--spacing-md);
+  background: #fff;
+  border: 1px solid transparent;
+  margin-bottom: var(--spacing-md);
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
 }
 
 .question-text {

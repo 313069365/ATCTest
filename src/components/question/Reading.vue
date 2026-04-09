@@ -18,8 +18,8 @@
       </div>
 
       <component :is="componentMap[currentSub?.type] || SingleChoice" :question="wrappedSub"
-        :user-answer="wrappedUserAnswer" :mode="mode" :show-answer="currentSubShowAnswer" :disabled="isSubAnswerDisabled"
-        @answer="handleSubAnswer" />
+        :user-answer="wrappedUserAnswer" :mode="mode" :show-answer="currentSubShowAnswer"
+        :disabled="isSubAnswerDisabled" @answer="handleSubAnswer" />
 
       <div class="sub-explanation" v-if="currentSubShowAnswer && currentSub?.explanation">
         <div class="explanation-header">
@@ -32,7 +32,8 @@
       </div>
 
       <!-- 检查答案按钮（答题模式，非立即显示或需要手动检查的题型） -->
-      <div class="sub-check-answer" v-if="mode !== 'review' && hasCurrentSubAnswer && !currentSubShowAnswer && shouldShowCheckBtn">
+      <div class="sub-check-answer"
+        v-if="mode !== 'review' && hasCurrentSubAnswer && !currentSubShowAnswer && shouldShowCheckBtn">
         <button class="check-btn" @click="checkSubAnswer(currentSubIndex)">
           <span class="material-symbols-outlined">verified</span>
           {{ t("checkAnswer") }}
@@ -41,8 +42,8 @@
     </div>
 
     <div class="sub-nav" v-if="question.subs && question.subs.length > 1">
-      <button v-for="(sub, index) in question.subs" :key="index" class="sub-nav-btn"
-        :class="getSubNavBtnClass(index)" @click="goToSub(index)">
+      <button v-for="(sub, index) in question.subs" :key="index" class="sub-nav-btn" :class="getSubNavBtnClass(index)"
+        @click="goToSub(index)">
         {{ index + 1 }}
       </button>
     </div>
@@ -168,21 +169,21 @@ const getSubStatus = (subIndex) => {
 const getSubNavBtnClass = (subIndex) => {
   const isCurrent = currentSubIndex.value === subIndex
   const mode = props.mode || 'answer'
-  
+
   // 当前题目优先返回
   if (isCurrent) {
     return getCurrentStatusClass('', mode)
   }
-  
+
   // 非当前题目
   const status = normalizeStatus(getSubStatus(subIndex))
   const answered = isSubAnswered(subIndex)
-  
+
   // 已作答但未检查
   if (answered && !status) {
     return 'answered'
   }
-  
+
   // 使用标准状态类名
   return getStatusClass(status, { isCurrent, mode })
 }
@@ -224,13 +225,13 @@ const handleSubAnswer = (answer) => {
   const newAnswer = { ...(props.userAnswer || {}) }
   newAnswer[currentSubIndex.value] = answer
   emit('answer', newAnswer)
-  
+
   // 立即显示模式下，仅对单选、判断、媒体题自动标记为已检查
   if (props.mode !== 'review' && props.showAnswerMode === 'immediate') {
     const canImmediateCheck = ['single', 'boolean', 'media'].includes(currentSub.value.type);
     if (canImmediateCheck) {
       subAnswerChecked.value[currentSubIndex.value] = true
-      
+
       // 自动跳转下一题
       if (props.autoJump) {
         setTimeout(() => {

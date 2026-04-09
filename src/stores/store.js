@@ -116,7 +116,7 @@ export const useAppStore = defineStore("app", () => {
     const allQuestions = API.fetchAllQuestions();
 
     const grouped = {};
-    allQuestions.forEach(q => {
+    allQuestions.forEach((q) => {
       const subject = q.meta?.subject;
       if (!subject) return;
       if (!grouped[subject]) grouped[subject] = [];
@@ -124,7 +124,7 @@ export const useAppStore = defineStore("app", () => {
     });
 
     const promises = Object.entries(grouped).map(([subject, questions]) =>
-      bankStorage.setBank(subject, questions)
+      bankStorage.setBank(subject, questions),
     );
 
     await Promise.all(promises);
@@ -281,8 +281,6 @@ export const useAppStore = defineStore("app", () => {
   /**
    * 添加练习历史
    */
-
-  //  unshift 在最前面添加，?? 这个添加时间是否有问题
   function addPracticeHistory(history) {
     practiceHistory.value.unshift({
       ...history,
