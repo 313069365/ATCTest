@@ -1,9 +1,20 @@
 <template>
   <div class="essay-question">
-    <div class="question-stem">
-      <h2 class="question-text">{{ question.stem }}</h2>
+    <!-- 1. 题目信息区 -->
+    <div class="question-meta">
+      <span class="question-type-tag">{{ t(question?.type) }}</span>
+      <span class="question-id">{{ t('questionId') }}: {{ question?.id }}</span>
+      <button class="fav-btn" :class="{ active: isFavorited }" @click="toggleFavorite">
+        <span class="material-symbols-outlined">{{ isFavorited ? 'kid_star' : 'star' }}</span>
+      </button>
     </div>
 
+    <!-- 2. 题干区 -->
+    <div class="question-stem">
+      <h2 class="question-text">{{ question?.stem }}</h2>
+    </div>
+
+    <!-- 3. 作答区 -->
     <div class="answer-input" v-if="mode !== 'review'">
       <textarea
         class="textarea-input"
@@ -24,12 +35,33 @@
       <span class="tip-text">提示：简答题需要人工批改，请输入您的答案</span>
     </div>
 
-    <div class="correct-answer" v-if="(showAnswer || mode === 'review') && question.answer">
-      <div class="answer-header">
-        <span class="material-symbols-outlined">check_circle</span>
-        <span>参考答案</span>
+    <!-- 4. 答案解析区 -->
+    <div v-if="(showAnswer || mode === 'review')" class="answer-section">
+      <div class="correct-answer" v-if="question?.answer">
+        <div class="answer-header">
+          <span class="material-symbols-outlined">check_circle</span>
+          <span>{{ t('correctAnswer') }}</span>
+        </div>
+        <div class="answer-content">{{ question.answer }}</div>
       </div>
-      <div class="answer-content">{{ question.answer }}</div>
+
+      <div class="explanation-section">
+        <div class="explanation-header">
+          <span class="material-symbols-outlined">lightbulb</span>
+          <span>{{ t('explanation') }}</span>
+        </div>
+        <div class="explanation-content">
+          {{ formattedExplanation }}
+        </div>
+      </div>
+
+      <!-- 检查答案按钮 -->
+      <div v-if="shouldShowCheckBtn" class="check-answer">
+        <button class="check-btn" @click="$emit('check')">
+          <span class="material-symbols-outlined">verified</span>
+          {{ t('checkAnswer') }}
+        </button>
+      </div>
     </div>
   </div>
 </template>
@@ -37,6 +69,9 @@
 <script setup>
 import { computed } from 'vue'
 import { t } from '@/utils/i18n.js'
+import { useAppStore } from '@/stores/store'
+
+const store = useAppStore()
 
 const props = defineProps({
   question: {
@@ -58,20 +93,72 @@ const props = defineProps({
   disabled: {
     type: Boolean,
     default: false
+  },
+  showAnswerMode: {
+    type: String,
+    default: 'manual'
+  },
+  autoJump: {
+    type: Boolean,
+    default: false
+  },
+  answerChecked: {
+    type: Object,
+    default: () => ({})
+  },
+  answerStatus: {
+    type: Object,
+    default: () => ({})
   }
 })
 
-const emit = defineEmits(['answer'])
+const emit = defineEmits(['answer', 'check'])
+
+// 是否已收藏
+const isFavorited = computed(() => {
+  if (!props.question) return false
+  return store.favorites.some(q => q.id === props.question.id)
+})
+
+// 切换收藏
+const toggleFavorite = () => {
+  if (!props.question) return
+  if (isFavorited.value) {
+    store.removeFavorite(props.question.id)
+  } else {
+    store.addFavorite(props.question)
+  }
+}
+
+// 是否需要显示检查按钮
+const shouldShowCheckBtn = computed(() => {
+  if (props.mode === 'review') return false
+  if (!props.question) return false
+  if (props.showAnswer) return false
+  
+  const hasAnswer = props.userAnswer && props.userAnswer.trim()
+  if (!hasAnswer) return false
+  
+  return true
+})
+
+// 格式化解析内容
+const formattedExplanation = computed(() => {
+  const explanation = props.question?.explanation
+  if (explanation && explanation.trim()) {
+    return explanation
+  }
+  return t('explanation') + ': 无'
+})
 
 const placeholder = computed(() => props.mode === 'review' ? '' : '请输入您的答案...')
 
 const isCorrect = computed(() => {
-  if (!props.question.answer || !props.userAnswer) return false
+  if (!props.question?.answer || !props.userAnswer) return false
   return props.userAnswer.trim() === props.question.answer.trim()
 })
 
 const isAutoCheckable = computed(() => {
-  // 简答题视为需要人工判断的题型
   return false
 })
 
@@ -84,6 +171,42 @@ const handleInput = (e) => {
 <style scoped>
 .essay-question {
   width: 100%;
+}
+
+.question-meta {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-md);
+}
+
+.question-type-tag {
+  padding: var(--spacing-xs) var(--spacing-sm);
+  background: var(--primary-light);
+  color: var(--primary);
+  border-radius: var(--radius-sm);
+  font-size: var(--font-size-sm);
+}
+
+.question-id {
+  color: var(--text-secondary);
+  font-size: var(--font-size-sm);
+}
+
+.fav-btn {
+  margin-left: auto;
+  padding: var(--spacing-xs);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fav-btn.active {
+  color: var(--warning);
 }
 
 .question-stem {
@@ -108,43 +231,25 @@ const handleInput = (e) => {
 .textarea-input {
   width: 100%;
   padding: var(--spacing-md);
-  font-size: var(--font-size-lg);
-  border: 2px solid var(--border-color-light);
+  font-size: var(--font-size-md);
+  border: 1px solid var(--border-color);
   border-radius: var(--radius-lg);
   background: #fff;
-  outline: none;
   resize: vertical;
   font-family: inherit;
-  transition: border-color 0.2s;
 }
 
 .textarea-input:focus {
+  outline: none;
   border-color: var(--primary);
 }
 
 .textarea-input:disabled {
   background: var(--color-gray-100);
   cursor: not-allowed;
-  opacity: 0.7;
-}
-
-.textarea-input.correct {
-  border-color: var(--success);
-  background: #e6f4ea;
-}
-
-.textarea-input.wrong {
-  border-color: var(--error);
-  background: #fce8e6;
-}
-
-.textarea-input.unknown {
-  border-color: var(--warning);
-  background: #fff9e6;
 }
 
 .answer-tip {
-  margin-bottom: var(--spacing-md);
   padding: var(--spacing-sm);
   background: var(--color-gray-100);
   border-radius: var(--radius-md);
@@ -155,10 +260,15 @@ const handleInput = (e) => {
   color: var(--text-secondary);
 }
 
+.answer-section {
+  margin-top: var(--spacing-lg);
+}
+
 .correct-answer {
   padding: var(--spacing-md);
   background: var(--color-gray-100);
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-md);
+  margin-bottom: var(--spacing-md);
 }
 
 .answer-header {
@@ -171,8 +281,53 @@ const handleInput = (e) => {
 }
 
 .answer-content {
+  font-size: var(--font-size-md);
   color: var(--on-surface);
   line-height: 1.6;
-  white-space: pre-wrap;
+}
+
+.explanation-section {
+  padding: var(--spacing-md);
+  background: var(--color-gray-100);
+  border-radius: var(--radius-md);
+}
+
+.explanation-header {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-sm);
+  color: var(--primary);
+  font-weight: var(--font-weight-semibold);
+}
+
+.explanation-content {
+  font-size: var(--font-size-md);
+  color: var(--on-surface);
+  line-height: 1.6;
+}
+
+.check-answer {
+  margin-top: var(--spacing-md);
+  text-align: center;
+}
+
+.check-answer .check-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-md) var(--spacing-xl);
+  background: var(--primary);
+  color: var(--on-primary);
+  border: none;
+  border-radius: var(--radius-lg);
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-semibold);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.check-answer .check-btn:active {
+  transform: scale(0.98);
 }
 </style>

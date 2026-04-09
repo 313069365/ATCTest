@@ -1,12 +1,23 @@
 <template>
   <div class="multiple-choice">
-    <div class="question-stem">
-      <h2 class="question-text">{{ question.stem }}</h2>
+    <!-- 1. 题目信息区 -->
+    <div class="question-meta">
+      <span class="question-type-tag">{{ t(question?.type) }}</span>
+      <span class="question-id">{{ t('questionId') }}: {{ question?.id }}</span>
+      <button class="fav-btn" :class="{ active: isFavorited }" @click="toggleFavorite">
+        <span class="material-symbols-outlined">{{ isFavorited ? 'kid_star' : 'star' }}</span>
+      </button>
     </div>
 
+    <!-- 2. 题干区 -->
+    <div class="question-stem">
+      <h2 class="question-text">{{ question?.stem }}</h2>
+    </div>
+
+    <!-- 3. 作答区 -->
     <div class="options">
       <button
-        v-for="(option, i) in question.options"
+        v-for="(option, i) in question?.options"
         :key="i"
         class="option-btn"
         :class="{
@@ -26,11 +37,36 @@
     <div class="answer-tip" v-if="mode === 'answer' && !showAnswer">
       <span class="tip-text">提示：多选题，可选择多个答案</span>
     </div>
+
+    <!-- 4. 答案解析区 -->
+    <div v-if="showAnswer" class="answer-section">
+      <div class="explanation-section">
+        <div class="explanation-header">
+          <span class="material-symbols-outlined">lightbulb</span>
+          <span>{{ t('explanation') }}</span>
+        </div>
+        <div class="explanation-content">
+          {{ formattedExplanation }}
+        </div>
+      </div>
+
+      <!-- 检查答案按钮 -->
+      <div v-if="shouldShowCheckBtn" class="check-answer">
+        <button class="check-btn" @click="$emit('check')">
+          <span class="material-symbols-outlined">verified</span>
+          {{ t('checkAnswer') }}
+        </button>
+      </div>
+    </div>
   </div>
 </template>
 
 <script setup>
 import { computed } from 'vue'
+import { t } from '@/utils/i18n.js'
+import { useAppStore } from '@/stores/store'
+
+const store = useAppStore()
 
 const props = defineProps({
   question: {
@@ -52,10 +88,63 @@ const props = defineProps({
   disabled: {
     type: Boolean,
     default: false
+  },
+  showAnswerMode: {
+    type: String,
+    default: 'manual'
+  },
+  autoJump: {
+    type: Boolean,
+    default: false
+  },
+  answerChecked: {
+    type: Object,
+    default: () => ({})
+  },
+  answerStatus: {
+    type: Object,
+    default: () => ({})
   }
 })
 
-const emit = defineEmits(['answer'])
+const emit = defineEmits(['answer', 'check'])
+
+// 是否已收藏
+const isFavorited = computed(() => {
+  if (!props.question) return false
+  return store.favorites.some(q => q.id === props.question.id)
+})
+
+// 切换收藏
+const toggleFavorite = () => {
+  if (!props.question) return
+  if (isFavorited.value) {
+    store.removeFavorite(props.question.id)
+  } else {
+    store.addFavorite(props.question)
+  }
+}
+
+// 是否需要显示检查按钮
+const shouldShowCheckBtn = computed(() => {
+  if (props.mode === 'review') return false
+  if (!props.question) return false
+  if (props.showAnswer) return false
+  
+  const hasAnswer = props.userAnswer !== null && props.userAnswer !== undefined
+  if (!hasAnswer) return false
+  
+  return true // 多选题总是需要手动检查
+})
+
+// 格式化解析内容
+const formattedExplanation = computed(() => {
+  const explanation = props.question?.explanation
+  if (explanation && explanation.trim()) {
+    return explanation
+  }
+  return t('explanation') + ': 无'
+})
 
 const isSelected = (index) => {
   if (props.mode === 'review') return false
@@ -66,24 +155,20 @@ const isSelected = (index) => {
 }
 
 const isCorrectOption = (index) => {
-  if (!props.question.answer || props.question.answer.length === 0) return false
+  if (!props.question?.answer || props.question.answer.length === 0) return false
   
-  // 获取当前选项的原始内容
   const currentOption = props.question.options?.[index]
   if (!currentOption) return false
   const currentOptionText = currentOption.replace(/^[A-Z]\.\s*/, '')
   
-  // 检查答案是否匹配（支持乱序）
   const hasCorrect = props.question.answer.some(ans => {
     const correctAnswerText = String(ans).replace(/^[A-Z]\.\s*/, '')
     return currentOptionText === correctAnswerText
   })
   
-  // 背题模式下显示正确答案
   if (props.mode === 'review') {
     return hasCorrect
   }
-  // 答题模式只在 showAnswer 时显示
   return props.showAnswer && hasCorrect
 }
 
@@ -118,6 +203,42 @@ const handleSelect = (index) => {
 <style scoped>
 .multiple-choice {
   width: 100%;
+}
+
+.question-meta {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-md);
+}
+
+.question-type-tag {
+  padding: var(--spacing-xs) var(--spacing-sm);
+  background: var(--primary-light);
+  color: var(--primary);
+  border-radius: var(--radius-sm);
+  font-size: var(--font-size-sm);
+}
+
+.question-id {
+  color: var(--text-secondary);
+  font-size: var(--font-size-sm);
+}
+
+.fav-btn {
+  margin-left: auto;
+  padding: var(--spacing-xs);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fav-btn.active {
+  color: var(--warning);
 }
 
 .question-stem {
@@ -236,5 +357,54 @@ const handleSelect = (index) => {
 .tip-text {
   font-size: var(--font-size-sm);
   color: var(--text-secondary);
+}
+
+.answer-section {
+  margin-top: var(--spacing-lg);
+}
+
+.explanation-section {
+  padding: var(--spacing-md);
+  background: var(--color-gray-100);
+  border-radius: var(--radius-md);
+}
+
+.explanation-header {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-sm);
+  color: var(--primary);
+  font-weight: var(--font-weight-semibold);
+}
+
+.explanation-content {
+  font-size: var(--font-size-md);
+  color: var(--on-surface);
+  line-height: 1.6;
+}
+
+.check-answer {
+  margin-top: var(--spacing-md);
+  text-align: center;
+}
+
+.check-answer .check-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-md) var(--spacing-xl);
+  background: var(--primary);
+  color: var(--on-primary);
+  border: none;
+  border-radius: var(--radius-lg);
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-semibold);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.check-answer .check-btn:active {
+  transform: scale(0.98);
 }
 </style>

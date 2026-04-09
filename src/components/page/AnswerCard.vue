@@ -52,16 +52,16 @@
 
         <div class="question-list">
           <template v-for="(q, idx) in questions" :key="idx">
-            <template v-if="q.type === 'reading' && q.subs">
+            <template v-if="isComplexQuestion(q)">
               <div class="question-group">
                 <div class="group-header">
-                  <span class="group-title">{{ t('readingMaterial') || '阅读理解' }}: {{ q.id }}</span>
-                </div>
-                <div class="sub-question-grid">
-                  <button v-for="(sq, sqIdx) in q.subs" :key="sqIdx" class="question-btn"
-                    :class="getSubQuestionBtnClass(idx, sqIdx, sq)" @click="$emit('go', idx, sqIdx)">
-                    {{ sqIdx + 1 }}
-                  </button>
+                  <span class="group-title">{{ t('questionId') || '' }}: {{ q.id }}</span>
+                  <div class="sub-question-grid">
+                    <button v-for="(sq, sqIdx) in q.subs" :key="sqIdx" class="sub-question-btn"
+                      :class="getSubQuestionBtnClass(idx, sqIdx, sq)" @click="$emit('go', idx, sqIdx)">
+                      {{ sqIdx + 1 }}
+                    </button>
+                  </div>
                 </div>
               </div>
             </template>
@@ -80,14 +80,7 @@
 <script setup>
 import { computed } from 'vue'
 import { t } from '@/utils/i18n.js'
-
-// 标准化状态
-function normalizeStatus(status) {
-  if (!status) return ''
-  if (status === 'partial') return 'wrong'
-  if (status === 'unchecked') return ''
-  return status
-}
+import { isComplexQuestion, normalizeStatus } from '@/utils/questionHandlers'
 
 const props = defineProps({
   questions: {
@@ -330,7 +323,8 @@ function getSubQuestionBtnClass(qIdx, sqIdx, sq) {
 
 .question-group {
   width: 100%;
-  margin-bottom: var(--spacing-sm);
+
+  /* margin-bottom: var(--spacing-sm); */
 }
 
 .group-header {
@@ -338,28 +332,31 @@ function getSubQuestionBtnClass(qIdx, sqIdx, sq) {
   justify-content: space-between;
   align-items: center;
   padding: var(--spacing-sm);
-  background: var(--surface-variant);
+  background-color: var(--background);
   border-radius: var(--radius-md);
-  margin-bottom: var(--spacing-sm);
 }
 
 .group-title {
-  font-size: 13px;
-  font-weight: 600;
+  font-size: var(--font-size-sm);
+  font-weight: 500;
   color: var(--icon-color);
 }
 
 .sub-question-grid {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
-  padding-left: var(--spacing-sm);
+  gap: var(--spacing-sm);
 }
 
-.sub-question-grid .question-btn {
-  min-width: 45px;
-  font-size: var(--font-size-md);
-  border-radius: 50%;
+.sub-question-grid .sub-question-btn {
+  min-width: 30px;
+  aspect-ratio: 1;
+  border-radius: var(--radius-full);
+  background: var(--color-gray-300);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-bold);
+  color: var(--icon-color);
+  cursor: pointer;
 }
 
 .question-list .question-btn {
@@ -369,7 +366,7 @@ function getSubQuestionBtnClass(qIdx, sqIdx, sq) {
   border: none;
   border-radius: var(--radius-md);
   background: var(--color-gray-300);
-  font-size: var(--font-size-sm);
+  font-size: var(--font-size-md);
   font-weight: var(--font-weight-bold);
   color: var(--icon-color);
   cursor: pointer;

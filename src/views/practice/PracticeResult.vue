@@ -79,6 +79,7 @@ import { ref, computed, onMounted } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import { useAppStore } from "@/stores/store";
 import { t } from "@/utils/i18n.js";
+import { getBatchStats, countQuestions } from "@/utils/questionHandlers";
 
 const router = useRouter();
 const route = useRoute();
@@ -91,11 +92,12 @@ const unknownCount = ref(0);
 const unansweredCount = ref(0);
 const elapsedSeconds = ref(0);
 const subjectName = ref('');
+const totalQuestionCount = ref(0);
+const bank = ref([]);
 
 const accuracy = computed(() => {
-  const total = correctCount.value + wrongCount.value + unknownCount.value;
-  if (total === 0) return 0;
-  return Math.round((correctCount.value / total) * 100);
+  if (totalQuestionCount.value === 0) return 0;
+  return Math.round((correctCount.value / totalQuestionCount.value) * 100);
 });
 
 const formattedTime = computed(() => {
@@ -118,26 +120,47 @@ onMounted(async () => {
   }
 
   practiceData.value = history;
-
+  
+  // 从 history.progress.questionIds 获取题目ID，然后需要获取题目数据
+  // 这里简化处理：假设答案数据中包含所有必要信息
   const answers = history.progress?.answers || {};
-  const totalQuestions = Object.keys(answers).length;
-
-  correctCount.value = 0;
-  wrongCount.value = 0;
-  unknownCount.value = 0;
-  unansweredCount.value = 0;
-
-  Object.values(answers).forEach(ans => {
-    if (ans.status === 'correct') {
-      correctCount.value++;
-    } else if (ans.status === 'wrong') {
-      wrongCount.value++;
-    } else if (ans.status === 'unknown') {
-      unknownCount.value++;
-    } else {
-      unansweredCount.value++;
-    }
-  });
+  
+  // 尝试从 store 获取题目（需要先加载）
+  const questionIds = history.progress?.questionIds || [];
+  
+  // 如果有题目数据，使用工具函数统计
+  // 否则使用兼容模式从 answers 推断
+  if (bank.value.length > 0) {
+    const stats = getBatchStats(bank.value, answers)
+    correctCount.value = stats.correctCount
+    wrongCount.value = stats.wrongCount
+    unknownCount.value = stats.unknownCount
+    unansweredCount.value = stats.unansweredCount
+    totalQuestionCount.value = stats.totalCount
+  } else {
+    // 兼容模式：从 answers 手动统计
+    const flatAnswers = [];
+    Object.entries(answers).forEach(([questionId, data]) => {
+      if (data?.status && typeof data.status === 'object') {
+        // 复合题
+        Object.entries(data.status).forEach(([subIdx, status]) => {
+          flatAnswers.push({ questionId, subIndex: parseInt(subIdx), status })
+        })
+      } else {
+        flatAnswers.push({ questionId, status: data?.status || 'unanswered' })
+      }
+    })
+    
+    flatAnswers.forEach(item => {
+      const s = item.status === 'partial' ? 'wrong' : (item.status || 'unanswered')
+      if (s === 'correct') correctCount.value++
+      else if (s === 'wrong') wrongCount.value++
+      else if (s === 'unknown') unknownCount.value++
+      else unansweredCount.value++
+    })
+    
+    totalQuestionCount.value = flatAnswers.length
+  }
 
   elapsedSeconds.value = history.meta?.elapsedSeconds || 0;
   subjectName.value = history.config?.bank?.subject || '';

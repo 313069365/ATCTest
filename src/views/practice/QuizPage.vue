@@ -16,62 +16,40 @@
           <span class="material-symbols-outlined">timer</span>
           <span>{{ elapsedTimeDisplay }}</span>
         </div>
-        <button class="grid-btn" @click="toggleAnswerCard">
+        <button class="grid-btn" :class="{ active: showAnswerCard }" @click="toggleAnswerCard">
           <span class="material-symbols-outlined">grid_view</span>
         </button>
       </div>
     </header>
 
-    <main class="content">
-      <div class="progress-bar-container">
-        <div class="progress-bar">
-          <div class="progress" :style="{ width: progress + '%' }"></div>
-        </div>
-        <span class="progress-text">{{ currentIndex + 1 }}/{{ bank.length }}</span>
+    <div class="progress-bar-container">
+      <div class="progress-bar">
+        <div class="progress" :style="{ width: progress + '%' }"></div>
       </div>
+      <span class="progress-text">{{ currentIndex + 1 }}/{{ bank.length }}</span>
+    </div>
 
-      <div class="question-container">
-        <div v-if="loading" style="text-align: center; padding: 40px">
-          <p>{{ t("loadingQuestions") }}</p>
-        </div>
-        <template v-else>
-          <div v-if="currentQuestion">
-            <div class="question-meta">
-              <span class="question-type-tag">{{
-                t(currentQuestion.type)
-                }}</span>
-              <span class="question-id">{{ t("questionId") }}: {{ currentQuestion.id }}</span>
-              <button class="fav-btn" :class="{ active: isFavorited }" @click="toggleFavorite">
-                <span class="material-symbols-outlined">{{ isFavorited ? 'kid_star' : 'star' }}</span>
-              </button>
-            </div>
-
-            <QuestionRenderer :question="currentQuestionWithOptions" :mode="practiceMode"
-              :user-answer="userAnswers[currentQuestion?.id]" :show-answer="isCurrentAnswerChecked"
-              :disabled="isCurrentAnswerDisabled" :show-answer-mode="practiceData?.showAnswerMode"
-              :auto-jump="practiceData?.autoJump" :answerChecked="answerChecked" :answerStatus="answerStatus"
-              @answer="handleAnswer" @next-question="nextQuestion" @checkSub="handleCheckSub" />
-
-            <div class="check-answer"
-              v-if="showCheckBtn && hasUserAnswer && practiceMode !== 'review' && currentQuestion?.type !== 'reading' && shouldShowCheckBtn">
-              <button class="check-btn" @click="checkAnswer">
-                <span class="material-symbols-outlined">verified</span>
-                {{ t("checkAnswer") }}
-              </button>
-            </div>
-          </div>
-
-          <div v-else style="text-align: center; padding: 40px">
-            <p>
-              {{ bank.length === 0 ? t("noQuestions") : t("loadingQuestions") }}
-            </p>
-          </div>
-        </template>
+    <main class="question-container">
+      <div v-if="loading" style="text-align: center; padding: 40px">
+        <p>{{ t("loadingQuestions") }}</p>
       </div>
+      <template v-else>
+        <div v-if="currentQuestion">
+          <QuestionRenderer :question="currentQuestionWithOptions" :mode="practiceMode"
+            :user-answer="userAnswers[currentQuestion?.id]" :show-answer-mode="practiceData?.showAnswerMode"
+            :auto-jump="practiceData?.autoJump" :answerChecked="answerChecked" :answerStatus="answerStatus"
+            @answer="handleAnswer" @next-question="nextQuestion" @checkSub="handleCheckSub" @check="checkAnswer" />
+        </div>
+
+        <div v-else style="text-align: center; padding: 40px">
+          <p>{{ bank.length === 0 ? t("noQuestions") : t("loadingQuestions") }}</p>
+        </div>
+      </template>
     </main>
 
     <QustionNavbar :prevDisabled="currentIndex === 0" :isLast="currentIndex === bank.length - 1" @prev="prevQuestion"
       @next="nextQuestion" @submit="finishQuiz" />
+
     <AnswerCard v-if="showAnswerCard" :questions="bank" :currentIndex="currentIndex" :currentSubIndex="currentSubIndex"
       :settings="practiceData" :answerChecked="answerChecked" :answerStatus="answerStatus" :userAnswers="userAnswers"
       @close="closeAnswerCard" @exit="exitQuiz" @go="gotoQuesitonIdx" />
@@ -88,6 +66,14 @@ import { useAppStore } from "@/stores/store";
 import { t } from "@/utils/i18n.js";
 import { useAnswerDisplay } from "@/composables/useAnswerDisplay";
 import { canAutoCheck } from "@/utils/questionStatus";
+import {
+  getAnswerStatus,
+  savePracticeProgress as saveProgress,
+  loadPracticeProgress as loadProgress,
+  unpackProgress,
+  isComplexQuestion,
+  packProgress
+} from "@/utils/questionHandlers";
 
 const router = useRouter();
 const route = useRoute();
@@ -350,102 +336,15 @@ const shouldShowCheckBtn = computed(() => currentQuestionDisplay.shouldShowCheck
 // 是否有用户答案（使用题目 ID 查询）
 const hasUserAnswer = computed(() => currentQuestionDisplay.hasUserAnswer.value)
 
-// 当前题目是否禁用（Reading 题型由内部管理）
-const isCurrentAnswerDisabled = computed(() => {
-  if (!currentQuestion.value) return false;
-  // 背题模式：禁用交互，只能浏览
-  if (practiceMode.value === 'review') return true;
-  // Reading 题型由内部组件管理禁用状态
-  if (currentQuestion.value.type === 'reading') return false;
-  return answerChecked.value[currentQuestion.value.id] || false;
-});
+// 当前题目是否禁用（由 QuestionRenderer 内部管理）
+const isCurrentAnswerDisabled = computed(() => false)
 
-// 是否已收藏
-const isFavorited = computed(() => {
-  if (!currentQuestion.value) return false;
-  return store.favorites.some(q => q.id === currentQuestion.value.id);
-});
-
-// 切换收藏
-const toggleFavorite = () => {
-  if (!currentQuestion.value) return;
-  if (isFavorited.value) {
-    store.removeFavorite(currentQuestion.value.id);
-  } else {
-    store.addFavorite(currentQuestion.value);
-  }
-};
-
-// 处理用户作答
+// 处理用户作答 - 直接保存，不做题型判断
 const handleAnswer = (answer) => {
   if (!currentQuestion.value) return
-
   const question = currentQuestion.value
-  console.log('[QuizPage handleAnswer] answer:', answer, 'type:', question.type)
-
-  // 保存用户答案 - 过滤并清理旧的对象格式
-  if (question.type === 'reading') {
-    // Reading 组件已经传入了完整对象 {0: 2}，直接使用
-    // 如果 answer 是对象，直接合并；如果是数字才需要构建
-    let cleanAnswers = {}
-
-    if (typeof answer === 'object' && answer !== null) {
-      // 传入的是完整对象，直接使用
-      cleanAnswers = { ...answer }
-    } else {
-      // 数字格式：构建对象
-      const existing = userAnswers.value[question.id] || {}
-      console.log('[QuizPage handleAnswer] existing:', existing)
-
-      // 过滤：只保留数字格式的值
-      Object.entries(existing).forEach(([key, val]) => {
-        if (typeof val === 'number' && !isNaN(val)) {
-          cleanAnswers[key] = val
-        }
-      })
-
-      // 添加当前答案
-      cleanAnswers[currentSubIndex.value] = answer
-    }
-
-    userAnswers.value[question.id] = cleanAnswers
-    console.log('[QuizPage handleAnswer] saved:', userAnswers.value[question.id])
-  } else {
-    userAnswers.value[question.id] = answer
-    console.log('[QuizPage handleAnswer] saved (non-reading):', userAnswers.value[question.id])
-  }
-
-  // 是否需要自动检查
-  // 条件：不是背题模式 + 立即显示模式 + 题型支持自动批改
-  const shouldAutoCheckForQuestion = (q, subQ = null) => {
-    if (practiceMode.value === 'review') return false
-    if (practiceData.value?.showAnswerMode !== 'immediate') return false
-
-    // 使用子题类型判断（阅读理解），否则使用题目类型
-    const checkType = subQ || q
-    if (!checkType) return false
-    return canAutoCheck(checkType.type)
-  }
-
-  // 判断是否需要自动检查
-  let autoCheck = false
-  if (question.type === 'reading') {
-    autoCheck = shouldAutoCheckForQuestion(question, question.subs?.[currentSubIndex.value])
-  } else {
-    autoCheck = shouldAutoCheckForQuestion(question)
-  }
-
-  // 如果需要自动检查，检查答案
-  if (autoCheck) {
-    checkAnswer()
-
-    // 自动跳转下一题（仅对普通题目）
-    if (question.type !== 'reading' && practiceData.value?.autoJump) {
-      setTimeout(() => {
-        nextQuestion()
-      }, 500);
-    }
-  }
+  console.log('[QuizPage handleAnswer] answer:', answer, 'questionId:', question.id)
+  userAnswers.value[question.id] = answer
 };
 
 // 检查答案
@@ -456,46 +355,33 @@ const checkAnswer = () => {
   const questionId = question.id
   const userAnswer = userAnswers.value[questionId]
 
-  // 简单题型：直接使用现有逻辑
-  if (question.type !== 'reading') {
-    let status = 'unchecked'
-    if (userAnswer === undefined || userAnswer === null || (typeof userAnswer === 'number' && isNaN(userAnswer))) {
-      status = 'unanswered'
-    } else {
-      status = getQuestionStatus(question, userAnswer)
-    }
+  // 使用统一入口函数获取状态
+  const status = getAnswerStatus(question, userAnswer)
+
+  // 根据题型处理
+  if (isComplexQuestion(question)) {
+    // 复合题型：status 是对象 { 0: 'correct', 1: 'wrong' }
     answerStatus.value[questionId] = status
+    answerChecked.value[questionId] = true
+
+    // 添加错题
+    question.subs?.forEach((sub, idx) => {
+      if (status[idx] === 'wrong') {
+        store.addWrongQuestion({
+          ...sub,
+          parentId: questionId,
+          type: sub.type
+        })
+      }
+    })
+  } else {
+    // 简单题型：status 是字符串
+    answerStatus.value[questionId] = status || 'unanswered'
     answerChecked.value[questionId] = true
 
     if (status === 'wrong') {
       store.addWrongQuestion(question)
     }
-  } else {
-    // 复合题型（阅读理解）：检查所有子题
-    const subs = question.subs || []
-
-    // 保存嵌套结构
-    if (!answerStatus.value[questionId]) answerStatus.value[questionId] = {}
-    if (!answerChecked.value[questionId]) answerChecked.value[questionId] = {}
-
-    // 遍历所有子题
-    subs.forEach((sub, idx) => {
-      const subAnswer = userAnswer?.[idx]
-      let status = 'unanswered'
-      if (subAnswer !== undefined && subAnswer !== null) {
-        status = getSubQuestionStatus(sub, subAnswer)
-        
-        if (status === 'wrong') {
-          store.addWrongQuestion({
-            ...sub,
-            parentId: questionId,
-            type: sub.type
-          })
-        }
-      }
-      answerStatus.value[questionId][idx] = status
-      answerChecked.value[questionId][idx] = true
-    })
   }
 
   showCheckBtn.value = false
@@ -503,100 +389,27 @@ const checkAnswer = () => {
   savePracticeProgress()
 }
 
-// 判断普通题目的答案状态
-const getQuestionStatus = (question, userAnswer) => {
-  if (!question.answer || !question.answer[0]) return 'unknown'
-
-  const correctAnswer = question.answer[0].replace(/^[A-Z]\.\s*/, '')
-
-  if (question.type === 'multiple') {
-    // 多选题：比较选项内容
-    if (!Array.isArray(userAnswer)) return 'wrong'
-    const correctSet = new Set(question.answer.map(a => a.replace(/^[A-Z]\.\s*/, '')))
-    const userSet = new Set((userAnswer || []).map(i => {
-      return question.options?.[i]?.replace(/^[A-Z]\.\s*/, '')
-    }).filter(Boolean))
-
-    if (correctSet.size === userSet.size && [...correctSet].every(v => userSet.has(v))) {
-      return 'correct'
-    }
-    if ([...userSet].some(v => !correctSet.has(v))) {
-      return 'wrong'
-    }
-    return 'partial'
-  } else {
-    // 单选、判断、媒体题
-    // options 可能是数组或对象
-    if (typeof userAnswer !== 'number') return 'wrong'
-    let userText
-    if (Array.isArray(question.options)) {
-      userText = question.options?.[userAnswer]?.replace(/^[A-Z]\.\s*/, '')
-    } else {
-      const userOptionKey = String.fromCharCode(65 + userAnswer)
-      userText = question.options?.[userOptionKey]?.replace(/^[A-Z]\.\s*/, '')
-    }
-    return userText === correctAnswer ? 'correct' : 'wrong'
-  }
-}
-
-// 判断阅读理解子题的答案状态
-const getSubQuestionStatus = (subQuestion, userAnswer) => {
-  if (!subQuestion?.answer || !subQuestion.answer[0]) return 'unknown'
-
-  const correctAnswer = subQuestion.answer[0].replace(/^[A-Z]\.\s*/, '')
-
-  if (subQuestion.type === 'multiple') {
-    if (!Array.isArray(userAnswer)) return 'wrong'
-    const correctSet = new Set(subQuestion.answer.map(a => a.replace(/^[A-Z]\.\s*/, '')))
-    const userSet = new Set((userAnswer || []).map(i => {
-      return subQuestion.options?.[i]?.replace(/^[A-Z]\.\s*/, '')
-    }).filter(Boolean))
-
-    if (correctSet.size === userSet.size && [...correctSet].every(v => userSet.has(v))) {
-      return 'correct'
-    }
-    if ([...userSet].some(v => !correctSet.has(v))) {
-      return 'wrong'
-    }
-    return 'partial'
-  } else {
-    // 单选、判断、媒体题
-    if (typeof userAnswer !== 'number') return 'wrong'
-    let userText
-    if (Array.isArray(subQuestion.options)) {
-      userText = subQuestion.options?.[userAnswer]?.replace(/^[A-Z]\.\s*/, '')
-    } else {
-      const userOptionKey = String.fromCharCode(65 + userAnswer)
-      userText = subQuestion.options?.[userOptionKey]?.replace(/^[A-Z]\.\s*/, '')
-    }
-    return userText === correctAnswer ? 'correct' : 'wrong'
-  }
-}
-
-// 处理子题检查事件
+// 加载练习进度（断点续练）
 const handleCheckSub = (subIndex) => {
   const question = currentQuestion.value
-  if (question?.type === 'reading') {
-    const questionId = question.id
-    const userAnswer = userAnswers.value[questionId]
-    const subAnswer = userAnswer?.[subIndex]
+  if (!question) return
 
-    // 判断子题答案状态
-    let status = 'unanswered'
-    if (subAnswer !== undefined && subAnswer !== null) {
-      status = getSubQuestionStatus(question.subs?.[subIndex], subAnswer)
-    }
+  const questionId = question.id
+  const userAnswer = userAnswers.value[questionId]
+  const subAnswer = userAnswer?.[subIndex]
 
-    // 保存状态
-    if (!answerChecked.value[questionId]) {
-      answerChecked.value[questionId] = {}
-    }
-    if (!answerStatus.value[questionId]) {
-      answerStatus.value[questionId] = {}
-    }
-    answerChecked.value[questionId][subIndex] = true
-    answerStatus.value[questionId][subIndex] = status
+  // 使用工具函数获取子题状态
+  const status = getAnswerStatus(question.subs?.[subIndex], subAnswer)
+
+  // 保存状态
+  if (!answerChecked.value[questionId]) {
+    answerChecked.value[questionId] = {}
   }
+  if (!answerStatus.value[questionId]) {
+    answerStatus.value[questionId] = {}
+  }
+  answerChecked.value[questionId][subIndex] = true
+  answerStatus.value[questionId][subIndex] = status
 };
 
 // 加载练习进度（断点续练）
@@ -607,40 +420,19 @@ const loadPracticeProgress = () => {
     const sameSubject = progress.config.bank.subject === subjectDisplay.value;
     if (sameSubject) {
       currentIndex.value = progress.progress.currentIndex || 0;
+      currentSubIndex.value = progress.progress.currentSubIndex || 0;
 
-      // 恢复 answers 数据
-      const answersData = progress.progress.answers || {};
-      const userAnswersMap = {};
-      const answerCheckedMap = {};
-      const answerStatusMap = {};
-      Object.keys(answersData).forEach(questionId => {
-        const data = answersData[questionId];
-        userAnswersMap[questionId] = data.selected;
-
-        const checked = data.checked;
-        const status = data.status;
-
-        // 判断是否为复合题型（从当前题库中查找）
-        const question = bank.value.find(q => q.id === questionId);
-        if (question?.type === 'reading') {
-          // 复合题型：保持嵌套结构
-          // checked/status 可能是 { 0: true/false, 1: 'correct/wrong' }
-          answerCheckedMap[questionId] = checked;
-          answerStatusMap[questionId] = status;
-        } else {
-          // 简单题型：扁平结构
-          answerCheckedMap[questionId] = checked;
-          answerStatusMap[questionId] = status;
-        }
-      });
-      userAnswers.value = userAnswersMap;
-      answerChecked.value = answerCheckedMap;
-      answerStatus.value = answerStatusMap;
+      // 使用工具函数解包数据
+      const { userAnswers: ua, answerChecked: ac, answerStatus: as } =
+        unpackProgress(progress.progress.answers || {})
+      userAnswers.value = ua;
+      answerChecked.value = ac;
+      answerStatus.value = as;
 
       // 恢复当前题目的答案检查状态
       const currentQ = bank.value[currentIndex.value];
       if (currentQ) {
-        const isChecked = currentQ.type === 'reading'
+        const isChecked = isComplexQuestion(currentQ)
           ? answerChecked.value[currentQ.id]?.[currentSubIndex.value]
           : answerChecked.value[currentQ.id]
         if (isChecked) {
@@ -652,15 +444,14 @@ const loadPracticeProgress = () => {
       // 根据恢复的练习模式决定是否显示答案
       const mode = progress.config.mode || practiceData.value?.practiceMode;
       if (mode === 'review') {
-        // 背题模式：所有题目都显示答案
         showCheckBtn.value = false;
         showAnswerExplanation.value = true;
       }
 
       console.log('已恢复练习进度:', {
         currentIndex: currentIndex.value,
+        currentSubIndex: currentSubIndex.value,
         answeredCount: Object.keys(userAnswers.value).length,
-        checkedCount: Object.keys(answerChecked.value).length,
         elapsedSeconds: progress.meta?.elapsedSeconds || 0
       });
     }
@@ -669,17 +460,9 @@ const loadPracticeProgress = () => {
 
 // 保存练习进度
 const savePracticeProgress = () => {
-  const answers = {}
-  Object.keys(userAnswers.value).forEach(questionId => {
-    answers[questionId] = {
-      selected: userAnswers.value[questionId],
-      checked: answerChecked.value[questionId] || false,
-      status: answerStatus.value[questionId] || 'unanswered'
-    }
-  })
-
-  store.savePracticeProgress({
-    config: {
+  // 使用工具函数保存进度
+  saveProgress(
+    {
       bank: {
         subject: practiceData.value?.subject?.name,
         category: practiceData.value?.subject?.category,
@@ -691,28 +474,20 @@ const savePracticeProgress = () => {
       showAnswerMode: practiceData.value?.showAnswerMode,
       autoJump: practiceData.value?.autoJump
     },
-    progress: {
-      currentIndex: currentIndex.value,
-      questionIds: bank.value.map(q => q.id),
-      answers: answers
-    },
-    meta: {
-      timestamp: Date.now(),
-      elapsedSeconds: elapsedSeconds.value
-    }
-  })
+    currentIndex.value,
+    currentSubIndex.value,
+    bank.value,
+    userAnswers.value,
+    answerChecked.value,
+    answerStatus.value,
+    elapsedSeconds.value
+  )
 };
 
 // 手动添加的
 const addPracticeHistory = () => {
-  const answers = {}
-  Object.keys(userAnswers.value).forEach(questionId => {
-    answers[questionId] = {
-      selected: userAnswers.value[questionId],
-      checked: answerChecked.value[questionId] || false,
-      status: answerStatus.value[questionId] || 'unanswered'
-    }
-  })
+  // 使用工具函数打包数据
+  const answers = packProgress(bank.value, userAnswers.value, answerChecked.value, answerStatus.value)
 
   store.addPracticeHistory({
     config: {
@@ -874,6 +649,10 @@ const resetQuestionState = () => {
   font-size: var(--font-size-3xl);
 }
 
+.grid-btn.active .material-symbols-outlined {
+  font-variation-settings: 'FILL' 1;
+}
+
 .progress-bar-container {
   display: flex;
   align-items: center;
@@ -901,10 +680,6 @@ const resetQuestionState = () => {
   color: var(--text-secondary);
   min-width: 50px;
   text-align: right;
-}
-
-.content {
-  /* padding: var(--spacing-md); */
 }
 
 .question-container {

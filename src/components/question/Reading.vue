@@ -1,27 +1,24 @@
 <template>
   <div class="reading-question">
-    <div class="reading-section" v-if="question.media?.article">
-      <div class="reading-header" @click="toggleReading">
-        <span class="material-symbols-outlined">description</span>
-        <span>{{ t('readingMaterial') || '阅读材料' }}</span>
-        <span class="material-symbols-outlined expand-icon">{{ readingExpanded ? 'expand_less' : 'expand_more' }}</span>
-      </div>
-      <div class="reading-content" v-show="readingExpanded">
-        {{ question.media.article }}
-      </div>
-    </div>
 
     <div class="sub-question-section" v-if="question.subs && question.subs.length > 0">
-      <div class="sub-question-header">
-        <span class="sub-index">{{ currentSubIndex + 1 }}.</span>
-        <span class="sub-type-tag">{{ t(currentSub?.type) || currentSub?.type }}</span>
+      <div class="reading-section" v-if="question.media?.article">
+        <div class="reading-header" @click="toggleReading">
+          <span class="material-symbols-outlined">description</span>
+          <span>{{ t('readingMaterial') || '' }}</span>
+          <span class="material-symbols-outlined expand-icon">{{ readingExpanded ? 'expand_less' : 'expand_more'
+            }}</span>
+        </div>
+        <div class="reading-content" v-show="readingExpanded">
+          {{ question.media.article }}
+        </div>
       </div>
 
       <component :is="componentMap[currentSub?.type] || SingleChoice" :question="wrappedSub"
         :user-answer="wrappedUserAnswer" :mode="mode" :show-answer="currentSubShowAnswer"
         :disabled="isSubAnswerDisabled" @answer="handleSubAnswer" />
 
-      <div class="sub-explanation" v-if="currentSubShowAnswer && currentSub?.explanation">
+      <!-- <div class="sub-explanation" v-if="currentSubShowAnswer && currentSub?.explanation">
         <div class="explanation-header">
           <span class="material-symbols-outlined">lightbulb</span>
           <span>{{ t('explanation') }}</span>
@@ -31,14 +28,13 @@
         </div>
       </div>
 
-      <!-- 检查答案按钮（答题模式，非立即显示或需要手动检查的题型） -->
       <div class="sub-check-answer"
         v-if="mode !== 'review' && hasCurrentSubAnswer && !currentSubShowAnswer && shouldShowCheckBtn">
         <button class="check-btn" @click="checkSubAnswer(currentSubIndex)">
           <span class="material-symbols-outlined">verified</span>
           {{ t("checkAnswer") }}
         </button>
-      </div>
+      </div> -->
     </div>
 
     <div class="sub-nav" v-if="question.subs && question.subs.length > 1">
@@ -63,6 +59,7 @@ import Essay from './Essay.vue'
 import FillIn from './FillIn.vue'
 
 const componentMap = {
+
   single: SingleChoice,
   multiple: MultipleChoice,
   boolean: BooleanQuestion,
@@ -111,7 +108,7 @@ const props = defineProps({
 
 const emit = defineEmits(['answer', 'checkSub', 'next-question'])
 
-const readingExpanded = ref(true)
+const readingExpanded = ref(false)
 const currentSubIndex = ref(0)
 const subAnswerChecked = ref({})
 
@@ -123,6 +120,7 @@ const currentSub = computed(() => {
 const wrappedSub = computed(() => {
   if (!currentSub.value) return null
   return {
+    id: currentSub.value.sid,
     stem: currentSub.value.stem,
     options: currentSub.value.options,
     answer: currentSub.value.answer,
@@ -305,8 +303,9 @@ watch(() => props.userAnswer, (newAnswer) => {
 
 .reading-section {
   /* border: 0.5px solid var(--border-color-light); */
-  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+  border-radius: var(--radius-lg);
   overflow: hidden;
+  margin-bottom: var(--spacing-md);
 }
 
 .reading-header {
@@ -331,7 +330,7 @@ watch(() => props.userAnswer, (newAnswer) => {
 }
 
 .reading-content {
-  padding: var(--spacing-md);
+  padding: 0 var(--spacing-md) var(--spacing-md);
   background: var(--background);
   color: var(--on-surface);
   line-height: 1.8;
@@ -343,17 +342,15 @@ watch(() => props.userAnswer, (newAnswer) => {
 .sub-nav {
   display: flex;
   justify-content: center;
-  gap: var(--spacing-sm);
-  padding: var(--spacing-sm) 0;
-  border-bottom: 1px solid var(--border-color-light);
+  gap: var(--spacing-md);
   flex-wrap: wrap;
 }
 
 .sub-nav-btn {
-  min-width: 36px;
-  height: 36px;
+  min-width: 40px;
+  height: 40px;
   padding: 0 var(--spacing-sm);
-  border: 1px solid var(--border-color-light);
+  border: 1px solid var(--color-gray-200);
   border-radius: var(--radius-md);
   background: #fff;
   font-size: var(--font-size-sm);

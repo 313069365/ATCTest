@@ -1,28 +1,15 @@
 <template>
-  <div class="question-renderer">
-    <component
-      :is="rendererComponent"
-      v-bind="allProps"
-      @answer="handleAnswer"
-      @next-question="handleNextQuestion"
-      @checkSub="handleCheckSub"
-    />
-    
-    <div class="explanation-section" v-if="showExplanation">
-      <div class="explanation-header">
-        <span class="material-symbols-outlined">lightbulb</span>
-        <span>{{ t('explanation') }}</span>
-      </div>
-      <div class="explanation-content">
-        {{ question?.explanation || t('noExplanation') }}
-      </div>
-    </div>
-  </div>
+  <component
+    :is="rendererComponent"
+    v-bind="$props"
+    @answer="handleAnswer"
+    @next-question="handleNextQuestion"
+    @checkSub="handleCheckSub"
+  />
 </template>
 
 <script setup>
 import { computed } from 'vue'
-import { t } from '@/utils/i18n.js'
 import SingleChoice from './SingleChoice.vue'
 import MultipleChoice from './MultipleChoice.vue'
 import BooleanQuestion from './BooleanQuestion.vue'
@@ -80,25 +67,9 @@ const componentMap = {
   reading: Reading
 }
 
-const allProps = computed(() => ({
-  question: props.question,
-  mode: props.mode,
-  userAnswer: props.userAnswer,
-  showAnswer: props.showAnswer,
-  disabled: props.disabled,
-  showAnswerMode: props.showAnswerMode,
-  autoJump: props.autoJump,
-  answerChecked: props.answerChecked,
-  answerStatus: props.answerStatus
-}))
-
 const rendererComponent = computed(() => {
   if (!props.question) return null
   return componentMap[props.question.type] || SingleChoice
-})
-
-const showExplanation = computed(() => {
-  return props.showAnswer && props.question?.explanation
 })
 
 const handleAnswer = (answer) => {
@@ -113,31 +84,3 @@ const handleCheckSub = (index) => {
   emit('checkSub', index)
 }
 </script>
-
-<style scoped>
-.question-renderer {
-  width: 100%;
-}
-
-.explanation-section {
-  margin-top: var(--spacing-lg);
-  padding: var(--spacing-md);
-  background: var(--color-gray-100);
-  border-radius: var(--radius-md);
-}
-
-.explanation-header {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-sm);
-  margin-bottom: var(--spacing-sm);
-  color: var(--primary);
-  font-weight: var(--font-weight-semibold);
-}
-
-.explanation-content {
-  font-size: var(--font-size-md);
-  color: var(--on-surface);
-  line-height: 1.6;
-}
-</style>

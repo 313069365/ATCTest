@@ -1,9 +1,20 @@
 <template>
   <div class="boolean-question">
-    <div class="question-stem">
-      <h2 class="question-text">{{ question.stem }}</h2>
+    <!-- 1. 题目信息区 -->
+    <div class="question-meta">
+      <span class="question-type-tag">{{ t(question?.type) }}</span>
+      <span class="question-id">{{ t('questionId') }}: {{ question?.id }}</span>
+      <button class="fav-btn" :class="{ active: isFavorited }" @click="toggleFavorite">
+        <span class="material-symbols-outlined">{{ isFavorited ? 'kid_star' : 'star' }}</span>
+      </button>
     </div>
 
+    <!-- 2. 题干区 -->
+    <div class="question-stem">
+      <h2 class="question-text">{{ question?.stem }}</h2>
+    </div>
+
+    <!-- 3. 作答区 -->
     <div class="options">
       <button class="option-btn" :class="{
         selected: isSelected(0),
@@ -24,11 +35,28 @@
         <span class="option-text">错误</span>
       </button>
     </div>
+
+    <!-- 4. 答案解析区 -->
+    <div v-if="showAnswer" class="answer-section">
+      <div class="explanation-section">
+        <div class="explanation-header">
+          <span class="material-symbols-outlined">lightbulb</span>
+          <span>{{ t('explanation') }}</span>
+        </div>
+        <div class="explanation-content">
+          {{ formattedExplanation }}
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script setup>
 import { computed } from 'vue'
+import { t } from '@/utils/i18n.js'
+import { useAppStore } from '@/stores/store'
+
+const store = useAppStore()
 
 const props = defineProps({
   question: {
@@ -50,10 +78,51 @@ const props = defineProps({
   disabled: {
     type: Boolean,
     default: false
+  },
+  showAnswerMode: {
+    type: String,
+    default: 'manual'
+  },
+  autoJump: {
+    type: Boolean,
+    default: false
+  },
+  answerChecked: {
+    type: Object,
+    default: () => ({})
+  },
+  answerStatus: {
+    type: Object,
+    default: () => ({})
   }
 })
 
 const emit = defineEmits(['answer'])
+
+// 是否已收藏
+const isFavorited = computed(() => {
+  if (!props.question) return false
+  return store.favorites.some(q => q.id === props.question.id)
+})
+
+// 切换收藏
+const toggleFavorite = () => {
+  if (!props.question) return
+  if (isFavorited.value) {
+    store.removeFavorite(props.question.id)
+  } else {
+    store.addFavorite(props.question)
+  }
+}
+
+// 格式化解析内容
+const formattedExplanation = computed(() => {
+  const explanation = props.question?.explanation
+  if (explanation && explanation.trim()) {
+    return explanation
+  }
+  return t('explanation') + ': 无'
+})
 
 const isSelected = (index) => {
   if (props.mode === 'review') return false
@@ -64,17 +133,14 @@ const isSelected = (index) => {
 }
 
 const isCorrectOption = (index) => {
-  if (!props.question.answer || !props.question.answer[0]) return false
+  if (!props.question?.answer || !props.question.answer[0]) return false
   const answerStr = props.question.answer[0]
-  // 检查答案是否包含"正"（中文）或"T"(英文 TRUE)
   const isCorrect = answerStr.includes('正') || answerStr.toUpperCase().includes('T')
-  // 正确答案为 index 0，错误答案为 index 1
   const correctIndex = isCorrect ? 0 : 1
-  // 背题模式下显示正确答案
+  
   if (props.mode === 'review') {
     return index === correctIndex
   }
-  // 答题模式只在 showAnswer 时显示
   return props.showAnswer && index === correctIndex
 }
 
@@ -94,6 +160,42 @@ const handleSelect = (index) => {
 <style scoped>
 .boolean-question {
   width: 100%;
+}
+
+.question-meta {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-md);
+}
+
+.question-type-tag {
+  padding: var(--spacing-xs) var(--spacing-sm);
+  background: var(--primary-light);
+  color: var(--primary);
+  border-radius: var(--radius-sm);
+  font-size: var(--font-size-sm);
+}
+
+.question-id {
+  color: var(--text-secondary);
+  font-size: var(--font-size-sm);
+}
+
+.fav-btn {
+  margin-left: auto;
+  padding: var(--spacing-xs);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fav-btn.active {
+  color: var(--warning);
 }
 
 .question-stem {
@@ -121,7 +223,7 @@ const handleSelect = (index) => {
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: var(--spacing-sm);
+  padding: var(--spacing-md);
   background: #fff;
   border: 1px solid transparent;
   border-radius: var(--radius-lg);
@@ -158,9 +260,9 @@ const handleSelect = (index) => {
 }
 
 .option-marker {
-  width: 40px;
-  height: 40px;
-  border-radius: var(--radius-lg);
+  width: 30px;
+  height: 30px;
+  border-radius: var(--radius-full);
   background: #f1f4f7;
   display: flex;
   align-items: center;
@@ -186,19 +288,34 @@ const handleSelect = (index) => {
   color: #fff;
 }
 
-.option-btn.review.correct {
-  border-color: var(--success);
-  background: #e6f4ea;
-}
-
-.option-btn.review.correct .option-marker {
-  background: var(--success);
-  color: #fff;
-}
-
 .option-text {
   flex: 1;
   font-size: 16px;
   font-weight: 500;
+}
+
+.answer-section {
+  margin-top: var(--spacing-lg);
+}
+
+.explanation-section {
+  padding: var(--spacing-md);
+  background: var(--color-gray-100);
+  border-radius: var(--radius-md);
+}
+
+.explanation-header {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-sm);
+  color: var(--primary);
+  font-weight: var(--font-weight-semibold);
+}
+
+.explanation-content {
+  font-size: var(--font-size-md);
+  color: var(--on-surface);
+  line-height: 1.6;
 }
 </style>
