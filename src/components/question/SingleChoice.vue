@@ -171,9 +171,30 @@ const formatOption = (option) => {
   return option.replace(/^[A-Z]\.\s*/, '')
 }
 
+// 直接比较答案是否正确（不依赖 showAnswer 状态）
+const checkIsCorrect = (index) => {
+  if (!props.question?.answer || !props.question.answer[0]) return false
+  const answerStr = props.question.answer[0]
+  const currentOption = props.question.options?.[index]
+  if (!currentOption) return false
+  const currentOptionText = currentOption.replace(/^[A-Z]\.\s*/, '')
+  const correctAnswerText = answerStr.replace(/^[A-Z]\.\s*/, '')
+  return currentOptionText === correctAnswerText
+}
+
 const handleSelect = (index) => {
   if (props.disabled || props.showAnswer) return
   emit('answer', index)
+
+  // 自动跳转：答题正确后自动跳下一题
+  if (props.autoJump && props.showAnswerMode === 'immediate' && !props.mode?.includes('review')) {
+    const isCorrect = checkIsCorrect(index)
+    if (isCorrect) {
+      setTimeout(() => {
+        emit('next-question')
+      }, 500)
+    }
+  }
 }
 </script>
 

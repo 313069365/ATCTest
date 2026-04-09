@@ -197,6 +197,16 @@ const handleSelect = (index) => {
   }
   
   emit('answer', newAnswer)
+
+  // 自动跳转：答题正确后自动跳下一题（多选需要手动检查，这里延迟检查）
+  if (props.autoJump && props.showAnswerMode === 'immediate' && !props.mode?.includes('review')) {
+    setTimeout(() => {
+      const isCorrect = isCorrectOption(index)
+      if (isCorrect) {
+        emit('next-question')
+      }
+    }, 300)
+  }
 }
 </script>
 

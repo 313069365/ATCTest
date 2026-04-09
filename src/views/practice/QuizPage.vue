@@ -160,9 +160,12 @@ onMounted(async () => {
       }
 
       // 恢复或开始计时
-      if (store.practiceProgress?.meta?.elapsedSeconds) {
+      const isContinue = route.query.continue === 'true';
+      if (isContinue && store.practiceProgress?.meta?.elapsedSeconds) {
+        // 继续练习：恢复之前的计时
         elapsedSeconds.value = store.practiceProgress.meta.elapsedSeconds;
       } else {
+        // 新练习：重置计时器
         elapsedSeconds.value = 0;
       }
       startTimer();

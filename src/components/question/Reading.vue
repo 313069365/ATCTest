@@ -16,25 +16,8 @@
 
       <component :is="componentMap[currentSub?.type] || SingleChoice" :question="wrappedSub"
         :user-answer="wrappedUserAnswer" :mode="mode" :show-answer="currentSubShowAnswer"
-        :disabled="isSubAnswerDisabled" @answer="handleSubAnswer" />
+        :disabled="isSubAnswerDisabled" @answer="handleSubAnswer" @check="checkSubAnswer(currentSubIndex)" />
 
-      <!-- <div class="sub-explanation" v-if="currentSubShowAnswer && currentSub?.explanation">
-        <div class="explanation-header">
-          <span class="material-symbols-outlined">lightbulb</span>
-          <span>{{ t('explanation') }}</span>
-        </div>
-        <div class="explanation-content">
-          {{ currentSub.explanation }}
-        </div>
-      </div>
-
-      <div class="sub-check-answer"
-        v-if="mode !== 'review' && hasCurrentSubAnswer && !currentSubShowAnswer && shouldShowCheckBtn">
-        <button class="check-btn" @click="checkSubAnswer(currentSubIndex)">
-          <span class="material-symbols-outlined">verified</span>
-          {{ t("checkAnswer") }}
-        </button>
-      </div> -->
     </div>
 
     <div class="sub-nav" v-if="question.subs && question.subs.length > 1">
@@ -231,22 +214,76 @@ const goToSub = (index) => {
   currentSubIndex.value = index
 }
 
+// 检查子题答案是否正确（立即模式下使用）
+const checkSubIsCorrect = (sub, answer) => {
+  if (!sub || answer === null || answer === undefined) return false
+  const subType = sub.type
+  const correctAnswer = sub.answer?.[0]
+  console.log('[Reading checkSubIsCorrect]', { subType, correctAnswer, answer, options: sub.options })
+
+  if (subType === 'single') {
+    // 单选：比较答案
+    // answer 是数字索引，correctAnswer 是选项文本（如 "C.  ..."）
+    if (typeof answer === 'number') {
+      // 用用户答案的索引获取选项文本
+      const selectedOption = sub.options?.[answer]
+      if (selectedOption && correctAnswer) {
+        // 去掉前缀后比较
+        const selectedText = selectedOption.replace(/^[A-Z]\.\s*/, '').trim()
+        const correctText = correctAnswer.replace(/^[A-Z]\.\s*/, '').trim()
+        console.log('[Reading] comparing:', { selectedText, correctText, equal: selectedText === correctText })
+        return selectedText === correctText
+      }
+    } else if (typeof answer === 'string') {
+      // 如果答案是文本，直接比较
+      const selectedText = answer.replace(/^[A-Z]\.\s*/, '').trim()
+      const correctText = correctAnswer.replace(/^[A-Z]\.\s*/, '').trim()
+      return selectedText === correctText
+    }
+    return false
+  } else if (subType === 'boolean') {
+    // 判断：比较答案
+    return answer === correctAnswer
+  } else if (subType === 'multiple') {
+    // 多选：比较数组
+    if (!Array.isArray(answer) || !Array.isArray(sub.answer)) return false
+    const correctSet = new Set(sub.answer)
+    const answerSet = new Set(answer)
+    return correctSet.size === answerSet.size && [...correctSet].every(x => answerSet.has(x))
+  }
+  return false
+}
+
 const handleSubAnswer = (answer) => {
   const newAnswer = { ...(props.userAnswer || {}) }
   newAnswer[currentSubIndex.value] = answer
   emit('answer', newAnswer)
 
+  console.log('[Reading handleSubAnswer]', {
+    mode: props.mode,
+    showAnswerMode: props.showAnswerMode,
+    autoJump: props.autoJump,
+    subType: currentSub.value?.type,
+    canImmediateCheck: currentSub.value ? ['single', 'boolean', 'media'].includes(currentSub.value.type) : false
+  })
+
   // 立即显示模式下，仅对单选、判断、媒体题自动标记为已检查
   if (props.mode !== 'review' && props.showAnswerMode === 'immediate') {
-    const canImmediateCheck = ['single', 'boolean', 'media'].includes(currentSub.value.type);
+    const canImmediateCheck = currentSub.value ? ['single', 'boolean', 'media'].includes(currentSub.value.type) : false
+    console.log('[Reading] canImmediateCheck:', canImmediateCheck)
     if (canImmediateCheck) {
       subAnswerChecked.value[currentSubIndex.value] = true
 
-      // 自动跳转下一题
+      // 自动跳转下一题（只有答案正确才跳转）
       if (props.autoJump) {
-        setTimeout(() => {
-          goToNextSubOrNextQuestion()
-        }, 500);
+        const isCorrect = checkSubIsCorrect(currentSub.value, answer)
+        console.log('[Reading] isCorrect:', isCorrect)
+        if (isCorrect) {
+          setTimeout(() => {
+            goToNextSubOrNextQuestion()
+            console.log('[Reading] auto jump triggered')
+          }, 500);
+        }
       }
     }
   }
@@ -263,7 +300,10 @@ const goToNextSubOrNextQuestion = () => {
 }
 
 const checkSubAnswer = (index) => {
+  console.log('[Reading checkSubAnswer] index:', index)
   subAnswerChecked.value[index] = true
+  // 通知 QuizPage 检查子题答案
+  emit('checkSub', index)
 }
 
 const isSubAnswerChecked = (index) => {
@@ -294,14 +334,17 @@ watch(() => props.userAnswer, (newAnswer) => {
     })
     return
   }
-  // 答题模式：有答案的子题视为已检查
-  Object.keys(newAnswer).forEach(subIndex => {
-    const answer = newAnswer[subIndex]
-    if (answer !== null && answer !== undefined && answer !== '') {
-      if (Array.isArray(answer) && answer.length === 0) return
-      subAnswerChecked.value[subIndex] = true
-    }
-  })
+  // 立即显示模式：有答案的子题视为已检查
+  if (props.showAnswerMode === 'immediate') {
+    Object.keys(newAnswer).forEach(subIndex => {
+      const answer = newAnswer[subIndex]
+      if (answer !== null && answer !== undefined && answer !== '') {
+        if (Array.isArray(answer) && answer.length === 0) return
+        subAnswerChecked.value[subIndex] = true
+      }
+    })
+  }
+  // 按需显示模式：不自动标记，等待用户点击检查按钮
 }, { immediate: true, deep: true })
 </script>
 

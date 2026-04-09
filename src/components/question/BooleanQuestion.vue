@@ -154,6 +154,16 @@ const isWrongOption = (index) => {
 const handleSelect = (index) => {
   if (props.disabled || props.showAnswer) return
   emit('answer', index)
+
+  // 自动跳转：答题正确后自动跳下一题
+  if (props.autoJump && props.showAnswerMode === 'immediate' && !props.mode?.includes('review')) {
+    const isCorrect = isCorrectOption(index)
+    if (isCorrect) {
+      setTimeout(() => {
+        emit('next-question')
+      }, 500)
+    }
+  }
 }
 </script>
 
