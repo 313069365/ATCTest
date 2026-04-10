@@ -41,8 +41,7 @@
 
           <div class="question-actions">
             <button class="mark-btn" :class="{ active: markedQuestions.has(currentQuestion.id) }" @click="toggleMark">
-              <span class="material-symbols-outlined">{{ markedQuestions.has(currentQuestion.id) ? 'bookmark' :
-                'bookmark_border' }}</span>
+              <span class="material-symbols-outlined">bookmark</span>
               <span class="mark-text">{{ markedQuestions.has(currentQuestion.id) ? t('marked') : t('mark') }}</span>
             </button>
           </div>
@@ -231,18 +230,19 @@ const autoSubmit = () => {
   // 每题默认2分，计算用户得分
   const defaultScore = 2
   const userScore = correctCount * defaultScore
+  const examResult = {
+    paperId: paper.value.id,
+    totalQuestions: questionCount,
+    correctCount,
+    totalScore,
+    userScore,
+    elapsedTime: elapsedSeconds.value
+  }
 
   // 跳转到结果页
   router.push({
     path: '/exam/result',
-    query: {
-      paperId: paper.value.id,
-      totalQuestions: questionCount,
-      correctCount,
-      totalScore,
-      userScore,
-      elapsedTime: elapsedSeconds.value
-    }
+    query: examResult
   })
 }
 
@@ -419,5 +419,10 @@ const checkAnswer = (question, userAnswer) => {
 
 .mark-btn .material-symbols-outlined {
   font-size: 18px;
+}
+
+.mark-btn.active .material-symbols-outlined {
+  font-size: 18px;
+  font-variation-settings: 'FILL' 1;
 }
 </style>

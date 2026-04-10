@@ -22,7 +22,7 @@
           <div class="picker-list">
             <div v-for="scope in getScopes(selection.category)" :key="scope" class="picker-item"
               :class="{ active: selection.scope === scope }" @click="selectScope(scope)">
-              {{ formatScope(scope) }}
+              {{ t(scope) }}
             </div>
             <div class="picker-placeholder" v-if="!selection.category">{{ t('selectCategoryFirst') }}</div>
           </div>
@@ -121,9 +121,6 @@ function getSubjects(category, scope) {
     .map(([name, info]) => ({ name, count: info.count }))
 }
 
-function formatScope(scope) {
-  return t(scope) || scope
-}
 
 function selectCategory(key) {
   const store = useAppStore()
@@ -255,7 +252,10 @@ function handleConfirm() {
 }
 
 .picker-list {
-  padding: var(--spacing-sm);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-mn);
+  padding: var(--spacing-mn);
   overflow-y: auto;
 }
 
