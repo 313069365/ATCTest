@@ -18,26 +18,34 @@
     <div class="options">
       <button class="option-btn" :class="{
         selected: isSelected(0),
-        correct: showAnswer && isCorrectOption(0),
-        wrong: showAnswer && isWrongOption(0),
+        correct: shouldShowAnswer && isCorrectOption(0),
+        wrong: shouldShowAnswer && isWrongOption(0),
         review: mode === 'review'
-      }" @click="handleSelect(0)" :disabled="disabled || (showAnswer && mode !== 'review')">
+      }" @click="handleSelect(0)" :disabled="disabled || (shouldShowAnswer && mode !== 'review')">
         <span class="option-marker">T</span>
         <span class="option-text">正确</span>
       </button>
       <button class="option-btn" :class="{
         selected: isSelected(1),
-        correct: showAnswer && isCorrectOption(1),
-        wrong: showAnswer && isWrongOption(1),
+        correct: shouldShowAnswer && isCorrectOption(1),
+        wrong: shouldShowAnswer && isWrongOption(1),
         review: mode === 'review'
-      }" @click="handleSelect(1)" :disabled="disabled || (showAnswer && mode !== 'review')">
+      }" @click="handleSelect(1)" :disabled="disabled || (shouldShowAnswer && mode !== 'review')">
         <span class="option-marker">F</span>
         <span class="option-text">错误</span>
       </button>
     </div>
 
+    <!-- 检查答案按钮 -->
+    <div v-if="shouldShowCheckBtn" class="check-answer">
+      <button class="check-btn" @click="$emit('check')">
+        <span class="material-symbols-outlined">verified</span>
+        {{ t('checkAnswer') }}
+      </button>
+    </div>
+
     <!-- 4. 答案解析区 -->
-    <div v-if="showAnswer" class="answer-section">
+    <div v-if="shouldShowAnswer" class="answer-section">
       <div class="explanation-section">
         <div class="explanation-header">
           <span class="material-symbols-outlined">lightbulb</span>
@@ -55,6 +63,7 @@
 import { computed } from 'vue'
 import { t } from '@/utils/i18n.js'
 import { useAppStore } from '@/stores/store'
+import { useQuestionHandler } from '@/composables/useQuestionHandler'
 
 const store = useAppStore()
 
@@ -99,6 +108,17 @@ const props = defineProps({
 
 const emit = defineEmits(['answer', 'check'])
 
+const {
+  shouldShowCheckBtn,
+  shouldShowAnswer
+} = useQuestionHandler({
+  question: computed(() => props.question),
+  practiceMode: computed(() => props.mode),
+  showAnswerMode: computed(() => props.showAnswerMode),
+  userAnswer: () => props.userAnswer,
+  isChecked: () => props.showAnswer
+})
+
 // 是否已收藏
 const isFavorited = computed(() => {
   if (!props.question) return false
@@ -141,7 +161,7 @@ const isCorrectOption = (index) => {
   if (props.mode === 'review') {
     return index === correctIndex
   }
-  return props.showAnswer && index === correctIndex
+  return shouldShowAnswer.value && index === correctIndex
 }
 
 // 直接比较答案是否正确（不依赖 showAnswer 状态）
@@ -154,14 +174,14 @@ const checkIsCorrect = (index) => {
 }
 
 const isWrongOption = (index) => {
-  if (!props.showAnswer) return false
+  if (!shouldShowAnswer.value) return false
   if (props.mode === 'review') return false
   if (!isSelected(index)) return false
   return !isCorrectOption(index)
 }
 
 const handleSelect = (index) => {
-  if (props.disabled || props.showAnswer) return
+  if (props.disabled || shouldShowAnswer.value) return
   emit('answer', index)
 
   // 自动跳转：答题正确后自动跳下一题
@@ -343,5 +363,29 @@ const handleSelect = (index) => {
   font-size: var(--font-size-md);
   color: var(--on-surface);
   line-height: 1.6;
+}
+
+.check-answer {
+  margin-top: var(--spacing-md);
+  text-align: center;
+}
+
+.check-answer .check-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-sm) var(--spacing-md);
+  background: var(--background);
+  color: var(--primary);
+  border: var(--primary) 1px solid;
+  border-radius: var(--radius-lg);
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-semibold);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.check-answer .check-btn:active {
+  transform: scale(0.98);
 }
 </style>

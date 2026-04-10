@@ -15,8 +15,8 @@
       </div>
 
       <component v-if="wrappedSub" :is="componentMap[currentSub?.type] || SingleChoice" :question="wrappedSub"
-        :user-answer="wrappedUserAnswer" :mode="mode" :show-answer="currentSubShowAnswer"
-        :disabled="isSubAnswerDisabled" @answer="handleSubAnswer" @check="checkSubAnswer(currentSubIndex)" />
+        :user-answer="props.userAnswer?.[currentSubIndex]" :mode="mode" :show-answer="currentSubShowAnswer"
+        :show-answer-mode="showAnswerMode" :disabled="isSubAnswerDisabled" @answer="handleSubAnswer" @check="checkSubAnswer(currentSubIndex)" />
 
     </div>
 
@@ -105,33 +105,6 @@ const isSubAnswerChecked = (index) => {
   return subAnswerChecked.value[index] === true
 }
 
-const {
-  practiceMode,
-  showAnswerMode,
-  hasUserAnswer,
-  answerState,
-  displayConfig,
-  shouldAutoCheck,
-  getSubAnswer: useGetSubAnswer,
-  getSubStatus: useGetSubStatus,
-  isComplex
-} = useQuestionHandler({
-  question: computed(() => props.question),
-  practiceMode: computed(() => props.mode),
-  userAnswer: computed(() => props.userAnswer),
-  isChecked: computed(() => isSubAnswerChecked(currentSubIndex.value)),
-  showAnswerMode: computed(() => props.showAnswerMode)
-})
-
-const mode = computed(() => practiceMode.value)
-
-// 监听外部传入的子题索引变化
-watch(() => props.currentSubIndex, (newVal) => {
-  if (newVal !== undefined && newVal !== null) {
-    currentSubIndex.value = newVal
-  }
-}, { immediate: true })
-
 const currentSub = computed(() => {
   if (!props.question.subs || props.question.subs.length === 0) return null
   return props.question.subs[currentSubIndex.value]
@@ -149,20 +122,37 @@ const wrappedSub = computed(() => {
   }
 })
 
-const wrappedUserAnswer = computed(() => {
-  return getSubAnswer(currentSubIndex.value)
+const {
+  practiceMode,
+  showAnswerMode,
+  hasUserAnswer,
+  answerState,
+  displayConfig,
+  shouldAutoCheck,
+  shouldShowCheckBtn,
+  getSubAnswer: useGetSubAnswer,
+  getSubStatus: useGetSubStatus,
+  isComplex
+} = useQuestionHandler({
+  question: wrappedSub,
+  practiceMode: computed(() => props.mode),
+  userAnswer: computed(() => props.userAnswer?.[currentSubIndex.value]),
+  isChecked: computed(() => isSubAnswerChecked(currentSubIndex.value)),
+  showAnswerMode: computed(() => props.showAnswerMode)
 })
 
-const getSubAnswer = (subIndex) => {
-  return useGetSubAnswer(subIndex)
-}
+const mode = computed(() => practiceMode.value)
 
 const isSubAnswered = (subIndex) => {
-  const answer = getSubAnswer(subIndex)
+  const answer = props.userAnswer?.[subIndex]
   if (answer === null || answer === undefined) return false
   if (Array.isArray(answer)) return answer.length > 0
   if (typeof answer === 'string') return answer.trim().length > 0
   return !!answer
+}
+
+const getSubAnswer = (subIndex) => {
+  return props.userAnswer?.[subIndex]
 }
 
 const getSubStatus = (subIndex) => {
@@ -193,20 +183,6 @@ const getSubNavBtnClass = (subIndex) => {
 
 const hasCurrentSubAnswer = computed(() => {
   return isSubAnswered(currentSubIndex.value)
-})
-
-// 是否应该显示检查答案按钮
-// - 背题模式：不需要
-// - 按需显示模式：所有题型都需要
-// - 直接显示模式：只有不支持自动批改的题型（多选、填空、简答、翻译）需要
-const shouldShowCheckBtn = computed(() => {
-  if (!currentSub.value) return false
-  if (props.mode === 'review') return false
-  // 按需显示模式
-  if (props.showAnswerMode !== "immediate") return true
-  // 直接显示模式：只有不支持自动批改的题型需要
-  const needsManualCheck = ['multiple', 'fillin', 'essay', 'translation'].includes(currentSub.value.type);
-  return needsManualCheck;
 })
 
 const isSubAnswerDisabled = computed(() => {

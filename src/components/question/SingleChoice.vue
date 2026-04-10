@@ -18,10 +18,10 @@
     <div class="options">
       <button v-for="(option, i) in question?.options" :key="i" class="option-btn" :class="{
         selected: isSelected(i),
-        correct: showAnswer && isCorrectOption(i),
-        wrong: showAnswer && isWrongOption(i),
+        correct: shouldShowAnswer && isCorrectOption(i),
+        wrong: shouldShowAnswer && isWrongOption(i),
         review: mode === 'review'
-      }" @click="handleSelect(i)" :disabled="disabled || (showAnswer && mode !== 'review')">
+      }" @click="handleSelect(i)" :disabled="disabled || (shouldShowAnswer && mode !== 'review')">
         <span class="option-marker">{{ String.fromCharCode(65 + i) }}</span>
         <span class="option-text" v-if="option">{{ formatOption(option) }}</span>
       </button>
@@ -36,7 +36,7 @@
     </div>
 
     <!-- 4. 答案解析区 -->
-    <div v-if="showAnswer" class="answer-section">
+    <div v-if="shouldShowAnswer" class="answer-section">
       <div class="explanation-section">
         <div class="explanation-header">
           <span class="material-symbols-outlined">lightbulb</span>
@@ -54,6 +54,7 @@
 import { computed } from 'vue'
 import { t } from '@/utils/i18n.js'
 import { useAppStore } from '@/stores/store'
+import { useQuestionHandler } from '@/composables/useQuestionHandler'
 
 const store = useAppStore()
 
@@ -98,6 +99,19 @@ const props = defineProps({
 
 const emit = defineEmits(['answer', 'check'])
 
+const handler = useQuestionHandler({
+  question: computed(() => props.question),
+  practiceMode: computed(() => props.mode),
+  showAnswerMode: computed(() => props.showAnswerMode),
+  userAnswer: () => props.userAnswer,
+  isChecked: () => props.showAnswer
+})
+
+const shouldShowCheckBtn = computed(() => handler.shouldShowCheckBtn.value)
+const isOptionsDisabled = computed(() => handler.isOptionsDisabled?.value || false)
+const shouldShowAnswer = computed(() => handler.shouldShowAnswer.value)
+const shouldShowExplanation = computed(() => handler.shouldShowExplanation?.value || false)
+
 // 是否已收藏
 const isFavorited = computed(() => {
   if (!props.question) return false
@@ -113,21 +127,6 @@ const toggleFavorite = () => {
     store.addFavorite(props.question)
   }
 }
-
-// 是否需要显示检查按钮
-const shouldShowCheckBtn = computed(() => {
-  if (props.mode === 'review' || props.mode === 'exam') return false
-  if (!props.question) return false
-  if (props.showAnswer) return false
-
-  const hasAnswer = props.userAnswer !== null && props.userAnswer !== undefined
-  if (!hasAnswer) return false
-
-  if (props.showAnswerMode !== 'immediate') return true
-
-  const type = props.question.type
-  return ['multiple', 'fillin', 'essay'].includes(type)
-})
 
 // 格式化解析内容
 const formattedExplanation = computed(() => {

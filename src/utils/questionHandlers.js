@@ -34,6 +34,17 @@ export const MANUAL_CHECK_TYPES = [
   "reading",
 ];
 
+export const DISPLAY_MODE = {
+  ANSWER: "answer",
+  REVIEW: "review",
+  EXAM: "exam",
+};
+
+export const ANSWER_SHOW_MODE = {
+  IMMEDIATE: "immediate",
+  MANUAL: "manual",
+};
+
 // ==================== 类型判断（原子函数）====================
 
 /**
@@ -587,5 +598,55 @@ export function getBatchStats(questions, answers) {
     wrongCount: wrong,
     unknownCount: unknown,
     unansweredCount: unanswered,
+  };
+}
+
+// ==================== 显示配置 ====================
+
+/**
+ * 获取题目显示配置（统一入口）
+ * @param {string} practiceMode - 练习模式: 'answer' | 'review' | 'exam'
+ * @param {string} showAnswerMode - 答案显示模式: 'immediate' | 'manual'
+ * @param {string} questionType - 题型
+ * @param {Object} options - 其他选项
+ * @param {boolean} options.hasUserAnswer - 是否有用户答案
+ * @param {boolean} options.isChecked - 是否已检查
+ * @param {boolean} options.autoJump - 是否自动跳转
+ * @returns {Object} 完整的显示配置
+ */
+export function getDisplayConfig(
+  practiceMode,
+  showAnswerMode,
+  questionType,
+  options = {},
+) {
+  const {
+    hasUserAnswer = false,
+    isChecked = false,
+    autoJump = false,
+  } = options;
+
+  const isReview = practiceMode === "review";
+  const isExam = practiceMode === "exam";
+  const isImmediate = showAnswerMode === "immediate";
+  const needsManual = needsManualCheck(questionType);
+  const canAuto = canAutoCheck(questionType);
+
+  return {
+    shouldShowMeta: true,
+    shouldShowStem: true,
+    shouldShowMedia: true,
+    shouldShowOptions: !isReview,
+    isOptionsDisabled: isReview || isExam || isChecked,
+    shouldShowInput: !isReview && !isExam,
+    isInputDisabled: isReview || isExam || isChecked,
+    shouldShowAnswer: isReview || isChecked,
+    shouldShowExplanation: isReview || isChecked,
+    shouldShowUserAnswer: isReview || isChecked,
+    shouldShowCheckBtn:
+      !isReview && !isExam && !isChecked && hasUserAnswer && !isImmediate,
+    shouldAutoCheck: !isReview && isImmediate && canAuto,
+    shouldAutoJump: autoJump && canAuto,
+    isComponentDisabled: isReview || isExam,
   };
 }

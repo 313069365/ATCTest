@@ -20,14 +20,14 @@
         type="text"
         class="text-input"
         :class="{
-          correct: showAnswer && isCorrect,
-          wrong: showAnswer && !isCorrect,
-          unknown: showAnswer && !isAutoCheckable
+          correct: shouldShowAnswer && isCorrect,
+          wrong: shouldShowAnswer && !isCorrect,
+          unknown: shouldShowAnswer && !isAutoCheckable
         }"
         :value="userAnswer"
         @input="handleInput"
         :placeholder="placeholder"
-        :disabled="disabled || showAnswer"
+        :disabled="disabled || shouldShowAnswer"
       />
     </div>
 
@@ -40,7 +40,7 @@
     </div>
 
     <!-- 4. 答案解析区 -->
-    <div v-if="(showAnswer || mode === 'review')" class="answer-section">
+    <div v-if="(shouldShowAnswer || mode === 'review')" class="answer-section">
       <div class="correct-answer" v-if="question?.answer">
         <span class="label">{{ t('correctAnswer') }}：</span>
         <span class="answer">{{ question.answer }}</span>
@@ -63,6 +63,7 @@
 import { computed } from 'vue'
 import { t } from '@/utils/i18n.js'
 import { useAppStore } from '@/stores/store'
+import { useQuestionHandler } from '@/composables/useQuestionHandler'
 
 const store = useAppStore()
 
@@ -107,6 +108,17 @@ const props = defineProps({
 
 const emit = defineEmits(['answer', 'check'])
 
+const {
+  shouldShowCheckBtn,
+  shouldShowAnswer
+} = useQuestionHandler({
+  question: computed(() => props.question),
+  practiceMode: computed(() => props.mode),
+  showAnswerMode: computed(() => props.showAnswerMode),
+  userAnswer: () => props.userAnswer,
+  isChecked: () => props.showAnswer
+})
+
 // 是否已收藏
 const isFavorited = computed(() => {
   if (!props.question) return false
@@ -122,18 +134,6 @@ const toggleFavorite = () => {
     store.addFavorite(props.question)
   }
 }
-
-// 是否需要显示检查按钮
-const shouldShowCheckBtn = computed(() => {
-  if (props.mode === 'review' || props.mode === 'exam') return false
-  if (!props.question) return false
-  if (props.showAnswer) return false
-  
-  const hasAnswer = props.userAnswer && props.userAnswer.trim()
-  if (!hasAnswer) return false
-  
-  return true
-})
 
 // 格式化解析内容
 const formattedExplanation = computed(() => {
@@ -156,7 +156,7 @@ const isAutoCheckable = computed(() => {
 })
 
 const handleInput = (e) => {
-  if (props.disabled || props.showAnswer) return
+  if (props.disabled || shouldShowAnswer.value) return
   emit('answer', e.target.value)
 }
 </script>
