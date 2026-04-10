@@ -80,7 +80,7 @@
 <script setup>
 import { computed } from 'vue'
 import { t } from '@/utils/i18n.js'
-import { isComplexQuestion, normalizeStatus } from '@/utils/questionHandlers'
+import { isComplexQuestion, normalizeStatus } from '@/utils/questionConfig'
 
 const props = defineProps({
   questions: {

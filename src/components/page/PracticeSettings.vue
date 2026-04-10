@@ -111,14 +111,11 @@ import { useRouter } from 'vue-router'
 import { watch, reactive } from 'vue'
 import { iconMap } from '@/assets/fonts/IconMaps.js'
 import { t, setLanguage, getLanguage } from '@/utils/i18n.js'
+import { QUESTION_SORT } from '@/utils/questionConfig'
 const router = useRouter()
 
 // 习题顺序配置
-const QUESTIONS_SORT = [
-  'sequence',
-  'reverse',
-  'shuffle'
-]
+const QUESTIONS_SORT = Object.values(QUESTION_SORT)
 
 
 const SHOW_ANSWER_MODE = [
@@ -141,7 +138,7 @@ const emit = defineEmits(['close', 'start'])
 
 // 默认配置
 const DEFAULT_SETTINGS = {
-  questionSort: 'sequence',
+  questionSort: QUESTION_SORT.SEQUENCE,
   optionsSort: false,
   practiceMode: 'answer',
   showAnswerMode: 'immediate',
@@ -173,7 +170,10 @@ const gotopage = () => {
   emit('close')
   router.push({
     path: '/practice/quiz',
-    query: { practiceData: JSON.stringify(practiceData) }
+    query: { 
+      practiceData: JSON.stringify(practiceData),
+      newPractice: 'true'
+    }
   })
 }
 

@@ -79,7 +79,7 @@ import { ref, computed, onMounted } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import { useAppStore } from "@/stores/store";
 import { t } from "@/utils/i18n.js";
-import { getBatchStats, countQuestions } from "@/utils/questionHandlers";
+import { getBatchStats, countQuestions } from "@/utils/questionConfig";
 
 const router = useRouter();
 const route = useRoute();

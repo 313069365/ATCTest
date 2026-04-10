@@ -68,6 +68,7 @@ import { useAppStore } from "@/stores/store";
 import { t } from "@/utils/i18n.js";
 import { useQuestionHandler } from "@/composables/useQuestionHandler";
 import {
+  QUESTION_SORT,
   canAutoCheck,
   getAnswerStatus,
   savePracticeProgress as saveProgress,
@@ -75,7 +76,7 @@ import {
   unpackProgress,
   isComplexQuestion,
   packProgress
-} from "@/utils/questionHandlers";
+} from "@/utils/questionConfig";
 
 const router = useRouter();
 const route = useRoute();
@@ -125,23 +126,33 @@ onMounted(async () => {
 
       // 加载已保存的进度
       const savedProgress = store.practiceProgress;
+      const isContinue = route.query.continue === 'true';
+      const isNewPractice = route.query.newPractice === 'true';
       const isSameSubject = savedProgress?.config?.bank?.subject === subjectName;
 
-      // 排序：优先使用保存的题目顺序
-      if (isSameSubject && savedProgress?.progress?.questionIds && savedProgress.progress.questionIds.length > 0) {
-        // 按保存的题目 ID 顺序恢复
+      // 排序逻辑
+      if (isContinue && isSameSubject && savedProgress?.progress?.questionIds?.length > 0) {
+        // 继续练习：恢复之前保存的顺序
         const savedQuestionIds = savedProgress.progress.questionIds;
         const existingQuestions = new Set(filtered.map(q => q.id));
         const validIds = savedQuestionIds.filter(id => existingQuestions.has(id));
 
         bank.value = validIds.map(id => filtered.find(q => q.id === id)).filter(Boolean);
         console.log("已恢复题目顺序，题数:", bank.value.length);
+      } else if (isNewPractice) {
+        // 新的练习：应用新的排序设置
+        if (questionSort === QUESTION_SORT.SHUFFLE) {
+          filtered = shuffleArray(filtered);
+        } else if (questionSort === QUESTION_SORT.REVERSE) {
+          filtered = [...filtered].reverse();
+        }
+        bank.value = filtered;
       } else {
-        // 新练习：按设置排序
-        if (questionSort === "shuffle") {
-          filtered = filtered.sort(() => Math.random() - 0.5);
-        } else if (questionSort === "reverse") {
-          filtered = filtered.reverse();
+        // 默认行为（无特殊参数）
+        if (questionSort === QUESTION_SORT.SHUFFLE) {
+          filtered = shuffleArray(filtered);
+        } else if (questionSort === QUESTION_SORT.REVERSE) {
+          filtered = [...filtered].reverse();
         }
         bank.value = filtered;
       }
@@ -160,7 +171,6 @@ onMounted(async () => {
       }
 
       // 恢复或开始计时
-      const isContinue = route.query.continue === 'true';
       if (isContinue && store.practiceProgress?.meta?.elapsedSeconds) {
         // 继续练习：恢复之前的计时
         elapsedSeconds.value = store.practiceProgress.meta.elapsedSeconds;
@@ -230,6 +240,16 @@ const stopTimer = () => {
   }
 };
 
+// Fisher-Yates 洗牌算法
+const shuffleArray = (array) => {
+  const arr = [...array];
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+};
+
 // 缓存选项乱序结果
 const cacheShuffledOptions = () => {
   if (!practiceData.value?.optionsSort) return;
@@ -237,7 +257,7 @@ const cacheShuffledOptions = () => {
   shuffledOptionsCache.value = {};
   bank.value.forEach((question, index) => {
     if (question && question.options) {
-      const shuffled = [...question.options].sort(() => Math.random() - 0.5);
+      const shuffled = shuffleArray(question.options);
       shuffledOptionsCache.value[question.id] = shuffled;
     }
   });
@@ -255,7 +275,7 @@ const getQuestionWithShuffledOptions = (question) => {
       return { ...question, options: cached };
     }
     // 如果没有缓存，重新打乱并缓存
-    const shuffled = [...question.options].sort(() => Math.random() - 0.5);
+    const shuffled = shuffleArray(question.options);
     shuffledOptionsCache.value[question.id] = shuffled;
     return { ...question, options: shuffled };
   }

@@ -5,55 +5,31 @@
  * @example
  * import { useQuestionHandler } from '@/composables/useQuestionHandler'
  * const { answerState, displayConfig, shouldAutoCheck } = useQuestionHandler(options)
- *
- * @typedef {Object} QuestionHandlerOptions
- * @property {string|ref} [options.practiceMode] - 练习模式: 'answer' | 'review' | 'practice' | 'exam'
- * @property {string|ref} [options.showAnswerMode] - 答案显示模式: 'immediate' | 'manual'
- * @property {Object|ref} [options.question] - 题目对象
- * @property {any|ref} [options.userAnswer] - 用户答案
- * @property {boolean|ref} [options.isChecked] - 是否已检查
  */
 
-import { computed } from "vue";
+import { computed, isRef } from "vue";
 import {
   isComplexQuestion,
   isComplexType,
-  canAutoCheck as checkAutoCheck,
-  needsManualCheck as checkManualCheck,
+  canAutoCheck,
+  hasUserAnswer as checkHasUserAnswer,
   getAnswerStatus,
-  normalizeStatus as normalizeStatusFn,
   getDisplayConfig,
-  AUTO_CHECK_TYPES,
-  MANUAL_CHECK_TYPES,
-} from "@/utils/questionHandlers";
+  normalizeStatus as normalizeStatusFn,
+  PRACTICE_MODE,
+  SHOW_ANSWER_MODE,
+  ANSWER_STATUS,
+} from "@/utils/questionConfig";
 
 export {
   isComplexQuestion,
   isComplexType,
   getAnswerStatus,
   getDisplayConfig,
-  AUTO_CHECK_TYPES,
-  MANUAL_CHECK_TYPES,
-};
-
-export const ANSWER_STATUS = {
-  CORRECT: "correct",
-  WRONG: "wrong",
-  PARTIAL: "partial",
-  UNCHECKED: "unchecked",
-  UNANSWERED: "unanswered",
-  UNKNOWN: "unknown",
-};
-
-export const PRACTICE_MODE = {
-  ANSWER: "answer",
-  REVIEW: "review",
-  EXAM: "exam",
-};
-
-export const SHOW_ANSWER_MODE = {
-  IMMEDIATE: "immediate",
-  MANUAL: "manual",
+  PRACTICE_MODE,
+  SHOW_ANSWER_MODE,
+  ANSWER_STATUS,
+  canAutoCheck,
 };
 
 export function isCompositeType(questionType) {
@@ -64,7 +40,15 @@ export function normalizeStatus(status) {
   return normalizeStatusFn(status);
 }
 
-export const canAutoCheck = checkAutoCheck;
+/**
+ * 统一参数提取器
+ * 支持 function / Ref / plain value 三种传入方式
+ */
+function getValue(val) {
+  if (typeof val === "function") return val();
+  if (isRef(val)) return val.value;
+  return val;
+}
 
 /**
  * 创建题型处理 hook
@@ -73,32 +57,19 @@ export const canAutoCheck = checkAutoCheck;
  */
 export function useQuestionHandler(options) {
   const practiceMode = computed(
-    () => options.practiceMode?.value || options.practiceMode || "answer",
+    () => getValue(options.practiceMode) || PRACTICE_MODE.ANSWER,
   );
-  const showAnswerMode = computed(() => {
-    const val = options.showAnswerMode?.value ?? options.showAnswerMode;
-    return val || "manual";
-  });
-  const question = computed(
-    () => options.question?.value || options.question || null,
+  const showAnswerMode = computed(
+    () => getValue(options.showAnswerMode) || SHOW_ANSWER_MODE.MANUAL,
   );
-  const userAnswer = computed(() => {
-    const val = options.userAnswer;
-    if (typeof val === "function") return val();
-    return val?.value ?? val ?? null;
-  });
-  const isChecked = computed(() => {
-    const val = options.isChecked;
-    if (typeof val === "function") return val();
-    return val?.value ?? val ?? false;
-  });
+  const question = computed(() => getValue(options.question) || null);
+  const userAnswer = computed(() => getValue(options.userAnswer) ?? null);
+  const isChecked = computed(() => getValue(options.isChecked) ?? false);
 
   const isReviewMode = computed(
     () => practiceMode.value === PRACTICE_MODE.REVIEW,
   );
-  const isExamMode = computed(
-    () => practiceMode.value === PRACTICE_MODE.EXAM,
-  );
+  const isExamMode = computed(() => practiceMode.value === PRACTICE_MODE.EXAM);
   const isAnswerMode = computed(
     () => practiceMode.value === PRACTICE_MODE.ANSWER,
   );
@@ -107,66 +78,25 @@ export function useQuestionHandler(options) {
   );
   const isComplex = computed(() => isComplexQuestion(question.value));
 
-  const hasUserAnswer = computed(() => {
-    try {
-      const answer = userAnswer.value;
-      if (answer === null || answer === undefined) return false;
-
-      if (typeof answer === "object") {
-        return Object.values(answer).some((val) => {
-          if (val === null || val === undefined) return false;
-          if (typeof val === "string") return val.trim().length > 0;
-          if (Array.isArray(val)) return val.length > 0;
-          if (typeof val === "number") return val !== null;
-          return !!val;
-        });
-      }
-
-      if (typeof answer === "string") return answer.trim().length > 0;
-      if (typeof answer === "number") return answer !== null && answer !== undefined;
-      if (Array.isArray(answer)) return answer.length > 0;
-
-      return !!answer;
-    } catch {
-      return false;
-    }
-  });
+  const hasUserAnswer = computed(() => checkHasUserAnswer(userAnswer.value));
 
   const answerState = computed(() => {
     try {
       const q = question.value;
       const ans = userAnswer.value;
-      if (!q) return "unanswered";
+      if (!q) return ANSWER_STATUS.UNANSWERED;
       return getAnswerStatus(q, ans);
     } catch {
-      return "unknown";
+      return ANSWER_STATUS.UNKNOWN;
     }
-  });
-
-  const shouldShowCheckBtn = computed(() => {
-    if (isReviewMode.value) return false;
-    if (isExamMode.value) return false;
-    if (!hasUserAnswer.value) return false;
-    if (isChecked.value) return false;
-
-    const q = question.value;
-    if (!q) return false;
-
-    const qType = q.type;
-
-    if (isImmediateMode.value) {
-      return false;
-    }
-
-    return true;
   });
 
   const displayConfig = computed(() => {
     const q = question.value;
     const qType = q?.type || "single";
 
-    const effectiveType = qType === "reading" && q.subs?.length > 0 
-      ? q.subs[0].type 
+    const effectiveType = qType === "reading" && q.subs?.length > 0
+      ? q.subs[0].type
       : qType;
 
     return getDisplayConfig(
@@ -180,36 +110,21 @@ export function useQuestionHandler(options) {
     );
   });
 
-  const shouldShowAnswer = computed(() => {
-    if (practiceMode.value === "exam") return false;
-    return isReviewMode.value || isChecked.value === true;
-  });
+  const shouldShowAnswer = computed(() => displayConfig.value.shouldShowAnswer);
   const shouldShowExplanation = computed(
-    () => isReviewMode.value || isChecked.value === true,
+    () => displayConfig.value.shouldShowExplanation,
   );
   const isOptionsDisabled = computed(
-    () => isReviewMode.value || isExamMode.value || isChecked.value === true,
+    () => displayConfig.value.isOptionsDisabled,
   );
-  const shouldShowInput = computed(
-    () => !isReviewMode.value && !isExamMode.value,
-  );
+  const shouldShowInput = computed(() => displayConfig.value.shouldShowInput);
   const isComponentDisabled = computed(
-    () => isReviewMode.value || isExamMode.value,
+    () => displayConfig.value.isComponentDisabled,
   );
-
-  const shouldAutoCheck = computed(() => {
-    if (isReviewMode.value) return false;
-    if (!isImmediateMode.value) return false;
-
-    const q = question.value;
-    if (!q) return false;
-
-    if (q.type === "reading" && q.subs?.length > 0) {
-      return canAutoCheck(q.subs[0].type);
-    }
-
-    return canAutoCheck(q.type);
-  });
+  const shouldShowCheckBtn = computed(
+    () => displayConfig.value.shouldShowCheckBtn,
+  );
+  const shouldAutoCheck = computed(() => displayConfig.value.shouldAutoCheck);
 
   const getAnswerCardStatus = (answerStatus, isCurrent = false) => {
     if (isCurrent) return "current";
@@ -265,9 +180,7 @@ export function useQuestionHandler(options) {
     return true;
   };
 
-  const resetAnswer = () => {
-    return null;
-  };
+  const resetAnswer = () => null;
 
   return {
     practiceMode,
@@ -297,9 +210,6 @@ export function useQuestionHandler(options) {
     resetAnswer,
     isComplexQuestion,
     isComplexType,
-    normalizeStatus,
-    ANSWER_STATUS,
-    PRACTICE_MODE,
-    SHOW_ANSWER_MODE,
+    canAutoCheck,
   };
 }

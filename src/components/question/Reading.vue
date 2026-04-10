@@ -34,7 +34,7 @@
 <script setup>
 import { ref, computed, watch } from 'vue'
 import { t } from '@/utils/i18n.js'
-import { getStatusClass, getCurrentStatusClass, getAnswerStatus } from '@/utils/questionHandlers'
+import { getStatusClass, getCurrentStatusClass, getAnswerStatus } from '@/utils/questionConfig'
 import { useQuestionHandler, canAutoCheck, normalizeStatus } from '@/composables/useQuestionHandler'
 import SingleChoice from './SingleChoice.vue'
 import MultipleChoice from './MultipleChoice.vue'

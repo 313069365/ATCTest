@@ -1,18 +1,11 @@
 /**
- * 题目处理工具函数
- * 统一入口，自动分配处理函数
- *
- * 使用方式：页面按需导入所需函数，无需处理题型判断逻辑
- * 统一入口：
- *   - handleQuestion(question, mode, options) 处理题目
- *   - getAnswerStatus(question, userAnswer) 获取答案状态
- *   - packProgress/unpackProgress 进度打包/解包
- *   - getBatchStats 批量统计
+ * 题目相关常量配置
+ * 统一管理所有题型相关的常量
  */
 
 import { STORAGE_KEY, storage } from "@/composables/useStorage";
 
-// ==================== 常量定义 ====================
+// ==================== 题型类型 ====================
 
 export const QUESTION_TYPES = {
   SINGLE: "single",
@@ -25,27 +18,93 @@ export const QUESTION_TYPES = {
   READING: "reading",
 };
 
-export const AUTO_CHECK_TYPES = ["single", "boolean", "media"];
-export const MANUAL_CHECK_TYPES = [
-  "multiple",
-  "fillin",
-  "essay",
-  "translation",
-  "reading",
-];
+// ==================== 答案状态 ====================
 
-export const DISPLAY_MODE = {
+export const ANSWER_STATUS = {
+  CORRECT: "correct",
+  WRONG: "wrong",
+  PARTIAL: "partial",
+  UNCHECKED: "unchecked",
+  UNANSWERED: "unanswered",
+  UNKNOWN: "unknown",
+};
+
+// ==================== 练习模式 ====================
+
+export const PRACTICE_MODE = {
   ANSWER: "answer",
   REVIEW: "review",
   EXAM: "exam",
 };
 
-export const ANSWER_SHOW_MODE = {
+// ==================== 答案显示模式 ====================
+
+export const SHOW_ANSWER_MODE = {
   IMMEDIATE: "immediate",
   MANUAL: "manual",
 };
 
-// ==================== 类型判断（原子函数）====================
+// ==================== 题目排序方式 ====================
+
+export const QUESTION_SORT = {
+  SEQUENCE: "sequence",
+  REVERSE: "reverse",
+  SHUFFLE: "shuffle",
+};
+
+// ==================== 题型能力配置 ====================
+
+export const QUESTION_CAPABILITIES = {
+  single: { canAutoCheck: true, needsManualCheck: false },
+  multiple: { canAutoCheck: false, needsManualCheck: true },
+  boolean: { canAutoCheck: true, needsManualCheck: false },
+  fillin: { canAutoCheck: false, needsManualCheck: true },
+  essay: { canAutoCheck: false, needsManualCheck: true },
+  translation: { canAutoCheck: false, needsManualCheck: true },
+  media: { canAutoCheck: true, needsManualCheck: false },
+  reading: { canAutoCheck: false, needsManualCheck: true },
+};
+
+// ==================== 从能力配置推导 ====================
+
+export const AUTO_CHECK_TYPES = Object.entries(QUESTION_CAPABILITIES)
+  .filter(([_, v]) => v.canAutoCheck)
+  .map(([k]) => k);
+
+export const MANUAL_CHECK_TYPES = Object.entries(QUESTION_CAPABILITIES)
+  .filter(([_, v]) => v.needsManualCheck)
+  .map(([k]) => k);
+
+// ==================== 模式行为配置 ====================
+
+export const MODE_BEHAVIOR = {
+  answer: {
+    checkBtn: (s) => s.showAnswerMode === 'manual' && s.hasUserAnswer && !s.isChecked,
+    autoCheck: (s) => s.showAnswerMode === 'immediate' && s.canAutoCheck,
+    showAnswer: (s) => s.isChecked || s.practiceMode === 'review',
+    showExplanation: (s) => s.isChecked || s.practiceMode === 'review',
+    inputDisabled: (s) => s.practiceMode === 'review' || s.practiceMode === 'exam' || s.isChecked,
+    showInput: (s) => s.practiceMode !== 'review' && s.practiceMode !== 'exam',
+  },
+  review: {
+    checkBtn: () => false,
+    autoCheck: () => false,
+    showAnswer: () => true,
+    showExplanation: () => true,
+    inputDisabled: () => true,
+    showInput: () => false,
+  },
+  exam: {
+    checkBtn: () => false,
+    autoCheck: () => false,
+    showAnswer: () => false,
+    showExplanation: () => false,
+    inputDisabled: () => true,
+    showInput: () => false,
+  },
+};
+
+// ==================== 类型判断 ====================
 
 /**
  * 判断是否简单题型
@@ -88,7 +147,37 @@ export function isComplexQuestion(question) {
  * @returns {boolean}
  */
 export function canAutoCheck(questionType) {
-  return AUTO_CHECK_TYPES.includes(questionType);
+  const cap = QUESTION_CAPABILITIES[questionType];
+  return cap ? cap.canAutoCheck : false;
+}
+
+/**
+ * 判断是否有用户答案
+ * @param {any} userAnswer - 用户答案
+ * @returns {boolean}
+ */
+export function hasUserAnswer(userAnswer) {
+  try {
+    if (userAnswer === null || userAnswer === undefined) return false;
+
+    if (typeof userAnswer === "object") {
+      return Object.values(userAnswer).some((val) => {
+        if (val === null || val === undefined) return false;
+        if (typeof val === "string") return val.trim().length > 0;
+        if (Array.isArray(val)) return val.length > 0;
+        if (typeof val === "number") return val !== null;
+        return !!val;
+      });
+    }
+
+    if (typeof userAnswer === "string") return userAnswer.trim().length > 0;
+    if (typeof userAnswer === "number") return userAnswer !== null && userAnswer !== undefined;
+    if (Array.isArray(userAnswer)) return userAnswer.length > 0;
+
+    return !!userAnswer;
+  } catch {
+    return false;
+  }
 }
 
 /**
@@ -97,7 +186,8 @@ export function canAutoCheck(questionType) {
  * @returns {boolean}
  */
 export function needsManualCheck(questionType) {
-  return MANUAL_CHECK_TYPES.includes(questionType);
+  const cap = QUESTION_CAPABILITIES[questionType];
+  return cap ? cap.needsManualCheck : false;
 }
 
 /**
@@ -115,6 +205,51 @@ export function getQuestionTypeKey(type) {
     reading: "reading",
   };
   return map[type] || type;
+}
+
+// ==================== 显示配置 ====================
+
+/**
+ * 获取题目显示配置（统一入口）
+ * @param {string} practiceMode - 练习模式
+ * @param {string} showAnswerMode - 答案显示模式
+ * @param {string} questionType - 题型
+ * @param {Object} options - 其他选项
+ * @returns {Object} 完整的显示配置
+ */
+export function getDisplayConfig(practiceMode, showAnswerMode, questionType, options = {}) {
+  const {
+    hasUserAnswer = false,
+    isChecked = false,
+  } = options;
+
+  const cap = QUESTION_CAPABILITIES[questionType] || {};
+  const behavior = MODE_BEHAVIOR[practiceMode] || MODE_BEHAVIOR.answer;
+
+  const state = {
+    practiceMode,
+    showAnswerMode,
+    canAutoCheck: cap.canAutoCheck,
+    needsManualCheck: cap.needsManualCheck,
+    hasUserAnswer,
+    isChecked,
+  };
+
+  return {
+    shouldShowMeta: true,
+    shouldShowStem: true,
+    shouldShowMedia: true,
+    shouldShowOptions: behavior.showInput(state),
+    isOptionsDisabled: behavior.inputDisabled(state),
+    shouldShowInput: behavior.showInput(state),
+    isInputDisabled: behavior.inputDisabled(state),
+    shouldShowAnswer: behavior.showAnswer(state),
+    shouldShowExplanation: behavior.showExplanation(state),
+    shouldShowUserAnswer: behavior.showAnswer(state),
+    shouldShowCheckBtn: behavior.checkBtn(state),
+    shouldAutoCheck: behavior.autoCheck(state),
+    isComponentDisabled: behavior.inputDisabled(state),
+  };
 }
 
 // ==================== 状态样式映射 ====================
@@ -143,8 +278,6 @@ export const STATUS_COLOR_MAP = {
  * 根据状态获取 CSS 类名
  * @param {string} status - 答案状态
  * @param {object} options - 选项
- * @param {boolean} options.isCurrent - 是否当前题目
- * @param {string} options.mode - 练习模式
  * @returns {string}
  */
 export function getStatusClass(status, options = {}) {
@@ -190,13 +323,13 @@ function getModeConfig(mode) {
   return config[mode] || config.practice;
 }
 
-// ==================== 状态判断（原子函数）====================
+// ==================== 状态判断 ====================
 
 /**
  * 获取简单题答案状态
  * @param {Object} question - 题目对象
  * @param {any} userAnswer - 用户答案
- * @returns {string} - correct/wrong/unknown/unanswered
+ * @returns {string}
  */
 export function getSimpleStatus(question, userAnswer) {
   if (!question?.answer?.[0]) return "unknown";
@@ -236,8 +369,8 @@ export function getSimpleStatus(question, userAnswer) {
 /**
  * 获取复合题答案状态（返回子题状态对象）
  * @param {Object} question - 题目对象
- * @param {Object} userAnswer - 用户答案 {0: ans0, 1: ans1}
- * @returns {Object} - { 0: 'correct', 1: 'wrong', ... }
+ * @param {Object} userAnswer - 用户答案
+ * @returns {Object}
  */
 export function getComplexStatus(question, userAnswer) {
   const result = {};
@@ -254,7 +387,7 @@ export function getComplexStatus(question, userAnswer) {
  * 获取答案状态 - 总入口，自动分发
  * @param {Object} question - 题目对象
  * @param {any} userAnswer - 用户答案
- * @returns {string|Object} - 简单题返回字符串，复合题返回对象
+ * @returns {string|Object}
  */
 export function getAnswerStatus(question, userAnswer) {
   if (!question) return "unanswered";
@@ -263,14 +396,14 @@ export function getAnswerStatus(question, userAnswer) {
     : getSimpleStatus(question, userAnswer);
 }
 
-// ==================== 题目处理（原子函数）====================
+// ==================== 题目处理 ====================
 
 /**
  * 处理简单题
  * @param {Object} question - 题目对象
  * @param {string} mode - 模式
- * @param {Object} options - 配置 { shuffledOptions, userAnswer, checked, status }
- * @returns {Object} - 处理后的题目数据
+ * @param {Object} options - 配置
+ * @returns {Object}
  */
 export function handleSimpleQuestion(question, mode, options = {}) {
   const { shuffledOptions, userAnswer, checked, status } = options;
@@ -296,11 +429,11 @@ export function handleSimpleQuestion(question, mode, options = {}) {
 }
 
 /**
- * 处理复合题（子题复用简单题逻辑）
+ * 处理复合题
  * @param {Object} question - 题目对象
  * @param {string} mode - 模式
- * @param {Object} options - 配置 { userAnswer, checked, status }
- * @returns {Object} - 处理后的题目数据
+ * @param {Object} options - 配置
+ * @returns {Object}
  */
 export function handleComplexQuestion(question, mode, options = {}) {
   const { userAnswer, checked, status } = options;
@@ -328,7 +461,7 @@ export function handleComplexQuestion(question, mode, options = {}) {
  * @param {Object} question - 题目对象
  * @param {string} mode - 模式
  * @param {Object} options - 配置
- * @returns {Object} - 处理后的题目数据
+ * @returns {Object}
  */
 export function handleQuestion(question, mode, options = {}) {
   if (!question) return null;
@@ -337,7 +470,7 @@ export function handleQuestion(question, mode, options = {}) {
     : handleSimpleQuestion(question, mode, options);
 }
 
-// ==================== 数据打包/解包（原子函数）====================
+// ==================== 数据打包/解包 ====================
 
 /**
  * 打包简单题进度
@@ -410,7 +543,7 @@ export function packProgress(
 /**
  * 解包进度数据
  * @param {Object} packedAnswers - 打包后的数据
- * @returns {Object} - { userAnswers, answerChecked, answerStatus }
+ * @returns {Object}
  */
 export function unpackProgress(packedAnswers) {
   const userAnswers = {};
@@ -428,7 +561,7 @@ export function unpackProgress(packedAnswers) {
   return { userAnswers, answerChecked, answerStatus };
 }
 
-// ==================== 进度存储（原子函数）====================
+// ==================== 进度存储 ====================
 
 /**
  * 保存练习进度
@@ -481,7 +614,7 @@ export function loadPracticeProgress() {
   return storage.getItem(STORAGE_KEY.PRACTICE_PROGRESS);
 }
 
-// ==================== 统计（原子函数）====================
+// ==================== 统计 ====================
 
 /**
  * 标准化状态
@@ -511,7 +644,7 @@ export function countQuestions(questions) {
 /**
  * 简单题统计
  * @param {string} status - 答案状态
- * @returns {Object} - { correct, wrong, unknown, unanswered }
+ * @returns {Object}
  */
 export function getSimpleStats(status) {
   const s = normalizeStatus(status);
@@ -525,13 +658,12 @@ export function getSimpleStats(status) {
 
 /**
  * 复合题统计
- * @param {Object|Array} subs - 答案状态（对象或数组）
+ * @param {Object|Array} subs - 答案状态
  * @returns {Object}
  */
 export function getComplexStats(subs) {
   const stats = { correct: 0, wrong: 0, unknown: 0, unanswered: 0 };
 
-  // 处理对象格式: { 0: "correct", 1: "wrong" }
   if (subs && typeof subs === "object" && !Array.isArray(subs)) {
     Object.values(subs).forEach((status) => {
       const s = normalizeStatus(status);
@@ -543,7 +675,6 @@ export function getComplexStats(subs) {
     return stats;
   }
 
-  // 处理数组格式: [{ status: "correct" }, ...]
   subs?.forEach((sub) => {
     const s = normalizeStatus(sub.status);
     if (s === "correct") stats.correct++;
@@ -555,10 +686,10 @@ export function getComplexStats(subs) {
 }
 
 /**
- * 批量统计 - 总入口，返回完整统计结果
+ * 批量统计 - 总入口
  * @param {Array} questions - 题目数组
  * @param {Object} answers - 答案数据
- * @returns {Object} - { totalCount, correctCount, wrongCount, unknownCount, unansweredCount }
+ * @returns {Object}
  */
 export function getBatchStats(questions, answers) {
   let correct = 0,
@@ -598,55 +729,5 @@ export function getBatchStats(questions, answers) {
     wrongCount: wrong,
     unknownCount: unknown,
     unansweredCount: unanswered,
-  };
-}
-
-// ==================== 显示配置 ====================
-
-/**
- * 获取题目显示配置（统一入口）
- * @param {string} practiceMode - 练习模式: 'answer' | 'review' | 'exam'
- * @param {string} showAnswerMode - 答案显示模式: 'immediate' | 'manual'
- * @param {string} questionType - 题型
- * @param {Object} options - 其他选项
- * @param {boolean} options.hasUserAnswer - 是否有用户答案
- * @param {boolean} options.isChecked - 是否已检查
- * @param {boolean} options.autoJump - 是否自动跳转
- * @returns {Object} 完整的显示配置
- */
-export function getDisplayConfig(
-  practiceMode,
-  showAnswerMode,
-  questionType,
-  options = {},
-) {
-  const {
-    hasUserAnswer = false,
-    isChecked = false,
-    autoJump = false,
-  } = options;
-
-  const isReview = practiceMode === "review";
-  const isExam = practiceMode === "exam";
-  const isImmediate = showAnswerMode === "immediate";
-  const needsManual = needsManualCheck(questionType);
-  const canAuto = canAutoCheck(questionType);
-
-  return {
-    shouldShowMeta: true,
-    shouldShowStem: true,
-    shouldShowMedia: true,
-    shouldShowOptions: !isReview,
-    isOptionsDisabled: isReview || isExam || isChecked,
-    shouldShowInput: !isReview && !isExam,
-    isInputDisabled: isReview || isExam || isChecked,
-    shouldShowAnswer: isReview || isChecked,
-    shouldShowExplanation: isReview || isChecked,
-    shouldShowUserAnswer: isReview || isChecked,
-    shouldShowCheckBtn:
-      !isReview && !isExam && !isChecked && hasUserAnswer && !isImmediate,
-    shouldAutoCheck: !isReview && isImmediate && canAuto,
-    shouldAutoJump: autoJump && canAuto,
-    isComponentDisabled: isReview || isExam,
   };
 }
