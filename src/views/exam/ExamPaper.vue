@@ -36,11 +36,13 @@
       </div>
       <template v-else>
         <div v-if="currentQuestion">
-          <QuestionRenderer :question="currentQuestion" mode="exam" :user-answer="userAnswers[currentQuestion?.id]" @answer="handleAnswer" />
+          <QuestionRenderer :question="currentQuestion" mode="exam" :user-answer="userAnswers[currentQuestion?.id]"
+            @answer="handleAnswer" />
 
           <div class="question-actions">
             <button class="mark-btn" :class="{ active: markedQuestions.has(currentQuestion.id) }" @click="toggleMark">
-              <span class="material-symbols-outlined">{{ markedQuestions.has(currentQuestion.id) ? 'bookmark' : 'bookmark_border' }}</span>
+              <span class="material-symbols-outlined">{{ markedQuestions.has(currentQuestion.id) ? 'bookmark' :
+                'bookmark_border' }}</span>
               <span class="mark-text">{{ markedQuestions.has(currentQuestion.id) ? t('marked') : t('mark') }}</span>
             </button>
           </div>
@@ -48,9 +50,12 @@
       </template>
     </main>
 
-    <QustionNavbar :prevDisabled="currentIndex === 0" :isLast="currentIndex === questions.length - 1" @prev="prevQuestion" @next="nextQuestion" @submit="submitPaper" />
+    <QustionNavbar :prevDisabled="currentIndex === 0" :isLast="currentIndex === questions.length - 1"
+      @prev="prevQuestion" @next="nextQuestion" @submit="submitPaper" />
 
-    <AnswerCard v-if="showAnswerCard" :questions="questions" :currentIndex="currentIndex" :currentSubIndex="0" :userAnswers="userAnswers" buttonText="submitPaper" @close="closeAnswerCard" @exit="submitPaper" @go="gotoQuestion" />
+    <AnswerCard v-if="showAnswerCard" :questions="questions" :currentIndex="currentIndex" :currentSubIndex="0"
+      :userAnswers="userAnswers" buttonText="submitPaper" @close="closeAnswerCard" @exit="submitPaper"
+      @go="gotoQuestion" />
   </div>
 </template>
 
@@ -102,7 +107,7 @@ const remainingTimeDisplay = computed(() => {
 
 onMounted(async () => {
   const paperId = parseInt(route.query.id)
-  
+
   if (!paperId) {
     router.push('/exam')
     return
@@ -110,10 +115,10 @@ onMounted(async () => {
 
   // 加载试卷列表
   store.loadExamPapers()
-  
+
   // 查找试卷
   const foundPaper = store.examPapers.find(p => p.id === paperId)
-  
+
   if (!foundPaper) {
     loading.value = false
     return
@@ -123,7 +128,7 @@ onMounted(async () => {
   questions.value = foundPaper.questions || []
   duration.value = foundPaper.duration || 120
   remainingSeconds.value = duration.value * 60
-  
+
   loading.value = false
 
   // 开始计时
@@ -139,7 +144,7 @@ const startTimer = () => {
   timerInterval = setInterval(() => {
     elapsedSeconds.value++
     remainingSeconds.value = Math.max(0, duration.value * 60 - elapsedSeconds.value)
-    
+
     if (remainingSeconds.value === 0) {
       autoSubmit()
     }
@@ -209,7 +214,7 @@ const submitPaper = () => {
 
 const autoSubmit = () => {
   stopTimer()
-  
+
   // 计算得分
   let correctCount = 0
   const totalScore = paper.value?.totalScore || 0
@@ -243,16 +248,16 @@ const autoSubmit = () => {
 
 const checkAnswer = (question, userAnswer) => {
   if (userAnswer === undefined || userAnswer === null) return false
-  
+
   const correctAnswer = question.answer
-  
+
   if (question.type === 'multiple') {
     if (!Array.isArray(userAnswer) || !Array.isArray(correctAnswer)) return false
     const sortedUser = [...userAnswer].sort()
     const sortedCorrect = [...correctAnswer].sort()
     return JSON.stringify(sortedUser) === JSON.stringify(sortedCorrect)
   }
-  
+
   return userAnswer === correctAnswer
 }
 </script>

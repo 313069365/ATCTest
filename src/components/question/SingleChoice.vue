@@ -271,8 +271,8 @@ const handleSelect = (index) => {
   align-items: center;
   gap: 12px;
   padding: var(--spacing-md);
-  background: #fff;
-  border: 1px solid transparent;
+  background: var(--background-surface);
+  border: 1px solid var(--border-color-strong);
   border-radius: var(--radius-lg);
   cursor: pointer;
   transition: all 0.2s;
