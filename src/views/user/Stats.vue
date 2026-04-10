@@ -161,157 +161,157 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from 'vue'
-import { useRouter } from 'vue-router'
-import { usePracticeHistory, useUserStats, useExamRecords } from '../../composables/useStorage'
+// import { ref, computed, onMounted } from 'vue'
+// import { useRouter } from 'vue-router'
+// import { usePracticeHistory, useUserStats, useExamRecords } from '../../composables/useStorage'
 
-const router = useRouter()
+// const router = useRouter()
 
-// 使用存储 composable
-const { getHistory } = usePracticeHistory()
-const { getStats } = useUserStats()
-const { getAll: getAllExams } = useExamRecords()
+// // 使用存储 composable
+// const { getHistory } = usePracticeHistory()
+// const { getStats } = useUserStats()
+// const { getAll: getAllExams } = useExamRecords()
 
-const practiceHistory = ref([])
-const examRecords = ref([])
-const userStats = ref(null)
+// const practiceHistory = ref([])
+// const examRecords = ref([])
+// const userStats = ref(null)
 
-// 练习统计数据
-const practiceStats = computed(() => {
-  const history = practiceHistory.value
-  const total = history.length
-  const correct = history.reduce((sum, item) => sum + item.correct, 0)
-  const incorrect = history.reduce((sum, item) => sum + (item.total - item.correct), 0)
-  const accuracy = total > 0 ? Math.round((correct / (correct + incorrect)) * 100) : 0
+// // 练习统计数据
+// const practiceStats = computed(() => {
+//   const history = practiceHistory.value
+//   const total = history.length
+//   const correct = history.reduce((sum, item) => sum + item.correct, 0)
+//   const incorrect = history.reduce((sum, item) => sum + (item.total - item.correct), 0)
+//   const accuracy = total > 0 ? Math.round((correct / (correct + incorrect)) * 100) : 0
   
-  return {
-    total,
-    correct,
-    incorrect,
-    accuracy
-  }
-})
+//   return {
+//     total,
+//     correct,
+//     incorrect,
+//     accuracy
+//   }
+// })
 
-// 考试统计数据
-const examStats = computed(() => {
-  const exams = examRecords.value
-  const total = exams.length
-  const passed = exams.filter(exam => exam.score >= exam.totalScore * 0.6).length
-  const failed = total - passed
-  const averageScore = total > 0 ? Math.round(exams.reduce((sum, exam) => sum + exam.score, 0) / total) : 0
+// // 考试统计数据
+// const examStats = computed(() => {
+//   const exams = examRecords.value
+//   const total = exams.length
+//   const passed = exams.filter(exam => exam.score >= exam.totalScore * 0.6).length
+//   const failed = total - passed
+//   const averageScore = total > 0 ? Math.round(exams.reduce((sum, exam) => sum + exam.score, 0) / total) : 0
   
-  return {
-    total,
-    passed,
-    failed,
-    averageScore
-  }
-})
+//   return {
+//     total,
+//     passed,
+//     failed,
+//     averageScore
+//   }
+// })
 
-// 总体统计数据
-const totalPracticeCount = computed(() => practiceStats.value.total)
-const totalExamCount = computed(() => examStats.value.total)
-const totalQuestionsAnswered = computed(() => {
-  const practiceQuestions = practiceHistory.value.reduce((sum, item) => sum + item.total, 0)
-  const examQuestions = examRecords.value.reduce((sum, item) => sum + (item.correctCount + item.incorrectCount + item.skippedCount), 0)
-  return practiceQuestions + examQuestions
-})
-const averageAccuracy = computed(() => {
-  const practiceAccuracy = practiceStats.value.accuracy
-  const examAccuracy = examRecords.value.length > 0 
-    ? Math.round(examRecords.value.reduce((sum, exam) => sum + exam.accuracy, 0) / examRecords.value.length)
-    : 0
+// // 总体统计数据
+// const totalPracticeCount = computed(() => practiceStats.value.total)
+// const totalExamCount = computed(() => examStats.value.total)
+// const totalQuestionsAnswered = computed(() => {
+//   const practiceQuestions = practiceHistory.value.reduce((sum, item) => sum + item.total, 0)
+//   const examQuestions = examRecords.value.reduce((sum, item) => sum + (item.correctCount + item.incorrectCount + item.skippedCount), 0)
+//   return practiceQuestions + examQuestions
+// })
+// const averageAccuracy = computed(() => {
+//   const practiceAccuracy = practiceStats.value.accuracy
+//   const examAccuracy = examRecords.value.length > 0 
+//     ? Math.round(examRecords.value.reduce((sum, exam) => sum + exam.accuracy, 0) / examRecords.value.length)
+//     : 0
   
-  if (practiceStats.value.total === 0 && examRecords.value.length === 0) return 0
-  if (practiceStats.value.total === 0) return examAccuracy
-  if (examRecords.value.length === 0) return practiceAccuracy
+//   if (practiceStats.value.total === 0 && examRecords.value.length === 0) return 0
+//   if (practiceStats.value.total === 0) return examAccuracy
+//   if (examRecords.value.length === 0) return practiceAccuracy
   
-  return Math.round((practiceAccuracy + examAccuracy) / 2)
-})
+//   return Math.round((practiceAccuracy + examAccuracy) / 2)
+// })
 
-// 最近记录
-const recentRecords = computed(() => {
-  const practiceRecords = practiceHistory.value.map(item => ({
-    id: item.id,
-    type: 'practice',
-    title: item.subjectName,
-    score: item.correct,
-    totalScore: item.total,
-    accuracy: Math.round((item.correct / item.total) * 100),
-    timestamp: item.timestamp
-  }))
+// // 最近记录
+// const recentRecords = computed(() => {
+//   const practiceRecords = practiceHistory.value.map(item => ({
+//     id: item.id,
+//     type: 'practice',
+//     title: item.subjectName,
+//     score: item.correct,
+//     totalScore: item.total,
+//     accuracy: Math.round((item.correct / item.total) * 100),
+//     timestamp: item.timestamp
+//   }))
   
-  const examRecordsData = examRecords.value.map(item => ({
-    id: item.id,
-    type: 'exam',
-    title: item.title,
-    score: item.score,
-    totalScore: item.totalScore,
-    accuracy: item.accuracy,
-    timestamp: item.timestamp
-  }))
+//   const examRecordsData = examRecords.value.map(item => ({
+//     id: item.id,
+//     type: 'exam',
+//     title: item.title,
+//     score: item.score,
+//     totalScore: item.totalScore,
+//     accuracy: item.accuracy,
+//     timestamp: item.timestamp
+//   }))
   
-  return [...practiceRecords, ...examRecordsData]
-    .sort((a, b) => b.timestamp - a.timestamp)
-    .slice(0, 5)
-})
+//   return [...practiceRecords, ...examRecordsData]
+//     .sort((a, b) => b.timestamp - a.timestamp)
+//     .slice(0, 5)
+// })
 
-// 格式化日期
-function formatDate(timestamp) {
-  if (!timestamp) return '未知'
-  const date = new Date(timestamp)
-  const now = new Date()
-  const diffDays = Math.floor((now - date) / (1000 * 60 * 60 * 24))
+// // 格式化日期
+// function formatDate(timestamp) {
+//   if (!timestamp) return '未知'
+//   const date = new Date(timestamp)
+//   const now = new Date()
+//   const diffDays = Math.floor((now - date) / (1000 * 60 * 60 * 24))
   
-  if (diffDays === 0) return '今天'
-  if (diffDays === 1) return '昨天'
-  if (diffDays < 7) return `${diffDays}天前`
+//   if (diffDays === 0) return '今天'
+//   if (diffDays === 1) return '昨天'
+//   if (diffDays < 7) return `${diffDays}天前`
   
-  return `${date.getMonth() + 1}月${date.getDate()}日`
-}
+//   return `${date.getMonth() + 1}月${date.getDate()}日`
+// }
 
-// 获取分数样式类
-function getScoreClass(score, totalScore) {
-  const ratio = score / totalScore
-  if (ratio >= 0.8) return 'good'
-  if (ratio >= 0.6) return 'mid'
-  return 'low'
-}
+// // 获取分数样式类
+// function getScoreClass(score, totalScore) {
+//   const ratio = score / totalScore
+//   if (ratio >= 0.8) return 'good'
+//   if (ratio >= 0.6) return 'mid'
+//   return 'low'
+// }
 
-// 返回上一页
-function goBack() {
-  router.back()
-}
+// // 返回上一页
+// function goBack() {
+//   router.back()
+// }
 
-// 查看练习历史
-function goPracticeHistory() {
-  router.push('/history')
-}
+// // 查看练习历史
+// function goPracticeHistory() {
+//   router.push('/history')
+// }
 
-// 查看考试历史
-function goExamHistory() {
-  router.push('/exam-history')
-}
+// // 查看考试历史
+// function goExamHistory() {
+//   router.push('/exam-history')
+// }
 
-// 查看记录详情
-function viewRecord(record) {
-  if (record.type === 'practice') {
-    // 练习记录详情暂不支持
-  } else if (record.type === 'exam') {
-    router.push(`/exam-result?id=${record.id}`)
-  }
-}
+// // 查看记录详情
+// function viewRecord(record) {
+//   if (record.type === 'practice') {
+//     // 练习记录详情暂不支持
+//   } else if (record.type === 'exam') {
+//     router.push(`/exam-result?id=${record.id}`)
+//   }
+// }
 
-// 加载数据
-function loadData() {
-  practiceHistory.value = getHistory()
-  examRecords.value = getAllExams()
-  userStats.value = getStats()
-}
+// // 加载数据
+// function loadData() {
+//   practiceHistory.value = getHistory()
+//   examRecords.value = getAllExams()
+//   userStats.value = getStats()
+// }
 
-onMounted(() => {
-  loadData()
-})
+// onMounted(() => {
+//   loadData()
+// })
 </script>
 
 <style scoped>

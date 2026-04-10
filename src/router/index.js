@@ -20,7 +20,7 @@ const routes = [
         component: () => import("../views/practice/QuizPage.vue"),
       },
       {
-        path: "history",
+        path: "practice-history",
         name: "PracticeHistory",
         component: () => import("../views/practice/PracticeHistory.vue"),
       },
@@ -55,26 +55,41 @@ const routes = [
         component: () => import("../views/exam/ExamResult.vue"),
       },
       {
-        path: "history",
+        path: "exam-history",
         name: "ExamHistory",
         component: () => import("../views/exam/ExamHistory.vue"),
       },
     ],
   },
   {
-    path: "/profile",
-    name: "Profile",
-    component: () => import("../views/user/Profile.vue"),
-  },
-  {
-    path: "/wrongbook",
-    name: "WrongBook",
-    component: () => import("../views/user/WrongBook.vue"),
-  },
-  {
-    path: "/favorites",
-    name: "Favorites",
-    component: () => import("../views/user/Favorites.vue"),
+    path: "/user",
+    children: [
+      {
+        path: "/stats",
+        name: "Stats",
+        component: () => import("../views/user/Stats.vue"),
+      },
+      {
+        path: "/profile",
+        name: "Profile",
+        component: () => import("../views/user/Profile.vue"),
+      },
+      {
+        path: "/wrongbook",
+        name: "WrongBook",
+        component: () => import("../views/user/WrongBook.vue"),
+      },
+      {
+        path: "/favorites",
+        name: "Favorites",
+        component: () => import("../views/user/Favorites.vue"),
+      },
+      {
+        path: "/settings",
+        name: "Settings",
+        component: () => import("../views/user/Settings.vue"),
+      },
+    ],
   },
 ];
 

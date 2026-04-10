@@ -28,7 +28,7 @@
 
       <!-- 收藏列表 -->
       <div class="favorites-list" v-if="favoritesList.length > 0">
-        <div class="favorite-card-wrapper" v-for="(item, index) in favoritesList" :key="item.id">
+        <div class="favorite-card-wrapper" v-for="(item, index) in paginatedList" :key="item.id">
           <div class="favorite-card glass">
             <div class="favorite-header">
               <div class="favorite-meta-top">
@@ -50,6 +50,14 @@
             </div>
           </div>
         </div>
+
+        <div class="loading-more" v-if="hasMore">
+          <div class="loading-spinner"></div>
+          <span>加载中...</span>
+        </div>
+        <div class="loading-complete" v-else-if="!hasMore && favoritesList.length > 0">
+          <span>没有更多了</span>
+        </div>
       </div>
 
       <!-- 空状态 -->
@@ -66,7 +74,7 @@
 </template>
 
 <script setup>
-import { computed, onMounted } from 'vue'
+import { computed, onMounted, onUnmounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAppStore } from '@/stores/store'
 import { t } from '@/utils/i18n.js'
@@ -75,10 +83,37 @@ const router = useRouter()
 const store = useAppStore()
 
 const favoritesList = computed(() => store.favorites)
+const pageSize = 20
+const currentPage = ref(1)
+
+const paginatedList = computed(() => {
+  const start = (currentPage.value - 1) * pageSize
+  const end = currentPage.value * pageSize
+  return favoritesList.value.slice(start, end)
+})
+
+const hasMore = computed(() => {
+  return currentPage.value * pageSize < favoritesList.value.length
+})
 
 onMounted(() => {
   store.loadFavorites()
+  window.addEventListener('scroll', handleScroll)
 })
+
+onUnmounted(() => {
+  window.removeEventListener('scroll', handleScroll)
+})
+
+function handleScroll() {
+  if (!hasMore.value) return
+  const scrollTop = window.scrollY || document.documentElement.scrollTop
+  const scrollHeight = document.documentElement.scrollHeight
+  const clientHeight = document.documentElement.clientHeight
+  if (scrollTop + clientHeight >= scrollHeight - 100) {
+    currentPage.value++
+  }
+}
 
 function goBack() {
   router.back()
@@ -269,6 +304,32 @@ function formatAnswer(answer) {
   flex-direction: column;
   gap: var(--spacing-md);
   contain: layout;
+}
+
+.loading-more,
+.loading-complete {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-lg);
+  color: var(--text-secondary);
+  font-size: var(--font-size-sm);
+}
+
+.loading-spinner {
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--border-color);
+  border-top-color: var(--primary);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .favorite-card-wrapper {

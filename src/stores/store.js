@@ -337,6 +337,57 @@ export const useAppStore = defineStore("app", () => {
     loadPracticeProgress();
     loadPracticeHistory();
     loadStats();
+    loadExamPapers();
+  }
+
+  /**
+   * 加载试卷列表
+   */
+  function loadExamPapers() {
+    examPapers.value = storage.getItem(STORAGE_KEY.EXAM_PAPERS) || [];
+  }
+
+  /**
+   * 添加试卷
+   */
+  function addExamPaper(paper) {
+    examPapers.value.unshift(paper);
+    storage.setItem(STORAGE_KEY.EXAM_PAPERS, examPapers.value);
+  }
+
+  /**
+   * 删除试卷
+   */
+  function removeExamPaper(paperId) {
+    examPapers.value = examPapers.value.filter(p => p.id !== paperId);
+    storage.setItem(STORAGE_KEY.EXAM_PAPERS, examPapers.value);
+  }
+
+  /**
+   * 加载预设
+   */
+  function loadExamPresets() {
+    examPresets.value = storage.getItem(STORAGE_KEY.EXAM_PRESETS) || [];
+  }
+
+  /**
+   * 保存预设
+   */
+  function saveExamPreset(preset) {
+    const existing = storage.getItem(STORAGE_KEY.EXAM_PRESETS) || [];
+    existing.push(preset);
+    storage.setItem(STORAGE_KEY.EXAM_PRESETS, existing);
+    examPresets.value = existing;
+  }
+
+  /**
+   * 删除预设
+   */
+  function deleteExamPreset(presetId) {
+    const existing = storage.getItem(STORAGE_KEY.EXAM_PRESETS) || [];
+    const filtered = existing.filter(p => p.id !== presetId);
+    storage.setItem(STORAGE_KEY.EXAM_PRESETS, filtered);
+    examPresets.value = filtered;
   }
 
   // 导出
@@ -382,6 +433,16 @@ export const useAppStore = defineStore("app", () => {
     statsSubject,
     updateStatsToday,
     loadStats,
+
+    // 考试
+    examPapers,
+    loadExamPapers,
+    addExamPaper,
+    removeExamPaper,
+    examPresets,
+    loadExamPresets,
+    saveExamPreset,
+    deleteExamPreset,
 
     // 初始化
     init,

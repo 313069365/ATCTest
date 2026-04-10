@@ -11,16 +11,18 @@
       <section class="user-section">
         <div class="avatar-container">
           <div class="avatar">
-            <img src="https://ts1.tc.mm.bing.net/th/id/R-C.14eaad76ba079248cac4fdb19dd11951?rik=n2D2PnNwJoLVTA&riu=http%3a%2f%2fn.sinaimg.cn%2fsinacn19%2f442%2fw1846h996%2f20180714%2fd240-hfhfwmv5289140.jpg&ehk=J%2b1i5USaNLpkeaA2ZdSiGujnqZhEogEAWNGdta2paZE%3d&risl=&pid=ImgRaw&r=0" alt="头像" />
+            <img
+              src="https://ts1.tc.mm.bing.net/th/id/R-C.14eaad76ba079248cac4fdb19dd11951?rik=n2D2PnNwJoLVTA&riu=http%3a%2f%2fn.sinaimg.cn%2fsinacn19%2f442%2fw1846h996%2f20180714%2fd240-hfhfwmv5289140.jpg&ehk=J%2b1i5USaNLpkeaA2ZdSiGujnqZhEogEAWNGdta2paZE%3d&risl=&pid=ImgRaw&r=0"
+              alt="头像" />
           </div>
         </div>
         <div class="user-info">
           <h2>wyd</h2>
-          <p>高级研究员</p>
+          <!-- <p>高级研究员</p> -->
         </div>
       </section>
 
-      <section class="performance-section">
+      <!-- <section class="performance-section">
         <h3 class="section-title">表现分析</h3>
         <div class="performance-grid">
           <div class="perf-card accuracy-card">
@@ -73,7 +75,7 @@
         <div class="empty-history">
           <p>暂无练习记录</p>
         </div>
-      </section>
+      </section> -->
 
       <section class="shortcut-section">
         <h3 class="section-title">快速操作</h3>
@@ -92,28 +94,28 @@
             <span class="shortcut-label">收藏本</span>
             <span class="material-symbols-outlined shortcut-arrow">chevron_right</span>
           </div>
-          <div class="shortcut-item">
+          <div class="shortcut-item" @click="goToPracticeHistory">
             <div class="shortcut-icon primary-bg">
               <span class="material-symbols-outlined">assignment_turned_in</span>
             </div>
             <span class="shortcut-label">练习历史</span>
             <span class="material-symbols-outlined shortcut-arrow">chevron_right</span>
           </div>
-          <div class="shortcut-item">
+          <div class="shortcut-item" @click="goToExamHistory">
             <div class="shortcut-icon primary-bg">
               <span class="material-symbols-outlined">quiz</span>
             </div>
             <span class="shortcut-label">考试历史</span>
             <span class="material-symbols-outlined shortcut-arrow">chevron_right</span>
           </div>
-          <div class="shortcut-item">
+          <div class="shortcut-item" @click="goToStats">
             <div class="shortcut-icon primary-bg">
               <span class="material-symbols-outlined">bar_chart</span>
             </div>
             <span class="shortcut-label">统计分析</span>
             <span class="material-symbols-outlined shortcut-arrow">chevron_right</span>
           </div>
-          <div class="shortcut-item">
+          <div class="shortcut-item" @click="goToSettings">
             <div class="shortcut-icon primary-bg">
               <span class="material-symbols-outlined">settings</span>
             </div>
@@ -148,6 +150,22 @@ function goToWrongBook() {
 
 function goToFavorites() {
   router.push({ name: 'Favorites' })
+}
+
+function goToPracticeHistory() {
+  router.push({ name: 'PracticeHistory' })
+}
+
+function goToExamHistory() {
+  router.push({ name: 'ExamHistory' })
+}
+
+function goToStats() {
+  router.push({ name: 'Stats' })
+}
+
+function goToSettings() {
+  router.push({ name: 'Settings' })
 }
 </script>
 

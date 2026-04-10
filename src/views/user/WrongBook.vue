@@ -35,7 +35,7 @@
 
       <!-- 错题列表 -->
       <div class="wrong-list" v-if="wrongList.length > 0">
-        <div class="wrong-card-wrapper" v-for="(item, index) in wrongList" :key="item.id">
+        <div class="wrong-card-wrapper" v-for="(item, index) in paginatedList" :key="item.id">
           <div class="wrong-card glass">
             <div class="wrong-header">
               <div class="wrong-meta-top">
@@ -67,6 +67,14 @@
             </div>
           </div>
         </div>
+
+        <div class="loading-more" v-if="hasMore">
+          <div class="loading-spinner"></div>
+          <span>加载中...</span>
+        </div>
+        <div class="loading-complete" v-else-if="!hasMore && wrongList.length > 0">
+          <span>没有更多了</span>
+        </div>
       </div>
 
       <!-- 空状态 -->
@@ -83,7 +91,7 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAppStore } from '@/stores/store'
 import { t } from '@/utils/i18n.js'
@@ -92,6 +100,19 @@ const router = useRouter()
 const store = useAppStore()
 
 const wrongList = computed(() => store.wrongBook)
+const pageSize = 20
+const currentPage = ref(1)
+const containerRef = ref(null)
+
+const paginatedList = computed(() => {
+  const start = (currentPage.value - 1) * pageSize
+  const end = currentPage.value * pageSize
+  return wrongList.value.slice(start, end)
+})
+
+const hasMore = computed(() => {
+  return currentPage.value * pageSize < wrongList.value.length
+})
 
 const repeatedErrors = computed(() => {
   return wrongList.value.filter(item => (item.wrongCount || 1) > 1).length
@@ -99,7 +120,22 @@ const repeatedErrors = computed(() => {
 
 onMounted(() => {
   store.loadWrongBook()
+  window.addEventListener('scroll', handleScroll)
 })
+
+onUnmounted(() => {
+  window.removeEventListener('scroll', handleScroll)
+})
+
+function handleScroll() {
+  if (!hasMore.value) return
+  const scrollTop = window.scrollY || document.documentElement.scrollTop
+  const scrollHeight = document.documentElement.scrollHeight
+  const clientHeight = document.documentElement.clientHeight
+  if (scrollTop + clientHeight >= scrollHeight - 100) {
+    currentPage.value++
+  }
+}
 
 function goBack() {
   router.back()
@@ -297,6 +333,32 @@ function getWrongCount(questionId) {
   flex-direction: column;
   gap: var(--spacing-md);
   contain: layout;
+}
+
+.loading-more,
+.loading-complete {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-lg);
+  color: var(--text-secondary);
+  font-size: var(--font-size-sm);
+}
+
+.loading-spinner {
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--border-color);
+  border-top-color: var(--primary);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .wrong-card-wrapper {

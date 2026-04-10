@@ -1,25 +1,19 @@
 <template>
   <div class="create-paper-page">
     <header class="top-bar">
-      <button class="icon-btn" @click="goBack">
+      <button class="icon-btn" @click="exitCreate">
         <span class="material-symbols-outlined">close</span>
       </button>
-      <h1 class="title">创建试卷</h1>
+      <h1 class="title">{{ t('createPaper') }}</h1>
       <div class="placeholder"></div>
     </header>
 
     <div class="stepper-container">
       <div class="stepper">
-        <div 
-          v-for="(step, index) in steps" 
-          :key="step.id" 
-          class="stepper-step"
-          :class="{
-            'active': currentStep === step.id,
-            'completed': currentStep > step.id
-          }"
-          @click="goToStep(step.id)"
-        >
+        <div v-for="(step, index) in steps" :key="step.id" class="stepper-step" :class="{
+          'active': currentStep === step.id,
+          'completed': currentStep > step.id
+        }">
           <div class="step-marker">
             <span v-if="currentStep > step.id" class="material-symbols-outlined check-icon">check</span>
             <span v-else class="step-number">{{ step.id }}</span>
@@ -31,7 +25,8 @@
     </div>
 
     <div class="step-content">
-      <div class="steps-wrapper" :style="{ transform: `translateX(${- (currentStep - 1) * 100}%)`, transition: 'transform 0.3s ease' }">
+      <div class="steps-wrapper"
+        :style="{ transform: `translateX(${- (currentStep - 1) * 100}%)`, transition: 'transform 0.3s ease' }">
         <div class="step-panel">
           <div class="step-header">
             <h2>基本信息</h2>
@@ -45,24 +40,24 @@
               </div>
               <div class="form-card-body">
                 <div class="form-group">
-                  <label>试卷名称 <span class="required">*</span></label>
-                  <input v-model="form.title" type="text" placeholder="请填入试卷名称" class="required-input"
+                  <label>{{ t('paperTitle') }} <span class="required">*</span></label>
+                  <input v-model="form.title" type="text" :placeholder="t('paperTitle')" class="required-input"
                     :class="{ error: currentStep === 1 && !form.title }" />
                 </div>
 
                 <div class="form-group">
-                  <label>时长 (分钟)</label>
+                  <label>{{ t('duration') }}</label>
                   <input v-model="form.duration" type="number" min="1" placeholder="120" />
                 </div>
 
                 <div class="form-group">
-                  <label>试卷类别</label>
-                  <input v-model="form.paperCategory" type="text" placeholder="请输入试卷类别" />
+                  <label>{{ t('paperCategory') }}</label>
+                  <input v-model="form.paperCategory" type="text" :placeholder="t('paperCategory')" />
                 </div>
 
                 <div class="form-group">
-                  <label>说明 / 备注</label>
-                  <textarea v-model="form.description" placeholder="输入考试的相关说明..." rows="3"></textarea>
+                  <label>{{ t('description') }}</label>
+                  <textarea v-model="form.description" :placeholder="t('description')" rows="3"></textarea>
                 </div>
               </div>
             </div>
@@ -70,7 +65,7 @@
 
           <div class="step-actions">
             <button class="step-btn step-btn-primary" @click="nextStep" :disabled="!canProceed">
-              <span>下一步</span>
+              <span>{{ t('nextStep') }}</span>
               <span class="material-symbols-outlined">arrow_forward</span>
             </button>
           </div>
@@ -78,56 +73,63 @@
 
         <div class="step-panel">
           <div class="step-header">
-            <h2>科目选择</h2>
-            <p>选择科目设置抽取数量</p>
+            <h2>{{ t('subjectSelection') }}</h2>
+            <p>{{ t('selectSubjectsSetCount') }}</p>
           </div>
 
           <div class="question-select-area">
             <div class="question-select-header">
-              <span class="question-select-title">已选科目</span>
+              <span class="question-select-title">{{ t('selectedSubjects') }}</span>
             </div>
 
             <div class="subject-list" v-if="selectedSubjects.length > 0">
               <div class="subject-card" v-for="(item, index) in selectedSubjects" :key="index">
-                <div class="subject-card-header">
-                  <span class="subject-card-name">{{ item.subjectName }}</span>
-                  <span class="subject-card-meta">{{ item.bankName }}</span>
+                <div class="subject-card-row subject-card-row-top">
+                  <div class="subject-card-main">
+                    <span class="subject-card-name">{{ t(item.subjectName) }}</span>
+                    <span class="subject-card-meta">{{ t(item.category) }}</span>
+                  </div>
                   <button class="btn-delete" @click="removeSubject(index)">
                     <span class="material-symbols-outlined">close</span>
                   </button>
                 </div>
-                <div class="subject-card-body">
+                <div class="subject-card-row subject-card-row-bottom">
                   <div class="subject-card-field">
-                    <span class="field-label">题量</span>
+                    <span class="field-label">{{ t('questionCount') }}</span>
                     <div class="field-input-wrap">
                       <input type="number" class="field-input" v-model="item.count" :max="item.maxCount">
                       <span class="field-suffix">/ {{ item.maxCount }}</span>
                     </div>
                   </div>
                   <div class="subject-card-field">
-                    <span class="field-label">每题分数</span>
+                    <span class="field-label">{{ t('scorePerQuestion') }}</span>
                     <div class="field-input-wrap">
                       <input type="number" class="field-input" v-model="item.score">
-                      <span class="field-suffix">分</span>
+                      <span class="field-suffix">{{ t('score') }}</span>
                     </div>
                   </div>
                 </div>
+              </div>
+
+              <div class="add-subject-btn" @click="openBankModal">
+                <span class="material-symbols-outlined">add</span>
+                <span>{{ t('addSubject') }}</span>
               </div>
             </div>
 
             <div class="empty-tip" @click="openBankModal" v-else>
               <span class="material-symbols-outlined">add_circle</span>
-              <p>点击添加科目</p>
+              <p>{{ t('clickToAddSubject') }}</p>
             </div>
           </div>
 
           <div class="step-actions">
             <button class="step-btn step-btn-secondary" @click="prevStep">
               <span class="material-symbols-outlined">arrow_back</span>
-              <span>上一步</span>
+              <span>{{ t('prevStep') }}</span>
             </button>
             <button class="step-btn step-btn-primary" @click="nextStep" :disabled="!canProceed">
-              <span>下一步</span>
+              <span>{{ t('nextStep') }}</span>
               <span class="material-symbols-outlined">arrow_forward</span>
             </button>
           </div>
@@ -135,34 +137,34 @@
 
         <div class="step-panel">
           <div class="step-header">
-            <h2>预览确认</h2>
-            <p>确认考试信息</p>
+            <h2>{{ t('previewConfirm') }}</h2>
+            <p>{{ t('confirmExamInfo') }}</p>
           </div>
 
           <div class="review-section">
             <div class="info-card">
               <div class="info-card-header">
-                <span>考卷信息</span>
+                <span>{{ t('paperTitle') }}</span>
               </div>
               <div class="info-card-body">
-                <div class="info-card-title">{{ form.title || '未设置' }}</div>
+                <div class="info-card-title">{{ form.title || t('paperTitle') }}</div>
                 <div class="info-card-stats">
                   <div class="info-stat-item">
                     <span class="material-symbols-outlined">schedule</span>
                     <span class="info-stat-value">{{ form.duration || 0 }}</span>
-                    <span class="info-stat-label">分钟</span>
+                    <span class="info-stat-label">{{ t('minutes') }}</span>
                   </div>
                   <div class="info-stat-divider"></div>
                   <div class="info-stat-item">
                     <span class="material-symbols-outlined">quiz</span>
                     <span class="info-stat-value">{{ totalQuestions }}</span>
-                    <span class="info-stat-label">题目</span>
+                    <span class="info-stat-label">{{ t('totalQuestions') }}</span>
                   </div>
                   <div class="info-stat-divider"></div>
                   <div class="info-stat-item">
                     <span class="material-symbols-outlined">grade</span>
                     <span class="info-stat-value">{{ autoTotalScore }}</span>
-                    <span class="info-stat-label">总分</span>
+                    <span class="info-stat-label">{{ t('totalScore') }}</span>
                   </div>
                 </div>
                 <div class="info-card-desc" v-if="form.description">
@@ -173,18 +175,18 @@
 
             <div class="rules-card">
               <div class="rules-card-header">
-                <span>题目设置</span>
+                <span>{{ t('subjectSetting') }}</span>
               </div>
               <div class="rules-card-body">
                 <div class="rules-list-compact">
                   <div class="rule-item-compact" v-for="(item, index) in selectedSubjects" :key="index">
                     <div class="rule-item-info">
-                      <span class="rule-item-subject">{{ item.subjectName }}</span>
-                      <span class="rule-item-bank">{{ item.bankName }}</span>
+                      <span class="rule-item-subject">{{ t(item.subjectName) }}</span>
+                      <span class="rule-item-bank">{{ t(item.category) }}</span>
                     </div>
                     <div class="rule-item-count">
                       <span class="count-num">{{ item.count }}</span>
-                      <span class="count-unit">题</span>
+                      <span class="count-unit">{{ t('questions') }}</span>
                     </div>
                   </div>
                 </div>
@@ -198,10 +200,10 @@
           <div class="step-actions">
             <button class="step-btn step-btn-secondary" @click="prevStep">
               <span class="material-symbols-outlined">arrow_back</span>
-              <span>上一步</span>
+              <span>{{ t('prevStep') }}</span>
             </button>
             <button class="step-btn step-btn-primary" @click="createPaper" :disabled="!canProceed">
-              <span>创建试卷</span>
+              <span>{{ t('createPaper') }}</span>
               <span class="material-symbols-outlined">check</span>
             </button>
           </div>
@@ -209,51 +211,23 @@
       </div>
     </div>
 
-    <div class="picker-overlay" v-if="showBankModal" @click="showBankModal = false">
-      <div class="picker" @click.stop>
-        <div class="picker-header">
-          <button class="picker-btn cancel" @click="showBankModal = false">取消</button>
-          <span class="picker-title">添加科目</span>
-          <button class="picker-btn confirm" @click="addSubject">添加</button>
-        </div>
-        <div class="picker-body">
-          <div class="picker-column">
-            <div class="picker-list">
-              <div v-for="(bank, key) in banks" :key="key" class="picker-item" :class="{ active: linkage.bank === key }"
-                @click="selectBank(key)">
-                {{ bank.name }}
-              </div>
-            </div>
-          </div>
-          <div class="picker-column">
-            <div class="picker-list">
-              <div v-for="cat in getBankCategories(linkage.bank)" :key="cat.key" class="picker-item"
-                :class="{ active: linkage.category === cat.key }" @click="selectCategory(cat.key)">
-                {{ cat.name }}
-              </div>
-              <div class="picker-placeholder" v-if="!linkage.bank">请先选择题库</div>
-            </div>
-          </div>
-          <div class="picker-column">
-            <div class="picker-list">
-              <div v-for="subj in getCategorySubjects(linkage.bank, linkage.category)" :key="subj.key" class="picker-item"
-                :class="{ active: linkage.subject === subj.key }" @click="selectSubject(subj.key)">
-                {{ subj.name }}
-              </div>
-              <div class="picker-placeholder" v-if="!linkage.category">请先选择分类</div>
-            </div>
-          </div>
-        </div>
-      </div>
+    <div class="picker-container" v-if="showBankModal">
+      <SubjectPicker v-model="showBankModal" :bank-meta="bankMeta" @add="handleAddSubject" />
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref, reactive, computed } from 'vue'
+import { ref, reactive, computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
+import { useAppStore } from '@/stores/store'
+import SubjectPicker from '@/components/page/SubjectPicker.vue'
+import { t } from '@/utils/i18n'
 
 const router = useRouter()
+const store = useAppStore()
+
+const bankMeta = computed(() => store.bankMeta)
 
 const currentStep = ref(1)
 
@@ -263,25 +237,7 @@ const steps = [
   { id: 3, label: '预览确认' }
 ]
 
-function goToStep(stepId) {
-  if (stepId < currentStep.value) {
-    currentStep.value = stepId
-  }
-}
-
 const showBankModal = ref(false)
-
-const banks = ref({
-  atc: { name: '空管题库', children: {} },
-  airport: { name: '机场题库', children: {} }
-})
-
-const linkage = reactive({
-  bank: 'atc',
-  category: 'basic',
-  subject: '',
-  count: 10
-})
 
 const selectedSubjects = ref([])
 
@@ -293,24 +249,9 @@ const form = reactive({
   paperCategory: ''
 })
 
-function getBankCategories(bankKey) {
-  const bank = banks.value[bankKey]
-  if (!bank?.children) return []
-  return Object.entries(bank.children).map(([key, cat]) => ({
-    key,
-    name: cat.name
-  }))
-}
-
-function getCategorySubjects(bankKey, catKey) {
-  const bank = banks.value[bankKey]
-  if (!bank?.children?.[catKey]?.children) return []
-  return Object.entries(bank.children[catKey].children).map(([key, subj]) => ({
-    key: key,
-    name: subj.name,
-    count: subj.questions?.length || 0
-  }))
-}
+onMounted(async () => {
+  await store.loadBankMeta()
+})
 
 const totalQuestions = computed(() => {
   return selectedSubjects.value.reduce((sum, item) => sum + (item.count || 0), 0)
@@ -330,7 +271,7 @@ const canProceed = computed(() => {
   return true
 })
 
-function goBack() {
+function exitCreate() {
   if (confirm('确定要退出吗？已填写的内容将丢失。')) {
     router.back()
   }
@@ -351,64 +292,76 @@ function nextStep() {
   }
 }
 
-function selectBank(key) {
-  linkage.bank = key
-  linkage.category = ''
-  linkage.subject = ''
-}
-
-function selectCategory(key) {
-  linkage.category = key
-  linkage.subject = ''
-}
-
-function selectSubject(key) {
-  linkage.subject = key
-}
-
 function openBankModal() {
-  linkage.bank = 'atc'
-  linkage.category = 'basic'
-  linkage.subject = ''
   showBankModal.value = true
 }
 
-function addSubject() {
-  if (!linkage.bank || !linkage.category || !linkage.subject) return
-  
-  const isDuplicate = selectedSubjects.value.some(item => 
-    item.bankKey === linkage.bank && 
-    item.categoryKey === linkage.category && 
-    item.subjectKey === linkage.subject
+function handleAddSubject(data) {
+  const isDuplicate = selectedSubjects.value.some(item =>
+    item.category === data.category &&
+    item.scope === data.scope &&
+    item.subject === data.subject
   )
-  
+
   if (isDuplicate) {
-    alert('该科目已经添加过了！');
+    alert('该科目已经添加过了！')
     return
   }
 
-  const bankName = banks.value[linkage.bank]?.name || ''
-
   selectedSubjects.value.push({
-    bankKey: linkage.bank,
-    categoryKey: linkage.category,
-    subjectKey: linkage.subject,
-    bankName,
-    subjectName: linkage.subject,
-    count: linkage.count || 10,
+    category: data.category,
+    scope: data.scope,
+    subject: data.subject,
+    subjectName: data.subject,
+    bankName: data.category,
+    count: 10,
     score: 2,
-    maxCount: 50
+    maxCount: data.count
   })
-
-  showBankModal.value = false
 }
 
 function removeSubject(index) {
   selectedSubjects.value.splice(index, 1)
 }
 
-function createPaper() {
-  alert('试卷创建成功')
+async function createPaper() {
+  const allQuestions = []
+
+  for (const item of selectedSubjects.value) {
+    if (item.count <= 0) continue
+
+    const questions = await store.getSubjectQuestions(
+      item.category,
+      item.scope,
+      item.subject,
+      'shuffle'
+    )
+    
+    const selected = questions.slice(0, item.count)
+    allQuestions.push(...selected)
+  }
+
+  const paper = {
+    id: Date.now(),
+    title: form.title,
+    description: form.description,
+    duration: parseInt(form.duration) || 120,
+    paperCategory: form.paperCategory,
+    questionCount: allQuestions.length,
+    totalScore: autoTotalScore.value || allQuestions.length,
+    subjects: selectedSubjects.value.map(s => ({
+      subjectName: s.subjectName,
+      category: s.category,
+      scope: s.scope,
+      count: s.count,
+      score: s.score
+    })),
+    questions: allQuestions,
+    createdAt: Date.now()
+  }
+
+  await store.addExamPaper(paper)
+  alert(t('createPaperSuccess') || '试卷创建成功')
   router.push('/exam')
 }
 </script>
@@ -584,7 +537,6 @@ function createPaper() {
 .step-header p {
   font-size: 15px;
   color: var(--text-secondary);
-  margin: 18px 0 0;
 }
 
 .form-section {
@@ -676,14 +628,15 @@ function createPaper() {
 }
 
 .step-btn {
-  flex: 1;
+  flex: 0.8;
+  margin: 0 auto;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: var(--spacing-sm);
   padding: var(--spacing-md);
   border: none;
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-full);
   font-size: var(--font-size-lg);
   font-weight: var(--font-weight-semibold);
   cursor: pointer;
@@ -721,6 +674,31 @@ function createPaper() {
   font-weight: var(--font-weight-semibold);
 }
 
+.add-subject-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-md);
+  background: var(--background);
+  border: 1px dashed var(--border-color);
+  border-radius: var(--radius-lg);
+  color: var(--primary);
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.add-subject-btn:hover {
+  border-color: var(--primary);
+  background: var(--primary-light);
+}
+
+.add-subject-btn:active {
+  transform: scale(0.98);
+}
+
 .subject-list {
   display: flex;
   flex-direction: column;
@@ -729,69 +707,124 @@ function createPaper() {
 
 .subject-card {
   background: var(--background);
-  border-radius: var(--radius-lg);
-  padding: var(--spacing-md);
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  transition: all 0.2s;
 }
 
-.subject-card-header {
+.subject-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.subject-card-row {
   display: flex;
   align-items: center;
-  gap: var(--spacing-sm);
-  margin-bottom: var(--spacing-sm);
+  justify-content: space-between;
+}
+
+.subject-card-row-top {
+  margin-bottom: 12px;
+}
+
+.subject-card-row-bottom {
+  gap: 16px;
+}
+
+.subject-card-main {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  min-width: 0;
 }
 
 .subject-card-name {
-  font-size: var(--font-size-md);
-  font-weight: var(--font-weight-semibold);
+  font-size: 15px;
+  font-weight: 600;
+  color: #1a1a1a;
 }
 
 .subject-card-meta {
-  font-size: var(--font-size-sm);
-  color: var(--text-secondary);
+  font-size: 11px;
+  color: #8e8e93;
+  background: #f2f2f7;
+  padding: 2px 8px;
+  border-radius: 4px;
+  white-space: nowrap;
 }
 
 .btn-delete {
-  margin-left: auto;
+  flex-shrink: 0;
   width: 28px;
   height: 28px;
   border: none;
-  background: var(--color-gray-100);
-  border-radius: 50%;
+  background: #f5f5f5;
+  border-radius: 8px;
   cursor: pointer;
+  color: #8e8e93;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
 }
 
-.subject-card-body {
-  display: flex;
-  gap: var(--spacing-md);
+.btn-delete:hover {
+  background: #ffe5e5;
+  color: #ff3b30;
 }
 
 .subject-card-field {
   flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .field-label {
-  font-size: var(--font-size-sm);
-  color: var(--text-secondary);
+  font-size: 13px;
+  color: #8e8e93;
+  white-space: nowrap;
 }
 
 .field-input-wrap {
   display: flex;
   align-items: center;
   gap: 4px;
-  margin-top: 4px;
+  flex: 1;
 }
 
 .field-input {
-  width: 60px;
-  padding: var(--spacing-sm);
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius-md);
+  width: 52px;
+  height: 32px;
+  padding: 0 8px;
+  border: 1px solid #e5e5ea;
+  border-radius: 8px;
   text-align: center;
+  font-size: 14px;
+  color: #1a1a1a;
+  background: #f2f2f7;
+  transition: all 0.2s;
+  -moz-appearance: textfield;
+}
+
+.field-input::-webkit-outer-spin-button,
+.field-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.field-input:focus {
+  outline: none;
+  border-color: #007aff;
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.1);
 }
 
 .field-suffix {
-  font-size: var(--font-size-sm);
-  color: var(--text-secondary);
+  font-size: 12px;
+  color: #8e8e93;
+  white-space: nowrap;
 }
 
 .empty-tip {
@@ -956,92 +989,14 @@ function createPaper() {
   color: var(--text-secondary);
 }
 
-.picker-overlay {
+.picker-container {
   position: fixed;
   top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
-  z-index: 1000;
-}
-
-.picker {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: var(--background);
-  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
-  max-height: 70vh;
-}
-
-.picker-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: var(--spacing-md);
-  border-bottom: 1px solid var(--border-color);
-}
-
-.picker-btn {
-  padding: var(--spacing-sm) var(--spacing-md);
-  border: none;
-  background: transparent;
-  font-size: var(--font-size-md);
-  cursor: pointer;
-}
-
-.picker-btn.cancel {
-  color: var(--text-secondary);
-}
-
-.picker-btn.confirm {
-  color: var(--primary);
-  font-weight: var(--font-weight-semibold);
-}
-
-.picker-title {
-  font-size: var(--font-size-lg);
-  font-weight: var(--font-weight-semibold);
-}
-
-.picker-body {
-  display: flex;
-  overflow-x: auto;
-  max-height: 60vh;
-}
-
-.picker-column {
-  flex: 1;
-  min-width: 120px;
-  border-right: 1px solid var(--border-color);
-}
-
-.picker-column:last-child {
-  border-right: none;
-}
-
-.picker-list {
-  padding: var(--spacing-sm);
-}
-
-.picker-item {
-  padding: var(--spacing-md);
-  text-align: center;
-  cursor: pointer;
-  border-radius: var(--radius-md);
-}
-
-.picker-item.active {
-  background: var(--primary-light);
-  color: var(--primary);
-}
-
-.picker-placeholder {
-  padding: var(--spacing-lg);
-  text-align: center;
-  color: var(--text-secondary);
-  font-size: var(--font-size-sm);
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: var(--app-max-width);
+  height: 100vh;
+  z-index: 100;
 }
 </style>
