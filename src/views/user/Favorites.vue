@@ -8,7 +8,7 @@
           <span class="material-symbols-outlined">arrow_back</span>
         </button>
         <h1>{{ t('favorites') }}</h1>
-        <button class="clear-btn" @click="clearAll" v-if="favoritesList.length > 0">
+        <button class="clear-btn" @click="clearAll" :disabled="favoritesList.length <= 0">
           <span class="material-symbols-outlined">delete_sweep</span>
         </button>
       </header>
@@ -480,7 +480,7 @@ function formatAnswer(answer) {
   color: var(--on-primary);
   border: none;
   border-radius: var(--radius-xl);
-  padding: var(--spacing-md) var(--spacing-3xl);
+  padding: var(--spacing-md) var(--spacing-xl);
   font-size: var(--font-size-lg);
   font-weight: var(--font-weight-bold);
   cursor: pointer;

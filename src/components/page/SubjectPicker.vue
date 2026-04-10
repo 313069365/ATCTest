@@ -9,7 +9,7 @@
       </div>
       <div class="picker-body">
         <div class="picker-column">
-          <div class="picker-column-header">{{ t('questionBank') }}</div>
+          <!-- <div class="picker-column-header">{{ t('questionBank') }}</div> -->
           <div class="picker-list">
             <div v-for="(info, key) in categories" :key="key" class="picker-item"
               :class="{ active: selection.category === key }" @click="selectCategory(key)">
@@ -18,7 +18,7 @@
           </div>
         </div>
         <div class="picker-column">
-          <div class="picker-column-header">{{ t('scope') }}</div>
+          <!-- <div class="picker-column-header">{{ t('scope') }}</div> -->
           <div class="picker-list">
             <div v-for="scope in getScopes(selection.category)" :key="scope" class="picker-item"
               :class="{ active: selection.scope === scope }" @click="selectScope(scope)">
@@ -28,7 +28,7 @@
           </div>
         </div>
         <div class="picker-column">
-          <div class="picker-column-header">{{ t('subject') }}</div>
+          <!-- <div class="picker-column-header">{{ t('subject') }}</div> -->
           <div class="picker-list">
             <div v-for="subj in getSubjects(selection.category, selection.scope)" :key="subj.name" class="picker-item"
               :class="{ active: selection.subject === subj.name }" @click="selectSubject(subj.name)">
@@ -87,7 +87,7 @@ async function loadBankMetaIfNeeded() {
 function setDefaultSelection() {
   const store = useAppStore()
   const meta = store.bankMeta
-  
+
   const firstCategory = Object.keys(meta)[0]
   if (firstCategory) {
     selection.category = firstCategory
@@ -195,7 +195,7 @@ function handleConfirm() {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: var(--spacing-md);
+  padding: var(--spacing-sm);
   border-bottom: 1px solid var(--border-color);
 }
 
@@ -230,6 +230,7 @@ function handleConfirm() {
   display: flex;
   overflow-x: auto;
   max-height: 60vh;
+  min-height: 50vh;
 }
 
 .picker-column {
@@ -245,6 +246,7 @@ function handleConfirm() {
 }
 
 .picker-column-header {
+  text-align: center;
   padding: var(--spacing-sm) var(--spacing-md);
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-semibold);
@@ -258,7 +260,7 @@ function handleConfirm() {
 }
 
 .picker-item {
-  padding: var(--spacing-md);
+  padding: var(--spacing-sm);
   text-align: center;
   cursor: pointer;
   border-radius: var(--radius-md);
