@@ -14,10 +14,11 @@
             <span class="material-symbols-outlined">add</span>
             <span>{{ t('createPaper') }}</span>
           </button>
-          <button class="paper-action-btn" @click="uploadPpaper">
+          <button class="paper-action-btn" @click="triggerImport">
             <span class="material-symbols-outlined">upload</span>
             <span>{{ t('importPaper') }}</span>
           </button>
+          <input type="file" ref="fileInput" accept=".json" @change="handleImport" style="display: none">
         </div>
 
         <h2 class="section-title">{{ t('paperList') }}</h2>
@@ -27,7 +28,7 @@
             <div class="paper-header">
               <span class="paper-tag">{{ paper.paperCategory || t('mockTest') }}</span>
               <div class="paper-actions-btns">
-                <button class="icon-btn-sm">
+                <button class="icon-btn-sm" @click="exportPaper(paper)">
                   <span class="material-symbols-outlined">file_download</span>
                 </button>
                 <button class="icon-btn-sm delete" @click="deletePaper(paper.id)">
@@ -77,7 +78,7 @@
 </template>
 
 <script setup>
-import { computed, onMounted } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAppStore } from '@/stores/store'
 import { t } from '@/utils/i18n'
@@ -97,8 +98,26 @@ function formatDate(timestamp) {
   return `${date.getMonth() + 1}月${date.getDate()}日`
 }
 
-function uploadPpaper() {
-  // TODO: 实现导入功能
+function triggerImport() {
+  fileInput.value.click()
+}
+
+async function handleImport(event) {
+  const file = event.target.files[0]
+  if (!file) return
+  
+  try {
+    await store.importPaper(file)
+    alert(t('importSuccess') || '导入成功')
+  } catch (err) {
+    alert((t('importFailed') || '导入失败') + ': ' + err.message)
+  }
+  
+  event.target.value = ''
+}
+
+function exportPaper(paper) {
+  store.exportPaper(paper)
 }
 
 function deletePaper(paperId) {
@@ -110,6 +129,8 @@ function deletePaper(paperId) {
 function startExam(paperId) {
   router.push(`/exam/paper?id=${paperId}`)
 }
+
+const fileInput = ref(null)
 </script>
 
 <style scoped>

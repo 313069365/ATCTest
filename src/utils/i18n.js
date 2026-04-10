@@ -76,6 +76,8 @@ const translations = {
     mockTest: "Mock Test",
     noDescription: "No description",
     confirmDeletePaper: "Are you sure to delete this paper?",
+    importSuccess: "Import successful",
+    importFailed: "Import failed",
 
     atc: "ATC",
     airTrafficManagement: "airTrafficManagement",
@@ -256,6 +258,8 @@ const translations = {
     mockTest: "模拟测试",
     noDescription: "暂无描述",
     confirmDeletePaper: "确定要删除这份试卷吗？",
+    importSuccess: "导入成功",
+    importFailed: "导入失败",
 
     atc: "空管",
     airTrafficManagement: "空中交通管理",

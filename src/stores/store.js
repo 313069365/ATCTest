@@ -390,6 +390,96 @@ export const useAppStore = defineStore("app", () => {
     examPresets.value = filtered;
   }
 
+  /**
+   * 验证试卷数据结构
+   * @param {Object} paper - 试卷对象
+   * @returns {Object} { valid: boolean, errors: string[] }
+   */
+  function validatePaper(paper) {
+    const errors = []
+
+    if (!paper.title || !paper.title.trim()) {
+      errors.push('缺少试卷标题')
+    }
+
+    if (!paper.questions || !Array.isArray(paper.questions)) {
+      errors.push('题目格式无效')
+    }
+
+    if (paper.questions && paper.questions.length > 0) {
+      paper.questions.forEach((q, index) => {
+        if (!q.meta) {
+          errors.push(`第${index + 1}题：缺少 meta 信息`)
+        } else {
+          if (!q.meta.category) {
+            errors.push(`第${index + 1}题：缺少 category`)
+          }
+          if (!q.meta.scope) {
+            errors.push(`第${index + 1}题：缺少 scope`)
+          }
+          if (!q.meta.subject) {
+            errors.push(`第${index + 1}题：缺少 subject`)
+          }
+        }
+      })
+    }
+
+    return {
+      valid: errors.length === 0,
+      errors
+    }
+  }
+
+  /**
+   * 导出试卷为 JSON 文件
+   */
+  function exportPaper(paper) {
+    const json = JSON.stringify(paper, null, 2)
+    const blob = new Blob([json], { type: 'application/json' })
+    const url = URL.createObjectURL(blob)
+    const a = document.createElement('a')
+    a.href = url
+    const safeTitle = paper.title.replace(/[^a-zA-Z0-9\u4e00-\u9fa5]/g, '_')
+    a.download = `ATCTest考卷_${safeTitle}_${Date.now()}.json`
+    a.click()
+    URL.revokeObjectURL(url)
+  }
+
+  /**
+   * 导入试卷
+   */
+  function importPaper(file) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader()
+      reader.onload = (e) => {
+        try {
+          const paper = JSON.parse(e.target.result)
+
+          const validation = validatePaper(paper)
+          if (!validation.valid) {
+            reject(new Error(validation.errors.join('; ')))
+            return
+          }
+
+          paper.id = Date.now()
+          paper.createdAt = Date.now()
+
+          paper.questions = paper.questions.map((q, index) => ({
+            ...q,
+            id: paper.id * 1000 + index
+          }))
+
+          addExamPaper(paper)
+          resolve(paper)
+        } catch (err) {
+          reject(err)
+        }
+      }
+      reader.onerror = () => reject(new Error('文件读取失败'))
+      reader.readAsText(file)
+    })
+  }
+
   // 导出
   return {
     // 题库状态
@@ -443,6 +533,9 @@ export const useAppStore = defineStore("app", () => {
     loadExamPresets,
     saveExamPreset,
     deleteExamPreset,
+    validatePaper,
+    exportPaper,
+    importPaper,
 
     // 初始化
     init,

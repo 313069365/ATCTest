@@ -349,8 +349,8 @@ async function createPaper() {
     paperCategory: form.paperCategory,
     questionCount: allQuestions.length,
     totalScore: autoTotalScore.value || allQuestions.length,
-    subjects: selectedSubjects.value.map(s => ({
-      subjectName: s.subjectName,
+    bankInfo: selectedSubjects.value.map(s => ({
+      subject: s.subjectName,
       category: s.category,
       scope: s.scope,
       count: s.count,
@@ -1000,3 +1000,5 @@ async function createPaper() {
   z-index: 100;
 }
 </style>
+
+
