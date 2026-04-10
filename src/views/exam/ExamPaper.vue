@@ -1,112 +1,266 @@
 <template>
   <div class="page">
     <header class="top-bar">
-      <div class="top-bar-left">
-        <button class="back-btn" @click="exitExam">
-          <span class="material-symbols-outlined">arrow_back</span>
+      <div class="top-bar-left" @click="exitExam">
+        <button class="back-btn">
+          <span class="material-symbols-outlined">close</span>
         </button>
         <div class="header-title">
-          <h1>2024年空管英语模拟考试</h1>
+          <h1>{{ paper?.title || t('examPaper') }}</h1>
         </div>
       </div>
       <div class="top-bar-right">
-        <button class="grid-btn" @click="toggleGrid">
+        <div class="timer-display" :class="{ warning: remainingSeconds < 300 }">
+          <span class="material-symbols-outlined">timer</span>
+          <span>{{ remainingTimeDisplay }}</span>
+        </div>
+        <button class="grid-btn" :class="{ active: showAnswerCard }" @click="toggleAnswerCard">
           <span class="material-symbols-outlined">grid_view</span>
         </button>
       </div>
     </header>
 
-    <div class="timer-bar">
-      <div class="timer-info">
-        <span class="material-symbols-outlined">timer</span>
-        <span class="time">01:45:30</span>
-      </div>
-    </div>
-
     <div class="progress-bar-container">
       <div class="progress-bar">
-        <div class="progress" style="width: 35%"></div>
+        <div class="progress" :style="{ width: progress + '%' }"></div>
       </div>
-      <span class="progress-text">35/100</span>
+      <span class="progress-text">{{ currentIndex + 1 }}/{{ questions.length }}</span>
     </div>
 
-    <main class="content">
-      <div class="question-meta">
-        <span class="question-type-tag">单选题</span>
-        <span class="question-id">题目编号：Q001</span>
-        <button class="mark-btn">
-          <span class="material-symbols-outlined">bookmark_border</span>
-        </button>
+    <main class="question-container">
+      <div v-if="loading" style="text-align: center; padding: 40px">
+        <p>{{ t('loadingQuestions') }}</p>
       </div>
+      <div v-else-if="!paper" style="text-align: center; padding: 40px">
+        <p>{{ t('paperNotFound') }}</p>
+      </div>
+      <template v-else>
+        <div v-if="currentQuestion">
+          <QuestionRenderer :question="currentQuestion" mode="exam" :user-answer="userAnswers[currentQuestion?.id]" @answer="handleAnswer" />
 
-      <div class="question-section">
-        <h2 class="question-text">
-          在无线电话中，机场管制服务管制员的呼号是__________。
-        </h2>
-      </div>
-
-      <div class="options-list">
-        <div class="option-item">
-          <span class="option-radio"></span>
-          <span class="option-text">A. 塔台</span>
+          <div class="question-actions">
+            <button class="mark-btn" :class="{ active: markedQuestions.has(currentQuestion.id) }" @click="toggleMark">
+              <span class="material-symbols-outlined">{{ markedQuestions.has(currentQuestion.id) ? 'bookmark' : 'bookmark_border' }}</span>
+              <span class="mark-text">{{ markedQuestions.has(currentQuestion.id) ? t('marked') : t('mark') }}</span>
+            </button>
+          </div>
         </div>
-        <div class="option-item selected">
-          <span class="option-radio selected"></span>
-          <span class="option-text">B. 地面</span>
-        </div>
-        <div class="option-item">
-          <span class="option-radio"></span>
-          <span class="option-text">C. 进近</span>
-        </div>
-        <div class="option-item">
-          <span class="option-radio"></span>
-          <span class="option-text">D. 管制</span>
-        </div>
-      </div>
+      </template>
     </main>
 
-    <QuestionNavbar />
-    <AnswerCard v-if="showGrid" @close="closeGrid" @exit="submitPaper" />
+    <QustionNavbar :prevDisabled="currentIndex === 0" :isLast="currentIndex === questions.length - 1" @prev="prevQuestion" @next="nextQuestion" @submit="submitPaper" />
 
-    <!-- <footer class="question-footer">
-      <button class="footer-btn prev">
-        <span class="material-symbols-outlined">arrow_back</span>
-        上一题
-      </button>
-      <button class="footer-btn next">
-        下一题
-        <span class="material-symbols-outlined">arrow_forward</span>
-      </button>
-    </footer> -->
+    <AnswerCard v-if="showAnswerCard" :questions="questions" :currentIndex="currentIndex" :currentSubIndex="0" :userAnswers="userAnswers" buttonText="submitPaper" @close="closeAnswerCard" @exit="submitPaper" @go="gotoQuestion" />
   </div>
 </template>
 
 <script setup>
-import { ref } from 'vue'
-import { useRouter } from 'vue-router'
-import QuestionNavbar from '@/components/layout/QuestionNavbar.vue'
+import { ref, computed, onMounted, onUnmounted } from 'vue'
+import { useRouter, useRoute } from 'vue-router'
 import AnswerCard from '@/components/page/AnswerCard.vue'
+import QustionNavbar from '@/components/layout/QuestionNavbar.vue'
+import QuestionRenderer from '@/components/question/QuestionRenderer.vue'
+import { useAppStore } from '@/stores/store'
+import { t } from '@/utils/i18n.js'
+
 const router = useRouter()
+const route = useRoute()
+const store = useAppStore()
 
-const showGrid = ref(false)
+const paper = ref(null)
+const questions = ref([])
+const currentIndex = ref(0)
+const userAnswers = ref({})
+const markedQuestions = ref(new Set())
+const showAnswerCard = ref(false)
+const loading = ref(true)
 
-const toggleGrid = () => {
-  showGrid.value = !showGrid.value
+// 计时器相关
+const duration = ref(0) // 分钟
+const elapsedSeconds = ref(0)
+const remainingSeconds = ref(0)
+let timerInterval = null
+
+const progress = computed(() => {
+  if (questions.value.length === 0) return 0
+  return Math.round(((currentIndex.value + 1) / questions.value.length) * 100)
+})
+
+const currentQuestion = computed(() => {
+  if (questions.value && questions.value.length > 0 && questions.value[currentIndex.value]) {
+    return questions.value[currentIndex.value]
+  }
+  return null
+})
+
+const remainingTimeDisplay = computed(() => {
+  const hours = Math.floor(remainingSeconds.value / 3600)
+  const minutes = Math.floor((remainingSeconds.value % 3600) / 60)
+  const seconds = remainingSeconds.value % 60
+  return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`
+})
+
+onMounted(async () => {
+  const paperId = parseInt(route.query.id)
+  
+  if (!paperId) {
+    router.push('/exam')
+    return
+  }
+
+  // 加载试卷列表
+  store.loadExamPapers()
+  
+  // 查找试卷
+  const foundPaper = store.examPapers.find(p => p.id === paperId)
+  
+  if (!foundPaper) {
+    loading.value = false
+    return
+  }
+
+  paper.value = foundPaper
+  questions.value = foundPaper.questions || []
+  duration.value = foundPaper.duration || 120
+  remainingSeconds.value = duration.value * 60
+  
+  loading.value = false
+
+  // 开始计时
+  startTimer()
+})
+
+onUnmounted(() => {
+  stopTimer()
+})
+
+const startTimer = () => {
+  if (timerInterval) clearInterval(timerInterval)
+  timerInterval = setInterval(() => {
+    elapsedSeconds.value++
+    remainingSeconds.value = Math.max(0, duration.value * 60 - elapsedSeconds.value)
+    
+    if (remainingSeconds.value === 0) {
+      autoSubmit()
+    }
+  }, 1000)
 }
 
-const submitPaper = (targetPath = '/exam/result') => {
-  try {
-    router.push(targetPath)
-  } catch (error) {
-    console.error('交卷失败:', error)
+const stopTimer = () => {
+  if (timerInterval) {
+    clearInterval(timerInterval)
+    timerInterval = null
   }
+}
+
+const toggleAnswerCard = () => {
+  showAnswerCard.value = !showAnswerCard.value
+}
+
+const closeAnswerCard = () => {
+  showAnswerCard.value = false
+}
+
+const toggleMark = () => {
+  if (!currentQuestion.value) return
+  const id = currentQuestion.value.id
+  if (markedQuestions.value.has(id)) {
+    markedQuestions.value.delete(id)
+  } else {
+    markedQuestions.value.add(id)
+  }
+}
+
+const handleAnswer = (answer) => {
+  if (!currentQuestion.value) return
+  const question = currentQuestion.value
+  userAnswers.value[question.id] = answer
+}
+
+const prevQuestion = () => {
+  if (currentIndex.value > 0) {
+    currentIndex.value--
+  }
+}
+
+const nextQuestion = () => {
+  if (currentIndex.value < questions.value.length - 1) {
+    currentIndex.value++
+  }
+}
+
+const gotoQuestion = (idx) => {
+  currentIndex.value = idx
+  closeAnswerCard()
+}
+
+const exitExam = () => {
+  if (confirm(t('confirmExitExam') || '确定要退出考试吗？')) {
+    stopTimer()
+    router.push('/exam')
+  }
+}
+
+const submitPaper = () => {
+  if (confirm(t('confirmSubmitPaper') || '确定要交卷吗？')) {
+    autoSubmit()
+  }
+}
+
+const autoSubmit = () => {
+  stopTimer()
+  
+  // 计算得分
+  let correctCount = 0
+  const totalScore = paper.value?.totalScore || 0
+  const questionCount = questions.value.length
+
+  questions.value.forEach((q) => {
+    const userAnswer = userAnswers.value[q.id]
+    const isCorrect = checkAnswer(q, userAnswer)
+    if (isCorrect) {
+      correctCount++
+    }
+  })
+
+  // 每题默认2分，计算用户得分
+  const defaultScore = 2
+  const userScore = correctCount * defaultScore
+
+  // 跳转到结果页
+  router.push({
+    path: '/exam/result',
+    query: {
+      paperId: paper.value.id,
+      totalQuestions: questionCount,
+      correctCount,
+      totalScore,
+      userScore,
+      elapsedTime: elapsedSeconds.value
+    }
+  })
+}
+
+const checkAnswer = (question, userAnswer) => {
+  if (userAnswer === undefined || userAnswer === null) return false
+  
+  const correctAnswer = question.answer
+  
+  if (question.type === 'multiple') {
+    if (!Array.isArray(userAnswer) || !Array.isArray(correctAnswer)) return false
+    const sortedUser = [...userAnswer].sort()
+    const sortedCorrect = [...correctAnswer].sort()
+    return JSON.stringify(sortedUser) === JSON.stringify(sortedCorrect)
+  }
+  
+  return userAnswer === correctAnswer
 }
 </script>
 
 <style scoped>
 .page {
   min-height: 100vh;
-  background: var(--background);
+  background: var(--background-secondary);
   max-width: var(--app-max-width);
   margin: 0 auto;
   padding-bottom: 80px;
@@ -130,11 +284,10 @@ const submitPaper = (targetPath = '/exam/result') => {
   display: flex;
   align-items: center;
   gap: var(--spacing-sm);
+  cursor: pointer;
 }
 
 .back-btn {
-  width: 40px;
-  height: 40px;
   border: none;
   background: transparent;
   border-radius: 50%;
@@ -145,6 +298,10 @@ const submitPaper = (targetPath = '/exam/result') => {
   color: var(--text-secondary);
 }
 
+.back-btn .material-symbols-outlined {
+  font-size: var(--font-size-3xl);
+}
+
 .header-title h1 {
   font-size: var(--font-size-md);
   font-weight: var(--font-weight-semibold);
@@ -153,50 +310,47 @@ const submitPaper = (targetPath = '/exam/result') => {
 
 .top-bar-right {
   display: flex;
+  align-items: center;
   gap: var(--spacing-sm);
+}
+
+.timer-display {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-mn);
+  padding: var(--spacing-sm) var(--spacing-md);
+  background: var(--color-gray-100);
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-md);
+  color: var(--primary);
+  font-weight: var(--font-weight-semibold);
+}
+
+.timer-display.warning {
+  color: var(--error);
+  background: var(--error-container);
+}
+
+.timer-display .material-symbols-outlined {
+  font-size: var(--font-size-2xl);
 }
 
 .grid-btn {
-  width: 40px;
-  height: 40px;
+  width: 45px;
+  height: 45px;
   border: none;
-  background: var(--color-gray-100);
-  border-radius: var(--radius-md);
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
 }
 
-.timer-bar {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: var(--spacing-sm) var(--spacing-md);
-  background: var(--primary);
-  color: var(--on-primary);
+.grid-btn .material-symbols-outlined {
+  font-size: var(--font-size-3xl);
 }
 
-.timer-info {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-sm);
-}
-
-.timer-info .time {
-  font-size: var(--font-size-lg);
-  font-weight: var(--font-weight-bold);
-}
-
-.submit-early-btn {
-  padding: var(--spacing-sm) var(--spacing-md);
-  background: rgba(255, 255, 255, 0.2);
-  border: none;
-  border-radius: var(--radius-md);
-  color: var(--on-primary);
-  font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-semibold);
-  cursor: pointer;
+.grid-btn.active .material-symbols-outlined {
+  font-variation-settings: 'FILL' 1;
 }
 
 .progress-bar-container {
@@ -217,7 +371,7 @@ const submitPaper = (targetPath = '/exam/result') => {
 
 .progress {
   height: 100%;
-  background: var(--primary);
+  background: var(--success);
   border-radius: var(--radius-full);
 }
 
@@ -228,127 +382,37 @@ const submitPaper = (targetPath = '/exam/result') => {
   text-align: right;
 }
 
-.content {
+.question-container {
   padding: var(--spacing-md);
 }
 
-.question-meta {
+.question-actions {
   display: flex;
-  align-items: center;
-  gap: var(--spacing-sm);
-  margin-bottom: var(--spacing-md);
-}
-
-.question-type-tag {
-  padding: var(--spacing-mn) var(--spacing-sm);
-  background: var(--primary-light);
-  color: var(--primary);
-  border-radius: var(--radius-sm);
-  font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-semibold);
-}
-
-.question-id {
-  font-size: var(--font-size-sm);
-  color: var(--text-secondary);
-  flex: 1;
+  justify-content: center;
+  padding: var(--spacing-md) 0;
 }
 
 .mark-btn {
-  width: 36px;
-  height: 36px;
-  border: none;
-  background: var(--color-gray-100);
-  border-radius: var(--radius-md);
   display: flex;
   align-items: center;
-  justify-content: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-sm) var(--spacing-md);
+  border: 1px solid var(--border-color);
+  background: var(--background);
+  border-radius: var(--radius-full);
   cursor: pointer;
   color: var(--text-secondary);
+  font-size: var(--font-size-sm);
+  transition: all 0.2s;
 }
 
-.question-text {
-  font-size: var(--font-size-lg);
-  font-weight: var(--font-weight-medium);
-  color: var(--on-surface);
-  line-height: 1.6;
-  margin-bottom: var(--spacing-lg);
+.mark-btn.active {
+  color: var(--warning);
+  border-color: var(--warning);
+  background: var(--warning-container);
 }
 
-.options-list {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-sm);
-}
-
-.option-item {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-md);
-  padding: var(--spacing-md);
-  background: var(--background-surface);
-  border: 1px solid var(--border-color-light);
-  border-radius: var(--radius-md);
-  cursor: pointer;
-}
-
-.option-item.selected {
-  border-color: var(--primary);
-  background: var(--primary-light);
-}
-
-.option-radio {
-  width: 20px;
-  height: 20px;
-  border: 2px solid var(--border-color-strong);
-  border-radius: 50%;
-  flex-shrink: 0;
-}
-
-.option-radio.selected {
-  border-color: var(--primary);
-  background: var(--primary);
-  box-shadow: inset 0 0 0 3px var(--background);
-}
-
-.option-text {
-  font-size: var(--font-size-md);
-  color: var(--on-surface);
-}
-
-.question-footer {
-  position: fixed;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100%;
-  max-width: var(--app-max-width);
-  display: flex;
-  justify-content: space-between;
-  padding: var(--spacing-sm) var(--spacing-md);
-  background: var(--background);
-  border-top: 1px solid var(--border-color-light);
-}
-
-.footer-btn {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-sm);
-  padding: var(--spacing-md) var(--spacing-lg);
-  border: none;
-  border-radius: var(--radius-md);
-  font-size: var(--font-size-md);
-  font-weight: var(--font-weight-semibold);
-  cursor: pointer;
-}
-
-.footer-btn.prev {
-  background: var(--background-surface);
-  color: var(--on-surface);
-}
-
-.footer-btn.next {
-  background: var(--primary);
-  color: var(--on-primary);
+.mark-btn .material-symbols-outlined {
+  font-size: 18px;
 }
 </style>

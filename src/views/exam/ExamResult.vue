@@ -2,81 +2,86 @@
   <div class="page">
     <div class="hero-section">
       <header class="top-bar">
-        <button class="home-btn">
+        <button class="home-btn" @click="goHome">
           <span class="material-symbols-outlined">home</span>
         </button>
-        <h1>考试成绩</h1>
+        <h1>{{ t('examResult') }}</h1>
         <button class="share-btn">
           <span class="material-symbols-outlined">share</span>
         </button>
       </header>
 
-      <div class="hero-content">
+      <div class="hero-content" v-if="hasResult">
         <div class="grade-badge" :class="gradeClass">
           <span class="material-symbols-outlined">emoji_events</span>
-          <span>优秀</span>
+          <span>{{ gradeText }}</span>
         </div>
 
         <div class="score-ring">
           <svg viewBox="0 0 120 120">
             <circle class="ring-bg" cx="60" cy="60" r="52" />
-            <circle class="ring-progress" cx="60" cy="60" r="52" style="stroke-dasharray: 326.7; stroke-dashoffset: 49;" />
+            <circle class="ring-progress" cx="60" cy="60" r="52" :style="ringStyle" />
           </svg>
           <div class="score-center">
-            <span class="score-main">85%</span>
-            <span class="score-sub">正确率</span>
+            <span class="score-main">{{ correctRate }}</span>
+            <span class="score-sub">{{ t('correctRate') }}</span>
           </div>
         </div>
 
         <div class="score-detail">
-          <span class="score-value">85</span>
+          <span class="score-value">{{ userScore }}</span>
           <span class="score-divider">/</span>
-          <span class="score-total">100 分</span>
+          <span class="score-total">{{ totalScore }} {{ t('score') }}</span>
         </div>
+      </div>
+
+      <div class="hero-content empty" v-else>
+        <span class="material-symbols-outlined">assignment</span>
+        <p>{{ t('noExamResult') }}</p>
       </div>
     </div>
 
     <main class="content">
       <section class="stats-section">
-        <div class="stats-grid">
+        <div class="stats-grid" v-if="hasResult">
           <div class="stat-card correct">
             <div class="stat-indicator"></div>
             <div class="stat-info">
-              <span class="stat-value">85</span>
-              <span class="stat-label">正确</span>
+              <span class="stat-value">{{ correctCount }}</span>
+              <span class="stat-label">{{ t('correct') }}</span>
             </div>
           </div>
           <div class="stat-card wrong">
             <div class="stat-indicator"></div>
             <div class="stat-info">
-              <span class="stat-value">15</span>
-              <span class="stat-label">错误</span>
+              <span class="stat-value">{{ wrongCount }}</span>
+              <span class="stat-label">{{ t('wrong') }}</span>
             </div>
           </div>
           <div class="stat-card total">
             <div class="stat-indicator"></div>
             <div class="stat-info">
-              <span class="stat-value">100</span>
-              <span class="stat-label">总题数</span>
+              <span class="stat-value">{{ totalQuestions }}</span>
+              <span class="stat-label">{{ t('totalQuestions') }}</span>
             </div>
           </div>
         </div>
       </section>
 
-      <section class="meta-section">
+      <section class="meta-section" v-if="hasResult">
         <div class="meta-card">
           <div class="meta-item">
             <span class="material-symbols-outlined">schedule</span>
             <div class="meta-text">
-              <span class="meta-label">用时</span>
-              <span class="meta-value">01:32:45</span>
+              <span class="meta-label">{{ t('timeUsed') }}</span>
+              <span class="meta-value">{{ formattedTime }}</span>
             </div>
           </div>
           <div class="meta-divider"></div>
           <div class="meta-item">
             <span class="material-symbols-outlined">calendar_today</span>
             <div class="meta-text">
-              <span class="meta-label">考试日期</span>
+              <span class="meta-label">{{ t('examDate') }}</span>
               <span class="meta-value">2024年1月15日</span>
             </div>
           </div>
@@ -118,7 +123,78 @@
 </template>
 
 <script setup>
-const gradeClass = 'excellent'
+import { computed } from 'vue'
+import { useRouter, useRoute } from 'vue-router'
+import { t } from '@/utils/i18n.js'
+
+const router = useRouter()
+const route = useRoute()
+
+const totalQuestions = computed(() => parseInt(route.query.totalQuestions) || 0)
+const correctCount = computed(() => parseInt(route.query.correctCount) || 0)
+const totalScore = computed(() => parseInt(route.query.totalScore) || 0)
+const userScore = computed(() => parseInt(route.query.userScore) || 0)
+const elapsedTime = computed(() => parseInt(route.query.elapsedTime) || 0)
+
+const wrongCount = computed(() => totalQuestions.value - correctCount.value)
+const correctRate = computed(() => {
+  if (totalQuestions.value === 0) return '0%'
+  return Math.round(correctCount.value / totalQuestions.value * 100) + '%'
+})
+
+const gradeClass = computed(() => {
+  const rate = parseInt(correctRate.value)
+  if (rate >= 90) return 'excellent'
+  if (rate >= 80) return 'good'
+  if (rate >= 60) return 'pass'
+  return 'fail'
+})
+
+const gradeText = computed(() => {
+  const map = {
+    excellent: t('excellent'),
+    good: t('good'),
+    pass: t('pass'),
+    fail: t('fail')
+  }
+  return map[gradeClass.value]
+})
+
+const ringStyle = computed(() => {
+  const rate = correctCount.value / totalQuestions.value
+  const circumference = 2 * Math.PI * 52
+  const offset = circumference * (1 - rate)
+  return {
+    strokeDasharray: circumference,
+    strokeDashoffset: offset
+  }
+})
+
+const formattedTime = computed(() => {
+  const seconds = elapsedTime.value
+  const hours = Math.floor(seconds / 3600)
+  const minutes = Math.floor((seconds % 3600) / 60)
+  const secs = seconds % 60
+  if (hours > 0) {
+    return `${hours}小时${minutes}分钟`
+  }
+  return `${minutes}分${secs}秒`
+})
+
+const hasResult = computed(() => totalQuestions.value > 0)
+
+const goHome = () => {
+  router.push('/exam')
+}
+
+const retakeExam = () => {
+  const paperId = route.query.paperId
+  if (paperId) {
+    router.push(`/exam/paper?id=${paperId}`)
+  } else {
+    router.push('/exam')
+  }
+}
 </script>
 
 <style scoped>

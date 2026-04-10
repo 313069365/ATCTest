@@ -6,7 +6,7 @@
           <span class="material-symbols-outlined">close</span>
         </button>
         <h3>答题卡</h3>
-        <button class="submit-btn" @click="$emit('exit')">退出</button>
+        <button class="submit-btn" @click="$emit('exit')">{{ t(buttonText) }}</button>
       </div>
 
       <div class="answer-card-body">
@@ -110,6 +110,10 @@ const props = defineProps({
   userAnswers: {
     type: Object,
     default: () => ({})
+  },
+  buttonText: {
+    type: String,
+    default: 'exit'
   }
 })
 

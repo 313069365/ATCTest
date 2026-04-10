@@ -132,7 +132,7 @@ const toggleFavorite = () => {
 
 // 是否需要显示检查按钮
 const shouldShowCheckBtn = computed(() => {
-  if (props.mode === 'review') return false
+  if (props.mode === 'review' || props.mode === 'exam') return false
   if (!props.question) return false
   if (props.showAnswer) return false
   
