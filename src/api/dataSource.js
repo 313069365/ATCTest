@@ -186,6 +186,20 @@ export function getQuestionBankInfo(category) {
 }
 
 /**
+ * 计算题库 Hash (SHA-256)
+ * 用于检测题库是否发生变化
+ */
+export async function computeBankHash() {
+  const allQuestions = fetchAllQuestions();
+  const jsonStr = JSON.stringify(allQuestions);
+  const encoder = new TextEncoder();
+  const data = encoder.encode(jsonStr);
+  const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+  const hashArray = Array.from(new Uint8Array(hashBuffer));
+  return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+}
+
+/**
  * 导入题库文件
  */
 export async function importQuestions(file, options = {}) {
@@ -225,4 +239,5 @@ export default {
   getQuestionBanks,
   getQuestionBankInfo,
   importQuestions,
+  computeBankHash,
 };

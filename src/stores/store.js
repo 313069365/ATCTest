@@ -134,6 +134,7 @@ export const useAppStore = defineStore("app", () => {
   /**
    * 加载题库数据
    * 检查是否已初始化，未初始化则存入 IndexedDB
+   * 通过 Hash 比对检测题库变化
    */
   async function loadQuestions() {
     loading.value = true;
@@ -141,10 +142,13 @@ export const useAppStore = defineStore("app", () => {
     try {
       await loadBankMeta();
 
-      const isInitialized = storage.getItem(STORAGE_KEY.APP_INITIALIZED);
+      const currentHash = await API.computeBankHash();
+      const storedHash = storage.getItem(STORAGE_KEY.BANK_HASH);
 
-      if (!isInitialized) {
+      if (!storedHash || currentHash !== storedHash) {
+        console.log('检测到题库变化，正在更新...');
         await loadAllQuestionsToIndexedDB();
+        storage.setItem(STORAGE_KEY.BANK_HASH, currentHash);
         storage.setItem(STORAGE_KEY.APP_INITIALIZED, true);
       }
     } catch (e) {
@@ -193,6 +197,30 @@ export const useAppStore = defineStore("app", () => {
   async function clearQuestionsCache() {
     await bankStorage.removeBank(STORAGE_KEY.BANK);
     rawQuestions.value = [];
+  }
+
+  /**
+   * 检查题库是否有更新
+   * @returns {Object} { hasUpdate, currentHash, storedHash }
+   */
+  async function checkForUpdates() {
+    const currentHash = await API.computeBankHash();
+    const storedHash = storage.getItem(STORAGE_KEY.BANK_HASH);
+    return {
+      hasUpdate: !storedHash || currentHash !== storedHash,
+      currentHash,
+      storedHash,
+    };
+  }
+
+  /**
+   * 强制刷新题库
+   * 清除缓存并重新加载
+   */
+  async function forceRefreshQuestions() {
+    storage.removeItem(STORAGE_KEY.BANK_HASH);
+    storage.removeItem(STORAGE_KEY.APP_INITIALIZED);
+    await loadQuestions();
   }
 
   // ========== 错题本 Actions ==========
@@ -494,6 +522,8 @@ export const useAppStore = defineStore("app", () => {
     loadSubjectQuestions,
     getSubjectQuestions,
     clearQuestionsCache,
+    checkForUpdates,
+    forceRefreshQuestions,
 
     // 错题本
     wrongBook,

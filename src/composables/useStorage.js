@@ -94,7 +94,6 @@ export const storage = {
       console.error("Storage setItem 失败:", e);
     }
   },
-
   /**
    * 获取数据
    */
