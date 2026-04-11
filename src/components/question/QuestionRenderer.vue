@@ -6,6 +6,7 @@
     @next-question="handleNextQuestion"
     @checkSub="handleCheckSub"
     @check="handleCheck"
+    @toggle-mark="handleToggleMark"
   />
 </template>
 
@@ -58,10 +59,14 @@ const props = defineProps({
   currentSubIndex: {
     type: Number,
     default: 0
+  },
+  isMarked: {
+    type: Boolean,
+    default: false
   }
 })
 
-const emit = defineEmits(['answer', 'next-question', 'checkSub', 'check'])
+const emit = defineEmits(['answer', 'next-question', 'checkSub', 'check', 'toggle-mark'])
 
 const componentMap = {
   single: SingleChoice,
@@ -91,5 +96,9 @@ const handleCheckSub = (index) => {
 
 const handleCheck = () => {
   emit('check')
+}
+
+const handleToggleMark = () => {
+  emit('toggle-mark')
 }
 </script>

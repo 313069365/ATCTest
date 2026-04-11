@@ -37,14 +37,7 @@
       <template v-else>
         <div v-if="currentQuestion">
           <QuestionRenderer :question="currentQuestion" mode="exam" :user-answer="userAnswers[currentQuestion?.id]"
-            @answer="handleAnswer" />
-
-          <div class="question-actions">
-            <button class="mark-btn" :class="{ active: markedQuestions.has(currentQuestion.id) }" @click="toggleMark">
-              <span class="material-symbols-outlined">bookmark</span>
-              <span class="mark-text">{{ markedQuestions.has(currentQuestion.id) ? t('marked') : t('mark') }}</span>
-            </button>
-          </div>
+            :is-marked="markedQuestions.has(currentQuestion.id)" @answer="handleAnswer" @toggle-mark="toggleMark" />
         </div>
       </template>
     </main>
@@ -389,40 +382,5 @@ const checkAnswer = (question, userAnswer) => {
 
 .question-container {
   padding: var(--spacing-md);
-}
-
-.question-actions {
-  display: flex;
-  justify-content: center;
-  padding: var(--spacing-md) 0;
-}
-
-.mark-btn {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-sm);
-  padding: var(--spacing-sm) var(--spacing-md);
-  border: 1px solid var(--border-color);
-  background: var(--background);
-  border-radius: var(--radius-full);
-  cursor: pointer;
-  color: var(--text-secondary);
-  font-size: var(--font-size-sm);
-  transition: all 0.2s;
-}
-
-.mark-btn.active {
-  color: var(--warning);
-  border-color: var(--warning);
-  background: var(--warning-container);
-}
-
-.mark-btn .material-symbols-outlined {
-  font-size: 18px;
-}
-
-.mark-btn.active .material-symbols-outlined {
-  font-size: 18px;
-  font-variation-settings: 'FILL' 1;
 }
 </style>

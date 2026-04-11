@@ -4,7 +4,10 @@
     <div class="question-meta">
       <span class="question-type-tag">{{ t(question?.type) }}</span>
       <span class="question-id">{{ t('questionId') }}: {{ question?.id }}</span>
-      <button class="fav-btn" :class="{ active: isFavorited }" @click="toggleFavorite">
+      <button v-if="mode === 'exam'" class="mark-btn" :class="{ active: isMarked }" @click="$emit('toggle-mark')">
+        <span class="material-symbols-outlined">bookmark</span>
+      </button>
+      <button v-else class="fav-btn" :class="{ active: isFavorited }" @click="toggleFavorite">
         <span class="material-symbols-outlined">kid_star</span>
       </button>
     </div>
@@ -103,10 +106,14 @@ const props = defineProps({
   answerStatus: {
     type: Object,
     default: () => ({})
+  },
+  isMarked: {
+    type: Boolean,
+    default: false
   }
 })
 
-const emit = defineEmits(['answer', 'check'])
+const emit = defineEmits(['answer', 'check', 'toggle-mark'])
 
 const {
   shouldShowCheckBtn,
@@ -241,6 +248,26 @@ const handleSelect = (index) => {
 }
 
 .fav-btn.active .material-symbols-outlined {
+  font-variation-settings: 'FILL' 1;
+}
+
+.mark-btn {
+  margin-left: auto;
+  padding: var(--spacing-xs);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mark-btn.active {
+  color: var(--warning);
+}
+
+.mark-btn.active .material-symbols-outlined {
   font-variation-settings: 'FILL' 1;
 }
 
