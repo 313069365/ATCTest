@@ -20,7 +20,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "着陆入口是跑道可用着陆部分的起端，即着陆方向的跑道入口端，标志跑道可供着陆使用的起点。",
+    "explanation": "",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -45,7 +45,7 @@
     "shuffle": true,
     "degree": 2,
     "subs": null,
-    "explanation": "设有停止道的跑道，净空道起点在跑道末端；停止道起端即跑道可用着陆部分终点。",
+    "explanation": "",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
