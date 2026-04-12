@@ -9,6 +9,6 @@ export default defineConfig({
       "@": "/src",
     },
   },
-  base: "/ATCTest/",
-  // base: "./",
+  // base: "/ATCTest/",
+  base: "./",
 });

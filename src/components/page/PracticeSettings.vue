@@ -139,7 +139,7 @@ const emit = defineEmits(['close', 'start'])
 // 默认配置
 const DEFAULT_SETTINGS = {
   questionSort: QUESTION_SORT.SEQUENCE,
-  optionsSort: false,
+  optionsSort: true,
   practiceMode: 'answer',
   showAnswerMode: 'immediate',
   autoJump: false
@@ -170,7 +170,7 @@ const gotopage = () => {
   emit('close')
   router.push({
     path: '/practice/quiz',
-    query: { 
+    query: {
       practiceData: JSON.stringify(practiceData),
       newPractice: 'true'
     }

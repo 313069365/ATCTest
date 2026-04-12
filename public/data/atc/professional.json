@@ -13572,7 +13572,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "管制员发现航空器在转弯时切过了仪表着陆系统【航向道】，或者航空器将进入非侵入区时，应当指挥航空器立即回到正确的航迹上来。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -13692,7 +13692,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "半混合运行",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -13752,7 +13752,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "独立平行仪表进近",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -13832,7 +13832,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "修正区是指一个附加的容差空域，是在被威胁航空器完成其机动避让飞行的时间内【非正常飞行航空器】所需的空域容差。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -13872,7 +13872,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "正常运行区的长度应当从跑道入口处开始，沿进近反方向延伸至【航空器加入跑道中心线延长线的一点为止】。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -13892,7 +13892,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "相关平行仪表进近模式，即在相邻的平行跑道仪表着陆系统上进近的航空器之间【需要】配备规定的雷达间隔时，在平行的跑道上同时进行的仪表着陆系统进近的运行模式",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -13912,7 +13912,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "独立平行仪表进近模式，即在相邻的平行跑道仪表着陆系统上进近的航空器之间【不需要】配备规定的雷达间隔时，在平行的跑道上同时进行的仪表着陆系统进近的运行模式；",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -13932,7 +13932,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "平行跑道的同时运行，按照跑道分别用于进近和离场的使用方式可分为【半混合运行】和混合运行",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -14025,7 +14025,7 @@
     },
     "id": "12124059",
     "type": "single",
-    "stem": "实施平行跑道独立进近是，发现航空器正在进入非侵入区，负责监视相邻仪表着陆系统航向道活动的雷达管制员或者承担相应职责的进近管制员，应当指挥在其监视仪表着陆系统航向道上受影响的航空器立即爬升和转弯到指定的高度和航向，以避开偏航的航空器。",
+    "stem": "实施平行跑道独立进近是，发现航空器正在进入非侵入区，负责监视相邻仪表着陆系统航向道活动的雷达管制员或者承担相应职责的进近管制员，应当指挥在其监视仪表着陆系统航向道上受影响的航空器立即(爬升和转弯)到指定的高度和航向，以避开偏航的航空器。",
     "options": ["A. 保持航向", "B. 下降", "C. 爬升", "D. 爬升和转弯"],
     "answer": ["D. 爬升和转弯"],
     "difficulty": 1,
@@ -14057,7 +14057,7 @@
     "shuffle": true,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "当有关地面设施符合规定进近类型的必要标准时，可以在隔离平行运行中使用下述类型进近程序：【（一）仪表着陆系统精密进近；（二）目视进近】。参考答案：MLS 微波着陆系统，答案可能有误。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -14077,7 +14077,7 @@
     "shuffle": true,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "民航局受理申请后，空中交通运行机构应当会同机场管理机构按照民航局要求组织开展试验运行。平行跑道同时仪表运行的试验运行期一般不少于【一年】，试验运行期不计入审批期限。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -14097,7 +14097,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "空中交通运行机构实施平行跑道同时仪表运行，【应当】提交下列申请材料：（一）申请开展平行跑道同时仪表运行的准备情况；（二）针对平行跑道同时仪表运行可行性论证报告；（三）开展平行跑道同时仪表运行的设备、人员、空域等条件的说明；（四）平行跑道同时仪表运行的运行模式、运行方案和日期；（五）平行跑道同时仪表运行的仪表飞行程序；（六）现行有效的平行跑道同时仪表运行批复的复印件。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -14117,7 +14117,7 @@
     "shuffle": true,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "试验运行应当划分为【两个及以上】阶段，分别对应不同气象条件。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -14207,7 +14207,7 @@
     "shuffle": true,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "违反本规定第五十二条的规定，擅自实施平行跑道同时仪表运行的，由民航局或者民航地区管理局责令其停止运行，可以对有关单位处警告或者【 1 万元以上 3 万元以下】的罚款",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -14220,7 +14220,7 @@
     },
     "id": "12124068",
     "type": "single",
-    "stem": "实施平行跑道同时仪表运行的单位，未能保持地面保障设施、雷达设\n备、人员资格等持续符合本规定相关要求的，由民航局或者民航地区管理局处警告或者（ ）的罚款。造成严重后果，构成犯罪的，依法追究有关责任人的刑事责任。",
+    "stem": "实施平行跑道同时仪表运行的单位，未能保持地面保障设施、雷达设备、人员资格等持续符合本规定相关要求的，由民航局或者民航地区管理局处警告或者（ ）的罚款。造成严重后果，构成犯罪的，依法追究有关责任人的刑事责任。",
     "options": [
       "A. 2万元以上5万元以下",
       "B. 3万元以上5万元以下",
@@ -14232,7 +14232,7 @@
     "shuffle": true,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "违反第五十二条 空中交通运行机构实施平行跑道同时仪表运行，应当提交下列申请材料：（一）申请开展平行跑道同时仪表运行的准备情况；（二）针对平行跑道同时仪表运行可行性论证报告；（三）开展平行跑道同时仪表运行的设备、人员、空域等条件的说明；（四）平行跑道同时仪表运行的运行模式、运行方案和日期；（五）平行跑道同时仪表运行的仪表飞行程序；（六）现行有效的平行跑道同时仪表运行批复的复印件。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -14277,7 +14277,7 @@
     "shuffle": true,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "当本场主导能见度或者正在使用跑道的任一位置测量跑道视程（Runway Visual Range，简称 RVR）小于 1500 米时，塔台管制员应向起飞或着陆的航空器驾驶员通报 RVR 数值。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -14302,7 +14302,7 @@
     "shuffle": true,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "塔台管制员不受气象部门【向本场外发布】的RVR情报及【自动终端情报服务播放】的 RVR 情报的约束，可以根据航空器实际起飞或着陆地带向航空器驾驶员通报该位置的 RVR",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -14327,7 +14327,7 @@
     "shuffle": true,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "塔台管制员通报 RVR 或者目视能见度时，不得以【塔台目视能见度】代替 RVR 或以 RVR 代替【塔台目视能见度】。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -14347,7 +14347,7 @@
     "shuffle": true,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "米",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -14417,7 +14417,7 @@
     "shuffle": true,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "当本场主导能见度<1500 米，而所有探测点的 RVR>2000 米时，只通报 【RVR 大于 2000】 或 【RVR 指示器】实际显示数值",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -14457,7 +14457,7 @@
     "shuffle": true,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "机场有自动观测系统的，应当按规定通知本机场的跑道视程；",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -14477,7 +14477,7 @@
     "shuffle": true,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "当正在使用的跑道起飞或接地地带【 RVR≤2000 】米时，不论其值大小，均应按该地带 RVR 指示器实际显示的数值进行通报。参考答案可能有误。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -14497,7 +14497,7 @@
     "shuffle": true,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "当跑道中间地带（MID，若有）和/或终端地带（END）的 【RVR≤600米】时，加报中间地带（MID，若有）和/或终端地带（END）的 RVR。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -14517,7 +14517,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "塔台管制员不受气象部门向本场【外】发布的RVR情报及自动终端情报服务播放的 RVR 情报的约束，可以根据航空器实际起飞或着陆地带向航空器驾驶员通报该位置的 RVR。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -14537,7 +14537,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "塔台管制员通报 RVR 或者目视能见度时，不得以【塔台】目视能见度代替 RVR 或以 RVR 代替塔台目视能见度",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -14717,7 +14717,7 @@
     "shuffle": true,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "本条第（一）项【同一跑道】所述航空器在进行训（熟）练飞行连续起落时，除后方航空器驾驶员能保证在高于前方航空器航径的高度以上飞行外，其尾流间隔时间应当在现行标准基础上增加 1 分钟。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -14782,7 +14782,7 @@
     "shuffle": true,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "重型机：最大允许起飞全重【等于或大于 136000 千克】的航空器",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -14982,7 +14982,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "【2 分钟】",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -15062,7 +15062,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "中部 【3 分钟】",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -15142,7 +15142,7 @@
     "shuffle": true,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "中型航空器在前，轻型航空器在后时，【不小于 9.3 公里】",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -15182,7 +15182,7 @@
     "shuffle": true,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "第二百五十条 ... 当前后进近着陆的航空器在起落航线上且处于同一高度或者后随航空器低于前行航空器时，若进行高度差小于 300 米的尾随飞行或者航迹交叉飞行，则前后航空器的尾流间隔时间应当按照本条上述有关规定执行。题目可能有误，应是【非雷达管制】",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -15207,7 +15207,7 @@
     "shuffle": true,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "MD11：重型；B737：中型；MD90：中型；B767：重型；运 12：轻型",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -15247,7 +15247,7 @@
     "shuffle": true,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "与其他航空器、障碍物水平距离大于 10 米；",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -15272,7 +15272,7 @@
     "shuffle": true,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "直升机可以在地面效应作用下，用 【1 米至 10 米的高度】慢速飞行代替滑行，并注意对附近航空器、设施和人员的影响；",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -15292,7 +15292,7 @@
     "shuffle": true,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "直升机的起飞、着陆地带，应当根据具体情况划定，起飞、着陆地点面积的直径应当根据机型确定，其长宽均不得小于旋翼直径的【两倍】，各起飞、着陆地点的边界之间左右间隔应当大于旋翼直径的两倍，前后距离应当大于机身长度的四倍",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -15312,7 +15312,7 @@
     "shuffle": true,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "直升机的起飞、着陆地带，应当根据具体情况划定，起飞、着陆地点面积的直径应当根据机型确定，其长宽均不得小于旋翼直径的两倍，各起飞、着陆地点的边界之间左右间隔应当大于旋翼直径的【两倍】，前后距离应当大于机身长度的四倍",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -15332,7 +15332,7 @@
     "shuffle": true,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "直升机的起飞、着陆地带，应当根据具体情况划定，起飞、着陆地点面积的直径应当根据机型确定，其长宽均不得小于旋翼直径的两倍，各起飞、着陆地点的边界之间左右间隔应当大于旋翼直径的两倍，前后距离应当大于机身长度的【四倍】",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -15352,7 +15352,7 @@
     "shuffle": true,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "在机场上空飞越障碍物的高度不得低于 10 米；飞越地面航空器的高度不得低于【 25 】米。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -15377,7 +15377,7 @@
     "shuffle": true,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "目视飞行规则飞行直升机使用同一起飞着陆区起飞、着陆时，间隔标准应当符合如下规定：（一）先起飞、着陆的直升机离开起飞、着陆区之前，后起飞的直升机不得开始起飞；（二）先起飞、着陆的直升机离开起飞、着陆区之前，着陆的直升机【不得进入起飞、着陆区】；（三）起飞点与着陆点的间隔在 60 米以上，起飞、着陆航线又不交叉时，可以准许同时起飞、着陆。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -15467,7 +15467,7 @@
     "shuffle": true,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "目视飞行规则飞行直升机使用同一起飞着陆区起飞、着陆时，间隔标准应当符合如下规定：（一）先起飞、着陆的直升机离开起飞、着陆区之前，后起飞的直升机【不得开始起飞】；（二）先起飞、着陆的直升机离开起飞、着陆区之前，着陆的直升机不得进入起飞、着陆区；（三）起飞点与着陆点的间隔在 60 米以上，起飞、着陆航线又不交叉时，可以准许同时起飞、着陆。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -15517,7 +15517,7 @@
     "shuffle": true,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "目视飞行规则飞行直升机使用同一起飞着陆区起飞、着陆时，间隔标准应当符合如下规定：（一）先起飞、着陆的直升机离开起飞、着陆区之前，后起飞的直升机不得开始起飞；（二）先起飞、着陆的直升机离开起飞、着陆区之前，着陆的直升机不得进入起飞、着陆区；（三）起飞点与着陆点的间隔在 【60 米以上】，起飞、着陆航线又不交叉时，【可以准许】同时起飞、着陆。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -15577,7 +15577,7 @@
     "shuffle": true,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "直升机在野外着陆、起飞时，通常应当预先选定和布置野外起降场地，其场地应当选择净空条件好、地势平坦坚实且【坡度较小】的地带。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -15627,7 +15627,7 @@
     "shuffle": true,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "《目视间隔和进近实施暂行规定》目视间隔是管制员为航路、终端和塔台管制空域内飞行高度 【6000 米（含）】以下运行的航空器配备的一种飞行间隔。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -15652,7 +15652,7 @@
     "shuffle": true,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "目视进近是航空器驾驶员执行【仪表飞行规则】计划时保持能见飞向着陆机场的一种进近方式。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -15677,7 +15677,7 @@
     "shuffle": true,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "目视进近【不需要】设置复飞航段，航空器驾驶员不能完成【目视】进近时，应当及时转为【仪表】进近或者复飞，管制员应当提供必要的协助并为其配备符合规定的间隔。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -15690,7 +15690,7 @@
     },
     "id": "12129004",
     "type": "single",
-    "stem": "（ ）间隔与程序间隔、雷达间隔、（　）间隔以及尾流间隔共同构成飞行间隔服务的完整序列。",
+    "stem": "（ ）间隔与程序间隔、雷达间隔、（ ）间隔以及尾流间隔共同构成飞行间隔服务的完整序列。",
     "options": [
       "A. 目视；RNP",
       "B. 仪表；RNP",
@@ -15787,7 +15787,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "目视进近【不需要】设置复飞航段，航空器驾驶员不能完成目视进近时，应当及时转为仪表进近或者复飞，管制员应当提供必要的协助并为其配备符合规定的间隔。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -15807,7 +15807,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "【ADS-B间隔】",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -15827,7 +15827,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "目视间隔和进近以航空器驾驶员自主飞行为主、管制员【监控】为辅；有效避免了因设备精度、管制技能、通话干扰和仪表间隔造成的调配时机延误和飞行间隔浪费。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -15852,7 +15852,7 @@
     "shuffle": true,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "塔台管制员持续目视能见两个相关航空器，并为其配目视间隔时应当注意以下事项：（一）【塔台管制员对所配备的目视间隔负责】，必要时应当通知航空器驾驶员正在使用目视间隔。（二）塔台管制员【不得为存在尾流间隔影响或者前机为 B757的航空器】之间配备目视间隔。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -16025,12 +16025,12 @@
     "stem": "关于目视进近的实施，下列说法正确的是（ ）。",
     "options": [
       "A. 如果雷达引导天气标准不够，但着陆机场云高大于等于150m，能见度大于等于5km，仍然可以实施目视进近",
-      "B. 如果雷达引导天气标准不够，但着陆机场云高大于等于300m，能见度大于　等于5km，仍然可以实施目视进近",
-      "C. 如果雷达引导天气标准不够，但着陆机场云高大于等于300m，能见度大于　等于4km，仍然可以实施目视进近",
+      "B. 如果雷达引导天气标准不够，但着陆机场云高大于等于300m，能见度大于等于5km，仍然可以实施目视进近",
+      "C. 如果雷达引导天气标准不够，但着陆机场云高大于等于300m，能见度大于等于4km，仍然可以实施目视进近",
       "D. 如果雷达引导天气标准不够，就不可以实施目视进近"
     ],
     "answer": [
-      "B. 如果雷达引导天气标准不够，但着陆机场云高大于等于300m，能见度大于　等于5km，仍然可以实施目视进近"
+      "B. 如果雷达引导天气标准不够，但着陆机场云高大于等于300m，能见度大于等于5km，仍然可以实施目视进近"
     ],
     "difficulty": 2,
     "shuffle": true,
@@ -16090,7 +16090,7 @@
     "shuffle": true,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "平行跑道上实施同时进近时，空中交通管制单位可以指挥航空器在一条跑道上实施目视进近，在其它跑道上实施【仪表或者目视进近】。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -16115,7 +16115,7 @@
     "shuffle": true,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "当起飞路径或者航空器性能无法满足保持目视间隔的要求时，管制员不得为连续起飞的航空器之间配备目视间隔。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -16162,7 +16162,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "航空器驾驶员必须在【任何情况下】都保持对着陆机场或者前机持续能见。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -16202,7 +16202,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "目的地机场具备以下气象条件时，航空器可以实施目视进近：（一）报告的云底高大于或者等于 300 米，能见度大于或者等于 5 公里；（二）目的地机场没有天气情报服务，但是航空器驾驶员报告能够保持目视下降以及飞向着陆机场。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -16262,7 +16262,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "平行跑道上实施同时进近时，空中交通管制单位可以指挥航空器在一条跑道上实施目视进近，在其它跑道上实施【仪表或者目视进近】。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -16307,7 +16307,7 @@
     "shuffle": true,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "当出现高温、大风及其他不利天气条件时，应当增加对【飞行区场地】巡查次数，发现问题及时处理。影响运行安全的，应当及时通报管制员，必要时向民用航空情报服务机构提供航空情报原始资料，同时向有关驻场单位通报情况",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -16327,7 +16327,7 @@
     "shuffle": true,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "巡视检查的车辆应当安装【黄色】旋转灯标，并在检查期间始终开启。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -16352,7 +16352,7 @@
     "shuffle": true,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "巡视检查期间，检查人员应当配备有效的无线电对讲机，并在相应的无线电波道上时刻保持守听。下车检查时，检查人员离开车辆的距离不得超过【 100 米】（随身携带对讲机），检查车辆应当处于【运行】状态。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -16372,7 +16372,7 @@
     "shuffle": true,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "当塔台管制员发现通信联系中断时，应当立即按照【紧急情况】的处置程序执行。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -16392,7 +16392,7 @@
     "shuffle": true,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "跑道日航空器着陆架次大于 210 架次的，测试跑道摩擦系数的频率应当不少于每周一次；跑道日航空器着陆架次为 151 至 210 架次的，测试跑道摩擦系数的频率应当不少于每两周一次；跑道日航空器着陆架次为 91 至 150架次的，测试跑道摩擦系数的频率应当不少于每月一次；跑道日航空器着陆架次为 31 至 90 架次的，测试跑道摩擦系数的频率应当不少于每三个月一次；跑道日航空器着陆架次为16 至 30 架次的，测试跑道摩擦系数的频率应当不少于每半年一次；跑道日航空器着陆架次为 15 次以下的，测试跑道摩擦系数的频率应当不少于每年一次。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -16532,7 +16532,7 @@
     "shuffle": true,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "出现下列情况后，机场管理机构应当立即测试跑道摩擦系数：（一）遇大雨或者跑道结冰、积雪；（二）在跑道上施洒除冰液或颗粒；（三）航空器偏出、冲出跑道。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -16662,7 +16662,7 @@
     "shuffle": true,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "在巡视检查过程中发现下列情况时，检查人员应当立即通知塔台管制员停止该跑道的使用，并立即报告机场值班领导或相关部门，由相关人员按程序关闭跑道（或部分关闭跑道）和发布航行通告：（一）跑道道面断裂，包括整块板或局部，并出现错台或局部松动的；（二）跑道出现直径（长边）大于 12 厘米的掉块的（三）跑道出现直径（长边）小于 12 厘米的掉块，但深度大于 7 厘米，或坡度大于 45 度角的破损的。参考答案可能有误，应是【跑道道面断裂，包括整块板或局部，并出现错台或局部松动的】",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -16902,7 +16902,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "每日应当至少对滑行道、机坪、升降带、跑道端安全地区、飞行区围界、巡场路巡视检查【一次】。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -16922,7 +16922,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "以连续 【100 米】长道面的摩擦系数为评价指标，在表面摩擦系数低于维护规划值或者测试曲线显示跑道多处存在表面摩擦系数（累计长度大于【100 米】）低于最小的摩阻值时，机场管理机构应当立即采取措施改善道面摩阻特性。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -16942,7 +16942,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "跑道日航空器着陆【 15 】架次以上的机场，应当配备跑道摩擦系数测试设备。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -16987,7 +16987,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "跑道开放运行期间，进入地面保护区或机动区的车辆和人员，必须向塔台管制员申请，获得明确进入许可后，复诵许可内容，确认无误后方可进入，不能 “直接进入” 。",
+    "explanation": "跑道开放运行期间，任何车辆和人员进入地面保护区或者机动区实施作业时，应当向管制员提出申请，经管制员许可后方可进入，并严格按照许可区域和时段作业。【可能考虑复诵指令】",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -17007,7 +17007,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "【需】",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -17020,14 +17020,14 @@
     },
     "id": "22131035",
     "type": "boolean",
-    "stem": "当管制单位收到航空器驾驶员报告，反映跑道刹车效应低于机 场管理机构提供的跑道表面状况，且未达到“差”或“极差”时，管制单位应当立即核实。",
+    "stem": "当管制单位收到航空器驾驶员报告，反映跑道刹车效应低于机场管理机构提供的跑道表面状况，且未达到“差”或“极差”时，管制单位应当立即核实。",
     "options": ["A. 正确", "B. 错误"],
     "answer": ["B. 错误"],
     "difficulty": 2,
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "机场管理机构收到管制单位通报机组反映跑道刹车效应低于机场管理机构提供的跑道表面状况，且未达到“差”或“极差”时，【机场管理机构】应当立即核实",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -17287,7 +17287,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "在跑道端之外 300 米以内、跑道中心线两侧 75 米以内的区域进行的任何施工作业，在航空器起飞、着陆前【半小时】，施工单位应当完成清理施工现场的工作，包括填平、夯实沟坑，将施工人员、机具、车辆全部撤离施工区域。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
