@@ -25,7 +25,7 @@
         wrong: shouldShowAnswer && isWrongOption(0),
         review: mode === 'review'
       }" @click="handleSelect(0)" :disabled="disabled || (shouldShowAnswer && mode !== 'review')">
-        <span class="option-marker">T</span>
+        <span class="option-marker"></span>
         <span class="option-text">正确</span>
       </button>
       <button class="option-btn" :class="{
@@ -34,7 +34,7 @@
         wrong: shouldShowAnswer && isWrongOption(1),
         review: mode === 'review'
       }" @click="handleSelect(1)" :disabled="disabled || (shouldShowAnswer && mode !== 'review')">
-        <span class="option-marker">F</span>
+        <span class="option-marker"></span>
         <span class="option-text">错误</span>
       </button>
     </div>
@@ -333,32 +333,31 @@ const handleSelect = (index) => {
 }
 
 .option-marker {
-  width: 30px;
-  height: 30px;
-  border-radius: var(--radius-full);
-  background: #f1f4f7;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 700;
-  font-size: 14px;
-  color: #414754;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid #a8adb7;
+  background: #fff;
   flex-shrink: 0;
+  transition: all 0.2s;
 }
 
 .option-btn.selected .option-marker {
-  background: var(--primary);
-  color: #fff;
+  background-color: var(--primary);
+  border-color: var(--primary);
+  box-shadow: inset 0 0 0 3px #fff;
 }
 
 .option-btn.correct .option-marker {
-  background: var(--success);
-  color: #fff;
+  background-color: var(--success);
+  border-color: var(--success);
+  box-shadow: inset 0 0 0 3px #fff;
 }
 
 .option-btn.wrong .option-marker {
-  background: var(--error);
-  color: #fff;
+  background-color: var(--error);
+  border-color: var(--error);
+  box-shadow: inset 0 0 0 3px #fff;
 }
 
 .option-text {
