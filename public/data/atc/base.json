@@ -15,7 +15,7 @@
     "shuffle": true,
     "degree": 3,
     "subs": null,
-    "explanation": "",
+    "explanation": "（1）⼲洁⼤⽓，且成分不随⾼度改变，平均分⼦量m=28.9644；（2）具有理想⽓体性质；（3）标准海平⾯重⼒加速度80=9.80665m/s^；（4）海平⾯⽓温To=288.16K=15°C；海平⾯⽓压Po=1013.25hPa=760mmHg=1个⼤⽓压；海平⾯空⽓密度po=1.225kg/m？；（5）处于流体静⼒平衡状态；（6）在海拔11000m以下，⽓温直减率为0.65°C/100m；从11000~20000m，⽓温不变，为-56.5°C；从20000~30000m，⽓温直减率为-0.1°C/100m。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -40,7 +40,7 @@
     "shuffle": true,
     "degree": 3,
     "subs": null,
-    "explanation": "",
+    "explanation": "在海拔11000m以下，⽓温直减率为0.65°C/100m；从11000~20000m，⽓温不变，为-56.5°C；从20000~30000m，⽓温直减率为-0.1°C/100m。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -65,7 +65,7 @@
     "shuffle": true,
     "degree": 3,
     "subs": null,
-    "explanation": "",
+    "explanation": "对流层有以下三个主要特征。（1）⽓温随⾼度升⾼⽽降低。（2）⽓温、湿度的⽔平分布很不均匀。（3）空⽓具有强烈的垂直混合。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -135,7 +135,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "对流层⼤⽓热量的直接来源主要是空⽓吸收地⾯发出的⻓波辐射，靠近地⾯的空⽓受热后热量再向⾼处传递，",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -155,7 +155,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "平均⽽⾔，低纬度地区（南北纬30°之间）上界⾼度为17~18km，中纬度地区（纬度30°~60°）为10~12km，⾼纬度地区（纬度在60°以上）为8~9km。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -175,7 +175,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "题库中有误，显示的是：中纬度地区对流层上界的高度。",
+    "explanation": "题库原题干显示的是：中纬度地区对流层上界的高度。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -195,7 +195,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "15 - 6.5 * 8 = -37",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -255,7 +255,7 @@
     "shuffle": false,
     "degree": 3,
     "subs": null,
-    "explanation": "",
+    "explanation": "[15 - (-24)] / 6.5 = 6 km",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -3105,7 +3105,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "我国产生 “春雨” 或 “秋雨” 的重要原因是由于 冷暖空气（冷暖气团）碰撞引起。",
+    "explanation": "航空气象[黄仪方，朱志愚主编]： 经常影响我国的气团主要有两个一个是西伯利亚气团，属于中纬度大陆气团；一个是热带太平洋气团，属热带海洋气团。春季，西伯利亚气团和热带海洋气团两者势力相当，互有进退，因此是天气系统最盛的时期，带来多变天气。秋季，变性的西伯利亚气团逐渐增强，热带海洋气团慢慢退居东南海上，我国东部地区在单一的气团控制之下，出现全国最宜人的秋高气爽的天气。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -9103,7 +9103,7 @@
     "shuffle": false,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "METAR报中RASN表示中等强度的雨夹雪，以【雨】为主。以前面为主导。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -9238,7 +9238,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "Clear Air Turbulence，晴空颠簸（晴空乱流）",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -9278,7 +9278,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "A 区域，T 终端区，R 航路",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -9423,7 +9423,7 @@
     "shuffle": false,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "SIGMET 由【气象监测台】发布。气象监测台：民用航空气象系统中的运行机构。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -9463,7 +9463,7 @@
     "shuffle": false,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "OBSC TS HVY GR 被遮蔽的、伴有大冰雹的雷暴，没有飑线SQ",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -9810,7 +9810,7 @@
     "shuffle": false,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "地面天气图上风向以矢杆表示，矢杆方向指向站圈，表示风的【去】向；风速以矢羽表示，矢羽一长划表示【4m/s】，矢羽一短划表示【2m/s】。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -9850,7 +9850,7 @@
     "shuffle": false,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "空三角旗 20m/s，实三角旗 50m/s",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -9920,7 +9920,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "Intensifying 增强",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -10090,7 +10090,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "Obscuration 遮蔽，代表情况不明。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -10265,7 +10265,7 @@
     "shuffle": false,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "【3000ft，20KT】",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -10370,7 +10370,7 @@
     "shuffle": false,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "黑三角旗代表风速为【50节】",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -10565,7 +10565,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "卫星将红外波段测得的辐射转换成图像就得到红外云图。辐射⼤的⽤⿊⾊表示，辐射⼩⽤⽩⾊表示。⾊调越⿊表示红外辐射越⼤，⽬标温度越⾼；反之，⾊调越浅，表示温度越低。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -10590,7 +10590,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "常⽤的卫星云图有三种。⽓象卫星通过携带的电视照相仪和扫描辐射仪分别在可⻅光波段和红外波段感应地球和⼤⽓的光辐射，获得两种云图，即【可⻅光云图和红外云图】；卫星选⽤⽔汽吸收谱段接收⼤⽓中⽔汽发射的辐射，可得到⽔汽图。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -10610,7 +10610,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "在卫星云图上，锋⾯往往表现为带状云系，称为锋⾯云带。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -10675,7 +10675,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "当⾼空急流附近⽔汽条件不充分时，在⾼空急流区就没有⼤⽚卷云，只表现为⼀条条狭⻓的卷云线，这种卷云线⼤体上与⻛向相平⾏，并处于急流轴的南侧。由于这种卷云线是断裂的，所以不容易确定急流轴的位置。但根据卷云线可以推断⾼空⻛的⽅向：卷云线愈狭⻓，边界愈光滑，说明⻛速越⼤。在⾼空急流云系左界附近，时常可⻅到⼀条条与急流轴相垂直的波状云线，使得急流轴的左界呈现锯⻮形，这种云系称横向波动云系。如附图48，在R-K处有⼀条条相互平⾏且与急流轴垂直的横向波动云线，R-K的左边是⼀⽚急流卷云线。⻜机探测表明、在横向波动云线中的乱流，⽐表⾯光滑的盾状卷云区或带状卷云区中强得多，所以⻜机在这种云区中常常会遇到严重的颠簸。当有横向波动出现时，⻛速都很强，⼀般⼤于40m/s。这种横向波动云线是⻛的⽔平切变的结果。由于⽔平切变，使得卷云线在云区内离开急流轴，最远的⼀些云线末端朝上⻛⽅向旋转。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -10695,7 +10695,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "在卫星云图上，卷状云多带有纤维状纹理。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -10715,7 +10715,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "未闭合的细胞状云系，是指每个细胞中⼼部分是晴空少云区，⽽在边缘上是云区，细胞形状表现为指环形或“U”字形。这类细胞状云系主要是由【浓积云或积⾬云】组成、因此常形成在⽓温和海⽔温度差异较⼤、对流⽐较强的地区。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -10775,7 +10775,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "盾状卷云区=>高空急流。在卫星云图上，⾼空急流云系的特征有：（1）急流卷云区位于急流轴南侧（北半球），其左界清楚且与急流轴平⾏；（2）在急流呈反⽓旋弯曲的地⽅云系稠密；在急流呈⽓旋性弯曲的地⽅云系稀薄或消失，所以急流云系主要位于急流呈反⽓旋弯曲的地⽅。（3）在可⻅光云图上，急流云系左界有明显的暗影，⽽且暗影呈反⽓旋弯曲的线状。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -10820,7 +10820,7 @@
     "shuffle": false,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "【亮】",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -10860,7 +10860,7 @@
     "shuffle": false,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "【可⻅光云图】上的⾊调决定于⽬标反射太阳辐射的⼤⼩。在可⻅光云图上，由于⾊调与太阳⾼度⻆和⽬标反照率有关，对云⽽⾔，⾊调与云的厚度，云中粒⼦性质和云⾯光滑程度有关。⼀般来说云的⾊调随云的厚度加⼤⽽变⽩。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -10880,7 +10880,7 @@
     "shuffle": false,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "可⻅光云图上的⾊调决定于⽬标【反射太阳辐射的⼤⼩】。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -10920,7 +10920,7 @@
     "shuffle": false,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "在可⻅光云图及红外云图上都表现得很⽩亮，呈浓⽩⾊，云顶⽐较光滑，在积⾬云的边界上常有纤维状的卷云砧；有时在积⾬云区上空⾼空⻛速甚⼩（在500hPa上⻛速⼩于7m/s），则没有卷云砧出现，积⾬云表现为⼀个个近乎圆形的明亮孤⽴的单体；有时候在热带地区可⻅到⼀团团的积⾬云合并成⼤⽚⽩⾊的卷云区。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -10960,7 +10960,7 @@
     "shuffle": false,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "卷状云主要由冰晶组成，透明度好，反照率低，因⽽在可⻅光云图上⼀般表现为【浅灰⾊到⽩⾊不等】，有时还可透过卷状云看到地⾯⽬标物；由于卷状云的温度⽐其他云都要低，所以在红外图上表现为【⽩⾊】，与地表、中低云之间形成明显的反差，因⽽卷状云在红外云图上表现最清楚。卷状云多带有纤维状纹理。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -11005,7 +11005,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "在平显上，对流云降⽔回波呈块状、尺度较⼩，从⼏千⽶到⼏⼗千⽶，内部结构密实，边缘清晰，⻩⾊和红⾊的区域呈块状或点状分散在蓝⾊和绿⾊的区域中，",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -11030,7 +11030,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "多普勒⽓象雷达是利⽤多普勒效应来测量云和降⽔粒⼦相对于雷达的径向运动速度的⽓象雷达。它除具有⼀般天⽓雷达的功能外，还可以测出各⾼度上的⻛向、⻛速、垂直⽓流速度、湍流和强的⻛切变、云⾬滴谱等，特别是在监测雷暴、冰雹、下击暴流、⻰卷等航空危险天⽓⽅⾯⼗分有效。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -11055,7 +11055,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "层（波）状云降水回波的范围大，显绿色，呈比较均匀的片状，边缘发毛，破碎模糊。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -11080,7 +11080,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "絮状回波常是出现连阴雨天气的征兆，降水时间长，累计雨量大，有时可达到暴雨程度。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -11140,7 +11140,7 @@
     "shuffle": false,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "在【高显RHI】上，零度层亮带是【层状云】回波的一个重要形态特征。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -11160,7 +11160,7 @@
     "shuffle": false,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "在【高显RHI】上，零度层亮带是【层状云】回波的一个重要形态特征。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
