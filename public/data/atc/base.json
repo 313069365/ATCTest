@@ -375,7 +375,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "假定零点高度（用场面气压与760 mmHg之差按标准大气换算的高度）。标准海平面气压760 mmHg = 1013.25 hPa",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -605,7 +605,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": " 速记：场，标。 ",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -720,7 +720,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "两高压和两低压相对组成的中间区域叫鞍型气压区，简称鞍。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -765,7 +765,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "本站气压是指气象台气压表直接测得的气压。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -865,7 +865,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "相对湿度：空气中实际水汽压与当时气温下的饱和水汽压之比，它反映了空气距饱和空气的程度。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -910,7 +910,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "📝 在空中，实际温度比标准大气温度高 → 空气密度变小 → 同样气压值，爬得更高才能遇到：实际气压高度 ＞ 标准气压高度",
+    "explanation": "📝 空气越暖 → 空气越膨胀 → 同样气压会出现在更高的实际高度",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -1210,7 +1210,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "地转偏向力",
+    "explanation": "在北半球，气旋范围内的空气作逆时针旋转，在南半球其旋转方向相反。在气压场上，气旋表现为低压，所以，气旋与低压常常混用。前者是按流场特征命名的, 后者是按气压场特征命名的。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -1325,7 +1325,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "由于自由大气中空气运动不再受摩擦力的影响，因此风的变化主要取决于气压场的变化。而自由大气中气压随高度的变化主要是由气温水平差异引起的。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -2190,7 +2190,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "地形雷暴",
+    "explanation": "地形雷暴是【暖湿不稳定空气】在山脉迎风坡【被强迫抬升】而形成的雷暴",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -2370,7 +2370,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "阵性降水：主要来自 积状云代表云：Cu（积云）、Cb（积雨云）、TCu（浓积云）间歇性降水：主要来自 层积云、高积云代表云：【Sc（层积云）】、Ac（高积云）",
+    "explanation": "速记：Tcu。积状云产生阵性降水，层状云产生连续性降水，波状云产生间歇性降水。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -2870,7 +2870,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "低压向内，向上，逆时针。右手螺旋。",
+    "explanation": "低气旋中心是低压，周围是高压，空气从高压流向低压，挤到中间没地方走，只能被迫上升。低压、高压是相对于周边。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -2915,7 +2915,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "热低压是地面被晒得很热形成的低压，所以一定出现在阳光足、干燥、升温强的陆地表面上空。",
+    "explanation": "热低压是出现在近地层的暖性气旋，它是浅薄的不大移动的气压系统，一般到三、四千米高度上就不明显了。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -3440,7 +3440,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "积状云（对流云），主要是浓积云、积雨云（Cb）",
+    "explanation": "急行冷锋迫使暖空气上升，如果水汽含量充分，且大气不稳定，将沿锋线产生一条狭窄的积状云带，并能形成旺盛的积雨云。云顶部常伸展到10 km以上。这种冷锋多出现在夏季，当它来临时，往往狂风骤起，乌云满天，暴雨倾盆，电闪雷鸣，有时伴有冰雹。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -3690,7 +3690,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "暖锋云系是 “从远到近” 依次出现：卷云 → 卷层云 → 高层云 → 雨层云",
+    "explanation": "速记： cics。暖锋云系是 “从远到近” 依次出现：卷云 → 卷层云 → 高层云 → 雨层云",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -3715,7 +3715,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "缓行冷锋：从远到近 Ns→As→Cs→Ci",
+    "explanation": "缓行冷锋：cics的逆序。 缓行冷锋：从远到近 Ns→As→Cs→Ci",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -3740,7 +3740,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "卷云 Ci → 卷层云 Cs → 高层云 As → 积雨云 Cb",
+    "explanation": "速记： cics。卷云 Ci → 卷层云 Cs → 高层云 As → 积雨云 Cb",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -3990,7 +3990,7 @@
     "shuffle": false,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "此外，【冷锋附近】的颠簸比其他锋面强，特别是第二型冷锋，对飞行特别危险。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -4215,7 +4215,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "晴夜、微风、湿度大、层结稳",
+    "explanation": "【晴夜，微风，湿度大】辐射雾的形成一般需要晴朗的夜空(无云或少云)、微风(一般1 ~ 3 m/s )和近地面空气湿度大三个条件。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -4475,7 +4475,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "春夏秋冬，平流辐射。春夏之交，我国沿海地区往往易受平流雾的影响，由于平流雾来去突然、厚度大、范围广，因此对飞行的影响很大。冬半年，我国大部分地区都会出现辐射雾，特别是四川盆地受辐射雾的影响最大。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -4615,7 +4615,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "要形成烟幕，需要有大的烟源、适宜的风向、风速和逆温层。低",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -5105,7 +5105,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "雷暴的形成需要三个关键条件：潮湿的空气、上升运动和不稳定的大气条件。",
+    "explanation": "雷暴是由强烈发展的积雨云产生的，形成强烈的积雨云需要有如下三个条件：（1 ）深厚而明显的不稳定气层；（2）充沛的水汽；（3）足够的冲击力。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -5155,7 +5155,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "冷锋雷暴是冷空气强烈冲击【暖湿不稳定空气】而形成的。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -5175,7 +5175,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "雷暴云的外流气流有时可以超越雷暴前方20 ~ 30 km。因此，飞机低空飞行时应远离雷暴云20 ~ 30 km飞行，不要侥幸抢飞这一危险区域。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -5250,7 +5250,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "飑线之前有中尺度高压，飑线之后有中尺度雷暴高压",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -5300,7 +5300,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "积云阶段又称发展阶段，即从形成淡积云到发展成浓积云的阶段。这个阶段的特征是: （1）内部都是上升气流，并随着高度的增加而增强，最大上升气流在云的中、上部。云的下部四周有空气辐合进入云中，空气从云底被吸入单体内部，空气中的水汽在逐步凝结的过程中释放潜能，促使上升气流在上升过程中不断加强。（2）因为大量水汽在云中凝结并释放潜热，所以云中温度高于同高度上四周空气的温度。这个阶段云滴大多由水滴构成，并且一般没有降水和闪电。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -5325,7 +5325,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "积雨云阶段即雷暴的成熟阶段，雷暴进入成熟阶段是以【强烈的阵风】以及它后面紧跟着的【降水】为标志的。在积雨云阶段（图5-1（b））,云顶发展很高，有的可达对流层顶，在高空强风影响下，云顶常成鬃状或砧状。这一阶段的前期，上升气流十分强大，可达20m/s,云滴和雨水可能会被带至0霓等温线以上好几千米。大量的雪片或雨滴在云的上部积累，最后云滴变得太大，云内的上升气流再也不能支持住它们了，它们便落下而形成降水。云中降水的下冲力.对上升气流产生向下的拉力、迫使部分空气转向下沉，形成下降气流，其速度可达10m/s。成熟阶段是雷暴单体发展最强盛的阶段，其主要特征是：云中除上升气流外，局部出现有系统的下降气流，上升气流区温度比周围高，下降气流区温度比周围低，降水产生并发展。强烈的湍流、积冰、闪电、阵雨和大风等危险天气主要出现在这一阶段。同时，在云的上部，0℃等温线以上，云还在继续发展，假如云顶足够高，能达到对流层顶，它将像'铁砧'一样向外扩张◎从云砧我们可以判断高空风的走向。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -5497,7 +5497,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "积云阶段又称发展阶段，即从形成淡积云到发展成浓积云的阶段。这个阶段的特征是: （1）内部都是上升气流，并随着高度的增加而增强，最大上升气流在云的中、上部。云的下部四周有空气辐合进入云中，空气从云底被吸入单体内部，空气中的水汽在逐步凝结的过程中释放潜能，促使上升气流在上升过程中不断加强。（2）因为大量水汽在云中凝结并释放潜热，所以云中温度高于同高度上四周空气的温度。这个阶段云滴大多由水滴构成，并且一般没有降水和闪电。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -5567,7 +5567,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "冷涡是指出现在空中（一般指700 hPa高度以上）的冷性低压。冷涡雷暴可分为北方冷涡雷暴和南方冷涡雷暴两种。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -5592,7 +5592,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "准静止锋雷暴常有明显的日变化，多产生在后半夜，白天逐渐减弱或消散。其原因是层状云系下部在白天低层增温少，气层比较稳定，而夜间云层顶部辐射冷却，使气层变得不稳定。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -5757,7 +5757,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "外流 => 下冲气流，下击爆流",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -5822,7 +5822,7 @@
     "shuffle": false,
     "degree": 1,
     "subs": null,
-    "explanation": "雷暴云下的雨幡说明雷暴云中上升气流较强，【但还有】强烈下降气流。",
+    "explanation": "雷暴云体下的雨幡是有强烈下降气流的重要征兆。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -5862,7 +5862,7 @@
     "shuffle": false,
     "degree": 1,
     "subs": null,
-    "explanation": "根据【强度特征】，可将雷暴分为普通雷暴和强烈雷暴。",
+    "explanation": "雷暴按强度不同，可分为一般雷暴和强雷暴。而根据形成雷暴的冲击力的种类，又可分为热雷暴、地形雷暴和天气系统雷暴。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -5922,7 +5922,7 @@
     "shuffle": false,
     "degree": 1,
     "subs": null,
-    "explanation": "在距离地面约6至12公里的高空，存在一股环绕地球、强而窄的高空急流（Jet Stream）。",
+    "explanation": "",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -6632,7 +6632,7 @@
     "shuffle": false,
     "degree": 1,
     "subs": null,
-    "explanation": "【600 米】",
+    "explanation": "在空间任何高度上都可能产生风切变，对飞行威胁最大的是发生在近地面层的风切变。我们把发生在【600 米】高度以下的平均风矢量在空间两点之间的差值称为低空风切变, 低空风切变与飞机的起落飞行密切相关。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -6712,7 +6712,7 @@
     "shuffle": false,
     "degree": 1,
     "subs": null,
-    "explanation": "【雷暴云体下方及其移动方向的前缘】",
+    "explanation": "一种是发生在雷暴单体下面，由下击暴流造成的风切变。这种风切变的特点是范围小、寿命短、强度大。另一种是雷雨中的下冲气流到达地面后，形成强烈的冷性气流向四处传播，这股气流可传到离雷暴云20 km处。由于它离开雷暴主体，并且不伴随其他可见的天气现象，所以往往不易发现, 对飞行威胁较大。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -6797,7 +6797,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "强积冰也多发生在【 -2℃至－10℃ 】范围内。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -7202,7 +7202,7 @@
     "shuffle": false,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "毛冰多形成在温度为-5℃ ～ -15 ℃的云中，因为这样的云中往往是大小过冷水滴同时并存，所以形成的积冰也既具有大水滴冻结的特征，又具有小水滴冻结的特征。明冰通常是在温度为 0 ～ -10℃ 的过冷雨中或由大水滴组成的云中形成的。雾凇这种冰多形成在温度为 -20℃ 左右的云中。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -7222,7 +7222,7 @@
     "shuffle": false,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "【过冷水滴】",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -7262,7 +7262,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "尾涡是指飞机飞行时产生的一对绕翼尖旋转的方向相反的闭合涡旋。可能翼涡（翼尖涡）会干扰，但是航空气象书上没有提到翼涡。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -7387,7 +7387,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "引起飞机颠簸的气流称为扰动气流。飞机颠簸是由于扰动气流不断破坏飞机的空气动力平衡而产生的。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -7667,7 +7667,7 @@
     "shuffle": false,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "晴空乱流是指出现在【6000米】以上高空，与对流云无关的乱流。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -7727,7 +7727,7 @@
     "shuffle": false,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "在有较强的风吹过山脉时，由于山脉对气流的扰动作用，在一定条件下，可在山的背风面形成【重力波】，我们称这种波为山地背风波或山岳波",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -8047,7 +8047,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "急流，盾状。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -8417,7 +8417,7 @@
     "shuffle": false,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "颠簸频率最大区出现在急流轴的低压一侧（西风急流的高纬度一侧）下方，那里的风速大约相当于急流轴风速的一半。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -8542,7 +8542,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "云量用四个简语描述，”FEW“（少云，1~2个八分量），“SCT”（疏云,3~4个八分量）, “BKN”（多云，5~7个八分量），“OVC”（阴天，云量8）。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -8642,7 +8642,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "“SKC”为碧空（Skyclear）。表示天空无云或不足1成云，且无积雨云，无浓积云。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -8667,7 +8667,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "定时机场的航空天气预报，一般有效时间为9、12、18、24 ho时段为9 h的预报每隔3 h发布一次，其余的每隔6 h发布一次。不定时机场的航空天气预报一般有效时间为2 ~9h,是从飞机预计起飞时间开始或适当提前至正点，终止时间是预计飞机降落（飞越）本站时间后一小时Q",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -9003,7 +9003,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "沙暴SandStorm",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -9153,7 +9153,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "风切变警报(WindShearWarnings)是机场气象台观测到或预期将出现风切变时发布的一种简明气象情报。低空风切变能危害跑道及其上空【500m(1600英尺)】之间的进近航道上、起飞航道上或盘旋进近期间的航空器的安全，还能危害在跑道上处于着陆滑跑或起飞滑跑阶段的航空器。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -9483,7 +9483,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "分析等压面图的目的是为了了解空间气压场的情况。等压面图的分析项目：等高线，等温线，槽线和切变线，温度平流，湿度场。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -9593,7 +9593,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "850hPa，700hPa，500hPa天气图的平均高度分别是1500m，3000m，5500m",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -9638,7 +9638,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "等压面图上填有气温、温度露点差、风向、风速以及等压面的高度",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -9703,7 +9703,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "天气形势是指各种天气系统的综合表现，天气形势预报就是对天气系统的生消、移动及强度变化的预报。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -9750,7 +9750,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "【700hPa，3000m】；【850hPa，1500m】；【500hPa，5500m】",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -9770,7 +9770,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "【700hPa，3000m】；【850hPa，1500m】；【500hPa，5500m】",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -9790,7 +9790,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "【700hPa，3000m】；【850hPa，1500m】；【500hPa，5500m】",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -10330,7 +10330,7 @@
     "shuffle": false,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "另外一种是表格式的空中风和温度预报图，图中方框及方框中的内容指示的是该方框所覆盖的纬线/经线【交叉点】上的几个高度层（以千英尺为单位）上的风向、风速（单位为真度和KT ）及温度（摄氏度）。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -10980,7 +10980,7 @@
     "shuffle": false,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "由于冰晶和雪片对微波的散射能力比水滴小得多，对微波的衰减作用也较小，因此雪的回波通常比连续性降水回波弱。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
