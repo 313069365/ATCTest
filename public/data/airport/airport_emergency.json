@@ -1,0 +1,6663 @@
+[
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "emergencyResponse",
+      "topic": ""
+    },
+    "id": "331001",
+    "type": "essay",
+    "stem": "遇有航空器空中失火,机塔指挥员应怎么处置。",
+    "options": [],
+    "answer": "当",
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "emergencyResponse",
+      "topic": ""
+    },
+    "id": "331002",
+    "type": "essay",
+    "stem": "简述航空器地面失火处置程序。",
+    "options": [],
+    "answer": "当",
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "emergencyResponse",
+      "topic": ""
+    },
+    "id": "331003",
+    "type": "essay",
+    "stem": "简述波道卡阻处置程序。",
+    "options": [],
+    "answer": "当",
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "emergencyResponse",
+      "topic": ""
+    },
+    "id": "331004",
+    "type": "essay",
+    "stem": "简述航空器遭劫持处置程序。",
+    "options": [],
+    "answer": "当",
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "emergencyResponse",
+      "topic": ""
+    },
+    "id": "331005",
+    "type": "essay",
+    "stem": "简述通信信号遇到干扰的处置程序。",
+    "options": [],
+    "answer": "当",
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "emergencyResponse",
+      "topic": ""
+    },
+    "id": "331006",
+    "type": "essay",
+    "stem": "简述航空器地面液压系统故障处置程序。",
+    "options": [],
+    "answer": "当",
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "emergencyResponse",
+      "topic": ""
+    },
+    "id": "331007",
+    "type": "essay",
+    "stem": "简述甚高频通信设备故障处置程序。",
+    "options": [],
+    "answer": "当",
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "emergencyResponse",
+      "topic": ""
+    },
+    "id": "331008",
+    "type": "essay",
+    "stem": "简述电子进程单系统故障处置程序。",
+    "options": [],
+    "answer": "当",
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "emergencyResponse",
+      "topic": ""
+    },
+    "id": "331009",
+    "type": "essay",
+    "stem": "飞行区分区管理分为5个不同颜色区域,请说明红区、橙区、黄区的范围。",
+    "options": [],
+    "answer": "红",
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "emergencyResponse",
+      "topic": ""
+    },
+    "id": "331010",
+    "type": "essay",
+    "stem": "简述应急救援启动的等级并简述相应等级在哪些情况下启动。",
+    "options": [],
+    "answer": "紧",
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "emergencyResponse",
+      "topic": ""
+    },
+    "id": "331011",
+    "type": "essay",
+    "stem": "列举民用航空安全生产类紧急事件。",
+    "options": [],
+    "answer": "1",
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "emergencyResponse",
+      "topic": ""
+    },
+    "id": "331012",
+    "type": "essay",
+    "stem": "列举非民用航空安全生产类紧急事件。",
+    "options": [],
+    "answer": "1",
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "emergencyResponse",
+      "topic": ""
+    },
+    "id": "331013",
+    "type": "essay",
+    "stem": "遇有航空器空中失火,机塔指挥员应怎么处置。",
+    "options": [],
+    "answer": "当",
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "emergencyResponse",
+      "topic": ""
+    },
+    "id": "331014",
+    "type": "essay",
+    "stem": "东1：消防大楼-东南灯光站-A滑行道-A7滑行道-跑道；东2：消防大楼-18、19号位中间勤务车道-B12联络道-K4滑行道-跑道；西1：塔台执勤点-B7联络道-K2滑行道-跑道；西2：塔台执勤点-B7联络道-A滑行道-A1滑行道-跑道。",
+    "options": [],
+    "answer": "东",
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322001",
+    "type": "single",
+    "stem": "消防工作贯彻（ ）方针",
+    "options": [
+      "A. 预防为主，消防未辅",
+      "B. 预防为主，防消结合",
+      "C. 谁主管、谁负责"
+    ],
+    "answer": [
+      "B. 预防为主，防消结合"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322002",
+    "type": "single",
+    "stem": "全国消防日是每年的（ ）",
+    "options": [
+      "A. 1 月 19 日",
+      "B. 11 月 9 日",
+      "C. 11 月 10 日",
+      "D. 6 月 19 日"
+    ],
+    "answer": [
+      "B. 11 月 9 日"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322003",
+    "type": "single",
+    "stem": "电器设备在发生火灾时不应该用（ ）灭火",
+    "options": [
+      "A. 二氧化碳灭火器",
+      "B. 水",
+      "C. 干粉灭火器"
+    ],
+    "answer": [
+      "B. 水"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322004",
+    "type": "single",
+    "stem": "发生燃烧的必要条件是（ ）",
+    "options": [
+      "A. 可燃物、助燃物",
+      "B. 可燃物、着火源",
+      "C. 可燃物、助燃物、着火源"
+    ],
+    "answer": [
+      "C. 可燃物、助燃物、着火源"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322005",
+    "type": "single",
+    "stem": "灭火的基本方法是（ ）",
+    "options": [
+      "A. 冷却、窒息、抑制",
+      "B. 冷却、隔离、抑制",
+      "C. 冷却、窒息、隔离",
+      "D. 冷却、窒息、隔离、抑制"
+    ],
+    "answer": [
+      "D. 冷却、窒息、隔离、抑制"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322006",
+    "type": "single",
+    "stem": "根据物质燃烧的特性，B 类火灾是指（ ）",
+    "options": [
+      "A. 固体类火灾",
+      "B. 金属火灾",
+      "C. 液体类火灾",
+      "D. 气体类火灾"
+    ],
+    "answer": [
+      "C. 液体类火灾"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322007",
+    "type": "single",
+    "stem": "用直流水喷射着火物降低燃烧物的温度，这样的灭火方式称为（ ）",
+    "options": [
+      "A. 冷却法",
+      "B. 窒息法",
+      "C. 隔离法",
+      "D. 抑制法"
+    ],
+    "answer": [
+      "A. 冷却法"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322008",
+    "type": "single",
+    "stem": "安全出口处的疏散门应向（ ）开启",
+    "options": [
+      "A. 外",
+      "B. 内"
+    ],
+    "answer": [
+      "A. 外"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322009",
+    "type": "single",
+    "stem": "消防重点单位的防火巡查的频次至少（ ）一次",
+    "options": [
+      "A. 每天",
+      "B. 每隔一天",
+      "C. 每周",
+      "D. 每月"
+    ],
+    "answer": [
+      "A. 每天"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322010",
+    "type": "single",
+    "stem": "各单位应当至少（ ）进行一次防火检查",
+    "options": [
+      "A. 每日",
+      "B. 每月",
+      "C. 每季度",
+      "D. 每年"
+    ],
+    "answer": [
+      "B. 每月"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322011",
+    "type": "single",
+    "stem": "航站楼旅客公共区域营业期间的防火巡查的频次至少（ ）一次",
+    "options": [
+      "A. 每日",
+      "B. 每月",
+      "C. 每 2 小时",
+      "D. 每半天"
+    ],
+    "answer": [
+      "C. 每 2 小时"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322012",
+    "type": "single",
+    "stem": "消防重点单位应当至少（ ）进行一次消防疏散演练",
+    "options": [
+      "A. 每日",
+      "B. 每月",
+      "C. 每季度",
+      "D. 每半年"
+    ],
+    "answer": [
+      "D. 每半年"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322013",
+    "type": "single",
+    "stem": "机场火警电话是（ ）",
+    "options": [
+      "A. 119",
+      "B. 89006119",
+      "C. 89009998",
+      "D. 89006618"
+    ],
+    "answer": [
+      "B. 89006119"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322014",
+    "type": "single",
+    "stem": "燃烧是一种发光发热的（ ）反应",
+    "options": [
+      "A. 物理",
+      "B. 化学"
+    ],
+    "answer": [
+      "B. 化学"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322015",
+    "type": "single",
+    "stem": "火灾初起阶段是火灾扑救的（ ）阶段",
+    "options": [
+      "A. 最不利",
+      "B. 最有利",
+      "C. 较不利"
+    ],
+    "answer": [
+      "B. 最有利"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322016",
+    "type": "single",
+    "stem": "据统计，火灾中死亡的人有 80% 以上属于（ ）",
+    "options": [
+      "A. 被火直接烧死",
+      "B. 烟气窒息致死",
+      "C. 跳楼或惊吓致死"
+    ],
+    "answer": [
+      "B. 烟气窒息致死"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322017",
+    "type": "single",
+    "stem": "人员密集场所开展动火作业严禁？",
+    "options": [
+      "A. 在营业期间进行作业",
+      "B. 进行电焊、气焊作业",
+      "C. 提前清理可燃物",
+      "D. 配置灭火器材"
+    ],
+    "answer": [
+      "A. 在营业期间进行作业"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322018",
+    "type": "single",
+    "stem": "下列哪个法规不是机场消防管理办法依据的上位法规",
+    "options": [
+      "A. 《中华人民共和国消防法》",
+      "B. 《机关、团体、企事业单位消防安全管理规定》",
+      "C. 《运输机场运行安全管理规定》",
+      "D. 《中华人民共和国民用航空安全保卫条例》"
+    ],
+    "answer": [
+      "D. 《中华人民共和国民用航空安全保卫条例》"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322019",
+    "type": "single",
+    "stem": "机场消防管理办法的适用范围不包括",
+    "options": [
+      "A. 机场公司的二级单位",
+      "B. 租用机场设施场所的航司",
+      "C. 集团板块公司",
+      "D. 轨道交通"
+    ],
+    "answer": [
+      "D. 轨道交通"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322020",
+    "type": "single",
+    "stem": "下列机场消防安全责任制的理解错误的是",
+    "options": [
+      "A. 各单位分头负责各自辖区的管理",
+      "B. 建筑主体责任单位只负责本单位使用区域的管理",
+      "C. 消防部负责机场消防安全的监督管理",
+      "D. 建设单位必须与施工单位签订消防安全责任书"
+    ],
+    "answer": [
+      "B. 建筑主体责任单位只负责本单位使用区域的管理"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322021",
+    "type": "single",
+    "stem": "消防管理网格未划分区域及公共区域由什么单位负责管理",
+    "options": [
+      "A. 三区管理单位",
+      "B. 消防部",
+      "C. 物业公司",
+      "D. 运行部"
+    ],
+    "answer": [
+      "A. 三区管理单位"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322022",
+    "type": "single",
+    "stem": "建筑物内未划分区域及公共区域由什么单位负责管理",
+    "options": [
+      "A. 建筑责任主体单位",
+      "B. 消防部",
+      "C. 物业公司"
+    ],
+    "answer": [
+      "A. 建筑责任主体单位"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322023",
+    "type": "single",
+    "stem": "机场公司用电安全由哪家单位负责",
+    "options": [
+      "A. 安全部",
+      "B. 消防部",
+      "C. 物业公司",
+      "D. 运行部"
+    ],
+    "answer": [
+      "C. 物业公司"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322024",
+    "type": "single",
+    "stem": "新增电气线路、加装大功率电器设备需经哪家单位审批后组织施工",
+    "options": [
+      "A. 安全部",
+      "B. 消防部",
+      "C. 物业公司",
+      "D. 航站楼部"
+    ],
+    "answer": [
+      "C. 物业公司"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322025",
+    "type": "single",
+    "stem": "机场公司用气安全由哪家单位负责",
+    "options": [
+      "A. 安全部",
+      "B. 消防部",
+      "C. 物业公司",
+      "D. 运行部"
+    ],
+    "answer": [
+      "C. 物业公司"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322026",
+    "type": "single",
+    "stem": "二氧化碳灭火器检查以下哪个是错误的",
+    "options": [
+      "A. 称重",
+      "B. 观察瓶体",
+      "C. 观察压力表",
+      "D. 检查有效期"
+    ],
+    "answer": [
+      "C. 观察压力表"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322027",
+    "type": "single",
+    "stem": "消防设施的功能完好性由哪家单位负责",
+    "options": [
+      "A. 消防部",
+      "B. 物业公司",
+      "C. 安全部",
+      "D. 运行部"
+    ],
+    "answer": [
+      "A. 消防部"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322028",
+    "type": "single",
+    "stem": "航站楼消防疏散演练应至少多久开展一次",
+    "options": [
+      "A. 每半年",
+      "B. 每一年",
+      "C. 每个月",
+      "D. 每季度"
+    ],
+    "answer": [
+      "A. 每半年"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322029",
+    "type": "single",
+    "stem": "其他场所结合本单位实际，参照制定的预案至少多久组织一次演练",
+    "options": [
+      "A. 每半年",
+      "B. 每一年",
+      "C. 每个月",
+      "D. 每季度"
+    ],
+    "answer": [
+      "B. 每一年"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322030",
+    "type": "single",
+    "stem": "以下哪个地点不属于机场消防重点部位",
+    "options": [
+      "A. 航站楼",
+      "B. 交通中心及地下停车场",
+      "C. 办公室",
+      "D. 集体宿舍"
+    ],
+    "answer": [
+      "C. 办公室"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322031",
+    "type": "single",
+    "stem": "仓库物品摆放哪个是错误的",
+    "options": [
+      "A. 与灯具电气设备距离不少于 0.5 米",
+      "B. 与供暖设备距离不少于 1 米",
+      "C. 与建筑顶部距离不少于 1 米"
+    ],
+    "answer": [
+      "C. 与建筑顶部距离不少于 1 米"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322032",
+    "type": "single",
+    "stem": "以下哪个描述是错误的",
+    "options": [
+      "A. 动火作业要审查人员资质",
+      "B. 动火作业要全程监管",
+      "C. 动火作业前无需进行可燃气体分析",
+      "D. 动火作业后要清理火种"
+    ],
+    "answer": [
+      "C. 动火作业前无需进行可燃气体分析"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322033",
+    "type": "single",
+    "stem": "因工作需要，需要进行电气焊割等明火作业必须办理（ ）",
+    "options": [
+      "A. 相关手续",
+      "B. 许可证",
+      "C. 动火审批"
+    ],
+    "answer": [
+      "C. 动火审批"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322034",
+    "type": "single",
+    "stem": "使用灭火器扑救火灾要对准火焰（ ）喷射",
+    "options": [
+      "A. 上部",
+      "B. 中部",
+      "C. 根部"
+    ],
+    "answer": [
+      "C. 根部"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322035",
+    "type": "single",
+    "stem": "任何单位和（ ）都有参加有组织的灭火工作义务",
+    "options": [
+      "A. 志愿消防队员",
+      "B. 成年公民",
+      "C. 职业消防队员"
+    ],
+    "answer": [
+      "B. 成年公民"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322036",
+    "type": "single",
+    "stem": "检查燃气用具是否泄漏时，通常采用（ ）来寻找漏气点",
+    "options": [
+      "A. 划火柴",
+      "B. 肥皂水",
+      "C. 闻气味"
+    ],
+    "answer": [
+      "B. 肥皂水"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322037",
+    "type": "single",
+    "stem": "发现燃气泄漏时哪个行为是正确的",
+    "options": [
+      "A. 立即开窗通风，关闭阀门，跑到室外空旷处拨打报警电话",
+      "B. 开灯查找泄漏的地点",
+      "C. 立即拨打电话报警"
+    ],
+    "answer": [
+      "A. 立即开窗通风，关闭阀门，跑到室外空旷处拨打报警电话"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322038",
+    "type": "single",
+    "stem": "公共场所发生火灾时，现场工作人员应（ ）",
+    "options": [
+      "A. 迅速撤离",
+      "B. 抢救贵重物品",
+      "C. 组织引导人员疏散"
+    ],
+    "answer": [
+      "C. 组织引导人员疏散"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322039",
+    "type": "single",
+    "stem": "泡沫灭火器不能用于扑救（ ）火灾",
+    "options": [
+      "A. 塑料",
+      "B. 汽油",
+      "C. 煤油",
+      "D. 金属钠"
+    ],
+    "answer": [
+      "D. 金属钠"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322040",
+    "type": "single",
+    "stem": "建筑工程施工现场的消防安全应由（ ）负责",
+    "options": [
+      "A. 建筑使用单位",
+      "B. 施工单位",
+      "C. 设计单位"
+    ],
+    "answer": [
+      "B. 施工单位"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322041",
+    "type": "single",
+    "stem": "烟头的中心温度可达（ ）。它超过了棉麻、织物、纸张、家具等可燃物的燃点，乱丢烟头容易引起火灾",
+    "options": [
+      "A. 100-200 度",
+      "B. 200-300 度",
+      "C. 700-800 度"
+    ],
+    "answer": [
+      "C. 700-800 度"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322042",
+    "type": "single",
+    "stem": "油锅起火应不能使用（ ）的方法扑救",
+    "options": [
+      "A. 水",
+      "B. 盖锅盖",
+      "C. 倒入生菜",
+      "D. 灭火毯"
+    ],
+    "answer": [
+      "A. 水"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322043",
+    "type": "single",
+    "stem": "施工现场使用溶剂和油漆时应杜绝一切火种，还应注意（ ）",
+    "options": [
+      "A. 湿度",
+      "B. 温度",
+      "C. 通风"
+    ],
+    "answer": [
+      "C. 通风"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322044",
+    "type": "single",
+    "stem": "机场公司各建筑场所在进行施工改造装修时应采用的装修材料是（ ）",
+    "options": [
+      "A. 可燃材料",
+      "B. 易燃材料",
+      "C. 难燃和不燃材料"
+    ],
+    "answer": [
+      "C. 难燃和不燃材料"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322045",
+    "type": "single",
+    "stem": "仓库堆放货物距离顶部和电气设备均应保持（ ）距离",
+    "options": [
+      "A. 无需保持距离",
+      "B. 0.5 米",
+      "C. 1 米"
+    ],
+    "answer": [
+      "B. 0.5 米"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322046",
+    "type": "single",
+    "stem": "哪个不属于火灾报警设备",
+    "options": [
+      "A. 感烟探测器",
+      "B. 感温探测器",
+      "C. 火灾报警按钮",
+      "D. 隐蔽式报警按钮"
+    ],
+    "answer": [
+      "D. 隐蔽式报警按钮"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322047",
+    "type": "single",
+    "stem": "哪个不属于疏散设施",
+    "options": [
+      "A. 疏散门",
+      "B. 安全疏散指示标志",
+      "C. 室内消防栓",
+      "D. 应急照明灯"
+    ],
+    "answer": [
+      "C. 室内消防栓"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322048",
+    "type": "single",
+    "stem": "灭火器指针指向红色表示（ ）",
+    "options": [
+      "A. 偏高",
+      "B. 偏低",
+      "C. 正常"
+    ],
+    "answer": [
+      "B. 偏低"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322049",
+    "type": "single",
+    "stem": "下面灭火器操作方法错误的是（ ）",
+    "options": [
+      "A. 拿起灭火器拔掉插销",
+      "B. 对准火源根部喷射",
+      "C. 距离火源 3-5 米",
+      "D. 在下风方向使用灭火器"
+    ],
+    "answer": [
+      "D. 在下风方向使用灭火器"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322050",
+    "type": "single",
+    "stem": "下面消防栓操作方法错误的是（ ）",
+    "options": [
+      "A. 打开消防栓门，按下消防栓按钮",
+      "B. 抛出水带，连接出水口和水枪",
+      "C. 打开阀门进行出水",
+      "D. 日常搞卫生也可以使用消防栓的水"
+    ],
+    "answer": [
+      "D. 日常搞卫生也可以使用消防栓的水"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322051",
+    "type": "single",
+    "stem": "火势凶猛无法控制时，现场工作人员需要（ ）",
+    "options": [
+      "A. 拼劲全力一定要灭火",
+      "B. 确保安全情况下迅速组织人员疏散，撤离火场",
+      "C. 自己先跑了再说",
+      "D. 在现场等到消防员之后再撤退"
+    ],
+    "answer": [
+      "B. 确保安全情况下迅速组织人员疏散，撤离火场"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322052",
+    "type": "single",
+    "stem": "窒息灭火法是指通过隔绝空气，消除 ( )，使燃烧区内的可燃物质无法获得足够的氧化剂助燃，从而使燃烧停止。",
+    "options": [
+      "A. 可燃物",
+      "B. 助燃物",
+      "C. 易燃物",
+      "D. 引火源"
+    ],
+    "answer": [
+      "A. 可燃物"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322053",
+    "type": "single",
+    "stem": "消防安全管理员是在国家机关、社会团体、企业、事业单位和其他组织中，实施日常消防安全管理、( ) 和应急疏散、配合火灾事故调查等消防管理工作的人员。",
+    "options": [
+      "A. 督促火灾隐患整改",
+      "B. 组织扑救初起火灾",
+      "C. 消防设施操作",
+      "D. 消防设施维护保养"
+    ],
+    "answer": [
+      "A. 督促火灾隐患整改"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322054",
+    "type": "single",
+    "stem": "单位作为消防工作的基本单元，决定了必须实行 () 的原则。",
+    "options": [
+      "A. 单位全面负责",
+      "B. 单位依法负责",
+      "C. 单位有限负责",
+      "D. 单位统一负责"
+    ],
+    "answer": [
+      "A. 单位全面负责"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322055",
+    "type": "single",
+    "stem": "( ) 本单位的消防安全责任人，全面负责本单位的消防安全工作。",
+    "options": [
+      "A. 单位的法定代表人或主要负责人",
+      "B. 消防安全主管",
+      "C. 分管消防安全工作的副总",
+      "D. 中控室值班人员"
+    ],
+    "answer": [
+      "A. 单位的法定代表人或主要负责人"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322056",
+    "type": "single",
+    "stem": "生活中常见的木材的燃烧属于 ( )。",
+    "options": [
+      "A. 分解燃烧",
+      "B. 蒸发燃烧",
+      "C. 表面燃烧",
+      "D. 熏烟燃烧"
+    ],
+    "answer": [
+      "A. 分解燃烧"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322057",
+    "type": "single",
+    "stem": "无论何种形式的引火源，都必须达到一定的 ( )，即要有一定的温度和足够的热量才能引起燃烧反应。",
+    "options": [
+      "A. 强度",
+      "B. 能量",
+      "C. 浓度",
+      "D. 温度"
+    ],
+    "answer": [
+      "B. 能量"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322058",
+    "type": "single",
+    "stem": "储存物品仓库按物品储存过程中的火灾危险性进行分类，可分为 ( )。",
+    "options": [
+      "A. 甲类、乙类、丙类、丁类、戊类",
+      "B. 甲类、乙类、丙类、丁类",
+      "C. 甲类、乙类、丙类",
+      "D. 甲类、乙类"
+    ],
+    "answer": [
+      "A. 甲类、乙类、丙类、丁类、戊类"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322059",
+    "type": "single",
+    "stem": "以下 ( ) 不是消防安全管理员需要具备的相关能力。",
+    "options": [
+      "A. 应具有机关、团体、企业、事业等单位的消防安全管理能力",
+      "B. 应具有消防安全重点单位的消防安全管理能力",
+      "C. 应具有扑救初起火灾的能力",
+      "D. 应具有维修、保养消防设施的能力"
+    ],
+    "answer": [
+      "D. 应具有维修、保养消防设施的能力"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322060",
+    "type": "single",
+    "stem": "我国消防工作是一项由政府统一领导、部门依法监管、( )、公民积极参与、专业队伍与社会各方面协同、群防群治的预防和减少火灾危害，开展应急救援的公共消防安全的专门性工作。",
+    "options": [
+      "A. 社会全面负责",
+      "B. 单位全面负责",
+      "C. 个人全面负责",
+      "D. 团体全面负责"
+    ],
+    "answer": [
+      "B. 单位全面负责"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322061",
+    "type": "single",
+    "stem": "热量的传播通常通过三种方式传播，空调采暖属于 ( )。",
+    "options": [
+      "A. 热传导",
+      "B. 热对流",
+      "C. 热传播",
+      "D. 热辐射"
+    ],
+    "answer": [
+      "B. 热对流"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322062",
+    "type": "single",
+    "stem": "( ) 属于难燃性构件。",
+    "options": [
+      "A. 混凝土柱",
+      "B. 砖墙",
+      "C. 水泥刨花复合板隔墙",
+      "D. 竹制吊顶"
+    ],
+    "answer": [
+      "C. 水泥刨花复合板隔墙"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322063",
+    "type": "single",
+    "stem": "下列不属于水系灭火器灭火原理的是 ( )。",
+    "options": [
+      "A. 冷却",
+      "B. 窒息",
+      "C. 稀释",
+      "D. 化学抑制"
+    ],
+    "answer": [
+      "D. 化学抑制"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322064",
+    "type": "single",
+    "stem": "灭火器压力表指针在黄色区域代表 ( )。",
+    "options": [
+      "A. 压力低",
+      "B. 压力正常",
+      "C. 压力过大",
+      "D. 达到报废条件"
+    ],
+    "answer": [
+      "C. 压力过大"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322065",
+    "type": "single",
+    "stem": "下面哪一项不属于发生火灾时疏散逃生的原则 ( )。",
+    "options": [
+      "A. 逃生时不乘坐普通电梯",
+      "B. 逃生时不要轻易跳楼",
+      "C. 逃生时应把贵重物品和重要资料带走",
+      "D. 通过窗户向下面呼喊、招手、打亮手电简、抛掷物品等，发出求救信号"
+    ],
+    "answer": [
+      "C. 逃生时应把贵重物品和重要资料带走"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322066",
+    "type": "single",
+    "stem": "消防安全重点单位制定的灭火和应急疏散预案应建立组织机构，组织机构不包括的是 ( )",
+    "options": [
+      "A. 灭火行动组",
+      "B. 调查行动组",
+      "C. 疏散引导组",
+      "D. 安全防护救护组"
+    ],
+    "answer": [
+      "B. 调查行动组"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322067",
+    "type": "single",
+    "stem": "消防安全培训要达到的基本能力要求中，“四会” 不包括 ( )。",
+    "options": [
+      "A. 会使用消防器材",
+      "B. 会宣传消防安全基础知识",
+      "C. 会扑救初起火灾",
+      "D. 会组织疏散逃生"
+    ],
+    "answer": [
+      "B. 会宣传消防安全基础知识"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322068",
+    "type": "single",
+    "stem": "各单位应根据自身特点，建立健全消防安全教育培训制度，明确机构和人员，保障教育培训工作经费，对员工进行消防安全教育培训的主要内容不包括 ( )。",
+    "options": [
+      "A. 有关消防法规、消防安全管理制度、保证消防安全的操作规程等",
+      "B. 报火警、扑救初起火灾、应急疏散和自救逃生的知识、技能",
+      "C. 本单位、本岗位的火灾危险性和防火措施",
+      "D. 消防设施维护、保养的知识和方法"
+    ],
+    "answer": [
+      "D. 消防设施维护、保养的知识和方法"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322069",
+    "type": "single",
+    "stem": "（ ）不是判断常闭防火门是否工作正常",
+    "options": [
+      "A. 闭门器、顺序器在位",
+      "B. 防火门能自动关闭",
+      "C. 防火门无变形",
+      "D. 防火门无划痕"
+    ],
+    "answer": [
+      "D. 防火门无划痕"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322070",
+    "type": "single",
+    "stem": "对建筑消防设施 ( ) 至少进行一次全面检测，确保完好有效，检测记录应当完整准确，存档备查。",
+    "options": [
+      "A. 每月",
+      "B. 每季度",
+      "C. 每半年",
+      "D. 每年"
+    ],
+    "answer": [
+      "D. 每年"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322071",
+    "type": "single",
+    "stem": "消控室值班人员监控发现火警信息后立即通知就近人员前往现场查看火警，相关人员应（ ）",
+    "options": [
+      "A. 立即快速前往相关地点现场查看",
+      "B. 忙完手上的工作再去",
+      "C. 慢慢踱步过去"
+    ],
+    "answer": [
+      "A. 立即快速前往相关地点现场查看"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322072",
+    "type": "single",
+    "stem": "室内消火栓实际出水操作时操作人员不应少于 ( ) 人",
+    "options": [
+      "A. 1",
+      "B. 2",
+      "C. 3",
+      "D. 4"
+    ],
+    "answer": [
+      "B. 2"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322073",
+    "type": "single",
+    "stem": "动火作业必须填写动火申请表，经单位 ( ) 批准后方可施工。",
+    "options": [
+      "A. 消防部和安全分管领导",
+      "B. 安全部",
+      "C. 区域管理单位",
+      "D. 本单位领导"
+    ],
+    "answer": [
+      "A. 消防部和安全分管领导"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322074",
+    "type": "single",
+    "stem": "使用气焊切割动火作业时，氧气瓶与乙炔、丙烷气瓶的间距不应小于 ( ) m。",
+    "options": [
+      "A. 3",
+      "B. 4",
+      "C. 5",
+      "D. 10"
+    ],
+    "answer": [
+      "C. 5"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322075",
+    "type": "single",
+    "stem": "以下哪项不是室内消火栓日常巡查检查内容",
+    "options": [
+      "A. 检查消火栓箱及箱内配装消防部件的外观有无损坏，涂层是否脱落，箱门玻璃是够完好无缺",
+      "B. 检查室内消火栓、消防水枪、消防水带、消防软管卷盘是否齐全完好",
+      "C. 检查最不利点消火栓静压和动压"
+    ],
+    "answer": [
+      "C. 检查最不利点消火栓静压和动压"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322076",
+    "type": "single",
+    "stem": "劳动者对用人单位管理人员违章指挥、强令冒险违规动火作业，( )。",
+    "options": [
+      "A. 应当立即执行",
+      "B. 不得抵制执行",
+      "C. 有权拒绝执行",
+      "D. 报告主管部门同意后应当执行"
+    ],
+    "answer": [
+      "C. 有权拒绝执行"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322077",
+    "type": "single",
+    "stem": "人员密集场所需要使用易燃、易爆化学物品时，应根据需求限量使用，存储量不应超过 ( ) 的使用量，并应在不使用时予以及时清除，且应由专人管理、登记。",
+    "options": [
+      "A. 12 小时",
+      "B. 8 小时",
+      "C. 24 小时",
+      "D. 36 小时"
+    ],
+    "answer": [
+      "C. 24 小时"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322078",
+    "type": "single",
+    "stem": "下列哪些部位不属于消防重点部位（ ）",
+    "options": [
+      "A. 锅炉房",
+      "B. 航站楼旅客公共区域",
+      "C. 油库",
+      "D. 办公室"
+    ],
+    "answer": [
+      "D. 办公室"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322079",
+    "type": "single",
+    "stem": "干粉灭火器和水基灭火器的有效期分别是（ ），过期应进行维修。",
+    "options": [
+      "A. 3 年、3 年",
+      "B. 5 年、5 年",
+      "C. 5 年、3 年",
+      "D. 3 年、5 年"
+    ],
+    "answer": [
+      "C. 5 年、3 年"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322080",
+    "type": "single",
+    "stem": "下列哪项不是防火巡查人员应巡查的内容 ( )。",
+    "options": [
+      "A. 有无违规用火用电",
+      "B. 安全出口是否畅通",
+      "C. 应急照明、疏散指示牌是否正常",
+      "D. 有无人员脱岗"
+    ],
+    "answer": [
+      "D. 有无人员脱岗"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322081",
+    "type": "single",
+    "stem": "关于动火作业的要求，说法错误的是 ( )。",
+    "options": [
+      "A. 须严格执行安全操作规程",
+      "B. 如发现安全隐患，可边动火边整改",
+      "C. 要指定现场安全防火负责人",
+      "D. 发生火灾必须及时扑救"
+    ],
+    "answer": [
+      "B. 如发现安全隐患，可边动火边整改"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322082",
+    "type": "single",
+    "stem": "下列关于用火行为的说法不正确的是 ( )。",
+    "options": [
+      "A. 电焊作业必须持证上岗",
+      "B. 户外风力 5 级可不用停止电焊作业",
+      "C. 动火作业必须填写动火申请表",
+      "D. 电焊作业应采取防火分隔保护措施"
+    ],
+    "answer": [
+      "B. 户外风力 5 级可不用停止电焊作业"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322083",
+    "type": "single",
+    "stem": "仓库储存物物品堆放应距离电气设备至少（ ）",
+    "options": [
+      "A. 1 米",
+      "B. 0.5 米",
+      "C. 0.3 米",
+      "D. 不需要保持距离"
+    ],
+    "answer": [
+      "B. 0.5 米"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322084",
+    "type": "single",
+    "stem": "使用气焊切割动火作业时，氧气瓶和乙炔、丙烷气瓶与动火作业点的间距不应小于 ( ) m。",
+    "options": [
+      "A. 5",
+      "B. 10",
+      "C. 15",
+      "D. 20"
+    ],
+    "answer": [
+      "B. 10"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322085",
+    "type": "single",
+    "stem": "《消防法》对公民在消防工作中的权利和义务作出的规定中说法错误的是 ( )。",
+    "options": [
+      "A. 任何人都有报告火警的义务",
+      "B. 任何成年人都有参加有组织的灭火的义务",
+      "C. 任何人发现火灾都应立即报",
+      "D. 人员密集场所的工作人员发生火灾时应立即逃生"
+    ],
+    "answer": [
+      "D. 人员密集场所的工作人员发生火灾时应立即逃生"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322086",
+    "type": "single",
+    "stem": "施工工地装修中使用油漆等，除了杜绝火种，还应注意（ ）",
+    "options": [
+      "A. 湿度",
+      "B. 温度",
+      "C. 通风"
+    ],
+    "answer": [
+      "C. 通风"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322087",
+    "type": "single",
+    "stem": "机场各建筑场所室内装修材料应采用（ ）",
+    "options": [
+      "A. 可燃材料",
+      "B. 难燃和不燃材料",
+      "C. 易燃材料",
+      "D. 钢筋混凝土"
+    ],
+    "answer": [
+      "B. 难燃和不燃材料"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322088",
+    "type": "single",
+    "stem": "各单位（A）是本单位的消防安全责任人，对本单位的消防安全工作全面负责。遵守消防法规，贯彻 “预防为主，防消结合” 的方针，履行消防安全职责，保障消防安全。",
+    "options": [
+      "A. 消防安全联络人",
+      "B. 分管安全的负责人",
+      "C. 主要负责人",
+      "D. 办公室主任"
+    ],
+    "answer": [
+      "A. 消防安全联络人"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322089",
+    "type": "single",
+    "stem": "检查室内消防栓、灭火器箱（B）米范围内无杂物堆放影响使用；",
+    "options": [
+      "A. 0.5",
+      "B. 1",
+      "C. 2",
+      "D. 3"
+    ],
+    "answer": [
+      "B. 1"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322090",
+    "type": "single",
+    "stem": "（B）不少于一次对灭火器、室内消火栓、水带等配件进行检查，旅客公共聚集场所、集体宿舍、地下停车场等地下室区域、动力中心等部位检查为（ ）不少于 1 次。",
+    "options": [
+      "A. 每月、每月",
+      "B. 每月、每半个月",
+      "C. 每半个月、每月",
+      "D. 每半个月、每半个月"
+    ],
+    "answer": [
+      "B. 每月、每半个月"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322091",
+    "type": "single",
+    "stem": "机场所有消防设施设备、器材不得用于与消防和抢险救援无关的事项。任何单位动用消防栓需经（ C ）的同意后方可使用（紧急救火时除外）。",
+    "options": [
+      "A. 消防救援保障部",
+      "B. 物业管理公司",
+      "C. 消防救援保障部和物业管理公司",
+      "D. 机场公司"
+    ],
+    "answer": [
+      "C. 消防救援保障部和物业管理公司"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322092",
+    "type": "single",
+    "stem": "（ B ）为机场公司的用电用气安全监督管理部门，负责机场用电用气审批，用电用气消防安全管理相关要求按机场公司用电管理相关制度执行；",
+    "options": [
+      "A. 安全管理部",
+      "B. 物业管理公司",
+      "C. 消防救援保障部",
+      "D. 运行管理部"
+    ],
+    "answer": [
+      "B. 物业管理公司"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322093",
+    "type": "single",
+    "stem": "二级动火作业动火期限为（ C ）天。",
+    "options": [
+      "A. 5",
+      "B. 6",
+      "C. 7",
+      "D. 8"
+    ],
+    "answer": [
+      "C. 7"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322094",
+    "type": "single",
+    "stem": "各单位负责本单位责任区域防火巡查工作，由各单位兼职消防安全管理人员组织实施，并确定巡查的人员、内容、部位和频次，机场消防重点部位至少（ ）进行一次防火巡查，其他区域不少于（ A ）一次",
+    "options": [
+      "A. 每日、每周",
+      "B. 每日、每月",
+      "C. 每周、每周",
+      "D. 每日、每日"
+    ],
+    "answer": [
+      "A. 每日、每周"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322095",
+    "type": "single",
+    "stem": "动火作业时，距动火点要保持（ D ）米以上的距离",
+    "options": [
+      "A. 2",
+      "B. 5",
+      "C. 8",
+      "D. 10"
+    ],
+    "answer": [
+      "D. 10"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322096",
+    "type": "single",
+    "stem": "动火作业时，距离动火点（ B）米内严禁进行可燃溶剂清洗或油漆作业及产生可燃性粉尘的清扫作业。",
+    "options": [
+      "A. 5",
+      "B. 10",
+      "C. 15",
+      "D. 20"
+    ],
+    "answer": [
+      "B. 10"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322097",
+    "type": "single",
+    "stem": "干粉灭火器有效期是几年",
+    "options": [
+      "A. 2",
+      "B. 3",
+      "C. 5",
+      "D. 10"
+    ],
+    "answer": [
+      "C. 5"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322098",
+    "type": "single",
+    "stem": "水基型灭火器有效期是几年",
+    "options": [
+      "A. 2",
+      "B. 3",
+      "C. 5",
+      "D. 10"
+    ],
+    "answer": [
+      "B. 3"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322099",
+    "type": "single",
+    "stem": "下面灭火器操作方法错误的是：",
+    "options": [
+      "A. 拿起灭火器拔掉插销",
+      "B. 对准火源根部喷射",
+      "C. 喷不出的时候上下摇晃几下",
+      "D. 在下风方向使用灭火器"
+    ],
+    "answer": [
+      "D. 在下风方向使用灭火器"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322100",
+    "type": "single",
+    "stem": "发生火灾时，正确的安全疏散主要有 3 个方向，向下跑到地面，向上跑到屋顶，还可以（ ）",
+    "options": [
+      "A. 躲在角落",
+      "B. 钻到阁楼避难",
+      "C. 逃到阳台"
+    ],
+    "answer": [
+      "C. 逃到阳台"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322101",
+    "type": "single",
+    "stem": "对于火灾的预防，我们每个人需要做到（ ）",
+    "options": [
+      "A. 会使用消防器材",
+      "B. 会报火警",
+      "C. 会扑救初起火灾",
+      "D. 会组织疏散逃生"
+    ],
+    "answer": [
+      "A. 会使用消防器材",
+      "B. 会报火警",
+      "C. 会扑救初起火灾",
+      "D. 会组织疏散逃生"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322102",
+    "type": "multiple",
+    "stem": "对于用电安全，下面正确的是（ ）",
+    "options": [
+      "A. 安装合格电流过载保护器",
+      "B. 人员不在时拔掉用电器插头",
+      "C. 不违规使用大功率用电器",
+      "D. 电动车按照指定地点集中停放，并使用充电保护装置充电"
+    ],
+    "answer": [
+      "A. 安装合格电流过载保护器",
+      "B. 人员不在时拔掉用电器插头",
+      "C. 不违规使用大功率用电器",
+      "D. 电动车按照指定地点集中停放，并使用充电保护装置充电"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322103",
+    "type": "multiple",
+    "stem": "对日常检查发现的火灾隐患要（ ）",
+    "options": [
+      "A. 立即消除并上报",
+      "B. 不能立即消除的火灾隐患要制定防范措施",
+      "C. 不用管，会有人处理",
+      "D. 假装整改，蒙混过关"
+    ],
+    "answer": [
+      "A. 立即消除并上报",
+      "B. 不能立即消除的火灾隐患要制定防范措施"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322104",
+    "type": "multiple",
+    "stem": "发现初起火灾时，应（ ）",
+    "options": [
+      "A. 大声呼救，争取周边人的帮助",
+      "B. 迅速拨打机场火警电话",
+      "C. 利用身边的消防设施灭火",
+      "D. 疏散附近人员"
+    ],
+    "answer": [
+      "A. 大声呼救，争取周边人的帮助",
+      "B. 迅速拨打机场火警电话",
+      "C. 利用身边的消防设施灭火",
+      "D. 疏散附近人员"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322105",
+    "type": "multiple",
+    "stem": "工作人员日常需要做的消防工作包括：（ ）",
+    "options": [
+      "A. 定期消防培训，并留下培训记录",
+      "B. 日常巡查并留下巡查记录",
+      "C. 发现火情及时报告",
+      "D. 发生火灾时疏散现场人员"
+    ],
+    "answer": [
+      "A. 定期消防培训，并留下培训记录",
+      "B. 日常巡查并留下巡查记录",
+      "C. 发现火情及时报告",
+      "D. 发生火灾时疏散现场人员"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322106",
+    "type": "multiple",
+    "stem": "机场公司全体员工作为消防安全工作参与者，履行以下职责（ ）",
+    "options": [
+      "A. 确保本岗位消防设施设备、灭火器材的完好，消防通道、疏散通道和安全出口畅通，离开工作岗位时不留下各种火险隐患。",
+      "B. 维护机场公司消防安全，保护消防设施，预防火灾、及时报告火警和扑救初起火灾。",
+      "C. 自觉遵守各项规章制度，认真学习消防法规和防火灭火知识、提高消防技能，积极参加机场公司或本单位组织的消防安全教育和培训。",
+      "D. 熟悉所在办公区域、工作场所内的消防安全设施位置、疏散通道和安全出口，一旦发生火灾事故，在立即报警和实施灭火的同时，要组织、引导在场人员疏散。"
+    ],
+    "answer": [
+      "A. 确保本岗位消防设施设备、灭火器材的完好，消防通道、疏散通道和安全出口畅通，离开工作岗位时不留下各种火险隐患。",
+      "B. 维护机场公司消防安全，保护消防设施，预防火灾、及时报告火警和扑救初起火灾。",
+      "C. 自觉遵守各项规章制度，认真学习消防法规和防火灭火知识、提高消防技能，积极参加机场公司或本单位组织的消防安全教育和培训。",
+      "D. 熟悉所在办公区域、工作场所内的消防安全设施位置、疏散通道和安全出口，一旦发生火灾事故，在立即报警和实施灭火的同时，要组织、引导在场人员疏散。"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322107",
+    "type": "multiple",
+    "stem": "消防设施设备包括（ ）",
+    "options": [
+      "A. 火灾自动报警系统",
+      "B. 室内消防栓系统",
+      "C. 自动喷淋灭火系统",
+      "D. 气体灭火系统",
+      "E. 防排烟系统"
+    ],
+    "answer": [
+      "A. 火灾自动报警系统",
+      "B. 室内消防栓系统",
+      "C. 自动喷淋灭火系统",
+      "D. 气体灭火系统",
+      "E. 防排烟系统"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322108",
+    "type": "multiple",
+    "stem": "灭火器器材包括（ ）",
+    "options": [
+      "A. 干粉灭火器",
+      "B. 消防水带",
+      "C. 消防水枪",
+      "D. 灭火毯",
+      "E. 防火门"
+    ],
+    "answer": [
+      "A. 干粉灭火器",
+      "B. 消防水带",
+      "C. 消防水枪",
+      "D. 灭火毯"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322109",
+    "type": "multiple",
+    "stem": "疏散设施包括（ ）",
+    "options": [
+      "A. 应急照明",
+      "B. 疏散指示标志",
+      "C. 安全出口",
+      "D. 疏散走道",
+      "E. 疏散楼梯"
+    ],
+    "answer": [
+      "A. 应急照明",
+      "B. 疏散指示标志",
+      "C. 安全出口",
+      "D. 疏散走道",
+      "E. 疏散楼梯"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322110",
+    "type": "multiple",
+    "stem": "网格责任主体单位主要职责包括（ ）",
+    "options": [
+      "A. 建立健全本单位消防安全管理规程",
+      "B. 开展消防安全培训、演练",
+      "C. 组织防火检查、防火巡查",
+      "D. 健全消防档案资料",
+      "E. 开展初期火灾处置"
+    ],
+    "answer": [
+      "A. 建立健全本单位消防安全管理规程",
+      "B. 开展消防安全培训、演练",
+      "C. 组织防火检查、防火巡查",
+      "D. 健全消防档案资料",
+      "E. 开展初期火灾处置"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322111",
+    "type": "multiple",
+    "stem": "各单位兼职消防安全管理人员的主要职责包括（ ）",
+    "options": [
+      "A. 本单位消防培训",
+      "B. 本单位消防疏散演练",
+      "C. 组织防火巡查",
+      "D. 消防隐患排查治理",
+      "E. 传达消防安全信息"
+    ],
+    "answer": [
+      "A. 本单位消防培训",
+      "B. 本单位消防疏散演练",
+      "C. 组织防火巡查",
+      "D. 消防隐患排查治理",
+      "E. 传达消防安全信息"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322112",
+    "type": "multiple",
+    "stem": "各单位员工的主要职责包括（ ）",
+    "options": [
+      "A. 及时发现并报告消防隐患",
+      "B. 及时报告火警及扑救初期火灾",
+      "C. 学习掌握消防应知应会",
+      "D. 掌握本岗位火灾风险和火灾扑救措施",
+      "E. 掌握疏散路线和疏散知识"
+    ],
+    "answer": [
+      "A. 及时发现并报告消防隐患",
+      "B. 及时报告火警及扑救初期火灾",
+      "C. 学习掌握消防应知应会",
+      "D. 掌握本岗位火灾风险和火灾扑救措施",
+      "E. 掌握疏散路线和疏散知识"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322113",
+    "type": "multiple",
+    "stem": "消防责任书层层签订包括（ ）",
+    "options": [
+      "A. 与各科室责任人签订",
+      "B. 与各岗位员工签订",
+      "C. 与各被管理单位签订",
+      "D. 与施工服务单位签订"
+    ],
+    "answer": [
+      "A. 与各科室责任人签订",
+      "B. 与各岗位员工签订",
+      "C. 与各被管理单位签订",
+      "D. 与施工服务单位签订"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322114",
+    "type": "multiple",
+    "stem": "机场消防重点部位特点",
+    "options": [
+      "A. 容易发生火灾",
+      "B. 火灾严重危害人身和财产安全",
+      "C. 发生火灾有其他重大影响",
+      "D. 场所装修豪华"
+    ],
+    "answer": [
+      "A. 容易发生火灾",
+      "B. 火灾严重危害人身和财产安全",
+      "C. 发生火灾有其他重大影响"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322115",
+    "type": "multiple",
+    "stem": "哪些场所需要设置消防重点部位标识牌，标明防火责任人",
+    "options": [
+      "A. 货运仓库",
+      "B. 110KV 变电站",
+      "C. 动力中心",
+      "D. 交通中心及 T1 地下停车场"
+    ],
+    "answer": [
+      "A. 货运仓库",
+      "B. 110KV 变电站",
+      "C. 动力中心",
+      "D. 交通中心及 T1 地下停车场"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322116",
+    "type": "multiple",
+    "stem": "机场哪些区域需要动火审批",
+    "options": [
+      "A. 场区",
+      "B. 飞行区",
+      "C. 航站区"
+    ],
+    "answer": [
+      "A. 场区",
+      "B. 飞行区",
+      "C. 航站区"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322117",
+    "type": "multiple",
+    "stem": "仓库消防安全管理要注意",
+    "options": [
+      "A. 货物摆放的 “五距” 要求",
+      "B. 不要遮挡影响消防设施",
+      "C. 不要违规存放危化品",
+      "D. 配置灭火器材",
+      "E. 货物分类摆放整齐"
+    ],
+    "answer": [
+      "A. 货物摆放的 “五距” 要求",
+      "B. 不要遮挡影响消防设施",
+      "C. 不要违规存放危化品",
+      "D. 配置灭火器材",
+      "E. 货物分类摆放整齐"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322118",
+    "type": "multiple",
+    "stem": "车辆消防安全管理要注意",
+    "options": [
+      "A. 配置灭火器材",
+      "B. 每日进行检查",
+      "C. 车内不摆放香水、充电宝等",
+      "D. 车内易燃物及时清理"
+    ],
+    "answer": [
+      "A. 配置灭火器材",
+      "B. 每日进行检查",
+      "C. 车内不摆放香水、充电宝等",
+      "D. 车内易燃物及时清理"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322119",
+    "type": "multiple",
+    "stem": "施工单位的消防职责包括（ ）",
+    "options": [
+      "A. 建立消防安全管理制度",
+      "B. 落实消防安全措施",
+      "C. 开展员工培训和演练",
+      "D. 配置消防设施器材",
+      "E. 落实防火检查消除隐患"
+    ],
+    "answer": [
+      "A. 建立消防安全管理制度",
+      "B. 落实消防安全措施",
+      "C. 开展员工培训和演练",
+      "D. 配置消防设施器材",
+      "E. 落实防火检查消除隐患"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322120",
+    "type": "multiple",
+    "stem": "消控室的职责包括（ ）",
+    "options": [
+      "A. 负责消控室内消防设施的定期检查巡查",
+      "B. 负责启动并监控消防设施",
+      "C. 发生火警，及时通知现场人员查看处置",
+      "D. 做好消控室台账记录",
+      "E. 确认发生火情后及时报警"
+    ],
+    "answer": [
+      "A. 负责消控室内消防设施的定期检查巡查",
+      "B. 负责启动并监控消防设施",
+      "C. 发生火警，及时通知现场人员查看处置",
+      "D. 做好消控室台账记录",
+      "E. 确认发生火情后及时报警"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322121",
+    "type": "multiple",
+    "stem": "办公生产场所每日运行结束后应该（ ）",
+    "options": [
+      "A. 进行巡查检查",
+      "B. 关闭不使用的电器电源",
+      "C. 燃气管阀",
+      "D. 清除遗留火种",
+      "E. 值班人员加强巡查"
+    ],
+    "answer": [
+      "A. 进行巡查检查",
+      "B. 关闭不使用的电器电源",
+      "C. 燃气管阀",
+      "D. 清除遗留火种",
+      "E. 值班人员加强巡查"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322122",
+    "type": "multiple",
+    "stem": "下列哪些是检查动火特种作业证的方法",
+    "options": [
+      "A. 扫描二维码查询",
+      "B. 登陆对应网站查询",
+      "C. 检查特种证与身份证信息是否相符",
+      "D. 仅看证件照片即可判断"
+    ],
+    "answer": [
+      "A. 扫描二维码查询",
+      "B. 登陆对应网站查询",
+      "C. 检查特种证与身份证信息是否相符"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322123",
+    "type": "multiple",
+    "stem": "消防培训内部包括 （ ）",
+    "options": [
+      "A. 消防规范规范",
+      "B. 本单位本岗位火灾危险性，火灾预防措施",
+      "C. 消防设施操作使用知识",
+      "D. 报火警、扑救火灾知识",
+      "E. 建筑布局熟悉、疏散知识"
+    ],
+    "answer": [
+      "A. 消防规范规范",
+      "B. 本单位本岗位火灾危险性，火灾预防措施",
+      "C. 消防设施操作使用知识",
+      "D. 报火警、扑救火灾知识",
+      "E. 建筑布局熟悉、疏散知识"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322124",
+    "type": "multiple",
+    "stem": "消防疏散应急预案包括（ ）",
+    "options": [
+      "A. 组织机构",
+      "B. 报警处置程序",
+      "C. 应急疏散程序",
+      "D. 扑救初期火灾程序",
+      "E. 通讯联络安全救护程序"
+    ],
+    "answer": [
+      "A. 组织机构",
+      "B. 报警处置程序",
+      "C. 应急疏散程序",
+      "D. 扑救初期火灾程序",
+      "E. 通讯联络安全救护程序"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322125",
+    "type": "multiple",
+    "stem": "存在下列情况的，消防救援保障部将填发《消防安全隐患整改通知书》通报",
+    "options": [
+      "A. 未按规定履行消防安全制度、管理措施不力、考核验收不合格的",
+      "B. 存在火灾隐患，逾期不整改或整改不到位的",
+      "C. 因责任原因被地方消防管理部门开具整改单的"
+    ],
+    "answer": [
+      "A. 未按规定履行消防安全制度、管理措施不力、考核验收不合格的",
+      "B. 存在火灾隐患，逾期不整改或整改不到位的",
+      "C. 因责任原因被地方消防管理部门开具整改单的"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322126",
+    "type": "multiple",
+    "stem": "各单位消防档案内容包括（ ）",
+    "options": [
+      "A. 单位基本情况",
+      "B. 单位消防重点部位情况",
+      "C. 本单位消防制度",
+      "D. 消防责任书情况",
+      "E. 其他检查、培训、演练记录等"
+    ],
+    "answer": [
+      "A. 单位基本情况",
+      "B. 单位消防重点部位情况",
+      "C. 本单位消防制度",
+      "D. 消防责任书情况",
+      "E. 其他检查、培训、演练记录等"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322127",
+    "type": "multiple",
+    "stem": "以下属于机场消防重点部位的有（ ）",
+    "options": [
+      "A. 航站楼",
+      "B. 交通中心及地下停车场",
+      "C. 货运仓库",
+      "D. 动力中心",
+      "E. 集体宿舍"
+    ],
+    "answer": [
+      "A. 航站楼",
+      "B. 交通中心及地下停车场",
+      "C. 货运仓库",
+      "D. 动力中心",
+      "E. 集体宿舍"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322128",
+    "type": "multiple",
+    "stem": "动火人做到 “四不” 原则",
+    "options": [
+      "A. 没有动火证不动火",
+      "B. 没有操作证不动火",
+      "C. 安全措施不落实不动火",
+      "D. 监护人不在现场不动火"
+    ],
+    "answer": [
+      "A. 没有动火证不动火",
+      "B. 没有操作证不动火",
+      "C. 安全措施不落实不动火",
+      "D. 监护人不在现场不动火"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322129",
+    "type": "multiple",
+    "stem": "怎么目视检查消防设施",
+    "options": [
+      "A. 检查设备是否在位",
+      "B. 安装是否牢固",
+      "C. 设备标识牌是否在位完整",
+      "D. 外观是否正常",
+      "E. 有无被遮挡覆盖"
+    ],
+    "answer": [
+      "A. 检查设备是否在位",
+      "B. 安装是否牢固",
+      "C. 设备标识牌是否在位完整",
+      "D. 外观是否正常",
+      "E. 有无被遮挡覆盖"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322130",
+    "type": "multiple",
+    "stem": "灭火器检查方法（ ）",
+    "options": [
+      "A. 观察外观是否有明显损坏，被腐蚀等情况。",
+      "B. 灭火器的铅封、销闩等保险装置是否未损坏或遗失。",
+      "C. 灭火器压力表指针是否在绿区（黄区也是正常的，因为受气温的影响，会出现瓶内压力过大的情况）",
+      "D. 灭火器有没有超过使用有效期。"
+    ],
+    "answer": [
+      "A. 观察外观是否有明显损坏，被腐蚀等情况。",
+      "B. 灭火器的铅封、销闩等保险装置是否未损坏或遗失。",
+      "C. 灭火器压力表指针是否在绿区（黄区也是正常的，因为受气温的影响，会出现瓶内压力过大的情况）",
+      "D. 灭火器有没有超过使用有效期。"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322131",
+    "type": "multiple",
+    "stem": "机坪施工时，哪些方面会造成火灾事故 （ ）",
+    "options": [
+      "A. 人员消防安全意识淡薄",
+      "B. 易燃易爆材料未按要求堆放",
+      "C. 违章用电用火",
+      "D. 违章操作，无资质上岗"
+    ],
+    "answer": [
+      "A. 人员消防安全意识淡薄",
+      "B. 易燃易爆材料未按要求堆放",
+      "C. 违章用电用火",
+      "D. 违章操作，无资质上岗"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322132",
+    "type": "multiple",
+    "stem": "动火作业应做到以下要素（ ）",
+    "options": [
+      "A. 动火人员资质符合要求",
+      "B. 动火现场全程专人监管",
+      "C. 动火现场准备灭火器材，动火现场清理可燃物易燃物",
+      "D. 动火前分析易燃气体危险性",
+      "E. 动火作业前报备相关管理单位"
+    ],
+    "answer": [
+      "A. 动火人员资质符合要求",
+      "B. 动火现场全程专人监管",
+      "C. 动火现场准备灭火器材，动火现场清理可燃物易燃物",
+      "D. 动火前分析易燃气体危险性",
+      "E. 动火作业前报备相关管理单位"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322133",
+    "type": "multiple",
+    "stem": "以下哪些是违规用电行为（ ）",
+    "options": [
+      "A. 私拉电线",
+      "B. 电线未用专用防火材料套管",
+      "C. 购买使用不合格电器",
+      "D. 串联使用插线板",
+      "E. 未经供电部门同意随意使用大功率电器"
+    ],
+    "answer": [
+      "A. 私拉电线",
+      "B. 电线未用专用防火材料套管",
+      "C. 购买使用不合格电器",
+      "D. 串联使用插线板",
+      "E. 未经供电部门同意随意使用大功率电器"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322134",
+    "type": "multiple",
+    "stem": "《消防法》规定，任何单位和个人都有维护消防安全、保护消防设施、预防火灾、报告火警的义务。火警电话应报告哪些内容。",
+    "options": [
+      "A. 起火单位和详细地址",
+      "B. 火灾基本情况，是否危险品着火",
+      "C. 报警人姓名、联系电话等",
+      "D. 有无人员被困"
+    ],
+    "answer": [
+      "A. 起火单位和详细地址",
+      "B. 火灾基本情况，是否危险品着火",
+      "C. 报警人姓名、联系电话等",
+      "D. 有无人员被困"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322135",
+    "type": "multiple",
+    "stem": "下列物质中，( ) 燃烧所引发的火灾属于 D 类火灾。",
+    "options": [
+      "A. 木材",
+      "B. 钾",
+      "C. 汽油",
+      "D. 钠"
+    ],
+    "answer": [
+      "B. 钾",
+      "D. 钠"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322136",
+    "type": "multiple",
+    "stem": "安全疏散和避难设施包括 ( ) 等。",
+    "options": [
+      "A. 疏散门、疏散出口",
+      "B. 安全出口",
+      "C. 疏散楼梯、走道",
+      "D. 疏散标识"
+    ],
+    "answer": [
+      "A. 疏散门、疏散出口",
+      "B. 安全出口",
+      "C. 疏散楼梯、走道",
+      "D. 疏散标识"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322137",
+    "type": "multiple",
+    "stem": "消防安全重点单位制定的灭火和应急疏散预案中的组织机构包括 ( )。",
+    "options": [
+      "A. 灭火行动组",
+      "B. 通讯联络组",
+      "C. 安全防护救护组",
+      "D. 疏散引导组"
+    ],
+    "answer": [
+      "A. 灭火行动组",
+      "B. 通讯联络组",
+      "C. 安全防护救护组",
+      "D. 疏散引导组"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322138",
+    "type": "multiple",
+    "stem": "日常建筑场所中有哪些消防设施（ ）",
+    "options": [
+      "A. 室内消防栓、灭火器",
+      "B. 火灾报警按钮",
+      "C. 防火卷帘、防火门",
+      "D. 自动喷淋装置"
+    ],
+    "answer": [
+      "A. 室内消防栓、灭火器",
+      "B. 火灾报警按钮",
+      "C. 防火卷帘、防火门",
+      "D. 自动喷淋装置"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322139",
+    "type": "multiple",
+    "stem": "根据燃烧条件理论，防火的基本方法有 ( )。",
+    "options": [
+      "A. 控制可燃物",
+      "B. 隔绝助燃物",
+      "C. 控制和消除引火源",
+      "D. 避免相互作用"
+    ],
+    "answer": [
+      "A. 控制可燃物",
+      "B. 隔绝助燃物",
+      "C. 控制和消除引火源",
+      "D. 避免相互作用"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322140",
+    "type": "multiple",
+    "stem": "室内消防栓、灭火器箱检查应注意（）",
+    "options": [
+      "A. 消火栓箱内所配置器件应当齐全、完好",
+      "B. 室内消防栓管路部件无渗漏",
+      "C. 消火栓箱内应无垃圾、杂物，保持干净",
+      "D. 室内消防栓箱应无障碍物遮挡"
+    ],
+    "answer": [
+      "A. 消火栓箱内所配置器件应当齐全、完好",
+      "B. 室内消防栓管路部件无渗漏",
+      "C. 消火栓箱内应无垃圾、杂物，保持干净",
+      "D. 室内消防栓箱应无障碍物遮挡"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322141",
+    "type": "multiple",
+    "stem": "消防安全重点单位对每名员工应当至少每年进行一次消防安全培训。宣传教育和培训的内容应包括 ( )。",
+    "options": [
+      "A. 有关消防法规、消防安全制度和保障消防安全的操作规程",
+      "B. 本单位、本岗位的火灾危险性和防火措施",
+      "C. 有关消防设施的性能、灭火器材的使用方法",
+      "D. 报火警、扑救初起火灾以及自救逃生的知识和技能"
+    ],
+    "answer": [
+      "A. 有关消防法规、消防安全制度和保障消防安全的操作规程",
+      "B. 本单位、本岗位的火灾危险性和防火措施",
+      "C. 有关消防设施的性能、灭火器材的使用方法",
+      "D. 报火警、扑救初起火灾以及自救逃生的知识和技能"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322142",
+    "type": "multiple",
+    "stem": "各单位消防档案应当包括消防安全基本情况和消防安全管理情况。以下属于消防安全管理情况的是 ( )。",
+    "options": [
+      "A. 灭火和应急疏散预案的演练记录",
+      "B. 火灾隐患及其整改情况记录",
+      "C. 防火检查、巡查记录",
+      "D. 消防安全培训记录"
+    ],
+    "answer": [
+      "A. 灭火和应急疏散预案的演练记录",
+      "B. 火灾隐患及其整改情况记录",
+      "C. 防火检查、巡查记录",
+      "D. 消防安全培训记录"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322143",
+    "type": "multiple",
+    "stem": "下列关于疏散通道、安全出口的说法不正确的是 ( )。",
+    "options": [
+      "A. 电动自行车在不充电的情况下，可以放在楼梯内",
+      "B. 在营业、生产、教学、工作等期间可以将安全出口上锁，防止人员走动",
+      "C. 疏散楼梯内安全疏散指示标志、应急照明、应处于正常状态",
+      "D. 疏散楼梯内不得堆放纸箱等可燃物"
+    ],
+    "answer": [
+      "A. 电动自行车在不充电的情况下，可以放在楼梯内",
+      "B. 在营业、生产、教学、工作等期间可以将安全出口上锁，防止人员走动"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322144",
+    "type": "multiple",
+    "stem": "消防安全培训要达到的基本能力要求概括起来就是要达到消防安全 “四懂” 和 “四会”，其中 “四会” 保括 ( )。",
+    "options": [
+      "A. 会使用消防器材",
+      "B. 会报火警",
+      "C. 会扑救初起火灾",
+      "D. 会组织疏散逃生"
+    ],
+    "answer": [
+      "A. 会使用消防器材",
+      "B. 会报火警",
+      "C. 会扑救初起火灾",
+      "D. 会组织疏散逃生"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322145",
+    "type": "multiple",
+    "stem": "消防安全培训要达到的基本能力要求概括起来就是要达到消防安全 “四懂” 和 “四会”，其中 “四懂” 保括 ( )。",
+    "options": [
+      "A. 懂本岗位火灾危险性",
+      "B. 懂预防火灾的措施",
+      "C. 懂扑救火灾的方法",
+      "D. 懂逃生疏散的方法"
+    ],
+    "answer": [
+      "A. 懂本岗位火灾危险性",
+      "B. 懂预防火灾的措施",
+      "C. 懂扑救火灾的方法",
+      "D. 懂逃生疏散的方法"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322146",
+    "type": "multiple",
+    "stem": "确定消防安全重点部位以下方面考虑的内容正确的有 ( )。",
+    "options": [
+      "A. 容易发生火灾的部位",
+      "B. 发生火灾后队消防安全有重大影响部位",
+      "C. 性质重要、发生事故影响全局的部位",
+      "D. 财产集中的部位"
+    ],
+    "answer": [
+      "A. 容易发生火灾的部位",
+      "B. 发生火灾后队消防安全有重大影响部位",
+      "C. 性质重要、发生事故影响全局的部位",
+      "D. 财产集中的部位"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322147",
+    "type": "multiple",
+    "stem": "以下对疏散通道、安全出口的管理表述正确的是 ( )。",
+    "options": [
+      "A. 机关、团体、企业、事业等单位应当履行保障疏散通道、安全出口畅通的消防安全职责",
+      "B. 同一建筑物由两个以上单位管理或者使用的，应当由建筑主体责任单位统一管理共用的疏散通道、安全出口",
+      "C. 任何单位和个人不得占用、堵塞、封闭疏散通道及安全出口",
+      "D. 人员密集场所的门窗，不得设置影响逃生和灭火救援的障碍物"
+    ],
+    "answer": [
+      "A. 机关、团体、企业、事业等单位应当履行保障疏散通道、安全出口畅通的消防安全职责",
+      "B. 同一建筑物由两个以上单位管理或者使用的，应当由建筑主体责任单位统一管理共用的疏散通道、安全出口",
+      "C. 任何单位和个人不得占用、堵塞、封闭疏散通道及安全出口",
+      "D. 人员密集场所的门窗，不得设置影响逃生和灭火救援的障碍物"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322148",
+    "type": "multiple",
+    "stem": "以下防火门设置正确的选项是 ( )。",
+    "options": [
+      "A. 常闭式防火门应在其明显位置设置 “保持防火门关闭” 等提示标志",
+      "B. 防火门关闭后应具有防烟性能",
+      "C. 防火门应保持美观"
+    ],
+    "answer": [
+      "A. 常闭式防火门应在其明显位置设置 “保持防火门关闭” 等提示标志",
+      "B. 防火门关闭后应具有防烟性能"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322149",
+    "type": "multiple",
+    "stem": "在针对初起火灾特点和扑救措施开展安全防护常识培训时，说法正确的有。( )",
+    "options": [
+      "A. 扑救时遵循 “先断电，后灭火” 的原则",
+      "B. 扑救燃气场所火灾时，先关闭燃气阀门",
+      "C. 扑救密闭房间起火时，可先立即开门，让烟气尽快散出",
+      "D. 扑救时做好现场警戒，提前做好安全撤离准备"
+    ],
+    "answer": [
+      "A. 扑救时遵循 “先断电，后灭火” 的原则",
+      "B. 扑救燃气场所火灾时，先关闭燃气阀门",
+      "D. 扑救时做好现场警戒，提前做好安全撤离准备"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322150",
+    "type": "multiple",
+    "stem": "下列哪些属于机场消防重点部位（ ），由管理责任单位设置明显消防重点部位标识牌，标明防火责任人，实行专人负责，严格管理。",
+    "options": [
+      "A. 货运仓库",
+      "B. 110KV 变电站",
+      "C. T1/T2 动力中心",
+      "D. 交通中心及 T1 地下停车场"
+    ],
+    "answer": [
+      "A. 货运仓库",
+      "B. 110KV 变电站",
+      "C. T1/T2 动力中心",
+      "D. 交通中心及 T1 地下停车场"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322151",
+    "type": "multiple",
+    "stem": "动火作业前须报动火作业所在区域管理单位备案，经同意后方可施工，一级二级动火作业每日动火施工前报备机场专职消防队（89009835），说明（ ）。",
+    "options": [
+      "A. 动火的地点",
+      "B. 动火开始时间",
+      "C. 预计持续时间",
+      "D. 现场监管人员"
+    ],
+    "answer": [
+      "A. 动火的地点",
+      "B. 动火开始时间",
+      "C. 预计持续时间",
+      "D. 现场监管人员"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322152",
+    "type": "multiple",
+    "stem": "各单位每月至少对本单位责任区域进行一次防火检查，填写防火检查记录。（ ）对各单位工作开展情况进行督查。",
+    "options": [
+      "A. 安全管理部",
+      "B. 值班经理室",
+      "C. 消防救援保障部",
+      "D. 运行管理部"
+    ],
+    "answer": [
+      "A. 安全管理部",
+      "B. 值班经理室",
+      "C. 消防救援保障部"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322153",
+    "type": "multiple",
+    "stem": "各单位通过多种形式开展经常性的消防安全宣传教育，对每名员工及业务承包单位、租赁单位人员至少每年进行一次消防安全培训；公众聚集场所员工至少每半年进行一次。宣传教育和培训内容包括但不限于以下内容：（ ）",
+    "options": [
+      "A. 有关消防安全的法律法规及行业要求；",
+      "B. 本单位、本岗位的火灾危险性，火灾预防知识和措施；",
+      "C. 有关消防设施的功能、消防设施设备、灭火器材的使用方法；",
+      "D. 报火警、扑救初起火灾和自救互救技能；",
+      "E. 熟悉建筑物布局、消防设施器材分布位置、安全出口位置、疏散路线、组织引导在场人员疏散的方法。"
+    ],
+    "answer": [
+      "A. 有关消防安全的法律法规及行业要求；",
+      "B. 本单位、本岗位的火灾危险性，火灾预防知识和措施；",
+      "C. 有关消防设施的功能、消防设施设备、灭火器材的使用方法；",
+      "D. 报火警、扑救初起火灾和自救互救技能；",
+      "E. 熟悉建筑物布局、消防设施器材分布位置、安全出口位置、疏散路线、组织引导在场人员疏散的方法。"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322154",
+    "type": "boolean",
+    "stem": "防火巡查人员应当及时纠正违章行为，妥善处置火灾危险，无法当场处置的，应当立即报告，发现初起火灾应当立即报警并及时扑救。（ ）",
+    "options": [
+      "A. 对",
+      "B. 错"
+    ],
+    "answer": [
+      "A. 正确"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322155",
+    "type": "boolean",
+    "stem": "在拨打火警电话向消防中心报火警时，必须讲清发生火灾的详细地址、起火物、火势情况和报警人的姓名及电话号码。（ ）",
+    "options": [
+      "A. 对",
+      "B. 错"
+    ],
+    "answer": [
+      "A. 正确"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322156",
+    "type": "boolean",
+    "stem": "在室外使用灭火器时，应选择在下风方向喷射。（ ）",
+    "options": [
+      "A. 对",
+      "B. 错"
+    ],
+    "answer": [
+      "B. 错误"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322157",
+    "type": "boolean",
+    "stem": "消火栓、灭火器材被遮挡影响使用或者被挪作他用的，应当立即改正，消除隐患。（ ）",
+    "options": [
+      "A. 对",
+      "B. 错"
+    ],
+    "answer": [
+      "A. 正确"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322158",
+    "type": "boolean",
+    "stem": "当灭火人员能够接近火源时，应迅速利用身边的灭火器材灭火，将火势控制在初期低温少烟阶段。（ ）",
+    "options": [
+      "A. 对",
+      "B. 错"
+    ],
+    "answer": [
+      "A. 正确"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322159",
+    "type": "boolean",
+    "stem": "任何单位和个人在发现火灾时，都有报告火警的义务。（ ）",
+    "options": [
+      "A. 对",
+      "B. 错"
+    ],
+    "answer": [
+      "A. 正确"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322160",
+    "type": "boolean",
+    "stem": "电气火灾扑救在未确认断电情况下可以使用水进行灭火",
+    "options": [
+      "A. 对",
+      "B. 错"
+    ],
+    "answer": [
+      "B. 错误"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322161",
+    "type": "boolean",
+    "stem": "电动自行车不可在室内充电，但可以在室内停放",
+    "options": [
+      "A. 对",
+      "B. 错"
+    ],
+    "answer": [
+      "B. 错误"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322162",
+    "type": "boolean",
+    "stem": "任何单位和个人不得擅自改变经住房城乡建设主管部门验收合格或者备案的建筑物、场所的使用性质。",
+    "options": [
+      "A. 对",
+      "B. 错"
+    ],
+    "answer": [
+      "A. 正确"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322163",
+    "type": "boolean",
+    "stem": "本单位由持证的电工，可以自行铺设电气线路和安装大功率电器设备",
+    "options": [
+      "A. 对",
+      "B. 错"
+    ],
+    "answer": [
+      "B. 错误"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322164",
+    "type": "boolean",
+    "stem": "燃气管路长期未使用，可以随意拆除",
+    "options": [
+      "A. 对",
+      "B. 错"
+    ],
+    "answer": [
+      "B. 错误"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322165",
+    "type": "boolean",
+    "stem": "室内装修、装饰材料的燃烧性能等级必须符合国家标准",
+    "options": [
+      "A. 对",
+      "B. 错"
+    ],
+    "answer": [
+      "A. 正确"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322166",
+    "type": "boolean",
+    "stem": "装修材料的燃烧性是否合格只需要打火机检验就行，不需要提供检测报告",
+    "options": [
+      "A. 对",
+      "B. 错"
+    ],
+    "answer": [
+      "B. 错误"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322167",
+    "type": "boolean",
+    "stem": "设计图纸应由建设单位报建设单位所在地住房和城乡建设主管部门核准后实施",
+    "options": [
+      "A. 对",
+      "B. 错"
+    ],
+    "answer": [
+      "A. 正确"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322168",
+    "type": "boolean",
+    "stem": "施工单位必须按照建设单位所在地住房和城乡建设主管部门核准的图纸和设计修改意见进行施工，为安装方便可以擅自更改",
+    "options": [
+      "A. 对",
+      "B. 错"
+    ],
+    "answer": [
+      "B. 错误"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322169",
+    "type": "boolean",
+    "stem": "工程竣工时，须报建设单位所在地住房和城乡建设主管部门或消防救援机构进行消防验收，并将消防设计图纸、消防验收报告等消防相关档案资料报消防救援保障部备案，接受监督",
+    "options": [
+      "A. 对",
+      "B. 错"
+    ],
+    "answer": [
+      "A. 正确"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322170",
+    "type": "boolean",
+    "stem": "动火作业前需要进行动火审批，动火当天不需要再进行动火报备",
+    "options": [
+      "A. 对",
+      "B. 错"
+    ],
+    "answer": [
+      "B. 错误"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322171",
+    "type": "boolean",
+    "stem": "建设单位与施工单位签订消防安全责任书，明确双方消防安全责任及义务",
+    "options": [
+      "A. 对",
+      "B. 错"
+    ],
+    "answer": [
+      "A. 正确"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322172",
+    "type": "boolean",
+    "stem": "建设工程施工现场的消防安全由施工单位负责",
+    "options": [
+      "A. 对",
+      "B. 错"
+    ],
+    "answer": [
+      "A. 正确"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322173",
+    "type": "boolean",
+    "stem": "各单位对本单位辖区内（所属网格区域、工作场所、办公场所等）的消防设施、灭火器材（包括工作车辆灭火器）和疏散设施的外观完好负责",
+    "options": [
+      "A. 对",
+      "B. 错"
+    ],
+    "answer": [
+      "A. 正确"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322174",
+    "type": "boolean",
+    "stem": "地下停车场的灭火器的检查频次是每月一次",
+    "options": [
+      "A. 对",
+      "B. 错"
+    ],
+    "answer": [
+      "B. 错误"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322175",
+    "type": "boolean",
+    "stem": "航站楼旅客公共区域的灭火器检查频次是每月两次",
+    "options": [
+      "A. 对",
+      "B. 错"
+    ],
+    "answer": [
+      "A. 正确"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322176",
+    "type": "boolean",
+    "stem": "灭火器检查不需要检查瓶体情况",
+    "options": [
+      "A. 对",
+      "B. 错"
+    ],
+    "answer": [
+      "B. 错误"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322177",
+    "type": "boolean",
+    "stem": "自动消防系统每年由具有消防检测资质的机构至少进行一次全面检测，对发现的问题及时整改，检测报告存档期限不得少于三年",
+    "options": [
+      "A. 对",
+      "B. 错"
+    ],
+    "answer": [
+      "A. 正确"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322178",
+    "type": "boolean",
+    "stem": "禁止随意动用火灾报警按钮、室内消防栓报警按钮、消防插孔电话、消防水泵、风机、气体灭火、水炮等消防设备控制按钮等",
+    "options": [
+      "A. 对",
+      "B. 错"
+    ],
+    "answer": [
+      "A. 正确"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322179",
+    "type": "boolean",
+    "stem": "机场所有消防设施设备、器材不得用于与消防和抢险救援无关的事项",
+    "options": [
+      "A. 对",
+      "B. 错"
+    ],
+    "answer": [
+      "A. 正确"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322180",
+    "type": "boolean",
+    "stem": "任何单位动用消防栓需经消防救援保障部和物业管理公司的同意后方可使用（紧急救火时除外）",
+    "options": [
+      "A. 对",
+      "B. 错"
+    ],
+    "answer": [
+      "A. 正确"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322181",
+    "type": "boolean",
+    "stem": "任何消防设施因故障、维修等原因，需要暂时停用系统时，须经消防救援保障部和相关管理区域责任单位消防安全责任人批准",
+    "options": [
+      "A. 对",
+      "B. 错"
+    ],
+    "answer": [
+      "A. 正确"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322182",
+    "type": "boolean",
+    "stem": "消防设施系统停用时间超过 24 小时的，报机场公司消防安全分管领导批准，并报机场公安分局备案，采取有效措施确保安全，严禁擅自关停消防设施",
+    "options": [
+      "A. 对",
+      "B. 错"
+    ],
+    "answer": [
+      "A. 正确"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322183",
+    "type": "boolean",
+    "stem": "飞行区内地下消防管网维修可以随意停用",
+    "options": [
+      "A. 对",
+      "B. 错"
+    ],
+    "answer": [
+      "B. 错误"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322184",
+    "type": "boolean",
+    "stem": "廊桥动火作业，施工人员可以从就近机坪灭火器箱取用灭火器",
+    "options": [
+      "A. 对",
+      "B. 错"
+    ],
+    "answer": [
+      "B. 错误"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322185",
+    "type": "boolean",
+    "stem": "疏散门为防止其他人员进入，可以直接在里侧用 U 型锁锁闭",
+    "options": [
+      "A. 对",
+      "B. 错"
+    ],
+    "answer": [
+      "B. 错误"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322186",
+    "type": "boolean",
+    "stem": "室外消防栓经物业公司同意，绿化作业人员可以随意使用",
+    "options": [
+      "A. 对",
+      "B. 错"
+    ],
+    "answer": [
+      "B. 错误"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322187",
+    "type": "boolean",
+    "stem": "各单位的志愿者消防队员应掌握预防和扑救火灾的能力",
+    "options": [
+      "A. 对",
+      "B. 错"
+    ],
+    "answer": [
+      "A. 正确"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322188",
+    "type": "boolean",
+    "stem": "机场消防重点部位的防火巡查需每日开展一次",
+    "options": [
+      "A. 对",
+      "B. 错"
+    ],
+    "answer": [
+      "A. 正确"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322189",
+    "type": "boolean",
+    "stem": "机场除消防重点部位的其他区域的防火巡查不少于每周一次",
+    "options": [
+      "A. 对",
+      "B. 错"
+    ],
+    "answer": [
+      "A. 正确"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322190",
+    "type": "boolean",
+    "stem": "防火巡查人员发现火灾隐患无需现场提出纠正，只需记录就行",
+    "options": [
+      "A. 对",
+      "B. 错"
+    ],
+    "answer": [
+      "B. 错误"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322191",
+    "type": "boolean",
+    "stem": "发现火情，除了向机场消防报警，还需通知建筑主体单位启动应急预案，开展扑救疏散工作",
+    "options": [
+      "A. 对",
+      "B. 错"
+    ],
+    "answer": [
+      "A. 正确"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322192",
+    "type": "boolean",
+    "stem": "火灾扑灭后，起火单位须保护现场，接受事故调查，如实提供火灾事故的情况，协助公安消防机构调查火灾原因，核定火灾损失，查明火灾事故责任。未经公安消防机构同意，可以提前清理火灾现场",
+    "options": [
+      "A. 对",
+      "B. 错"
+    ],
+    "answer": [
+      "B. 错误"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322193",
+    "type": "boolean",
+    "stem": "各单位每月需开展一次防火检查，做好检查记录",
+    "options": [
+      "A. 对",
+      "B. 错"
+    ],
+    "answer": [
+      "A. 正确"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322194",
+    "type": "boolean",
+    "stem": "各单位火灾隐患需及时纳入 SMS 系统，开展风险评估，制定措施",
+    "options": [
+      "A. 对",
+      "B. 错"
+    ],
+    "answer": [
+      "A. 正确"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322195",
+    "type": "boolean",
+    "stem": "动火作业前需申请单位需对动火人员资质进行审查，检查特种作业证是否有效",
+    "options": [
+      "A. 对",
+      "B. 错"
+    ],
+    "answer": [
+      "A. 正确"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322196",
+    "type": "boolean",
+    "stem": "各单位通过多种形式开展经常性的消防安全宣传教育，对每名员工及业务承包单位、租赁单位人员至少每年进行一次消防安全培训",
+    "options": [
+      "A. 对",
+      "B. 错"
+    ],
+    "answer": [
+      "A. 正确"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322197",
+    "type": "boolean",
+    "stem": "公众聚集场所员工至少每半年进行一次，培训内容包括灭火器材操作使用，建筑疏散知识等",
+    "options": [
+      "A. 对",
+      "B. 错"
+    ],
+    "answer": [
+      "A. 正确"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322198",
+    "type": "boolean",
+    "stem": "新上岗和进入新岗位的员工在上岗前，须接受消防救援保障部消防安全培训，经考试合格后方可上岗",
+    "options": [
+      "A. 对",
+      "B. 错"
+    ],
+    "answer": [
+      "A. 正确"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322199",
+    "type": "boolean",
+    "stem": "多家使用单位合用的建筑由建筑责任主体单位牵头各使用单位开展联合演练",
+    "options": [
+      "A. 对",
+      "B. 错"
+    ],
+    "answer": [
+      "A. 正确"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322200",
+    "type": "boolean",
+    "stem": "消防演练时，设置明显标识并事先告知演练范围内的人员",
+    "options": [
+      "A. 对",
+      "B. 错"
+    ],
+    "answer": [
+      "A. 正确"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322201",
+    "type": "boolean",
+    "stem": "仓库库区内敷设的配电线路，需穿金属管或用难燃硬塑料管保护。不随意乱接电线，擅自增加用电设备",
+    "options": [
+      "A. 对",
+      "B. 错"
+    ],
+    "answer": [
+      "A. 正确"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322202",
+    "type": "boolean",
+    "stem": "仓库内不准使用大功率电器或其他家用电器",
+    "options": [
+      "A. 对",
+      "B. 错"
+    ],
+    "answer": [
+      "A. 正确"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322203",
+    "type": "boolean",
+    "stem": "电气设备，必须由持合格证的电工进行安装、检查和维修保养。电工严格遵守各项电气操作规程",
+    "options": [
+      "A. 对",
+      "B. 错"
+    ],
+    "answer": [
+      "A. 正确"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322204",
+    "type": "boolean",
+    "stem": "消防器材设置在明显和便于取用的地点，周围不准堆放物品和杂物",
+    "options": [
+      "A. 对",
+      "B. 错"
+    ],
+    "answer": [
+      "A. 正确"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322205",
+    "type": "boolean",
+    "stem": "贮存易燃易爆物品的仓库（场所），电气设备、开关、灯具、线路必须符合防爆要求",
+    "options": [
+      "A. 对",
+      "B. 错"
+    ],
+    "answer": [
+      "A. 正确"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322206",
+    "type": "boolean",
+    "stem": "动火作业是指进行焊接（气焊、电焊）与切割作业及使用明火、喷灯、砂轮等进行产生火焰、火花和炽热表面的临时性作业。",
+    "options": [
+      "A. 对",
+      "B. 错"
+    ],
+    "answer": [
+      "A. 正确"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322207",
+    "type": "boolean",
+    "stem": "不是所有的区域动火作业都要申请",
+    "options": [
+      "A. 对",
+      "B. 错"
+    ],
+    "answer": [
+      "B. 错误"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322208",
+    "type": "boolean",
+    "stem": "一级动火：是指在油罐、油箱、油槽车和贮存过可燃气体、易燃气体的容器以及连接在一起的辅助设备；各种受压设备；比较密封的室内、容器内、地下室等场所；堆有大量可燃和易燃物质的火灾爆炸危险场所等进行的动火作业，如锅炉房、燃气厨房、燃气管道、油品仓库等区域",
+    "options": [
+      "A. 对",
+      "B. 错"
+    ],
+    "answer": [
+      "A. 正确"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322209",
+    "type": "boolean",
+    "stem": "二级动火：是指在火灾爆炸危险场所以外的消防重点部位区域",
+    "options": [
+      "A. 对",
+      "B. 错"
+    ],
+    "answer": [
+      "A. 正确"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322210",
+    "type": "boolean",
+    "stem": "三级动火作业现场不需要人员监管",
+    "options": [
+      "A. 对",
+      "B. 错"
+    ],
+    "answer": [
+      "B. 错误"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322211",
+    "type": "boolean",
+    "stem": "动火作业前需要对人员进行作业交底，不需要进行安全评估",
+    "options": [
+      "A. 对",
+      "B. 错"
+    ],
+    "answer": [
+      "B. 错误"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322212",
+    "type": "boolean",
+    "stem": "电气焊设备不需要专人管理，只要能需用就行",
+    "options": [
+      "A. 对",
+      "B. 错"
+    ],
+    "answer": [
+      "B. 错误"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322213",
+    "type": "boolean",
+    "stem": "五级以上大风，停止室外动火作业",
+    "options": [
+      "A. 对",
+      "B. 错"
+    ],
+    "answer": [
+      "A. 正确"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322214",
+    "type": "boolean",
+    "stem": "动火结束后，由建设单位对操作现场进行全面检查，确认无火险隐患后，作业人员方可离场",
+    "options": [
+      "A. 对",
+      "B. 错"
+    ],
+    "answer": [
+      "A. 正确"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322215",
+    "type": "boolean",
+    "stem": "室内消防栓 / 灭火器箱 1 米范围内、室外消防栓 2 米范围内应无杂物堆放影响使用",
+    "options": [
+      "A. 对",
+      "B. 错"
+    ],
+    "answer": [
+      "A. 正确"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322216",
+    "type": "boolean",
+    "stem": "房屋使用单位未经同意可以随意装修、改造房屋或变更房屋使用功能",
+    "options": [
+      "A. 对",
+      "B. 错"
+    ],
+    "answer": [
+      "B. 错误"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322217",
+    "type": "boolean",
+    "stem": "二三级动火作业前应向机场消防部门报备",
+    "options": [
+      "A. 对",
+      "B. 错"
+    ],
+    "answer": [
+      "A. 正确"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322218",
+    "type": "boolean",
+    "stem": "应装修需要可以随意变更消防设施",
+    "options": [
+      "A. 对",
+      "B. 错"
+    ],
+    "answer": [
+      "B. 错误"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322219",
+    "type": "boolean",
+    "stem": "密闭房间内部起火时，不可贸然开门，不可正对门口，防止轰然造成人员伤亡。",
+    "options": [
+      "A. 对",
+      "B. 错"
+    ],
+    "answer": [
+      "A. 正确"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322220",
+    "type": "boolean",
+    "stem": "公众聚集场所在营业期间的防火巡查应当至少每二小时一次；营业结束时无需对营业现场进行检查",
+    "options": [
+      "A. 对",
+      "B. 错"
+    ],
+    "answer": [
+      "B. 错误"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322221",
+    "type": "boolean",
+    "stem": "公共娱乐场所在营业期间，可以组织人员动火",
+    "options": [
+      "A. 对",
+      "B. 错"
+    ],
+    "answer": [
+      "B. 错误"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322222",
+    "type": "boolean",
+    "stem": "根据《消防法》中关于单位消防安全责任的规定：被责令停止施工、停止使用、停产停业的单位，可以边整改边生产",
+    "options": [
+      "A. 对",
+      "B. 错"
+    ],
+    "answer": [
+      "B. 错误"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322223",
+    "type": "boolean",
+    "stem": "单位生产需要动用消防栓水，本单位领导同意后可以使用",
+    "options": [
+      "A. 对",
+      "B. 错"
+    ],
+    "answer": [
+      "B. 错误"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322224",
+    "type": "boolean",
+    "stem": "防火卷帘门下区域（距离卷帘门两侧各 0.3 米内）应无杂物堆放影响卷帘门升降",
+    "options": [
+      "A. 对",
+      "B. 错"
+    ],
+    "answer": [
+      "A. 正确"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322225",
+    "type": "boolean",
+    "stem": "常闭式防火门应处于关闭状态、闭门器自动闭门功能正常",
+    "options": [
+      "A. 对",
+      "B. 错"
+    ],
+    "answer": [
+      "A. 正确"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322226",
+    "type": "boolean",
+    "stem": "使用手提式二氧化碳灭火器时，可用手握住喇叭喷筒进行喷放。",
+    "options": [
+      "A. 对",
+      "B. 错"
+    ],
+    "answer": [
+      "B. 错误"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322227",
+    "type": "boolean",
+    "stem": "房屋租赁后，房屋租赁单位无须对租赁方进行消防安全监督检查",
+    "options": [
+      "A. 对",
+      "B. 错"
+    ],
+    "answer": [
+      "B. 错误"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322228",
+    "type": "boolean",
+    "stem": "涉及多家单位合用的建筑，消防疏散演练应由建筑主体管理单位牵头组织联合演练",
+    "options": [
+      "A. 对",
+      "B. 错"
+    ],
+    "answer": [
+      "A. 正确"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322229",
+    "type": "boolean",
+    "stem": "航站楼内动火作业，施工人员可以从旅客公共区域的室内消防栓箱里取用灭火器",
+    "options": [
+      "A. 对",
+      "B. 错"
+    ],
+    "answer": [
+      "B. 错误"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322230",
+    "type": "boolean",
+    "stem": "涉及多家单位合用的建筑，发生火灾时建筑主体管理单位应立即启动本建筑应急预案，牵头开展先期处置。",
+    "options": [
+      "A. 对",
+      "B. 错"
+    ],
+    "answer": [
+      "A. 正确"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322231",
+    "type": "boolean",
+    "stem": "临时施工工地人员无须进行消防培训",
+    "options": [
+      "A. 对",
+      "B. 错"
+    ],
+    "answer": [
+      "B. 错误"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322232",
+    "type": "boolean",
+    "stem": "各单位每月至少对本单位责任区域进行一次防火检查，填写防火检查记录。安全管理部、值班经理室、消防救援保障部对各单位工作开展情况进行督查。",
+    "options": [
+      "A. 对",
+      "B. 错"
+    ],
+    "answer": [
+      "A. 正确"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322233",
+    "type": "boolean",
+    "stem": "办公场所场地较小，可以长期占用通道摆放柜子等杂物",
+    "options": [
+      "A. 对",
+      "B. 错"
+    ],
+    "answer": [
+      "B. 错误"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322234",
+    "type": "boolean",
+    "stem": "一级动火作业动火期限为 8 小时。",
+    "options": [
+      "A. 对",
+      "B. 错"
+    ],
+    "answer": [
+      "A. 正确"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322235",
+    "type": "boolean",
+    "stem": "任何单位和个人不得擅自改变经住房城乡建设 主管部门验收合格或者备案的建筑物、场所的使用性质。",
+    "options": [
+      "A. 对",
+      "B. 错"
+    ],
+    "answer": [
+      "A. 正确"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322236",
+    "type": "boolean",
+    "stem": "可以随意动用火灾报警按钮、室内消防栓报警按钮、消防插孔电话、消防水泵、风机、气体灭火、水炮等消防设备控制按钮等。",
+    "options": [
+      "A. 对",
+      "B. 错"
+    ],
+    "answer": [
+      "B. 错误"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "应急处置",
+      "subject": "airportFireSafety",
+      "topic": ""
+    },
+    "id": "322237",
+    "type": "boolean",
+    "stem": "各单位定期组织灭火、应急疏散预案演练。航站楼至少每半年进行一次演练；其他场所结合本单位实际，参照制定的预案至少每年组织一次演练。",
+    "options": [
+      "A. 对",
+      "B. 错"
+    ],
+    "answer": [
+      "A. 正确"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  }
+]

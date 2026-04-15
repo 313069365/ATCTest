@@ -11240,7 +11240,7 @@
     "shuffle": false,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "只和飞机位置有关。电台磁方位（QDR）：从电台指向飞机的磁方位角。飞机磁方位（QDM）：从飞机指向电台的磁方位角。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -11265,7 +11265,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "地球表面上任何地点都有一条经线通过，它代表该地点的南北方向。平面垂直于地轴的大圆圈叫做赤道（Equator ）,其平面就是赤道平面，赤道平面将地球分成了南、北两个半球；与赤道平行的小圆圈叫做纬圈，纬圈的一段叫纬线（Parallel）,所有纬线都是互相平行的。地球表面任何地点都有一条纬线通过，它代表该地点的东西方向，",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -11365,7 +11365,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "航线距离我国常用千米(km--Kilometer)和浬(海里，NM——Nautical Mile )为单位，也有以英里(哩)(英里，SM——Statute Mile )为单位的。地球上大圆弧 1° 的长度为1 NM, 所以3种距离单位间的关系为：1NM = 1.852 km = 1.15 SM。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -11430,7 +11430,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "地球仪或地图上所标画的经线，都是指向地理南北极的方向线，叫做真经线，真经线的北端用真北（Nt）来表示；稳定的自由磁针所指的南北方向线叫做磁经线，磁经线的北端用磁北（Nm）来表示。【磁经线北端】偏离【真经线北端】的角度，叫做磁差或磁偏角，用MV或VAR表示",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -11455,7 +11455,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "在航空地图或磁差图上，通常把磁差相等的各点，用紫色的虚线连接起来，并标出磁差的数值，这些虚线就叫等磁差曲线(Isogonic Line ) ( D007 ),可供飞行时查取磁差之用",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -11475,7 +11475,7 @@
     "shuffle": false,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "所以，【领航学】中为了研究问题的方便，通常把地球看作【正球体】，通过计算：地球的平均半径 R = 6371.004 km。 目前我国使用的大地坐标系为北京大地坐标系，所选用的参考椭球为1975年国际第16届大地测量与地球物理联合会推荐的参考椭球，其数据为：东西半径（长半轴a ）为6 378.140 km,南北半径（短半轴6）为6 356.755 km,地球长、短半轴只相差21.385 km,椭球体的扁平率C= 1/298.253。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -11495,7 +11495,7 @@
     "shuffle": false,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "利用经纬度定位的方法是【绝对】定位法。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -11515,7 +11515,7 @@
     "shuffle": false,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "磁经线北端偏在真经线以东为正磁差，以西为负磁差；磁差范围0°~ ± 180°,磁差的常见表示形式有：① MV-20；② VAR2°WO",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -11555,7 +11555,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "等高线(Contours)：等高线指的是地球表面【标高】相等的各个地点的连线在地图上的投影(D010)",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -11580,7 +11580,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "常用的有3种表示形式：(1)数字比例尺，(2)文字说明比例尺，(3)图解比例尺。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -11605,7 +11605,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "【极地正投影】等角正割圆锥投影图又称为兰伯特投影图，是德国人兰伯特（Lambert）创制的。投影时以圆锥面与地球仪的两条选定的标准纬线相割，根据等角投影的要求，从地球中心将经、纬网投影到圆锥面上，然后将圆锥面展开成平面就得到了兰伯特投影图，如图2.24 所示。投影时，两条标准纬线间的地区有所收缩，两条标准纬线以外的地区则有所扩大。主要特征是：经线都是互不平行的直线，收敛于图外的一点（投影圆锥的顶点）；纬线都是以圆锥顶点为圆心的同心圆弧；纬度差相等的各纬线间的距离基本相等。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -11625,7 +11625,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "0.01 * 500 0000 / 1000 = 50",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -11650,7 +11650,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "百万分之一世界航图的分幅,0-60°范围内，纬度差4°，经度差6°;60°-76°范围内，纬度差4°，经度差12°;76°~84°范围内，纬度差4°，经度差24°;84°~88°范围内，纬度差4°，经度差36°; 88°~90°范围内，纬度差2°，经度差360°。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -11675,7 +11675,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "在现代地图上，地形主要是用等高线来表示的。目前使用的航空地图为了把地形表现得更加明显、准确，都是采用综合3种方法来表示地形的。根据该地点所在的等高线或所在区域的颜色从颜色高度尺上查出；若该地点正好在等高线上，则等高线的标高就是该地点的标高，若在两条等高线之间，一般以邻近较高的等高线的标高作为该地点的标高。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -11700,7 +11700,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "地图失真表现在长度、角度和面积3个方面。等角投影，投影时保持任何一点沿经线、纬线方向的局部比例尺相等，即没有角度失真的投影。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -11810,7 +11810,7 @@
     "shuffle": false,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "图幅同样大小的地图，比例尺大的所表现的地面范围要小些，但比较详细；比例尺小的地图所表现的地面范围要大些，但比较简略。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -11830,7 +11830,7 @@
     "shuffle": false,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "图幅同样大小的地图，比例尺大的所表现的地面范围要小些，但比较详细；比例尺小的地图所表现的地面范围要大些，但比较简略。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -11870,7 +11870,7 @@
     "shuffle": false,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "飞机远程飞行时通常选择【小比例尺】航图。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -11895,7 +11895,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "地方航线（航段）分两类，第一类为飞行管制区间的航线，编号范围为【J 1-200】； 第二类为飞行管制区内的航线，编号范围为【J 201－900】。 ",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -11920,7 +11920,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "飞机从地球表面一点（起点）到另一点（终点）的预定航行路线叫航线，也称为预计航迹。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -11965,7 +11965,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "北端顺时针",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -11990,7 +11990,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "北端顺时针",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -12055,7 +12055,7 @@
     "shuffle": false,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "以通过两航路点间的大圆圈线作为航线的叫【大圆航线】。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -12185,7 +12185,7 @@
     "shuffle": true,
     "degree": 3,
     "subs": null,
-    "explanation": "",
+    "explanation": "区时是该时区中央经线的地方时。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -12330,7 +12330,7 @@
     "shuffle": true,
     "degree": 3,
     "subs": null,
-    "explanation": "",
+    "explanation": "地平线下7°",
     "updated_at": "2023-11-28",
     "status": "valid"
   },

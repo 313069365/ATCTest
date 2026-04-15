@@ -1,0 +1,1021 @@
+[
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "英文题库",
+      "subject": "aviationEnglishTranslation",
+      "topic": ""
+    },
+    "id": "341001",
+    "type": "single",
+    "stem": "The word “Panpan”, spoken at the start of a transmission indentifies _______ ．",
+    "options": [
+      "A. a radio failure",
+      "B. a distress message",
+      "C. an urgency message",
+      "D. a fire alarm"
+    ],
+    "answer": [
+      "C. an urgency message"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "英文题库",
+      "subject": "aviationEnglishTranslation",
+      "topic": ""
+    },
+    "id": "341002",
+    "type": "single",
+    "stem": "The word “Mayday” spoken at the start of a transmission identifies _______ ．",
+    "options": [
+      "A. a call for help",
+      "B. a distress message",
+      "C. an urgency message",
+      "D. a radio failure"
+    ],
+    "answer": [
+      "B. a distress message"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "英文题库",
+      "subject": "aviationEnglishTranslation",
+      "topic": ""
+    },
+    "id": "341003",
+    "type": "single",
+    "stem": "“CDG8857, taxi with caution, A330 overtaking you on your left, he is number one .”What does the controller mean?",
+    "options": [
+      "A. ask CDG8857 to taxi faster",
+      "B. ask CDG8857 to stop",
+      "C. ask CDG8857 to give way",
+      "D. ask CDG8857 to depart after A330"
+    ],
+    "answer": [
+      "C. ask CDG8857 to give way"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "英文题库",
+      "subject": "aviationEnglishTranslation",
+      "topic": ""
+    },
+    "id": "341004",
+    "type": "single",
+    "stem": "The phrase “unable to comply” is used _______ ．",
+    "options": [
+      "A. by the controller before he amends the clearance or instruction",
+      "B. by the pilot to advise the controller he cannot carry out the clearance or instruction received",
+      "C. by the pilot before he takes action on the clearance or instruction received",
+      "D. by the controller to inform that he cannot comply with the pilot’s requirement"
+    ],
+    "answer": [
+      "B. by the pilot to advise the controller he cannot carry out the clearance or instruction received"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "英文题库",
+      "subject": "aviationEnglishTranslation",
+      "topic": ""
+    },
+    "id": "341005",
+    "type": "single",
+    "stem": "The link between the airport parking areas and the runways are the _______ ．",
+    "options": [
+      "A. bridges",
+      "B. taxiways",
+      "C. airways",
+      "D. carriage ways"
+    ],
+    "answer": [
+      "B. taxiways"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "英文题库",
+      "subject": "aviationEnglishTranslation",
+      "topic": ""
+    },
+    "id": "341006",
+    "type": "single",
+    "stem": "（）means I give permission for you to do what you asked.",
+    "options": [
+      "A. Affirm",
+      "B. Approved",
+      "C. Cleared",
+      "D. Correct"
+    ],
+    "answer": [
+      "B. Approved"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "英文题库",
+      "subject": "aviationEnglishTranslation",
+      "topic": ""
+    },
+    "id": "341007",
+    "type": "single",
+    "stem": "海关的英文是（）。",
+    "options": [
+      "A. channel",
+      "B. customs",
+      "C. certificate",
+      "D. currency"
+    ],
+    "answer": [
+      "B. customs"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "英文题库",
+      "subject": "aviationEnglishTranslation",
+      "topic": ""
+    },
+    "id": "341008",
+    "type": "single",
+    "stem": "HDA640, ____ , traffic on short final, report runway vacated.（ ）",
+    "options": [
+      "A. be quick",
+      "B. taxi faster",
+      "C. vacate runway as soon as possible",
+      "D. expedite taxi"
+    ],
+    "answer": [
+      "D. expedite taxi"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "英文题库",
+      "subject": "aviationEnglishTranslation",
+      "topic": ""
+    },
+    "id": "341009",
+    "type": "single",
+    "stem": "Code 7500 alerts ATC that _______ ．",
+    "options": [
+      "A. an aircraft has been hijacked",
+      "B. the failure of two-way radio communications has been encountered",
+      "C. emergency condition exists",
+      "D. false alarms have been sent out"
+    ],
+    "answer": [
+      "A. an aircraft has been hijacked"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "英文题库",
+      "subject": "aviationEnglishTranslation",
+      "topic": ""
+    },
+    "id": "341010",
+    "type": "single",
+    "stem": "Apron,CCA101, we are stuck halfway along taxiway B due to unserviceable steering ,request ______.",
+    "options": [
+      "A. follow me car guide us.",
+      "B. tug to tow us back to the apron.",
+      "C. continue taxi.",
+      "D. fire service"
+    ],
+    "answer": [
+      "B. tug to tow us back to the apron."
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "英文题库",
+      "subject": "aviationEnglishTranslation",
+      "topic": ""
+    },
+    "id": "341011",
+    "type": "single",
+    "stem": "What does \"Hotspot\" mean in ground control?",
+    "options": [
+      "A. busy area on the apron",
+      "B. locations where conflicts or runway incursions may occur",
+      "C. places with high risk of being on fire",
+      "D. ground radar detectors"
+    ],
+    "answer": [
+      "B. locations where conflicts or runway incursions may occur"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "英文题库",
+      "subject": "aviationEnglishTranslation",
+      "topic": ""
+    },
+    "id": "341012",
+    "type": "single",
+    "stem": "CDG8857, ____, work in progress at the end of the taxiway.",
+    "options": [
+      "A. taxi with caution",
+      "B. taxi carefully",
+      "C. taxi slower",
+      "D. hold position"
+    ],
+    "answer": [
+      "A. taxi with caution"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "英文题库",
+      "subject": "aviationEnglishTranslation",
+      "topic": ""
+    },
+    "id": "341013",
+    "type": "single",
+    "stem": "If you make an error in a transmission and you want to immediately correct it by saying",
+    "options": [
+      "A. sorry",
+      "B. break, break",
+      "C. correction",
+      "D. I say again"
+    ],
+    "answer": [
+      "C. correction"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "英文题库",
+      "subject": "aviationEnglishTranslation",
+      "topic": ""
+    },
+    "id": "341014",
+    "type": "single",
+    "stem": "A clearance to taxi to the active runway means a pilot has been given permission to taxi _______ ．",
+    "options": [
+      "A. to the active runway for takeoff",
+      "B. via taxiways and across intersecting runways to, but not on, the active runway",
+      "C. to and hold in takeoff position on the active runway",
+      "D. on taxiways to the active runway without crossing any intersecting runways"
+    ],
+    "answer": [
+      "B. via taxiways and across intersecting runways to, but not on, the active runway"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "英文题库",
+      "subject": "aviationEnglishTranslation",
+      "topic": ""
+    },
+    "id": "341015",
+    "type": "single",
+    "stem": "SSR Code A7600 means ( ).",
+    "options": [
+      "A. flight level",
+      "B. emergency failure",
+      "C. overfly",
+      "D. radio failure"
+    ],
+    "answer": [
+      "D. radio failure"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "英文题库",
+      "subject": "aviationEnglishTranslation",
+      "topic": ""
+    },
+    "id": "341016",
+    "type": "single",
+    "stem": "Before an aircraft can taxi out, the chocks will have to be ( ).",
+    "options": [
+      "A. released",
+      "B. refused",
+      "C. rejected",
+      "D. removed"
+    ],
+    "answer": [
+      "D. removed"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "英文题库",
+      "subject": "aviationEnglishTranslation",
+      "topic": ""
+    },
+    "id": "341017",
+    "type": "single",
+    "stem": "A problem occurred during the startup process after push back, which of the following is not true for the controller reply?（  ）",
+    "options": [
+      "A. Roger, advise us of further information.",
+      "B. How much time do you need?",
+      "C. Can you taxi out to L2/ return to parking bay?",
+      "D. Start up approved, report ready for taxi"
+    ],
+    "answer": [
+      "D. Start up approved, report ready for taxi"
+    ],
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "英文题库",
+      "subject": "aviationEnglishTranslation",
+      "topic": ""
+    },
+    "id": "341018",
+    "type": "translation",
+    "stem": "Adjust your transmitter, and put your microphone closer to your mouth, please. Your signal is unstable.",
+    "options": [],
+    "answer": "调整你的发射，并且请把话筒靠近一点发话。你的信号不稳定。",
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "英文题库",
+      "subject": "aviationEnglishTranslation",
+      "topic": ""
+    },
+    "id": "341019",
+    "type": "translation",
+    "stem": "Apron,CCA101,A passenger has just had a heart attack on board, request medical assistance。翻译，并给出回答",
+    "options": [],
+    "answer": "机坪，国航 101，机上一名乘客突发心脏病，请求医疗援助。roger, first aid will be ready for you.",
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "英文题库",
+      "subject": "aviationEnglishTranslation",
+      "topic": ""
+    },
+    "id": "341020",
+    "type": "translation",
+    "stem": "Caution taxiway A4 closed due construction。",
+    "options": [],
+    "answer": "注意，因施工滑行道A4关闭。",
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "英文题库",
+      "subject": "aviationEnglishTranslation",
+      "topic": ""
+    },
+    "id": "341021",
+    "type": "translation",
+    "stem": "CSN648, a bird was found hovering above the surface of A5, hold position and the bird scaring car is on its way.",
+    "options": [],
+    "answer": "CSN648，A5上方发现有一只鸟在盘旋，请稍等，驱鸟车正在前往。",
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "英文题库",
+      "subject": "aviationEnglishTranslation",
+      "topic": ""
+    },
+    "id": "341022",
+    "type": "translation",
+    "stem": "CSN648, expect 30min delay due flow control.",
+    "options": [],
+    "answer": "CSN648，预计延误30分钟，由于流量控制。",
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "英文题库",
+      "subject": "aviationEnglishTranslation",
+      "topic": ""
+    },
+    "id": "341023",
+    "type": "translation",
+    "stem": "CSN648, I have coordinated, and confirm you can depart within 15min? If you cannot make it, you’ll have to wait for two hours.",
+    "options": [],
+    "answer": "CSN648，我已经帮你协调了，证实能否在一刻钟以内离港？如果不能，你就得等两个小时。",
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "英文题库",
+      "subject": "aviationEnglishTranslation",
+      "topic": ""
+    },
+    "id": "341024",
+    "type": "translation",
+    "stem": "CSN648, monitor Ningbo Apron on 121.6.",
+    "options": [],
+    "answer": "CSN648，守听宁波机坪121.6。",
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "英文题库",
+      "subject": "aviationEnglishTranslation",
+      "topic": ""
+    },
+    "id": "341025",
+    "type": "translation",
+    "stem": "CSN648, Ningbo Apron, a drone/glider was found in the vicinity of aerodrome. All aircraft are grounded, and the delay is undetermined.",
+    "options": [],
+    "answer": "CSN648，宁波机坪，因为机场附近发现无人机/滑翔机活动，所有飞机都起不来，延误时间待定。",
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "英文题库",
+      "subject": "aviationEnglishTranslation",
+      "topic": ""
+    },
+    "id": "341026",
+    "type": "translation",
+    "stem": "CSN648, Ningbo Apron, push back approved，facing south. Push backward further/Tow forward a little bit to allow other aircraft to pass A5.",
+    "options": [],
+    "answer": "CSN648，宁波机坪，同意推出, 头朝南。往后多推点/往前多拉点,以便让其他航空器通过A5。",
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "英文题库",
+      "subject": "aviationEnglishTranslation",
+      "topic": ""
+    },
+    "id": "341027",
+    "type": "translation",
+    "stem": "CSN648, Ningbo Apron, stand by due busy, call you back soon.",
+    "options": [],
+    "answer": "CSN648，宁波机坪，因繁忙稍等我叫。",
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "英文题库",
+      "subject": "aviationEnglishTranslation",
+      "topic": ""
+    },
+    "id": "341028",
+    "type": "translation",
+    "stem": "CSN648, Ningbo Apron, start up approved.",
+    "options": [],
+    "answer": "CSN648，宁波机坪，同意开车。",
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "英文题库",
+      "subject": "aviationEnglishTranslation",
+      "topic": ""
+    },
+    "id": "341029",
+    "type": "translation",
+    "stem": "CSN648, roger that. Let me know when you get fully ready.",
+    "options": [],
+    "answer": "CSN648，收到。你完全准备好后告诉我。",
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "英文题库",
+      "subject": "aviationEnglishTranslation",
+      "topic": ""
+    },
+    "id": "341030",
+    "type": "translation",
+    "stem": "CSN648, understand your situation. Standby while I apply for your departure time to Tower.",
+    "options": [],
+    "answer": "CSN648，明白你的情况。稍等一下，我向塔台申请你的离港时间。",
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "英文题库",
+      "subject": "aviationEnglishTranslation",
+      "topic": ""
+    },
+    "id": "341031",
+    "type": "translation",
+    "stem": "MSR959 clear to tow back to stand 310 report on stand.",
+    "options": [],
+    "answer": "MSR959，可以拖回310，完全到位报。",
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "英文题库",
+      "subject": "aviationEnglishTranslation",
+      "topic": ""
+    },
+    "id": "341032",
+    "type": "translation",
+    "stem": "MSR959 you'll tow back to stand 310，shut down the engine and call me tug ready.",
+    "options": [],
+    "answer": "MSR959，你拖回310机位，先关车然后挂好拖车报。",
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "英文题库",
+      "subject": "aviationEnglishTranslation",
+      "topic": ""
+    },
+    "id": "341033",
+    "type": "translation",
+    "stem": "Ningbo Apron, CSN648, request tow from stand 307 to stand 314.",
+    "options": [],
+    "answer": "宁波机坪，CSN648，请求从停机位307牵引到停机位314。",
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "英文题库",
+      "subject": "aviationEnglishTranslation",
+      "topic": ""
+    },
+    "id": "341034",
+    "type": "translation",
+    "stem": "Ningbo Apron, CSN648, we will work overtime if we cannot depart within 30 minutes. We hope an earlier departure time.",
+    "options": [],
+    "answer": "宁波机坪，CSN648，如果不能在30分钟内起飞的话我们就超时了。我们希望可以早一点起飞。",
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "英文题库",
+      "subject": "aviationEnglishTranslation",
+      "topic": ""
+    },
+    "id": "341035",
+    "type": "translation",
+    "stem": "Ningbo Apron, CSN648，stand 330，request start up.",
+    "options": [],
+    "answer": "宁波机坪，CSN648，停机位330，请求开车。",
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "英文题库",
+      "subject": "aviationEnglishTranslation",
+      "topic": ""
+    },
+    "id": "341036",
+    "type": "translation",
+    "stem": "Pay attention please, similar call signs on this frequency.",
+    "options": [],
+    "answer": "请注意，此波道里有相似航班号。",
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "英文题库",
+      "subject": "aviationEnglishTranslation",
+      "topic": ""
+    },
+    "id": "341037",
+    "type": "translation",
+    "stem": "Say again/Repeat your call sign and speak slower please.",
+    "options": [],
+    "answer": "请再说一遍你的呼号，并且说慢点。",
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "英文题库",
+      "subject": "aviationEnglishTranslation",
+      "topic": ""
+    },
+    "id": "341038",
+    "type": "translation",
+    "stem": "We are stuck halfway along taxiway B due to unserviceable brakes and steering, request a tug to tow us to the apron",
+    "options": [],
+    "answer": "飞机卡在 B 滑行道上的原因是由于刹车和前轮转向失效，需要拖车拖回机坪",
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "英文题库",
+      "subject": "aviationEnglishTranslation",
+      "topic": ""
+    },
+    "id": "341039",
+    "type": "translation",
+    "stem": "You are cut in and out. Repeat all after (before) ...Please.",
+    "options": [],
+    "answer": "你的声音时有时无，请重复……以后（以前）的内容。",
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "英文题库",
+      "subject": "aviationEnglishTranslation",
+      "topic": ""
+    },
+    "id": "341040",
+    "type": "translation",
+    "stem": "东航 331，在 B5 前等待，让行消防车",
+    "options": [],
+    "answer": "CES331, hold short of B5, give way to fire engines crossing from left to right",
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "英文题库",
+      "subject": "aviationEnglishTranslation",
+      "topic": ""
+    },
+    "id": "341041",
+    "type": "translation",
+    "stem": "滑行注意，B3 滑行道附近有施工",
+    "options": [],
+    "answer": "taxi with caution, work in progress near taxiway C",
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "英文题库",
+      "subject": "aviationEnglishTranslation",
+      "topic": ""
+    },
+    "id": "341042",
+    "type": "translation",
+    "stem": "机坪，国航 101，在 122.7 无线电检查，听我信号怎样？",
+    "options": [],
+    "answer": "Apron,CCA101,radio check on 122.7,how do you read me?",
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "英文题库",
+      "subject": "aviationEnglishTranslation",
+      "topic": ""
+    },
+    "id": "341043",
+    "type": "translation",
+    "stem": "南航 222，在 B 滑行道前给左侧的东航波音 738 让路",
+    "options": [],
+    "answer": "give way to China Eastern B738 on your left before B",
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "英文题库",
+      "subject": "aviationEnglishTranslation",
+      "topic": ""
+    },
+    "id": "341044",
+    "type": "translation",
+    "stem": "所有机组注意，宁波机坪，由于我们接收机故障，请原地等待，联系备用频率 131.7MHz。",
+    "options": [],
+    "answer": "All stations, Ningbo ramp, hold position due to our receiver failure, contact backup frequency 131.7MHz.",
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  },
+  {
+    "meta": {
+      "category": "airport",
+      "scope": "英文题库",
+      "subject": "aviationEnglishTranslation",
+      "topic": ""
+    },
+    "id": "341045",
+    "type": "translation",
+    "stem": "同意在机位中启动一发慢车",
+    "options": [],
+    "answer": "start one engine to idle on stand approved",
+    "difficulty": 1,
+    "shuffle": true,
+    "degree": 1,
+    "subs": null,
+    "explanation": "",
+    "updated_at": "2026-04-15",
+    "status": "valid"
+  }
+]
