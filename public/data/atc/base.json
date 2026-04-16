@@ -7047,7 +7047,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "Ns 雨层云 Cu 淡积云 Ci 卷云 Cs",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -7242,7 +7242,7 @@
     "shuffle": false,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "行中，中等强度以上积冰形成的必要条件是【存在过冷水滴】",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -8786,7 +8786,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "NOSIG 表示未来2小时内没有明显变化。 BECMG 表渐变。TEMPO，表短时，气象状况总共所占用不超过预期发生波动的预报时间的一半。NSW，如果没有预期的重要天气发生则该组报文编码省略。但是如果一种预报的天气发生以后影响不再存在则用缩写 NSW（no significant weather）指示。NSC，无重要的云。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -8901,7 +8901,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": " occasionally ",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
