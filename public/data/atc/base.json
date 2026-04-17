@@ -11535,7 +11535,7 @@
     "shuffle": false,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "罗经线偏离磁经线的角度，叫罗差(DEV)。以磁经线北端为准，罗经线北端偏东为正罗差，罗经线北端偏西为负罗差。罗差一般较小(<=5°)。罗差的大小随着航向的变化而改变；不同罗盘的罗差由于安装位置不同，其大小也不一样。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -11555,7 +11555,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "等高线(Contours)：等高线指的是地球表面【标高】相等的各个地点的连线在地图上的投影(D010)",
+    "explanation": "等高线(Contours)：等高线指的是地球表面【标高】相等的各个地点的连线在地图上的投影",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -11605,7 +11605,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "【极地正投影】等角正割圆锥投影图又称为兰伯特投影图，是德国人兰伯特（Lambert）创制的。投影时以圆锥面与地球仪的两条选定的标准纬线相割，根据等角投影的要求，从地球中心将经、纬网投影到圆锥面上，然后将圆锥面展开成平面就得到了兰伯特投影图，如图2.24 所示。投影时，两条标准纬线间的地区有所收缩，两条标准纬线以外的地区则有所扩大。主要特征是：经线都是互不平行的直线，收敛于图外的一点（投影圆锥的顶点）；纬线都是以圆锥顶点为圆心的同心圆弧；纬度差相等的各纬线间的距离基本相等。",
+    "explanation": "等角正割圆锥投影图又称为兰伯特投影图，是德国人兰伯特(Lambert)创制的。主要特征是：经纬线都是互不平行的直线，收敛于图外的一点(投影圆锥的顶点)；纬线都是以圆锥顶点为圆心的同心圆弧，纬度差相等的各纬线间的距离基本相等；两经线间的夹角(6)小于它们间的经度差(A2),关系是",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -11675,7 +11675,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "在现代地图上，地形主要是用等高线来表示的。目前使用的航空地图为了把地形表现得更加明显、准确，都是采用综合3种方法来表示地形的。根据该地点所在的等高线或所在区域的颜色从颜色高度尺上查出；若该地点正好在等高线上，则等高线的标高就是该地点的标高，若在两条等高线之间，一般以邻近较高的等高线的标高作为该地点的标高。",
+    "explanation": "将地形情况清楚地在地图上表现出来，常采用标高点、等高线和分层着色三种表示方法。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -11700,7 +11700,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "地图失真表现在长度、角度和面积3个方面。等角投影，投影时保持任何一点沿经线、纬线方向的局部比例尺相等，即没有角度失真的投影。",
+    "explanation": "墨卡托投影图没有角度失真，赤道没有任何失真，其余地区都有不同程度的长度和面积失真：赤道附近失真很小，离赤道越远，失真越大，即随纬度增高而增大。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -11725,7 +11725,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "等角航线在【极地平面投影图】上是凹向极点的螺旋曲线，大圆航线是一条直线。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -11750,7 +11750,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "等角正圆柱投影图又称为墨卡托投影图，由于图上经线互相平行，所以等角航线是一条直线，而大圆航线则是一条凸向两极的曲线",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -11770,7 +11770,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "【12-51】。每幅图的编号由列数和行数组成。百万分之一航图从赤道起向两极纬度每隔4°为一列，依次以1, 2, 3,…，22表示；从经度180°起，自西向东经度每隔6。为一行，依次以1, 2,3, 60表示。在北半球的图幅编号前加注N,南半球的图幅则加注S,我国领土都在北半球，编号时通常将N省略，如图1.34所示。例如，重庆所在的一幅百万分之一航图位于第8列和第48行，编号为8 - 48。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -11790,7 +11790,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "【 12‑51‑乙 】。五十万分之一航图图幅所包含的范围是百万分之一航图范围的四分之一，即一幅百万分之一航图可分为四幅五十万分之一航图。五十万分之一航图的编号为百万分之一航图编号后面加上甲、乙、丙、丁，如图1.35所示。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -11850,7 +11850,7 @@
     "shuffle": false,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "在极地平面投影图上，大圆航线是一条直线。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -11870,7 +11870,7 @@
     "shuffle": false,
     "degree": 1,
     "subs": null,
-    "explanation": "飞机远程飞行时通常选择【小比例尺】航图。",
+    "explanation": "飞机 远程 飞行时通常选择【小比例尺】航图。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -12255,7 +12255,7 @@
     "shuffle": true,
     "degree": 3,
     "subs": null,
-    "explanation": "",
+    "explanation": "领航学里将太阳中心升到地平线下7°时叫天亮；太阳中心沉没于地平线下7°时叫天黑。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -12305,7 +12305,7 @@
     "shuffle": true,
     "degree": 3,
     "subs": null,
-    "explanation": "",
+    "explanation": "我国幅员辽阔，全国共跨五个时区（东五至东九时区）。为了使用方便，我国统一使用北京所在的东八区的区时作为标准时间，称为北京时，北京时就是我国的法定时。我国西部地区的地方时与北京时有较大的时差。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -12330,7 +12330,7 @@
     "shuffle": true,
     "degree": 3,
     "subs": null,
-    "explanation": "地平线下7°",
+    "explanation": "领航学里将太阳中心升到地平线下7°时叫天亮；太阳中心沉没于地平线下7°时叫天黑。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -12355,7 +12355,7 @@
     "shuffle": true,
     "degree": 3,
     "subs": null,
-    "explanation": "",
+    "explanation": "以当地经线正对太阳的时刻为正午12时，正背着太阳的时刻为0时，这样确定的时刻, 就叫做该地点的地方时（LT）。除同一经度外，任何经度不同的地方，其地方时是不相同的。两地地方时的差数，正好等于地球转过其经度差所需的时间，同时又由于地球自西向东自转, 因而同一天内西边的时刻数少于东边的时刻数。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -12380,7 +12380,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "国际经度会议规定以180。经线为日界线，又叫国际日期变更线或改日线。当飞机从西向东飞越日界线，日期应减一天；飞机从东向西飞越日界线，则应增加一天。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -12405,7 +12405,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "东八区(UTC+8)比西八区(UTC-8)早 16 小时，减去飞的 11 小时，等于早 5 小时。10 - 5 = 5",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -12430,7 +12430,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "东六区比东八区晚 2 小时，拉萨区时=16:42−2小时=14:42。地方时与东经 120° 的时差：Δλ=120°−91°07′=28°53′经度每差 1°，时间差 4 分钟：28°53′×4=115分32秒≈1小时55分32秒拉萨地方时=16:42−1小时55分32秒=14:46:28",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -12450,7 +12450,7 @@
     "shuffle": false,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "根据地球自转方向判断：【顺着地球自转方向】，由昼半球过渡到夜半球的分界线是昏线，由夜半球过渡到昼半球的分界线是晨线。地球在自转的过程中总有一半对着太阳，即白天；一半背着太阳，即黑夜。白天和黑夜的分界线叫晨昏线，地球不停地自西向东旋转，晨昏线就在地球上自东向西移动，形成了太阳的升没和昼夜的不断更替。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -12490,7 +12490,7 @@
     "shuffle": false,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "只有赤道上，晨线永远是地方时 6:00。地轴倾斜，导致晨昏线上经纬度地方时不同。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -12510,7 +12510,7 @@
     "shuffle": false,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "只有赤道上，昏线永远是地方时 18:00。地轴倾斜，导致晨昏线上经纬度地方时不同。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -12530,7 +12530,7 @@
     "shuffle": false,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "北京时间是东八区的区时，也就是东经 120° 的地方时。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -12550,7 +12550,7 @@
     "shuffle": false,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "国际上规定以零时区的区时作为全世界统一时刻，叫世界时(UT--Universal Time ),也称为格林尼治平时(GMT——Greemwich Mean Time )。世界时由于地球自转速度不均匀，除了不规则变化以外，还存在着长期变慢的趋势，每年大约要比原子时慢1 s。由于原子时与世界时的不同，国际天文学会和国际无线电咨询委员会，于1971年决定采用一种称为“协调世界时“（UTC——Coordinated Univeral Time ）的时间标准。协调世界时用原子时秒长，并采用一整秒的调整，即UTC与原子时只相差整数秒，而UTC与世界时之差保持在± 0.9 s以内，每隔12 ~ 18个月；协调世界时就要调整1 S。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -12570,7 +12570,7 @@
     "shuffle": false,
     "degree": 3,
     "subs": null,
-    "explanation": "",
+    "explanation": "存在日界线例外。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -12590,7 +12590,7 @@
     "shuffle": false,
     "degree": 3,
     "subs": null,
-    "explanation": "",
+    "explanation": "早晨，当太阳上边缘升到地平线时叫日出（Sunrise）；傍晚，太阳上边缘沉没于地平线时叫日没（Sunset）。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -12610,7 +12610,7 @@
     "shuffle": false,
     "degree": 3,
     "subs": null,
-    "explanation": "",
+    "explanation": "日出时刻指的是「当地日出瞬间的地方时」，由晨昏线与纬线的交点决定。春分、秋分日（太阳直射赤道）同一经线上，所有纬度的日出时刻完全相同，均为地方时 6:00。太阳直射北半球（北半球夏半年：春分→夏至→秋分）北半球:纬度越高，昼长越长，日出的地方时越早，高纬比低纬日出早；南半球：纬度越高，昼长越短，日出的地方时越晚，高纬比低纬日出晚；太阳直射南半球（北半球冬半年：秋分→冬至→春分）与直射北半球情况相反。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -12630,7 +12630,7 @@
     "shuffle": false,
     "degree": 3,
     "subs": null,
-    "explanation": "",
+    "explanation": "但在航空应用中，协调世界时与世界时没有多少差别，完全可以认为两者相同。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -12650,7 +12650,7 @@
     "shuffle": false,
     "degree": 3,
     "subs": null,
-    "explanation": "",
+    "explanation": "领航时钟由时刻表、续航时间表和飞行秒表等组成。它可以指示时刻、记录续航时间和某一段短暂的飞行时间，如进近着陆的飞行时间。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -12675,7 +12675,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "罗经线偏离磁经线的角度，叫罗差(DEV)。以磁经线北端为准，罗经线北端偏东为正罗差，罗经线北端偏西为负罗差。罗差一般较小(<=5°)。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -12700,7 +12700,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "飞机纵轴前方的延长线叫航向线。航向线的方向，即飞机纵轴前方的指向，叫做航向(HDG),它是从经线北端顺时针量到航向线的角度，范围为0°〜360°。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -12725,7 +12725,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "飞机的航向是利用罗盘来测定的，当罗盘安装到飞机上后,罗盘中的磁条由于受飞机上钢铁部件和电气设备所形成的飞机磁场的影响，磁条将指向地球磁场与飞机磁场的合成方向，从而偏离磁经线的南北方向。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -12750,7 +12750,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "飞机的航向是利用罗盘来测定的，当罗盘安装到飞机上后,罗盘中的磁条由于受飞机上钢铁部件和电气设备所形成的飞机磁场的影响，磁条将指向地球磁场与飞机磁场的合成方向，从而偏离磁经线的南北方向。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -12775,7 +12775,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "罗航向 110° => 磁航向 110 + (-3°) = 107° => 真航向 107° + 6° = 113°",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -12795,7 +12795,7 @@
     "shuffle": false,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "罗差的大小随着航向的变化而改变；不同罗盘的罗差由于安装位置不同，其大小也不一样。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -12815,7 +12815,7 @@
     "shuffle": false,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "直读磁罗盘的缺点主要是当飞机进行机动飞行或飞机姿态长时间不稳定时，存在较大的飞行误差；在高纬度地区地磁水平强度很弱，不能准确而稳定地测量航向；【直读磁罗盘指示的是罗航向，横用时必须 修正罗差 后才是磁航向】。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -12835,7 +12835,7 @@
     "shuffle": false,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "直读磁罗盘是根据磁针恒指南北的特性制成的，它是早期飞机上测量航向的主要仪表，具有体积小、构造简单、不易发生故障的优点，现在主要用做各型飞机的备用罗盘。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -12855,7 +12855,7 @@
     "shuffle": false,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "陀螺半罗盘的结构简单，造价低，而且指示稳定、准确，但罗盘基准线需人工调定，因此，飞行中必须与磁罗盘配合使用，而且存在自走误差，飞行中必须定时与磁罗盘校准。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -12875,7 +12875,7 @@
     "shuffle": false,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "飞行过程中，直读陀螺半罗盘存在自走误差，自走误差为每15分钟 2°～3°,所以飞行中必须每隔约15分钟校准一次航向。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -12900,7 +12900,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "飞机到某一基准面的垂直距离叫飞行高度(Flight Altitude),常用米(m)或英尺(ft)为单位。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -12925,7 +12925,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "相对高(Relative Height)是指以起飞或降落机场的跑道平面作为基准面的高度，即飞机到某机场跑道平面的垂直距离。西方许多国家，真高、相对高统称为高（Height）,绝对高度则称为高度（Altitude）。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -12950,7 +12950,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "机场标高指【机场跑道着陆区内最高点】距离平均海平面(Mean sea level)的垂直距离。机场标高常指跑道最高点的标高。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -12970,7 +12970,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "以起飞机场或着陆机场的场面气压（QFE）为基准面所测出的气压高度，叫做场面气压高，简称场压高（Hqfe）。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -12995,7 +12995,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "以修正海平面气压（QNH）为基准面所测出的气压高度，叫做修正海平面气压高度，简称修正海压高（Hqnh）。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -13015,7 +13015,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "假定零点高度（用场面气压与760 mmHg之差按标准大气换算的高度）。标准海平面气压760 mmHg = 1013.25 hPa",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -13065,7 +13065,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "为了计算和比较地面各点的高低，我国规定以黄海平均海平面(MSL-Mean Sea Level)作为大地水准面，某一地点沿垂线方向到大地水准面的距离叫该地点的标高(EL-Elevation)或海拔",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -13090,7 +13090,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "以标准海平面气压（一个大气压力，即1013hPa, 760 mmHg或29.92 inHg）为基准面所测出的气压高度，叫做标准气压高（Hqne）。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -13110,7 +13110,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "气压式高度表是通过一组具有弹性的真空膜盒来测量出【飞行高度上的大气压力】，并通过传送机构使指示器的指针指示出相应的高度",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -13135,7 +13135,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "当飞机停在跑道上时，修正海压高通过高度表指示应为机场标高加座舱高度。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -13160,7 +13160,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "假定零点高度（用场面气压与760 mmHg之差按标准大气换算的高度）。标准海平面气压760 mmHg = 1013.25 hPa",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -13185,7 +13185,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "标准海平面气压760 mmHg = 1013.25 hPa = 29.92 inHg",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -13230,7 +13230,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "低空",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -13250,7 +13250,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "假定零点高度（用场面气压与760 mmHg之差按标准大气换算的高度）。标准海平面气压760 mmHg = 1013.25 hPa",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -13275,7 +13275,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "假定零点高度（用场面气压与760 mmHg之差按标准大气换算的高度）。标准海平面气压760 mmHg = 1013.25 hPa",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -13345,7 +13345,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "离场航空器在爬升过程中，保持本机场的QNH直至到达过渡高度。在穿越过渡高度或者在过渡高度以下穿越修正海平面气压适用区域的侧向水平边界时，必须立即将高度表气压刻度调到标准大气压（1013.2 hPa）,其后航空器的垂直位置用飞行高度层表示。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -13385,7 +13385,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "进场航空器在下降穿过机场的过渡高度层，或者在过渡高度以下进入修正海平面气压适用区域侧向边界时，应立即将高度表气压刻度调到本机场的QNH值，其后航空器的垂直位置用高度表示。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -13405,7 +13405,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "（1013 - 1031） * 9 = -162；📝气压越大，高度越低。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -13425,7 +13425,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "(1032-1023)*9=81;",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -13450,7 +13450,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "QNH<QNE => 零点高度（QNE 基准） ＞ 机场标高（QNH 基准）。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
