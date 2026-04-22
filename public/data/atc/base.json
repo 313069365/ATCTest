@@ -11770,7 +11770,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "【12-51】。每幅图的编号由列数和行数组成。百万分之一航图从赤道起向两极纬度每隔4°为一列，依次以1, 2, 3,…，22表示；从经度180°起，自西向东经度每隔6。为一行，依次以1, 2,3, 60表示。在北半球的图幅编号前加注N,南半球的图幅则加注S,我国领土都在北半球，编号时通常将N省略，如图1.34所示。例如，重庆所在的一幅百万分之一航图位于第8列和第48行，编号为8 - 48。",
+    "explanation": "《国家基本比例尺地形图分幅和编号》1∶1000000地形图的编号采用国际1∶1000000地图编号标准。从赤道起算,每纬差4°为一行,至南、北纬88°各分为22行,依次用大写拉丁字母(字符码)A、B、C、……V表示其相应行号;从180°经线起算,自西向东每经差6°为一列,全球分为60列,依次用阿拉伯数字(数字码)1、2、3、……60表示其相应列号。由经线和纬线所围成的每一个梯形小格(见图2)为一幅1∶1000000地形图,它们的编号由该图所在的行号与列号组合而成。同时,国际1∶1000000地图编号第一位表示南、北半球,用“N”表示北半球,用“S”表示南半球。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -11790,7 +11790,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "【 12‑51‑乙 】。五十万分之一航图图幅所包含的范围是百万分之一航图范围的四分之一，即一幅百万分之一航图可分为四幅五十万分之一航图。五十万分之一航图的编号为百万分之一航图编号后面加上甲、乙、丙、丁，如图1.35所示。",
+    "explanation": "【 12‑51‑乙 】。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -11965,7 +11965,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "北端顺时针",
+    "explanation": "大圆航线的航线角是【航线起点】经线北端【顺时针】到航线去向方向",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -11990,7 +11990,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "北端顺时针",
+    "explanation": "等角航线的航线角是【航线上任意一点】经线北端【顺时针】到航线去向的夹角",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -12055,7 +12055,7 @@
     "shuffle": false,
     "degree": 1,
     "subs": null,
-    "explanation": "以通过两航路点间的大圆圈线作为航线的叫【大圆航线】。",
+    "explanation": "以通过两航路点间的【等角线作为航线】的就叫等角航线，等角航线是一条盘向两极的螺旋形曲线，等角航线上各点的航线角相等，但它的距离一般比大圆航线长",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -12095,7 +12095,7 @@
     "shuffle": true,
     "degree": 3,
     "subs": null,
-    "explanation": "",
+    "explanation": "24 小时",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -12120,7 +12120,7 @@
     "shuffle": true,
     "degree": 3,
     "subs": null,
-    "explanation": "",
+    "explanation": "在同一时区里的各地方都统一使用这一时区【中央经线的地方时】，叫该时区的区时（ZTM）。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -12145,7 +12145,7 @@
     "shuffle": true,
     "degree": 3,
     "subs": null,
-    "explanation": "",
+    "explanation": "国际上规定以【零时区的区时】作为全世界统一时刻，叫世界时(UT-Universal Time),也称为格林尼治平时(GMT—Greenwich Mean Time)。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -12205,7 +12205,7 @@
     "shuffle": true,
     "degree": 3,
     "subs": null,
-    "explanation": "",
+    "explanation": "我国幅员辽阔，全国共跨五个时区（东五至东九时区）。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -12230,7 +12230,7 @@
     "shuffle": true,
     "degree": 3,
     "subs": null,
-    "explanation": "",
+    "explanation": "这题都不是很准确。协调世界时用原子时秒长，并采用一整秒的调整，即UTC与原子时只相差整数秒，而UTC与世界时之差保持在±0.9 s以内，大约每隔12〜18个月，协调世界时就要调整1s。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -12280,7 +12280,7 @@
     "shuffle": true,
     "degree": 3,
     "subs": null,
-    "explanation": "",
+    "explanation": "以当地经线正对太阳的时刻为正午12时，正背着太阳的时刻为0时，这样确定的时刻, 就叫做该地点的地方时（LT）。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -12380,7 +12380,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "国际经度会议规定以180。经线为日界线，又叫国际日期变更线或改日线。当飞机从西向东飞越日界线，日期应减一天；飞机从东向西飞越日界线，则应增加一天。",
+    "explanation": "国际经度会议规定以180°经线为日界线，又叫国际日期变更线或改日线。当飞机从西向东飞越日界线，日期应减一天；飞机从东向西飞越日界线，则应增加一天。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -12405,7 +12405,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "东八区(UTC+8)比西八区(UTC-8)早 16 小时，减去飞的 11 小时，等于早 5 小时。10 - 5 = 5",
+    "explanation": "速记： 同一天小。东八区(UTC+8)比西八区(UTC-8)早 16 小时，减去飞的 11 小时，等于早 5 小时。10 - 5 = 5",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -12430,7 +12430,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "东六区比东八区晚 2 小时，拉萨区时=16:42−2小时=14:42。地方时与东经 120° 的时差：Δλ=120°−91°07′=28°53′经度每差 1°，时间差 4 分钟：28°53′×4=115分32秒≈1小时55分32秒拉萨地方时=16:42−1小时55分32秒=14:46:28",
+    "explanation": "速记： 早， 42'，46'。东六区比东八区晚 2 小时，拉萨区时=16:42−2小时=14:42。地方时与东经 120° 的时差：Δλ=120°−91°07′=28°53′经度每差 1°，时间差 4 分钟：28°53′×4=115分32秒≈1小时55分32秒拉萨地方时=16:42−1小时55分32秒=14:46:28",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -12550,7 +12550,7 @@
     "shuffle": false,
     "degree": 1,
     "subs": null,
-    "explanation": "国际上规定以零时区的区时作为全世界统一时刻，叫世界时(UT--Universal Time ),也称为格林尼治平时(GMT——Greemwich Mean Time )。世界时由于地球自转速度不均匀，除了不规则变化以外，还存在着长期变慢的趋势，每年大约要比原子时慢1 s。由于原子时与世界时的不同，国际天文学会和国际无线电咨询委员会，于1971年决定采用一种称为“协调世界时“（UTC——Coordinated Univeral Time ）的时间标准。协调世界时用原子时秒长，并采用一整秒的调整，即UTC与原子时只相差整数秒，而UTC与世界时之差保持在± 0.9 s以内，每隔12 ~ 18个月；协调世界时就要调整1 S。",
+    "explanation": "协调世界时是基于原子时秒长修正的世界时。国际上规定以零时区的区时作为全世界统一时刻，叫世界时(UT--Universal Time ),也称为格林尼治平时(GMT——Greemwich Mean Time )。世界时由于地球自转速度不均匀，除了不规则变化以外，还存在着长期变慢的趋势，每年大约要比原子时慢1 s。由于原子时与世界时的不同，国际天文学会和国际无线电咨询委员会，于1971年决定采用一种称为“协调世界时“（UTC——Coordinated Univeral Time ）的时间标准。协调世界时用原子时秒长，并采用一整秒的调整，即UTC与原子时只相差整数秒，而UTC与世界时之差保持在± 0.9 s以内，每隔12 ~ 18个月；协调世界时就要调整1 S。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -12570,7 +12570,7 @@
     "shuffle": false,
     "degree": 3,
     "subs": null,
-    "explanation": "存在日界线例外。",
+    "explanation": "1.存在日界线例外。2.同时区的区时相同。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -12775,7 +12775,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "罗航向 110° => 磁航向 110 + (-3°) = 107° => 真航向 107° + 6° = 113°",
+    "explanation": "罗航向 110° => 磁航向 = 110 + (-3°) = 107° => 真航向 = 107° + 6° = 113°",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -12925,7 +12925,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "相对高(Relative Height)是指以起飞或降落机场的跑道平面作为基准面的高度，即飞机到某机场跑道平面的垂直距离。西方许多国家，真高、相对高统称为高（Height）,绝对高度则称为高度（Altitude）。",
+    "explanation": "相对高(Relative Height)是指以【起飞或降落机场的跑道平面】作为基准面的高度，即飞机到【某机场跑道平面】的垂直距离。西方许多国家，真高、相对高统称为高（Height）,绝对高度则称为高度（Altitude）。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -12950,7 +12950,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "机场标高指【机场跑道着陆区内最高点】距离平均海平面(Mean sea level)的垂直距离。机场标高常指跑道最高点的标高。",
+    "explanation": "机场标高指【机场跑道着陆区内最高点】距离【平均海平面(Mean sea level)】的垂直距离。机场标高常指跑道最高点的标高。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -13015,7 +13015,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "假定零点高度（用场面气压与760 mmHg之差按标准大气换算的高度）。标准海平面气压760 mmHg = 1013.25 hPa",
+    "explanation": "假定零点高度（用场面气压与760 mmHg之差按标准大气换算的高度）。标准海平面气压760 mmHg = 1013.25 hPa == 29.92 in",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -13040,7 +13040,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "飞行高度层（以QNE为基准面的飞行高度）",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -13160,7 +13160,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "假定零点高度（用场面气压与760 mmHg之差按标准大气换算的高度）。标准海平面气压760 mmHg = 1013.25 hPa",
+    "explanation": "假定零点高度（用场面气压与760 mmHg之差按标准大气换算的高度）。标准海平面气压760 mmHg = 1013.25 hPa = 29.92 inHg",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -13205,7 +13205,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "因为航线上基准气压降低，空速表会把低气压当做有高度来飞行，所以指示高度假高，实际高度会偏低，所以实际需要增加高度。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -13300,7 +13300,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "QNH = 标高",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -13325,7 +13325,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "以【起飞机场或着陆机场的场面气压（QFE）为基准面】所测出的气压高度，叫做场面气压高，简称场压高（Hqfe）",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -13345,7 +13345,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "离场航空器在爬升过程中，保持本机场的QNH直至到达过渡高度。在穿越过渡高度或者在过渡高度以下穿越修正海平面气压适用区域的侧向水平边界时，必须立即将高度表气压刻度调到标准大气压（1013.2 hPa）,其后航空器的垂直位置用飞行高度层表示。",
+    "explanation": "离场航空器在爬升过程中，保持本机场的QNH直至到达过渡高度。在穿越过渡高度或者在过渡高度以下穿越修正海平面气压适用区域的侧向水平边界时，必须立即将高度表气压刻度调到【标准大气压（1013.2 hPa）】,其后航空器的垂直位置用飞行高度层表示。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -13365,7 +13365,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "进场航空器在下降穿过机场的过渡高度层，或者在过渡高度以下进入修正海平面气压适用区域侧向边界时，应立即将高度表气压刻度调到【本机场的QNH值】，其后航空器的垂直位置用高度表示",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -13385,7 +13385,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "进场航空器在下降穿过机场的过渡高度层，或者在过渡高度以下进入修正海平面气压适用区域侧向边界时，应立即将高度表气压刻度调到本机场的QNH值，其后航空器的垂直位置用高度表示。",
+    "explanation": "Htrue - Hind = (Qact − Qset) * k = (765 - 769) * 11m/mmHg = -44 = Htrue - 200 => Htrue = 156",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -13405,7 +13405,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "（1013 - 1031） * 9 = -162；📝气压越大，高度越低。",
+    "explanation": "Htrue - Hind = (Qact − Qset) * k = （1013 - 1031） * 9 = -162；📝气压越大，高度越低。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -13425,7 +13425,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "(1032-1023)*9=81;",
+    "explanation": "Htrue - Hind = (Qact − Qset) * k = (1032 - 1023) * 9 = 81;",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -13450,7 +13450,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "QNH<QNE => 零点高度（QNE 基准） ＞ 机场标高（QNH 基准）。",
+    "explanation": "实际海平面 = QNH < 1013.2 hPa = 标准海平面 = 零点高度",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -13475,7 +13475,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "如果实际气温偏低，空气密度增大，气压递减率也增大，这时高度表指示的表高大于实际高度，即产生多指误差",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -13495,7 +13495,7 @@
     "shuffle": false,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "如果实际气温等于标准气温，这时，气压递减率与标准大气条件下的相同，不考虑机械误差，高度表指示的表高就等于实际高度；如果实际气温偏低，空气密度增大，气压递减率也增大，这时高度表指示的表高大于实际高度，即产生【多指误差】；如果实际气温偏高，空气密度减小，气压递减率也减小，这时高度表指示的高度小于实际高度，即产生少指误差。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -13515,7 +13515,7 @@
     "shuffle": false,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "飞机在作大坡度转弯时，高度表指示有误差，在这种情况下一般【不用】无线电高度表。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -13535,7 +13535,7 @@
     "shuffle": false,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "飞行高度较高或作长途飞行，应【关闭无线电高度表】；",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -13555,7 +13555,7 @@
     "shuffle": false,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "过渡高度（TA-TransitionAltitude）是以【修正海压（QNH）为基准面】在航站区域内划定的一个气压高度，在这个高度（含）以下，飞机按修正海压高（Hqnh）飞行。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -13575,7 +13575,7 @@
     "shuffle": false,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "在【航路、航线】以及未建立过渡高度和过渡高度层的【区域中飞行】，航空器应使用标准大气压作为高度表拨正值，并按照规定的飞行高度层飞行。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -13595,7 +13595,7 @@
     "shuffle": false,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "航线仪表飞行的最小超障余度是平原地区为【400 m】,丘陵和山区为600 m。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -13635,7 +13635,7 @@
     "shuffle": false,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "(12500 - 8900) / 300 + 1 = 13",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -13760,7 +13760,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "飞行中空速的大小用空速表来测定，它是利用【空气相对于飞机的动压】来测定空速的。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -13780,7 +13780,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "指示空速(IAS—Indicated Airspeed)根据标准海平面大气条件下空速与动压的关系，利用开口膜盒测动压来指示的空速，称为指示空速，也称为表速(BAS-Basic Airspeed)„",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -13805,7 +13805,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "指示空速经过修正【机械误差】和【空气动力误差】得到的空速就是修正表速，也称为校正空速(Rectified Airspeed)。修正表速经过【修正空气压缩性】修正量误差得到的空速就是当量空速。当量空速经过修正【空气密度误差】得到的空速就是真空速，它是飞机相对于空气运动的真实速度。密度（高度 / 温度）引起。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -13830,7 +13830,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "马赫数是该【飞行高度上】的真空速与音速之比，即Ma = TAS/a。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -13855,7 +13855,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "在中、低空，通常高度每升高1 000 m,真空速比指示空速约大【 5% 】,这里仅修正了气压变化所引起的误差，对于气温变化引起的误差则未修正，但心算方法快速简便，飞行中常用。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -13880,7 +13880,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "电动式组合空速表是【大气数据计算机系统】(ADCS-Air Data Computer System)指示/显示的一部分。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -13900,7 +13900,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "惯性基准系统(IRS—Inertial Reference System)实质上就是使用激光陀螺的捷联式惯性导航系统。IRS向FMCS输送飞机经纬度位置、真航向、磁航向、南北和东西加速度、俯仰和倾斜角、高度、升降速度、地速等数据。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -13925,7 +13925,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "根据【标准海平面大气条件下】空速与动压的关系，利用开口膜盒测动压来指示的空速，称为指示空速，也称为表速(BAS-Basic Airspeed)„",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -13950,7 +13950,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "高度表由静压控制。静压孔一堵，表内气压被封死不变；空速表 = 全压 − 静压。全压：正常，随动压变化，静压：被堵死，爬升时保持偏低的低空静压",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -13970,7 +13970,7 @@
     "shuffle": false,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "当量空速经过修正【空气密度误差】得到的空速就是真空速，它是飞机相对于空气运动的真实速度。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -14010,7 +14010,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "航迹 = 10+(-8)=2；偏航 = 2 - 358 = 4，偏流<0，右侧",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -14035,7 +14035,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "📝 航迹（结果）偏离航向（目标）。航迹线同航向线的关系可以用地速向量同空速向量的夹角，即【航迹线】偏离【航向线】的角度来表示，这一角度叫偏流角（DA）,简称偏流。左侧风时，航迹线偏在航向线的右侧，规定偏流为正（+DA）, 也称为右偏流（RDA）;右侧风时，航迹线偏在航向线的左侧，规定偏流为负（一DA）,也称为左偏流（LDA）。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -14060,7 +14060,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "风修正角（Wind Correction Angle，简称WCA）指飞机【航向线】偏离【预定航线】的角度，用于修正侧风对飞行轨迹的影响以确保航空器准确沿航线飞行。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -14085,7 +14085,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "飞机的【航迹线】与【航线】间的夹角，叫偏航角(TKE-Track Angle Error)，航迹线偏在航线右边，偏航角为正；航迹线偏在航线左边，偏航角为负",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -14110,7 +14110,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "航行速度三角形中【地速向量】同【风速向量】的夹角，即航迹线同风向线之间的夹角，叫做风角（WA）,它说明了飞机所受侧风的程度。风角的正、负规定是：以航迹线为基准，左侧风时，由航迹线顺时针量到风向线，为正值，即“+WA”；右侧风时，由航迹线反时针量到风向线，为负值，即“-WA”。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -14130,7 +14130,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "飞机相对【地面运动】时单位时间所经过的距离叫地速，常用的单位是公里/时(km/h)，浬/小时(kt)。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -14155,7 +14155,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "根据向量合成的法则，飞机在风中航行的空速向量（真空速TAS）、风速向量和地速向量构成了一个三角形，叫做航行速度三角形",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -14175,7 +14175,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "偏流0° = 无侧风，地速大，顺风。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -14195,7 +14195,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "偏流0° = 无侧风，地速小，逆风。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -14220,7 +14220,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "目标↗️，影响➡️，纠正⬅️",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -14245,7 +14245,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "预计↙️，操作⬇️，结果⬅️，风就是左侧，偏流就是 8°。偏流：航迹（结果）偏离航向（目标）",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -14265,7 +14265,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "偏流为正，左侧风；速度不变，无顺逆风。左正侧风。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -14285,7 +14285,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "风角与偏流的正负完全一致，都是由风的左、右决定的。风角的范围为0°～±180°。0°表示顺风，180°表示逆风，±90°表示（左或右）正侧风，0°〜±90°之间表示（左或右）顺侧风，±90°〜180°之间表示（左或右）逆侧风。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -14465,7 +14465,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "航线↖️，风⬇️↘️，",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -14485,7 +14485,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "30，340-180=160，",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -14505,7 +14505,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "正常需要偏 5°，实际少偏了 3 度，说明实际只偏了 2°，为正 => 左侧风。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -14525,7 +14525,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "偏流为正+，左侧风，真空速=地速，无顺逆风。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -14750,7 +14750,7 @@
     "shuffle": false,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "接近顺（逆）风时，风向的变化主要引起偏流的变化，地速变化很小；接近正侧风时，风向的变化主要引起地速的变化，偏流的变化很小。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -14775,7 +14775,7 @@
     "shuffle": false,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "接近顺（逆）风时，风向的变化主要引起偏流的变化，地速变化很小；接近正侧风时，风向的变化主要引起地速的变化，偏流的变化很小。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -14995,7 +14995,7 @@
     "shuffle": false,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "正侧风主要影响偏流。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -15135,7 +15135,7 @@
     "shuffle": false,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "MH + DA = MTK = MC => MH + (-5°) = 323°。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -15155,7 +15155,7 @@
     "shuffle": false,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "125°-5°+180°=300°",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -15175,7 +15175,7 @@
     "shuffle": false,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "125°+5°+180° = 310°",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -15290,7 +15290,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "480/60=8 600/60=10, 8(x+5)=10x => x = 20",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -15310,7 +15310,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "6(x+5)=16x => x=3",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -15324,18 +15324,13 @@
     "id": "10209007",
     "type": "single",
     "stem": "长沙至广州，甲机08：35过茶陵，地速480km/h；乙机08：40过英德，地速420km/h，英德、茶陵相距280km，两机相遇时刻为（）。",
-    "options": [
-      "A. 0.36875",
-      "B. 0.370138888888889",
-      "C. 0.372222222222222",
-      "D. 0.374305555555556"
-    ],
-    "answer": ["C. 0.372222222222222"],
+    "options": ["A. 08:51", "B. 08:53", "C. 08:56", "D. 08:59"],
+    "answer": ["C. 08:56"],
     "difficulty": 1,
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "8*5=40,(280-40)/(8+7)=16,40+16=56",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -15349,18 +15344,13 @@
     "id": "10209008",
     "type": "single",
     "stem": "甲机预计10：20出走廊，GS=360km/h，乙机预计10：30进走廊，GS=540km/h，两机相遇时刻为（）。",
-    "options": [
-      "A. 0.434722222222222",
-      "B. 0.438888888888889",
-      "C. 0.441666666666667",
-      "D. 0.443055555555556"
-    ],
-    "answer": ["A. 0.434722222222222"],
+    "options": ["A. 10:26", "B. 10:32", "C. 10:36", "D. 10:38"],
+    "answer": ["A. 10:26"],
     "difficulty": 1,
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "肯定在 20 和 30 之间。甲6km/min，乙9km/min，一共 9*10=90公里,90/15=6,20+6=26",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -15380,7 +15370,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "600/300*60=120",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -15400,7 +15390,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "(10000-1000)/900=10",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -15414,13 +15404,8 @@
     "id": "10209011",
     "type": "single",
     "stem": "航空器于10：00从2000ft上升到10000ft，上升率1000ft/min，改平时刻为（）。",
-    "options": [
-      "A. 0.419444444444444",
-      "B. 0.420833333333333",
-      "C. 0.422222222222222",
-      "D. 0.423611111111111"
-    ],
-    "answer": ["C. 0.422222222222222"],
+    "options": ["A. 10:04", "B. 10:06", "C. 10:08", "D. 10:10"],
+    "answer": ["C. 10:08"],
     "difficulty": 1,
     "shuffle": true,
     "degree": 1,
@@ -15475,7 +15460,7 @@
     "shuffle": false,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "看见地标，可采用地标复航，包括线，面，点状地标。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -15560,7 +15545,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "以 13:25 分为基准，500/60*(x+6)=800/60*x => 5x+30=8x, x=10, 25+10=35",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -15580,7 +15565,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "同速中间时刻",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -15605,7 +15590,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "地标在右，飞机偏左，所以偏到航线右边，偏航<0, 偏流更加偏右。arctan(-7/86) 约等于 -5°，航迹为 85°，DA = -7°",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -15625,7 +15610,7 @@
     "shuffle": false,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "700/270*60 = 155.5",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -15645,7 +15630,7 @@
     "shuffle": false,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "1800/3/60=10",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -15665,7 +15650,7 @@
     "shuffle": false,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "空中无风时，飞机的航迹线与航向线一致，即MTK=MH、GS = TAS,因此，从地图上的推算起点开始，按航向画出航向线(称为无风航迹)，按【真空速】和【飞行时间】计算出飞机无风时的飞行距离，便可以求出无风时的飞机位置，这一位置叫无风位置或无风点。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -15685,7 +15670,7 @@
     "shuffle": false,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "当航线中途没有备降场时，选择起飞机场作为备降场，为了保证飞行安全，在起飞前应当准确计算安全返航点(Point of Safe Return)。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -15705,7 +15690,7 @@
     "shuffle": false,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "等时点(Point of Equal Time )是航线上的一点，在该点飞机飞往着陆机场的时间与返回起飞机场的时间相等。在长距离飞行或航线【中途没有备降场】而又【需要尽快着陆】时，应计算等时点的位置。如果飞机还未到等时点需尽快着陆，应返回起飞机场着陆；如果飞机已飞过等时点，则应继续飞向着陆机场，这样可以在最短的时间着陆，",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -15770,7 +15755,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "从飞机所在位置的经线北端顺时针量到无线电方位线的角度，叫电台方位角；以磁经线北端为基准的电台方位角叫电台磁方位角(QDM - Magnetic Bearing to the Station )o",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -15795,7 +15780,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "从电台所在位置的经线北端顺时针量到无线电方位线的角度，叫飞机方位角；以磁经线北端为基准的飞机方位角叫飞机磁方位角(QDR - Magnetic Beargin from the Station )o",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -15820,7 +15805,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "从【航向线顺时针量到无线电方位线】的角度，叫电台相对方位角RB, 简称相对方位，范围是0。~ 360。。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -15920,7 +15905,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "方位指示器，无线电磁指示器(RMI--Radio Magnetic Indicator )",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -15940,7 +15925,7 @@
     "shuffle": false,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "向/背台指示与飞机的航向无关，决定于飞机当时位置所处的区域。飞机向背台指标显示与飞机选定的航道和飞机与电台的位置有关系。当测出的电台磁方位与预选航道之差小于±90。时，显示“TO“即向台，表明飞机在向台区域飞行；当测出的电台磁方位与预选航道之差大于±90°时，显示‘FR‘即背台，表明飞机在背台区域飞行。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -15980,7 +15965,7 @@
     "shuffle": false,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "向/背台指示与飞机的航向无关，决定于飞机当时位置所处的区域。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -16245,7 +16230,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "下滑台发射的信号覆盖区，在跑道中心(延长)线两侧各8°内，从跑道平面以上0.39〜1.75的范围内，有效作用距离为10 NM",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -16320,7 +16305,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "利用CDI或HSI判断飞机偏航，可以很直观地判断出飞机偏航的左右及大小，但飞行距离不同，同样的偏离角所对应的偏航距离不相同。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -16410,7 +16395,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "90-（360-350）= 80",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -17353,7 +17338,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "惯性基准系统由惯性基准组件INU（Inertial Navigation Unit）/IRU、方式选择组件MSU（Mode Select Unit）和控制显示组件CDU（Control Display Unit）组成。BU（Battery Unit / Backup Unit）",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -17378,7 +17363,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "惯性基准系统的一个关键问题就是：在外场条件下，满足环境条件与时间限制的初始对准，即系统必须在飞机受阵风、登机、装载等各种干扰运动的影响下，在较短的时间内以一定的精度确定出从机体坐标系到导航坐标系的初始变换矩阵。所以，系统的初始对准实质就是确定初始时刻的姿态阵。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -17403,7 +17388,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "IRS向FMCS输送飞机经纬度位置、真航向、磁航向、南北和东西加速度、俯仰和倾斜角、高度、升降速度、地速等数据。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -17428,7 +17413,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "系统中没有实际的陀螺稳定平台，加速度计和陀螺直接“捆绑”在机体上，“平台”的概念是用计算机建立的“数学平台”模型来替代的，这种系统称为捷联式惯导系统。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -17453,7 +17438,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "大气数据计算机ADC",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -17473,7 +17458,7 @@
     "shuffle": false,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "惯性导航系统（INS/IRS）。惯性导航完全是靠机载的自主设备实现导航，其导航计算机都具有RNAV计算能力，可以输出精确的现在位置、导航数据、驾驶指令和飞机的姿态航向信息；缺点是精度随时间增加变差。现代飞机上一般装有2套或3套惯性导航系统，而且目前很多都与其他导航系统进行了组合，因而成为目.前理想的RNAV设备。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -17493,7 +17478,7 @@
     "shuffle": false,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "飞机在飞行中只要测出飞机对地面运动的水平加速度，利用积分器，经一次积分可求得【地速】，再经一次积分就可求得飞机【飞行的距离】，从而计算并确定出飞机的位置。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -17583,7 +17568,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "全球定位系统包括空间GPS卫星、地面控制站组、用户GPS接收机三部分",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -17648,7 +17633,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "由于GPS和GLONASS的性能限制，GNSS增加了外部系统以增强其性能，包括机载增强系统（ABAS）、星基增强系统（SBAS）和地基增强系统（GBAS）。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -18058,7 +18043,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "飞行管理系统的数据库，按数据的种类可分为两大类，一类是与飞机导航有关的导航数据；另一类是与飞机性能有关的性能数据。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -18078,7 +18063,7 @@
     "shuffle": true,
     "degree": 3,
     "subs": null,
-    "explanation": "",
+    "explanation": "控制显示组件CDU",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -18128,7 +18113,7 @@
     "shuffle": true,
     "degree": 3,
     "subs": null,
-    "explanation": "",
+    "explanation": "典型的飞行管理系统是由四个分系统组成的，它们是：【飞行管理计算机系统 FMCS】、【自动飞行控制系统 AFCS】、【自动油门系统 A/T】和【传感器系统】，其中飞行管理计算机系统是FMS的中枢，",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -18153,7 +18138,7 @@
     "shuffle": true,
     "degree": 3,
     "subs": null,
-    "explanation": "",
+    "explanation": "AFCS是FMS的操作系统，它对自动驾驶、飞行指引系统、速度配平、马赫配平等提供综合控制。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -18178,7 +18163,7 @@
     "shuffle": true,
     "degree": 3,
     "subs": null,
-    "explanation": "",
+    "explanation": "ANU：Area Navigation Unit，区域导航单元；CDU：Control Display Unit；控制显示组件，MSU：Mode Select Unit，方式选择组件",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -18348,7 +18333,7 @@
     "shuffle": false,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "【95%】",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -18468,12 +18453,12 @@
     "type": "single",
     "stem": "磁航线角90°，航空器向台飞行，测得电台磁方位角=92°、已飞距离90km，未飞距离180km、偏离角和航迹角为（）。",
     "options": [
-      "A. 偏离角TKD=+2°  偏航角TKE=+4°",
-      "B. 偏离角TKD=-2°偏航角TKE=-4°",
-      "C. 偏离角TKD=+4°  偏离角TKE=+2°",
-      "D. 偏离角TKD=4°         偏航角TKE=-2°"
+      "A. 偏离角TKD=+2° 偏航角TKE=+4°",
+      "B. 偏离角TKD=-2° 偏航角TKE=-4°",
+      "C. 偏离角TKD=+4° 偏离角TKE=+2°",
+      "D. 偏离角TKD=4° 偏航角TKE=-2°"
     ],
-    "answer": ["B. 偏离角TKD=-2°偏航角TKE=-4°"],
+    "answer": ["B. 偏离角TKD=-2° 偏航角TKE=-4°"],
     "difficulty": 1,
     "shuffle": true,
     "degree": 3,
@@ -18613,10 +18598,10 @@
     "type": "single",
     "stem": "某航空器背台切入航线，磁航线MC=90°，飞机磁方位角QDR=70°，管制员指令50°切回航线，切入航向和回到航线的相对方位角分别是（）。",
     "options": [
-      "A. MH=220° 、 ADF=230°",
-      "B. MH=140°、  RB=130°",
-      "C. MH=300°、  ADF=130°",
-      "D. MH=300°、  RB=230°"
+      "A. MH=220°、 ADF=230°",
+      "B. MH=140°、 RB=130°",
+      "C. MH=300°、 ADF=130°",
+      "D. MH=300°、 RB=230°"
     ],
     "answer": ["B. MH=140°、  RB=130°"],
     "difficulty": 2,
@@ -59702,7 +59687,7 @@
     "shuffle": true,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "环境音频率高于信息音频率时，遮蔽影响小。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -60852,7 +60837,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "跑道较宽：飞行员会低估离地高度（感觉比实际高度更低），进而拉平过晚，导致接地偏晚、重着陆。",
+    "explanation": "当跑道宽度较宽时，飞行员会觉得离地高度比真实高度【低】，因而易使飞机接地过早。跑道较宽：飞行员会低估离地高度（感觉比实际高度更低），进而拉平过晚，导致接地偏晚、重着陆。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
