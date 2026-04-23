@@ -1,7 +1,8 @@
 /* 字体定义 */
 @font-face {
   font-family: "Material Symbols Rounded";
-  src: url("./assets/fonts/MaterialSymbols.woff2") format("woff2");
+  src: url("./assets/fonts/MaterialSymbolsOutlined-Regular.woff2")
+    format("woff2");
   font-weight: 100 700;
   font-style: normal;
   font-display: block;
