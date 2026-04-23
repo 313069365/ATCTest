@@ -17,8 +17,8 @@
           </div>
         </div>
         <div class="user-info">
-          <h2>wyd</h2>
-          <!-- <p>高级研究员</p> -->
+          <h2>{{ user.username }}</h2>
+          <p>{{ user.title }}</p>
         </div>
       </section>
 
@@ -129,6 +129,7 @@
         <button class="action-btn">
           <span class="material-symbols-outlined">help</span>
           <span>关于我们</span>
+          <span>Version 0.2.15</span>
         </button>
         <button class="action-btn logout">
           <span class="material-symbols-outlined">logout</span>
@@ -140,9 +141,15 @@
 </template>
 
 <script setup>
+import { reactive } from 'vue'
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
+
+const user = reactive({
+  username: "wyd",
+  title: "开发者",
+})
 
 function goToWrongBook() {
   router.push({ name: 'WrongBook' })
