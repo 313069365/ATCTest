@@ -30256,7 +30256,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "【气体种类影响密度】",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -30276,7 +30276,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "【静止无摩擦】",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -30296,7 +30296,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "【Re 数越大，粘性影响越小】",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -30316,7 +30316,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "【大】",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -30356,7 +30356,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "【附面层法向压强相等，流向压强会变。】",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -31006,7 +31006,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "【后掠角越大，升力线斜率越小；后掠角越小，升力线斜率越大】",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -31026,7 +31026,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "【其他条件一定的情况下，升阻比最大时所对应的平飞阻力最小】",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -31433,7 +31433,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "襟翼偏度越大，升力大，【起飞安全速度V2就越小】",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -31453,7 +31453,7 @@
     "shuffle": false,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "飞机的襟翼角度越大则阻力就【越大】。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -31513,7 +31513,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "放襟翼，应当逐渐【减小】迎角",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -32073,7 +32073,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "为了防止副翼反效，飞机在【大速度】飞行时一般使用内侧副翼。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -32113,7 +32113,7 @@
     "shuffle": false,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "【右】，舵往哪偏，机头往哪转。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -32153,7 +32153,7 @@
     "shuffle": false,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "【迎角不为零】",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -32663,7 +32663,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "等表速爬升：真空速一直增大；等马赫数爬升：真空速先增、平流层减小（先增后减）",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -32763,7 +32763,7 @@
     "shuffle": false,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "【可能考虑同温层】",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -32783,7 +32783,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "主要的误差源来自【静压】的测量。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
