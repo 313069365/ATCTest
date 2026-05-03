@@ -32943,7 +32943,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "【V2 起飞安全速度】",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -33303,7 +33303,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "【范围越小】",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -33363,7 +33363,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "中低空限制因素主要是 VMO（最大操作空速，表速 / 指示空速），低空看表速（VMO），高空看马赫（MMO）最大操作马赫数",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -33403,7 +33403,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "【抖振限制的平飞最小马赫数增大，最大马赫数减小】。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -34222,7 +34222,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "【安全水平不降低】",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -34282,7 +34282,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "【高速靠气阻反推，低速才靠刹车。】",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -34362,7 +34362,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "【净航迹】至少要高出障碍物顶点35ft。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -34382,7 +34382,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "CCAR规定双发飞机的进场爬升梯度不得小于2.1%，该爬升梯度的计算条件是【一发失效、剩余发动机】最大功率工作情况。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -35252,7 +35252,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "【机动能力越强，重量越小】",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -35292,7 +35292,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "【增加迎角】",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -35687,7 +35687,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "【顺风，减小巡航速度】",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -35707,7 +35707,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "【逆风，增大巡航速度】",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -35787,7 +35787,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "CI 成本指数：时间成本 / 燃油成本；CI 越大，速度越大。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -35847,7 +35847,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "ETOPS（Extended-range Twin-engine Operations）即双发延程飞行，核心是双发飞机在单发失效后，能在规定时间内安全飞抵最近备降机场的运行标准。需要其他要求。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -35907,7 +35907,7 @@
     "shuffle": false,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "【减小】",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -35927,7 +35927,7 @@
     "shuffle": false,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "相同情况下飞机的久航速度【小于】飞机的远航速度。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -35947,7 +35947,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "LRC 马赫数 / 真空速 比 MRC 大约 【 3% 】。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -35967,7 +35967,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "飘降的【净航迹】至少应高出障碍物顶点2000ft，在改平点至少要高出【1500ft】。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -35987,7 +35987,7 @@
     "shuffle": false,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "机在巡航过程中如果出现一发停车情况，飞机要飘降，此时飞机剩余发动机的推力应加大到【最大连续推力 MCT】。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -36007,7 +36007,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "节约全程 10% 不可预期油，不节约备降燃油。 ",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -36027,7 +36027,7 @@
     "shuffle": false,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "【 CI=0，最大航程速度 MRC 】",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -37267,7 +37267,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "【不一定】",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -37287,7 +37287,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "【会损失】",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -38147,7 +38147,7 @@
     "shuffle": false,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "【前三点式】",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -38187,7 +38187,7 @@
     "shuffle": false,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "【即使灯光故障，飞行员依然可以通过机械指示、目视观察确认起落架收放状态】",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -38417,7 +38417,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "【交流电 => 直流电】",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -38537,7 +38537,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "【VHF 空间波】",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -39099,7 +39099,7 @@
     "shuffle": false,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "民航飞机起落架都设有人工 / 重力备用放下系统。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -39119,7 +39119,7 @@
     "shuffle": false,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "【舵面操纵效能不变、操纵性能不减弱】",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -39524,7 +39524,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "【正常情况主发动机引气】",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -39674,7 +39674,7 @@
     "shuffle": false,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "【 固定式连续供氧系统 + 手提氧 】",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -40454,7 +40454,7 @@
     "shuffle": false,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "电传操纵（FBW）响应快、滞后极小、重量轻、结构简单，抗电磁干扰能力极强，并不会易受干扰。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -40469,12 +40469,12 @@
     "type": "single",
     "stem": "地面扰流板的作用是（ ）。",
     "options": [
-      "A. 着陆时减小机翼的升力        ",
+      "A. 着陆时减小机翼的升力",
       "B. 当飞机进入转弯时辅助滚转",
       "C. 不需增加速度以增加下降率",
       "D. 增大飞机的升力，同时增大飞机的阻力"
     ],
-    "answer": ["A. 着陆时减小机翼的升力        "],
+    "answer": ["A. 着陆时减小机翼的升力"],
     "difficulty": 2,
     "shuffle": true,
     "degree": 1,
@@ -40971,7 +40971,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "【结构油箱，广泛用在现代飞机上】",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -41011,7 +41011,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "【爆震、早燃、气缸过热】过富油是油气混合比问题，和燃油牌号无关",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -41031,7 +41031,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "【富油不容易积铅】",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -41356,7 +41356,7 @@
     "shuffle": false,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "客舱：无自动灭火系统，只配备手提灭火器，人工灭火；驾驶舱：部分有固定灭火装置，但也非全自动；真正自带自动灭火系统的区域：发动机、APU、货舱。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -41396,7 +41396,7 @@
     "shuffle": false,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "【A 类水基灭火剂 / 卤代烷（清洁灭火剂）】",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -42017,7 +42017,7 @@
     "shuffle": false,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "【激光陀螺、光纤陀螺等无机械旋转转子。】",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -42037,7 +42037,7 @@
     "shuffle": false,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "GPS 属于非自主 / 无线电卫星导航，必须依赖天上卫星发射的外部信号才能定位导航。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -42117,7 +42117,7 @@
     "shuffle": false,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "【TCAS只识别装有应答机且正常工作的飞机】",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -42137,7 +42137,7 @@
     "shuffle": false,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "惯性导航（INS）是完全自主式导航，无需地面配合。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -42157,7 +42157,7 @@
     "shuffle": false,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "无线电高度表主要用于起飞、进近、着陆、低高度飞行。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -42217,7 +42217,7 @@
     "shuffle": false,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "【频率在人耳可听范围，便于搜寻人员水下直接听音搜寻。】",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -42277,7 +42277,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "实际导航性能值 ANP 越小，FMC位置预算的准确性越高。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -42297,7 +42297,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "【水平状态指示器主要显示航向、航道、VOR/ILS 偏差、飞机位置姿态、导航方位等导航、姿态信息。】",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -42317,7 +42317,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "【横向】",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -42566,7 +42566,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "【21 种】",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -42586,7 +42586,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "【1:100 万】",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -42606,7 +42606,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "航图讲究简洁、清晰、重点突出。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -42626,7 +42626,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "航图配色遵循标准化、简洁、区分要素原则。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -42686,7 +42686,7 @@
     "shuffle": false,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "禁区：永久、长期禁止一切航空器飞入的固定空域，无时间限制。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -42726,7 +42726,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "【RNP1.0 1NM】",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -42746,7 +42746,7 @@
     "shuffle": false,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "【运行批准、机组资质、设备审定许可】",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -43130,7 +43130,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "【机场跑道入口】",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
