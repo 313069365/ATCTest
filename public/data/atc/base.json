@@ -14550,7 +14550,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": " 真空速增加，平移矢量风，地速增加，空地速夹角减小。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -14600,7 +14600,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "空速不变，风速矢量变化，连接空速起点和风速终点。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -14625,7 +14625,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "空速不变，风速矢量变化，连接空速起点和风速终点。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -14650,7 +14650,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "空速不变，风速矢量变化，连接空速起点和风速终点。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -14675,7 +14675,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "空速不变，风速矢量变化，连接空速起点和风速终点。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -14700,7 +14700,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "空速不变，风速矢量变化，连接空速起点和风速终点。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -14725,7 +14725,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "空速不变，风速矢量变化，连接空速起点和风速终点。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -20308,7 +20308,7 @@
     "shuffle": true,
     "degree": 3,
     "subs": null,
-    "explanation": "",
+    "explanation": "Single Sideband",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -20333,7 +20333,7 @@
     "shuffle": true,
     "degree": 3,
     "subs": null,
-    "explanation": "",
+    "explanation": "Amplitude Modulation",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -21228,7 +21228,7 @@
     "shuffle": false,
     "degree": 3,
     "subs": null,
-    "explanation": "",
+    "explanation": " 会反射 ",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -21288,7 +21288,7 @@
     "shuffle": false,
     "degree": 3,
     "subs": null,
-    "explanation": "",
+    "explanation": " 匀速 ",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -21528,7 +21528,7 @@
     "shuffle": false,
     "degree": 3,
     "subs": null,
-    "explanation": "",
+    "explanation": "【远距离】",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -22303,7 +22303,7 @@
     "shuffle": false,
     "degree": 3,
     "subs": null,
-    "explanation": "",
+    "explanation": "【散射】",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -22473,7 +22473,7 @@
     "shuffle": false,
     "degree": 3,
     "subs": null,
-    "explanation": "",
+    "explanation": "极地盲区",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -22533,7 +22533,7 @@
     "shuffle": false,
     "degree": 3,
     "subs": null,
-    "explanation": "",
+    "explanation": "【 C 波段】",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -22813,7 +22813,7 @@
     "shuffle": false,
     "degree": 3,
     "subs": null,
-    "explanation": "",
+    "explanation": "【数据通信】",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -23333,7 +23333,7 @@
     "shuffle": true,
     "degree": 3,
     "subs": null,
-    "explanation": "",
+    "explanation": " Present Position ",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -23473,7 +23473,7 @@
     "shuffle": false,
     "degree": 3,
     "subs": null,
-    "explanation": "",
+    "explanation": "【一个电参数可以确定位置线，但不能确定所处位置】",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -23533,7 +23533,7 @@
     "shuffle": false,
     "degree": 3,
     "subs": null,
-    "explanation": "",
+    "explanation": "航线角从航线起点的经线北端顺时针量到航线（航段）去向的角度。飞机纵轴前方的延长线叫航向线。航向线的方向，即飞机纵轴前方的指向，叫做航向(HDG),它是从经线北端顺时量到航向线的角度。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -24083,7 +24083,7 @@
     "shuffle": false,
     "degree": 3,
     "subs": null,
-    "explanation": "",
+    "explanation": "【有影响】",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -24123,7 +24123,7 @@
     "shuffle": false,
     "degree": 3,
     "subs": null,
-    "explanation": "",
+    "explanation": "【RNP 需要卫星】",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -24883,7 +24883,7 @@
     "shuffle": false,
     "degree": 3,
     "subs": null,
-    "explanation": "",
+    "explanation": "【VOR 测方位/角度】",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -24903,7 +24903,7 @@
     "shuffle": false,
     "degree": 3,
     "subs": null,
-    "explanation": "",
+    "explanation": "【极坐标】",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -26252,7 +26252,7 @@
     "shuffle": false,
     "degree": 3,
     "subs": null,
-    "explanation": "",
+    "explanation": "【航向信标 LOC，下滑信标 GS 和指点信标 MB】",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -26272,7 +26272,7 @@
     "shuffle": false,
     "degree": 3,
     "subs": null,
-    "explanation": "",
+    "explanation": "【飞行员】",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -26312,7 +26312,7 @@
     "shuffle": false,
     "degree": 3,
     "subs": null,
-    "explanation": "",
+    "explanation": " 【III 类】",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -26332,7 +26332,7 @@
     "shuffle": false,
     "degree": 3,
     "subs": null,
-    "explanation": "",
+    "explanation": "II 类 RVR350米，DH30米～60米",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -26677,7 +26677,7 @@
     "shuffle": false,
     "degree": 3,
     "subs": null,
-    "explanation": "",
+    "explanation": "【4 颗】",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -26882,7 +26882,7 @@
     "shuffle": true,
     "degree": 3,
     "subs": null,
-    "explanation": "",
+    "explanation": "【每秒即频率】",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -27132,7 +27132,7 @@
     "shuffle": true,
     "degree": 3,
     "subs": null,
-    "explanation": "",
+    "explanation": "R = (3×10^8 × 500×10^-6) ÷ 2 = 75 km",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -27257,7 +27257,7 @@
     "shuffle": false,
     "degree": 3,
     "subs": null,
-    "explanation": "",
+    "explanation": "【L波段】",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -27297,7 +27297,7 @@
     "shuffle": false,
     "degree": 3,
     "subs": null,
-    "explanation": "",
+    "explanation": "【距离分辨率】",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -27497,7 +27497,7 @@
     "shuffle": false,
     "degree": 3,
     "subs": null,
-    "explanation": "",
+    "explanation": "【主要依赖二次雷达（SSR）+ 自动化系统、ADS-B】",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -28667,7 +28667,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "【飞机可能被遮蔽】",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -28687,7 +28687,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "【需要问询】",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -28707,7 +28707,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "【高度、航向等信息】",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -29012,7 +29012,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "A/C 模式：只有 4 位识别码，无独立唯一地址码，会重复混用；S 模式飞机，才有专属 24 位唯一地址码。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -29052,7 +29052,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "【选择】",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -29482,7 +29482,7 @@
     "shuffle": false,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "通过ADS-B可以实现飞机间的【互相感知】，进而实现对周边空域交通状况的了解。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -29502,7 +29502,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "ADS-C 采用【合同式 / 点对点】，地空建立合约按需传输。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -29946,7 +29946,7 @@
     "shuffle": false,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "【不可以识别 B模式】",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -33043,7 +33043,7 @@
     "shuffle": true,
     "degree": 3,
     "subs": null,
-    "explanation": "",
+    "explanation": "V_s1g失速速度：对应最大升力系数（即：在升力即将减小之前）。在这个时刻，过载系数仍然等于1（JAR25参考失速速度）。V_far（传统失速速度）：对应常规失速（即：当升力开始快速减小时）。在这个时刻，过载系数总是小于1（FAR参考失速度）。0.94",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
