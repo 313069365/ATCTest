@@ -43130,7 +43130,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "【机场跑道入口】",
+    "explanation": "【设在机场跑道入口】",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -43190,7 +43190,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "部分特殊飞行区域（如本场训练空域、临时限制区、小型通用机场本场飞行区域等），无需标配航路图，会使用空域图、机场图、训练用图等替代。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -43210,7 +43210,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "【300米】",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
