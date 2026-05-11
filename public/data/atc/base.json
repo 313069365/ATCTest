@@ -9770,7 +9770,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "【700hPa，3000m】；【850hPa，1500m】；【500hPa，5500m】",
+    "explanation": "【500hPa，5500m】；【700hPa，3000m】；【850hPa，1500m】",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -18873,7 +18873,7 @@
     "shuffle": true,
     "degree": 3,
     "subs": null,
-    "explanation": "",
+    "explanation": "⚠️ 题干可能有误【全最小】。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -18940,10 +18940,10 @@
     "options": [
       "A. 不论高度如何都飞行1分钟",
       "B. 不论高度如何都飞行15分钟",
-      "C. 14000ft以下1分钟，14000ft以上15分钟",
+      "C. 14000ft以下1分钟，14000ft以上1.5分钟",
       "D. 14000ft以下1分钟，20000ft以上2分钟，30000ft上以3分钟"
     ],
-    "answer": ["C. 14000ft以下1分钟，14000ft以上15分钟"],
+    "answer": ["C. 14000ft以下1分钟，14000ft以上1.5分钟"],
     "difficulty": 1,
     "shuffle": true,
     "degree": 3,
@@ -19333,7 +19333,7 @@
     "shuffle": false,
     "degree": 3,
     "subs": null,
-    "explanation": "",
+    "explanation": "⚠️ 可能非标准定义则偏流-5°，或者条件不完整。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -19373,7 +19373,7 @@
     "shuffle": false,
     "degree": 3,
     "subs": null,
-    "explanation": "",
+    "explanation": "内侧有风，向内侧修正。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -19413,7 +19413,7 @@
     "shuffle": false,
     "degree": 3,
     "subs": null,
-    "explanation": "",
+    "explanation": "飞机以标准转弯率3°/s、转弯速度110kt进近转弯，则转弯半径R为【1.08km】。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -19533,7 +19533,7 @@
     "shuffle": false,
     "degree": 3,
     "subs": null,
-    "explanation": "",
+    "explanation": "非精密进近着陆时，飞机下降至最低下降高时仍然看不到跑道【应当保持高度至复飞点】，仍然看不到跑道时再复飞。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -19553,7 +19553,7 @@
     "shuffle": false,
     "degree": 3,
     "subs": null,
-    "explanation": "",
+    "explanation": "精密进近，飞机下降至决断高时仍然看不到跑道应立即复飞。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -19573,7 +19573,7 @@
     "shuffle": false,
     "degree": 3,
     "subs": null,
-    "explanation": "",
+    "explanation": "一类精密进近 RVR 550米",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -19593,7 +19593,7 @@
     "shuffle": false,
     "degree": 3,
     "subs": null,
-    "explanation": "",
+    "explanation": "⚠️ 新修订二类是 RVR 300 米",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -19613,7 +19613,7 @@
     "shuffle": false,
     "degree": 3,
     "subs": null,
-    "explanation": "",
+    "explanation": "三类分情况。RVR 175 米，DH小于 30 米或无 DH。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -19633,7 +19633,7 @@
     "shuffle": false,
     "degree": 3,
     "subs": null,
-    "explanation": "",
+    "explanation": "直角航线程序由出航转弯、出航航段、【入航转弯】和入航航段组成。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -19653,7 +19653,7 @@
     "shuffle": false,
     "degree": 3,
     "subs": null,
-    "explanation": "",
+    "explanation": "修正角程序由出航航段、【入航转弯】和入航航段组成。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -21228,7 +21228,7 @@
     "shuffle": false,
     "degree": 3,
     "subs": null,
-    "explanation": " 会反射 ",
+    "explanation": " 不同媒介会反射 ",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -22813,7 +22813,7 @@
     "shuffle": false,
     "degree": 3,
     "subs": null,
-    "explanation": "【数据通信】",
+    "explanation": "国际民航组织新航行系统中的通信系统主要强调发展基于【数据通信】的航空移动业务。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -23413,7 +23413,7 @@
     "shuffle": false,
     "degree": 3,
     "subs": null,
-    "explanation": "",
+    "explanation": "定位，导航。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -24863,7 +24863,7 @@
     "shuffle": false,
     "degree": 3,
     "subs": null,
-    "explanation": "",
+    "explanation": "进近也行",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -24883,7 +24883,7 @@
     "shuffle": false,
     "degree": 3,
     "subs": null,
-    "explanation": "【VOR 测方位/角度】",
+    "explanation": "VOR 测方位/角度，DME 是测距离",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -24903,7 +24903,7 @@
     "shuffle": false,
     "degree": 3,
     "subs": null,
-    "explanation": "【极坐标】",
+    "explanation": "组成【极坐标】",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -26252,7 +26252,7 @@
     "shuffle": false,
     "degree": 3,
     "subs": null,
-    "explanation": "【航向信标 LOC，下滑信标 GS 和指点信标 MB】",
+    "explanation": "仪表着陆系统由【航向信标 LOC】，下滑信标 GS 和指点信标 MB等组成。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -26272,7 +26272,7 @@
     "shuffle": false,
     "degree": 3,
     "subs": null,
-    "explanation": "【飞行员】",
+    "explanation": "【飞行员】显示器显示",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -26312,7 +26312,7 @@
     "shuffle": false,
     "degree": 3,
     "subs": null,
-    "explanation": " 【III 类】",
+    "explanation": " 【III 类精密进近】",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -26332,7 +26332,7 @@
     "shuffle": false,
     "degree": 3,
     "subs": null,
-    "explanation": "II 类 RVR350米，DH30米～60米",
+    "explanation": "II 类 RVR300米，DH30米～60米",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -27257,7 +27257,7 @@
     "shuffle": false,
     "degree": 3,
     "subs": null,
-    "explanation": "【L波段】",
+    "explanation": "【L波段】是目前一/二次雷达最常用的波段。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -27297,7 +27297,7 @@
     "shuffle": false,
     "degree": 3,
     "subs": null,
-    "explanation": "【距离分辨率】",
+    "explanation": "区别同一方向上两个大小相同的点目标之间的最小距离叫做【距离分辨率】",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -27497,7 +27497,7 @@
     "shuffle": false,
     "degree": 3,
     "subs": null,
-    "explanation": "【主要依赖二次雷达（SSR）+ 自动化系统、ADS-B】",
+    "explanation": "民航空中交通管制的数据获取主要依赖【二次雷达（SSR）+ 自动化系统、ADS-B】",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -28687,7 +28687,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "【需要问询】",
+    "explanation": "应答机需要地面问询，然后再回复。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -28707,7 +28707,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "【高度、航向等信息】",
+    "explanation": "二次雷达主要获取【高度、航向等信息】",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -29052,7 +29052,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "【选择】",
+    "explanation": "S模式【选择】询问方式。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -32683,7 +32683,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "涡扇发动机的额定推力随外界温度【先不变、后减小】。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -32723,7 +32723,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "在同一几何高度上，实际气压值大于标准大气下该高度的气压值。气压高度表按标准大气校准，此时指示的气压高度会低于实际几何高度。故气压高度大小【小于】几何高度大小。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -32743,7 +32743,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "受风影响，不一定。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -32863,7 +32863,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "EPR 发动机压力比。EPR大小将随飞行高度增加而【增大】。 ",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -35787,7 +35787,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "CI 成本指数：时间成本 / 燃油成本；CI 越大，速度越大。",
+    "explanation": "成本指数（CI）定义为时间成本与燃油成本之比。CI 越大，表示时间成本相对燃油成本越高，因此为了最小化总成本，应提高巡航速度以缩短飞行时间。在相同条件下，CI 越大，最优巡航速度【越大】。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -35907,7 +35907,7 @@
     "shuffle": false,
     "degree": 1,
     "subs": null,
-    "explanation": "【减小】",
+    "explanation": "在等高度巡航时，飞机的远程巡航速度将随燃油消耗而【减小】",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -38837,7 +38837,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "和机型有关。737NG在空中不会自动关，A350会自动关，CRJ200则是自动调节。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -39099,7 +39099,7 @@
     "shuffle": false,
     "degree": 1,
     "subs": null,
-    "explanation": "民航飞机起落架都设有人工 / 重力备用放下系统。",
+    "explanation": "民航飞机起落架都设有人工/重力备用放下系统。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -39674,7 +39674,7 @@
     "shuffle": false,
     "degree": 1,
     "subs": null,
-    "explanation": "【 固定式连续供氧系统 + 手提氧 】",
+    "explanation": "【装有连续流动和压力式供氧设备，以及手提式氧气瓶】",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -43090,7 +43090,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "在航空图（区域图）中，IPDC 是 ILS paired DME (Channel)的缩写。H44X，H 代表进近阶段，44 为 DME 频道，X 代表 DME工作在 X模式。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -43450,7 +43450,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "等待航线除标注出航与入航的方向外，还应标明出航时间和【最低等待高度层】。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -44340,7 +44340,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "【跑道入口标高 RDH 为3米】",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -44400,7 +44400,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "须为所有供国际民航使用的、【且有关国家已为其建立了仪表进近程序的机场】，提供仪表进近图。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -44950,7 +44950,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "活动障碍物不产生阴影。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -45010,7 +45010,7 @@
     "shuffle": false,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "设有【净空道】的跑道，机场障碍物A型图中起飞航径区的起点应在【净空道】末端。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -45310,7 +45310,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "【机场管理机构】",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -45415,7 +45415,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "纯粹解释性、咨询性、行政性的资料应以【航行资料通报】的形式发布。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -45495,7 +45495,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "航行资料通报AIC：涉及法律法规、空中航行、技术与管理、飞行安全等方面内容，但不适宜以航空资料汇编或者航行通告形式公布的，应当以航空资料通报方式公布（具体内容见本规则附件七），主要包括：（一）有关法律、法规、程序、设施的任何重大变更的长期预报；（二）有关可能影响飞行安全的解释性和咨询性资料；（三）有关技术、法律、行政性事务的解释性和咨询性资料或者通知",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -45720,7 +45720,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "【QFE】",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -45740,7 +45740,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "【青岛机场】",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -45780,7 +45780,7 @@
     "shuffle": true,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "A 系列：国际分发（全球航路、法规、标准）；C 系列：国内分发（全国范围）；D 系列，地区分发（本地区内）。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -45905,7 +45905,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "【SNOWTAM】",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -45925,7 +45925,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "【北京时】",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -45945,7 +45945,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "【24 小时】",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -46130,7 +46130,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "应按照【最佳飞行程序的要求】来确定。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -46170,7 +46170,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "【右侧】为正",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -46210,7 +46210,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "【3°/s】",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -49955,7 +49955,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "精密进近复飞点通常情况设在【决断高DH/决断高度DA】与下滑道的交点处。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
