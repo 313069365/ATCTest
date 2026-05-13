@@ -46130,7 +46130,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "应按照【最佳飞行程序的要求】来确定。",
+    "explanation": "机场导航设施的位置应按照【最佳飞行程序的要求】来确定。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -46170,7 +46170,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "【右侧】为正",
+    "explanation": "进场及进近程序设计中的直角坐标系中Y轴在进近航迹的【右侧】为正",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -46210,7 +46210,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "【3°/s】",
+    "explanation": "飞行程序设计中计算转弯半径时规定转弯率不得超过【3°/s】",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -46605,7 +46605,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "采用雷达定位方式确定的位置点可以称为定位点。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -46645,7 +46645,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "NDB台的圆锥效应区的半圆锥角为【40°】。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -46665,7 +46665,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "飞行程序设计中考虑VOR提供航迹引导时的精度是【±5.2°】。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -46745,7 +46745,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "飞行程序设计中考虑NDB提供侧方定位时的精度是【±°】。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -46805,7 +46805,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "当交叉定位点是用VOR/VOR确定时，两条径向线之间的夹角不得小于【30°】。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -46825,7 +46825,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "当交叉定位点是用VOR/VOR确定时，两条径向线之间的夹角不得大于【150°】。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -47010,7 +47010,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "仪表进近程序中扇区的划分是以归航台为圆心,半径为【46km】。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -47050,7 +47050,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "使用DME弧在扇区内侧部分划分分扇区时，使用的DME弧应选择的范围是19～28km。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -47227,7 +47227,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "直线离场必须在【20km】以内取得航迹引导。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -47247,7 +47247,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "设计离场程序时障碍物鉴别面（OIS）的梯度为【2.5%】。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -47267,7 +47267,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "最小超障余度是指航空器在某一航段飞行时【与保护区内障碍物之间的最小垂直间隔】。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -47452,7 +47452,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "最低安全高度是 3900 米，但西飞需要偶数层，最低航路高度应为【4200米】",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -47492,7 +47492,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "航路保护区总宽度要保证【99.7%】概率的可容度。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -47512,7 +47512,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "final approach fixed",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -47784,7 +47784,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "仪表进近中进场航线的主要作用是【理顺航路和机场运行路线之间的关系】。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -47864,7 +47864,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "【下降梯度 Gr 为常数】",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -47904,7 +47904,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "直线进近的中间进近航段的长度最佳为 19km。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -47924,7 +47924,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "直线进近的最后进近航段的长度最佳为 9km。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
