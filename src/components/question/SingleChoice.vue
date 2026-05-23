@@ -14,7 +14,9 @@
 
     <!-- 2. 题干区 -->
     <div class="question-stem">
-      <h2 class="question-text">{{ question?.stem }}</h2>
+      <h2 class="question-text">{{ question?.stem }}
+        <div>{{ question.translation?.stem || "" }}</div>
+      </h2>
     </div>
 
     <!-- 3. 作答区 -->
@@ -26,7 +28,9 @@
         review: mode === 'review'
       }" @click="handleSelect(i)" :disabled="disabled || (shouldShowAnswer && mode !== 'review')">
         <span class="option-marker"></span>
-        <span class="option-text" v-if="option">{{ formatOption(option) }}</span>
+        <span class="option-text" v-if="option">{{ formatOption(option) }}
+          <div style="color:gray">{{ formatOption(question.translation?.options[i] || "") }}</div>
+        </span>
       </button>
     </div>
 
