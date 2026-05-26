@@ -4,6 +4,10 @@
     <div class="question-meta">
       <span class="question-type-tag">{{ t(question?.type) }}</span>
       <span class="question-id">{{ t('questionId') }}: {{ question?.id }}</span>
+      <button class="trans-btn" :class="{ active: showTranslation }" @click="toggleTranslation"
+        :title="showTranslation ? '隐藏翻译' : '显示翻译'">
+        <span class="material-symbols-outlined">translate</span>
+      </button>
       <button v-if="mode === 'exam'" class="mark-btn" :class="{ active: isMarked }" @click="$emit('toggle-mark')">
         <span class="material-symbols-outlined">bookmark</span>
       </button>
@@ -15,7 +19,7 @@
     <!-- 2. 题干区 -->
     <div class="question-stem">
       <h2 class="question-text">{{ question?.stem }}
-        <div>{{ question.translation?.stem || "" }}</div>
+        <div v-show="showTranslation">{{ question.translation?.stem || "" }}</div>
       </h2>
     </div>
 
@@ -29,7 +33,8 @@
       }" @click="handleSelect(i)" :disabled="disabled || (shouldShowAnswer && mode !== 'review')">
         <span class="option-marker"></span>
         <span class="option-text" v-if="option">{{ formatOption(option) }}
-          <div style="color:gray">{{ formatOption(question.translation?.options[i] || "") }}</div>
+          <div v-show="showTranslation" style="color:gray">{{ formatOption(question.translation?.options[i] || "") }}
+          </div>
         </span>
       </button>
     </div>
@@ -58,10 +63,12 @@
 </template>
 
 <script setup>
-import { computed } from 'vue'
+import { ref, computed } from 'vue'
 import { t } from '@/utils/i18n.js'
 import { useAppStore } from '@/stores/store'
 import { useQuestionHandler } from '@/composables/useQuestionHandler'
+
+const showTranslation = ref(false)
 
 const store = useAppStore()
 
@@ -137,6 +144,11 @@ const toggleFavorite = () => {
   } else {
     store.addFavorite(props.question)
   }
+}
+
+// 切换翻译显示
+const toggleTranslation = () => {
+  showTranslation.value = !showTranslation.value
 }
 
 // 格式化解析内容
@@ -237,7 +249,6 @@ const handleSelect = (index) => {
 }
 
 .fav-btn {
-  margin-left: auto;
   padding: var(--spacing-xs);
   background: transparent;
   border: none;
@@ -257,7 +268,6 @@ const handleSelect = (index) => {
 }
 
 .mark-btn {
-  margin-left: auto;
   padding: var(--spacing-xs);
   background: transparent;
   border: none;
@@ -274,6 +284,26 @@ const handleSelect = (index) => {
 
 .mark-btn.active .material-symbols-outlined {
   font-variation-settings: 'FILL' 1;
+}
+
+.trans-btn {
+  margin-left: auto;
+  padding: var(--spacing-xs);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.trans-btn .material-symbols-outlined {
+  font-size: 18px;
+}
+
+.trans-btn.active {
+  color: var(--primary);
 }
 
 .question-stem {

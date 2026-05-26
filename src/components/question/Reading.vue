@@ -11,12 +11,15 @@
         </div>
         <div class="reading-content" v-show="readingExpanded">
           {{ question.media.article }}
+          <br>
+          {{ question.translation.article }}
         </div>
       </div>
 
       <component v-if="wrappedSub" :is="componentMap[currentSub?.type] || SingleChoice" :question="wrappedSub"
         :user-answer="props.userAnswer?.[currentSubIndex]" :mode="mode" :show-answer="currentSubShowAnswer"
-        :show-answer-mode="showAnswerMode" :disabled="isSubAnswerDisabled" @answer="handleSubAnswer" @check="checkSubAnswer(currentSubIndex)" />
+        :show-answer-mode="showAnswerMode" :disabled="isSubAnswerDisabled" @answer="handleSubAnswer"
+        @check="checkSubAnswer(currentSubIndex)" />
 
     </div>
 
@@ -118,7 +121,8 @@ const wrappedSub = computed(() => {
     options: currentSub.value.options,
     answer: currentSub.value.answer,
     type: currentSub.value.type,
-    explanation: currentSub.value.explanation
+    explanation: currentSub.value.explanation,
+    translation: currentSub.value.translation,
   }
 })
 
