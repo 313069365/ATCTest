@@ -140,19 +140,23 @@ onMounted(async () => {
         bank.value = validIds.map(id => filtered.find(q => q.id === id)).filter(Boolean);
         console.log("已恢复题目顺序，题数:", bank.value.length);
       } else if (isNewPractice) {
-        // 新的练习：应用新的排序设置
-        if (questionSort === QUESTION_SORT.SHUFFLE) {
-          filtered = shuffleArray(filtered);
-        } else if (questionSort === QUESTION_SORT.REVERSE) {
-          filtered = [...filtered].reverse();
+        // 新的练习：应用新的排序设置（背题模式不乱序）
+        if (practiceData.value?.practiceMode !== 'review') {
+          if (questionSort === QUESTION_SORT.SHUFFLE) {
+            filtered = shuffleArray(filtered);
+          } else if (questionSort === QUESTION_SORT.REVERSE) {
+            filtered = [...filtered].reverse();
+          }
         }
         bank.value = filtered;
       } else {
         // 默认行为（无特殊参数）
-        if (questionSort === QUESTION_SORT.SHUFFLE) {
-          filtered = shuffleArray(filtered);
-        } else if (questionSort === QUESTION_SORT.REVERSE) {
-          filtered = [...filtered].reverse();
+        if (practiceData.value?.practiceMode !== 'review') {
+          if (questionSort === QUESTION_SORT.SHUFFLE) {
+            filtered = shuffleArray(filtered);
+          } else if (questionSort === QUESTION_SORT.REVERSE) {
+            filtered = [...filtered].reverse();
+          }
         }
         bank.value = filtered;
       }
@@ -250,9 +254,10 @@ const shuffleArray = (array) => {
   return arr;
 };
 
-// 缓存选项乱序结果
+// 缓存选项乱序结果（背题模式不乱序）
 const cacheShuffledOptions = () => {
   if (!practiceData.value?.optionsSort) return;
+  if (practiceData.value?.practiceMode === 'review') return;
 
   shuffledOptionsCache.value = {};
   bank.value.forEach((question, index) => {
@@ -264,9 +269,10 @@ const cacheShuffledOptions = () => {
   console.log("已缓存选项乱序，题数:", Object.keys(shuffledOptionsCache.value).length);
 };
 
-// 获取带乱序选项的题目（使用缓存）
+// 获取带乱序选项的题目（使用缓存，背题模式不乱序）
 const getQuestionWithShuffledOptions = (question) => {
   if (!question || !question.options) return question;
+  if (practiceData.value?.practiceMode === 'review') return question;
 
   // 如果设置了选项乱序，使用缓存
   if (practiceData.value?.optionsSort) {
