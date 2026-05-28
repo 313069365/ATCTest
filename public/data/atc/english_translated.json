@@ -13350,7 +13350,7 @@
     "shuffle": false,
     "degree": 3,
     "subs": null,
-    "explanation": "",
+    "explanation": "⚠️ 这里重量不会随飞行动作减少，可能出题人考虑成载荷 load 了。",
     "updated_at": "2022-11-20",
     "status": "valid",
     "translation": {
@@ -13420,7 +13420,7 @@
     "status": "valid",
     "translation": {
       "stem": "_____ 是飞机绕纵轴的运动。",
-      "options": ["A. 转弯", "B. 滚", "C. 俯仰", "D. 偏航"]
+      "options": ["A. 转弯", "B. 横滚", "C. 俯仰", "D. 偏航"]
     }
   },
   {
@@ -13444,7 +13444,7 @@
     "status": "valid",
     "translation": {
       "stem": "俯仰角是飞机绕_____轴的运动。",
-      "options": ["A. 纵向", "B. 侧向", "C. 垂直", "D. 平行"]
+      "options": ["A. 纵向", "B. 横轴", "C. 垂直", "D. 平行"]
     }
   },
   {
@@ -13555,7 +13555,7 @@
     "status": "valid",
     "translation": {
       "stem": "在下降过程中，飞机实际滑翔路径与地平线之间的角度通常称为 _____ ．",
-      "options": ["A. 诱导攻角", "B. 攻击天使", "C. 临界角", "D. 滑翔角"]
+      "options": ["A. 诱导攻角", "B. 迎角", "C. 临界角", "D. 下滑角"]
     }
   },
   {
@@ -13613,7 +13613,7 @@
     "status": "valid",
     "translation": {
       "stem": "_____ 代表飞机在没有动力的情况下向前飞行的距离，与高度损失有关。",
-      "options": ["A. 下降率", "B. 升阻比", "C. 纵横比", "D. 滑翔比"]
+      "options": ["A. 下降率", "B. 升阻比", "C. 展弦比", "D. 滑翔比"]
     }
   },
   {
@@ -13637,7 +13637,7 @@
     "status": "valid",
     "translation": {
       "stem": "滑翔比是飞机在没有动力的情况下向前飞行的距离，与_____损失有关。",
-      "options": ["A. 姿态", "B. 海拔高度", "C. 空速", "D. 距离"]
+      "options": ["A. 姿态", "B. 高度", "C. 空速", "D. 距离"]
     }
   },
   {
@@ -13665,7 +13665,7 @@
     "updated_at": "2022-11-20",
     "status": "valid",
     "translation": {
-      "stem": "_____ 是唯一能提供最大滑行距离的速度。",
+      "stem": "_____ 是能提供最大滑行距离的唯一速度。",
       "options": [
         "A. 最大速度",
         "B. 最低速度",
@@ -13762,9 +13762,9 @@
     "updated_at": "2022-11-20",
     "status": "valid",
     "translation": {
-      "stem": "_____ 通常不会在空速指示器上标记，因为它可能会随着飞机的总重量而变化。",
+      "stem": "_____ 通常不会标记在空速表上，因为它随飞机总重量变化。",
       "options": [
-        "A. 永不超越速度（Vne）",
+        "A. 机型固定极限速度（Vne）",
         "B. 设计机动速度（Va）",
         "C. 最小稳定飞行速度（Vso）",
         "D. 襟翼展开时的最大速度（Vfe）"
@@ -13800,7 +13800,7 @@
       "options": [
         "A. 飞行员操作手册",
         "B. 飞机上的标语牌",
-        "C. 空速指示器上的颜色编码弧线",
+        "C. 空速表上的彩色刻度弧",
         "D. A 和 B"
       ]
     }
@@ -13826,7 +13826,7 @@
     "shuffle": true,
     "degree": 3,
     "subs": null,
-    "explanation": "",
+    "explanation": "baric，气压的",
     "updated_at": "2022-11-20",
     "status": "valid",
     "translation": {
@@ -13866,10 +13866,10 @@
     "translation": {
       "stem": "由地面效应现象引起的漂浮在 _____ 接近陆地时最为明显。",
       "options": [
-        "A. 小于水面以上翼展的长度",
-        "B. 翼展距地面长度的两倍",
-        "C. 即将着陆之前的点",
-        "D. 高于正常攻角"
+        "A. 离地高度小于翼展长度",
+        "B. 离地高度为两倍翼展长度",
+        "C. 即将接地的瞬间",
+        "D. 大于正常迎角的状态"
       ]
     }
   },
@@ -13894,7 +13894,7 @@
     "status": "valid",
     "translation": {
       "stem": "在海平面，标准大气的气压为 29.92 英寸汞柱 (1013.2mb)，温度为 15 摄氏度（59 华氏度）。这通常称为 _____ 。",
-      "options": ["A. SA", "B. LAS", "C. ISA", "D. PSI"]
+      "options": ["A. SA", "B. LAS", "C. ISA 国际标准大气", "D. PSI"]
     }
   },
   {
@@ -13966,7 +13966,7 @@
     "status": "valid",
     "translation": {
       "stem": "从空速表直接得到的空速是_____空速。",
-      "options": ["A. 指示空速", "B. 校准", "C. 真实", "D. 同等水平"]
+      "options": ["A. 指示", "B. 校准", "C. 真实", "D. 当量"]
     }
   },
   {
@@ -13990,7 +13990,12 @@
     "status": "valid",
     "translation": {
       "stem": "经安装和仪器误差校正后的指示空速为 _____ ．",
-      "options": ["A. IAS", "B. CAS", "C. TAS", "D. EAS"]
+      "options": [
+        "A. IAS",
+        "B. CAS (Calibrated Airspeed) 校准空速",
+        "C. TAS",
+        "D. EAS (equivalent airspeed) 当量空速"
+      ]
     }
   },
   {
@@ -14104,7 +14109,7 @@
     "translation": {
       "stem": "当地飞行区域的 _____ 对于最大限度地减少高度计误差至关重要。",
       "options": [
-        "A. 更新后的温度",
+        "A. 最新的温度",
         "B. 当前高度计设置",
         "C. 标准大气压",
         "D. 标准大气条件"
@@ -14194,7 +14199,7 @@
     "updated_at": "2022-11-20",
     "status": "valid",
     "translation": {
-      "stem": "_____ is defined as pressure altitude corrected for non-standard temperature.",
+      "stem": "由气压高度经过非标准气温修正后得到的高度，定义为______。",
       "options": ["A. 气压高度", "B. 真实高度", "C. 密度高度", "D. 绝对高度"]
     }
   },
@@ -14293,7 +14298,7 @@
     "updated_at": "2022-11-20",
     "status": "valid",
     "translation": {
-      "stem": "压力高度和密度高度将是相同的值 _____ ．",
+      "stem": "气压高度与密度高度数值相等的情况是______。",
       "options": [
         "A. 在标准温度下",
         "B. 当高度计设置为 29.92 英寸汞柱时",
@@ -14327,12 +14332,12 @@
     "updated_at": "2022-11-20",
     "status": "valid",
     "translation": {
-      "stem": "Pressure altitude will be equal to true altitude _____ ．",
+      "stem": "气压高度与真实高度数值相等的情况是______。",
       "options": [
         "A. 当大气压为29.90英寸汞柱时",
         "B. 当存在标准大气条件时",
         "C. 当指示高度等于气压高度时",
-        "D. 当OAT 低于该海拔高度的标准时"
+        "D. 当外界气温低于该高度标准气温时"
       ]
     }
   },
@@ -14361,7 +14366,7 @@
     "updated_at": "2022-11-20",
     "status": "valid",
     "translation": {
-      "stem": "维护 飞行高度层210 时，使用什么类型的高度？",
+      "stem": "保持 飞行高度层210 时，使用什么类型的高度？",
       "options": ["A. 指示高度", "B. 气压高度", "C. 校准高度", "D. 真实高度"]
     }
   },
@@ -14386,11 +14391,11 @@
     "shuffle": true,
     "degree": 3,
     "subs": null,
-    "explanation": "",
+    "explanation": "FL250 含义：代表气压高度为 25000 ft。题干里的当地拨正值 28.92 inHg，只影响指示高度，不改变飞行高度层对应的气压高度。",
     "updated_at": "2022-11-20",
     "status": "valid",
     "translation": {
-      "stem": "The 飞行员 is flying at 飞行高度层250, ATC gives an altimeter setting of 28.92 in Hg in the area. At what pressure altitude is the 飞行员 flying?",
+      "stem": "飞行员在飞行高度层 FL250 飞行，管制通报该区域高度表拨正值为 28.92 英寸汞柱。飞行员当前的气压高度是多少？",
       "options": [
         "A. 2500英尺",
         "B. 25000英尺",
@@ -14419,7 +14424,7 @@
     "updated_at": "2022-11-20",
     "status": "valid",
     "translation": {
-      "stem": "海平面标准日的大气压将迫使汞柱进入真空管_____英寸。",
+      "stem": "标准天气下，海平面大气压力可将真空试管中的汞柱抬升____英寸。",
       "options": ["A. 14.7", "B. 1013", "C. 32", "D. 29.92"]
     }
   },
@@ -14448,7 +14453,7 @@
     "updated_at": "2022-11-20",
     "status": "valid",
     "translation": {
-      "stem": "If the altitude is set properly to the destination airport pressure while airborne, it will read _____ after 着陆.",
+      "stem": "飞行中把高度表正确调至目的地机场气压，落地后高度表将显示____。",
       "options": ["A. 0ft", "B. 气压高度", "C. 场地标高", "D. 密度高度"]
     }
   },
@@ -14468,11 +14473,11 @@
     "shuffle": true,
     "degree": 3,
     "subs": null,
-    "explanation": "",
+    "explanation": "气压差值：30.16 - 29.97 = 0.19 ；换算高度误差 0.19 * 1000 = 190",
     "updated_at": "2022-11-20",
     "status": "valid",
     "translation": {
-      "stem": "When flying from an airport that has a pressure of 29.97 in Hg to a destination airport that has a pressure of 30.16 in. Hg, there will be an altitude error of _____ feet.",
+      "stem": "从气压 29.97 英寸汞柱的机场，飞往气压 30.16 英寸汞柱的目的地机场，高度表误差为____英尺。",
       "options": ["A. 1.9", "B. 19", "C. 190", "D. 1900"]
     }
   },
@@ -14505,7 +14510,7 @@
       "options": [
         "A. ATC服务、空域管理、警报服务",
         "B. ATC服务、飞行情报服务、空域管理",
-        "C. ATC 服务、空域管理、ATFM",
+        "C. ATC服务、空域管理、ATFM",
         "D. ATC服务、飞行情报服务、告警服务"
       ]
     }
@@ -14533,14 +14538,14 @@
     "shuffle": true,
     "degree": 3,
     "subs": null,
-    "explanation": "",
+    "explanation": "VSI：Stalling Speed（失速速度）",
     "updated_at": "2022-11-20",
     "status": "valid",
     "translation": {
-      "stem": "Vsi is defined as _____ ．",
+      "stem": "VSI 的定义是____。",
       "options": [
-        "A. 着陆构型中的失速速度或最小稳定飞行速度",
-        "B. 在指定构型下获得的失速速度或最小稳定飞行速度",
+        "A. 着陆构型下的失速速度 / 最小稳定飞行速度",
+        "B. 特定构型下的失速速度 / 最小稳定飞行速度",
         "C. 襟翼放下时的最大速度",
         "D. 最大结构巡航速度"
       ]
