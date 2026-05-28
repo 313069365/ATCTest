@@ -11183,7 +11183,7 @@
     "options": [
       "A. reception range for VOR signals is limited by line of sight",
       "B. obstructions such as a building or the curvature of the earth can block the transmission and thus reduce the reception distance of the VOR signals",
-      "C. the VOR signals can occasionally be made unusable for navigation purposes by terrain features_x001f_",
+      "C. the VOR signals can occasionally be made unusable for navigation purposes by terrain features",
       "D. all the above"
     ],
     "answer": ["D. all the above"],
@@ -11199,7 +11199,7 @@
       "options": [
         "A. 甚高频全向信标 信号的接收范围受视线限制",
         "B. 建筑物或地球曲率等障碍物会阻挡传输，从而缩短 甚高频全向信标 信号的接收距离",
-        "C. 甚高频全向信标 信号有时会因地形特征而无法用于导航目的_x001f_",
+        "C. 甚高频全向信标 信号有时会因地形特征而无法用于导航目的",
         "D. 以上所有"
       ]
     }
@@ -16391,7 +16391,7 @@
     },
     "id": "410000539",
     "type": "single",
-    "stem": "_____ is a non-government air/ground radio communication facility which may provide air_x001f_port advisory service at certain airports.",
+    "stem": "_____ is a non-government air/ground radio communication facility which may provide airport advisory service at certain airports.",
     "options": [
       "A. UNICOM",
       "B. Broadcast facilities",
@@ -23644,7 +23644,7 @@
     },
     "id": "410000803",
     "type": "single",
-    "stem": "I’m Brown, the representative of Air France, our premier will be visiting your coun_x001f_try next week, his special flight will be parking on the old apron, we want to know the _____ of the parking stand.",
+    "stem": "I’m Brown, the representative of Air France, our premier will be visiting your country next week, his special flight will be parking on the old apron, we want to know the _____ of the parking stand.",
     "options": ["A. number", "B. surface", "C. coordinates", "D. gate"],
     "answer": ["C. coordinates"],
     "difficulty": 1,
@@ -31703,7 +31703,7 @@
     "options": [
       "A. the call sign of the aircraft",
       "B. nature of distress",
-      "C. present position, alti_x001f_tude and heading of the aircraft",
+      "C. present position, altitude and heading of the aircraft",
       "D. all that above"
     ],
     "answer": ["D. all that above"],
