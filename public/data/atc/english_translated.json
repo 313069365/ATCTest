@@ -16437,7 +16437,7 @@
     "status": "valid",
     "translation": {
       "stem": "_____ 是为飞行中的航空器定期广播气象信息。",
-      "options": ["A. 气象广播", "B. 气象服务", "C. 音量广播", "D. 信息服务"]
+      "options": ["A. 气象广播", "B. 气象服务", "C. 对空广播", "D. 信息服务"]
     }
   },
   {
@@ -16466,7 +16466,7 @@
     "status": "valid",
     "translation": {
       "stem": "_____ 是指在一定范围内进行的军事训练活动虽然不具危险性，但对非参与飞行员有影响的空域。",
-      "options": ["A. V区域", "B. 危险点", "C. 危险区", "D.  caution区"]
+      "options": ["A. V区域", "B. 危险点", "C. 危险区", "D.  警戒区"]
     }
   },
   {
@@ -16589,7 +16589,7 @@
     },
     "id": "410000546",
     "type": "single",
-    "stem": "_____ is a n LF/MF NDB used as an aid to final approach.",
+    "stem": "_____ is an LF/MF NDB used as an aid to final approach.",
     "options": [
       "A. Compass locator",
       "B. Radial",
@@ -16940,7 +16940,7 @@
     "status": "valid",
     "translation": {
       "stem": "磁罗盘指示航空器相对于 _____ 飞行的方向。",
-      "options": ["A. 高度", "B. 方位", "C. 航线", "D. 磁北极"]
+      "options": ["A. 高度", "B. 方位", "C. 航线", "D. 方向"]
     }
   },
   {
@@ -17773,14 +17773,14 @@
     },
     "id": "410000587",
     "type": "single",
-    "stem": "Push-out tugs are use to man oeuvre aircraft _____ into oddly positioned parking bays.",
+    "stem": "Push-out tugs are used to manoeuvre aircraft _____ into oddly positioned parking bays.",
     "options": ["A. forwards", "B. round", "C. backwards", "D. direct"],
     "answer": ["C. backwards"],
     "difficulty": 1,
     "shuffle": true,
     "degree": 3,
     "subs": null,
-    "explanation": "",
+    "explanation": " 修复题目中的 use 语法错误和移除man oeuvre中的多余空格错误。",
     "updated_at": "2022-11-20",
     "status": "valid",
     "translation": {
@@ -18047,14 +18047,14 @@
     },
     "id": "410000598",
     "type": "single",
-    "stem": "If the radar receiver detects the retarding time tR＝500(S between transmitting pulse and receiving pulse, now the target is _____ km from the radar station.",
+    "stem": "If the radar receiver detects the retarding time tR＝500μs between transmitting pulse and receiving pulse, now the target is _____ km from the radar station.",
     "options": ["A. 150", "B. 120", "C. 100", "D. 75"],
     "answer": ["D. 75"],
     "difficulty": 1,
     "shuffle": true,
     "degree": 3,
     "subs": null,
-    "explanation": "",
+    "explanation": "修正题目中的500(S为500μs微秒。",
     "updated_at": "2022-11-20",
     "status": "valid",
     "translation": {
@@ -18314,7 +18314,7 @@
     "shuffle": true,
     "degree": 3,
     "subs": null,
-    "explanation": "",
+    "explanation": "定义：Flight level is a surface of constant atmospheric pressure。",
     "updated_at": "2022-11-20",
     "status": "valid",
     "translation": {
@@ -18419,7 +18419,7 @@
     "updated_at": "2022-11-20",
     "status": "valid",
     "translation": {
-      "stem": "SIGMET 是针对对所有航空器安全具有 _____ 的天气发布的气象 advisory。",
+      "stem": "重要气象情报（SIGMET）是针对对所有航空器安全有______的天气发布的气象通告。",
       "options": ["A. 重要", "B. 可变", "C. 信息", "D. 条件"]
     }
   },
@@ -19259,7 +19259,7 @@
     "shuffle": true,
     "degree": 3,
     "subs": null,
-    "explanation": "",
+    "explanation": "⚠️GMT是Greenwich Mean Time，Z:Zulu用来表示使用世界统一标准时，现在的民航只使用 UTC 了，故正确应为 UTC",
     "updated_at": "2022-11-20",
     "status": "valid",
     "translation": {
@@ -20075,7 +20075,7 @@
     "shuffle": true,
     "degree": 3,
     "subs": null,
-    "explanation": "",
+    "explanation": "题目正确的应为 15 m/s，15 * 60 / 0.30）= 3000，前面的 119.很可能是原始题库的题号。",
     "updated_at": "2022-11-20",
     "status": "valid",
     "translation": {
@@ -20099,7 +20099,7 @@
     "shuffle": true,
     "degree": 3,
     "subs": null,
-    "explanation": "",
+    "explanation": "2500 * 0.3048 / 60 = 12.7 ",
     "updated_at": "2022-11-20",
     "status": "valid",
     "translation": {
@@ -20541,7 +20541,7 @@
     "status": "valid",
     "translation": {
       "stem": "燃油 _____ 是指当前携带的燃油量。",
-      "options": ["A. 剩余", "B. 续航", "C. 数量", "D. 总量"]
+      "options": ["A. 提醒", "B. 续航", "C. 数量", "D. 总量"]
     }
   },
   {
@@ -20796,7 +20796,7 @@
     "updated_at": "2022-11-20",
     "status": "valid",
     "translation": {
-      "stem": "\"converging\" 的反义词是 _____。",
+      "stem": "\"converging(汇聚)\" 的反义词是 _____。",
       "options": ["A. 发散", "B. 相反", "C. 偏航", "D. 接近"]
     }
   },
@@ -20820,7 +20820,7 @@
     "updated_at": "2022-11-20",
     "status": "valid",
     "translation": {
-      "stem": "\"Encounter\" 的意思是 _____。",
+      "stem": "\"Encounter(遭遇)\" 的意思是 _____。",
       "options": ["A. 花费", "B. 遇到", "C. 计数器", "D. 得到"]
     }
   },
@@ -20833,7 +20833,7 @@
     },
     "id": "410000702",
     "type": "single",
-    "stem": "“Engine flamed out “means _____ .",
+    "stem": "“Engine flamed out” means _____ .",
     "options": [
       "A. Engine failure",
       "B. Engine fire",
@@ -20849,7 +20849,7 @@
     "updated_at": "2022-11-20",
     "status": "valid",
     "translation": {
-      "stem": "\"Engine flamed out\" 意思是 _____。",
+      "stem": "\"Engine flamed out (引擎熄火)\" 意思是 _____。",
       "options": [
         "A. 发动机失效",
         "B. 发动机起火",
@@ -20912,7 +20912,7 @@
     "updated_at": "2022-11-20",
     "status": "valid",
     "translation": {
-      "stem": "\"Make a gear up landing\" 意思是进行 _____ 着陆。",
+      "stem": "\"Make a gear up landing (不放起落架着陆)\" 意思是进行 _____ 着陆。",
       "options": [
         "A. 使用上部起落架",
         "B. 使用一个起落架",
@@ -20946,7 +20946,7 @@
     "updated_at": "2022-11-20",
     "status": "valid",
     "translation": {
-      "stem": "\"Crank down the gears\" 意思是 _____。",
+      "stem": "\"Crank down the gears (手摇放下起落架)\" 意思是 _____。",
       "options": [
         "A. 手动放下起落架",
         "B. 液压收起起落架",
@@ -21318,7 +21318,7 @@
     "updated_at": "2022-11-20",
     "status": "valid",
     "translation": {
-      "stem": "\"Engine partially disintegrated\" 意思是发动机 _____。",
+      "stem": "\"Engine partially disintegrated (引擎部分解体)\" 意思是发动机 _____。",
       "options": ["A. 部分失效", "B. 失效", "C. 起火", "D. 停车"]
     }
   },
@@ -21347,7 +21347,7 @@
     "updated_at": "2022-11-20",
     "status": "valid",
     "translation": {
-      "stem": "\"Belly landing\" 意思是 _____。",
+      "stem": "\"Belly landing (机腹着陆)\" 意思是 _____。",
       "options": [
         "A. 在跑道外着陆",
         "B. 完美着陆",
@@ -22110,7 +22110,7 @@
     "status": "valid",
     "translation": {
       "stem": "术语 \"节\"（knots）指速度时，表示每小时 _____。",
-      "options": ["A. 千", "B. 公里", "C. 海里", "D. 海里"]
+      "options": ["A. 千", "B. 公里", "C. 航海的", "D. 海里"]
     }
   },
   {
