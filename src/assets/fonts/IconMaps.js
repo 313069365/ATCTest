@@ -23,6 +23,7 @@ export const iconMap = {
   caacOperationsMonitoring: "apartment",
   specialSkillAdsb: "star",
   apronControl: "local_airport",
+  apronControlOld: "flight",
 
   // english
   singleChoice: "radio_button_checked",
