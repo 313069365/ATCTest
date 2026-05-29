@@ -126,6 +126,10 @@
       </section>
 
       <section class="action-section">
+        <button class="action-btn" @click="refreshCache" :disabled="refreshing">
+          <span class="material-symbols-outlined">refresh</span>
+          <span>{{ refreshing ? '刷新中...' : '刷新题库缓存' }}</span>
+        </button>
         <button class="action-btn">
           <span class="material-symbols-outlined">help</span>
           <span>关于我们</span>
@@ -141,15 +145,30 @@
 </template>
 
 <script setup>
-import { reactive } from 'vue'
+import { reactive, ref } from 'vue'
 import { useRouter } from 'vue-router'
+import { useAppStore } from '@/stores/store'
 
 const router = useRouter()
+const store = useAppStore()
 
 const user = reactive({
   username: "wyd",
   title: "开发者",
 })
+
+const refreshing = ref(false)
+
+async function refreshCache() {
+  refreshing.value = true
+  try {
+    await store.forceRefreshQuestions()
+  } catch (e) {
+    console.error('刷新缓存失败:', e)
+  } finally {
+    refreshing.value = false
+  }
+}
 
 function goToWrongBook() {
   router.push({ name: 'WrongBook' })
