@@ -22482,8 +22482,8 @@
     "updated_at": "2022-11-20",
     "status": "valid",
     "translation": {
-      "stem": "在飞行数据记录器中，语音记录器磁带被持续\"擦除\"，以便在任何时刻存储前 _____ 分钟的数据。",
-      "options": ["A. 30", "B. 之后", "C. 一", "D. 之前"]
+      "stem": "在飞行数据记录仪中，语音记录器磁带被持续\"擦除\"，因此任何时刻设备里仅保存 _____ 半小时的数据。",
+      "options": ["A. 之前", "B. 之后", "C. 一", "D. 在...以前"]
     }
   },
   {
@@ -22507,7 +22507,7 @@
     "shuffle": true,
     "degree": 3,
     "subs": null,
-    "explanation": "",
+    "explanation": "port 原来是larboard，左侧靠接港口。",
     "updated_at": "2022-11-20",
     "status": "valid",
     "translation": {
@@ -22536,7 +22536,7 @@
     "shuffle": true,
     "degree": 3,
     "subs": null,
-    "explanation": "",
+    "explanation": "steor 舵边",
     "updated_at": "2022-11-20",
     "status": "valid",
     "translation": {
@@ -22921,7 +22921,7 @@
     "updated_at": "2022-11-20",
     "status": "valid",
     "translation": {
-      "stem": "\"可用着陆距离\" 是宣布可供飞机着陆地面滑跑的跑道长度。",
+      "stem": "\"可用着陆距离\" 是宣布可供飞机 ____ 地面滑跑的跑道长度。",
       "options": ["A. 着陆", "B. 起飞", "C. 着陆或起飞", "D. 复飞"]
     }
   },
@@ -23056,7 +23056,7 @@
     "updated_at": "2022-11-20",
     "status": "valid",
     "translation": {
-      "stem": "根据ICAO，VOR频率范围为108MHz-118MHz，其中108MHz至112MHz之间的奇偶信道用于 _____。",
+      "stem": "根据国际民航组织（ICAO）规定，甚高频全向信标（VOR）的频率范围为108兆赫 — 118兆赫，其中108兆赫至112兆赫之间的奇数信道供______使用。",
       "options": ["A. NDB", "B. VOR", "C. ILS航向信标", "D. DME"]
     }
   },
@@ -23462,7 +23462,7 @@
     "updated_at": "2022-11-20",
     "status": "valid",
     "translation": {
-      "stem": "您能告诉我您为什么 _____ 从TVE VOR和WGT VOR之间的正常航路偏离吗？",
+      "stem": "您能告诉我您为什么从TVE VOR和WGT VOR之间的正常航路 ____ 吗？",
       "options": ["A. 飞行", "B. 偏航", "C. 偏离", "D. 前往"]
     }
   },
@@ -23604,8 +23604,8 @@
     "translation": {
       "stem": "MLS为进近跑道上的航空器提供精确的导航引导，以实现精确对准和下降。它提供 _____。",
       "options": [
-        "A. 距离和仰角",
-        "B. 仰角和方位角",
+        "A. 距离和高度",
+        "B. 高度和方位角",
         "C. 下滑道和航向",
         "D. A和B"
       ]
@@ -23632,7 +23632,12 @@
     "status": "valid",
     "translation": {
       "stem": "对不起，根据规定，我们无权向外国机组提供国内机场的航空情报。请您联系市区的 _____ 总部好吗？",
-      "options": ["A. AIS", "B. ATC", "C. 气象", "D. 中国民航"]
+      "options": [
+        "A. AIS 航空情报服务",
+        "B. ATC 空中交通管制",
+        "C. 气象",
+        "D. 中国民航"
+      ]
     }
   },
   {
@@ -23705,7 +23710,7 @@
     "stem": "In RTF communication, the number 34,900 is transmitted as _____ .",
     "options": [
       "A. tree four niner zero zero",
-      "B. thirty一four thousand niner hundred",
+      "B. thirty-four thousand niner hundred",
       "C. tree four thousand niner hundred",
       "D. tree four niner hundred"
     ],
@@ -25030,7 +25035,7 @@
     "shuffle": true,
     "degree": 3,
     "subs": null,
-    "explanation": "",
+    "explanation": "⚠️ 答案有误，正常是升力阻力都增加，升阻比减小。",
     "updated_at": "2022-11-20",
     "status": "valid",
     "translation": {
@@ -26466,7 +26471,7 @@
     "shuffle": true,
     "degree": 3,
     "subs": null,
-    "explanation": "",
+    "explanation": "⚠️正确答案是 57，参见中文题库。",
     "updated_at": "2022-11-20",
     "status": "valid",
     "translation": {
@@ -26910,7 +26915,7 @@
     "shuffle": true,
     "degree": 3,
     "subs": null,
-    "explanation": "",
+    "explanation": "⚠️ 参考答案错误，应各自向右 500 米。",
     "updated_at": "2022-11-20",
     "status": "valid",
     "translation": {
@@ -26943,7 +26948,7 @@
     "updated_at": "2022-11-20",
     "status": "valid",
     "translation": {
-      "stem": "除非有特殊程序生效或情况需要立即采取行动，否则未经非雷达管制员事先批准，雷达管制员 _____ 对非雷达管制员发布的放行许可进行更改。",
+      "stem": "未经非雷达管制员事先许可，雷达管制员_____更改非雷达管制员下达的许可指令，特殊程序生效或情况需要立即处置的情况除外。",
       "options": [
         "A. 不得进行重大",
         "B. 只能进行少量",
@@ -27230,8 +27235,8 @@
     "updated_at": "2022-11-20",
     "status": "valid",
     "translation": {
-      "stem": "进行雷达进近的雷达管制员应 _____ 为所进行进近类型建立的障碍物 clearance 高度/高度的信息。",
-      "options": ["A. 持有", "B. 知道", "C. 获取", "D. 掌握"]
+      "stem": "执行雷达进近的雷达管制员应______各类进近程序对应的超障高度 / 高相关信息。",
+      "options": ["A. 掌握", "B. 知道", "C. 获取", "D. 取得"]
     }
   },
   {
@@ -28186,7 +28191,7 @@
     "updated_at": "2022-11-20",
     "status": "valid",
     "translation": {
-      "stem": "_____ 是指从飞行中的航空器驾驶舱向前方看到的平均水平距离，白天可以看到并识别 prominent 无照明物体，夜间可以看到并识别 prominent 有照明物体。",
+      "stem": " _____ 指飞行中从飞机驾驶舱向前水平测得的平均距离：白天可看清并识别明显的无灯光障碍物，夜间可看清并识别明显的有灯光障碍物。",
       "options": ["A. VIS", "B. RVR", "C. TODA", "D. DH"]
     }
   },

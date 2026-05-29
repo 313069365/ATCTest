@@ -24,6 +24,7 @@ const translations = {
     caacOperationsMonitoring: "CAAC Operations Monitoring",
     specialSkillAdsb: "Special Skill ADS-B",
     apronControl: "Apron Control",
+    apronControl_old: "Apron Control(old)",
 
     // english
     singleChoice: "Single Choice",
@@ -227,6 +228,7 @@ const translations = {
     caacOperationsMonitoring: "运行监控（民航局）",
     specialSkillAdsb: "特殊技能ADS-B",
     apronControl: "机坪管制",
+    apronControl_old: "Apron Control旧",
 
     // english
     singleChoice: "单项选择",
