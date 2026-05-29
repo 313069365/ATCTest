@@ -99,12 +99,7 @@ export const useAppStore = defineStore("app", () => {
    * 加载题库元数据
    */
   async function loadBankMeta() {
-    let meta = await bankStorage.getBank(STORAGE_KEY.BANK_META);
-    if (!meta) {
-      meta = API.generateBankMeta();
-      await bankStorage.setBank(STORAGE_KEY.BANK_META, meta);
-    }
-    bankMeta.value = meta;
+    bankMeta.value = API.generateBankMeta();
   }
 
   /**
