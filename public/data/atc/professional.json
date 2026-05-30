@@ -80565,7 +80565,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "【最大运行机型】",
+    "explanation": "机场管理机构应该根据【航空器年起降架次】，配置与机场所使用航空器最大机型相匹配的残损航空器搬移设备，并在机场运行期间保证其完好适用。",
     "updated_at": "2026-05-27",
     "status": "valid"
   },

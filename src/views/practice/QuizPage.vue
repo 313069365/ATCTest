@@ -37,9 +37,8 @@
         <div v-if="currentQuestion">
           <QuestionRenderer :question="currentQuestionWithOptions" :mode="practiceMode"
             :user-answer="userAnswers[currentQuestion?.id]" :show-answer="currentQuestionDisplay.shouldShowAnswer.value"
-            :show-answer-mode="practiceData?.showAnswerMode"
-            :auto-jump="practiceData?.autoJump" :answerChecked="answerChecked" :answerStatus="answerStatus"
-            :current-sub-index="currentSubIndex"
+            :show-answer-mode="practiceData?.showAnswerMode" :auto-jump="practiceData?.autoJump"
+            :answerChecked="answerChecked" :answerStatus="answerStatus" :current-sub-index="currentSubIndex"
             @answer="handleAnswer" @next-question="nextQuestion" @checkSub="handleCheckSub" @check="checkAnswer" />
         </div>
 
@@ -260,10 +259,16 @@ const cacheShuffledOptions = () => {
   if (practiceData.value?.practiceMode === 'review') return;
 
   shuffledOptionsCache.value = {};
-  bank.value.forEach((question, index) => {
+  bank.value.forEach((question) => {
     if (question && question.options) {
-      const shuffled = shuffleArray(question.options);
-      shuffledOptionsCache.value[question.id] = shuffled;
+      const indices = question.options.map((_, i) => i);
+      const shuffledIndices = shuffleArray(indices);
+      shuffledOptionsCache.value[question.id] = {
+        options: shuffledIndices.map(i => question.options[i]),
+        translationOptions: question.translation?.options
+          ? shuffledIndices.map(i => question.translation.options[i])
+          : null
+      };
     }
   });
   console.log("已缓存选项乱序，题数:", Object.keys(shuffledOptionsCache.value).length);
@@ -278,12 +283,31 @@ const getQuestionWithShuffledOptions = (question) => {
   if (practiceData.value?.optionsSort) {
     const cached = shuffledOptionsCache.value[question.id];
     if (cached) {
-      return { ...question, options: cached };
+      return {
+        ...question,
+        options: cached.options,
+        ...(cached.translationOptions && {
+          translation: { ...question.translation, options: cached.translationOptions }
+        })
+      };
     }
     // 如果没有缓存，重新打乱并缓存
-    const shuffled = shuffleArray(question.options);
-    shuffledOptionsCache.value[question.id] = shuffled;
-    return { ...question, options: shuffled };
+    const indices = question.options.map((_, i) => i);
+    const shuffledIndices = shuffleArray(indices);
+    const result = {
+      options: shuffledIndices.map(i => question.options[i]),
+      translationOptions: question.translation?.options
+        ? shuffledIndices.map(i => question.translation.options[i])
+        : null
+    };
+    shuffledOptionsCache.value[question.id] = result;
+    return {
+      ...question,
+      options: result.options,
+      ...(result.translationOptions && {
+        translation: { ...question.translation, options: result.translationOptions }
+      })
+    };
   }
   return question;
 };
