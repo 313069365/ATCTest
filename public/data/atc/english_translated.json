@@ -29717,7 +29717,7 @@
     "shuffle": true,
     "degree": 3,
     "subs": null,
-    "explanation": "",
+    "explanation": "⚠️ 答案错误，雷达识别丢时候，后续必须立即改用非雷达管制间隔。无-选 inform，有-选非雷达间隔",
     "updated_at": "2022-11-20",
     "status": "valid",
     "translation": {
@@ -36729,7 +36729,7 @@
     "updated_at": "2022-11-20",
     "status": "valid",
     "translation": {
-      "stem": "塔台, DAL215, 在五边遇到风切变, 在600英尺和400英尺之间 _____ 25节, 随后在400英尺到地面之间 loss 40节。",
+      "stem": "塔台, DAL215, 在五边遇到风切变, 在600英尺和400英尺之间 _____ 25节, 随后在400英尺到地面之间减小 40节。",
       "options": ["A. 增加", "B. 减少", "C. 波动", "D. 变化"]
     }
   },
@@ -37149,7 +37149,7 @@
     "shuffle": true,
     "degree": 3,
     "subs": null,
-    "explanation": "",
+    "explanation": "15秒 ASR",
     "updated_at": "2022-11-20",
     "status": "valid",
     "translation": {
@@ -37173,7 +37173,7 @@
     "shuffle": true,
     "degree": 3,
     "subs": null,
-    "explanation": "",
+    "explanation": "5秒 PAR",
     "updated_at": "2022-11-20",
     "status": "valid",
     "translation": {
@@ -38641,7 +38641,12 @@
     "status": "valid",
     "translation": {
       "stem": "_____ 跑道是为需要短距离起飞和着陆的特殊设计的航空器建造的。",
-      "options": ["A. 基本VFR", "B. 非精密", "C. 精密", "D. STOL"]
+      "options": [
+        "A. 基本VFR",
+        "B. 非精密",
+        "C. 精密",
+        "D. STOL(Short Takeoff and Landing)，即短距起降"
+      ]
     }
   },
   {
@@ -38994,7 +38999,7 @@
     "shuffle": true,
     "degree": 3,
     "subs": null,
-    "explanation": "",
+    "explanation": "Flying from one radial to another is normally referred to as ______ the radial",
     "updated_at": "2022-11-20",
     "status": "valid",
     "translation": {
@@ -39976,11 +39981,11 @@
     "updated_at": "2022-11-20",
     "status": "valid",
     "translation": {
-      "stem": "管制员应使用什么用语通知飞行员冲突已不再存在？",
+      "stem": "管制员告知飞行员冲突已解除，应使用哪一标准用语？",
       "options": [
-        "A. the traffic has passed",
-        "B. traffic in sight",
-        "C. clear of traffic",
+        "A. 目标航班已飞过",
+        "B. 已目视看到目标航空器",
+        "C. 已脱离冲突航空器 / 无冲突",
         "D. 以上都不对"
       ]
     }
@@ -40227,11 +40232,11 @@
     "updated_at": "2022-11-20",
     "status": "valid",
     "translation": {
-      "stem": "管制员应使用什么用语通知飞行员冲突已不再存在？",
+      "stem": "管制员告知飞行员冲突已解除，应使用哪一标准用语？",
       "options": [
-        "A. the traffic has passed",
-        "B. traffic in sight",
-        "C. clear of traffic",
+        "A. 目标航班已飞过",
+        "B. 已目视看到目标航空器",
+        "C. 已脱离冲突航空器 / 无冲突",
         "D. 以上都不对"
       ]
     }
