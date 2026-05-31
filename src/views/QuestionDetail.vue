@@ -23,19 +23,15 @@
       </div>
 
       <div class="question-renderer-wrap">
-        <QuestionRenderer
-          :question="question"
-          mode="review"
-          :disabled="true"
-        />
+        <QuestionRenderer :question="question" mode="review" :disabled="true" />
       </div>
 
-      <div class="detail-actions">
+      <!-- <div class="detail-actions">
         <button class="practice-btn" @click="startPractice">
           <span class="material-symbols-outlined">play_arrow</span>
           {{ t('startPracticeWithSubject') }}
         </button>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
