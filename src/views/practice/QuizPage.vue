@@ -98,7 +98,6 @@ import { useRouter, useRoute } from "vue-router";
 import AnswerCard from "@/components/page/AnswerCard.vue";
 import QustionNavbar from "@/components/layout/QuestionNavbar.vue";
 import QuestionRenderer from "@/components/question/QuestionRenderer.vue";
-import SvgIcon from "@/components/common/SvgIcon.vue";
 import { useAppStore } from "@/stores/store";
 import { t } from "@/utils/i18n.js";
 import { useQuestionHandler } from "@/composables/useQuestionHandler";
