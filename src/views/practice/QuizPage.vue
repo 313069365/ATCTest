@@ -19,6 +19,7 @@
         <button class="grid-btn" :class="{ active: showAnswerCard }" @click="toggleAnswerCard">
           <span class="material-symbols-outlined">grid_view</span>
         </button>
+
       </div>
     </header>
 
@@ -35,7 +36,7 @@
           <span class="material-symbols-outlined">translate</span>
         </button>
         <button class="action-btn" :class="{ active: isFavorited }" @click="toggleFavorite" title="收藏">
-          <span class="material-symbols-outlined">{{ isFavorited ? 'kid_star' : 'star' }}</span>
+          <span class="material-symbols-outlined">kid_star</span>
         </button>
         <button v-if="isWrongPractice" class="action-btn remove-btn" @click="removeCurrentFromWrong" title="移出错题集">
           <span class="material-symbols-outlined">playlist_remove</span>
@@ -661,16 +662,18 @@ const resetQuestionState = () => {
 
 // 移除当前题目出错的题集
 const removeCurrentFromWrong = () => {
-  const q = bank.value[currentIndex.value]
-  if (!q) return
+  if (confirm("将该题从错题集中移除？")) {
+    const q = bank.value[currentIndex.value]
+    if (!q) return
 
-  store.removeWrongQuestion(q.id)
-  bank.value.splice(currentIndex.value, 1)
+    store.removeWrongQuestion(q.id)
+    bank.value.splice(currentIndex.value, 1)
 
-  if (currentIndex.value >= bank.value.length && currentIndex.value > 0) {
-    currentIndex.value--
+    if (currentIndex.value >= bank.value.length && currentIndex.value > 0) {
+      currentIndex.value--
+    }
+    resetQuestionState()
   }
-  resetQuestionState()
 }
 </script>
 
@@ -834,16 +837,8 @@ const removeCurrentFromWrong = () => {
 }
 
 .action-btn.active {
-  color: var(--primary);
-  background: rgba(0, 91, 191, 0.08);
-}
-
-.action-btn.remove-btn {
-  color: var(--color-error);
-}
-
-.action-btn.remove-btn:hover {
-  background: rgba(211, 47, 47, 0.08);
+  color: var(--accent);
+  background: var(--accent-light);
 }
 
 .action-btn .material-symbols-outlined {

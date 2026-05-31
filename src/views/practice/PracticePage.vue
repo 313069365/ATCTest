@@ -54,28 +54,30 @@
             </div>
 
             <div v-if="expandedSubject === subject.name" class="subject-expanded">
-                <div class="stats-row">
-                  <div class="stat-item">
-                    <span class="stat-value">{{ getSubjectStats(subject.name).sessionCount }}</span>
-                    <span class="stat-label">{{ t('practiceSessions') }}</span>
-                  </div>
-                  <div class="stat-item">
-                    <span class="stat-value accent">{{ getSubjectStats(subject.name).accuracy }}%</span>
-                    <span class="stat-label">{{ t('accuracy') }}</span>
-                  </div>
-                  <div class="stat-item">
-                    <span class="stat-value warn">{{ getSubjectStats(subject.name).wrongCount }}</span>
-                    <span class="stat-label">{{ t('toReview') }}</span>
-                  </div>
+              <div class="stats-row">
+                <div class="stat-item">
+                  <span class="stat-value">{{ getSubjectStats(subject.name).sessionCount }}</span>
+                  <span class="stat-label">{{ t('practiceSessions') }}</span>
                 </div>
-
-                <div class="action-row">
-                  <button v-if="hasProgress(subject)" class="new-btn" @click.stop="newQuizWith(subject)">{{ t('new') }}</button>
-                  <button v-if="getSubjectStats(subject.name).wrongCount > 0" class="wrong-btn" @click.stop="wrongPractice(subject)">
-                    {{ t('wrongPractice') }}
-                  </button>
+                <div class="stat-item">
+                  <span class="stat-value accent">{{ getSubjectStats(subject.name).accuracy }}%</span>
+                  <span class="stat-label">{{ t('accuracy') }}</span>
+                </div>
+                <div class="stat-item">
+                  <span class="stat-value warn">{{ getSubjectStats(subject.name).wrongCount }}</span>
+                  <span class="stat-label">{{ t('toReview') }}</span>
                 </div>
               </div>
+
+              <div class="action-row">
+                <button v-if="hasProgress(subject)" class="new-btn" @click.stop="newQuizWith(subject)">{{ t('new')
+                  }}</button>
+                <button v-if="getSubjectStats(subject.name).wrongCount > 0" class="wrong-btn"
+                  @click.stop="wrongPractice(subject)">
+                  {{ t('wrongPractice') }}
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -208,7 +210,7 @@ const newQuizWith = (subject) => {
   const key = getPracticeKey({ bank: { category: selectedCategory.value, scope: selectedScope.value, subject: subject.name } })
 
   if (hasProgress(subject)) {
-    if (confirm('已有练习进度，是否重新开始？')) {
+    if (confirm('是否清除已有练习进度，开始新的练习？')) {
       store.clearPracticeProgress(key)
       showPracticeSetting.value = true
     }
@@ -538,6 +540,7 @@ const wrongPractice = (subject) => {
     opacity: 0;
     transform: translateY(-6px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -612,7 +615,7 @@ const wrongPractice = (subject) => {
 
 .wrong-btn {
   background: rgba(211, 47, 47, 0.1);
-  color: var(--color-error);
+  color: var(--error);
   border: none;
   border-radius: var(--radius-full);
   padding: 6px 14px;
