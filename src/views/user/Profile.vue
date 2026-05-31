@@ -133,7 +133,7 @@
         <button class="action-btn">
           <span class="material-symbols-outlined">help</span>
           <span>关于我们</span>
-          <span>Version 0.052813</span>
+          <span>Version 053121</span>
         </button>
         <button class="action-btn logout">
           <span class="material-symbols-outlined">logout</span>
