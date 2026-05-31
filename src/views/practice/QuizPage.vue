@@ -962,4 +962,13 @@ const removeCurrentFromWrong = () => {
 .check-btn .material-symbols-outlined {
   font-size: var(--font-size-xl);
 }
+
+svg-icon {
+  display: inline-block;
+  /* 让它变成一个有面积的盒子 */
+  width: 20px;
+  /* 必须给明确的宽度 */
+  height: 20px;
+  /* 必须给明确的高度 */
+}
 </style>
