@@ -17,9 +17,6 @@
               <span class="info-tag" v-if="settings.practiceMode === 'answer'">
                 {{ showAnswerDisplay }}
               </span>
-              <span class="info-tag" v-if="settings.practiceMode === 'answer' && settings.optionsSort">
-                选项乱序
-              </span>
               <span class="info-tag" v-if="settings.practiceMode === 'answer' && settings.autoJump">
                 自动跳转
               </span>

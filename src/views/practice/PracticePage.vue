@@ -186,7 +186,6 @@ const continuePractice = (subject) => {
     },
     practiceMode: progress.config.mode,
     questionSort: progress.config.questionSort,
-    optionsSort: progress.config.optionsSort,
     showAnswerMode: progress.config.showAnswerMode,
     autoJump: progress.config.autoJump
   }

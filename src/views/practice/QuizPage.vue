@@ -255,14 +255,13 @@ const shuffleArray = (array) => {
   return arr;
 };
 
-// 缓存选项乱序结果（背题模式不乱序）
+// 按每题 shuffle 字段缓存选项乱序结果（背题模式不乱序）
 const cacheShuffledOptions = () => {
-  if (!practiceData.value?.optionsSort) return;
   if (practiceData.value?.practiceMode === 'review') return;
 
   shuffledOptionsCache.value = {};
   bank.value.forEach((question) => {
-    if (question && question.options) {
+    if (question && question.options && question.shuffle) {
       const indices = question.options.map((_, i) => i);
       const shuffledIndices = shuffleArray(indices);
       shuffledOptionsCache.value[question.id] = {
@@ -276,13 +275,12 @@ const cacheShuffledOptions = () => {
   console.log("已缓存选项乱序，题数:", Object.keys(shuffledOptionsCache.value).length);
 };
 
-// 获取带乱序选项的题目（使用缓存，背题模式不乱序）
+// 获取带乱序选项的题目（按每题 shuffle 字段，背题模式不乱序）
 const getQuestionWithShuffledOptions = (question) => {
   if (!question || !question.options) return question;
   if (practiceData.value?.practiceMode === 'review') return question;
 
-  // 如果设置了选项乱序，使用缓存
-  if (practiceData.value?.optionsSort) {
+  if (question.shuffle) {
     const cached = shuffledOptionsCache.value[question.id];
     if (cached) {
       return {
@@ -293,7 +291,6 @@ const getQuestionWithShuffledOptions = (question) => {
         })
       };
     }
-    // 如果没有缓存，重新打乱并缓存
     const indices = question.options.map((_, i) => i);
     const shuffledIndices = shuffleArray(indices);
     const result = {
@@ -478,6 +475,7 @@ const handleCheckSub = (subIndex) => {
 // 加载练习进度（断点续练）
 const loadPracticeProgress = () => {
   if (!practiceData.value) return
+  if (route.query.continue !== 'true') return
   const { category, scope, subject } = practiceData.value
   const subjectName = typeof subject === 'object' ? subject.name : subject
   const key = getPracticeKey({ bank: { category, scope, subject: subjectName } })
@@ -537,7 +535,6 @@ const savePracticeProgress = () => {
       },
       mode: practiceData.value?.practiceMode,
       questionSort: practiceData.value?.questionSort,
-      optionsSort: practiceData.value?.optionsSort,
       showAnswerMode: practiceData.value?.showAnswerMode,
       autoJump: practiceData.value?.autoJump
     },
@@ -566,7 +563,6 @@ const addPracticeHistory = () => {
       },
       mode: practiceData.value?.practiceMode,
       questionSort: practiceData.value?.questionSort,
-      optionsSort: practiceData.value?.optionsSort,
       showAnswerMode: practiceData.value?.showAnswerMode,
       autoJump: practiceData.value?.autoJump
     },

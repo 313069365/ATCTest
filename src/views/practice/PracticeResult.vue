@@ -79,7 +79,7 @@ import { ref, computed, onMounted } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import { useAppStore } from "@/stores/store";
 import { t } from "@/utils/i18n.js";
-import { getBatchStats, countQuestions } from "@/utils/questionConfig";
+import { getBatchStats, countQuestions, getPracticeKey } from "@/utils/questionConfig";
 
 const router = useRouter();
 const route = useRoute();
@@ -167,7 +167,11 @@ onMounted(async () => {
   elapsedSeconds.value = history.meta?.elapsedSeconds || 0;
   subjectName.value = history.config?.bank?.subject || '';
 
-  store.savePracticeProgress(null);
+  const bank = history.config?.bank
+  if (bank) {
+    const key = getPracticeKey({ bank })
+    store.clearPracticeProgress(key)
+  }
 });
 
 const backToHome = () => {

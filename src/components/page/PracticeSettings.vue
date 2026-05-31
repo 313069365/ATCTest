@@ -80,20 +80,6 @@
           </div>
         </section>
 
-        <section class="settings-section" v-if="settings.practiceMode === 'answer'">
-          <h3>{{ t('optionOrder') }}</h3>
-          <div class="toggle-option">
-            <div class="toggle-info">
-              <span class="toggle-title">{{ t('shuffleOptions') }}</span>
-              <span class="toggle-desc">{{ t('shuffleOptionsDesc') }}</span>
-            </div>
-            <button class="toggle-btn" :class="{ active: settings.optionsSort }"
-              @click="settings.optionsSort = !settings.optionsSort">
-              <span class="toggle-knob"></span>
-            </button>
-          </div>
-        </section>
-
       </main>
 
       <footer class="settings-footer">
@@ -139,7 +125,6 @@ const emit = defineEmits(['close', 'start'])
 // 默认配置
 const DEFAULT_SETTINGS = {
   questionSort: QUESTION_SORT.SEQUENCE,
-  optionsSort: true,
   practiceMode: 'answer',
   showAnswerMode: 'immediate',
   autoJump: false
@@ -162,7 +147,6 @@ const gotopage = () => {
     scope: props.subject.scope,
     practiceMode: settings.practiceMode,
     questionSort: settings.questionSort,
-    optionsSort: settings.optionsSort,
     showAnswerMode: settings.showAnswerMode,
     autoJump: settings.autoJump
   }
