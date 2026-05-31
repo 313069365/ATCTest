@@ -14,13 +14,8 @@
     <div class="search-input-container">
       <div class="search-input-wrap">
         <span class="material-symbols-outlined search-input-icon">search</span>
-        <input
-          ref="inputRef"
-          v-model="keyword"
-          class="search-input"
-          :placeholder="t('searchPlaceholder')"
-          @input="onDebouncedSearch"
-        />
+        <input ref="inputRef" v-model="keyword" class="search-input" :placeholder="t('searchPlaceholder')"
+          @input="onDebouncedSearch" />
         <button v-if="keyword" class="input-clear-btn" @click="clearSearch">
           <span class="material-symbols-outlined">close</span>
         </button>
@@ -42,8 +37,7 @@
             <button class="chip" :class="{ active: !selectedCategory }" @click="selectCategory('')">
               {{ t('selectAll') }}
             </button>
-            <button v-for="cat in categories" :key="cat" class="chip"
-              :class="{ active: selectedCategory === cat }"
+            <button v-for="cat in categories" :key="cat" class="chip" :class="{ active: selectedCategory === cat }"
               @click="selectCategory(cat)">
               {{ t(cat) }}
             </button>
@@ -56,8 +50,7 @@
             <button class="chip" :class="{ active: !selectedScope }" @click="selectScope('')">
               {{ t('selectAll') }}
             </button>
-            <button v-for="s in availableScopes" :key="s" class="chip"
-              :class="{ active: selectedScope === s }"
+            <button v-for="s in availableScopes" :key="s" class="chip" :class="{ active: selectedScope === s }"
               @click="selectScope(s)">
               {{ t(s) }}
             </button>
@@ -70,8 +63,7 @@
             <button class="chip" :class="{ active: !selectedSubject }" @click="selectSubject('')">
               {{ t('selectAll') }}
             </button>
-            <button v-for="s in availableSubjects" :key="s" class="chip"
-              :class="{ active: selectedSubject === s }"
+            <button v-for="s in availableSubjects" :key="s" class="chip" :class="{ active: selectedSubject === s }"
               @click="selectSubject(s)">
               {{ t(s) }}
             </button>
@@ -113,13 +105,11 @@
       <div v-else-if="results.length > 0" class="result-list">
         <div v-for="(q, idx) in results" :key="q.id + idx" class="result-card" @click="goToQuestion(q)">
           <div class="result-top">
-            <span class="result-id">#{{ q.id }}</span>
-            <span class="result-scope-tag">{{ t(q.meta?.category) }} / {{ t(q.meta?.scope) }}</span>
+            <span class="result-id"><span class="hash-tag">ID</span>{{ q.id }}</span>
+            <span class="result-scope-tag">{{ t(q.meta?.category) }} / {{ t(q.meta?.scope) }} / {{ t(q.meta?.subject)
+            }}</span>
           </div>
           <div class="result-stem" v-html="highlightText(q.stem)"></div>
-          <div class="result-bottom">
-            <span class="result-subject-tag">{{ t(q.meta?.subject) }}</span>
-          </div>
         </div>
       </div>
     </div>
@@ -556,6 +546,18 @@ onMounted(async () => {
   font-weight: 600;
   color: var(--text-disabled);
   font-family: monospace;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.hash-tag {
+  color: var(--primary);
+  background: var(--primary-light);
+  padding: 2px 6px;
+  border-radius: var(--radius-full);
+  font-weight: 700;
+  font-size: var(--font-size-mn);
 }
 
 .result-scope-tag {
