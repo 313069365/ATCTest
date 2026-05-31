@@ -1,13 +1,6 @@
 <template>
-  <component
-    :is="rendererComponent"
-    v-bind="$props"
-    @answer="handleAnswer"
-    @next-question="handleNextQuestion"
-    @checkSub="handleCheckSub"
-    @check="handleCheck"
-    @toggle-mark="handleToggleMark"
-  />
+  <component :is="rendererComponent" v-bind="$props" @answer="handleAnswer" @next-question="handleNextQuestion"
+    @checkSub="handleCheckSub" @check="handleCheck" @toggle-mark="handleToggleMark" />
 </template>
 
 <script setup>
@@ -78,7 +71,7 @@ const componentMap = {
 }
 
 const rendererComponent = computed(() => {
-  if (!props.question) return SingleChoice // 默认显示单选组件，避免 null
+  if (!props.question) return SingleChoice
   return componentMap[props.question.type] || SingleChoice
 })
 

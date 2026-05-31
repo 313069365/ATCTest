@@ -221,6 +221,7 @@ const translations = {
     prevQuestion: "Previous",
     nextQuestion: "Next",
     startPracticeWithSubject: "Practice This Subject",
+    removeFromWrong: "Remove from Wrong Book",
   },
 
   zh: {
@@ -447,6 +448,7 @@ const translations = {
     prevQuestion: "上一题",
     nextQuestion: "下一题",
     startPracticeWithSubject: "开始练习该科目",
+    removeFromWrong: "移出错题集",
   },
 };
 

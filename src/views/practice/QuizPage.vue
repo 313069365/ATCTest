@@ -26,7 +26,21 @@
       <div class="progress-bar">
         <div class="progress" :style="{ width: progress + '%' }"></div>
       </div>
-      <span class="progress-text">{{ currentIndex + 1 }}/{{ bank.length }}</span>
+    </div>
+
+    <div class="action-bar">
+      <span class="progress-label">进度 {{ currentIndex + 1 }}/{{ bank.length }}</span>
+      <div class="action-bar-right">
+        <button class="action-btn" :class="{ active: showTranslation }" @click="toggleTranslation" title="翻译">
+          <span class="material-symbols-outlined">translate</span>
+        </button>
+        <button class="action-btn" :class="{ active: isFavorited }" @click="toggleFavorite" title="收藏">
+          <span class="material-symbols-outlined">{{ isFavorited ? 'kid_star' : 'star' }}</span>
+        </button>
+        <button v-if="isWrongPractice" class="action-btn remove-btn" @click="removeCurrentFromWrong" title="移出错题集">
+          <span class="material-symbols-outlined">playlist_remove</span>
+        </button>
+      </div>
     </div>
 
     <main class="question-container">
@@ -58,7 +72,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted, computed, toRaw } from "vue";
+import { ref, onMounted, onUnmounted, computed, provide } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import AnswerCard from "@/components/page/AnswerCard.vue";
 import QustionNavbar from "@/components/layout/QuestionNavbar.vue";
@@ -226,6 +240,29 @@ const subjectDisplay = computed(() => {
   const subject = practiceData.value.subject;
   return typeof subject === "object" ? subject.name : subject;
 });
+
+const isWrongPractice = computed(() => practiceData.value?.wrongPractice)
+
+const showTranslation = ref(false)
+provide('showTranslation', showTranslation)
+
+const toggleTranslation = () => {
+  showTranslation.value = !showTranslation.value
+}
+
+const isFavorited = computed(() => {
+  if (!currentQuestion.value) return false
+  return store.favorites.some(q => q.id === currentQuestion.value.id)
+})
+
+const toggleFavorite = () => {
+  if (!currentQuestion.value) return
+  if (isFavorited.value) {
+    store.removeFavorite(currentQuestion.value.id)
+  } else {
+    store.addFavorite(currentQuestion.value)
+  }
+}
 
 // 计时器相关
 const elapsedTimeDisplay = computed(() => {
@@ -621,6 +658,20 @@ const resetQuestionState = () => {
   // 保存进度
   savePracticeProgress();
 };
+
+// 移除当前题目出错的题集
+const removeCurrentFromWrong = () => {
+  const q = bank.value[currentIndex.value]
+  if (!q) return
+
+  store.removeWrongQuestion(q.id)
+  bank.value.splice(currentIndex.value, 1)
+
+  if (currentIndex.value >= bank.value.length && currentIndex.value > 0) {
+    currentIndex.value--
+  }
+  resetQuestionState()
+}
 </script>
 
 <style scoped>
@@ -643,7 +694,7 @@ const resetQuestionState = () => {
   justify-content: space-between;
   padding: 12px 16px;
   height: 56px;
-  border-bottom: 1px solid var(--border-color);
+  /* border-bottom: 1px solid var(--border-color); */
 }
 
 .top-bar-left {
@@ -724,15 +775,11 @@ const resetQuestionState = () => {
 }
 
 .progress-bar-container {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-sm);
-  padding: var(--spacing-sm) var(--spacing-md);
+  padding: 0 var(--spacing-md);
   background: var(--background);
 }
 
 .progress-bar {
-  flex: 1;
   height: 6px;
   background: var(--color-gray-300);
   border-radius: var(--radius-full);
@@ -745,11 +792,62 @@ const resetQuestionState = () => {
   border-radius: var(--radius-full);
 }
 
-.progress-text {
+.action-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 6px;
+  padding: 6px var(--spacing-md);
+  background: var(--background);
+  border-bottom: 1px solid var(--border-color-light);
+}
+
+.action-bar-right {
+  display: flex;
+  gap: 6px;
+}
+
+.progress-label {
   font-size: var(--font-size-sm);
-  color: var(--text-secondary);
-  min-width: 50px;
-  text-align: right;
+  color: var(--success);
+  background: var(--success-light);
+  padding: 2px 8px;
+  border-radius: var(--radius-md);
+}
+
+.action-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border: none;
+  border-radius: var(--radius-full);
+  background: transparent;
+  color: var(--icon-color);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.action-btn:hover {
+  background: var(--color-gray-200);
+}
+
+.action-btn.active {
+  color: var(--primary);
+  background: rgba(0, 91, 191, 0.08);
+}
+
+.action-btn.remove-btn {
+  color: var(--color-error);
+}
+
+.action-btn.remove-btn:hover {
+  background: rgba(211, 47, 47, 0.08);
+}
+
+.action-btn .material-symbols-outlined {
+  font-size: 18px;
 }
 
 .question-container {

@@ -4,16 +4,6 @@
     <div class="question-meta">
       <span class="question-type-tag">{{ t(question?.type) }}</span>
       <span class="question-id">{{ t('questionId') }}: {{ question?.id }}</span>
-      <button class="trans-btn" :class="{ active: showTranslation }" @click="toggleTranslation"
-        :title="showTranslation ? '隐藏翻译' : '显示翻译'">
-        <span class="material-symbols-outlined">translate</span>
-      </button>
-      <button v-if="mode === 'exam'" class="mark-btn" :class="{ active: isMarked }" @click="$emit('toggle-mark')">
-        <span class="material-symbols-outlined">bookmark</span>
-      </button>
-      <button v-else class="fav-btn" :class="{ active: isFavorited }" @click="toggleFavorite">
-        <span class="material-symbols-outlined">kid_star</span>
-      </button>
     </div>
 
     <!-- 2. 题干区 -->
@@ -63,14 +53,11 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, inject } from 'vue'
 import { t } from '@/utils/i18n.js'
-import { useAppStore } from '@/stores/store'
 import { useQuestionHandler } from '@/composables/useQuestionHandler'
 
-const showTranslation = ref(false)
-
-const store = useAppStore()
+const showTranslation = inject('showTranslation', ref(false))
 
 const props = defineProps({
   question: {
@@ -130,26 +117,6 @@ const isOptionsDisabled = computed(() => handler.isOptionsDisabled?.value || fal
 const shouldShowAnswer = computed(() => handler.shouldShowAnswer.value)
 const shouldShowExplanation = computed(() => handler.shouldShowExplanation?.value || false)
 
-// 是否已收藏
-const isFavorited = computed(() => {
-  if (!props.question) return false
-  return store.favorites.some(q => q.id === props.question.id)
-})
-
-// 切换收藏
-const toggleFavorite = () => {
-  if (!props.question) return
-  if (isFavorited.value) {
-    store.removeFavorite(props.question.id)
-  } else {
-    store.addFavorite(props.question)
-  }
-}
-
-// 切换翻译显示
-const toggleTranslation = () => {
-  showTranslation.value = !showTranslation.value
-}
 
 // 格式化解析内容
 const formattedExplanation = computed(() => {
@@ -248,63 +215,7 @@ const handleSelect = (index) => {
   font-size: var(--font-size-sm);
 }
 
-.fav-btn {
-  padding: var(--spacing-xs);
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  color: var(--text-secondary);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
 
-.fav-btn.active {
-  color: var(--warning);
-}
-
-.fav-btn.active .material-symbols-outlined {
-  font-variation-settings: 'FILL' 1;
-}
-
-.mark-btn {
-  padding: var(--spacing-xs);
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  color: var(--text-secondary);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.mark-btn.active {
-  color: var(--warning);
-}
-
-.mark-btn.active .material-symbols-outlined {
-  font-variation-settings: 'FILL' 1;
-}
-
-.trans-btn {
-  margin-left: auto;
-  padding: var(--spacing-xs);
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  color: var(--text-secondary);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.trans-btn .material-symbols-outlined {
-  font-size: 18px;
-}
-
-.trans-btn.active {
-  color: var(--primary);
-}
 
 .question-stem {
   padding: var(--spacing-sm) var(--spacing-md);

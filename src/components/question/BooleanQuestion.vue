@@ -4,12 +4,6 @@
     <div class="question-meta">
       <span class="question-type-tag">{{ t(question?.type) }}</span>
       <span class="question-id">{{ t('questionId') }}: {{ question?.id }}</span>
-      <button v-if="mode === 'exam'" class="mark-btn" :class="{ active: isMarked }" @click="$emit('toggle-mark')">
-        <span class="material-symbols-outlined">bookmark</span>
-      </button>
-      <button v-else class="fav-btn" :class="{ active: isFavorited }" @click="toggleFavorite">
-        <span class="material-symbols-outlined">kid_star</span>
-      </button>
     </div>
 
     <!-- 2. 题干区 -->
@@ -65,10 +59,7 @@
 <script setup>
 import { computed } from 'vue'
 import { t } from '@/utils/i18n.js'
-import { useAppStore } from '@/stores/store'
 import { useQuestionHandler } from '@/composables/useQuestionHandler'
-
-const store = useAppStore()
 
 const props = defineProps({
   question: {
@@ -126,21 +117,6 @@ const {
   isChecked: () => props.showAnswer
 })
 
-// 是否已收藏
-const isFavorited = computed(() => {
-  if (!props.question) return false
-  return store.favorites.some(q => q.id === props.question.id)
-})
-
-// 切换收藏
-const toggleFavorite = () => {
-  if (!props.question) return
-  if (isFavorited.value) {
-    store.removeFavorite(props.question.id)
-  } else {
-    store.addFavorite(props.question)
-  }
-}
 
 // 格式化解析内容
 const formattedExplanation = computed(() => {
@@ -231,45 +207,6 @@ const handleSelect = (index) => {
   font-size: var(--font-size-sm);
 }
 
-.fav-btn {
-  margin-left: auto;
-  padding: var(--spacing-xs);
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  color: var(--text-secondary);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.fav-btn.active {
-  color: var(--warning);
-}
-
-.fav-btn.active .material-symbols-outlined {
-  font-variation-settings: 'FILL' 1;
-}
-
-.mark-btn {
-  margin-left: auto;
-  padding: var(--spacing-xs);
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  color: var(--text-secondary);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.mark-btn.active {
-  color: var(--warning);
-}
-
-.mark-btn.active .material-symbols-outlined {
-  font-variation-settings: 'FILL' 1;
-}
 
 .question-stem {
   padding: var(--spacing-sm) var(--spacing-md);
