@@ -37,8 +37,9 @@
       <!-- Level 3: 科目卡片 -->
       <section class="level3">
         <div class="subject-list">
-          <div class="subject-card" v-for="subject in SubjectsOptions" :key="subject.name">
-            <div class="subject-header">
+          <div class="subject-card" v-for="subject in SubjectsOptions" :key="subject.name"
+            :class="{ expanded: expandedSubject === subject.name }">
+            <div class="subject-header" @click="toggleExpand(subject)">
               <div class="subject-icon">
                 <span class="material-symbols-outlined">{{ iconMap[subject.name] }}</span>
               </div>
@@ -46,13 +47,35 @@
                 <h4>{{ t(subject.name) }}</h4>
                 <p>{{ `${t('totally')} ${subject.count} ${t('questions')}` }}</p>
               </div>
-              <div class="subject-actions">
-                <button v-if="hasProgress(subject)" class="continue-btn" @click="continuePractice(subject)">
-                  {{ t('continue') }}
-                </button>
-                <button class="new-btn" @click="newQuizWith(subject)">{{ t('new') }}</button>
-              </div>
+              <button v-if="hasProgress(subject)" class="continue-btn" @click.stop="continuePractice(subject)">
+                {{ t('continue') }}
+              </button>
+              <button v-else class="new-btn" @click.stop="newQuizWith(subject)">{{ t('new') }}</button>
             </div>
+
+            <div v-if="expandedSubject === subject.name" class="subject-expanded">
+                <div class="stats-row">
+                  <div class="stat-item">
+                    <span class="stat-value">{{ getSubjectStats(subject.name).sessionCount }}</span>
+                    <span class="stat-label">{{ t('practiceSessions') }}</span>
+                  </div>
+                  <div class="stat-item">
+                    <span class="stat-value accent">{{ getSubjectStats(subject.name).accuracy }}%</span>
+                    <span class="stat-label">{{ t('accuracy') }}</span>
+                  </div>
+                  <div class="stat-item">
+                    <span class="stat-value warn">{{ getSubjectStats(subject.name).wrongCount }}</span>
+                    <span class="stat-label">{{ t('toReview') }}</span>
+                  </div>
+                </div>
+
+                <div class="action-row">
+                  <button v-if="hasProgress(subject)" class="new-btn" @click.stop="newQuizWith(subject)">{{ t('new') }}</button>
+                  <button v-if="getSubjectStats(subject.name).wrongCount > 0" class="wrong-btn" @click.stop="wrongPractice(subject)">
+                    {{ t('wrongPractice') }}
+                  </button>
+                </div>
+              </div>
           </div>
         </div>
       </section>
@@ -74,7 +97,7 @@ import BankImport from '@/components/page/BankImport.vue'
 import { iconMap } from '@/assets/fonts/IconMaps.js'
 import { t, setLanguage, getLanguage } from '@/utils/i18n.js'
 import { useAppStore } from '@/stores/store'
-import { getPracticeKey } from '@/utils/questionConfig'
+import { getPracticeKey, normalizeStatus } from '@/utils/questionConfig'
 
 // 创建 Store 实例
 const store = useAppStore()
@@ -85,6 +108,44 @@ const showImportModal = ref(false)
 const selectedSubject = ref(null)
 const selectedCategory = ref('atc')
 const selectedScope = ref('base')
+const expandedSubject = ref(null)
+
+function toggleExpand(subject) {
+  expandedSubject.value = expandedSubject.value === subject.name ? null : subject.name
+}
+
+function getSubjectStats(subjectName) {
+  const sessions = store.practiceHistory.filter(h => h.config?.bank?.subject === subjectName)
+  const sessionCount = sessions.length
+
+  let correct = 0, wrong = 0
+  sessions.forEach(session => {
+    const answers = session.progress?.answers || {}
+    Object.values(answers).forEach(answer => {
+      if (!answer || !answer.status) return
+      if (typeof answer.status === 'string') {
+        const norm = normalizeStatus(answer.status)
+        if (norm === 'correct') correct++
+        else if (norm === 'wrong') wrong++
+      } else if (typeof answer.status === 'object') {
+        Object.values(answer.status).forEach(subStatus => {
+          const norm = normalizeStatus(subStatus)
+          if (norm === 'correct') correct++
+          else if (norm === 'wrong') wrong++
+        })
+      }
+    })
+  })
+
+  const total = correct + wrong
+  const wrongCount = store.wrongBook.filter(q => q.meta?.subject === subjectName).length
+
+  return {
+    sessionCount,
+    accuracy: total > 0 ? Math.round((correct / total) * 100) : 0,
+    wrongCount
+  }
+}
 
 // 从 Store 获取题库元数据
 const bankMeta = computed(() => store.bankMeta)
@@ -92,6 +153,8 @@ const bankMeta = computed(() => store.bankMeta)
 // 每次页面显示时刷新练习进度（从 localStorage 加载最新数据）
 onMounted(() => {
   store.loadPracticeProgress()
+  store.loadPracticeHistory()
+  store.loadWrongBook()
 })
 
 // 使用 bankMeta 直接获取选项
@@ -128,6 +191,11 @@ watch(() => selectedCategory.value, (newCat) => {
       selectedScope.value = scopes[0]
     }
   }
+  expandedSubject.value = null
+})
+
+watch(selectedScope, () => {
+  expandedSubject.value = null
 })
 
 const newQuizWith = (subject) => {
@@ -201,6 +269,35 @@ const continuePractice = (subject) => {
 
 const handleImportSuccess = (result) => {
   console.log('导入成功:', result)
+}
+
+const wrongPractice = (subject) => {
+  const wrongQuestions = store.wrongBook.filter(q => q.meta?.subject === subject.name)
+  if (wrongQuestions.length === 0) return
+
+  const practiceData = {
+    category: selectedCategory.value,
+    scope: selectedScope.value,
+    subject: {
+      name: subject.name,
+      category: selectedCategory.value,
+      scope: selectedScope.value
+    },
+    practiceMode: 'answer',
+    questionSort: 'sequence',
+    showAnswerMode: 'onDemand',
+    autoJump: false,
+    wrongPractice: true,
+    wrongQuestionIds: wrongQuestions.map(q => q.id)
+  }
+
+  router.push({
+    path: '/practice/quiz',
+    query: {
+      practiceData: JSON.stringify(practiceData),
+      newPractice: 'true'
+    }
+  })
 }
 
 
@@ -386,15 +483,17 @@ const handleImportSuccess = (result) => {
 .subject-card {
   background: var(--background);
   border-radius: var(--radius-md);
-  padding: var(--spacing-md);
   border: 1px solid var(--border-color-light);
   box-shadow: var(--shadow-sm);
+  overflow: hidden;
 }
 
 .subject-header {
   display: flex;
   align-items: center;
   gap: var(--spacing-sm);
+  cursor: pointer;
+  padding: var(--spacing-md);
 }
 
 .subject-icon {
@@ -428,21 +527,63 @@ const handleImportSuccess = (result) => {
   color: var(--icon-color);
 }
 
-.enter-btn {
-  background: rgba(0, 91, 191, 0.1);
-  color: var(--primary);
-  border: none;
-  border-radius: var(--radius-full);
-  padding: 6px 14px;
-  font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-semibold);
-  cursor: pointer;
-  white-space: nowrap;
+.subject-expanded {
+  border-top: 1px solid var(--border-color-light);
+  padding: var(--spacing-md);
+  animation: slideDown 0.25s ease;
 }
 
-.subject-actions {
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.stats-row {
+  display: flex;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-md);
+}
+
+.stat-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: var(--spacing-sm) 0;
+  background: var(--color-gray-100);
+  border-radius: var(--radius-md);
+}
+
+.stat-value {
+  font-size: 20px;
+  font-weight: var(--font-weight-bold);
+  color: var(--text-primary);
+}
+
+.stat-value.accent {
+  color: var(--primary);
+}
+
+.stat-value.warn {
+  color: var(--color-error);
+}
+
+.stat-label {
+  font-size: var(--font-size-sm);
+  color: var(--icon-color);
+}
+
+.action-row {
   display: flex;
   gap: 8px;
+  justify-content: flex-end;
 }
 
 .continue-btn {
@@ -467,5 +608,21 @@ const handleImportSuccess = (result) => {
   font-weight: var(--font-weight-semibold);
   cursor: pointer;
   white-space: nowrap;
+}
+
+.wrong-btn {
+  background: rgba(211, 47, 47, 0.1);
+  color: var(--color-error);
+  border: none;
+  border-radius: var(--radius-full);
+  padding: 6px 14px;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.wrong-btn:active {
+  background: rgba(211, 47, 47, 0.2);
 }
 </style>

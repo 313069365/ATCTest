@@ -190,6 +190,9 @@ const translations = {
     unknown: "Unknown",
     confirmRemoveWrong: "Remove this question from wrong book?",
     confirmClearAll: "Clear all wrong questions? This cannot be undone.",
+    wrongPractice: "Wrong Practice",
+    practiceSessions: "Sessions",
+    toReview: "To Review",
 
     // Favorites
     favorites: "Favorites",
@@ -413,6 +416,9 @@ const translations = {
     unknown: "未知",
     confirmRemoveWrong: "确定要从错题本移除这道题吗？",
     confirmClearAll: "确定要清空整个错题本吗？此操作不可恢复",
+    wrongPractice: "错题练习",
+    practiceSessions: "练习次数",
+    toReview: "待巩固",
 
     // Favorites
     favorites: "收藏夹",

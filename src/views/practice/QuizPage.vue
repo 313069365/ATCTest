@@ -122,6 +122,12 @@ onMounted(async () => {
       // 使用加载的题目
       let filtered = [...store.rawQuestions];
 
+      // 错题练习模式：仅保留错题
+      if (practiceData.value?.wrongPractice && practiceData.value?.wrongQuestionIds) {
+        const wrongIds = new Set(practiceData.value.wrongQuestionIds)
+        filtered = filtered.filter(q => wrongIds.has(q.id))
+      }
+
       console.log("题目数量:", filtered.length);
 
       // 加载已保存的进度
