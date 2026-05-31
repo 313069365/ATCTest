@@ -3,7 +3,7 @@
     <div class="settings-content">
       <header class="settings-header">
         <button class="close-btn" @click="$emit('close')">
-          <span class="material-symbols-outlined">arrow_back</span>
+          <span class="material-symbols-outlined">close</span>
         </button>
         <h2>{{ t('practiceSettings') }}</h2>
         <div class="spacer"></div>
@@ -85,7 +85,6 @@
       <footer class="settings-footer">
         <button class="start-btn" @click="gotopage">
           {{ t('startPractice') }}
-          <span class="material-symbols-outlined">play_arrow</span>
         </button>
       </footer>
     </div>
@@ -192,7 +191,7 @@ const gotopage = () => {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  /* padding: var(--spacing-sm); */
+  padding: var(--spacing-mn);
   background: rgba(247, 250, 253, 0.8);
   backdrop-filter: blur(12px);
 }
@@ -234,7 +233,7 @@ const gotopage = () => {
   font-weight: var(--font-weight-bold);
   text-transform: uppercase;
   color: var(--icon-color);
-  margin-bottom: var(--spacing-mn);
+  margin-bottom: var(--spacing-sm);
 }
 
 .order-options {
@@ -278,7 +277,7 @@ const gotopage = () => {
 .mode-toggle {
   display: flex;
   gap: 4px;
-  padding: var(--spacing-mn);
+  padding: var(--spacing-sm);
   background: var(--primary-container);
   border-radius: var(--radius-lg);
 }

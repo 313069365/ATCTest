@@ -3,7 +3,7 @@
     <div class="import-content">
       <header class="import-header">
         <button class="close-btn" @click="$emit('close')">
-          <span class="material-symbols-outlined">arrow_back</span>
+          <span class="material-symbols-outlined">close</span>
         </button>
         <h2>导入题库</h2>
         <div class="spacer"></div>
@@ -17,13 +17,7 @@
           </div>
 
           <div class="file-upload">
-            <input 
-              type="file" 
-              ref="fileInput" 
-              accept=".json" 
-              @change="handleFileChange"
-              class="file-input"
-            />
+            <input type="file" ref="fileInput" accept=".json" @change="handleFileChange" class="file-input" />
             <button class="upload-btn" @click="triggerFileInput">
               <span class="material-symbols-outlined">upload_file</span>
               <span>选择文件</span>
@@ -113,7 +107,7 @@ defineEmits(['close'])
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: var(--spacing-sm);
+  padding: var(--spacing-mn);
   background: rgba(247, 250, 253, 0.8);
   backdrop-filter: blur(12px);
 }
