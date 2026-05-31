@@ -233,6 +233,7 @@ const handleSelect = (index) => {
 }
 
 .options {
+  color: var(--text-primary);
   display: flex;
   flex-direction: column;
   gap: 12px;
