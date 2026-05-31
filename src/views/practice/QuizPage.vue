@@ -16,10 +16,9 @@
           <span class="material-symbols-outlined">timer</span>
           <span>{{ elapsedTimeDisplay }}</span>
         </div>
-        <button class="grid-btn" :class="{ active: showAnswerCard }" @click="toggleAnswerCard">
-          <span class="material-symbols-outlined">grid_view</span>
+        <button class="grid-btn">
+          <svg-icon name="settings"></svg-icon>
         </button>
-
       </div>
     </header>
 
@@ -32,14 +31,35 @@
     <div class="action-bar">
       <span class="progress-label">进度 {{ currentIndex + 1 }}/{{ bank.length }}</span>
       <div class="action-bar-right">
+        <button class="action-btn">
+          <span class="material-symbols-outlined">mode_night</span>
+        </button>
         <button class="action-btn" :class="{ active: showTranslation }" @click="toggleTranslation" title="翻译">
-          <span class="material-symbols-outlined">translate</span>
+          <svg-icon size="20px" name="translate"></svg-icon>
         </button>
-        <button class="action-btn" :class="{ active: isFavorited }" @click="toggleFavorite" title="收藏">
+        <!-- <button class="action-btn" :class="{ active: isFavorited }" @click="toggleFavorite" title="收藏">
           <span class="material-symbols-outlined">kid_star</span>
+        </button> -->
+        <button class="action-btn" :class="{ active: isFavorited }" @click="toggleFavorite" title="收藏">
+          <svg-icon v-if="isFavorited" size="20px" name="kidstar_fill"></svg-icon>
+          <svg-icon v-else size="20px" name="kidstar"></svg-icon>
         </button>
+        <!--  错题集 
+        <button class="action-btn" :class="{ active: isInWrongBook }" @click="toggleFavorite" title="错题集">
+          <svg-icon v-if="isFavorited" size="20px" name="kidstar_fill"></svg-icon>
+          <svg-icon v-else size="20px" name="kidstar"></svg-icon>
+        </button>
+
+        答题模式标记
+        <button class="action-btn" :class="{ active: isInWrongBook }" @click="toggleFavorite" title="错题集">
+          <svg-icon v-if="isFavorited" size="20px" name="kidstar_fill"></svg-icon>
+          <svg-icon v-else size="20px" name="kidstar"></svg-icon>
+        </button> -->
         <button v-if="isWrongPractice" class="action-btn remove-btn" @click="removeCurrentFromWrong" title="移出错题集">
           <span class="material-symbols-outlined">playlist_remove</span>
+        </button>
+        <button class="action-btn" :class="{ active: showAnswerCard }" @click="toggleAnswerCard">
+          <span class="material-symbols-outlined">grid_view</span>
         </button>
       </div>
     </div>
