@@ -564,7 +564,17 @@ export function unpackProgress(packedAnswers) {
 // ==================== 进度存储 ====================
 
 /**
- * 保存练习进度
+ * 生成练习进度的唯一 key
+ * @param {Object} config - 配置（含 bank.category/scope/subject）
+ * @returns {string}
+ */
+export function getPracticeKey(config) {
+  const bank = config?.bank || config || {};
+  return `${bank.category || ''}_${bank.scope || ''}_${bank.subject || ''}`;
+}
+
+/**
+ * 保存练习进度（按科目存入 map）
  * @param {Object} config - 配置
  * @param {number} currentIndex - 当前题目索引
  * @param {number} currentSubIndex - 当前子题索引
@@ -591,7 +601,10 @@ export function savePracticeProgress(
     answerStatus,
   );
 
-  storage.setItem(STORAGE_KEY.PRACTICE_PROGRESS, {
+  const key = getPracticeKey(config);
+  const map = storage.getItem(STORAGE_KEY.PRACTICE_PROGRESS) || migrateOldProgress() || {};
+
+  map[key] = {
     config,
     progress: {
       currentIndex,
@@ -603,15 +616,43 @@ export function savePracticeProgress(
       timestamp: Date.now(),
       elapsedSeconds,
     },
-  });
+  };
+
+  storage.setItem(STORAGE_KEY.PRACTICE_PROGRESS, map);
 }
 
 /**
- * 加载练习进度
- * @returns {Object|null}
+ * 加载练习进度 map
+ * @returns {Object} 以 key 为键的进度 map
  */
 export function loadPracticeProgress() {
-  return storage.getItem(STORAGE_KEY.PRACTICE_PROGRESS);
+  const data = storage.getItem(STORAGE_KEY.PRACTICE_PROGRESS);
+
+  if (!data) return {};
+
+  // 迁移旧格式（单对象 → map）
+  if (data.config) {
+    const key = getPracticeKey(data.config);
+    const map = { [key]: data };
+    storage.setItem(STORAGE_KEY.PRACTICE_PROGRESS, map);
+    return map;
+  }
+
+  return data;
+}
+
+/**
+ * 内部：迁移旧格式
+ */
+function migrateOldProgress() {
+  const data = storage.getItem(STORAGE_KEY.PRACTICE_PROGRESS);
+  if (data && data.config) {
+    const key = getPracticeKey(data.config);
+    const map = { [key]: data };
+    storage.setItem(STORAGE_KEY.PRACTICE_PROGRESS, map);
+    return map;
+  }
+  return null;
 }
 
 // ==================== 统计 ====================

@@ -7,6 +7,7 @@ import { defineStore } from "pinia";
 import { ref, computed } from "vue";
 import * as API from "@/api/dataSource";
 import { bankStorage, storage, STORAGE_KEY } from "@/composables/useStorage";
+import { loadPracticeProgress as loadPracticeProgressFromUtil } from "@/utils/questionConfig";
 
 export const useAppStore = defineStore("app", () => {
   // ========== 题库相关 (BANK) ==========
@@ -33,8 +34,8 @@ export const useAppStore = defineStore("app", () => {
 
   // ========== 练习相关 (PRACTICE) ==========
 
-  /** 练习进度 (PRACTICE_PROGRESS) */
-  const practiceProgress = ref(null);
+  /** 练习进度 map (PRACTICE_PROGRESS)，key 为 category_scope_subject */
+  const practiceProgress = ref({});
 
   /** 练习历史 (PRACTICE_HISTORY) */
   const practiceHistory = ref([]);
@@ -92,6 +93,15 @@ export const useAppStore = defineStore("app", () => {
 
   /** 收藏数量 */
   const favoritesCount = computed(() => favorites.value.length);
+
+  /** 最新一条练习进度（按 timestamp 取） */
+  const lastPracticeProgress = computed(() => {
+    const map = practiceProgress.value;
+    const entries = Object.values(map);
+    if (entries.length === 0) return null;
+    entries.sort((a, b) => (b.meta?.timestamp || 0) - (a.meta?.timestamp || 0));
+    return entries[0];
+  });
 
   // ========== 题库 Actions ==========
 
@@ -287,19 +297,40 @@ export const useAppStore = defineStore("app", () => {
   // ========== 练习 Progress Actions ==========
 
   /**
-   * 保存练习进度
+   * 按 key 获取某科目的练习进度
+   * @param {string} key - category_scope_subject
+   * @returns {Object|null}
    */
-  function savePracticeProgress(progress) {
-    practiceProgress.value = progress;
-    storage.setItem(STORAGE_KEY.PRACTICE_PROGRESS, progress);
+  function getPracticeProgress(key) {
+    return practiceProgress.value?.[key] || null;
   }
 
   /**
-   * 加载练习进度
+   * 保存某科目的练习进度到 map
+   * @param {string} key - category_scope_subject
+   * @param {Object} progress - 进度数据
    */
+  function savePracticeProgress(key, progress) {
+    if (!key) return;
+    practiceProgress.value[key] = progress;
+    storage.setItem(STORAGE_KEY.PRACTICE_PROGRESS, practiceProgress.value);
+  }
 
+  /**
+   * 清除某科目的练习进度
+   * @param {string} key - category_scope_subject
+   */
+  function clearPracticeProgress(key) {
+    if (!key) return;
+    delete practiceProgress.value[key];
+    storage.setItem(STORAGE_KEY.PRACTICE_PROGRESS, practiceProgress.value);
+  }
+
+  /**
+   * 从 localStorage 加载练习进度 map
+   */
   function loadPracticeProgress() {
-    practiceProgress.value = storage.getItem(STORAGE_KEY.PRACTICE_PROGRESS);
+    practiceProgress.value = loadPracticeProgressFromUtil();
   }
 
   // ========== 练习 History Actions ==========
@@ -536,9 +567,12 @@ export const useAppStore = defineStore("app", () => {
 
     // 练习
     practiceProgress,
+    lastPracticeProgress,
     practiceHistory,
     savePracticeProgress,
     loadPracticeProgress,
+    getPracticeProgress,
+    clearPracticeProgress,
     loadPracticeHistory,
     addPracticeHistory,
 

@@ -74,6 +74,7 @@ import BankImport from '@/components/page/BankImport.vue'
 import { iconMap } from '@/assets/fonts/IconMaps.js'
 import { t, setLanguage, getLanguage } from '@/utils/i18n.js'
 import { useAppStore } from '@/stores/store'
+import { getPracticeKey } from '@/utils/questionConfig'
 
 // 创建 Store 实例
 const store = useAppStore()
@@ -136,14 +137,13 @@ const newQuizWith = (subject) => {
     scope: selectedScope.value
   }
 
-  // 检查是否有保存的进度
+  const key = getPracticeKey({ bank: { category: selectedCategory.value, scope: selectedScope.value, subject: subject.name } })
+
   if (hasProgress(subject)) {
     if (confirm('已有练习进度，是否重新开始？')) {
-      // 清除进度
-      store.savePracticeProgress(null)
+      store.clearPracticeProgress(key)
       showPracticeSetting.value = true
     }
-    // 取消则不操作
   } else {
     showPracticeSetting.value = true
   }
@@ -151,12 +151,10 @@ const newQuizWith = (subject) => {
 
 // 检查是否有保存的进度（且有实际答题记录）
 const hasProgress = (subject) => {
-  const progress = store.practiceProgress
+  const key = getPracticeKey({ bank: { category: selectedCategory.value, scope: selectedScope.value, subject: subject.name } })
+  const progress = store.getPracticeProgress(key)
   if (!progress || !progress.config?.bank) return false
-  const subjectName = typeof subject === 'object' ? subject.name : subject
-  if (progress.config.bank.subject !== subjectName) return false
 
-  // 检查是否有实际的用户答案
   const answers = progress.progress?.answers
   if (!answers) return false
 
@@ -174,7 +172,8 @@ const hasProgress = (subject) => {
 
 // 继续练习
 const continuePractice = (subject) => {
-  const progress = store.practiceProgress
+  const key = getPracticeKey({ bank: { category: selectedCategory.value, scope: selectedScope.value, subject: subject.name } })
+  const progress = store.getPracticeProgress(key)
   if (!progress || !progress.config) return
 
   const practiceData = {
@@ -196,7 +195,6 @@ const continuePractice = (subject) => {
     path: '/practice/quiz',
     query: {
       practiceData: JSON.stringify(practiceData),
-      // practiceData: encodeURIComponent(JSON.stringify(practiceData)),
       continue: 'true'
     }
   })

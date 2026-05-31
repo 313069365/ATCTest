@@ -74,7 +74,8 @@ import {
   loadPracticeProgress as loadProgress,
   unpackProgress,
   isComplexQuestion,
-  packProgress
+  packProgress,
+  getPracticeKey
 } from "@/utils/questionConfig";
 
 const router = useRouter();
@@ -124,7 +125,8 @@ onMounted(async () => {
       console.log("题目数量:", filtered.length);
 
       // 加载已保存的进度
-      const savedProgress = store.practiceProgress;
+      const practiceKey = getPracticeKey({ bank: { category, scope, subject: subjectName } });
+      const savedProgress = store.getPracticeProgress(practiceKey);
       const isContinue = route.query.continue === 'true';
       const isNewPractice = route.query.newPractice === 'true';
       const isSameSubject = savedProgress?.config?.bank?.subject === subjectName;
@@ -174,9 +176,9 @@ onMounted(async () => {
       }
 
       // 恢复或开始计时
-      if (isContinue && store.practiceProgress?.meta?.elapsedSeconds) {
+      if (isContinue && store.practiceProgress?.[practiceKey]?.meta?.elapsedSeconds) {
         // 继续练习：恢复之前的计时
-        elapsedSeconds.value = store.practiceProgress.meta.elapsedSeconds;
+        elapsedSeconds.value = store.practiceProgress[practiceKey].meta.elapsedSeconds;
       } else {
         // 新练习：重置计时器
         elapsedSeconds.value = 0;
@@ -475,7 +477,11 @@ const handleCheckSub = (subIndex) => {
 
 // 加载练习进度（断点续练）
 const loadPracticeProgress = () => {
-  const progress = store.practiceProgress;
+  if (!practiceData.value) return
+  const { category, scope, subject } = practiceData.value
+  const subjectName = typeof subject === 'object' ? subject.name : subject
+  const key = getPracticeKey({ bank: { category, scope, subject: subjectName } })
+  const progress = store.getPracticeProgress(key);
   if (progress && progress.config?.bank) {
     // 检查是否是同一个练习
     const sameSubject = progress.config.bank.subject === subjectDisplay.value;
@@ -543,6 +549,7 @@ const savePracticeProgress = () => {
     answerStatus.value,
     elapsedSeconds.value
   )
+  store.loadPracticeProgress();
 };
 
 // 手动添加的

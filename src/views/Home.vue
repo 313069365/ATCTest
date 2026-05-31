@@ -109,7 +109,7 @@ const accuracy = ref(0.0)
 
 // 上次练习
 const lastPractice = computed(() => {
-  const progress = store.practiceProgress
+  const progress = store.lastPracticeProgress
   if (!progress || !progress.config?.bank) return null
 
   return {
@@ -138,7 +138,7 @@ const lastPracticeProgress = computed(() => {
 
 // 继续上次练习
 const continueLastPractice = () => {
-  const progress = store.practiceProgress
+  const progress = store.lastPracticeProgress
   if (!progress || !progress.config) return
 
   const practiceData = {
@@ -272,7 +272,7 @@ const toggleLanguage = () => {
   align-items: center;
   gap: var(--spacing-sm);
   margin: var(--spacing-md) var(--spacing-lg) 0;
-  padding: var(--spacing-sm) var(--spacing-md);
+  padding: var(--spacing-smd) var(--spacing-md);
   background: var(--background);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-sm);
