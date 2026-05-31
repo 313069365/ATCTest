@@ -202,6 +202,22 @@ const translations = {
     confirmRemoveFavorite: "Remove this question from favorites?",
     confirmClearFavorites: "Clear all favorites? This cannot be undone.",
     answer: "Answer",
+    fieldId: "ID",
+    fieldStem: "Stem",
+    fieldOption: "Options",
+
+    // Search
+    search: "Search",
+    searchTitle: "Search Questions",
+    searchPlaceholder: "Enter keyword to search...",
+    searchClear: "Clear",
+    searchResults: "Search Results",
+    searchNoResults: "No results found",
+    searchScope: "Scope",
+    searchFields: "Fields",
+    selectAll: "Select All",
+    questionDetail: "Question Detail",
+    startPracticeWithSubject: "Practice This Subject",
   },
 
   zh: {
@@ -409,6 +425,22 @@ const translations = {
     confirmRemoveFavorite: "确定要从收藏夹移除这道题吗？",
     confirmClearFavorites: "确定要清空整个收藏夹吗？此操作不可恢复",
     answer: "答案",
+    fieldId: "编号",
+    fieldStem: "题干",
+    fieldOption: "选项",
+
+    // Search
+    search: "搜索",
+    searchTitle: "搜索题目",
+    searchPlaceholder: "输入关键词搜索题目...",
+    searchClear: "清除",
+    searchResults: "搜索结果",
+    searchNoResults: "未找到相关题目",
+    searchScope: "搜索范围",
+    searchFields: "搜索字段",
+    selectAll: "全选",
+    questionDetail: "题目详情",
+    startPracticeWithSubject: "开始练习该科目",
   },
 };
 

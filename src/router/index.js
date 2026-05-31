@@ -7,6 +7,16 @@ const routes = [
     component: () => import("../views/Home.vue"),
   },
   {
+    path: "/search",
+    name: "Search",
+    component: () => import("../views/Search.vue"),
+  },
+  {
+    path: "/question/:id",
+    name: "QuestionDetail",
+    component: () => import("../views/QuestionDetail.vue"),
+  },
+  {
     path: "/practice",
     children: [
       {

@@ -11,6 +11,11 @@
       </div>
     </header>
 
+    <div class="search-bar" @click="pageTo('/search')">
+      <span class="material-symbols-outlined search-icon">search</span>
+      <span class="search-placeholder">{{ t('searchTitle') }}</span>
+    </div>
+
     <main class="content">
       <section class="stats-bento">
         <div class="stat-card">
@@ -262,8 +267,35 @@ const toggleLanguage = () => {
   background: var(--color-gray-100);
 }
 
+.search-bar {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  margin: var(--spacing-md) var(--spacing-lg) 0;
+  padding: var(--spacing-sm) var(--spacing-md);
+  background: var(--background);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  cursor: pointer;
+  transition: box-shadow 0.2s;
+}
+
+.search-bar:active {
+  box-shadow: var(--shadow-md);
+}
+
+.search-icon {
+  color: var(--text-secondary);
+  font-size: 20px;
+}
+
+.search-placeholder {
+  font-size: var(--font-size-md);
+  color: var(--text-secondary);
+}
+
 .content {
-  padding: var(--spacing-lg);
+  padding: var(--spacing-md) var(--spacing-lg);
   max-width: var(--app-max-width);
   margin: 0 auto;
 }

@@ -229,6 +229,35 @@ export async function importQuestions(file, options = {}) {
   });
 }
 
+/**
+ * 搜索题目
+ * @param {Object} params
+ * @param {string} params.keyword - 搜索关键词
+ * @param {string[]} params.fields - 搜索字段 ['id', 'stem', 'options']
+ * @param {string} [params.category] - 按分类过滤
+ * @param {string} [params.scope] - 按范围过滤
+ * @param {string} [params.subject] - 按科目过滤
+ * @returns {Array} 匹配的题目数组
+ */
+export function searchQuestions({ keyword, fields, category, scope, subject } = {}) {
+  if (!keyword?.trim()) return [];
+  const kw = keyword.toLowerCase().trim();
+  const searchFields = fields || ['id', 'stem', 'options'];
+
+  let questions = fetchAllQuestions();
+
+  if (category) questions = questions.filter((q) => q.meta?.category === category);
+  if (scope) questions = questions.filter((q) => q.meta?.scope === scope);
+  if (subject) questions = questions.filter((q) => q.meta?.subject === subject);
+
+  return questions.filter((q) => {
+    if (searchFields.includes('id') && q.id?.toLowerCase().includes(kw)) return true;
+    if (searchFields.includes('stem') && q.stem?.toLowerCase().includes(kw)) return true;
+    if (searchFields.includes('options') && q.options?.some((o) => o.toLowerCase().includes(kw))) return true;
+    return false;
+  });
+}
+
 export default {
   getAllCategories,
   generateBankMeta,
@@ -240,4 +269,5 @@ export default {
   getQuestionBankInfo,
   importQuestions,
   computeBankHash,
+  searchQuestions,
 };
