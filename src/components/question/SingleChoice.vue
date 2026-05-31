@@ -252,6 +252,7 @@ const handleSelect = (index) => {
   text-align: left;
   width: 100%;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+  color: var(--text-primary);
 }
 
 .option-btn:active {
