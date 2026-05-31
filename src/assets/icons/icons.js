@@ -1,4 +1,4 @@
-const svgTemplates = {
+export const svgTemplates = {
   settings:
     "m370-80-16-128q-13-5-24.5-12T307-235l-119 50L78-375l103-78q-1-7-1-13.5v-27q0-6.5 1-13.5L78-585l110-190 119 50q11-8 23-15t24-12l16-128h220l16 128q13 5 24.5 12t22.5 15l119-50 110 190-103 78q1 7 1 13.5v-27q0 6.5-2 13.5l103 78-110 190-118-50q-11 8-23 15t-24 12L590-80H370Zm112-260q58 0 99-41t41-99q0-58-41-99t-99-41q-59 0-99.5 41T342-480q0 58 40.5 99t99.5 41Z",
   translate:
@@ -9,11 +9,11 @@ const svgTemplates = {
     "m305-704 112-145q12-16 28.5-23.5T480-880q18 0 34.5 7.5T543-849l112 145 170 57q26 8 41 29.5t15 47.5q0 12-3.5 24T866-523L756-367l4 164q1 35-23 59t-56 24q-2 0-22-3l-179-50-179 50q-5 2-11 2.5t-11 .5q-32 0-56-24t-23-59l4-165L95-523q-8-11-11.5-23T80-570q0-25 14.5-46.5T135-647l170-57Zm49 69-194 64 124 179-4 191 200-55 200 56-4-192 124-177-194-66-126-165-126 165Zm126 135Z",
 };
 
+// 保持原有的 Web Components 方式以兼容现有代码
 class SvgIcon extends HTMLElement {
   connectedCallback() {
     const name = this.getAttribute("name");
-    // const fill = this.getAttribute("fill") || "#1f1f1f"; // 默认颜色
-    const size = this.getAttribute("size") || "24px"; // 默认大小
+    const size = this.getAttribute("size") || "24px";
     const pathData = svgTemplates[name];
 
     if (pathData) {
@@ -30,4 +30,8 @@ class SvgIcon extends HTMLElement {
     }
   }
 }
-customElements.define("svg-icon", SvgIcon);
+
+// 只有在浏览器环境中才定义自定义元素
+if (typeof window !== 'undefined' && window.customElements) {
+  customElements.define("svg-icon", SvgIcon);
+}

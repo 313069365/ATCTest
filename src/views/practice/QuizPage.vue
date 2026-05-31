@@ -17,7 +17,7 @@
           <span>{{ elapsedTimeDisplay }}</span>
         </div>
         <button class="grid-btn">
-          <svg-icon name="settings"></svg-icon>
+          <SvgIcon name="settings"></SvgIcon>
         </button>
       </div>
     </header>
@@ -35,14 +35,14 @@
           <span class="material-symbols-outlined">mode_night</span>
         </button>
         <button class="action-btn" :class="{ active: showTranslation }" @click="toggleTranslation" title="翻译">
-          <svg-icon size="20px" name="translate"></svg-icon>
+          <SvgIcon size="20px" name="translate"></SvgIcon>
         </button>
         <!-- <button class="action-btn" :class="{ active: isFavorited }" @click="toggleFavorite" title="收藏">
           <span class="material-symbols-outlined">kid_star</span>
         </button> -->
         <button class="action-btn" :class="{ active: isFavorited }" @click="toggleFavorite" title="收藏">
-          <svg-icon v-if="isFavorited" size="20px" name="kidstar_fill"></svg-icon>
-          <svg-icon v-else size="20px" name="kidstar"></svg-icon>
+          <SvgIcon v-if="isFavorited" size="20px" name="kidstar_fill"></SvgIcon>
+          <SvgIcon v-else size="20px" name="kidstar"></SvgIcon>
         </button>
         <!--  错题集 
         <button class="action-btn" :class="{ active: isInWrongBook }" @click="toggleFavorite" title="错题集">
@@ -98,6 +98,7 @@ import { useRouter, useRoute } from "vue-router";
 import AnswerCard from "@/components/page/AnswerCard.vue";
 import QustionNavbar from "@/components/layout/QuestionNavbar.vue";
 import QuestionRenderer from "@/components/question/QuestionRenderer.vue";
+import SvgIcon from "@/components/common/SvgIcon.vue";
 import { useAppStore } from "@/stores/store";
 import { t } from "@/utils/i18n.js";
 import { useQuestionHandler } from "@/composables/useQuestionHandler";
