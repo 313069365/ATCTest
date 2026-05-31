@@ -248,12 +248,16 @@ export function searchQuestions({ keyword, fields, category, scope, subject } = 
 
   if (category) questions = questions.filter((q) => q.meta?.category === category);
   if (scope) questions = questions.filter((q) => q.meta?.scope === scope);
-  if (subject) questions = questions.filter((q) => q.meta?.subject === subject);
+  if (subject && subject.length) {
+    const subjects = Array.isArray(subject) ? subject : [subject];
+    questions = questions.filter((q) => subjects.includes(q.meta?.subject));
+  }
 
   return questions.filter((q) => {
     if (searchFields.includes('id') && q.id?.toLowerCase().includes(kw)) return true;
     if (searchFields.includes('stem') && q.stem?.toLowerCase().includes(kw)) return true;
     if (searchFields.includes('options') && q.options?.some((o) => o.toLowerCase().includes(kw))) return true;
+    if (searchFields.includes('answer') && q.answer?.some((a) => a.toLowerCase().includes(kw))) return true;
     return false;
   });
 }

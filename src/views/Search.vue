@@ -23,6 +23,27 @@
     </div>
 
     <div class="filters">
+      <div class="filter-group">
+        <span class="filter-label">{{ t('searchFields') }}</span>
+        <div class="chip-row">
+          <button class="chip" :class="{ active: allFieldsSelected }" @click="toggleAllFields">
+            {{ t('selectAll') }}
+          </button>
+          <button class="chip" :class="{ active: searchFields.id }" @click="toggleField('id')">
+            {{ t('fieldId') }}
+          </button>
+          <button class="chip" :class="{ active: searchFields.stem }" @click="toggleField('stem')">
+            {{ t('fieldStem') }}
+          </button>
+          <button class="chip" :class="{ active: searchFields.options }" @click="toggleField('options')">
+            {{ t('fieldOption') }}
+          </button>
+          <button class="chip" :class="{ active: searchFields.answer }" @click="toggleField('answer')">
+            {{ t('fieldAnswer') }}
+          </button>
+        </div>
+      </div>
+
       <div class="filter-section" @click="filtersExpanded = !filtersExpanded">
         <span class="filter-section-label">{{ t('searchScope') }}</span>
         <span class="material-symbols-outlined filter-arrow" :class="{ expanded: filtersExpanded }">
@@ -58,32 +79,15 @@
         </div>
 
         <div class="filter-group">
-          <span class="filter-label">{{ t('subject') }}</span>
+          <span class="filter-label">{{ t('subject') }} <span class="multi-badge">可多选</span></span>
           <div class="chip-row">
-            <button class="chip" :class="{ active: !selectedSubject }" @click="selectSubject('')">
+            <button class="chip" :class="{ active: selectedSubject.length === 0 }"
+              @click="selectedSubject = []; doSearch()">
               {{ t('selectAll') }}
             </button>
-            <button v-for="s in availableSubjects" :key="s" class="chip" :class="{ active: selectedSubject === s }"
-              @click="selectSubject(s)">
+            <button v-for="s in availableSubjects" :key="s" class="chip"
+              :class="{ active: selectedSubject.includes(s) }" @click="selectSubject(s)">
               {{ t(s) }}
-            </button>
-          </div>
-        </div>
-
-        <div class="filter-group">
-          <span class="filter-label">{{ t('searchFields') }}</span>
-          <div class="chip-row">
-            <button class="chip" :class="{ active: allFieldsSelected }" @click="toggleAllFields">
-              {{ t('selectAll') }}
-            </button>
-            <button class="chip" :class="{ active: searchFields.id }" @click="toggleField('id')">
-              {{ t('fieldId') }}
-            </button>
-            <button class="chip" :class="{ active: searchFields.stem }" @click="toggleField('stem')">
-              {{ t('fieldStem') }}
-            </button>
-            <button class="chip" :class="{ active: searchFields.options }" @click="toggleField('options')">
-              {{ t('fieldOption') }}
             </button>
           </div>
         </div>
@@ -107,7 +111,7 @@
           <div class="result-top">
             <span class="result-id"><span class="hash-tag">ID</span>{{ q.id }}</span>
             <span class="result-scope-tag">{{ t(q.meta?.category) }} / {{ t(q.meta?.scope) }} / {{ t(q.meta?.subject)
-            }}</span>
+              }}</span>
           </div>
           <div class="result-stem" v-html="highlightText(q.stem)"></div>
         </div>
@@ -141,12 +145,13 @@ let debounceTimer = null
 
 const selectedCategory = ref('')
 const selectedScope = ref('')
-const selectedSubject = ref('')
+const selectedSubject = ref([])
 
 const searchFields = reactive({
   id: true,
   stem: true,
   options: true,
+  answer: true,
 })
 
 const bankMeta = computed(() => store.bankMeta)
@@ -181,7 +186,7 @@ const availableSubjects = computed(() => {
     .map(([k]) => k)
 })
 
-const allFieldsSelected = computed(() => searchFields.id && searchFields.stem && searchFields.options)
+const allFieldsSelected = computed(() => searchFields.id && searchFields.stem && searchFields.options && searchFields.answer)
 
 function selectCategory(cat) {
   selectedCategory.value = cat
@@ -192,17 +197,22 @@ function selectCategory(cat) {
 
 function selectScope(s) {
   selectedScope.value = s
-  selectedSubject.value = ''
+  selectedSubject.value = []
   doSearch()
 }
 
 function selectSubject(s) {
-  selectedSubject.value = s
+  const idx = selectedSubject.value.indexOf(s)
+  if (idx >= 0) {
+    selectedSubject.value.splice(idx, 1)
+  } else {
+    selectedSubject.value.push(s)
+  }
   doSearch()
 }
 
 function toggleField(field) {
-  const count = [searchFields.id, searchFields.stem, searchFields.options].filter(Boolean).length
+  const count = [searchFields.id, searchFields.stem, searchFields.options, searchFields.answer].filter(Boolean).length
   if (count === 1 && searchFields[field]) return
   searchFields[field] = !searchFields[field]
   doSearch()
@@ -213,6 +223,7 @@ function toggleAllFields() {
   searchFields.id = !all
   searchFields.stem = !all
   searchFields.options = !all
+  searchFields.answer = !all
   doSearch()
 }
 
@@ -227,6 +238,7 @@ function getActiveFields() {
   if (searchFields.id) fields.push('id')
   if (searchFields.stem) fields.push('stem')
   if (searchFields.options) fields.push('options')
+  if (searchFields.answer) fields.push('answer')
   return fields
 }
 
@@ -264,7 +276,8 @@ function highlightText(text) {
 }
 
 function goToQuestion(q) {
-  router.push(`/question/${q.id}?keyword=${encodeURIComponent(keyword.value)}`)
+  const ids = results.value.map(r => r.id).join(',')
+  router.push(`/question/${q.id}?ids=${encodeURIComponent(ids)}&keyword=${encodeURIComponent(keyword.value)}`)
 }
 
 function goBack() {
@@ -453,6 +466,16 @@ onMounted(async () => {
   font-weight: 600;
   color: var(--text-secondary);
   margin-bottom: var(--spacing-sm);
+}
+
+.multi-badge {
+  font-size: var(--font-size-mn);
+  font-weight: 500;
+  color: var(--primary);
+  background: var(--primary-light);
+  padding: 3px 6px;
+  border-radius: var(--radius-full);
+  vertical-align: middle;
 }
 
 .chip-row {

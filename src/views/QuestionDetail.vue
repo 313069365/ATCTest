@@ -26,18 +26,23 @@
         <QuestionRenderer :question="question" mode="review" :disabled="true" />
       </div>
 
-      <!-- <div class="detail-actions">
-        <button class="practice-btn" @click="startPractice">
-          <span class="material-symbols-outlined">play_arrow</span>
-          {{ t('startPracticeWithSubject') }}
+      <div v-if="ids.length > 0" class="bottom-nav">
+        <button class="nav-btn" :disabled="currentIndex <= 0" @click="goPrev">
+          <span class="material-symbols-outlined">chevron_left</span>
+          <span>{{ t('prevQuestion') }}</span>
         </button>
-      </div> -->
+        <span class="nav-indicator">{{ currentIndex + 1 }} / {{ ids.length }}</span>
+        <button class="nav-btn" :disabled="currentIndex >= ids.length - 1" @click="goNext">
+          <span>{{ t('nextQuestion') }}</span>
+          <span class="material-symbols-outlined">chevron_right</span>
+        </button>
+      </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, computed, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useAppStore } from '@/stores/store'
 import { t } from '@/utils/i18n.js'
@@ -49,6 +54,20 @@ const router = useRouter()
 const store = useAppStore()
 
 const question = ref(null)
+const ids = ref([])
+
+const currentIndex = computed(() => {
+  return ids.value.indexOf(route.params.id)
+})
+
+function parseIds() {
+  const raw = route.query.ids
+  if (raw) {
+    ids.value = raw.split(',').filter(Boolean)
+  } else {
+    ids.value = []
+  }
+}
 
 function loadQuestion() {
   const id = route.params.id
@@ -58,26 +77,26 @@ function loadQuestion() {
   question.value = all.find((q) => q.id === id) || null
 }
 
+function goPrev() {
+  const idx = currentIndex.value
+  if (idx <= 0) return
+  router.replace(`/question/${ids.value[idx - 1]}?ids=${encodeURIComponent(ids.value.join(','))}`)
+}
+
+function goNext() {
+  const idx = currentIndex.value
+  if (idx >= ids.value.length - 1) return
+  router.replace(`/question/${ids.value[idx + 1]}?ids=${encodeURIComponent(ids.value.join(','))}`)
+}
+
 function goBack() {
   router.back()
 }
 
-function startPractice() {
-  if (!question.value?.meta) return
-  const meta = question.value.meta
-  router.push({
-    path: '/practice',
-    query: {
-      category: meta.category,
-      scope: meta.scope,
-      subject: meta.subject,
-    }
-  })
-}
-
-onMounted(() => {
+watch(() => route.params.id, () => {
+  parseIds()
   loadQuestion()
-})
+}, { immediate: true })
 </script>
 
 <style scoped>
@@ -130,6 +149,59 @@ onMounted(() => {
   width: 40px;
 }
 
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: var(--app-max-width);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--spacing-smd) var(--spacing-lg);
+  padding-bottom: calc(var(--spacing-smd) + env(safe-area-inset-bottom, 0px));
+  background: var(--background);
+  border-top: 1px solid var(--border-color);
+  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.06);
+  box-sizing: border-box;
+}
+
+.nav-btn {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-smd) var(--spacing-lg);
+  border: none;
+  background: var(--color-gray-200);
+  border-radius: var(--radius-lg);
+  font-size: var(--font-size-lg);
+  font-weight: 700;
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: opacity var(--transition-fast);
+}
+
+.nav-btn:active:not(:disabled) {
+  opacity: 0.75;
+}
+
+.nav-btn:disabled {
+  color: var(--text-disabled);
+  background: transparent;
+  cursor: default;
+}
+
+.nav-btn .material-symbols-outlined {
+  font-size: 20px;
+}
+
+.nav-indicator {
+  font-size: var(--font-size-md);
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
 .not-found {
   display: flex;
   flex-direction: column;
@@ -147,6 +219,7 @@ onMounted(() => {
 
 .detail-content {
   padding: var(--spacing-lg);
+  padding-bottom: 80px;
 }
 
 .question-meta-bar {

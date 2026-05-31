@@ -205,6 +205,7 @@ const translations = {
     fieldId: "ID",
     fieldStem: "Stem",
     fieldOption: "Options",
+    fieldAnswer: "Answer",
 
     // Search
     search: "Search",
@@ -217,6 +218,8 @@ const translations = {
     searchFields: "Fields",
     selectAll: "Select All",
     questionDetail: "Question Detail",
+    prevQuestion: "Previous",
+    nextQuestion: "Next",
     startPracticeWithSubject: "Practice This Subject",
   },
 
@@ -428,6 +431,7 @@ const translations = {
     fieldId: "编号",
     fieldStem: "题干",
     fieldOption: "选项",
+    fieldAnswer: "答案",
 
     // Search
     search: "搜索",
@@ -440,6 +444,8 @@ const translations = {
     searchFields: "搜索字段",
     selectAll: "全选",
     questionDetail: "题目详情",
+    prevQuestion: "上一题",
+    nextQuestion: "下一题",
     startPracticeWithSubject: "开始练习该科目",
   },
 };
