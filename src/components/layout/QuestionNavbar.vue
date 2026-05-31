@@ -3,9 +3,11 @@
     <button class="nav-btn prev" :disabled="prevDisabled" @click="$emit('prev')">
       <span class="material-symbols-outlined">chevron_left</span>
       上一题
+      <span>　</span>
     </button>
 
     <button v-if="!isLast" class="nav-btn next" @click="$emit('next')">
+      <span>　</span>
       下一题
       <span class="material-symbols-outlined">chevron_right</span>
     </button>
@@ -39,11 +41,12 @@ defineEmits(['prev', 'next', 'submit'])
 <style scoped>
 .footer {
   position: fixed;
-  bottom: 8px;
+  bottom: 0px;
   left: 50%;
   transform: translateX(-50%);
+  background: #fff;
   width: 100%;
-  max-width: 368px;
+  max-width: var(--app-max-width);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -54,23 +57,24 @@ defineEmits(['prev', 'next', 'submit'])
 }
 
 .nav-btn {
-  position: relative;
+  /* position: relative; */
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 48%;
-  height: 44px;
+  min-width: 150px;
+  padding: 10px;
+  margin: var(--spacing-mn) var(--spacing-md);
   background: rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  /* backdrop-filter: blur(10px); */
+  /* -webkit-backdrop-filter: blur(10px); */
+  border: 1px solid rgba(213, 213, 213, 0.3);
   border-radius: var(--radius-lg);
   color: var(--primary);
   font-size: var(--font-size-md);
   font-weight: var(--font-weight-medium);
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.1);
   overflow: hidden;
 }
 
