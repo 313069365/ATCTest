@@ -176,11 +176,11 @@ button {
   /* 🍎 iOS 全局样式修复 */
   -webkit-appearance: none;
   appearance: none;
-  color: inherit;
+  color: var(--text-primary);
 }
 
 button * {
-  /* 确保按钮内所有文字都继承颜色 */
+  /* 确保按钮内所有文字都继承按钮的颜色 */
   color: inherit;
 }
 
