@@ -453,6 +453,10 @@ const exitQuiz = () => {
 
 const finishQuiz = () => {
   if (confirm("确定完成答题并退出吗？")) {
+    if (isWrongPractice.value) {
+      router.push({ name: "Home" })
+      return
+    }
     const answers = packProgress(bank.value, userAnswers.value, answerChecked.value, answerStatus.value)
     pm.completeSession(
       {
@@ -650,6 +654,7 @@ const loadPracticeProgress = () => {
 
 // 保存练习进度
 const savePracticeProgress = () => {
+  if (practiceData.value?.wrongPractice) return
   // 错题本/收藏本练习不保存进度（无法通过题库继续）
   const source = practiceData.value?.source
   if (source && source !== 'bank') return
