@@ -58,6 +58,9 @@
         <button v-if="isWrongPractice" class="action-btn remove-btn" @click="removeCurrentFromWrong" title="移出错题集">
           <span class="material-symbols-outlined">playlist_remove</span>
         </button>
+        <button class="action-btn" @click="showStatsDialog = true" title="答题统计">
+          <span class="material-symbols-outlined">bar_chart</span>
+        </button>
         <button class="action-btn" :class="{ active: showAnswerCard }" @click="toggleAnswerCard">
           <span class="material-symbols-outlined">grid_view</span>
         </button>
@@ -89,6 +92,11 @@
     <AnswerCard v-if="showAnswerCard" :questions="bank" :currentIndex="currentIndex" :currentSubIndex="currentSubIndex"
       :settings="practiceData" :answerChecked="answerChecked" :answerStatus="answerStatus" :userAnswers="userAnswers"
       @close="closeAnswerCard" @exit="exitQuiz" @go="gotoQuesitonIdx" />
+
+    <PracticeStats v-if="showStatsDialog" :total="liveStats.total" :correct="liveStats.correct" :wrong="liveStats.wrong"
+      :unanswered="liveStats.unanswered" :accuracy="liveStats.accuracy" :elapsed="liveStats.elapsed"
+      :current="liveStats.current" :totalQ="liveStats.totalQ" :settings="practiceData"
+      @close="showStatsDialog = false" />
   </div>
 </template>
 
@@ -96,6 +104,7 @@
 import { ref, onMounted, onUnmounted, computed, provide } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import AnswerCard from "@/components/page/AnswerCard.vue";
+import PracticeStats from "@/components/page/PracticeStats.vue";
 import QustionNavbar from "@/components/layout/QuestionNavbar.vue";
 import QuestionRenderer from "@/components/question/QuestionRenderer.vue";
 import { useAppStore } from "@/stores/store";
@@ -130,6 +139,7 @@ const userAnswers = ref({});
 const answerChecked = ref({}); // 每个题目的答案检查状态
 const answerStatus = ref({}); // 每个题目的答案状态: correct/wrong/partial/unchecked/unanswered
 const shuffledOptionsCache = ref({}); // 缓存选项乱序结果
+const showStatsDialog = ref(false);
 const loading = ref(true);
 
 // 计时器相关
@@ -297,6 +307,38 @@ const elapsedTimeDisplay = computed(() => {
   const seconds = elapsedSeconds.value % 60;
   return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
 });
+
+// 实时答题统计
+const liveStats = computed(() => {
+  let correct = 0, wrong = 0, total = 0
+  bank.value.forEach(q => {
+    const status = answerStatus.value[q.id]
+    if (isComplexQuestion(q)) {
+      const subs = q.subs || []
+      subs.forEach((_, idx) => {
+        total++
+        const s = status?.[idx]
+        if (s === 'correct') correct++
+        else if (s === 'wrong') wrong++
+      })
+    } else {
+      total++
+      if (status === 'correct') correct++
+      else if (status === 'wrong') wrong++
+    }
+  })
+  const unanswered = total - correct - wrong
+  return {
+    total,
+    correct,
+    wrong,
+    unanswered,
+    accuracy: (correct + wrong) > 0 ? Math.round(correct / (correct + wrong) * 100) : 0,
+    current: currentIndex.value + 1,
+    totalQ: bank.value.length,
+    elapsed: elapsedSeconds.value
+  }
+})
 
 // 开始计时
 const startTimer = () => {

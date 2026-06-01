@@ -11,18 +11,6 @@
 
       <div class="answer-card-body">
         <div class="progress-stats">
-          <div class="practice-info" v-if="settings">
-            <div class="tags-row">
-              <span class="info-tag">{{ orderDisplay }}{{ modeDisplay }}</span>
-              <span class="info-tag" v-if="settings.practiceMode === 'answer'">
-                {{ showAnswerDisplay }}
-              </span>
-              <span class="info-tag" v-if="settings.practiceMode === 'answer' && settings.autoJump">
-                自动跳转
-              </span>
-            </div>
-          </div>
-
           <div class="legend">
             <div class="legend-item">
               <span class="legend-dot correct"></span>
@@ -115,26 +103,6 @@ const props = defineProps({
 })
 
 const emit = defineEmits(['close', 'go', 'exit'])
-
-const orderDisplay = computed(() => {
-  if (!props.settings) return '顺序'
-  const orderMap = {
-    'sequence': '顺序',
-    'reverse': '逆序',
-    'shuffle': '乱序',
-  }
-  return orderMap[props.settings.questionSort] || '顺序'
-})
-
-const modeDisplay = computed(() => {
-  if (!props.settings) return '答题'
-  return props.settings.practiceMode === 'review' ? '背题' : '答题'
-})
-
-const showAnswerDisplay = computed(() => {
-  if (!props.settings) return '立即显示'
-  return props.settings.showAnswerMode === 'immediate' ? '立即显示' : '按需显示'
-})
 
 
 // 获取按钮状态
@@ -251,7 +219,7 @@ function getSubQuestionBtnClass(qIdx, sqIdx, sq) {
 
 .progress-stats {
   border-radius: var(--radius-md);
-  padding: var(--spacing-md);
+  padding: var(--spacing-sm) var(--spacing-md);
   margin-bottom: var(--spacing-md);
   box-shadow: var(--shadow-lg);
   background-color: var(--background);
@@ -281,8 +249,8 @@ function getSubQuestionBtnClass(qIdx, sqIdx, sq) {
   display: flex;
   flex-wrap: wrap;
   gap: var(--spacing-md);
-  padding-top: var(--spacing-md);
-  border-top: 1px solid var(--border-color-strong);
+  /* padding-top: var(--spacing-md); */
+  /* border-top: 1px solid var(--border-color-strong); */
 }
 
 .legend-item {

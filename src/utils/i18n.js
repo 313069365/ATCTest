@@ -161,6 +161,10 @@ const translations = {
     noExplanation: "No explanation available",
     readingMaterial: "Reading Material",
     correctAnswer: "Correct Answer",
+    practiceStats: "Practice Stats",
+    answered: "Answered",
+    progress: "Progress",
+    close: "Close",
 
     // Practice Result
     practiceResult: "Practice Result",
@@ -388,6 +392,10 @@ const translations = {
     noExplanation: "暂无解析",
     readingMaterial: "阅读材料",
     correctAnswer: "正确答案",
+    practiceStats: "答题统计",
+    answered: "已答",
+    progress: "进度",
+    close: "关闭",
 
     // Practice Result
     practiceResult: "答题结果",

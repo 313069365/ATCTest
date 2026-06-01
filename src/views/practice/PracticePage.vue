@@ -265,7 +265,7 @@ const wrongPractice = (subject) => {
     },
     practiceMode: 'answer',
     questionSort: 'sequence',
-    showAnswerMode: 'onDemand',
+    showAnswerMode: 'immediate',
     autoJump: false,
     wrongPractice: true,
     wrongQuestionIds: wrongQuestions.map(q => q.id)
