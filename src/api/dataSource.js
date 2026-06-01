@@ -12,6 +12,7 @@ import base from "@/../public/data/atc/base.json";
 import professional from "@/../public/data/atc/professional.json";
 import english_singleChoice from "@/../public/data/atc/english_translated.json";
 import enlish_reading from "@/../public/data/atc/english_reading.json";
+import base_set from "@/../public/data/atc/base_set.json";
 
 // ==================== 配置 ====================
 
@@ -21,6 +22,9 @@ const DATA_SOURCES = {
     base: base,
     professional: professional,
     english: [...english_singleChoice, ...enlish_reading],
+  },
+  base: {
+    base_set: base_set,
   },
 };
 
@@ -194,9 +198,9 @@ export async function computeBankHash() {
   const jsonStr = JSON.stringify(allQuestions);
   const encoder = new TextEncoder();
   const data = encoder.encode(jsonStr);
-  const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+  const hashBuffer = await crypto.subtle.digest("SHA-256", data);
   const hashArray = Array.from(new Uint8Array(hashBuffer));
-  return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+  return hashArray.map((b) => b.toString(16).padStart(2, "0")).join("");
 }
 
 /**
@@ -239,14 +243,21 @@ export async function importQuestions(file, options = {}) {
  * @param {string} [params.subject] - 按科目过滤
  * @returns {Array} 匹配的题目数组
  */
-export function searchQuestions({ keyword, fields, category, scope, subject } = {}) {
+export function searchQuestions({
+  keyword,
+  fields,
+  category,
+  scope,
+  subject,
+} = {}) {
   if (!keyword?.trim()) return [];
   const kw = keyword.toLowerCase().trim();
-  const searchFields = fields || ['id', 'stem', 'options'];
+  const searchFields = fields || ["id", "stem", "options"];
 
   let questions = fetchAllQuestions();
 
-  if (category) questions = questions.filter((q) => q.meta?.category === category);
+  if (category)
+    questions = questions.filter((q) => q.meta?.category === category);
   if (scope) questions = questions.filter((q) => q.meta?.scope === scope);
   if (subject && subject.length) {
     const subjects = Array.isArray(subject) ? subject : [subject];
@@ -254,10 +265,20 @@ export function searchQuestions({ keyword, fields, category, scope, subject } = 
   }
 
   return questions.filter((q) => {
-    if (searchFields.includes('id') && q.id?.toLowerCase().includes(kw)) return true;
-    if (searchFields.includes('stem') && q.stem?.toLowerCase().includes(kw)) return true;
-    if (searchFields.includes('options') && q.options?.some((o) => o.toLowerCase().includes(kw))) return true;
-    if (searchFields.includes('answer') && q.answer?.some((a) => a.toLowerCase().includes(kw))) return true;
+    if (searchFields.includes("id") && q.id?.toLowerCase().includes(kw))
+      return true;
+    if (searchFields.includes("stem") && q.stem?.toLowerCase().includes(kw))
+      return true;
+    if (
+      searchFields.includes("options") &&
+      q.options?.some((o) => o.toLowerCase().includes(kw))
+    )
+      return true;
+    if (
+      searchFields.includes("answer") &&
+      q.answer?.some((a) => a.toLowerCase().includes(kw))
+    )
+      return true;
     return false;
   });
 }
