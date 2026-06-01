@@ -56,15 +56,15 @@
             <div v-if="expandedSubject === subject.name" class="subject-expanded">
               <div class="stats-row">
                 <div class="stat-item">
-                  <span class="stat-value">{{ getSubjectStats(subject.name).sessionCount }}</span>
+                  <span class="stat-value">{{ expandedSubjectStats?.sessionCount ?? 0 }}</span>
                   <span class="stat-label">{{ t('practiceSessions') }}</span>
                 </div>
                 <div class="stat-item">
-                  <span class="stat-value accent">{{ getSubjectStats(subject.name).accuracy }}%</span>
+                  <span class="stat-value accent">{{ expandedSubjectStats?.accuracy ?? 0 }}%</span>
                   <span class="stat-label">{{ t('accuracy') }}</span>
                 </div>
                 <div class="stat-item">
-                  <span class="stat-value warn">{{ getSubjectStats(subject.name).wrongCount }}</span>
+                  <span class="stat-value warn">{{ expandedSubjectStats?.wrongBookCount ?? 0 }}</span>
                   <span class="stat-label">{{ t('toReview') }}</span>
                 </div>
               </div>
@@ -72,7 +72,7 @@
               <div class="action-row">
                 <button v-if="hasProgress(subject)" class="new-btn" @click.stop="newQuizWith(subject)">{{ t('new')
                   }}</button>
-                <button v-if="getSubjectStats(subject.name).wrongCount > 0" class="wrong-btn"
+                <button v-if="(expandedSubjectStats?.wrongBookCount ?? 0) > 0" class="wrong-btn"
                   @click.stop="wrongPractice(subject)">
                   {{ t('wrongPractice') }}
                 </button>
@@ -97,12 +97,14 @@ import { useRouter } from 'vue-router'
 import PracticeSetting from '@/components/page/PracticeSettings.vue'
 import BankImport from '@/components/page/BankImport.vue'
 import { iconMap } from '@/assets/fonts/IconMaps.js'
-import { t, setLanguage, getLanguage } from '@/utils/i18n.js'
+import { t } from '@/utils/i18n.js'
 import { useAppStore } from '@/stores/store'
-import { getPracticeKey, normalizeStatus } from '@/utils/questionConfig'
+import { usePracticeService } from '@/composables/usePracticeService'
+import { computeSubjectStats } from '@/utils/stats'
+import { getPracticeKey } from '@/utils/questionConfig'
 
-// 创建 Store 实例
 const store = useAppStore()
+const pm = usePracticeService()
 const router = useRouter()
 
 const showPracticeSetting = ref(false)
@@ -116,47 +118,19 @@ function toggleExpand(subject) {
   expandedSubject.value = expandedSubject.value === subject.name ? null : subject.name
 }
 
-function getSubjectStats(subjectName) {
-  const sessions = store.practiceHistory.filter(h => h.config?.bank?.subject === subjectName)
-  const sessionCount = sessions.length
-
-  let correct = 0, wrong = 0
-  sessions.forEach(session => {
-    const answers = session.progress?.answers || {}
-    Object.values(answers).forEach(answer => {
-      if (!answer || !answer.status) return
-      if (typeof answer.status === 'string') {
-        const norm = normalizeStatus(answer.status)
-        if (norm === 'correct') correct++
-        else if (norm === 'wrong') wrong++
-      } else if (typeof answer.status === 'object') {
-        Object.values(answer.status).forEach(subStatus => {
-          const norm = normalizeStatus(subStatus)
-          if (norm === 'correct') correct++
-          else if (norm === 'wrong') wrong++
-        })
-      }
-    })
+const expandedSubjectStats = computed(() => {
+  if (!expandedSubject.value) return null
+  return computeSubjectStats(store.practiceHistory, store.wrongBook, {
+    category: selectedCategory.value,
+    scope: selectedScope.value,
+    subject: expandedSubject.value
   })
+})
 
-  const total = correct + wrong
-  const wrongCount = store.wrongBook.filter(q => q.meta?.subject === subjectName).length
-
-  return {
-    sessionCount,
-    accuracy: total > 0 ? Math.round((correct / total) * 100) : 0,
-    wrongCount
-  }
-}
-
-// 从 Store 获取题库元数据
 const bankMeta = computed(() => store.bankMeta)
 
-// 每次页面显示时刷新练习进度（从 localStorage 加载最新数据）
 onMounted(() => {
-  store.loadPracticeProgress()
-  store.loadPracticeHistory()
-  store.loadWrongBook()
+  pm.refresh()
 })
 
 // 使用 bankMeta 直接获取选项
@@ -274,7 +248,11 @@ const handleImportSuccess = (result) => {
 }
 
 const wrongPractice = (subject) => {
-  const wrongQuestions = store.wrongBook.filter(q => q.meta?.subject === subject.name)
+  const wrongQuestions = store.wrongBook.filter(q =>
+    q.meta?.category === selectedCategory.value &&
+    q.meta?.scope === selectedScope.value &&
+    q.meta?.subject === subject.name
+  )
   if (wrongQuestions.length === 0) return
 
   const practiceData = {

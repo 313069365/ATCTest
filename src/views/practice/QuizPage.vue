@@ -99,6 +99,7 @@ import AnswerCard from "@/components/page/AnswerCard.vue";
 import QustionNavbar from "@/components/layout/QuestionNavbar.vue";
 import QuestionRenderer from "@/components/question/QuestionRenderer.vue";
 import { useAppStore } from "@/stores/store";
+import { usePracticeService } from "@/composables/usePracticeService";
 import { t } from "@/utils/i18n.js";
 import { useQuestionHandler } from "@/composables/useQuestionHandler";
 import {
@@ -116,6 +117,7 @@ import {
 const router = useRouter();
 const route = useRoute();
 const store = useAppStore();
+const pm = usePracticeService();
 
 const showAnswerCard = ref(false);
 const showCheckBtn = ref(true);
@@ -160,7 +162,10 @@ onMounted(async () => {
       // 错题练习模式：仅保留错题
       if (practiceData.value?.wrongPractice && practiceData.value?.wrongQuestionIds) {
         const wrongIds = new Set(practiceData.value.wrongQuestionIds)
-        filtered = filtered.filter(q => wrongIds.has(q.id))
+        filtered = filtered.filter(q =>
+          wrongIds.has(q.id) ||
+          (q.subs && q.subs.some(sub => wrongIds.has(sub.sid)))
+        )
       }
 
       console.log("题目数量:", filtered.length);
@@ -407,8 +412,26 @@ const exitQuiz = () => {
 
 const finishQuiz = () => {
   if (confirm("确定完成答题并退出吗？")) {
-    // 保存当前进度再退出
-    addPracticeHistory();
+    const answers = packProgress(bank.value, userAnswers.value, answerChecked.value, answerStatus.value)
+    pm.completeSession(
+      {
+        bank: {
+          subject: practiceData.value?.subject?.name,
+          category: practiceData.value?.subject?.category,
+          scope: practiceData.value?.subject?.scope
+        },
+        mode: practiceData.value?.practiceMode,
+        questionSort: practiceData.value?.questionSort,
+        showAnswerMode: practiceData.value?.showAnswerMode,
+        autoJump: practiceData.value?.autoJump
+      },
+      {
+        answers,
+        questionIds: bank.value.map(q => q.id),
+        currentIndex: currentIndex.value,
+        elapsedSeconds: elapsedSeconds.value
+      }
+    )
     router.push({
       name: "PracticeResult",
       query: { practiceData: JSON.stringify(practiceData.value) },
@@ -465,7 +488,9 @@ const handleAnswer = (answer) => {
   userAnswers.value[question.id] = answer
   // 自动检查答案（立即显示模式）
   if (currentQuestionDisplay.shouldAutoCheck.value) {
+    const capturedId = question.id
     setTimeout(() => {
+      if (currentQuestion.value?.id !== capturedId) return
       checkAnswer()
     }, 100)
   }
@@ -473,7 +498,7 @@ const handleAnswer = (answer) => {
 
 // 检查答案
 const checkAnswer = () => {
-  const question = currentQuestion.value
+  const question = currentQuestionWithOptions.value || currentQuestion.value
   if (!question) return
 
   const questionId = question.id
@@ -488,14 +513,9 @@ const checkAnswer = () => {
     answerStatus.value[questionId] = status
     answerChecked.value[questionId] = true
 
-    // 添加错题
     question.subs?.forEach((sub, idx) => {
       if (status[idx] === 'wrong') {
-        store.addWrongQuestion({
-          ...sub,
-          parentId: questionId,
-          type: sub.type
-        })
+        pm.markWrong(sub, question)
       }
     })
   } else {
@@ -504,7 +524,7 @@ const checkAnswer = () => {
     answerChecked.value[questionId] = true
 
     if (status === 'wrong') {
-      store.addWrongQuestion(question)
+      pm.markWrong(question)
     }
   }
 
@@ -612,35 +632,6 @@ const savePracticeProgress = () => {
   )
   store.loadPracticeProgress();
 };
-
-// 手动添加的
-const addPracticeHistory = () => {
-  // 使用工具函数打包数据
-  const answers = packProgress(bank.value, userAnswers.value, answerChecked.value, answerStatus.value)
-
-  store.addPracticeHistory({
-    config: {
-      bank: {
-        subject: practiceData.value?.subject?.name,
-        category: practiceData.value?.subject?.category,
-        scope: practiceData.value?.subject?.scope
-      },
-      mode: practiceData.value?.practiceMode,
-      questionSort: practiceData.value?.questionSort,
-      showAnswerMode: practiceData.value?.showAnswerMode,
-      autoJump: practiceData.value?.autoJump
-    },
-    progress: {
-      currentIndex: currentIndex.value,
-      questionIds: bank.value.map(q => q.id),
-      answers: answers
-    },
-    meta: {
-      timestamp: Date.now(),
-      elapsedSeconds: elapsedSeconds.value
-    }
-  })
-}
 
 // 上一题
 const prevQuestion = () => {

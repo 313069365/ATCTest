@@ -51,17 +51,6 @@ export const useAppStore = defineStore("app", () => {
   /** 考试历史 (EXAM_HISTORY) */
   const examHistory = ref([]);
 
-  // ========== 统计相关 (STATS) ==========
-
-  /** 今日统计 (STATS_TODAY) */
-  const statsToday = ref({ answered: 0, correct: 0 });
-
-  /** 总统计 (STATS_TOTAL) */
-  const statsTotal = ref({ days: 0, totalCount: 0, correctCount: 0 });
-
-  /** 科目统计 (STATS_SUBJECT) */
-  const statsSubject = ref({});
-
   // ========== 计算属性 ==========
 
   /** 按科目分组的题目统计 */
@@ -353,32 +342,6 @@ export const useAppStore = defineStore("app", () => {
     practiceHistory.value = storage.getItem(STORAGE_KEY.PRACTICE_HISTORY) || [];
   }
 
-  // ========== 统计 Actions ==========
-
-  /**
-   * 更新今日统计
-   */
-  function updateStatsToday(answered, correct) {
-    statsToday.value = { answered, correct };
-    storage.setItem(STORAGE_KEY.STATS_TODAY, statsToday.value);
-  }
-
-  /**
-   * 加载统计
-   */
-  function loadStats() {
-    statsToday.value = storage.getItem(STORAGE_KEY.STATS_TODAY) || {
-      answered: 0,
-      correct: 0,
-    };
-    statsTotal.value = storage.getItem(STORAGE_KEY.STATS_TOTAL) || {
-      days: 0,
-      totalCount: 0,
-      correctCount: 0,
-    };
-    statsSubject.value = storage.getItem(STORAGE_KEY.STATS_SUBJECT) || {};
-  }
-
   // ========== 初始化 ==========
 
   /**
@@ -390,7 +353,6 @@ export const useAppStore = defineStore("app", () => {
     loadFavorites();
     loadPracticeProgress();
     loadPracticeHistory();
-    loadStats();
     loadExamPapers();
   }
 
@@ -575,13 +537,6 @@ export const useAppStore = defineStore("app", () => {
     clearPracticeProgress,
     loadPracticeHistory,
     addPracticeHistory,
-
-    // 统计
-    statsToday,
-    statsTotal,
-    statsSubject,
-    updateStatsToday,
-    loadStats,
 
     // 考试
     examPapers,

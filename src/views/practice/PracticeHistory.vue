@@ -1,7 +1,7 @@
 <template>
   <div class="page">
     <header class="top-bar">
-      <button class="back-btn">
+      <button class="back-btn" @click="$router.back()">
         <span class="material-symbols-outlined">arrow_back</span>
       </button>
       <h1>历史记录</h1>
@@ -15,28 +15,28 @@
         <div class="stat-card">
           <span class="material-symbols-outlined stat-icon">assignment</span>
           <div class="stat-info">
-            <span class="stat-value">12</span>
+            <span class="stat-value">{{ pm.sessions.value.length }}</span>
             <span class="stat-label">总练习</span>
           </div>
         </div>
         <div class="stat-card">
           <span class="material-symbols-outlined stat-icon">target</span>
           <div class="stat-info">
-            <span class="stat-value">78%</span>
+            <span class="stat-value">{{ pm.overallStats.value.accuracy }}%</span>
             <span class="stat-label">正确率</span>
           </div>
         </div>
         <div class="stat-card">
           <span class="material-symbols-outlined stat-icon">history</span>
           <div class="stat-info">
-            <span class="stat-value">12</span>
+            <span class="stat-value">{{ pm.sessions.value.length }}</span>
             <span class="stat-label">记录条数</span>
           </div>
         </div>
       </div>
 
       <div class="history-list">
-        <div v-for="item in mockHistory" :key="item.id" class="history-card" :class="item.class">
+        <div v-for="item in list" :key="item.id" class="history-card" :class="item.class">
           <div class="card-body">
             <div class="card-header">
               <div class="header-main">
@@ -62,21 +62,10 @@
               </div>
             </div>
           </div>
-
-          <div class="card-footer">
-            <button class="action-btn review-btn">
-              <span class="material-symbols-outlined">refresh</span>
-              <span>复习</span>
-            </button>
-            <button class="action-btn delete-btn">
-              <span class="material-symbols-outlined">delete</span>
-              <span>删除</span>
-            </button>
-          </div>
         </div>
       </div>
 
-      <div class="empty-state" v-if="mockHistory.length === 0">
+      <div class="empty-state" v-if="list.length === 0">
         <div class="empty-icon-wrapper">
           <span class="material-symbols-outlined">history</span>
         </div>
@@ -89,41 +78,56 @@
 </template>
 
 <script setup>
-const mockHistory = [
-  {
-    id: 1,
-    subjectName: '空管英语 - 听力专项',
-    date: '2小时前',
-    accuracy: 85,
-    accuracyClass: 'excellent',
-    class: 'excellent',
-    correct: 17,
-    total: 20,
-    time: '15分钟'
-  },
-  {
-    id: 2,
-    subjectName: '专业英语 - 词汇练习',
-    date: '昨天',
-    accuracy: 72,
-    accuracyClass: 'good',
-    class: 'good',
-    correct: 18,
-    total: 25,
-    time: '20分钟'
-  },
-  {
-    id: 3,
-    subjectName: '雷达基础 - 操作流程',
-    date: '3天前',
-    accuracy: 55,
-    accuracyClass: 'needs-work',
-    class: 'needs-work',
-    correct: 11,
-    total: 20,
-    time: '18分钟'
-  }
-]
+import { computed, onMounted } from 'vue'
+import { usePracticeService } from '@/composables/usePracticeService'
+import { t } from '@/utils/i18n.js'
+
+const pm = usePracticeService()
+
+onMounted(() => {
+  pm.refresh()
+})
+
+const list = computed(() =>
+  pm.sessions.value.slice(0, 50).map(s => {
+    const st = pm.getSessionStats(s)
+    const ts = s.meta?.timestamp || s.timestamp
+    const date = ts ? formatRelativeTime(ts) : ''
+    const cls = st.accuracy >= 80 ? 'excellent' : st.accuracy >= 60 ? 'good' : 'needs-work'
+    const timeStr = formatDuration(st.elapsedSeconds)
+    return {
+      id: ts || Math.random(),
+      subjectName: t(st.subject) || st.subject,
+      date,
+      accuracy: st.accuracy,
+      class: cls,
+      accuracyClass: cls,
+      correct: st.correctCount,
+      total: st.totalQuestions,
+      time: timeStr
+    }
+  })
+)
+
+function formatRelativeTime(ts) {
+  const diff = Date.now() - ts
+  const minutes = Math.floor(diff / 60000)
+  const hours = Math.floor(diff / 3600000)
+  const days = Math.floor(diff / 86400000)
+  if (minutes < 1) return '刚刚'
+  if (minutes < 60) return `${minutes}分钟前`
+  if (hours < 24) return `${hours}小时前`
+  if (days < 7) return `${days}天前`
+  const d = new Date(ts)
+  return `${d.getMonth() + 1}月${d.getDate()}日`
+}
+
+function formatDuration(seconds) {
+  const m = Math.floor(seconds / 60)
+  const s = seconds % 60
+  if (m === 0) return `${s}秒`
+  return `${m}分钟${s}秒`
+}
 </script>
 
 <style scoped>

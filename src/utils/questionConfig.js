@@ -355,7 +355,7 @@ export function getSimpleStatus(question, userAnswer) {
     if ([...userSet].some((v) => !correctSet.has(v))) return "wrong";
     return "partial";
   } else {
-    if (typeof userAnswer !== "number") return "wrong";
+    if (typeof userAnswer !== "number") return "unanswered";
     const userText = Array.isArray(question.options)
       ? question.options?.[userAnswer]?.replace(/^[A-Z]\.\s*/, "")
       : question.options?.[String.fromCharCode(65 + userAnswer)]?.replace(

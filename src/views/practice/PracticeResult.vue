@@ -78,37 +78,35 @@
 import { ref, computed, onMounted } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import { useAppStore } from "@/stores/store";
+import { usePracticeService } from "@/composables/usePracticeService";
 import { t } from "@/utils/i18n.js";
-import { getBatchStats, countQuestions, getPracticeKey } from "@/utils/questionConfig";
+import { getPracticeKey } from "@/utils/questionConfig";
 
 const router = useRouter();
 const route = useRoute();
 const store = useAppStore();
+const pm = usePracticeService();
 
 const practiceData = ref(null);
-const correctCount = ref(0);
-const wrongCount = ref(0);
-const unknownCount = ref(0);
-const unansweredCount = ref(0);
-const elapsedSeconds = ref(0);
-const subjectName = ref('');
-const totalQuestionCount = ref(0);
-const bank = ref([]);
-
-const accuracy = computed(() => {
-  if (totalQuestionCount.value === 0) return 0;
-  return Math.round((correctCount.value / totalQuestionCount.value) * 100);
-});
+const stats = ref(null);
 
 const formattedTime = computed(() => {
-  const hours = Math.floor(elapsedSeconds.value / 3600);
-  const minutes = Math.floor((elapsedSeconds.value % 3600) / 60);
-  const seconds = elapsedSeconds.value % 60;
+  if (!stats.value) return '00:00';
+  const hours = Math.floor(stats.value.elapsedSeconds / 3600);
+  const minutes = Math.floor((stats.value.elapsedSeconds % 3600) / 60);
+  const seconds = stats.value.elapsedSeconds % 60;
   if (hours > 0) {
     return `${hours}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
   }
   return `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
 });
+
+const accuracy = computed(() => stats.value?.accuracy ?? 0);
+const correctCount = computed(() => stats.value?.correctCount ?? 0);
+const wrongCount = computed(() => stats.value?.wrongCount ?? 0);
+const unknownCount = computed(() => stats.value?.unknownCount ?? 0);
+const unansweredCount = computed(() => stats.value?.unansweredCount ?? 0);
+const subjectName = computed(() => stats.value?.subject ?? '');
 
 onMounted(async () => {
   await store.loadPracticeHistory();
@@ -120,52 +118,7 @@ onMounted(async () => {
   }
 
   practiceData.value = history;
-  
-  // 获取科目名称并加载题目数据
-  subjectName.value = history.config?.bank?.subject || '';
-  if (subjectName.value) {
-    await store.loadSubjectQuestions(subjectName.value);
-    bank.value = [...store.rawQuestions];
-  }
-  
-  const answers = history.progress?.answers || {};
-  const questionIds = history.progress?.questionIds || [];
-  
-  // 如果有题目数据，使用工具函数统计
-  if (bank.value.length > 0) {
-    const stats = getBatchStats(bank.value, answers)
-    correctCount.value = stats.correctCount
-    wrongCount.value = stats.wrongCount
-    unknownCount.value = stats.unknownCount
-    unansweredCount.value = stats.unansweredCount
-    totalQuestionCount.value = stats.totalCount
-  } else {
-    // 兼容模式：从 answers 手动统计
-    const flatAnswers = [];
-    Object.entries(answers).forEach(([questionId, data]) => {
-      if (data?.status && typeof data.status === 'object') {
-        // 复合题
-        Object.entries(data.status).forEach(([subIdx, status]) => {
-          flatAnswers.push({ questionId, subIndex: parseInt(subIdx), status })
-        })
-      } else {
-        flatAnswers.push({ questionId, status: data?.status || 'unanswered' })
-      }
-    })
-    
-    flatAnswers.forEach(item => {
-      const s = item.status === 'partial' ? 'wrong' : (item.status || 'unanswered')
-      if (s === 'correct') correctCount.value++
-      else if (s === 'wrong') wrongCount.value++
-      else if (s === 'unknown') unknownCount.value++
-      else unansweredCount.value++
-    })
-    
-    totalQuestionCount.value = flatAnswers.length
-  }
-
-  elapsedSeconds.value = history.meta?.elapsedSeconds || 0;
-  subjectName.value = history.config?.bank?.subject || '';
+  stats.value = pm.getSessionStats(history);
 
   const bank = history.config?.bank
   if (bank) {
