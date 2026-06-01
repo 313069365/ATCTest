@@ -12,7 +12,7 @@
         <div class="reading-content" v-show="readingExpanded">
           {{ question.media.article }}
           <br>
-          {{ question.translation.article }}
+          <span v-if="showTranslation">{{ question.translation.article }}</span>
         </div>
       </div>
 
@@ -35,7 +35,7 @@
 </template>
 
 <script setup>
-import { ref, computed, watch } from 'vue'
+import { ref, computed, watch, inject } from 'vue'
 import { t } from '@/utils/i18n.js'
 import { getStatusClass, getCurrentStatusClass, getAnswerStatus } from '@/utils/questionConfig'
 import { useQuestionHandler, canAutoCheck, normalizeStatus } from '@/composables/useQuestionHandler'
@@ -98,6 +98,8 @@ const props = defineProps({
 })
 
 const emit = defineEmits(['answer', 'checkSub', 'next-question'])
+
+const showTranslation = inject('showTranslation', ref(false))
 
 const readingExpanded = ref(false)
 const currentSubIndex = ref(0)
