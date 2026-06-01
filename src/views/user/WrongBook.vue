@@ -33,6 +33,18 @@
         </div>
       </div>
 
+      <!-- 错题巩固 -->
+      <button class="practice-all-btn" @click="startWrongPractice" v-if="wrongList.length > 0">
+        <div class="practice-all-left">
+          <span class="material-symbols-outlined practice-all-icon">rate_review</span>
+          <div class="practice-all-text">
+            <span class="practice-all-title">{{ t('practiceWrong') }}</span>
+            <span class="practice-all-desc">{{ t('wrongReviewDesc', { count: wrongList.length }) }}</span>
+          </div>
+        </div>
+        <span class="material-symbols-outlined practice-all-arrow">chevron_right</span>
+      </button>
+
       <!-- 错题列表 -->
       <div class="wrong-list" v-if="wrongList.length > 0">
         <div class="wrong-card-wrapper" v-for="(item, index) in paginatedList" :key="item.id">
@@ -57,7 +69,7 @@
             </div>
 
             <div class="wrong-answer-section">
-              <span class="answer-correct">{{ item.explanation }}</span>
+              <!-- <span class="answer-correct">{{ item.explanation }}</span> -->
             </div>
 
             <div class="wrong-footer">
@@ -139,6 +151,24 @@ function handleScroll() {
 
 function goBack() {
   router.back()
+}
+
+function startWrongPractice() {
+  router.push({
+    path: '/practice/quiz',
+    query: {
+      practiceData: JSON.stringify({
+        source: 'wrongbook',
+        subject: { name: 'practiceWrong' },
+        category: 'wrongBook',
+        scope: 'wrongBook',
+        practiceMode: 'answer',
+        questionSort: 'shuffle',
+        showAnswerMode: 'immediate',
+        autoJump: false
+      })
+    }
+  })
 }
 
 function goPractice() {
@@ -539,5 +569,57 @@ function getWrongCount(questionId) {
 .start-btn:active {
   transform: scale(0.96);
   box-shadow: 0 2px 8px rgba(0, 91, 191, 0.2);
+}
+
+.practice-all-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--spacing-md) var(--spacing-lg);
+  margin-bottom: var(--spacing-md);
+  background: var(--primary);
+  border: none;
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  transition: transform 0.15s;
+  color: var(--on-primary);
+}
+
+.practice-all-btn:active {
+  transform: scale(0.98);
+}
+
+.practice-all-left {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+
+.practice-all-icon {
+  font-size: 28px;
+  color: var(--on-primary);
+}
+
+.practice-all-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+}
+
+.practice-all-title {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+}
+
+.practice-all-desc {
+  font-size: var(--font-size-sm);
+  opacity: 0.85;
+}
+
+.practice-all-arrow {
+  font-size: 24px;
+  color: var(--on-primary);
 }
 </style>

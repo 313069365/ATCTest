@@ -26,6 +26,18 @@
         </div>
       </div>
 
+      <!-- 收藏加强 -->
+      <button class="practice-all-btn" @click="startFavoritesPractice" v-if="favoritesList.length > 0">
+        <div class="practice-all-left">
+          <span class="material-symbols-outlined practice-all-icon">star</span>
+          <div class="practice-all-text">
+            <span class="practice-all-title">{{ t('practiceFavorites') }}</span>
+            <span class="practice-all-desc">{{ t('favoritesReviewDesc', { count: favoritesList.length }) }}</span>
+          </div>
+        </div>
+        <span class="material-symbols-outlined practice-all-arrow">chevron_right</span>
+      </button>
+
       <!-- 收藏列表 -->
       <div class="favorites-list" v-if="favoritesList.length > 0">
         <div class="favorite-card-wrapper" v-for="(item, index) in paginatedList" :key="item.id">
@@ -46,7 +58,7 @@
               <span class="favorite-type-tag">{{ t('answer') }}: {{ formatAnswer(item.answer) }}</span>
             </div>
             <div class="favorite-footer">
-              <span class="favorite-type-tag">{{ item.explanation }}</span>
+              <!-- <span class="favorite-type-tag">{{ item.explanation }}</span> -->
             </div>
           </div>
         </div>
@@ -117,6 +129,24 @@ function handleScroll() {
 
 function goBack() {
   router.back()
+}
+
+function startFavoritesPractice() {
+  router.push({
+    path: '/practice/quiz',
+    query: {
+      practiceData: JSON.stringify({
+        source: 'favorites',
+        subject: { name: 'practiceFavorites' },
+        category: 'favorites',
+        scope: 'favorites',
+        practiceMode: 'answer',
+        questionSort: 'shuffle',
+        showAnswerMode: 'immediate',
+        autoJump: false
+      })
+    }
+  })
 }
 
 function goPractice() {
@@ -491,5 +521,57 @@ function formatAnswer(answer) {
 .start-btn:active {
   transform: scale(0.96);
   box-shadow: 0 2px 8px rgba(0, 91, 191, 0.2);
+}
+
+.practice-all-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--spacing-md) var(--spacing-lg);
+  margin-bottom: var(--spacing-md);
+  background: var(--primary);
+  border: none;
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  transition: transform 0.15s;
+  color: var(--on-primary);
+}
+
+.practice-all-btn:active {
+  transform: scale(0.98);
+}
+
+.practice-all-left {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+
+.practice-all-icon {
+  font-size: 28px;
+  color: var(--on-primary);
+}
+
+.practice-all-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+}
+
+.practice-all-title {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+}
+
+.practice-all-desc {
+  font-size: var(--font-size-sm);
+  opacity: 0.85;
+}
+
+.practice-all-arrow {
+  font-size: 24px;
+  color: var(--on-primary);
 }
 </style>

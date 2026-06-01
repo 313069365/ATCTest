@@ -160,7 +160,7 @@ const translations = {
     boolean: "True/False",
     noExplanation: "No explanation available",
     readingMaterial: "Reading Material",
-    correctAnswer: "Correct Answer",
+    correctAnswer: "Reference Answer",
     practiceStats: "Practice Stats",
     answered: "Answered",
     progress: "Progress",
@@ -226,6 +226,12 @@ const translations = {
     nextQuestion: "Next",
     startPracticeWithSubject: "Practice This Subject",
     removeFromWrong: "Remove from Wrong Book",
+
+    // Wrong Book / Favorites Practice
+    practiceWrong: "Wrong Review",
+    practiceFavorites: "Favorites Review",
+    wrongReviewDesc: "{count} questions to review",
+    favoritesReviewDesc: "{count} questions to review",
   },
 
   zh: {
@@ -391,7 +397,7 @@ const translations = {
     boolean: "判断题",
     noExplanation: "暂无解析",
     readingMaterial: "阅读材料",
-    correctAnswer: "正确答案",
+    correctAnswer: "参考答案",
     practiceStats: "答题统计",
     answered: "已答",
     progress: "进度",
@@ -457,6 +463,12 @@ const translations = {
     nextQuestion: "下一题",
     startPracticeWithSubject: "开始练习该科目",
     removeFromWrong: "移出错题集",
+
+    // Wrong Book / Favorites Practice
+    practiceWrong: "错题巩固",
+    practiceFavorites: "收藏加强",
+    wrongReviewDesc: "共 {count} 道错题，开始练习",
+    favoritesReviewDesc: "共 {count} 道收藏题，开始练习",
   },
 };
 
@@ -466,9 +478,15 @@ function getLanguage() {
 }
 
 // 翻译函数
-function t(key) {
+function t(key, params) {
   const lang = getLanguage();
-  return translations[lang]?.[key] || translations.zh[key] || key;
+  let str = translations[lang]?.[key] || translations.zh[key] || key;
+  if (params) {
+    Object.keys(params).forEach((k) => {
+      str = str.replace(`{${k}}`, params[k]);
+    });
+  }
+  return str;
 }
 
 // 设置语言

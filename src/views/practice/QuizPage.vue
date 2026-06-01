@@ -128,6 +128,23 @@ const route = useRoute();
 const store = useAppStore();
 const pm = usePracticeService();
 
+const questionLoaders = {
+  bank: async (data) => {
+    const subjectName = typeof data.subject === 'object' ? data.subject.name : data.subject
+    await store.loadSubjectQuestions(subjectName)
+    let questions = [...store.rawQuestions]
+    if (data.wrongPractice && data.wrongQuestionIds) {
+      const wrongIds = new Set(data.wrongQuestionIds)
+      questions = questions.filter(q =>
+        wrongIds.has(q.id) || (q.subs && q.subs.some(sub => wrongIds.has(sub.sid)))
+      )
+    }
+    return questions
+  },
+  wrongbook: () => [...store.wrongBook],
+  favorites: () => [...store.favorites],
+}
+
 const showAnswerCard = ref(false);
 const showCheckBtn = ref(true);
 const showAnswerExplanation = ref(false);
@@ -147,108 +164,90 @@ const elapsedSeconds = ref(0); // 已用时间（秒）
 let timerInterval = null; // 计时器 interval
 
 onMounted(async () => {
-  // 从 query 获取练习数据
-  if (route.query.practiceData) {
-    try {
-      practiceData.value = JSON.parse(route.query.practiceData);
-      const { category, scope, subject, questionSort } = practiceData.value;
-
-      // subject 可能是对象 { name, category, scope } 或字符串
-      const subjectName = typeof subject === "object" ? subject.name : subject;
-
-      console.log("QuizPage 接收参数:", {
-        category,
-        scope,
-        subject: subjectName,
-        questionSort,
-      });
-
-      // 加载该科目的题目
-      await store.loadSubjectQuestions(subjectName);
-
-      // 使用加载的题目
-      let filtered = [...store.rawQuestions];
-
-      // 错题练习模式：仅保留错题
-      if (practiceData.value?.wrongPractice && practiceData.value?.wrongQuestionIds) {
-        const wrongIds = new Set(practiceData.value.wrongQuestionIds)
-        filtered = filtered.filter(q =>
-          wrongIds.has(q.id) ||
-          (q.subs && q.subs.some(sub => wrongIds.has(sub.sid)))
-        )
-      }
-
-      console.log("题目数量:", filtered.length);
-
-      // 加载已保存的进度
-      const practiceKey = getPracticeKey({ bank: { category, scope, subject: subjectName } });
-      const savedProgress = store.getPracticeProgress(practiceKey);
-      const isContinue = route.query.continue === 'true';
-      const isNewPractice = route.query.newPractice === 'true';
-      const isSameSubject = savedProgress?.config?.bank?.subject === subjectName;
-
-      // 排序逻辑
-      if (isContinue && isSameSubject && savedProgress?.progress?.questionIds?.length > 0) {
-        // 继续练习：恢复之前保存的顺序
-        const savedQuestionIds = savedProgress.progress.questionIds;
-        const existingQuestions = new Set(filtered.map(q => q.id));
-        const validIds = savedQuestionIds.filter(id => existingQuestions.has(id));
-
-        bank.value = validIds.map(id => filtered.find(q => q.id === id)).filter(Boolean);
-        console.log("已恢复题目顺序，题数:", bank.value.length);
-      } else if (isNewPractice) {
-        // 新的练习：应用新的排序设置（背题模式不乱序）
-        if (practiceData.value?.practiceMode !== 'review') {
-          if (questionSort === QUESTION_SORT.SHUFFLE) {
-            filtered = shuffleArray(filtered);
-          } else if (questionSort === QUESTION_SORT.REVERSE) {
-            filtered = [...filtered].reverse();
-          }
-        }
-        bank.value = filtered;
-      } else {
-        // 默认行为（无特殊参数）
-        if (practiceData.value?.practiceMode !== 'review') {
-          if (questionSort === QUESTION_SORT.SHUFFLE) {
-            filtered = shuffleArray(filtered);
-          } else if (questionSort === QUESTION_SORT.REVERSE) {
-            filtered = [...filtered].reverse();
-          }
-        }
-        bank.value = filtered;
-      }
-
-      // 缓存选项乱序
-      cacheShuffledOptions();
-      console.log("bank.value 长度:", bank.value.length);
-
-      // 加载练习进度（断点续练）
-      loadPracticeProgress();
-
-      // 背题模式：初始化时直接显示答案
-      if (practiceData.value?.practiceMode === 'review') {
-        showCheckBtn.value = false;
-        showAnswerExplanation.value = true;
-      }
-
-      // 恢复或开始计时
-      if (isContinue && store.practiceProgress?.[practiceKey]?.meta?.elapsedSeconds) {
-        // 继续练习：恢复之前的计时
-        elapsedSeconds.value = store.practiceProgress[practiceKey].meta.elapsedSeconds;
-      } else {
-        // 新练习：重置计时器
-        elapsedSeconds.value = 0;
-      }
-      startTimer();
-    } catch (e) {
-      console.error("解析练习数据失败:", e);
-      router.push({ name: "Practice" });
-    }
-  } else {
-    router.push({ name: "Practice" });
+  if (!route.query.practiceData) {
+    router.push({ name: "Practice" })
+    loading.value = false
+    return
   }
-  loading.value = false;
-});
+
+  try {
+    practiceData.value = JSON.parse(route.query.practiceData)
+    const { category, scope, subject, questionSort, source: dataSource } = practiceData.value
+    const source = dataSource || 'bank'
+    const subjectName = typeof subject === "object" ? subject.name : subject
+
+    console.log("QuizPage 接收参数:", { category, scope, subject: subjectName, questionSort, source })
+
+    const loader = questionLoaders[source]
+    if (!loader) {
+      router.push({ name: "Practice" })
+      loading.value = false
+      return
+    }
+
+    let questions = await loader(practiceData.value)
+
+    if (questions.length === 0) {
+      if (source === 'wrongbook') router.push({ name: 'WrongBook' })
+      else if (source === 'favorites') router.push({ name: 'Favorites' })
+      else router.push({ name: 'Practice' })
+      loading.value = false
+      return
+    }
+
+    console.log("题目数量:", questions.length)
+
+    const practiceKey = getPracticeKey({ bank: { category, scope, subject: subjectName } })
+    const isContinue = route.query.continue === 'true'
+
+    if (source === 'bank' && isContinue) {
+      const savedProgress = store.getPracticeProgress(practiceKey)
+      const isSameSubject = savedProgress?.config?.bank?.subject === subjectName
+      if (isSameSubject && savedProgress?.progress?.questionIds?.length > 0) {
+        const savedQuestionIds = savedProgress.progress.questionIds
+        const existingQuestions = new Set(questions.map(q => q.id))
+        const validIds = savedQuestionIds.filter(id => existingQuestions.has(id))
+        questions = validIds.map(id => questions.find(q => q.id === id)).filter(Boolean)
+        console.log("已恢复题目顺序，题数:", questions.length)
+      }
+    } else if (source === 'bank') {
+      if (practiceData.value?.practiceMode !== 'review') {
+        if (questionSort === QUESTION_SORT.SHUFFLE) {
+          questions = shuffleArray(questions)
+        } else if (questionSort === QUESTION_SORT.REVERSE) {
+          questions = [...questions].reverse()
+        }
+      }
+    } else {
+      questions = [...questions].sort(() => Math.random() - 0.5)
+    }
+
+    bank.value = questions
+
+    cacheShuffledOptions()
+    console.log("bank.value 长度:", bank.value.length)
+
+    if (source === 'bank') {
+      loadPracticeProgress()
+    }
+
+    if (practiceData.value?.practiceMode === 'review') {
+      showCheckBtn.value = false
+      showAnswerExplanation.value = true
+    }
+
+    if (source === 'bank' && isContinue && store.practiceProgress?.[practiceKey]?.meta?.elapsedSeconds) {
+      elapsedSeconds.value = store.practiceProgress[practiceKey].meta.elapsedSeconds
+    } else {
+      elapsedSeconds.value = 0
+    }
+    startTimer()
+  } catch (e) {
+    console.error("解析练习数据失败:", e)
+    router.push({ name: "Practice" })
+  }
+  loading.value = false
+})
 
 // 页面卸载时停止计时并保存进度（刷新、关闭页面等）
 onUnmounted(() => {
@@ -651,6 +650,10 @@ const loadPracticeProgress = () => {
 
 // 保存练习进度
 const savePracticeProgress = () => {
+  // 错题本/收藏本练习不保存进度（无法通过题库继续）
+  const source = practiceData.value?.source
+  if (source && source !== 'bank') return
+
   // 使用工具函数保存进度
   saveProgress(
     {
