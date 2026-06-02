@@ -114,6 +114,7 @@
               }}</span>
           </div>
           <div class="result-stem" v-html="highlightText(q.stem)"></div>
+          <div v-if="q.answer?.length" class="result-answer" v-html="highlightText(formatAnswer(q.answer))"></div>
         </div>
       </div>
     </div>
@@ -264,6 +265,11 @@ function doSearch() {
       searching.value = false
     }
   }, 0)
+}
+
+function formatAnswer(answer) {
+  if (!answer || !answer.length) return ''
+  return answer.map(a => a.replace(/^[A-Da-d][.、\s]+/, '')).join('、')
 }
 
 function highlightText(text) {
@@ -603,6 +609,31 @@ onMounted(async () => {
 }
 
 .result-stem :deep(.highlight) {
+  background: var(--secondary-light);
+  color: var(--text-primary);
+  border-radius: 2px;
+  padding: 0 2px;
+}
+
+.result-answer {
+  margin-top: var(--spacing-sm);
+  font-size: var(--font-size-md);
+  line-height: var(--line-height-relaxed);
+  color: var(--primary);
+  font-weight: 500;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  word-break: break-all;
+}
+
+.result-answer::before {
+  content: '✓ ';
+  font-weight: 700;
+}
+
+.result-answer :deep(.highlight) {
   background: var(--secondary-light);
   color: var(--text-primary);
   border-radius: 2px;

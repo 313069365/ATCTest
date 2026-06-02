@@ -47412,7 +47412,7 @@
     "shuffle": true,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": " 3300 + 600（山区超障）=3900，另外更具东单西双航路，所以 4200 米",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -50135,7 +50135,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "【只有Ⅰ类 ILS 】精密进近，使用的余度为75m。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -52726,7 +52726,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "时间前【45】分钟向",
+    "explanation": "时间前【45】分钟",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
