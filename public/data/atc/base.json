@@ -7727,7 +7727,7 @@
     "shuffle": false,
     "degree": 1,
     "subs": null,
-    "explanation": "在有较强的风吹过山脉时，由于山脉对气流的扰动作用，在一定条件下，可在山的背风面形成【重力波】，我们称这种波为山地背风波或山岳波",
+    "explanation": "山地背风波是一种有序，周期性起伏气流，不是湍流（乱流）。在有较强的风吹过山脉时，由于山脉对气流的扰动作用，在一定条件下，可在山的背风面形成【重力波】，我们称这种波为山地背风波或山岳波",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -9618,7 +9618,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "海平面气压就是修正海压的一种叫法，QNH。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -14600,7 +14600,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "空速不变，风速矢量变化，连接空速起点和风速终点。",
+    "explanation": "💡速记技巧：空速三角形，投影分量。空速不变，风速矢量变化，连接空速起点和风速终点。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -44815,7 +44815,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "⚠️ 参考答案可能有误，应为水平面",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -50377,7 +50377,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "【10】",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -50397,7 +50397,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "飞行进程单应当妥善保存，以备查验，保存期为【一个月】。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -50417,7 +50417,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "【15】时",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -50457,7 +50457,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "两次工作的时间间隔不得少于【半】小时。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -50589,7 +50589,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "保持【500 米】",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -50614,7 +50614,7 @@
     "shuffle": true,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "【三年】以上",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -50879,7 +50879,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "【零高度】，零点高度是基于 QNE",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -50939,7 +50939,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "【可以省略】地名",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -51169,7 +51169,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "💡：中间不带等于",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -51209,7 +51209,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "【C】",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -51269,7 +51269,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "【1.3】",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -51639,7 +51639,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "平原【400】，山区【600】",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -52406,7 +52406,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "台上空前【30】分钟",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -52426,7 +52426,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "900m以上高度，【15 分钟】，16公里距边缘，19 公里距放油点。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -52726,7 +52726,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "时间前【45】分钟向",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -52766,7 +52766,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "应当在航空器预计起飞时间前【20】分钟通知塔台管制室",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -52806,7 +52806,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "应当在该航空器飞入本管制区【10】分钟前向上一区域管制室提出。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -52826,7 +52826,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "在航线两侧各25km以内的标高不高于【100m】、",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -52886,7 +52886,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "从航空器飞行的方向向右转30度，并且以此航向飞行【20km】，",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -52906,7 +52906,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "【任何情况都不允许】",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -52931,7 +52931,7 @@
     "shuffle": true,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "C 是地区级流量管理单位",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -53108,7 +53108,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "因航线天气恶劣需要改变预定飞行航线时，由有关航空器经营人或【中国民航局空管局】飞行流量管理单位提出申请，经中国民航局协调有关单位后，通知有关地区空管局飞行流量管理单位和空中交通管制单位。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -53148,7 +53148,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "预计扇区或区域流量超过负荷需要改变航线或航段时，由有关区域管制室向地区空管局飞行流量管理单位报告，【如果采取的措施只涉及本区管制单位，】则由地区空管局飞行流量管理单位协调当地有关单位后发布改变航线或航段的通知，并抄报民航局空管局飞行流量管理单位备案。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -53542,7 +53542,7 @@
     "shuffle": true,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "💡速记技巧：三五一十五，3，5，15",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -54144,7 +54144,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "A 类运输航空严重征候",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -54164,7 +54164,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "B 类运输航空一般征候",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -54184,7 +54184,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "A 类要极端措施",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -54204,7 +54204,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "在程序管制区域，垂直间隔和水平间隔同时小于1/3但未同时小于1/5规定间隔。该事件属于运输航空【一般】征候。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -54224,7 +54224,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "在程序管制区域，垂直间隔和水平间隔同时小于1/5规定间隔。该事件属于运输航空【严重】征候。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -54251,7 +54251,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "💡速记技巧：沈万三。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -54341,7 +54341,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "在航空器起飞阶段或进近着陆阶段机场标高60m以下发生的跑道侵入属于运输航空【紧急事件】。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -54401,7 +54401,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "飞行中，航空器与航空器之间小于规定间隔（不考虑容差）或平行跑道同时仪表进近运行时航空器进入非侵入区（NTZ）的属于运输航空【紧急事件】。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -54421,7 +54421,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "飞偏或飞错进离场航线或未正确执行复飞程序并造成其他航空器避让（例如：调整速度、调整高度、调整航向、调整航路）的属于运输航空【紧急事件】。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -54441,7 +54441,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "飞行中，区域范围内，陆空通信双向联系中断【5min】（含）以上的属于运输航空非紧急事件。【20 min】 以上紧急事件。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -54501,7 +54501,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "飞行中，进近或塔台范围内，陆空通信双向联系中断 2min （含）以上的属于运输航空非紧急事件。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -54541,7 +54541,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "偏离指定进离场航线5km或2倍RNP值以上、飞错进离场航线或未正确执行复飞程序的属于运输航空【非紧急事件】。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -54561,7 +54561,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "未得到许可推出、起动、滑行、起飞或着陆的属于运输航空【非紧急事件】。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -56381,7 +56381,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "【60 米】",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -56401,7 +56401,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "雷达管制员在与航空器建立联系时应当要求航空器驾驶员证实高度，但下列情况除外：（一）航空器驾驶员报告了高度；（二）管制员为正常上升和下降的航空器指定了一个新的高度；（三）航空器高度已经被确认，雷达数据表明航空器在指定的高度上飞行；（四）航空器为从本系统中其他席位或者扇区移交过来的。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -56421,7 +56421,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "二次雷达编码是按管制区 / 地区固定分配、分区使用的，不得随意借用相邻管制区编码。各管制单位只能使用总局空管局分配给本地区的代码段，防止重叠、重码冲突。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -56441,7 +56441,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "发现应答机显示不正常或不显示时，雷达管制员应当迅速通知有关航空器，查明相关管制席位是否已了解航空器应答机工作不正常或不工作的情况，并应当采取适当措施进行证实。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -56501,7 +56501,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "【CNL】，CPL 现行飞行计划报 / Current Flight Plan",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -56561,7 +56561,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "运输航空【严重征候】",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -56581,7 +56581,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "运输航空【严重】征候",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -56641,7 +56641,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "【《民用航空安全信息报告表》】报事发地监管局",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -56681,7 +56681,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "12 小时内报监管局",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -56701,7 +56701,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "【15 分钟】",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -56721,7 +56721,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "【±15 分钟】",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -56761,7 +56761,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "【运输航空一般事故征候】",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -56781,7 +56781,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "题目信息不全。飞行中遇有颠簸或机组操纵等原因导致 ３（含）人以上人员轻伤。属于严重事故征候。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -56881,7 +56881,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "航空器航路（航线）飞行阶段，纵向间隔小于3000m属于运输航空【严重】事故征候。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -56901,7 +56901,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "航空器进近飞行阶段，纵向间隔小于2000m属于运输航空【严重】事故征候。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -57001,7 +57001,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "由于空中交通管制工作上的失误造成影响邻近管制区管制单位的正常工作，或者致使航空器飞出该管制区【10分钟】后仍未与下一管制区建立无线电联络的为空中交通管制严重差错。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
