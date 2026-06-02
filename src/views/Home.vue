@@ -103,9 +103,15 @@ import { ref, computed, onMounted, watch } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAppStore } from '@/stores/store'
 import { t, setLanguage, getLanguage } from '@/utils/i18n.js'
+import { usePracticeService } from '@/composables/usePracticeService'
 
 const router = useRouter()
 const store = useAppStore()
+
+const pm = usePracticeService()
+const todayStats = pm.dailyStats()
+const answeredToday = computed(() => todayStats.value.answered || 0)
+const accuracy = computed(() => todayStats.value.accuracy ?? 0)
 
 const darkMode = ref(localStorage.getItem('darkMode') === 'true')
 
@@ -118,8 +124,6 @@ watch(darkMode, (val) => {
   localStorage.setItem('darkMode', val)
 }, { immediate: true })
 
-const answeredToday = ref(0)
-const accuracy = ref(0.0)
 
 // 上次练习
 const lastPractice = computed(() => {
@@ -188,7 +192,7 @@ onMounted(async () => {
   if (store.rawQuestions.length === 0) {
     await store.loadQuestions()
   }
-  // store init
+  pm.refresh()
 })
 
 // 切换中英文

@@ -192,7 +192,7 @@ const gotopage = () => {
   align-items: center;
   justify-content: space-between;
   padding: var(--spacing-mn);
-  background: rgba(247, 250, 253, 0.8);
+  background: var(--background-surface);
   backdrop-filter: blur(12px);
 }
 
@@ -336,7 +336,7 @@ const gotopage = () => {
 }
 
 .mode-card.active .mode-icon {
-  background: rgba(0, 91, 191, 0.1);
+  background: var(--primary-light);
 }
 
 .mode-icon .material-symbols-outlined {

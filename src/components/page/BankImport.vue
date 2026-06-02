@@ -108,7 +108,7 @@ defineEmits(['close'])
   align-items: center;
   justify-content: space-between;
   padding: var(--spacing-mn);
-  background: rgba(247, 250, 253, 0.8);
+  background: var(--background-surface);
   backdrop-filter: blur(12px);
 }
 
@@ -240,8 +240,8 @@ defineEmits(['close'])
 
 .import-footer {
   padding: var(--spacing-md);
-  background: #fff;
-  border-top: 1px solid #e0e3e6;
+  background: var(--background);
+  border-top: 1px solid var(--border-color-light);
 }
 
 .import-btn {
