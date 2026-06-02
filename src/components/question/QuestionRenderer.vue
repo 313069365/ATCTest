@@ -41,6 +41,10 @@ const props = defineProps({
     type: Boolean,
     default: false
   },
+  showExplanation: {
+    type: Boolean,
+    default: true
+  },
   answerChecked: {
     type: Object,
     default: () => ({})

@@ -2,11 +2,14 @@
   <div class="home">
     <header class="top-bar">
       <div class="top-bar-left">
-        <h1 class="title">{{ t('learningPlatform') }}</h1>
-      </div>
-      <div class="header-actions">
         <button class="lang-btn" @click="toggleLanguage">
-          {{ getLanguage() === 'zh' ? 'EN' : '中' }}
+          <span class="material-symbols-outlined">translate</span>
+        </button>
+      </div>
+      <h1 class="title">{{ t('learningPlatform') }}</h1>
+      <div class="header-actions">
+        <button class="theme-toggle" :class="{ active: darkMode }" @click="darkMode = !darkMode">
+          <span class="material-symbols-outlined">{{ darkMode ? 'dark_mode' : 'light_mode' }}</span>
         </button>
       </div>
     </header>
@@ -96,13 +99,24 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, onMounted, watch } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAppStore } from '@/stores/store'
 import { t, setLanguage, getLanguage } from '@/utils/i18n.js'
 
 const router = useRouter()
 const store = useAppStore()
+
+const darkMode = ref(localStorage.getItem('darkMode') === 'true')
+
+watch(darkMode, (val) => {
+  if (val) {
+    document.documentElement.classList.add('dark')
+  } else {
+    document.documentElement.classList.remove('dark')
+  }
+  localStorage.setItem('darkMode', val)
+}, { immediate: true })
 
 const answeredToday = ref(0)
 const accuracy = ref(0.0)
@@ -201,27 +215,23 @@ const toggleLanguage = () => {
   backdrop-filter: blur(8px);
   display: flex;
   align-items: center;
-  justify-content: center;
   padding: var(--spacing-sm) var(--spacing-md);
   height: 56px;
   border-bottom: 1px solid var(--border-color);
   box-sizing: border-box;
-  position: relative;
 }
 
 .top-bar-left {
+  flex: 1;
   display: flex;
   align-items: center;
-  justify-content: center;
 }
 
 .header-actions {
-  position: absolute;
-  right: 16px;
-  top: 50%;
-  transform: translateY(-50%);
+  flex: 1;
   display: flex;
-  gap: 4px;
+  align-items: center;
+  justify-content: flex-end;
 }
 
 .title {
@@ -229,37 +239,48 @@ const toggleLanguage = () => {
   font-weight: 700;
   color: var(--text-primary);
   letter-spacing: -0.02em;
+  flex-shrink: 0;
 }
 
-.icon-btn {
+.theme-toggle {
   width: 40px;
   height: 40px;
-  border: none;
-  background: transparent;
   border-radius: 50%;
+  background: transparent;
+  border: none;
+  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
   color: var(--text-secondary);
   transition: background 0.2s;
+  flex-shrink: 0;
 }
 
-.icon-btn:active {
-  background: var(--color-gray-400);
+.theme-toggle:hover {
+  background: var(--color-gray-100);
+}
+
+.theme-toggle .material-symbols-outlined {
+  font-size: 20px;
 }
 
 .lang-btn {
   width: 40px;
   height: 40px;
-  /* border: 1px solid var(--border-color); */
+  border: none;
   background: transparent;
-  /* border-radius: var(--radius-full); */
+  border-radius: 50%;
   cursor: pointer;
-  font-weight: 600;
-  font-size: 14px;
-  color: var(--text-primary);
-  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+  transition: background 0.2s;
+}
+
+.lang-btn .material-symbols-outlined {
+  font-size: 20px;
 }
 
 .lang-btn:hover {

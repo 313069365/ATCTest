@@ -18,8 +18,8 @@
 
       <component v-if="wrappedSub" :is="componentMap[currentSub?.type] || SingleChoice" :question="wrappedSub"
         :user-answer="props.userAnswer?.[currentSubIndex]" :mode="mode" :show-answer="currentSubShowAnswer"
-        :show-answer-mode="showAnswerMode" :disabled="isSubAnswerDisabled" @answer="handleSubAnswer"
-        @check="checkSubAnswer(currentSubIndex)" />
+        :show-answer-mode="showAnswerMode" :show-explanation="showExplanation" :disabled="isSubAnswerDisabled"
+        @answer="handleSubAnswer" @check="checkSubAnswer(currentSubIndex)" />
 
     </div>
 
@@ -94,6 +94,10 @@ const props = defineProps({
   currentSubIndex: {
     type: Number,
     default: 0
+  },
+  showExplanation: {
+    type: Boolean,
+    default: true
   }
 })
 
@@ -350,7 +354,7 @@ watch(() => props.userAnswer, (newAnswer) => {
   padding: 0 var(--spacing-sm);
   border: 1px solid var(--color-gray-200);
   border-radius: var(--radius-md);
-  background: #fff;
+  background: var(--background);
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-semibold);
   color: var(--text-secondary);
@@ -384,11 +388,11 @@ watch(() => props.userAnswer, (newAnswer) => {
 .sub-nav-btn.unknown {
   background: var(--warning);
   border-color: var(--warning);
-  color: #181c1f;
+  color: var(--on-surface);
 }
 
 .sub-nav-btn.answered:not(.active) {
-  background: #e8f5e9;
+  background: var(--success-light);
   border-color: var(--success);
   color: var(--success);
 }
@@ -461,19 +465,18 @@ watch(() => props.userAnswer, (newAnswer) => {
   align-items: center;
   justify-content: center;
   padding: var(--spacing-sm) var(--spacing-lg);
-  border: 1px solid #c1c6d6;
+  border: 1px solid var(--color-gray-500);
   border-radius: var(--radius-full);
-  background: #fff;
+  background: var(--background);
   color: var(--primary);
   font-size: var(--font-size-md);
   font-weight: var(--font-weight-bold);
   cursor: pointer;
   transition: all 0.2s;
-  gap: var(--spacing-mn);
 }
 
 .sub-check-answer .check-btn:hover {
-  background: #f1f4f7;
+  background: var(--color-gray-100);
 }
 
 .sub-check-answer .check-btn:active {

@@ -244,12 +244,12 @@ const gotopage = () => {
 .order-btn {
   flex: 1;
   padding: 12px 16px;
-  border: 1px solid rgba(193, 198, 214, 0.3);
+  border: 1px solid var(--border-color-strong);
   border-radius: var(--radius-md);
-  background: #fff;
+  background: var(--background);
   font-size: 16px;
   font-weight: 500;
-  color: #414754;
+  color: var(--icon-color);
   cursor: pointer;
   transition: all 0.2s;
   display: flex;
@@ -293,7 +293,7 @@ const gotopage = () => {
   border: none;
   font-size: 14px;
   font-weight: 500;
-  color: #727785;
+  color: var(--text-secondary);
   cursor: pointer;
   transition: all 0.2s;
 }
@@ -313,7 +313,7 @@ const gotopage = () => {
   align-items: center;
   gap: 12px;
   padding: var(--spacing-sm);
-  background: #fff;
+  background: var(--background);
   border: 2px solid transparent;
   border-radius: var(--radius-lg);
   cursor: pointer;
@@ -322,14 +322,14 @@ const gotopage = () => {
 
 .mode-card.active {
   border-color: var(--primary);
-  background: #d8e2ff;
+  background: var(--primary-light);
 }
 
 .mode-icon {
   width: 44px;
   height: 44px;
   border-radius: var(--radius-lg);
-  background: #f1f4f7;
+  background: var(--color-gray-100);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -341,7 +341,7 @@ const gotopage = () => {
 
 .mode-icon .material-symbols-outlined {
   font-size: 24px;
-  color: #414754;
+  color: var(--icon-color);
 }
 
 .mode-card.active .mode-icon .material-symbols-outlined {
@@ -360,14 +360,14 @@ const gotopage = () => {
 
 .mode-info p {
   font-size: 12px;
-  color: #414754;
+  color: var(--text-secondary);
 }
 
 .mode-check {
   width: 24px;
   height: 24px;
   border-radius: 50%;
-  border: 2px solid #c1c6d6;
+  border: 2px solid var(--border-color-strong);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -388,7 +388,7 @@ const gotopage = () => {
   align-items: center;
   justify-content: space-between;
   padding: var(--spacing-md);
-  background: #fff;
+  background: var(--background);
   border-radius: var(--radius-lg);
 }
 
@@ -404,7 +404,7 @@ const gotopage = () => {
 
 .toggle-desc {
   font-size: 11px;
-  color: #414754;
+  color: var(--text-secondary);
   margin-top: 2px;
 }
 
@@ -412,7 +412,7 @@ const gotopage = () => {
   width: 52px;
   height: 28px;
   border-radius: var(--radius-full);
-  background: #e0e3e6;
+  background: var(--color-gray-300);
   border: none;
   cursor: pointer;
   position: relative;
@@ -430,7 +430,7 @@ const gotopage = () => {
   width: 24px;
   height: 24px;
   border-radius: 50%;
-  background: #fff;
+  background: var(--background);
   transition: transform 0.2s;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 }
@@ -441,8 +441,8 @@ const gotopage = () => {
 
 .settings-footer {
   padding: var(--spacing-md);
-  background: #fff;
-  border-top: 1px solid #e0e3e6;
+  background: var(--background);
+  border-top: 1px solid var(--border-color-light);
 }
 
 .start-btn {

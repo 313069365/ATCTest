@@ -150,8 +150,8 @@ const formattedTime = computed(() => {
   background: var(--background-secondary);
   width: 100%;
   max-width: var(--app-max-width);
-  max-height: 85vh;
-  min-height: 62vh;
+  max-height: 80vh;
+  min-height: 65vh;
   border-radius: 20px 20px 0 0;
   overflow: hidden;
   display: flex;

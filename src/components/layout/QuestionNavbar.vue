@@ -44,7 +44,7 @@ defineEmits(['prev', 'next', 'submit'])
   bottom: 0px;
   left: 50%;
   transform: translateX(-50%);
-  background: #fff;
+  background: var(--background);
   width: 100%;
   max-width: var(--app-max-width);
   display: flex;
@@ -57,24 +57,21 @@ defineEmits(['prev', 'next', 'submit'])
 }
 
 .nav-btn {
-  /* position: relative; */
   display: flex;
   align-items: center;
   justify-content: center;
   min-width: 150px;
   padding: 10px;
   margin: var(--spacing-mn) var(--spacing-md);
-  background: rgba(255, 255, 255, 0.2);
-  /* backdrop-filter: blur(10px); */
-  /* -webkit-backdrop-filter: blur(10px); */
-  border: 1px solid rgba(213, 213, 213, 0.3);
+  background: var(--surface-variant);
+  border: 1px solid var(--border-color);
   border-radius: var(--radius-lg);
   color: var(--primary);
   font-size: var(--font-size-md);
   font-weight: var(--font-weight-medium);
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow-sm);
   overflow: hidden;
 }
 
@@ -84,22 +81,22 @@ defineEmits(['prev', 'next', 'submit'])
 }
 
 .nav-btn:hover {
-  background: rgba(255, 255, 255, 0.3);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  background: var(--color-gray-100);
+  box-shadow: var(--shadow-md);
 }
 
 .nav-btn.prev:disabled {
-  background: rgba(255, 255, 255, 0.1);
-  color: var(--primary);
+  background: var(--color-gray-200);
+  color: var(--text-disabled);
   cursor: not-allowed;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  box-shadow: none;
   transform: none;
 }
 
 .nav-btn.submit {
-  background: rgba(255, 255, 255, 0.2);
-  color: var(--primary);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  background: var(--primary);
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(0, 91, 191, 0.3);
+  border: none;
 }
 </style>

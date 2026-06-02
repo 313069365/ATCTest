@@ -3,10 +3,10 @@
     <div class="answer-card-content">
       <div class="answer-card-header">
         <button class="close-btn" @click="$emit('close')">
-          <span class="material-symbols-outlined">close</span>
+          <span class="material-symbols-outlined">horizontal_rule</span>
         </button>
-        <h3>答题卡</h3>
-        <button class="submit-btn" @click="$emit('exit')">{{ t(buttonText) }}</button>
+        <span class="header-title">答题卡</span>
+        <div class="header-spacer"></div>
       </div>
 
       <div class="answer-card-body">
@@ -96,13 +96,7 @@ const props = defineProps({
     type: Object,
     default: () => ({})
   },
-  buttonText: {
-    type: String,
-    default: 'exit'
-  }
 })
-
-const emit = defineEmits(['close', 'go', 'exit'])
 
 
 // 获取按钮状态
@@ -163,7 +157,7 @@ function getSubQuestionBtnClass(qIdx, sqIdx, sq) {
   background: var(--background-secondary);
   width: 100%;
   max-width: var(--app-max-width);
-  max-height: 85vh;
+  max-height: 80vh;
   border-radius: var(--radius-xl) var(--radius-xl) 0 0;
   overflow: hidden;
   display: flex;
@@ -172,7 +166,6 @@ function getSubQuestionBtnClass(qIdx, sqIdx, sq) {
 
 .answer-card-header {
   display: flex;
-  justify-content: space-between;
   align-items: center;
   padding: var(--spacing-sm);
   background: var(--background);
@@ -189,16 +182,24 @@ function getSubQuestionBtnClass(qIdx, sqIdx, sq) {
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
 }
 
 .close-btn .material-symbols-outlined {
   font-size: 18px;
 }
 
-.answer-card-header h3 {
+.header-title {
+  flex: 1;
+  text-align: center;
   font-size: var(--font-size-xl);
   font-weight: var(--font-weight-bold);
   color: var(--on-surface);
+}
+
+.header-spacer {
+  width: 35px;
+  flex-shrink: 0;
 }
 
 .submit-btn {

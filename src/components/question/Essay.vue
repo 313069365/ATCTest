@@ -50,7 +50,7 @@
         <div class="answer-content">{{ question.answer }}</div>
       </div>
 
-      <div class="explanation-section">
+      <div v-if="showExplanation" class="explanation-section">
         <div class="explanation-header">
           <span class="material-symbols-outlined">lightbulb</span>
           <span>{{ t('explanation') }}</span>
@@ -108,6 +108,10 @@ const props = defineProps({
   isMarked: {
     type: Boolean,
     default: false
+  },
+  showExplanation: {
+    type: Boolean,
+    default: true
   }
 })
 
@@ -179,10 +183,11 @@ const handleInput = (e) => {
 
 .question-stem {
   padding: var(--spacing-sm) var(--spacing-md);
-  background: #fff;
+  background: var(--background);
   border: 1px solid transparent;
   margin-bottom: var(--spacing-md);
   border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+  box-shadow: var(--shadow-md);
 }
 
 .question-text {
@@ -202,7 +207,7 @@ const handleInput = (e) => {
   font-size: var(--font-size-md);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-lg);
-  background: #fff;
+  background: var(--background);
   resize: vertical;
   font-family: inherit;
 }

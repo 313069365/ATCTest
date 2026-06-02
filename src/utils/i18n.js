@@ -165,6 +165,13 @@ const translations = {
     answered: "Answered",
     progress: "Progress",
     close: "Close",
+    quizSettings: "Quiz Settings",
+    showExplanation: "Show Explanation",
+    showExplanationDesc: "Display explanation after answering",
+    showTranslation: "Show Translation",
+    showTranslationDesc: "Display translation of questions",
+    darkMode: "Dark Mode",
+    darkModeDesc: "Switch to dark theme",
 
     // Practice Result
     practiceResult: "Practice Result",
@@ -402,6 +409,13 @@ const translations = {
     answered: "已答",
     progress: "进度",
     close: "关闭",
+    quizSettings: "练习设置",
+    showExplanation: "显示解析",
+    showExplanationDesc: "答题后显示题目解析",
+    showTranslation: "显示翻译",
+    showTranslationDesc: "显示题目翻译",
+    darkMode: "夜间模式",
+    darkModeDesc: "切换至深色主题",
 
     // Practice Result
     practiceResult: "答题结果",

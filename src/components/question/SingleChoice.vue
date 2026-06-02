@@ -38,7 +38,7 @@
     </div>
 
     <!-- 4. 答案解析区 -->
-    <div v-if="shouldShowAnswer" class="answer-section">
+    <div v-if="shouldShowAnswer && showExplanation" class="answer-section">
       <div class="explanation-section">
         <div class="explanation-header">
           <span class="material-symbols-outlined">lightbulb</span>
@@ -99,6 +99,10 @@ const props = defineProps({
   isMarked: {
     type: Boolean,
     default: false
+  },
+  showExplanation: {
+    type: Boolean,
+    default: true
   }
 })
 
@@ -197,9 +201,10 @@ const handleSelect = (index) => {
   align-items: center;
   gap: var(--spacing-md);
   padding: var(--spacing-sm) var(--spacing-md);
-  background: #fff;
+  background: var(--background);
   border: 1px solid transparent;
   border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  box-shadow: var(--shadow-md);
 }
 
 .question-type-tag {
@@ -219,10 +224,11 @@ const handleSelect = (index) => {
 
 .question-stem {
   padding: var(--spacing-sm) var(--spacing-md);
-  background: #fff;
+  background: var(--background);
   border: 1px solid transparent;
   margin-bottom: var(--spacing-md);
   border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+  box-shadow: var(--shadow-md);
 }
 
 .question-text {
@@ -251,7 +257,7 @@ const handleSelect = (index) => {
   transition: all 0.2s;
   text-align: left;
   width: 100%;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+  box-shadow: var(--shadow-md);
 }
 
 .option-btn:active {
@@ -272,21 +278,21 @@ const handleSelect = (index) => {
 .option-btn.correct {
   color: var(--success);
   border-color: var(--success);
-  background: #e6f4ea;
+  background: var(--success-light);
 }
 
 .option-btn.wrong {
   color: var(--error);
   border-color: var(--error);
-  background: #fce8e6;
+  background: var(--error-light);
 }
 
 .option-marker {
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  border: 2px solid #bbbbbb;
-  background: #fff;
+  border: 2px solid var(--color-gray-500);
+  background: var(--background);
   flex-shrink: 0;
   transition: all 0.2s;
 }
@@ -311,7 +317,7 @@ const handleSelect = (index) => {
 
 .option-btn.review.correct {
   border-color: var(--success);
-  background: #e6f4ea;
+  background: var(--success-light);
 }
 
 .option-btn.review.correct .option-marker {

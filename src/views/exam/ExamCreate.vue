@@ -377,7 +377,7 @@ async function createPaper() {
   position: sticky;
   top: 0;
   z-index: 100;
-  background: rgba(255, 255, 255, 0.95);
+  background: var(--background);
   backdrop-filter: blur(8px);
   display: flex;
   align-items: center;

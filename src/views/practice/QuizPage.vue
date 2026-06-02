@@ -1,10 +1,7 @@
 <template>
   <div class="page">
     <header class="top-bar">
-      <div class="top-bar-left" @click="exitQuiz">
-        <button class="back-btn">
-          <span class="material-symbols-outlined">close</span>
-        </button>
+      <div class="top-bar-left">
         <div class="header-title">
           <h1>{{ t(subjectDisplay) }}</h1>
           <span class="header-subtitle">{{ t(practiceData?.category) || practiceData?.category || "" }} •
@@ -16,7 +13,7 @@
           <span class="material-symbols-outlined">timer</span>
           <span>{{ elapsedTimeDisplay }}</span>
         </div>
-        <button class="grid-btn">
+        <button class="grid-btn" @click="showQuizSettings = true">
           <SvgIcon name="settings"></SvgIcon>
         </button>
       </div>
@@ -31,9 +28,6 @@
     <div class="action-bar">
       <span class="progress-label">进度 {{ currentIndex + 1 }}/{{ bank.length }}</span>
       <div class="action-bar-right">
-        <button class="action-btn">
-          <span class="material-symbols-outlined">mode_night</span>
-        </button>
         <button class="action-btn" :class="{ active: showTranslation }" @click="toggleTranslation" title="翻译">
           <SvgIcon size="20px" name="translate"></SvgIcon>
         </button>
@@ -76,8 +70,9 @@
           <QuestionRenderer :question="currentQuestionWithOptions" :mode="practiceMode"
             :user-answer="userAnswers[currentQuestion?.id]" :show-answer="currentQuestionDisplay.shouldShowAnswer.value"
             :show-answer-mode="practiceData?.showAnswerMode" :auto-jump="practiceData?.autoJump"
-            :answerChecked="answerChecked" :answerStatus="answerStatus" :current-sub-index="currentSubIndex"
-            @answer="handleAnswer" @next-question="nextQuestion" @checkSub="handleCheckSub" @check="checkAnswer" />
+            :show-explanation="showAnswerExplanation" :answerChecked="answerChecked" :answerStatus="answerStatus"
+            :current-sub-index="currentSubIndex" @answer="handleAnswer" @next-question="nextQuestion"
+            @checkSub="handleCheckSub" @check="checkAnswer" />
         </div>
 
         <div v-else style="text-align: center; padding: 40px">
@@ -91,20 +86,27 @@
 
     <AnswerCard v-if="showAnswerCard" :questions="bank" :currentIndex="currentIndex" :currentSubIndex="currentSubIndex"
       :settings="practiceData" :answerChecked="answerChecked" :answerStatus="answerStatus" :userAnswers="userAnswers"
-      @close="closeAnswerCard" @exit="exitQuiz" @go="gotoQuesitonIdx" />
+      @close="closeAnswerCard" @go="gotoQuesitonIdx" />
 
     <PracticeStats v-if="showStatsDialog" :total="liveStats.total" :correct="liveStats.correct" :wrong="liveStats.wrong"
       :unanswered="liveStats.unanswered" :accuracy="liveStats.accuracy" :elapsed="liveStats.elapsed"
       :current="liveStats.current" :totalQ="liveStats.totalQ" :settings="practiceData"
       @close="showStatsDialog = false" />
+
+    <QuizSettings v-if="showQuizSettings" :showExplanation="showAnswerExplanation"
+      :autoJump="practiceData?.autoJump ?? false" :darkMode="darkMode" @close="showQuizSettings = false"
+      @update:showExplanation="showAnswerExplanation = $event"
+      @update:autoJump="practiceData.autoJump = $event" @update:darkMode="darkMode = $event"
+      @exit="exitQuiz" @submit="finishQuiz" />
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted, computed, provide } from "vue";
+import { ref, onMounted, onUnmounted, computed, provide, watch } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import AnswerCard from "@/components/page/AnswerCard.vue";
 import PracticeStats from "@/components/page/PracticeStats.vue";
+import QuizSettings from "@/components/page/QuizSettings.vue";
 import QustionNavbar from "@/components/layout/QuestionNavbar.vue";
 import QuestionRenderer from "@/components/question/QuestionRenderer.vue";
 import { useAppStore } from "@/stores/store";
@@ -157,7 +159,14 @@ const answerChecked = ref({}); // 每个题目的答案检查状态
 const answerStatus = ref({}); // 每个题目的答案状态: correct/wrong/partial/unchecked/unanswered
 const shuffledOptionsCache = ref({}); // 缓存选项乱序结果
 const showStatsDialog = ref(false);
+const showQuizSettings = ref(false);
+const darkMode = ref(localStorage.getItem('darkMode') === 'true');
 const loading = ref(true);
+
+watch(darkMode, (val) => {
+  document.documentElement.classList.toggle('dark', val)
+  localStorage.setItem('darkMode', val)
+}, { immediate: true })
 
 // 计时器相关
 const elapsedSeconds = ref(0); // 已用时间（秒）
@@ -751,7 +760,7 @@ const removeCurrentFromWrong = () => {
   position: sticky;
   top: 0;
   z-index: 100;
-  background: rgba(255, 255, 255, 0.95);
+  background: var(--background);
   backdrop-filter: blur(8px);
   display: flex;
   align-items: center;
@@ -762,6 +771,7 @@ const removeCurrentFromWrong = () => {
 }
 
 .top-bar-left {
+  margin-left: 10px;
   display: flex;
   align-items: center;
   gap: var(--spacing-sm);
@@ -915,7 +925,7 @@ const removeCurrentFromWrong = () => {
   align-items: center;
   gap: var(--spacing-sm);
   padding: var(--spacing-sm) var(--spacing-md);
-  background: #fff;
+  background: var(--background);
   border: 1px solid transparent;
   border-radius: var(--radius-lg) var(--radius-lg) 0 0;
 }
@@ -981,19 +991,18 @@ const removeCurrentFromWrong = () => {
   align-items: center;
   justify-content: center;
   padding: var(--spacing-sm) var(--spacing-lg);
-  border: 1px solid #c1c6d6;
+  border: 1px solid var(--color-gray-500);
   border-radius: var(--radius-full);
-  background: #fff;
+  background: var(--background);
   color: var(--primary);
   font-size: var(--font-size-md);
   font-weight: var(--font-weight-bold);
   cursor: pointer;
   transition: all 0.2s;
-  gap: var(--spacing-mn);
 }
 
 .check-btn:hover {
-  background: #f1f4f7;
+  background: var(--color-gray-100);
 }
 
 .check-btn:active {
