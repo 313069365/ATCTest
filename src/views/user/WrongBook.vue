@@ -15,24 +15,6 @@
     </div>
 
     <main class="content">
-      <!-- 统计信息 -->
-      <div class="stats-section" v-if="wrongList.length > 0">
-        <div class="stat-card glass">
-          <span class="material-symbols-outlined stat-icon">close</span>
-          <div class="stat-info">
-            <span class="stat-value">{{ wrongList.length }}</span>
-            <span class="stat-label">{{ t('wrongQuestions') }}</span>
-          </div>
-        </div>
-        <div class="stat-card glass">
-          <span class="material-symbols-outlined stat-icon">repeat</span>
-          <div class="stat-info">
-            <span class="stat-value">{{ repeatedErrors }}</span>
-            <span class="stat-label">{{ t('repeatedErrors') }}</span>
-          </div>
-        </div>
-      </div>
-
       <!-- 错题巩固 -->
       <button class="practice-all-btn" @click="startWrongPractice" v-if="wrongList.length > 0">
         <div class="practice-all-left">
@@ -126,9 +108,6 @@ const hasMore = computed(() => {
   return currentPage.value * pageSize < wrongList.value.length
 })
 
-const repeatedErrors = computed(() => {
-  return wrongList.value.filter(item => (item.wrongCount || 1) > 1).length
-})
 
 onMounted(() => {
   store.loadWrongBook()
@@ -304,57 +283,6 @@ function getWrongCount(questionId) {
   z-index: 1;
 }
 
-.stats-section {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--spacing-sm);
-  margin-bottom: var(--spacing-md);
-}
-
-.stat-card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: var(--spacing-sm) var(--spacing-md);
-  border-radius: var(--radius-lg);
-  gap: var(--spacing-xs);
-  transition: all 0.2s;
-  min-height: 100px;
-  justify-content: center;
-}
-
-.stat-card:hover {
-  box-shadow: 0 8px 24px rgba(0, 91, 191, 0.15);
-}
-
-.stat-icon {
-  font-size: 24px;
-  color: var(--primary);
-  margin-bottom: 2px;
-}
-
-.stat-info {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 2px;
-}
-
-.stat-value {
-  font-size: var(--font-size-lg);
-  font-weight: var(--font-weight-bold);
-  color: var(--on-surface);
-  line-height: 1;
-  letter-spacing: -0.5px;
-}
-
-.stat-label {
-  font-size: 10px;
-  color: var(--text-secondary);
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  font-weight: 500;
-}
 
 
 

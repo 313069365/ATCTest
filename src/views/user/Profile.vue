@@ -79,35 +79,33 @@
 
       <section class="shortcut-section">
         <h3 class="section-title">快速操作</h3>
-        <div class="shortcut-list">
-          <div class="shortcut-item" @click="goToWrongBook">
+        <div class="shortcut-grid">
+          <div class="shortcut-grid-item" @click="goToWrongBook">
             <div class="shortcut-icon error-bg">
               <span class="material-symbols-outlined">error_outline</span>
             </div>
-            <span class="shortcut-label">错题本</span>
-            <span class="material-symbols-outlined shortcut-arrow">chevron_right</span>
+            <span class="shortcut-grid-label">错题本</span>
           </div>
-          <div class="shortcut-item" @click="goToFavorites">
+          <div class="shortcut-grid-item" @click="goToFavorites">
             <div class="shortcut-icon tertiary-bg">
               <span class="material-symbols-outlined">bookmark</span>
             </div>
-            <span class="shortcut-label">收藏本</span>
-            <span class="material-symbols-outlined shortcut-arrow">chevron_right</span>
+            <span class="shortcut-grid-label">收藏本</span>
           </div>
-          <div class="shortcut-item" @click="goToPracticeHistory">
+          <div class="shortcut-grid-item" @click="goToPracticeHistory">
             <div class="shortcut-icon primary-bg">
               <span class="material-symbols-outlined">assignment_turned_in</span>
             </div>
-            <span class="shortcut-label">练习历史</span>
-            <span class="material-symbols-outlined shortcut-arrow">chevron_right</span>
+            <span class="shortcut-grid-label">练习历史</span>
           </div>
-          <div class="shortcut-item" @click="goToExamHistory">
+          <div class="shortcut-grid-item" @click="goToExamHistory">
             <div class="shortcut-icon primary-bg">
               <span class="material-symbols-outlined">quiz</span>
             </div>
-            <span class="shortcut-label">考试历史</span>
-            <span class="material-symbols-outlined shortcut-arrow">chevron_right</span>
+            <span class="shortcut-grid-label">考试历史</span>
           </div>
+        </div>
+        <div class="shortcut-list">
           <div class="shortcut-item" @click="goToStats">
             <div class="shortcut-icon primary-bg">
               <span class="material-symbols-outlined">bar_chart</span>
@@ -128,16 +126,12 @@
       <section class="action-section">
         <button class="action-btn" @click="refreshCache" :disabled="refreshing">
           <span class="material-symbols-outlined">refresh</span>
-          <span>{{ refreshing ? '刷新中...' : '刷新题库缓存' }}</span>
-        </button>
-        <button class="action-btn">
-          <span class="material-symbols-outlined">help</span>
-          <span>关于我们</span>
-          <span>Version 053121</span>
+          <span> {{ refreshing ? '刷新中...' : '刷新题库缓存' }}</span>
+          <span>Ver 0.06 </span>
         </button>
         <button class="action-btn logout">
           <span class="material-symbols-outlined">logout</span>
-          <span>退出登录</span>
+          <span>xiaomi 14</span>
         </button>
       </section>
     </main>
@@ -498,6 +492,37 @@ function goToSettings() {
 
 .shortcut-section {
   margin-top: var(--spacing-md);
+}
+
+.shortcut-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-md);
+}
+
+.shortcut-grid-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-md) var(--spacing-sm);
+  background: var(--background-surface);
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  transition: transform 0.1s;
+}
+
+.shortcut-grid-item:active {
+  transform: scale(0.95);
+}
+
+.shortcut-grid-label {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--on-surface);
+  text-align: center;
+  white-space: nowrap;
 }
 
 .shortcut-list {

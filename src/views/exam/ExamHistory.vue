@@ -1,7 +1,7 @@
 <template>
   <div class="page">
     <header class="top-bar">
-      <button class="back-btn">
+      <button class="back-btn" @click="$router.back()">
         <span class="material-symbols-outlined">arrow_back</span>
       </button>
       <h1>考试记录</h1>
