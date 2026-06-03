@@ -113,6 +113,13 @@
             <span class="shortcut-label">统计分析</span>
             <span class="material-symbols-outlined shortcut-arrow">chevron_right</span>
           </div>
+          <div class="shortcut-item" @click="goToAviation">
+            <div class="shortcut-icon primary-bg">
+              <span class="material-symbols-outlined">record_voice_over</span>
+            </div>
+            <span class="shortcut-label">字母发音</span>
+            <span class="material-symbols-outlined shortcut-arrow">chevron_right</span>
+          </div>
           <div class="shortcut-item" @click="goToSettings">
             <div class="shortcut-icon primary-bg">
               <span class="material-symbols-outlined">settings</span>
@@ -182,6 +189,10 @@ function goToExamHistory() {
 
 function goToStats() {
   router.push({ name: 'Stats' })
+}
+
+function goToAviation() {
+  router.push({ name: 'AviationPhonetics' })
 }
 
 function goToSettings() {

@@ -72,6 +72,11 @@ const routes = [
     ],
   },
   {
+    path: "/aviation",
+    name: "AviationPhonetics",
+    component: () => import("../views/AviationPhonetics.vue"),
+  },
+  {
     path: "/user",
     children: [
       {
