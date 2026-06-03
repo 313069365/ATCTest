@@ -22,8 +22,8 @@
 
       <div class="sub-nav-wrap" v-if="question.subs && question.subs.length > 1">
         <div class="sub-nav">
-          <button v-for="(sub, index) in question.subs" :key="index" class="sub-nav-btn" :class="getSubNavBtnClass(index)"
-            @click="goToSub(index)">
+          <button v-for="(sub, index) in question.subs" :key="index" class="sub-nav-btn"
+            :class="getSubNavBtnClass(index)" @click="goToSub(index)">
             {{ index + 1 }}
           </button>
         </div>
@@ -420,7 +420,7 @@ watch(() => props.userAnswer, (newAnswer) => {
   white-space: pre-wrap;
   color: var(--text-secondary);
   line-height: 1.8;
-  font-size: 14px;
+  font-size: 16px;
 }
 
 .sub-nav-wrap {
