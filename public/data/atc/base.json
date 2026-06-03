@@ -15095,7 +15095,7 @@
     "shuffle": false,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "风修正角小于偏流角时，飞机会偏在航线的【右侧】。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -16687,7 +16687,7 @@
     "shuffle": true,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "💡速记技巧：OM3.9NM",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -21918,7 +21918,7 @@
     "shuffle": true,
     "degree": 3,
     "subs": null,
-    "explanation": "",
+    "explanation": "💡速记技巧：设备一致，可以接收和发射，设备不一致，只可以接受。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -33043,7 +33043,7 @@
     "shuffle": true,
     "degree": 3,
     "subs": null,
-    "explanation": "V_s1g失速速度：对应最大升力系数（即：在升力即将减小之前）。在这个时刻，过载系数仍然等于1（JAR25参考失速速度）。V_far（传统失速速度）：对应常规失速（即：当升力开始快速减小时）。在这个时刻，过载系数总是小于1（FAR参考失速度）。0.94",
+    "explanation": "💡速记技巧：1g 大。V_s1g失速速度：对应最大升力系数（即：在升力即将减小之前）。在这个时刻，过载系数仍然等于1（JAR25参考失速速度）。V_far（传统失速速度）：对应常规失速（即：当升力开始快速减小时）。在这个时刻，过载系数总是小于1（FAR参考失速度）。0.94",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -44195,7 +44195,7 @@
     "shuffle": true,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "1500 * 4.8% = 72（48+24）,  72 + 15 = 87。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },

@@ -26,7 +26,7 @@
     </div>
 
     <div class="action-bar">
-      <span class="progress-label">进度 {{ currentIndex + 1 }}/{{ bank.length }}</span>
+      <span class="progress-label" @click="openJumpDialog">进度 {{ currentIndex + 1 }}/{{ bank.length }}</span>
       <div class="action-bar-right">
         <button class="action-btn" :class="{ active: showTranslation }" @click="toggleTranslation" title="翻译">
           <SvgIcon size="20px" name="translate"></SvgIcon>
@@ -98,6 +98,9 @@
       @update:showExplanation="showAnswerExplanation = $event"
       @update:autoJump="practiceData.autoJump = $event" @update:darkMode="darkMode = $event"
       @exit="exitQuiz" @submit="finishQuiz" />
+
+    <JumpDialog :visible="jumpDialogVisible" :total="bank.length" :current="currentIndex"
+      @close="jumpDialogVisible = false" @jump="gotoQuesitonIdx" />
   </div>
 </template>
 
@@ -109,6 +112,7 @@ import PracticeStats from "@/components/page/PracticeStats.vue";
 import QuizSettings from "@/components/page/QuizSettings.vue";
 import QustionNavbar from "@/components/layout/QuestionNavbar.vue";
 import QuestionRenderer from "@/components/question/QuestionRenderer.vue";
+import JumpDialog from "@/components/page/JumpDialog.vue";
 import { useAppStore } from "@/stores/store";
 import { usePracticeService } from "@/composables/usePracticeService";
 import { t } from "@/utils/i18n.js";
@@ -160,6 +164,7 @@ const answerStatus = ref({}); // 每个题目的答案状态: correct/wrong/part
 const shuffledOptionsCache = ref({}); // 缓存选项乱序结果
 const showStatsDialog = ref(false);
 const showQuizSettings = ref(false);
+const jumpDialogVisible = ref(false);
 const darkMode = ref(localStorage.getItem('darkMode') === 'true');
 const loading = ref(true);
 
@@ -501,6 +506,10 @@ const gotoQuesitonIdx = (idx, sqIdx) => {
   resetQuestionState();
   closeAnswerCard();
 
+}
+
+const openJumpDialog = () => {
+  jumpDialogVisible.value = true
 }
 
 // 练习模式
@@ -887,6 +896,8 @@ const removeCurrentFromWrong = () => {
   background: var(--success-light);
   padding: 2px 8px;
   border-radius: var(--radius-md);
+  cursor: pointer;
+  user-select: none;
 }
 
 .action-btn {

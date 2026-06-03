@@ -1,17 +1,13 @@
 <template>
-  <div class="answer-card-modal" @click.self="$emit('close')">
-    <div class="answer-card-content">
+  <div class="practice-stats-overlay" @click.self="$emit('close')">
+    <div class="practice-stats-card">
       <div class="header">
-        <button class="close-btn" @click="$emit('close')">
-          <span class="material-symbols-outlined">close</span>
-        </button>
         <span class="header-title">{{ t('practiceStats') }}</span>
-        <div class="header-spacer"></div>
       </div>
 
       <div class="body">
         <div class="tags-row" v-if="settings">
-          <span class="info-tag">{{ orderDisplay }}{{ modeDisplay }}</span>
+          <span class="info-tag">{{ orderDisplay }}·{{ modeDisplay }}</span>
           <span class="info-tag" v-if="settings.practiceMode === 'answer'">{{ showAnswerDisplay }}</span>
           <span class="info-tag" v-if="settings.practiceMode === 'answer' && settings.autoJump">自动跳转</span>
         </div>
@@ -45,6 +41,7 @@
         <div class="result-bar">
           <div class="result-segment" :style="{ flex: correct + wrong || 1 }">
             <div class="result-track correct" :style="{ flex: correct }"></div>
+            <div class="result-track wrong" :style="{ flex: wrong }"></div>
           </div>
         </div>
 
@@ -130,8 +127,7 @@ const formattedTime = computed(() => {
 </script>
 
 <style scoped>
-/* === Modal overlay === */
-.answer-card-modal {
+.practice-stats-overlay {
   position: fixed;
   left: 50%;
   transform: translateX(-50%);
@@ -142,17 +138,16 @@ const formattedTime = computed(() => {
   background: rgba(0, 0, 0, 0.45);
   z-index: var(--z-popup);
   display: flex;
-  align-items: flex-end;
+  align-items: center;
+  justify-content: center;
 }
 
-/* === Sheet === */
-.answer-card-content {
+.practice-stats-card {
   background: var(--background-secondary);
-  width: 100%;
-  max-width: var(--app-max-width);
+  width: calc(100% - 48px);
+  max-width: 340px;
   max-height: 80vh;
-  min-height: 65vh;
-  border-radius: 20px 20px 0 0;
+  border-radius: var(--radius-xl);
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -162,45 +157,18 @@ const formattedTime = computed(() => {
 .header {
   display: flex;
   align-items: center;
-  padding: var(--spacing-smd);
-  background: var(--background);
-}
-
-.close-btn {
-  width: 32px;
-  height: 32px;
-  border: none;
-  background: transparent;
-  border-radius: 50%;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
   justify-content: center;
-  color: var(--text-secondary);
-  flex-shrink: 0;
-  transition: background 0.15s;
-}
-
-.close-btn:hover {
-  background: var(--color-gray-100);
-}
-
-.close-btn .material-symbols-outlined {
-  font-size: 22px;
+  padding: var(--spacing-smd) var(--spacing-md);
+  background: var(--background);
+  margin-bottom: var(--spacing-sm);
 }
 
 .header-title {
-  flex: 1;
-  text-align: center;
   font-size: 17px;
   font-weight: 600;
   color: var(--on-surface);
 }
 
-.header-spacer {
-  width: 32px;
-  flex-shrink: 0;
-}
 
 /* === Tags === */
 .tags-row {
@@ -208,7 +176,6 @@ const formattedTime = computed(() => {
   align-items: center;
   gap: 8px;
   flex-wrap: wrap;
-  padding: 0 24px;
 }
 
 .info-tag {
@@ -223,11 +190,11 @@ const formattedTime = computed(() => {
 /* === Body === */
 .body {
   background: var(--background);
-  margin: 20px;
+  margin: 0 var(--spacing-md) var(--spacing-md);
   flex: 1;
   overflow-y: auto;
   padding: var(--spacing-lg);
-  border-radius: 8px;
+  border-radius: var(--radius-lg);
   display: flex;
   flex-direction: column;
   align-items: center;
