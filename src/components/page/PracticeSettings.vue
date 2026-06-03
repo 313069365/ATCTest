@@ -2,9 +2,10 @@
   <div class="settings-modal" v-if="visible" @click.self="$emit('close')">
     <div class="settings-content">
       <header class="settings-header">
-        <button class="close-btn" @click="$emit('close')">
+        <!-- <button class="close-btn" @click="$emit('close')">
           <span class="material-symbols-outlined">close</span>
-        </button>
+        </button> -->
+        <div class="spacer"></div>
         <h2>{{ t('practiceSettings') }}</h2>
         <div class="spacer"></div>
       </header>

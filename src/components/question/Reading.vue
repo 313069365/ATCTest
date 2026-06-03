@@ -2,20 +2,6 @@
   <div class="reading-question">
 
     <div class="sub-question-section" v-if="question.subs && question.subs.length > 0">
-      <div class="reading-section" v-if="question.media?.article">
-        <div class="reading-header" @click="toggleReading">
-          <span class="material-symbols-outlined">description</span>
-          <span>{{ t('readingMaterial') || '' }}</span>
-          <span class="material-symbols-outlined expand-icon">{{ readingExpanded ? 'expand_less' : 'expand_more'
-          }}</span>
-        </div>
-        <div class="reading-content" v-show="readingExpanded">
-          {{ question.media.article }}
-          <br>
-          <span v-if="showTranslation">{{ question.translation.article }}</span>
-        </div>
-      </div>
-
       <component v-if="wrappedSub" :is="componentMap[currentSub?.type] || SingleChoice" :question="wrappedSub"
         :user-answer="props.userAnswer?.[currentSubIndex]" :mode="mode" :show-answer="currentSubShowAnswer"
         :show-answer-mode="showAnswerMode" :show-explanation="showExplanation" :disabled="isSubAnswerDisabled"
@@ -23,11 +9,29 @@
 
     </div>
 
-    <div class="sub-nav" v-if="question.subs && question.subs.length > 1">
-      <button v-for="(sub, index) in question.subs" :key="index" class="sub-nav-btn" :class="getSubNavBtnClass(index)"
-        @click="goToSub(index)">
-        {{ index + 1 }}
-      </button>
+    <div class="sub-nav-wrap" v-if="question.subs && question.subs.length > 1">
+      <div class="sub-nav">
+        <button v-for="(sub, index) in question.subs" :key="index" class="sub-nav-btn" :class="getSubNavBtnClass(index)"
+          @click="goToSub(index)">
+          {{ index + 1 }}
+        </button>
+      </div>
+    </div>
+
+    <div class="reading-section" v-if="question.media?.article">
+      <div class="reading-header" @click="toggleReading">
+        <span class="material-symbols-outlined">description</span>
+        <span>{{ t('readingMaterial') || '' }}</span>
+        <span class="material-symbols-outlined expand-icon">{{ readingExpanded ? 'expand_less' : 'expand_more'
+        }}</span>
+      </div>
+    <div class="reading-content" v-show="readingExpanded">
+      <div class="reading-article">{{ question.media.article }}</div>
+      <div v-if="showTranslation" class="reading-divider">
+        <span class="reading-divider-label">译文</span>
+      </div>
+      <div v-if="showTranslation" class="reading-translation">{{ question.translation.article }}</div>
+    </div>
     </div>
 
 
@@ -304,10 +308,8 @@ watch(() => props.userAnswer, (newAnswer) => {
 }
 
 .reading-section {
-  /* border: 0.5px solid var(--border-color-light); */
   border-radius: var(--radius-lg);
   overflow: hidden;
-  margin-bottom: var(--spacing-md);
 }
 
 .reading-header {
@@ -337,70 +339,97 @@ watch(() => props.userAnswer, (newAnswer) => {
   color: var(--on-surface);
   line-height: 1.8;
   white-space: pre-wrap;
-  max-height: 300px;
-  overflow-y: auto;
+}
+
+.reading-article {
+  white-space: pre-line;
+  hyphens: auto;
+  overflow-wrap: break-word;
+  line-height: 1.8;
+  font-size: 15px;
+}
+
+.reading-divider {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  margin: var(--spacing-md) 0;
+}
+
+.reading-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border-color-strong);
+}
+
+.reading-divider-label {
+  font-size: var(--font-size-sm);
+  color: var(--text-disabled);
+  font-weight: 500;
+  flex-shrink: 0;
+}
+
+.reading-translation {
+  white-space: pre-wrap;
+  color: var(--text-secondary);
+}
+
+.sub-nav-wrap {
+  background: var(--background);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-sm) var(--spacing-md);
 }
 
 .sub-nav {
   display: flex;
-  justify-content: center;
-  gap: var(--spacing-md);
-  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: var(--spacing-sm);
+  padding: 0 var(--spacing-md);
 }
 
 .sub-nav-btn {
-  min-width: 40px;
-  height: 40px;
-  padding: 0 var(--spacing-sm);
-  border: 1px solid var(--color-gray-200);
-  border-radius: var(--radius-md);
-  background: var(--background);
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: var(--color-gray-100);
   font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-semibold);
+  font-weight: var(--font-weight-bold);
   color: var(--text-secondary);
   cursor: pointer;
   transition: all 0.2s;
 }
 
 .sub-nav-btn:hover {
-  border-color: var(--primary);
-  color: var(--primary);
+  background: var(--color-gray-200);
 }
 
 .sub-nav-btn.current {
-  background-color: var(--primary);
-  border-color: var(--primary);
+  background: var(--primary);
   color: #fff;
+  box-shadow: 0 2px 8px rgba(0, 91, 191, 0.25);
 }
 
 .sub-nav-btn.correct {
   background: var(--success);
-  border-color: var(--success);
   color: #fff;
 }
 
 .sub-nav-btn.wrong {
   background: var(--error);
-  border-color: var(--error);
   color: #fff;
 }
 
 .sub-nav-btn.unknown {
   background: var(--warning);
-  border-color: var(--warning);
-  color: var(--on-surface);
+  color: #fff;
 }
 
-.sub-nav-btn.answered:not(.active) {
+.sub-nav-btn.answered:not(.current) {
   background: var(--success-light);
-  border-color: var(--success);
   color: var(--success);
-}
-
-.sub-nav-btn.no-answer {
-  background: var(--color-gray-200);
-  border-color: var(--border-color-light);
-  color: var(--text-secondary);
 }
 
 .sub-question-section {

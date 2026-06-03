@@ -2,9 +2,10 @@
   <div class="quiz-settings-modal" @click.self="$emit('close')">
     <div class="quiz-settings-content">
       <header class="settings-header">
-        <button class="close-btn" @click="$emit('close')">
+        <!-- <button class="close-btn" @click="$emit('close')">
           <span class="material-symbols-outlined">close</span>
-        </button>
+        </button> -->
+        <div class="header-spacer"></div>
         <span class="header-title">{{ t('quizSettings') }}</span>
         <div class="header-spacer"></div>
       </header>

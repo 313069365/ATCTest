@@ -3910,7 +3910,7 @@
     "shuffle": false,
     "degree": 1,
     "subs": null,
-    "explanation": "",
+    "explanation": "💡速记技巧：谁动是谁。向【暖】空气一侧移动的锋面是冷锋；向【冷】空气一侧移动的锋面是暖锋；24小时移动不超过1个纬距的是准静止锋。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -6712,7 +6712,7 @@
     "shuffle": false,
     "degree": 1,
     "subs": null,
-    "explanation": "一种是发生在雷暴单体下面，由下击暴流造成的风切变。这种风切变的特点是范围小、寿命短、强度大。另一种是雷雨中的下冲气流到达地面后，形成强烈的冷性气流向四处传播，这股气流可传到离雷暴云20 km处。由于它离开雷暴主体，并且不伴随其他可见的天气现象，所以往往不易发现, 对飞行威胁较大。",
+    "explanation": "与雷暴有关的低空风切变引起的最大危害区出现在【快速移动的积雨云前方，砧状云正下方】。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -44110,7 +44110,7 @@
     "shuffle": true,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "💡速记技巧： tan3° 不规整，故尾数不是5倍数。L=9.0km=9000m,tan3°≈0.052408,RDH=15m，H=9000×tan3°=9000×0.052408=471.672m，471.672+15=486.672m",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -49605,7 +49605,7 @@
     "shuffle": true,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "💡速记技巧：精密。这里的精密航段指的是精密进近，障碍物鉴别面是用来鉴别起飞的。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -56641,7 +56641,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "【《民用航空安全信息报告表》】报事发地监管局",
+    "explanation": "报告【事发地监管局，抄送地区管理局】；而不是监控中心",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
