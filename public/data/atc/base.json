@@ -46745,7 +46745,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "飞行程序设计中考虑NDB提供侧方定位时的精度是【±°】。",
+    "explanation": "飞行程序设计中考虑NDB提供侧方定位时的精度是【±6.2°】。飞行程序设计中考虑【VOR】提供侧方定位时的精度是±4.5°",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -47352,7 +47352,7 @@
     "shuffle": true,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "⚠️ 答案可能有误。每个航段都有相应的保护区。通常保护区对称于预定航迹两侧。原则上，该保护区分为主区和副区。然而，有时会只有主区。当允许有副区时，每一边外侧一半宽度的保护区为副区（通常为总宽度的 25%），",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -51639,7 +51639,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "平原【400】，山区【600】",
+    "explanation": "在机场区域，以机场导航台为中心，半径【55 km】范围内，航空器距离障碍物的最高点，丘陵和山区不得小于600m。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
@@ -51659,7 +51659,7 @@
     "shuffle": false,
     "degree": 2,
     "subs": null,
-    "explanation": "",
+    "explanation": "在机场区域，以机场导航台为中心，半径【55 km】范围内，航空器距离障碍物的最高点，丘陵和山区不得小于600m。",
     "updated_at": "2023-11-28",
     "status": "valid"
   },
