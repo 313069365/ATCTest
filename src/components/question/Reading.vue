@@ -1,46 +1,60 @@
 <template>
   <div class="reading-question">
 
-    <div class="sub-question-section" v-if="question.subs && question.subs.length > 0">
-      <component v-if="wrappedSub" :is="componentMap[currentSub?.type] || SingleChoice" :question="wrappedSub"
-        :user-answer="props.userAnswer?.[currentSubIndex]" :mode="mode" :show-answer="currentSubShowAnswer"
-        :show-answer-mode="showAnswerMode" :show-explanation="showExplanation" :disabled="isSubAnswerDisabled"
-        @answer="handleSubAnswer" @check="checkSubAnswer(currentSubIndex)" />
-
+    <div class="reading-tab-bar" v-if="question.media?.article">
+      <button class="reading-tab" :class="{ active: activeTab === 'question' }" @click="activeTab = 'question'">
+        <span class="material-symbols-outlined">rate_review</span>
+        作答区
+      </button>
+      <button class="reading-tab" :class="{ active: activeTab === 'article' }" @click="activeTab = 'article'">
+        <span class="material-symbols-outlined">menu_book</span>
+        阅读材料
+      </button>
     </div>
 
-    <div class="sub-nav-wrap" v-if="question.subs && question.subs.length > 1">
-      <div class="sub-nav">
-        <button v-for="(sub, index) in question.subs" :key="index" class="sub-nav-btn" :class="getSubNavBtnClass(index)"
-          @click="goToSub(index)">
-          {{ index + 1 }}
-        </button>
+    <template v-if="activeTab === 'question'">
+      <div class="sub-question-section" v-if="question.subs && question.subs.length > 0">
+        <component v-if="wrappedSub" :is="componentMap[currentSub?.type] || SingleChoice" :question="wrappedSub"
+          :user-answer="props.userAnswer?.[currentSubIndex]" :mode="mode" :show-answer="currentSubShowAnswer"
+          :show-answer-mode="showAnswerMode" :show-explanation="showExplanation" :disabled="isSubAnswerDisabled"
+          @answer="handleSubAnswer" @check="checkSubAnswer(currentSubIndex)" />
       </div>
-    </div>
 
-    <div class="reading-section" v-if="question.media?.article">
-      <div class="reading-header" @click="toggleReading">
-        <span class="material-symbols-outlined">description</span>
-        <span>{{ t('readingMaterial') || '' }}</span>
-        <span class="material-symbols-outlined expand-icon">{{ readingExpanded ? 'expand_less' : 'expand_more'
-        }}</span>
+      <div class="sub-nav-wrap" v-if="question.subs && question.subs.length > 1">
+        <div class="sub-nav">
+          <button v-for="(sub, index) in question.subs" :key="index" class="sub-nav-btn" :class="getSubNavBtnClass(index)"
+            @click="goToSub(index)">
+            {{ index + 1 }}
+          </button>
+        </div>
       </div>
-    <div class="reading-content" v-show="readingExpanded">
-      <div class="reading-article">{{ question.media.article }}</div>
-      <div v-if="showTranslation" class="reading-divider">
-        <span class="reading-divider-label">译文</span>
-      </div>
-      <div v-if="showTranslation" class="reading-translation">{{ question.translation.article }}</div>
-    </div>
-    </div>
+    </template>
 
+    <template v-if="activeTab === 'article'">
+      <div class="reading-content">
+        <template v-if="!showTranslation">
+          <div class="reading-article">{{ question.media.article }}</div>
+        </template>
+        <template v-else>
+          <div class="reading-divider">
+            <span class="reading-divider-label">译文</span>
+          </div>
+          <div class="reading-translation">{{ question.translation.article }}</div>
+          <div class="reading-divider with-top">
+            <span class="reading-notch"></span>
+            <span class="reading-divider-label">原文</span>
+            <span class="reading-notch"></span>
+          </div>
+          <div class="reading-article">{{ question.media.article }}</div>
+        </template>
+      </div>
+    </template>
 
   </div>
 </template>
 
 <script setup>
 import { ref, computed, watch, inject } from 'vue'
-import { t } from '@/utils/i18n.js'
 import { getStatusClass, getCurrentStatusClass, getAnswerStatus } from '@/utils/questionConfig'
 import { useQuestionHandler, canAutoCheck, normalizeStatus } from '@/composables/useQuestionHandler'
 import SingleChoice from './SingleChoice.vue'
@@ -109,7 +123,7 @@ const emit = defineEmits(['answer', 'checkSub', 'next-question'])
 
 const showTranslation = inject('showTranslation', ref(false))
 
-const readingExpanded = ref(false)
+const activeTab = ref('question')
 const currentSubIndex = ref(0)
 const subAnswerChecked = ref({})
 
@@ -206,10 +220,6 @@ const isSubAnswerDisabled = computed(() => {
   return isSubAnswerChecked(currentSubIndex.value)
 })
 
-const toggleReading = () => {
-  readingExpanded.value = !readingExpanded.value
-}
-
 const goToSub = (index) => {
   currentSubIndex.value = index
 }
@@ -270,7 +280,7 @@ const currentSubShowAnswer = computed(() => {
 
 watch(() => props.question, () => {
   currentSubIndex.value = 0
-  readingExpanded.value = false
+  activeTab.value = 'question'
   subAnswerChecked.value = {}
 })
 
@@ -307,35 +317,46 @@ watch(() => props.userAnswer, (newAnswer) => {
   gap: var(--spacing-md);
 }
 
-.reading-section {
-  border-radius: var(--radius-lg);
-  overflow: hidden;
+.reading-tab-bar {
+  display: flex;
+  gap: 4px;
+  padding: 3px;
+  background: var(--color-gray-100);
+  border-radius: 12px;
 }
 
-.reading-header {
+.reading-tab {
+  flex: 1;
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: var(--spacing-sm);
-  padding: var(--spacing-sm) var(--spacing-md);
-  background: var(--background);
-  color: var(--primary);
-  font-weight: var(--font-weight-semibold);
+  padding: 8px 16px;
+  border-radius: 10px;
+  border: none;
+  background: transparent;
+  font-size: var(--font-size-md);
+  font-weight: 500;
+  color: var(--text-secondary);
   cursor: pointer;
-  user-select: none;
+  transition: all 0.2s;
 }
 
-.reading-header .material-symbols-outlined:first-child {
+.reading-tab .material-symbols-outlined {
   font-size: 20px;
 }
 
-.expand-icon {
-  margin-left: auto;
-  font-size: 20px;
+.reading-tab.active {
+  background: var(--primary);
+  color: #fff;
+  font-weight: 600;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
 }
 
 .reading-content {
-  padding: 0 var(--spacing-md) var(--spacing-md);
+  padding: var(--spacing-md);
   background: var(--background);
+  border-radius: var(--radius-lg);
   color: var(--on-surface);
   line-height: 1.8;
   white-space: pre-wrap;
@@ -350,10 +371,35 @@ watch(() => props.userAnswer, (newAnswer) => {
 }
 
 .reading-divider {
+  position: relative;
   display: flex;
   align-items: center;
   gap: var(--spacing-sm);
-  margin: var(--spacing-md) 0;
+  margin: 0 0 var(--spacing-sm);
+}
+
+.reading-divider.with-top {
+  margin: var(--spacing-sm) 0;
+}
+
+.reading-notch {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--background-secondary);
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.reading-notch:first-child {
+  left: -23px;
+}
+
+.reading-notch:last-child {
+  right: -23px;
 }
 
 .reading-divider::after {
@@ -373,6 +419,8 @@ watch(() => props.userAnswer, (newAnswer) => {
 .reading-translation {
   white-space: pre-wrap;
   color: var(--text-secondary);
+  line-height: 1.8;
+  font-size: 14px;
 }
 
 .sub-nav-wrap {

@@ -9,7 +9,7 @@
     <!-- 2. 题干区 -->
     <div class="question-stem">
       <h2 class="question-text">{{ question?.stem }}
-        <div v-show="showTranslation">{{ question.translation?.stem || "" }}</div>
+        <div v-show="showTranslation" class="translation-text">{{ question.translation?.stem || "" }}</div>
       </h2>
     </div>
 
@@ -23,7 +23,7 @@
       }" @click="handleSelect(i)" :disabled="disabled || (shouldShowAnswer && mode !== 'review')">
         <span class="option-marker"></span>
         <span class="option-text" v-if="option">{{ formatOption(option) }}
-          <div v-show="showTranslation" style="color:gray">{{ formatOption(question.translation?.options[i] || "") }}
+          <div v-show="showTranslation" class="translation-text">{{ formatOption(question.translation?.options[i] || "") }}
           </div>
         </span>
       </button>
@@ -194,6 +194,12 @@ const handleSelect = (index) => {
 <style scoped>
 .single-choice {
   width: 100%;
+}
+
+.translation-text {
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin-top: 4px;
 }
 
 .question-meta {

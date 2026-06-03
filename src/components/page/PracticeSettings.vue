@@ -278,9 +278,9 @@ const gotopage = () => {
 .mode-toggle {
   display: flex;
   gap: 4px;
-  padding: var(--spacing-sm);
-  background: var(--primary-container);
-  border-radius: var(--radius-lg);
+  padding: 3px;
+  background: var(--color-gray-100);
+  border-radius: 12px;
 }
 
 .mode-toggle-btn {
@@ -288,8 +288,9 @@ const gotopage = () => {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 12px 16px;
-  border-radius: var(--radius-lg);
+  gap: var(--spacing-sm);
+  padding: 8px 16px;
+  border-radius: 10px;
   background: transparent;
   border: none;
   font-size: 14px;
@@ -304,9 +305,10 @@ const gotopage = () => {
 }
 
 .mode-toggle-btn.active {
-  background: var(--on-primary);
-  color: var(--primary);
-  font-weight: 700;
+  background: var(--primary);
+  color: #fff;
+  font-weight: 600;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
 }
 
 .mode-card {
