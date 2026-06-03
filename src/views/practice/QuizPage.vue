@@ -72,7 +72,7 @@
             :show-answer-mode="practiceData?.showAnswerMode" :auto-jump="practiceData?.autoJump"
             :show-explanation="showAnswerExplanation" :answerChecked="answerChecked" :answerStatus="answerStatus"
             :current-sub-index="currentSubIndex" @answer="handleAnswer" @next-question="nextQuestion"
-            @checkSub="handleCheckSub" @check="checkAnswer" />
+            @checkSub="handleCheckSub" @check="checkAnswer" @goSub="handleGoSub" />
         </div>
 
         <div v-else style="text-align: center; padding: 40px">
@@ -81,8 +81,9 @@
       </template>
     </main>
 
-    <QustionNavbar :prevDisabled="currentIndex === 0" :isLast="currentIndex === bank.length - 1" @prev="prevQuestion"
-      @next="nextQuestion" @submit="finishQuiz" />
+    <QustionNavbar :prevDisabled="currentIndex === 0" :isLast="currentIndex === bank.length - 1"
+      :subCount="currentSubCount" :currentSubIndex="currentSubIndex" :subStatuses="currentSubStatuses"
+      @prev="prevQuestion" @next="nextQuestion" @submit="finishQuiz" @goSub="handleGoSub" />
 
     <AnswerCard v-if="showAnswerCard" :questions="bank" :currentIndex="currentIndex" :currentSubIndex="currentSubIndex"
       :settings="practiceData" :answerChecked="answerChecked" :answerStatus="answerStatus" :userAnswers="userAnswers"
@@ -282,6 +283,21 @@ const currentQuestion = computed(() => {
   }
   return null;
 });
+
+const currentSubCount = computed(() => currentQuestion.value?.subs?.length || 0)
+
+const currentSubStatuses = computed(() => {
+  const q = currentQuestion.value
+  if (!q || !q.subs) return []
+  const status = answerStatus.value[q.id]
+  const answers = userAnswers.value[q.id]
+  return q.subs.map((_, i) => {
+    if (status && status[i] === 'correct') return 'correct'
+    if (status && status[i] === 'wrong') return 'wrong'
+    if (answers && answers[i] !== undefined && answers[i] !== null && answers[i] !== '') return 'answered'
+    return null
+  })
+})
 
 // 科目显示名称
 const subjectDisplay = computed(() => {
@@ -497,6 +513,10 @@ const finishQuiz = () => {
     });
   }
 };
+
+const handleGoSub = (index) => {
+  currentSubIndex.value = index
+}
 
 const gotoQuesitonIdx = (idx, sqIdx) => {
   currentIndex.value = idx;
@@ -762,7 +782,7 @@ const removeCurrentFromWrong = () => {
   background: var(--background-secondary);
   max-width: var(--app-max-width);
   margin: 0 auto;
-  padding-bottom: 80px;
+  padding-bottom: 120px;
 }
 
 .top-bar {

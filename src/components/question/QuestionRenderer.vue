@@ -1,6 +1,6 @@
 <template>
   <component :is="rendererComponent" v-bind="$props" @answer="handleAnswer" @next-question="handleNextQuestion"
-    @checkSub="handleCheckSub" @check="handleCheck" @toggle-mark="handleToggleMark" />
+    @checkSub="handleCheckSub" @check="handleCheck" @toggle-mark="handleToggleMark" @goSub="handleGoSub" />
 </template>
 
 <script setup>
@@ -63,7 +63,7 @@ const props = defineProps({
   }
 })
 
-const emit = defineEmits(['answer', 'next-question', 'checkSub', 'check', 'toggle-mark'])
+const emit = defineEmits(['answer', 'next-question', 'checkSub', 'check', 'toggle-mark', 'goSub'])
 
 const componentMap = {
   single: SingleChoice,
@@ -97,5 +97,9 @@ const handleCheck = () => {
 
 const handleToggleMark = () => {
   emit('toggle-mark')
+}
+
+const handleGoSub = (index) => {
+  emit('goSub', index)
 }
 </script>

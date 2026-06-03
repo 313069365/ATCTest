@@ -19,15 +19,6 @@
           :show-answer-mode="showAnswerMode" :show-explanation="showExplanation" :disabled="isSubAnswerDisabled"
           @answer="handleSubAnswer" @check="checkSubAnswer(currentSubIndex)" />
       </div>
-
-      <div class="sub-nav-wrap" v-if="question.subs && question.subs.length > 1">
-        <div class="sub-nav">
-          <button v-for="(sub, index) in question.subs" :key="index" class="sub-nav-btn"
-            :class="getSubNavBtnClass(index)" @click="goToSub(index)">
-            {{ index + 1 }}
-          </button>
-        </div>
-      </div>
     </template>
 
     <template v-if="activeTab === 'article'">
@@ -55,8 +46,8 @@
 
 <script setup>
 import { ref, computed, watch, inject } from 'vue'
-import { getStatusClass, getCurrentStatusClass, getAnswerStatus } from '@/utils/questionConfig'
-import { useQuestionHandler, canAutoCheck, normalizeStatus } from '@/composables/useQuestionHandler'
+import { getAnswerStatus } from '@/utils/questionConfig'
+import { useQuestionHandler, canAutoCheck } from '@/composables/useQuestionHandler'
 import SingleChoice from './SingleChoice.vue'
 import MultipleChoice from './MultipleChoice.vue'
 import BooleanQuestion from './BooleanQuestion.vue'
@@ -119,12 +110,19 @@ const props = defineProps({
   }
 })
 
-const emit = defineEmits(['answer', 'checkSub', 'next-question'])
+const emit = defineEmits(['answer', 'checkSub', 'next-question', 'goSub'])
 
 const showTranslation = inject('showTranslation', ref(false))
 
 const activeTab = ref('question')
 const currentSubIndex = ref(0)
+
+watch(() => props.currentSubIndex, (val) => {
+  if (val !== currentSubIndex.value) {
+    currentSubIndex.value = val
+  }
+}, { immediate: true })
+
 const subAnswerChecked = ref({})
 
 const isSubAnswerChecked = (index) => {
@@ -153,14 +151,8 @@ const wrappedSub = computed(() => {
 const {
   practiceMode,
   showAnswerMode,
-  hasUserAnswer,
-  answerState,
-  displayConfig,
   shouldAutoCheck,
   shouldShowCheckBtn,
-  getSubAnswer: useGetSubAnswer,
-  getSubStatus: useGetSubStatus,
-  isComplex
 } = useQuestionHandler({
   question: wrappedSub,
   practiceMode: computed(() => props.mode),
@@ -183,32 +175,6 @@ const getSubAnswer = (subIndex) => {
   return props.userAnswer?.[subIndex]
 }
 
-const getSubStatus = (subIndex) => {
-  return useGetSubStatus(subIndex)
-}
-
-const getSubNavBtnClass = (subIndex) => {
-  const isCurrent = currentSubIndex.value === subIndex
-  const currentMode = mode.value || 'answer'
-
-  // 当前题目优先返回
-  if (isCurrent) {
-    return getCurrentStatusClass('', currentMode)
-  }
-
-  // 非当前题目
-  const status = normalizeStatus(getSubStatus(subIndex))
-  const answered = isSubAnswered(subIndex)
-
-  // 已作答但未检查
-  if (answered && !status) {
-    return 'answered'
-  }
-
-  // 使用标准状态类名
-  return getStatusClass(status, { isCurrent, mode: currentMode })
-}
-
 const hasCurrentSubAnswer = computed(() => {
   return isSubAnswered(currentSubIndex.value)
 })
@@ -222,6 +188,7 @@ const isSubAnswerDisabled = computed(() => {
 
 const goToSub = (index) => {
   currentSubIndex.value = index
+  emit('goSub', index)
 }
 
 // 检查子题答案是否正确（立即模式下使用）
@@ -261,7 +228,9 @@ const handleSubAnswer = (answer) => {
 const goToNextSubOrNextQuestion = () => {
   const subs = props.question?.subs || []
   if (currentSubIndex.value < subs.length - 1) {
-    currentSubIndex.value++
+    const next = currentSubIndex.value + 1
+    currentSubIndex.value = next
+    emit('goSub', next)
   } else {
     emit('next-question')
   }
@@ -282,6 +251,7 @@ watch(() => props.question, () => {
   currentSubIndex.value = 0
   activeTab.value = 'question'
   subAnswerChecked.value = {}
+  emit('goSub', 0)
 })
 
 // 监听 userAnswer 变化，自动推断子题检查状态
@@ -421,63 +391,6 @@ watch(() => props.userAnswer, (newAnswer) => {
   color: var(--text-secondary);
   line-height: 1.8;
   font-size: 16px;
-}
-
-.sub-nav-wrap {
-  background: var(--background);
-  border-radius: var(--radius-lg);
-  padding: var(--spacing-sm) var(--spacing-md);
-}
-
-.sub-nav {
-  display: flex;
-  justify-content: space-between;
-  gap: var(--spacing-sm);
-  padding: 0 var(--spacing-md);
-}
-
-.sub-nav-btn {
-  width: 36px;
-  height: 36px;
-  padding: 0;
-  border: none;
-  border-radius: 50%;
-  background: var(--color-gray-100);
-  font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-bold);
-  color: var(--text-secondary);
-  cursor: pointer;
-  transition: all 0.2s;
-}
-
-.sub-nav-btn:hover {
-  background: var(--color-gray-200);
-}
-
-.sub-nav-btn.current {
-  background: var(--primary);
-  color: #fff;
-  box-shadow: 0 2px 8px rgba(0, 91, 191, 0.25);
-}
-
-.sub-nav-btn.correct {
-  background: var(--success);
-  color: #fff;
-}
-
-.sub-nav-btn.wrong {
-  background: var(--error);
-  color: #fff;
-}
-
-.sub-nav-btn.unknown {
-  background: var(--warning);
-  color: #fff;
-}
-
-.sub-nav-btn.answered:not(.current) {
-  background: var(--success-light);
-  color: var(--success);
 }
 
 .sub-question-section {
