@@ -19,12 +19,12 @@
       </button>
     </div>
     <div class="nav-row">
-      <button class="nav-btn prev" :disabled="prevDisabled" @click="$emit('prev')">
+      <button class="nav-btn prev" :disabled="prevDisabled && !(subCount > 0 && currentSubIndex > 0)" @click="handlePrev">
         <span class="material-symbols-outlined">chevron_left</span>
-        上一题
+        {{ subCount > 0 && currentSubIndex > 0 ? '上一小题' : '上一题' }}
       </button>
-      <button v-if="!isLast" class="nav-btn next" @click="$emit('next')">
-        下一题
+      <button v-if="!isLast || (subCount > 0 && currentSubIndex < subCount - 1)" class="nav-btn next" @click="handleNext">
+        {{ subCount > 0 && currentSubIndex < subCount - 1 ? '下一小题' : '下一题' }}
         <span class="material-symbols-outlined">chevron_right</span>
       </button>
       <button v-else class="nav-btn submit" @click="$emit('submit')">
@@ -47,7 +47,23 @@ const props = defineProps({
   subStatuses: { type: Array, default: () => [] }
 })
 
-defineEmits(['prev', 'next', 'submit', 'goSub'])
+const emit = defineEmits(['prev', 'next', 'submit', 'goSub'])
+
+const handlePrev = () => {
+  if (props.subCount > 0 && props.currentSubIndex > 0) {
+    emit('goSub', props.currentSubIndex - 1)
+  } else {
+    emit('prev')
+  }
+}
+
+const handleNext = () => {
+  if (props.subCount > 0 && props.currentSubIndex < props.subCount - 1) {
+    emit('goSub', props.currentSubIndex + 1)
+  } else {
+    emit('next')
+  }
+}
 
 const MAX_VISIBLE = 5
 const pageSlots = 3
