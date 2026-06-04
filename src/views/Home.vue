@@ -38,7 +38,7 @@
       </section>
 
       <section class="main-actions">
-        <button class="action-btn practice" @click="pageTo('/practice')">
+        <button class="action-btn practice" @click="pageTo('/practice')" :disabled="store.loading">
           <div class="action-text">
             <span class="action-title">{{ t('practiceMode') }}</span>
             <span class="action-subtitle">{{ t('reviewKeyPoints') }}</span>
@@ -47,7 +47,7 @@
             <span class="material-symbols-outlined">menu_book</span>
           </div>
         </button>
-        <button class="action-btn exam" @click="pageTo('/exam')">
+        <button class="action-btn exam" @click="pageTo('/exam')" :disabled="store.loading">
           <div class="action-text">
             <span class="action-title">{{ t('mockExam') }}</span>
             <span class="action-subtitle">{{ t('timedExam') }}</span>
@@ -88,7 +88,7 @@
                 </div>
                 <h3 class="placeholder-title">{{ t('noPracticeRecord') }}</h3>
                 <p class="placeholder-subtitle">{{ t('startFirstPractice') }}</p>
-                <button class="continue-btn" @click="pageTo('/practice')">{{ t('startPractice') }}</button>
+                <button class="continue-btn" @click="pageTo('/practice')" :disabled="store.loading">{{ t('startPractice') }}</button>
               </div>
             </div>
           </template>
@@ -188,10 +188,7 @@ const pageTo = (path) => {
 }
 
 // 加载数据
-onMounted(async () => {
-  if (store.rawQuestions.length === 0) {
-    await store.loadQuestions()
-  }
+onMounted(() => {
   pm.refresh()
 })
 

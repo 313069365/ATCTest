@@ -30,3 +30,4 @@ design/*
 !.dev.vars.example
 .env*
 !.env.example
+scripts/generate-structure.cjs

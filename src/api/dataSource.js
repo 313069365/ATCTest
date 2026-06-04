@@ -3,156 +3,141 @@
  * 统一管理题库数据的获取和自动发现
  *
  * 功能:
- * - 多来源支持: 本地文件 / API / 用户导入
- * - 自动发现题库结构 (category -> scope -> subject)
+ * - structure.json 提供元数据/目录（小型，同步可用）
+ * - 题目文件按需 fetch，写入 IndexedDB 后通过 store 读取
+ * - dataCache 提供内存缓存，供搜索/导入等操作使用
  */
 
 import { storage, STORAGE_KEY } from "@/composables/useStorage";
-import base from "@/../public/data/atc/base.json";
-import professional from "@/../public/data/atc/professional.json";
-import english_singleChoice from "@/../public/data/atc/english_translated.json";
-import enlish_reading from "@/../public/data/atc/english_reading.json";
-import base_set from "@/../public/data/atc/base_set.json";
+import structure from "@/../public/data/atc/structure.json";
 
-// ==================== 配置 ====================
+// ==================== 内存缓存 ====================
 
-// 预定义题库数据
-const DATA_SOURCES = {
-  atc: {
-    base: base,
-    professional: professional,
-    english: [...english_singleChoice, ...enlish_reading],
-  },
-  base: {
-    base_set: base_set,
-  },
-};
+/** 运行时题目缓存（fetch 后填充，供搜索等操作使用） */
+const dataCache = new Map();
 
-// ==================== 核心功能 ====================
+// ==================== 结构/元数据（同步） ====================
 
 /**
- * 发现题库结构
- * @param {Array} questions - 题目数组
- * @returns {Object} 题库结构
+ * 生成题库元数据（读自 structure.json）
  */
-function discover(questions) {
-  const bank = {};
-
-  questions.forEach((q) => {
-    const { category, scope, subject } = q.meta || {};
-    if (!category) return;
-
-    if (!bank[category]) {
-      bank[category] = {
-        scopes: new Set(),
-        subjects: new Set(),
-      };
-    }
-    if (scope) bank[category].scopes.add(scope);
-    if (subject) bank[category].subjects.add(subject);
-  });
-
-  // Set 转 Array
-  Object.values(bank).forEach((item) => {
-    item.scopes = [...item.scopes];
-    item.subjects = [...item.subjects];
-  });
-
-  // 合并导入配置
-  const imports = storage.getItem(STORAGE_KEY.IMPORT_CONFIG) || {};
-  Object.entries(imports).forEach(([cat, info]) => {
-    if (!bank[cat]) {
-      bank[cat] = { scopes: [info.scope], subjects: [] };
-    }
-  });
-
-  return bank;
+export function generateBankMeta() {
+  return structure.categories;
 }
 
-// ==================== 导出函数 ====================
+/**
+ * 获取题库版本号（用于检测更新）
+ */
+export function computeBankHash() {
+  return structure.version;
+}
 
 /**
  * 获取所有 category
  */
 export function getAllCategories() {
-  return Object.keys(DATA_SOURCES);
+  return Object.keys(structure.categories);
 }
 
 /**
- * 辅助函数：按 key 分组
+ * 获取题库结构
  */
-function groupBy(arr, keyFn) {
-  return arr.reduce((result, item) => {
-    const key = keyFn(item);
-    if (!result[key]) result[key] = [];
-    result[key].push(item);
-    return result;
-  }, {});
-}
-
-/**
- * 生成题库元数据
- */
-export function generateBankMeta() {
-  const meta = {};
-
-  for (const [category, scopes] of Object.entries(DATA_SOURCES)) {
-    meta[category] = {
-      scopes: [],
-      subjects: {},
+export function getQuestionBankStructure() {
+  const bank = {};
+  for (const [category, info] of Object.entries(structure.categories)) {
+    bank[category] = {
+      scopes: [...info.scopes],
+      subjects: Object.keys(info.subjects),
     };
-
-    for (const [scope, questions] of Object.entries(scopes)) {
-      if (!meta[category].scopes.includes(scope)) {
-        meta[category].scopes.push(scope);
-      }
-
-      const grouped = groupBy(questions, (q) => q.meta?.subject);
-      for (const [subject, qs] of Object.entries(grouped)) {
-        if (!subject) continue;
-        meta[category].subjects[subject] = {
-          scope,
-          count: qs.length,
-        };
-      }
-    }
   }
-
-  return meta;
+  return bank;
 }
 
 /**
- * 获取所有题目
+ * 获取题库列表
  */
-export function fetchAllQuestions() {
-  const results = [];
-
-  for (const scopes of Object.values(DATA_SOURCES)) {
-    for (const data of Object.values(scopes)) {
-      results.push(...data);
-    }
-  }
-
-  return results;
+export function getQuestionBanks() {
+  return Object.keys(structure.categories);
 }
 
 /**
- * 按 subject 获取题目
+ * 获取某个题库信息
+ */
+export function getQuestionBankInfo(category) {
+  const cat = structure.categories[category];
+  if (!cat) return null;
+  return { scopes: [...cat.scopes], subjects: Object.keys(cat.subjects) };
+}
+
+// ==================== 文件下载 ====================
+
+/**
+ * 拉取单个题目文件并缓存到内存
+ * @param {string} filename - 如 "base.json"
+ * @returns {Array} 题目数组
+ */
+export async function fetchQuestionFile(filename) {
+  const resp = await fetch(`/data/atc/${filename}`);
+  const questions = await resp.json();
+  dataCache.set(filename, questions);
+  return questions;
+}
+
+/**
+ * 拉取所有题目文件，按 subject 分组返回
+ * @param {Function} onProgress - (当前文件序号, 总数) => void
+ * @returns {Object} { subjectName: [questions...], ... }
+ */
+export async function fetchAllQuestionFiles(onProgress) {
+  const files = structure.files;
+  const total = files.length;
+  const groupedBySubject = {};
+
+  for (let i = 0; i < total; i++) {
+    const filename = files[i];
+    const questions = await fetchQuestionFile(filename);
+
+    for (const q of questions) {
+      const subject = q.meta?.subject;
+      if (!subject) continue;
+      if (!groupedBySubject[subject]) groupedBySubject[subject] = [];
+      groupedBySubject[subject].push(q);
+    }
+
+    if (onProgress) onProgress(i + 1, total);
+  }
+
+  return groupedBySubject;
+}
+
+// ==================== 题目查询（内存缓存 / 向后兼容） ====================
+
+/**
+ * 按 subject 获取题目（从内存缓存读取）
  */
 export function fetchQuestionsBySubject(subject) {
-  for (const scopes of Object.values(DATA_SOURCES)) {
-    for (const questions of Object.values(scopes)) {
-      const filtered = questions.filter((q) => q.meta?.subject === subject);
-      if (filtered.length > 0) return filtered;
-    }
+  for (const questions of dataCache.values()) {
+    const filtered = questions.filter((q) => q.meta?.subject === subject);
+    if (filtered.length > 0) return filtered;
   }
   return [];
 }
 
 /**
+ * 获取所有题目（从内存缓存读取）
+ */
+export function fetchAllQuestions() {
+  const results = [];
+  for (const questions of dataCache.values()) {
+    results.push(...questions);
+  }
+  return results;
+}
+
+/**
  * 条件过滤获取题目
  */
-export function fetchQuestions({ category, scope, subject }) {
+export function fetchQuestions({ category, scope, subject } = {}) {
   const all = fetchAllQuestions();
   return all.filter((q) => {
     const m = q.meta || {};
@@ -164,84 +149,7 @@ export function fetchQuestions({ category, scope, subject }) {
 }
 
 /**
- * 获取题库结构
- */
-export function getQuestionBankStructure(questions) {
-  if (!questions || questions.length === 0) {
-    questions = fetchAllQuestions();
-  }
-  return discover(questions);
-}
-
-/**
- * 获取题库列表
- */
-export function getQuestionBanks() {
-  const structure = getQuestionBankStructure();
-  return Object.keys(structure);
-}
-
-/**
- * 获取某个题库信息
- */
-export function getQuestionBankInfo(category) {
-  const structure = getQuestionBankStructure();
-  return structure[category] || null;
-}
-
-/**
- * 计算题库 Hash (SHA-256)
- * 用于检测题库是否发生变化
- */
-export async function computeBankHash() {
-  const allQuestions = fetchAllQuestions();
-  const jsonStr = JSON.stringify(allQuestions);
-  const encoder = new TextEncoder();
-  const data = encoder.encode(jsonStr);
-  const hashBuffer = await crypto.subtle.digest("SHA-256", data);
-  const hashArray = Array.from(new Uint8Array(hashBuffer));
-  return hashArray.map((b) => b.toString(16).padStart(2, "0")).join("");
-}
-
-/**
- * 导入题库文件
- */
-export async function importQuestions(file, options = {}) {
-  const { category = "import", scope = "base" } = options;
-
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      try {
-        const data = JSON.parse(e.target.result);
-        const questions = (
-          Array.isArray(data) ? data : data.questions || []
-        ).map((q) => ({ ...q, meta: { ...q.meta, category, scope } }));
-
-        // 保存导入配置
-        const imports = storage.getItem(STORAGE_KEY.IMPORT_CONFIG) || {};
-        imports[category] = { scope, importTime: Date.now() };
-        storage.setItem(STORAGE_KEY.IMPORT_CONFIG, imports);
-
-        resolve(questions);
-      } catch (err) {
-        reject(err);
-      }
-    };
-    reader.onerror = reject;
-    reader.readAsText(file);
-  });
-}
-
-/**
  * 搜索题目
- * @param {Object} params
- * @param {string} params.keyword - 搜索关键词
- * @param {string[]} params.fields - 搜索字段 ['id', 'stem', 'options']
- * @param {string} [params.category] - 按分类过滤
- * @param {string} [params.scope] - 按范围过滤
- * @param {string} [params.subject] - 按科目过滤
- * @returns {Array} 匹配的题目数组
  */
 export function searchQuestions({
   keyword,
@@ -283,9 +191,55 @@ export function searchQuestions({
   });
 }
 
+/**
+ * 辅助函数：按 key 分组
+ */
+function groupBy(arr, keyFn) {
+  return arr.reduce((result, item) => {
+    const key = keyFn(item);
+    if (!result[key]) result[key] = [];
+    result[key].push(item);
+    return result;
+  }, {});
+}
+
+// ==================== 导入 ====================
+
+/**
+ * 导入题库文件
+ */
+export async function importQuestions(file, options = {}) {
+  const { category = "import", scope = "base" } = options;
+
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      try {
+        const data = JSON.parse(e.target.result);
+        const questions = (
+          Array.isArray(data) ? data : data.questions || []
+        ).map((q) => ({ ...q, meta: { ...q.meta, category, scope } }));
+
+        const imports = storage.getItem(STORAGE_KEY.IMPORT_CONFIG) || {};
+        imports[category] = { scope, importTime: Date.now() };
+        storage.setItem(STORAGE_KEY.IMPORT_CONFIG, imports);
+
+        resolve(questions);
+      } catch (err) {
+        reject(err);
+      }
+    };
+    reader.onerror = reject;
+    reader.readAsText(file);
+  });
+}
+
 export default {
-  getAllCategories,
   generateBankMeta,
+  computeBankHash,
+  getAllCategories,
+  fetchQuestionFile,
+  fetchAllQuestionFiles,
   fetchAllQuestions,
   fetchQuestions,
   fetchQuestionsBySubject,
@@ -293,6 +247,5 @@ export default {
   getQuestionBanks,
   getQuestionBankInfo,
   importQuestions,
-  computeBankHash,
   searchQuestions,
 };

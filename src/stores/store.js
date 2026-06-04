@@ -19,6 +19,12 @@ export const useAppStore = defineStore("app", () => {
   /** 题库加载状态 */
   const loading = ref(false);
 
+  /** 题库加载提示文字 */
+  const loadingText = ref('');
+
+  /** 题库加载进度 0-100 */
+  const loadingProgress = ref(0);
+
   /** 题库结构（自动发现） */
   const questionBankStructure = ref({});
 
@@ -96,60 +102,45 @@ export const useAppStore = defineStore("app", () => {
   // ========== 题库 Actions ==========
 
   /**
-   * 加载题库元数据
+   * 加载题库元数据（从 structure.json 同步读取）
    */
   async function loadBankMeta() {
     bankMeta.value = API.generateBankMeta();
   }
 
   /**
-   * 首次启动时，将所有题目按 subject 分块存入 IndexedDB
+   * 后台下载所有题目文件并写入 IndexedDB
    */
-  async function loadAllQuestionsToIndexedDB() {
-    console.log("首次加载，存入 IndexedDB...");
-
-    const allQuestions = API.fetchAllQuestions();
-
-    const grouped = {};
-    allQuestions.forEach((q) => {
-      const subject = q.meta?.subject;
-      if (!subject) return;
-      if (!grouped[subject]) grouped[subject] = [];
-      grouped[subject].push(q);
-    });
-
+  async function downloadAndCacheAll(onProgress) {
+    const grouped = await API.fetchAllQuestionFiles(onProgress);
     const promises = Object.entries(grouped).map(([subject, questions]) =>
       bankStorage.setBank(subject, questions),
     );
-
     await Promise.all(promises);
-    console.log(`已存入 ${Object.keys(grouped).length} 个科目`);
+    storage.setItem('bank_version', String(API.computeBankHash()));
   }
 
   /**
-   * 加载题库数据
-   * 检查是否已初始化，未初始化则存入 IndexedDB
-   * 通过 Hash 比对检测题库变化
+   * 阻塞式加载题库（显示全局 loading）
+   * 用于首次启动和手动刷新
    */
   async function loadQuestions() {
     loading.value = true;
+    loadingText.value = '加载题库...';
+    loadingProgress.value = 0;
 
     try {
-      await loadBankMeta();
-
-      const currentHash = await API.computeBankHash();
-      const storedHash = storage.getItem(STORAGE_KEY.BANK_HASH);
-
-      if (!storedHash || currentHash !== storedHash) {
-        console.log('检测到题库变化，正在更新...');
-        await loadAllQuestionsToIndexedDB();
-        storage.setItem(STORAGE_KEY.BANK_HASH, currentHash);
-        storage.setItem(STORAGE_KEY.APP_INITIALIZED, true);
-      }
+      await downloadAndCacheAll((cur, total) => {
+        loadingText.value = `下载题库 ${cur}/${total}`;
+        loadingProgress.value = Math.round((cur / total) * 100);
+      });
     } catch (e) {
       console.error("加载题库失败:", e);
+      throw e;
     } finally {
       loading.value = false;
+      loadingText.value = '';
+      loadingProgress.value = 0;
     }
   }
 
@@ -168,6 +159,7 @@ export const useAppStore = defineStore("app", () => {
 
   /**
    * 获取某个科目下的题目（带排序）
+   * 优先从 IndexedDB 读取，降级到内存缓存
    */
   async function getSubjectQuestions(
     category,
@@ -175,7 +167,10 @@ export const useAppStore = defineStore("app", () => {
     subject,
     sortType = "sequence",
   ) {
-    let questions = await API.fetchQuestionsBySubject(subject);
+    let questions = await bankStorage.getBank(subject);
+    if (!questions || questions.length === 0) {
+      questions = API.fetchQuestionsBySubject(subject);
+    }
 
     if (sortType === "shuffle") {
       questions = [...questions].sort(() => Math.random() - 0.5);
@@ -187,35 +182,39 @@ export const useAppStore = defineStore("app", () => {
   }
 
   /**
-   * 清除题库缓存
-   */
-  async function clearQuestionsCache() {
-    await bankStorage.removeBank(STORAGE_KEY.BANK);
-    rawQuestions.value = [];
-  }
-
-  /**
    * 检查题库是否有更新
-   * @returns {Object} { hasUpdate, currentHash, storedHash }
    */
   async function checkForUpdates() {
-    const currentHash = await API.computeBankHash();
-    const storedHash = storage.getItem(STORAGE_KEY.BANK_HASH);
+    const currentVer = API.computeBankHash();
+    const storedVer = storage.getItem('bank_version');
     return {
-      hasUpdate: !storedHash || currentHash !== storedHash,
-      currentHash,
-      storedHash,
+      hasUpdate: String(storedVer) !== String(currentVer),
+      currentVer,
+      storedVer,
     };
   }
 
   /**
    * 强制刷新题库
-   * 清除缓存并重新加载
    */
   async function forceRefreshQuestions() {
-    storage.removeItem(STORAGE_KEY.BANK_HASH);
-    storage.removeItem(STORAGE_KEY.APP_INITIALIZED);
+    storage.removeItem('bank_version');
     await loadQuestions();
+  }
+
+  /**
+   * 后台检测更新
+   */
+  async function checkForUpdatesInBackground() {
+    const { hasUpdate } = await checkForUpdates();
+    if (!hasUpdate) return;
+    try {
+      await downloadAndCacheAll((cur, total) => {
+        console.log(`后台更新题库 ${cur}/${total}`);
+      });
+    } catch (e) {
+      console.error('后台更新题库失败:', e);
+    }
   }
 
   // ========== 错题本 Actions ==========
@@ -347,14 +346,32 @@ export const useAppStore = defineStore("app", () => {
 
   /**
    * 初始化所有数据
+   * 首次启动阻塞下载，后续启动后台检测
    */
   async function init() {
-    await loadBankMeta();
+    loadBankMeta();
     loadWrongBook();
     loadFavorites();
     loadPracticeProgress();
     loadPracticeHistory();
     loadExamPapers();
+    loadExamPresets();
+
+    const storedVer = storage.getItem('bank_version');
+    const currentVer = API.computeBankHash();
+
+    if (storedVer && String(storedVer) === String(currentVer)) {
+      checkForUpdatesInBackground();
+      return;
+    }
+
+    if (!storedVer) {
+      await loadQuestions();
+      return;
+    }
+
+    // 版本不一致：后台静默更新
+    checkForUpdatesInBackground();
   }
 
   /**
@@ -502,6 +519,8 @@ export const useAppStore = defineStore("app", () => {
     // 题库状态
     rawQuestions,
     loading,
+    loadingText,
+    loadingProgress,
     questionBankStructure,
     questionBanks,
     questionsBySubject,
@@ -510,7 +529,6 @@ export const useAppStore = defineStore("app", () => {
     loadBankMeta,
     loadSubjectQuestions,
     getSubjectQuestions,
-    clearQuestionsCache,
     checkForUpdates,
     forceRefreshQuestions,
 

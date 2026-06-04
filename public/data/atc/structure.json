@@ -1,0 +1,124 @@
+{
+  "version": 1,
+  "files": [
+    "base.json",
+    "professional.json",
+    "english_translated.json",
+    "english_reading.json",
+    "base_set.json"
+  ],
+  "categories": {
+    "atc": {
+      "scopes": [
+        "base",
+        "professional",
+        "english"
+      ],
+      "subjects": {
+        "aviationMeteorology": {
+          "scope": "base",
+          "count": 504
+        },
+        "airNavigation": {
+          "scope": "base",
+          "count": 378
+        },
+        "communicationNavigationSurveillance": {
+          "scope": "base",
+          "count": 481
+        },
+        "principlesOfFlight": {
+          "scope": "base",
+          "count": 274
+        },
+        "aircraftSystems": {
+          "scope": "base",
+          "count": 269
+        },
+        "aeronauticalInformation": {
+          "scope": "base",
+          "count": 357
+        },
+        "airTrafficServicesGeneral": {
+          "scope": "base",
+          "count": 325
+        },
+        "airspace": {
+          "scope": "base",
+          "count": 91
+        },
+        "humanFactors": {
+          "scope": "base",
+          "count": 88
+        },
+        "generalAviation": {
+          "scope": "base",
+          "count": 27
+        },
+        "aerodromeControl": {
+          "scope": "professional",
+          "count": 804
+        },
+        "approachControl": {
+          "scope": "professional",
+          "count": 331
+        },
+        "approachRadarControl": {
+          "scope": "professional",
+          "count": 359
+        },
+        "areaControl": {
+          "scope": "professional",
+          "count": 259
+        },
+        "areaRadarControl": {
+          "scope": "professional",
+          "count": 180
+        },
+        "flightService": {
+          "scope": "professional",
+          "count": 238
+        },
+        "regionalOperationsMonitoring": {
+          "scope": "professional",
+          "count": 336
+        },
+        "caacOperationsMonitoring": {
+          "scope": "professional",
+          "count": 320
+        },
+        "specialSkillAdsb": {
+          "scope": "professional",
+          "count": 281
+        },
+        "apronControl": {
+          "scope": "professional",
+          "count": 587
+        },
+        "apronControlOld": {
+          "scope": "professional",
+          "count": 122
+        },
+        "singleChoice": {
+          "scope": "english",
+          "count": 1390
+        },
+        "readingComprehension": {
+          "scope": "english",
+          "count": 87
+        }
+      }
+    },
+    "base": {
+      "scopes": [
+        "base_set"
+      ],
+      "subjects": {
+        "基础合集": {
+          "scope": "base_set",
+          "count": 2794
+        }
+      }
+    }
+  }
+}

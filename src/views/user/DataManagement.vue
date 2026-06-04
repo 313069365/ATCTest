@@ -74,7 +74,7 @@ const store = useAppStore()
 const clearing = ref(false)
 const refreshProgress = ref({ visible: false, indeterminate: false })
 
-const cached = computed(() => !!storage.getItem(STORAGE_KEY.BANK_HASH))
+const cached = computed(() => !!storage.getItem('bank_version'))
 
 const totalSubjects = computed(() => {
   const meta = store.bankMeta
