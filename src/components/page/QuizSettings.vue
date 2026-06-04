@@ -64,6 +64,17 @@
           </button>
         </div>
 
+        <div v-if="!showExplanation" class="toggle-item">
+          <div class="toggle-info">
+            <span class="toggle-title">{{ t('forceExplanationOnWrong') }}</span>
+            <span class="toggle-desc">{{ t('forceExplanationOnWrongDesc') }}</span>
+          </div>
+          <button class="toggle-btn" :class="{ active: forceExplanationOnWrong }"
+            @click="$emit('update:forceExplanationOnWrong', !forceExplanationOnWrong)">
+            <span class="toggle-knob"></span>
+          </button>
+        </div>
+
         <div class="toggle-item">
           <div class="toggle-info">
             <span class="toggle-title">{{ t('autoJump') }}</span>
@@ -84,12 +95,13 @@ import { t } from '@/utils/i18n.js'
 
 defineProps({
   showExplanation: { type: Boolean, default: true },
+  forceExplanationOnWrong: { type: Boolean, default: true },
   autoJump: { type: Boolean, default: true },
   darkMode: { type: Boolean, default: false },
   soundEnabled: { type: Boolean, default: true },
 })
 
-const emit = defineEmits(['close', 'update:showExplanation', 'update:autoJump', 'update:darkMode', 'exit', 'submit'])
+const emit = defineEmits(['close', 'update:showExplanation', 'update:forceExplanationOnWrong', 'update:autoJump', 'update:darkMode', 'exit', 'submit'])
 
 const handleExit = () => {
   emit('close')

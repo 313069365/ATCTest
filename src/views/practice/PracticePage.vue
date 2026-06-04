@@ -102,10 +102,13 @@ import { useAppStore } from '@/stores/store'
 import { usePracticeService } from '@/composables/usePracticeService'
 import { computeSubjectStats } from '@/utils/stats'
 import { getPracticeKey } from '@/utils/questionConfig'
+import { getAudioManager } from '@/services/audio-manager'
 
 const store = useAppStore()
 const pm = usePracticeService()
 const router = useRouter()
+const manager = getAudioManager()
+const soundEnabled = ref(localStorage.getItem('soundEnabled') !== 'false')
 
 const showPracticeSetting = ref(false)
 const showImportModal = ref(false)
@@ -131,6 +134,7 @@ const bankMeta = computed(() => store.bankMeta)
 
 onMounted(() => {
   pm.refresh()
+  if (soundEnabled.value) manager.preloadAll()
 })
 
 // 使用 bankMeta 直接获取选项

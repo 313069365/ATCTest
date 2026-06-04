@@ -7,8 +7,11 @@ class AudioManager {
   ctx = null
   buffers = {}
   volumes = {}
+  _preloaded = false
 
   async preloadAll(manifest = MANIFEST) {
+    if (this._preloaded) return
+    this._preloaded = true
     this.ctx = new (window.AudioContext || window.webkitAudioContext)()
 
     const results = await Promise.allSettled(

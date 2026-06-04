@@ -70,10 +70,12 @@
       :current="liveStats.current" :totalQ="liveStats.totalQ" :settings="practiceData"
       @close="showStatsDialog = false" />
 
-    <QuizSettings v-if="showQuizSettings" :showExplanation="showAnswerExplanation"
+    <QuizSettings v-if="showQuizSettings" :showExplanation="showExplanationPref"
+      :forceExplanationOnWrong="forceExplanationOnWrong"
       :autoJump="practiceData?.autoJump ?? true" :darkMode="darkMode" :soundEnabled="soundEnabled"
       @close="showQuizSettings = false"
-      @update:showExplanation="showAnswerExplanation = $event"
+      @update:showExplanation="showExplanationPref = $event"
+      @update:forceExplanationOnWrong="forceExplanationOnWrong = $event"
       @update:autoJump="practiceData.autoJump = $event" @update:darkMode="darkMode = $event"
       @update:soundEnabled="soundEnabled = $event"
       @exit="exitQuiz" @submit="finishQuiz" />
@@ -158,6 +160,23 @@ watch(darkMode, (val) => {
 watch(soundEnabled, (val) => {
   localStorage.setItem('soundEnabled', val)
 })
+
+const showExplanationPref = ref(localStorage.getItem('showExplanationPref') !== 'false')
+watch(showExplanationPref, (val) => {
+  localStorage.setItem('showExplanationPref', val)
+  if (!val) showAnswerExplanation.value = false
+})
+
+const forceExplanationOnWrong = ref(localStorage.getItem('forceExplanationOnWrong') !== 'false')
+watch(forceExplanationOnWrong, (val) => {
+  localStorage.setItem('forceExplanationOnWrong', val)
+})
+
+function isWrongStatus(status) {
+  if (typeof status === 'string') return status === 'wrong' || status === 'partial'
+  if (typeof status === 'object') return Object.values(status).some(s => s === 'wrong')
+  return false
+}
 
 // 计时器相关
 const elapsedSeconds = ref(0); // 已用时间（秒）
@@ -626,7 +645,7 @@ const checkAnswer = () => {
   }
 
   showCheckBtn.value = false
-  showAnswerExplanation.value = true
+  if (showExplanationPref.value || (forceExplanationOnWrong.value && isWrongStatus(status))) showAnswerExplanation.value = true
   savePracticeProgress()
 }
 
@@ -722,7 +741,8 @@ const loadPracticeProgress = () => {
           : answerChecked.value[currentQ.id]
         if (isChecked) {
           showCheckBtn.value = false;
-          showAnswerExplanation.value = true;
+          const status = answerStatus.value[currentQ.id]
+          if (showExplanationPref.value || (forceExplanationOnWrong.value && isWrongStatus(status))) showAnswerExplanation.value = true;
         }
       }
 
@@ -730,7 +750,7 @@ const loadPracticeProgress = () => {
       const mode = progress.config.mode || practiceData.value?.practiceMode;
       if (mode === 'review') {
         showCheckBtn.value = false;
-        showAnswerExplanation.value = true;
+        if (showExplanationPref.value) showAnswerExplanation.value = true;
       }
 
       console.log('已恢复练习进度:', {
@@ -796,13 +816,14 @@ const resetQuestionState = () => {
   // 背题模式：所有题目都显示答案
   if (practiceMode.value === "review") {
     showCheckBtn.value = false;
-    showAnswerExplanation.value = true;
+    if (showExplanationPref.value) showAnswerExplanation.value = true;
   } else {
     // 检查当前题目是否已检查过答案
     const currentQ = bank.value[currentIndex.value];
     if (currentQ && answerChecked.value[currentQ.id]) {
       showCheckBtn.value = false;
-      showAnswerExplanation.value = true;
+      const status = answerStatus.value[currentQ.id]
+      if (showExplanationPref.value || (forceExplanationOnWrong.value && isWrongStatus(status))) showAnswerExplanation.value = true;
     } else {
       showCheckBtn.value = true;
       showAnswerExplanation.value = false;
