@@ -9,6 +9,7 @@ import * as API from "@/api/dataSource";
 import { bankStorage, storage, STORAGE_KEY } from "@/composables/useStorage";
 import { schemaRead, schemaWrite } from "@/utils/dataSchema";
 import { loadPracticeProgress as loadPracticeProgressFromUtil } from "@/utils/questionConfig";
+import { APP_VERSION } from "@/utils/version";
 
 export const useAppStore = defineStore("app", () => {
   // ========== 题库相关 (BANK) ==========
@@ -368,6 +369,13 @@ export const useAppStore = defineStore("app", () => {
     loadPracticeHistory();
     loadExamPapers();
     loadExamPresets();
+
+    // 应用版本追踪
+    const prevAppVer = storage.getItem(STORAGE_KEY.APP_VERSION);
+    if (prevAppVer && prevAppVer !== APP_VERSION) {
+      console.log(`应用版本更新: ${prevAppVer} → ${APP_VERSION}`);
+    }
+    storage.setItem(STORAGE_KEY.APP_VERSION, APP_VERSION);
 
     const storedVer = storage.getItem('bank_version');
     const currentVer = API.computeBankHash();

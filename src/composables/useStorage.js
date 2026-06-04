@@ -17,6 +17,7 @@ export const STORAGE_KEY = {
   BANK_META: "bank_meta",
 
   // 应用相关 (APP)
+  APP_VERSION: "app_version",
   APP_INITIALIZED: "app_initialized",
 
   // 导入题库配置 (IMPORT)

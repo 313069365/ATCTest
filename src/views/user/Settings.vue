@@ -6,6 +6,9 @@
       </button>
       <h1 class="title">系统设置</h1>
     </header>
+
+    <main class="content">
+    </main>
   </div>
 </template>
 
@@ -22,16 +25,18 @@ function goBack() {
 <style scoped>
 .settings {
   min-height: 100vh;
-  background: var(--background);
+  background: var(--background-secondary);
   max-width: var(--app-max-width);
   margin: 0 auto;
+  display: flex;
+  flex-direction: column;
 }
 
 .top-bar {
   position: sticky;
   top: 0;
-  z-index: 100;
-  background: var(--background);
+  z-index: var(--z-sticky);
+  background: var(--background-secondary);
   display: flex;
   align-items: center;
   gap: 8px;
@@ -59,5 +64,10 @@ function goBack() {
   font-weight: 700;
   color: var(--text-primary);
   letter-spacing: -0.02em;
+}
+
+.content {
+  flex: 1;
+  padding: 16px;
 }
 </style>

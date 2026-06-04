@@ -143,6 +143,8 @@
           <span>xiaomi 14</span>
         </button>
       </section>
+
+      <div class="version-footer">Version {{ APP_VERSION }}</div>
     </main>
   </div>
 </template>
@@ -151,6 +153,7 @@
 import { reactive } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAppStore } from '@/stores/store'
+import { APP_VERSION } from '@/utils/version'
 
 const router = useRouter()
 const store = useAppStore()
@@ -629,5 +632,12 @@ function goToSettings() {
 
 .action-btn.logout:active {
   background: var(--error-light);
+}
+
+.version-footer {
+  text-align: center;
+  padding: 24px 16px 32px;
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
 }
 </style>
