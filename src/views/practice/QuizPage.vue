@@ -113,7 +113,8 @@ const router = useRouter();
 const route = useRoute();
 const store = useAppStore();
 const pm = usePracticeService();
-const { playAnswerSound } = useSoundEffect();
+const soundEnabled = ref(localStorage.getItem('soundEnabled') !== 'false');
+const { playAnswerSound } = useSoundEffect(soundEnabled);
 
 const questionLoaders = {
   bank: async (data) => {
@@ -147,7 +148,6 @@ const showStatsDialog = ref(false);
 const showQuizSettings = ref(false);
 const jumpDialogVisible = ref(false);
 const darkMode = ref(localStorage.getItem('darkMode') === 'true');
-const soundEnabled = ref(localStorage.getItem('soundEnabled') !== 'false');
 const loading = ref(true);
 
 watch(darkMode, (val) => {

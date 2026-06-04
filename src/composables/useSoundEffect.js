@@ -1,18 +1,25 @@
-export function useSoundEffect() {
-  function playAnswerSound(status) {
-    if (status === 'correct') {
-      tryPlay('/tune/correct.mp3')
-    } else if (status === 'wrong' || status === 'partial') {
-      tryPlay('/tune/negativebeep.mp3')
+import { ref, watch } from 'vue'
+import { getAudioManager } from '@/services/audio-manager'
+
+export function useSoundEffect(soundEnabledRef) {
+  const manager = getAudioManager()
+  const loaded = ref(false)
+
+  watch(soundEnabledRef, (enabled) => {
+    if (enabled && !loaded.value) {
+      loaded.value = true
+      manager.preloadAll()
     }
+  }, { immediate: true })
+
+  function playAnswerSound(status) {
+    if (!soundEnabledRef?.value) return
+    const key = status === 'correct' ? 'correct'
+      : (status === 'wrong' || status === 'partial') ? 'wrong'
+      : null
+    if (!key) return
+    manager.play(key).catch(() => {})
   }
 
-  function tryPlay(src) {
-    try {
-      const audio = new Audio(src)
-      audio.play().catch(() => {})
-    } catch {}
-  }
-
-  return { playAnswerSound }
+  return { playAnswerSound, loaded }
 }
