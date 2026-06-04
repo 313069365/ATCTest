@@ -7,6 +7,7 @@ import { defineStore } from "pinia";
 import { ref, computed } from "vue";
 import * as API from "@/api/dataSource";
 import { bankStorage, storage, STORAGE_KEY } from "@/composables/useStorage";
+import { schemaRead, schemaWrite } from "@/utils/dataSchema";
 import { loadPracticeProgress as loadPracticeProgressFromUtil } from "@/utils/questionConfig";
 
 export const useAppStore = defineStore("app", () => {
@@ -223,7 +224,7 @@ export const useAppStore = defineStore("app", () => {
    * 加载错题本
    */
   function loadWrongBook() {
-    wrongBook.value = storage.getItem(STORAGE_KEY.USER_WRONG_BOOK) || [];
+    wrongBook.value = schemaRead(STORAGE_KEY.USER_WRONG_BOOK) || [];
   }
 
   /**
@@ -241,7 +242,7 @@ export const useAppStore = defineStore("app", () => {
         wrongCount: 1,
       });
     }
-    storage.setItem(STORAGE_KEY.USER_WRONG_BOOK, wrongBook.value);
+    schemaWrite(STORAGE_KEY.USER_WRONG_BOOK, wrongBook.value);
   }
 
   /**
@@ -249,7 +250,7 @@ export const useAppStore = defineStore("app", () => {
    */
   function removeWrongQuestion(questionId) {
     wrongBook.value = wrongBook.value.filter((q) => q.id !== questionId);
-    storage.setItem(STORAGE_KEY.USER_WRONG_BOOK, wrongBook.value);
+    schemaWrite(STORAGE_KEY.USER_WRONG_BOOK, wrongBook.value);
   }
 
   // ========== 收藏 Actions ==========
@@ -258,7 +259,7 @@ export const useAppStore = defineStore("app", () => {
    * 加载收藏
    */
   function loadFavorites() {
-    favorites.value = storage.getItem(STORAGE_KEY.USER_FAVORITES) || [];
+    favorites.value = schemaRead(STORAGE_KEY.USER_FAVORITES) || [];
   }
 
   /**
@@ -271,7 +272,7 @@ export const useAppStore = defineStore("app", () => {
         ...question,
         favoriteTime: Date.now(),
       });
-      storage.setItem(STORAGE_KEY.USER_FAVORITES, favorites.value);
+      schemaWrite(STORAGE_KEY.USER_FAVORITES, favorites.value);
     }
   }
 
@@ -280,7 +281,7 @@ export const useAppStore = defineStore("app", () => {
    */
   function removeFavorite(questionId) {
     favorites.value = favorites.value.filter((q) => q.id !== questionId);
-    storage.setItem(STORAGE_KEY.USER_FAVORITES, favorites.value);
+    schemaWrite(STORAGE_KEY.USER_FAVORITES, favorites.value);
   }
 
   // ========== 练习 Progress Actions ==========
@@ -302,7 +303,7 @@ export const useAppStore = defineStore("app", () => {
   function savePracticeProgress(key, progress) {
     if (!key) return;
     practiceProgress.value[key] = progress;
-    storage.setItem(STORAGE_KEY.PRACTICE_PROGRESS, practiceProgress.value);
+    schemaWrite(STORAGE_KEY.PRACTICE_PROGRESS, practiceProgress.value);
   }
 
   /**
@@ -312,7 +313,7 @@ export const useAppStore = defineStore("app", () => {
   function clearPracticeProgress(key) {
     if (!key) return;
     delete practiceProgress.value[key];
-    storage.setItem(STORAGE_KEY.PRACTICE_PROGRESS, practiceProgress.value);
+    schemaWrite(STORAGE_KEY.PRACTICE_PROGRESS, practiceProgress.value);
   }
 
   /**
@@ -332,14 +333,14 @@ export const useAppStore = defineStore("app", () => {
       ...history,
       timestamp: Date.now(),
     });
-    storage.setItem(STORAGE_KEY.PRACTICE_HISTORY, practiceHistory.value);
+    schemaWrite(STORAGE_KEY.PRACTICE_HISTORY, practiceHistory.value);
   }
 
   /**
    * 加载练习历史
    */
   function loadPracticeHistory() {
-    practiceHistory.value = storage.getItem(STORAGE_KEY.PRACTICE_HISTORY) || [];
+    practiceHistory.value = schemaRead(STORAGE_KEY.PRACTICE_HISTORY) || [];
   }
 
   // ========== 初始化 ==========
@@ -360,7 +361,7 @@ export const useAppStore = defineStore("app", () => {
    * 加载试卷列表
    */
   function loadExamPapers() {
-    examPapers.value = storage.getItem(STORAGE_KEY.EXAM_PAPERS) || [];
+    examPapers.value = schemaRead(STORAGE_KEY.EXAM_PAPERS) || [];
   }
 
   /**
@@ -368,7 +369,7 @@ export const useAppStore = defineStore("app", () => {
    */
   function addExamPaper(paper) {
     examPapers.value.unshift(paper);
-    storage.setItem(STORAGE_KEY.EXAM_PAPERS, examPapers.value);
+    schemaWrite(STORAGE_KEY.EXAM_PAPERS, examPapers.value);
   }
 
   /**
@@ -376,23 +377,23 @@ export const useAppStore = defineStore("app", () => {
    */
   function removeExamPaper(paperId) {
     examPapers.value = examPapers.value.filter(p => p.id !== paperId);
-    storage.setItem(STORAGE_KEY.EXAM_PAPERS, examPapers.value);
+    schemaWrite(STORAGE_KEY.EXAM_PAPERS, examPapers.value);
   }
 
   /**
    * 加载预设
    */
   function loadExamPresets() {
-    examPresets.value = storage.getItem(STORAGE_KEY.EXAM_PRESETS) || [];
+    examPresets.value = schemaRead(STORAGE_KEY.EXAM_PRESETS) || [];
   }
 
   /**
    * 保存预设
    */
   function saveExamPreset(preset) {
-    const existing = storage.getItem(STORAGE_KEY.EXAM_PRESETS) || [];
+    const existing = schemaRead(STORAGE_KEY.EXAM_PRESETS) || [];
     existing.push(preset);
-    storage.setItem(STORAGE_KEY.EXAM_PRESETS, existing);
+    schemaWrite(STORAGE_KEY.EXAM_PRESETS, existing);
     examPresets.value = existing;
   }
 
@@ -400,9 +401,9 @@ export const useAppStore = defineStore("app", () => {
    * 删除预设
    */
   function deleteExamPreset(presetId) {
-    const existing = storage.getItem(STORAGE_KEY.EXAM_PRESETS) || [];
+    const existing = schemaRead(STORAGE_KEY.EXAM_PRESETS) || [];
     const filtered = existing.filter(p => p.id !== presetId);
-    storage.setItem(STORAGE_KEY.EXAM_PRESETS, filtered);
+    schemaWrite(STORAGE_KEY.EXAM_PRESETS, filtered);
     examPresets.value = filtered;
   }
 

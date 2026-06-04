@@ -28,35 +28,11 @@
     <div class="action-bar">
       <span class="progress-label" @click="openJumpDialog">进度 {{ currentIndex + 1 }}/{{ bank.length }}</span>
       <div class="action-bar-right">
-        <button class="action-btn" :class="{ active: showTranslation }" @click="toggleTranslation" title="翻译">
-          <SvgIcon size="20px" name="translate"></SvgIcon>
-        </button>
-        <!-- <button class="action-btn" :class="{ active: isFavorited }" @click="toggleFavorite" title="收藏">
-          <span class="material-symbols-outlined">kid_star</span>
-        </button> -->
-        <button class="action-btn" :class="{ active: isFavorited }" @click="toggleFavorite" title="收藏">
-          <SvgIcon v-if="isFavorited" size="20px" name="kidstar_fill"></SvgIcon>
-          <SvgIcon v-else size="20px" name="kidstar"></SvgIcon>
-        </button>
-        <!--  错题集 
-        <button class="action-btn" :class="{ active: isInWrongBook }" @click="toggleFavorite" title="错题集">
-          <svg-icon v-if="isFavorited" size="20px" name="kidstar_fill"></svg-icon>
-          <svg-icon v-else size="20px" name="kidstar"></svg-icon>
-        </button>
-
-        答题模式标记
-        <button class="action-btn" :class="{ active: isInWrongBook }" @click="toggleFavorite" title="错题集">
-          <svg-icon v-if="isFavorited" size="20px" name="kidstar_fill"></svg-icon>
-          <svg-icon v-else size="20px" name="kidstar"></svg-icon>
-        </button> -->
-        <button v-if="isWrongPractice" class="action-btn remove-btn" @click="removeCurrentFromWrong" title="移出错题集">
-          <span class="material-symbols-outlined">playlist_remove</span>
-        </button>
-        <button class="action-btn" @click="showStatsDialog = true" title="答题统计">
-          <span class="material-symbols-outlined">bar_chart</span>
-        </button>
-        <button class="action-btn" :class="{ active: showAnswerCard }" @click="toggleAnswerCard">
-          <span class="material-symbols-outlined">grid_view</span>
+        <button v-for="btn in visibleButtons" :key="btn.key" class="action-btn"
+          :class="{ active: btn.active?.value, 'remove-btn': btn.key === 'removeWrong' }"
+          @click="btn.action" :title="btn.title">
+          <SvgIcon v-if="btn.iconType === 'svg'" size="20px" :name="btn.icon.value || btn.icon" />
+          <span v-else class="material-symbols-outlined">{{ btn.icon }}</span>
         </button>
       </div>
     </div>
@@ -329,6 +305,11 @@ const isFavorited = computed(() => {
   return store.favorites.some(q => q.id === currentQuestion.value.id)
 })
 
+const isInWrongBook = computed(() => {
+  if (!currentQuestion.value) return false
+  return store.wrongBook.some(q => q.id === currentQuestion.value.id)
+})
+
 const toggleFavorite = () => {
   if (!currentQuestion.value) return
   if (isFavorited.value) {
@@ -394,11 +375,22 @@ const stopTimer = () => {
   }
 };
 
+// 种子随机数生成器（mulberry32）
+function seededRandom(seed) {
+  let s = seed | 0
+  return () => {
+    s = (s + 0x6D2B79F5) | 0
+    let t = Math.imul(s ^ (s >>> 15), 1 | s)
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296
+  }
+}
+
 // Fisher-Yates 洗牌算法
-const shuffleArray = (array) => {
+const shuffleArray = (array, rng = Math.random) => {
   const arr = [...array];
   for (let i = arr.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
+    const j = Math.floor(rng() * (i + 1));
     [arr[i], arr[j]] = [arr[j], arr[i]];
   }
   return arr;
@@ -408,11 +400,14 @@ const shuffleArray = (array) => {
 const cacheShuffledOptions = () => {
   if (practiceData.value?.practiceMode === 'review') return;
 
+  const seed = practiceData.value?.shuffleSeed
+  const rng = seed ? seededRandom(seed) : Math.random
+
   shuffledOptionsCache.value = {};
   bank.value.forEach((question) => {
     if (question && question.options && question.shuffle) {
       const indices = question.options.map((_, i) => i);
-      const shuffledIndices = shuffleArray(indices);
+      const shuffledIndices = shuffleArray(indices, rng);
       shuffledOptionsCache.value[question.id] = {
         options: shuffledIndices.map(i => question.options[i]),
         translationOptions: question.translation?.options
@@ -676,6 +671,45 @@ const loadPracticeProgress = () => {
       // 使用工具函数解包数据
       const { userAnswers: ua, answerChecked: ac, answerStatus: as } =
         unpackProgress(progress.progress.answers || {})
+
+      // 用 selectedText 重映射索引（适应当前打乱顺序）
+      Object.entries(ua).forEach(([qId, answer]) => {
+        const q = bank.value.find(q => q.id === qId)
+        if (!q) return
+        const cache = shuffledOptionsCache.value[qId]
+        if (cache) {
+          // 简单题：selectedText → 当前打乱后的索引
+          const packed = progress.progress.answers?.[qId]
+          if (packed?.selectedText !== undefined && typeof packed.selectedText === 'string') {
+            const idx = cache.options.indexOf(packed.selectedText)
+            if (idx !== -1) ua[qId] = idx
+          }
+        } else if (q.options && !q.shuffle) {
+          // 未打乱的题：直接取 selectedText 在原始选项中的索引
+          const packed = progress.progress.answers?.[qId]
+          if (packed?.selectedText !== undefined && typeof packed.selectedText === 'string') {
+            const idx = q.options.indexOf(packed.selectedText)
+            if (idx !== -1) ua[qId] = idx
+          }
+        }
+        // 复合题：selectedText 是对象，对每个子题做相同映射
+        if (q.subs && typeof answer === 'object' && answer !== null) {
+          const packed = progress.progress.answers?.[qId]
+          const st = packed?.selectedText
+          if (st && typeof st === 'object') {
+            const newAnswer = { ...answer }
+            q.subs.forEach((sub, idx) => {
+              if (st[idx] !== undefined && sub.options) {
+                const subCache = shuffledOptionsCache.value[qId]?.subOptions?.[idx]
+                const opts = subCache || sub.options
+                const pos = opts.indexOf(st[idx])
+                if (pos !== -1) newAnswer[idx] = pos
+              }
+            })
+            ua[qId] = newAnswer
+          }
+        }
+      })
       userAnswers.value = ua;
       answerChecked.value = ac;
       answerStatus.value = as;
@@ -735,7 +769,8 @@ const savePracticeProgress = () => {
     userAnswers.value,
     answerChecked.value,
     answerStatus.value,
-    elapsedSeconds.value
+    elapsedSeconds.value,
+    practiceData.value?.shuffleSeed
   )
   store.loadPracticeProgress();
 };
@@ -785,14 +820,73 @@ const removeCurrentFromWrong = () => {
     if (!q) return
 
     store.removeWrongQuestion(q.id)
-    bank.value.splice(currentIndex.value, 1)
 
-    if (currentIndex.value >= bank.value.length && currentIndex.value > 0) {
-      currentIndex.value--
+    if (isWrongPractice.value) {
+      bank.value.splice(currentIndex.value, 1)
+      if (currentIndex.value >= bank.value.length && currentIndex.value > 0) {
+        currentIndex.value--
+      }
+      resetQuestionState()
     }
-    resetQuestionState()
   }
 }
+
+// 动作栏按钮配置
+const currentMode = computed(() => isWrongPractice.value ? 'wrong' : practiceMode.value)
+
+const buttonVisibility = computed(() => ({
+  translate: true,
+  favorite: currentMode.value !== 'wrong' && currentMode.value !== 'favorites',
+  removeWrong: isInWrongBook.value,
+  stats: true,
+  answerCard: true,
+}))
+
+const actionButtons = [
+  {
+    key: 'translate',
+    icon: 'translate',
+    iconType: 'svg',
+    title: '翻译',
+    active: computed(() => showTranslation.value),
+    action: toggleTranslation,
+  },
+  {
+    key: 'favorite',
+    icon: computed(() => isFavorited.value ? 'kidstar_fill' : 'kidstar'),
+    iconType: 'svg',
+    title: '收藏',
+    active: computed(() => isFavorited.value),
+    action: toggleFavorite,
+  },
+  {
+    key: 'removeWrong',
+    icon: 'playlist_remove',
+    iconType: 'material',
+    title: '移出错题集',
+    active: computed(() => isInWrongBook.value),
+    action: removeCurrentFromWrong,
+  },
+  {
+    key: 'stats',
+    icon: 'bar_chart',
+    iconType: 'material',
+    title: '答题统计',
+    action: () => showStatsDialog.value = true,
+  },
+  {
+    key: 'answerCard',
+    icon: 'grid_view',
+    iconType: 'material',
+    title: '答题卡',
+    active: computed(() => showAnswerCard.value),
+    action: toggleAnswerCard,
+  },
+]
+
+const visibleButtons = computed(() =>
+  actionButtons.filter(b => buttonVisibility.value[b.key])
+)
 </script>
 
 <style scoped>

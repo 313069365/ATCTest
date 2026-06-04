@@ -231,7 +231,8 @@ const continuePractice = (subject) => {
     practiceMode: progress.config.mode,
     questionSort: progress.config.questionSort,
     showAnswerMode: progress.config.showAnswerMode,
-    autoJump: progress.config.autoJump
+    autoJump: progress.config.autoJump,
+    shuffleSeed: progress.config.shuffleSeed
   }
 
   router.push({
@@ -268,7 +269,8 @@ const wrongPractice = (subject) => {
     showAnswerMode: 'immediate',
     autoJump: false,
     wrongPractice: true,
-    wrongQuestionIds: wrongQuestions.map(q => q.id)
+    wrongQuestionIds: wrongQuestions.map(q => q.id),
+    shuffleSeed: Date.now()
   }
 
   router.push({

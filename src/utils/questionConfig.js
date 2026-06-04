@@ -4,6 +4,7 @@
  */
 
 import { STORAGE_KEY, storage } from "@/composables/useStorage";
+import { schemaRead, schemaWrite } from "@/utils/dataSchema";
 
 // ==================== 题型类型 ====================
 
@@ -480,9 +481,13 @@ export function handleQuestion(question, mode, options = {}) {
  * @param {string} status - 答案状态
  * @returns {Object}
  */
-export function packSimpleProgress(questionId, userAnswer, checked, status) {
+export function packSimpleProgress(questionId, userAnswer, checked, status, question) {
+  const selectedText = question?.options && typeof userAnswer === 'number'
+    ? question.options[userAnswer]
+    : undefined;
   return {
     selected: userAnswer,
+    selectedText,
     checked: checked || false,
     status: status || "unanswered",
   };
@@ -496,9 +501,21 @@ export function packSimpleProgress(questionId, userAnswer, checked, status) {
  * @param {Object} status - 答案状态
  * @returns {Object}
  */
-export function packComplexProgress(questionId, userAnswer, checked, status) {
+export function packComplexProgress(questionId, userAnswer, checked, status, question) {
+  const selectedText = {};
+  if (userAnswer && typeof userAnswer === 'object') {
+    question?.subs?.forEach((sub, idx) => {
+      const subAnswer = userAnswer[idx];
+      if (subAnswer !== undefined && sub.options && typeof subAnswer === 'number') {
+        selectedText[idx] = sub.options[subAnswer];
+      } else if (subAnswer !== undefined) {
+        selectedText[idx] = subAnswer;
+      }
+    });
+  }
   return {
     selected: userAnswer,
+    selectedText: Object.keys(selectedText).length > 0 ? selectedText : undefined,
     checked,
     status,
   };
@@ -527,6 +544,7 @@ export function packProgress(
         userAnswers?.[qId],
         answerChecked?.[qId],
         answerStatus?.[qId],
+        q,
       );
     } else {
       result[qId] = packSimpleProgress(
@@ -534,6 +552,7 @@ export function packProgress(
         userAnswers?.[qId],
         answerChecked?.[qId],
         answerStatus?.[qId],
+        q,
       );
     }
   });
@@ -593,6 +612,7 @@ export function savePracticeProgress(
   answerChecked,
   answerStatus,
   elapsedSeconds,
+  shuffleSeed,
 ) {
   const answers = packProgress(
     questions,
@@ -602,10 +622,10 @@ export function savePracticeProgress(
   );
 
   const key = getPracticeKey(config);
-  const map = storage.getItem(STORAGE_KEY.PRACTICE_PROGRESS) || migrateOldProgress() || {};
+  const map = schemaRead(STORAGE_KEY.PRACTICE_PROGRESS) || {};
 
   map[key] = {
-    config,
+    config: { ...config, shuffleSeed },
     progress: {
       currentIndex,
       currentSubIndex,
@@ -618,7 +638,7 @@ export function savePracticeProgress(
     },
   };
 
-  storage.setItem(STORAGE_KEY.PRACTICE_PROGRESS, map);
+  schemaWrite(STORAGE_KEY.PRACTICE_PROGRESS, map);
 }
 
 /**
@@ -626,33 +646,18 @@ export function savePracticeProgress(
  * @returns {Object} 以 key 为键的进度 map
  */
 export function loadPracticeProgress() {
-  const data = storage.getItem(STORAGE_KEY.PRACTICE_PROGRESS);
+  const data = schemaRead(STORAGE_KEY.PRACTICE_PROGRESS);
 
   if (!data) return {};
 
-  // 迁移旧格式（单对象 → map）
   if (data.config) {
     const key = getPracticeKey(data.config);
     const map = { [key]: data };
-    storage.setItem(STORAGE_KEY.PRACTICE_PROGRESS, map);
+    schemaWrite(STORAGE_KEY.PRACTICE_PROGRESS, map);
     return map;
   }
 
   return data;
-}
-
-/**
- * 内部：迁移旧格式
- */
-function migrateOldProgress() {
-  const data = storage.getItem(STORAGE_KEY.PRACTICE_PROGRESS);
-  if (data && data.config) {
-    const key = getPracticeKey(data.config);
-    const map = { [key]: data };
-    storage.setItem(STORAGE_KEY.PRACTICE_PROGRESS, map);
-    return map;
-  }
-  return null;
 }
 
 // ==================== 统计 ====================

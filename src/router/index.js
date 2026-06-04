@@ -104,6 +104,11 @@ const routes = [
         name: "Settings",
         component: () => import("../views/user/Settings.vue"),
       },
+      {
+        path: "/data-management",
+        name: "DataManagement",
+        component: () => import("../views/user/DataManagement.vue"),
+      },
     ],
   },
 ];

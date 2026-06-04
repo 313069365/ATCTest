@@ -148,7 +148,8 @@ const gotopage = () => {
     practiceMode: settings.practiceMode,
     questionSort: settings.questionSort,
     showAnswerMode: settings.showAnswerMode,
-    autoJump: settings.autoJump
+    autoJump: settings.autoJump,
+    shuffleSeed: Date.now()
   }
   // setItem('practiceMeta', JSON.stringify(practiceData))
   emit('close')

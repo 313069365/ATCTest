@@ -120,6 +120,13 @@
             <span class="shortcut-label">字母发音</span>
             <span class="material-symbols-outlined shortcut-arrow">chevron_right</span>
           </div>
+          <div class="shortcut-item" @click="goToDataManagement">
+            <div class="shortcut-icon primary-bg">
+              <span class="material-symbols-outlined">storage</span>
+            </div>
+            <span class="shortcut-label">数据管理</span>
+            <span class="material-symbols-outlined shortcut-arrow">chevron_right</span>
+          </div>
           <div class="shortcut-item" @click="goToSettings">
             <div class="shortcut-icon primary-bg">
               <span class="material-symbols-outlined">settings</span>
@@ -131,11 +138,6 @@
       </section>
 
       <section class="action-section">
-        <button class="action-btn" @click="refreshCache" :disabled="refreshing">
-          <span class="material-symbols-outlined">refresh</span>
-          <span> {{ refreshing ? '刷新中...' : '刷新题库缓存' }}</span>
-          <span>Ver 0.06 </span>
-        </button>
         <button class="action-btn logout">
           <span class="material-symbols-outlined">logout</span>
           <span>xiaomi 14</span>
@@ -146,7 +148,7 @@
 </template>
 
 <script setup>
-import { reactive, ref } from 'vue'
+import { reactive } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAppStore } from '@/stores/store'
 
@@ -157,19 +159,6 @@ const user = reactive({
   username: "wyd",
   title: "开发者",
 })
-
-const refreshing = ref(false)
-
-async function refreshCache() {
-  refreshing.value = true
-  try {
-    await store.forceRefreshQuestions()
-  } catch (e) {
-    console.error('刷新缓存失败:', e)
-  } finally {
-    refreshing.value = false
-  }
-}
 
 function goToWrongBook() {
   router.push({ name: 'WrongBook' })
@@ -189,6 +178,10 @@ function goToExamHistory() {
 
 function goToStats() {
   router.push({ name: 'Stats' })
+}
+
+function goToDataManagement() {
+  router.push({ name: 'DataManagement' })
 }
 
 function goToAviation() {
