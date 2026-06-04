@@ -70,11 +70,10 @@
       :current="liveStats.current" :totalQ="liveStats.totalQ" :settings="practiceData"
       @close="showStatsDialog = false" />
 
-    <QuizSettings v-if="showQuizSettings" :showExplanation="showExplanationPref"
+    <QuizSettings v-if="showQuizSettings" :showExplanationEnabled="showExplanationPref"
       :forceExplanationOnWrong="forceExplanationOnWrong"
       :autoJump="practiceData?.autoJump ?? true" :darkMode="darkMode" :soundEnabled="soundEnabled"
       @close="showQuizSettings = false"
-      @update:showExplanation="showExplanationPref = $event"
       @update:forceExplanationOnWrong="forceExplanationOnWrong = $event"
       @update:autoJump="practiceData.autoJump = $event" @update:darkMode="darkMode = $event"
       @update:soundEnabled="soundEnabled = $event"
@@ -317,6 +316,11 @@ provide('showTranslation', showTranslation)
 
 const toggleTranslation = () => {
   showTranslation.value = !showTranslation.value
+}
+
+const toggleShowExplanation = () => {
+  showExplanationPref.value = !showExplanationPref.value
+  if (!showExplanationPref.value) showAnswerExplanation.value = false
 }
 
 const isFavorited = computed(() => {
@@ -857,6 +861,7 @@ const currentMode = computed(() => isWrongPractice.value ? 'wrong' : practiceMod
 
 const buttonVisibility = computed(() => ({
   translate: true,
+  explanation: true,
   favorite: currentMode.value !== 'wrong' && currentMode.value !== 'favorites',
   removeWrong: isInWrongBook.value,
   stats: true,
@@ -871,6 +876,14 @@ const actionButtons = [
     title: '翻译',
     active: computed(() => showTranslation.value),
     action: toggleTranslation,
+  },
+  {
+    key: 'explanation',
+    icon: 'description',
+    iconType: 'material',
+    title: '显示解析',
+    active: computed(() => showExplanationPref.value),
+    action: toggleShowExplanation,
   },
   {
     key: 'favorite',
