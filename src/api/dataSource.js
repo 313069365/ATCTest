@@ -113,6 +113,17 @@ export async function fetchAllQuestionFiles(onProgress, signal) {
 // ==================== 题目查询（内存缓存 / 向后兼容） ====================
 
 /**
+ * 将题目数据填入内存缓存（供搜索/导入使用）
+ * @param {Object} bySubject - { subjectName: [questions...] }
+ */
+export function populateCache(bySubject) {
+  dataCache.clear();
+  for (const [subject, questions] of Object.entries(bySubject)) {
+    dataCache.set(subject, questions);
+  }
+}
+
+/**
  * 按 subject 获取题目（从内存缓存读取）
  */
 export function fetchQuestionsBySubject(subject) {

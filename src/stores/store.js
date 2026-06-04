@@ -208,6 +208,25 @@ export const useAppStore = defineStore("app", () => {
   }
 
   /**
+   * 从 IndexedDB 填充内存缓存，供搜索等功能使用
+   */
+  async function populateCacheFromIndexedDB() {
+    const categories = API.getAllCategories();
+    const allBySubject = {};
+    for (const category of categories) {
+      const info = API.getQuestionBankInfo(category);
+      if (!info) continue;
+      for (const subject of info.subjects) {
+        const questions = await bankStorage.getBank(subject);
+        if (questions) {
+          allBySubject[subject] = questions;
+        }
+      }
+    }
+    API.populateCache(allBySubject);
+  }
+
+  /**
    * 强制刷新题库
    */
   async function forceRefreshQuestions() {
@@ -381,6 +400,7 @@ export const useAppStore = defineStore("app", () => {
     const currentVer = API.computeBankHash();
 
     if (storedVer && String(storedVer) === String(currentVer)) {
+      populateCacheFromIndexedDB();
       checkForUpdatesInBackground();
       return;
     }
