@@ -127,7 +127,7 @@ const DEFAULT_SETTINGS = {
   questionSort: QUESTION_SORT.SEQUENCE,
   practiceMode: 'answer',
   showAnswerMode: 'immediate',
-  autoJump: false
+  autoJump: true
 }
 
 // 使用 reactive 统一管理状态
