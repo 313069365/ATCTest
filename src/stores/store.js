@@ -111,8 +111,8 @@ export const useAppStore = defineStore("app", () => {
   /**
    * 后台下载所有题目文件并写入 IndexedDB
    */
-  async function downloadAndCacheAll(onProgress) {
-    const grouped = await API.fetchAllQuestionFiles(onProgress);
+  async function downloadAndCacheAll(onProgress, signal) {
+    const grouped = await API.fetchAllQuestionFiles(onProgress, signal);
     const promises = Object.entries(grouped).map(([subject, questions]) =>
       bankStorage.setBank(subject, questions),
     );
@@ -130,17 +130,29 @@ export const useAppStore = defineStore("app", () => {
     loadingProgress.value = 0;
 
     try {
-      await downloadAndCacheAll((cur, total) => {
-        loadingText.value = `下载题库 ${cur}/${total}`;
-        loadingProgress.value = Math.round((cur / total) * 100);
-      });
+      // 检测 file:// 协议，fetch 在该协议下会无限挂起
+      if (location.protocol === 'file:') {
+        throw new Error('不支持 file:// 协议，请使用本地服务器运行 (如: npx vite preview)');
+      }
+
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), 15000);
+      await downloadAndCacheAll(
+        (cur, total) => {
+          loadingText.value = `下载题库 ${cur}/${total}`;
+          loadingProgress.value = Math.round((cur / total) * 100);
+        },
+        controller.signal,
+      );
+      clearTimeout(timeout);
     } catch (e) {
       console.error("加载题库失败:", e);
-      throw e;
+      loadingText.value = e.message || '加载失败';
+      await new Promise(r => setTimeout(r, 3000));
     } finally {
       loading.value = false;
-      loadingText.value = '';
       loadingProgress.value = 0;
+      setTimeout(() => { loadingText.value = ''; }, 100);
     }
   }
 

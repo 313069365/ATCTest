@@ -76,8 +76,8 @@ export function getQuestionBankInfo(category) {
  * @param {string} filename - 如 "base.json"
  * @returns {Array} 题目数组
  */
-export async function fetchQuestionFile(filename) {
-  const resp = await fetch(`/data/atc/${filename}`);
+export async function fetchQuestionFile(filename, signal) {
+  const resp = await fetch(`/data/atc/${filename}`, { signal });
   const questions = await resp.json();
   dataCache.set(filename, questions);
   return questions;
@@ -88,14 +88,14 @@ export async function fetchQuestionFile(filename) {
  * @param {Function} onProgress - (当前文件序号, 总数) => void
  * @returns {Object} { subjectName: [questions...], ... }
  */
-export async function fetchAllQuestionFiles(onProgress) {
+export async function fetchAllQuestionFiles(onProgress, signal) {
   const files = structure.files;
   const total = files.length;
   const groupedBySubject = {};
 
   for (let i = 0; i < total; i++) {
     const filename = files[i];
-    const questions = await fetchQuestionFile(filename);
+    const questions = await fetchQuestionFile(filename, signal);
 
     for (const q of questions) {
       const subject = q.meta?.subject;
