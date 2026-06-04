@@ -95,9 +95,11 @@
       @close="showStatsDialog = false" />
 
     <QuizSettings v-if="showQuizSettings" :showExplanation="showAnswerExplanation"
-      :autoJump="practiceData?.autoJump ?? false" :darkMode="darkMode" @close="showQuizSettings = false"
+      :autoJump="practiceData?.autoJump ?? true" :darkMode="darkMode" :soundEnabled="soundEnabled"
+      @close="showQuizSettings = false"
       @update:showExplanation="showAnswerExplanation = $event"
       @update:autoJump="practiceData.autoJump = $event" @update:darkMode="darkMode = $event"
+      @update:soundEnabled="soundEnabled = $event"
       @exit="exitQuiz" @submit="finishQuiz" />
 
     <JumpDialog :visible="jumpDialogVisible" :total="bank.length" :current="currentIndex"
@@ -118,6 +120,7 @@ import { useAppStore } from "@/stores/store";
 import { usePracticeService } from "@/composables/usePracticeService";
 import { t } from "@/utils/i18n.js";
 import { useQuestionHandler } from "@/composables/useQuestionHandler";
+import { useSoundEffect } from "@/composables/useSoundEffect";
 import {
   QUESTION_SORT,
   canAutoCheck,
@@ -134,6 +137,7 @@ const router = useRouter();
 const route = useRoute();
 const store = useAppStore();
 const pm = usePracticeService();
+const { playAnswerSound } = useSoundEffect();
 
 const questionLoaders = {
   bank: async (data) => {
@@ -167,12 +171,17 @@ const showStatsDialog = ref(false);
 const showQuizSettings = ref(false);
 const jumpDialogVisible = ref(false);
 const darkMode = ref(localStorage.getItem('darkMode') === 'true');
+const soundEnabled = ref(localStorage.getItem('soundEnabled') !== 'false');
 const loading = ref(true);
 
 watch(darkMode, (val) => {
   document.documentElement.classList.toggle('dark', val)
   localStorage.setItem('darkMode', val)
 }, { immediate: true })
+
+watch(soundEnabled, (val) => {
+  localStorage.setItem('soundEnabled', val)
+})
 
 // 计时器相关
 const elapsedSeconds = ref(0); // 已用时间（秒）
@@ -608,6 +617,16 @@ const checkAnswer = () => {
 
     if (status === 'wrong') {
       pm.markWrong(question)
+    }
+  }
+
+  // 播放音效
+  if (soundEnabled.value) {
+    if (isComplexQuestion(question)) {
+      const allCorrect = question.subs?.every((_, idx) => status[idx] === 'correct')
+      playAnswerSound(allCorrect ? 'correct' : 'wrong')
+    } else {
+      playAnswerSound(status)
     }
   }
 

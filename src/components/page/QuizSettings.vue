@@ -42,6 +42,19 @@
 
         <div class="toggle-item">
           <div class="toggle-info">
+            <span class="toggle-title">{{ t('sound') }}</span>
+            <span class="toggle-desc">{{ t('soundDesc') }}</span>
+          </div>
+          <button class="toggle-btn" :class="{ active: soundEnabled }"
+            @click="$emit('update:soundEnabled', !soundEnabled)">
+            <span class="toggle-knob">
+              <span class="material-symbols-outlined">{{ soundEnabled ? 'volume_up' : 'volume_off' }}</span>
+            </span>
+          </button>
+        </div>
+
+        <div class="toggle-item">
+          <div class="toggle-info">
             <span class="toggle-title">{{ t('showExplanation') }}</span>
             <span class="toggle-desc">{{ t('showExplanationDesc') }}</span>
           </div>
@@ -71,8 +84,9 @@ import { t } from '@/utils/i18n.js'
 
 defineProps({
   showExplanation: { type: Boolean, default: true },
-  autoJump: { type: Boolean, default: false },
+  autoJump: { type: Boolean, default: true },
   darkMode: { type: Boolean, default: false },
+  soundEnabled: { type: Boolean, default: true },
 })
 
 const emit = defineEmits(['close', 'update:showExplanation', 'update:autoJump', 'update:darkMode', 'exit', 'submit'])
@@ -108,7 +122,7 @@ const handleSubmit = () => {
   background: var(--background-secondary);
   width: 100%;
   max-width: var(--app-max-width);
-  max-height: 80vh;
+  max-height: 85vh;
   min-height: 70vh;
   border-radius: 20px 20px 0 0;
   overflow: hidden;

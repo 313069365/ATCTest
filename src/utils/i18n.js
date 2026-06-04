@@ -172,6 +172,8 @@ const translations = {
     showTranslationDesc: "Display translation of questions",
     darkMode: "Dark Mode",
     darkModeDesc: "Switch to dark theme",
+    sound: "Sound Effects",
+    soundDesc: "Play sound on correct/wrong answer",
 
     // Practice Result
     practiceResult: "Practice Result",
@@ -416,6 +418,8 @@ const translations = {
     showTranslationDesc: "显示题目翻译",
     darkMode: "夜间模式",
     darkModeDesc: "切换至深色主题",
+    sound: "音效",
+    soundDesc: "作答时播放正确/错误提示音",
 
     // Practice Result
     practiceResult: "答题结果",
