@@ -135,8 +135,24 @@ const questionLoaders = {
 }
 
 const showAnswerCard = ref(false);
-const showCheckBtn = ref(true);
-const showAnswerExplanation = ref(false);
+const showAnswerExplanation = computed(() => {
+  const q = bank.value[currentIndex.value]
+  if (!q) return false
+
+  if (practiceMode.value === 'review') return true
+
+  const isChecked = answerChecked.value[q.id]
+  if (!isChecked) return false
+
+  if (showExplanationPref.value) return true
+
+  if (forceExplanationOnWrong.value) {
+    const status = answerStatus.value[q.id]
+    if (isWrongStatus(status)) return true
+  }
+
+  return false
+})
 const practiceData = ref(null);
 const bank = ref([]);
 const currentIndex = ref(0);
@@ -163,7 +179,6 @@ watch(soundEnabled, (val) => {
 const showExplanationPref = ref(localStorage.getItem('showExplanationPref') !== 'false')
 watch(showExplanationPref, (val) => {
   localStorage.setItem('showExplanationPref', val)
-  if (!val) showAnswerExplanation.value = false
 })
 
 const forceExplanationOnWrong = ref(localStorage.getItem('forceExplanationOnWrong') !== 'false')
@@ -249,11 +264,6 @@ onMounted(async () => {
       loadPracticeProgress()
     }
 
-    if (practiceData.value?.practiceMode === 'review') {
-      showCheckBtn.value = false
-      showAnswerExplanation.value = true
-    }
-
     if (source === 'bank' && isContinue && store.practiceProgress?.[practiceKey]?.meta?.elapsedSeconds) {
       elapsedSeconds.value = store.practiceProgress[practiceKey].meta.elapsedSeconds
     } else {
@@ -320,7 +330,6 @@ const toggleTranslation = () => {
 
 const toggleShowExplanation = () => {
   showExplanationPref.value = !showExplanationPref.value
-  if (!showExplanationPref.value) showAnswerExplanation.value = false
 }
 
 const isFavorited = computed(() => {
@@ -648,8 +657,6 @@ const checkAnswer = () => {
     }
   }
 
-  showCheckBtn.value = false
-  if (showExplanationPref.value || (forceExplanationOnWrong.value && isWrongStatus(status))) showAnswerExplanation.value = true
   savePracticeProgress()
 }
 
@@ -737,26 +744,6 @@ const loadPracticeProgress = () => {
       answerChecked.value = ac;
       answerStatus.value = as;
 
-      // 恢复当前题目的答案检查状态
-      const currentQ = bank.value[currentIndex.value];
-      if (currentQ) {
-        const isChecked = isComplexQuestion(currentQ)
-          ? answerChecked.value[currentQ.id]?.[currentSubIndex.value]
-          : answerChecked.value[currentQ.id]
-        if (isChecked) {
-          showCheckBtn.value = false;
-          const status = answerStatus.value[currentQ.id]
-          if (showExplanationPref.value || (forceExplanationOnWrong.value && isWrongStatus(status))) showAnswerExplanation.value = true;
-        }
-      }
-
-      // 根据恢复的练习模式决定是否显示答案
-      const mode = progress.config.mode || practiceData.value?.practiceMode;
-      if (mode === 'review') {
-        showCheckBtn.value = false;
-        if (showExplanationPref.value) showAnswerExplanation.value = true;
-      }
-
       console.log('已恢复练习进度:', {
         currentIndex: currentIndex.value,
         currentSubIndex: currentSubIndex.value,
@@ -817,24 +804,6 @@ const nextQuestion = () => {
 
 // 重置题目状态
 const resetQuestionState = () => {
-  // 背题模式：所有题目都显示答案
-  if (practiceMode.value === "review") {
-    showCheckBtn.value = false;
-    if (showExplanationPref.value) showAnswerExplanation.value = true;
-  } else {
-    // 检查当前题目是否已检查过答案
-    const currentQ = bank.value[currentIndex.value];
-    if (currentQ && answerChecked.value[currentQ.id]) {
-      showCheckBtn.value = false;
-      const status = answerStatus.value[currentQ.id]
-      if (showExplanationPref.value || (forceExplanationOnWrong.value && isWrongStatus(status))) showAnswerExplanation.value = true;
-    } else {
-      showCheckBtn.value = true;
-      showAnswerExplanation.value = false;
-    }
-  }
-
-  // 保存进度
   savePracticeProgress();
 };
 

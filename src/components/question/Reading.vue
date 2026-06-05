@@ -125,9 +125,31 @@ watch(() => props.currentSubIndex, (val) => {
 
 const subAnswerChecked = ref({})
 
+const derivedChecked = computed(() => {
+  const checked = {}
+  if (props.mode === 'review') {
+    const subs = props.question?.subs || []
+    subs.forEach((_, index) => { checked[index] = true })
+    return checked
+  }
+  if (props.showAnswerMode === 'immediate') {
+    const answer = props.userAnswer
+    if (answer && typeof answer === 'object') {
+      Object.keys(answer).forEach(subIndex => {
+        const val = answer[subIndex]
+        if (val !== null && val !== undefined && val !== '') {
+          if (Array.isArray(val) && val.length === 0) return
+          checked[subIndex] = true
+        }
+      })
+    }
+    return checked
+  }
+  return checked
+})
+
 const isSubAnswerChecked = (index) => {
-  if (props.mode === 'review') return true
-  return subAnswerChecked.value[index] === true
+  return derivedChecked.value[index] === true || subAnswerChecked.value[index] === true
 }
 
 const currentSub = computed(() => {
@@ -209,8 +231,6 @@ const handleSubAnswer = (answer) => {
     const subType = currentSub.value?.type
     const canImmediateCheck = subType ? canAutoCheck(subType) : false
     if (canImmediateCheck) {
-      subAnswerChecked.value[currentSubIndex.value] = true
-
       // 自动跳转下一题（只有答案正确才跳转）
       if (props.autoJump) {
         const isCorrect = checkSubIsCorrect(wrappedSub.value, answer)
@@ -254,29 +274,7 @@ watch(() => props.question, () => {
   emit('goSub', 0)
 })
 
-// 监听 userAnswer 变化，自动推断子题检查状态
-watch(() => props.userAnswer, (newAnswer) => {
-  if (!newAnswer || typeof newAnswer !== 'object') return
-  // 背题模式：所有子题都显示答案
-  if (props.mode === 'review') {
-    const subs = props.question?.subs || []
-    subs.forEach((_, index) => {
-      subAnswerChecked.value[index] = true
-    })
-    return
-  }
-  // 立即显示模式：有答案的子题视为已检查
-  if (props.showAnswerMode === 'immediate') {
-    Object.keys(newAnswer).forEach(subIndex => {
-      const answer = newAnswer[subIndex]
-      if (answer !== null && answer !== undefined && answer !== '') {
-        if (Array.isArray(answer) && answer.length === 0) return
-        subAnswerChecked.value[subIndex] = true
-      }
-    })
-  }
-  // 按需显示模式：不自动标记，等待用户点击检查按钮
-}, { immediate: true, deep: true })
+
 </script>
 
 <style scoped>

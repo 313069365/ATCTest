@@ -139,7 +139,7 @@ const inputRef = ref(null)
 const keyword = ref('')
 const results = ref([])
 const searching = ref(false)
-const initial = ref(true)
+const initial = computed(() => !keyword.value)
 const filtersExpanded = ref(false)
 
 let debounceTimer = null
@@ -229,7 +229,6 @@ function toggleAllFields() {
 }
 
 function onDebouncedSearch() {
-  initial.value = false
   clearTimeout(debounceTimer)
   debounceTimer = setTimeout(doSearch, 300)
 }
@@ -294,7 +293,6 @@ function clearSearch() {
   keyword.value = ''
   results.value = []
   searching.value = false
-  initial.value = true
   nextTick(() => {
     inputRef.value?.focus()
   })
