@@ -1,11 +1,6 @@
 <template>
   <div class="home">
     <header class="top-bar">
-      <div class="top-bar-left">
-        <button class="lang-btn" @click="toggleLanguage">
-          <span class="material-symbols-outlined">translate</span>
-        </button>
-      </div>
       <h1 class="title">{{ t('learningPlatform') }}</h1>
       <div class="header-actions">
         <button class="theme-toggle" :class="{ active: darkMode }" @click="darkMode = !darkMode">
@@ -102,7 +97,7 @@
 import { ref, computed, onMounted, watch } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAppStore } from '@/stores/store'
-import { t, setLanguage, getLanguage } from '@/utils/i18n.js'
+import { t } from '@/utils/i18n.js'
 import { usePracticeService } from '@/composables/usePracticeService'
 import { createPracticeSession } from '@/utils/session'
 
@@ -194,12 +189,7 @@ onMounted(() => {
   pm.refresh()
 })
 
-// 切换中英文
-const toggleLanguage = () => {
-  const current = getLanguage()
-  setLanguage(current === 'zh' ? 'en' : 'zh')
-  window.location.reload()
-}
+
 </script>
 
 <style scoped>
@@ -224,25 +214,18 @@ const toggleLanguage = () => {
   box-sizing: border-box;
 }
 
-.top-bar-left {
-  flex: 1;
-  display: flex;
-  align-items: center;
-}
-
 .header-actions {
-  flex: 1;
   display: flex;
   align-items: center;
   justify-content: flex-end;
 }
 
 .title {
+  flex: 1;
   font-size: var(--font-size-2xl);
   font-weight: 700;
   color: var(--text-primary);
   letter-spacing: -0.02em;
-  flex-shrink: 0;
 }
 
 .theme-toggle {
@@ -266,28 +249,6 @@ const toggleLanguage = () => {
 
 .theme-toggle .material-symbols-outlined {
   font-size: 20px;
-}
-
-.lang-btn {
-  width: 40px;
-  height: 40px;
-  border: none;
-  background: transparent;
-  border-radius: 50%;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--text-secondary);
-  transition: background 0.2s;
-}
-
-.lang-btn .material-symbols-outlined {
-  font-size: 20px;
-}
-
-.lang-btn:hover {
-  background: var(--color-gray-100);
 }
 
 .search-bar {

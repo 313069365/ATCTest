@@ -247,6 +247,12 @@ const translations = {
     practiceFavorites: "Favorites Review",
     wrongReviewDesc: "{count} questions to review",
     favoritesReviewDesc: "{count} questions to review",
+
+    // Settings
+    systemSettings: "Settings",
+    language: "Language",
+    displayLanguage: "Display Language",
+    displayLanguageDesc: "Switch app language between Chinese and English",
   },
 
   zh: {
@@ -499,6 +505,12 @@ const translations = {
     practiceFavorites: "收藏加强",
     wrongReviewDesc: "共 {count} 道错题，开始练习",
     favoritesReviewDesc: "共 {count} 道收藏题，开始练习",
+
+    // Settings
+    systemSettings: "系统设置",
+    language: "语言",
+    displayLanguage: "显示语言",
+    displayLanguageDesc: "切换界面语言（中文/English）",
   },
 };
 
