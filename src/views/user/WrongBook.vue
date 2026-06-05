@@ -89,6 +89,7 @@ import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAppStore } from '@/stores/store'
 import { t } from '@/utils/i18n.js'
+import { createPracticeSession } from '@/utils/session'
 
 const router = useRouter()
 const store = useAppStore()
@@ -133,20 +134,19 @@ function goBack() {
 }
 
 function startWrongPractice() {
+  const sessionId = createPracticeSession({
+    source: 'wrongbook',
+    subject: { name: 'practiceWrong' },
+    category: 'wrongBook',
+    scope: 'wrongBook',
+    practiceMode: 'answer',
+    questionSort: 'shuffle',
+    showAnswerMode: 'immediate',
+    autoJump: false
+  })
   router.push({
     path: '/practice/quiz',
-    query: {
-      practiceData: JSON.stringify({
-        source: 'wrongbook',
-        subject: { name: 'practiceWrong' },
-        category: 'wrongBook',
-        scope: 'wrongBook',
-        practiceMode: 'answer',
-        questionSort: 'shuffle',
-        showAnswerMode: 'immediate',
-        autoJump: false
-      })
-    }
+    query: { sessionId }
   })
 }
 

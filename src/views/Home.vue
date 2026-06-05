@@ -104,6 +104,7 @@ import { useRouter } from 'vue-router'
 import { useAppStore } from '@/stores/store'
 import { t, setLanguage, getLanguage } from '@/utils/i18n.js'
 import { usePracticeService } from '@/composables/usePracticeService'
+import { createPracticeSession } from '@/utils/session'
 
 const router = useRouter()
 const store = useAppStore()
@@ -173,10 +174,11 @@ const continueLastPractice = () => {
     autoJump: progress.config.autoJump
   }
 
+  const sessionId = createPracticeSession(practiceData)
   router.push({
     path: '/practice/quiz',
     query: {
-      practiceData: JSON.stringify(practiceData),
+      sessionId,
       continue: 'true'
     }
   })

@@ -79,6 +79,7 @@ import { computed, onMounted, onUnmounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAppStore } from '@/stores/store'
 import { t } from '@/utils/i18n.js'
+import { createPracticeSession } from '@/utils/session'
 
 const router = useRouter()
 const store = useAppStore()
@@ -121,20 +122,19 @@ function goBack() {
 }
 
 function startFavoritesPractice() {
+  const sessionId = createPracticeSession({
+    source: 'favorites',
+    subject: { name: 'practiceFavorites' },
+    category: 'favorites',
+    scope: 'favorites',
+    practiceMode: 'answer',
+    questionSort: 'shuffle',
+    showAnswerMode: 'immediate',
+    autoJump: false
+  })
   router.push({
     path: '/practice/quiz',
-    query: {
-      practiceData: JSON.stringify({
-        source: 'favorites',
-        subject: { name: 'practiceFavorites' },
-        category: 'favorites',
-        scope: 'favorites',
-        practiceMode: 'answer',
-        questionSort: 'shuffle',
-        showAnswerMode: 'immediate',
-        autoJump: false
-      })
-    }
+    query: { sessionId }
   })
 }
 

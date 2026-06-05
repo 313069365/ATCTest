@@ -98,6 +98,7 @@ import { watch, reactive } from 'vue'
 import { iconMap } from '@/assets/fonts/IconMaps.js'
 import { t, setLanguage, getLanguage } from '@/utils/i18n.js'
 import { QUESTION_SORT } from '@/utils/questionConfig'
+import { createPracticeSession } from '@/utils/session'
 const router = useRouter()
 
 // 习题顺序配置
@@ -153,10 +154,11 @@ const gotopage = () => {
   }
   // setItem('practiceMeta', JSON.stringify(practiceData))
   emit('close')
+  const sessionId = createPracticeSession(practiceData)
   router.push({
     path: '/practice/quiz',
     query: {
-      practiceData: JSON.stringify(practiceData),
+      sessionId,
       newPractice: 'true'
     }
   })

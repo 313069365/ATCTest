@@ -109,6 +109,7 @@ import {
   packProgress,
   getPracticeKey
 } from "@/utils/questionConfig";
+import { getPracticeSession } from "@/utils/session";
 
 const router = useRouter();
 const route = useRoute();
@@ -197,14 +198,19 @@ const elapsedSeconds = ref(0); // 已用时间（秒）
 let timerInterval = null; // 计时器 interval
 
 onMounted(async () => {
-  if (!route.query.practiceData) {
+  if (!route.query.sessionId) {
     router.push({ name: "Practice" })
     loading.value = false
     return
   }
 
   try {
-    practiceData.value = JSON.parse(route.query.practiceData)
+    practiceData.value = getPracticeSession(route.query.sessionId)
+    if (!practiceData.value) {
+      router.push({ name: "Practice" })
+      loading.value = false
+      return
+    }
     const { category, scope, subject, questionSort, source: dataSource } = practiceData.value
     const source = dataSource || 'bank'
     const subjectName = typeof subject === "object" ? subject.name : subject
@@ -545,7 +551,6 @@ const finishQuiz = () => {
     )
     router.push({
       name: "PracticeResult",
-      query: { practiceData: JSON.stringify(practiceData.value) },
     });
   }
 };

@@ -103,6 +103,7 @@ import { usePracticeService } from '@/composables/usePracticeService'
 import { computeSubjectStats } from '@/utils/stats'
 import { getPracticeKey } from '@/utils/questionConfig'
 import { getAudioManager } from '@/services/audio-manager'
+import { createPracticeSession } from '@/utils/session'
 
 const store = useAppStore()
 const pm = usePracticeService()
@@ -239,10 +240,11 @@ const continuePractice = (subject) => {
     shuffleSeed: progress.config.shuffleSeed
   }
 
+  const sessionId = createPracticeSession(practiceData)
   router.push({
     path: '/practice/quiz',
     query: {
-      practiceData: JSON.stringify(practiceData),
+      sessionId,
       continue: 'true'
     }
   })
@@ -277,10 +279,11 @@ const wrongPractice = (subject) => {
     shuffleSeed: Date.now()
   }
 
+  const sessionId = createPracticeSession(practiceData)
   router.push({
     path: '/practice/quiz',
     query: {
-      practiceData: JSON.stringify(practiceData),
+      sessionId,
       newPractice: 'true'
     }
   })
