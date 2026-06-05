@@ -20,12 +20,25 @@
           <span class="material-symbols-outlined">close</span>
         </button>
       </div>
+      <div v-if="!keyword && searchHistory.length > 0" class="recent-searches">
+        <div class="filter-group">
+          <div class="filter-label-row">
+            <span class="filter-label">{{ t('recentSearches') }}</span>
+            <button class="filter-clear-btn" @click="clearSearchHistory">{{ t('searchClearHistory') }}</button>
+          </div>
+          <div class="chip-row chip-row-scroll">
+            <button v-for="kw in searchHistory" :key="kw" class="chip" @click="applySearchHistory(kw)">
+              {{ kw }}
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
 
     <div class="filters">
       <div class="filter-group">
         <span class="filter-label">{{ t('searchFields') }}</span>
-        <div class="chip-row">
+        <div class="chip-row chip-row-even">
           <button class="chip" :class="{ active: allFieldsSelected }" @click="toggleAllFields">
             {{ t('selectAll') }}
           </button>
@@ -79,13 +92,16 @@
         </div>
 
         <div class="filter-group">
-          <span class="filter-label">{{ t('subject') }} <span class="multi-badge">可多选</span></span>
-          <div class="chip-row">
-            <button class="chip" :class="{ active: selectedSubject.length === 0 }"
-              @click="selectedSubject = []; doSearch()">
-              {{ t('selectAll') }}
-            </button>
-            <button v-for="s in availableSubjects" :key="s" class="chip"
+          <div class="filter-label-row">
+            <span class="filter-label">{{ t('subject') }}</span>
+            <span class="multi-badge">可多选</span>
+          </div>
+          <button class="chip chip-full" :class="{ active: selectedSubject.length === 0 }"
+            @click="selectedSubject = []; doSearch()">
+            {{ t('selectAll') }}
+          </button>
+          <div class="subject-grid">
+            <button v-for="s in availableSubjects" :key="s" class="chip subject-chip"
               :class="{ active: selectedSubject.includes(s) }" @click="selectSubject(s)">
               {{ t(s) }}
             </button>
@@ -126,7 +142,7 @@
 </template>
 
 <script setup>
-import { ref, reactive, computed, onMounted, nextTick } from 'vue'
+import { ref, reactive, computed, onMounted, nextTick, watch } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAppStore } from '@/stores/store'
 import { t } from '@/utils/i18n.js'
@@ -144,9 +160,42 @@ const filtersExpanded = ref(false)
 
 let debounceTimer = null
 
-const selectedCategory = ref('')
+const selectedCategory = ref('atc')
 const selectedScope = ref('')
 const selectedSubject = ref([])
+
+const SEARCH_HISTORY_KEY = 'searchHistory'
+const searchHistory = ref([])
+
+function pushSearchHistory(keyword) {
+  const kw = keyword.trim()
+  if (!kw) return
+  const list = [kw]
+  for (const entry of searchHistory.value) {
+    if (entry !== kw && list.length < 7) list.push(entry)
+  }
+  searchHistory.value = list
+  localStorage.setItem(SEARCH_HISTORY_KEY, JSON.stringify(list))
+}
+
+function loadSearchHistory() {
+  try {
+    const raw = localStorage.getItem(SEARCH_HISTORY_KEY)
+    if (raw) searchHistory.value = JSON.parse(raw)
+  } catch {}
+}
+
+function applySearchHistory(kw) {
+  keyword.value = kw
+  doSearch()
+}
+
+function clearSearchHistory() {
+  searchHistory.value = []
+  localStorage.removeItem(SEARCH_HISTORY_KEY)
+}
+
+loadSearchHistory()
 
 const searchFields = reactive({
   id: true,
@@ -156,6 +205,15 @@ const searchFields = reactive({
 })
 
 const bankMeta = computed(() => store.bankMeta)
+
+watch(bankMeta, (newMeta) => {
+  if (newMeta && Object.keys(newMeta).length > 0) {
+    const categories = Object.keys(newMeta)
+    if (categories.length > 0 && !categories.includes(selectedCategory.value)) {
+      selectedCategory.value = categories[0]
+    }
+  }
+}, { immediate: true })
 
 const categories = computed(() => Object.keys(bankMeta.value))
 
@@ -247,6 +305,7 @@ function doSearch() {
     results.value = []
     return
   }
+  pushSearchHistory(keyword.value)
   searching.value = true
   setTimeout(() => {
     try {
@@ -488,6 +547,23 @@ onMounted(async () => {
   gap: var(--spacing-sm);
 }
 
+.chip-row-scroll {
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: var(--spacing-xs);
+}
+
+.chip-row-even {
+  flex-wrap: nowrap;
+  gap: var(--spacing-sm);
+}
+
+.chip-row-even .chip {
+  flex: 1;
+  text-align: center;
+}
+
 .chip {
   padding: var(--spacing-mn) var(--spacing-md);
   border-radius: var(--radius-full);
@@ -508,6 +584,32 @@ onMounted(async () => {
 .chip.active {
   background: var(--primary);
   color: var(--on-primary);
+  border-color: var(--primary);
+}
+
+.chip-full {
+  display: block;
+  width: 100%;
+  text-align: center;
+  margin-bottom: var(--spacing-sm);
+}
+
+.subject-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-sm);
+}
+
+.subject-chip {
+  border-radius: var(--radius-md);
+  text-align: center;
+  white-space: normal;
+  padding: var(--spacing-mn) var(--spacing-sm);
+}
+
+.subject-chip.active {
+  background: var(--primary-light);
+  color: var(--primary);
   border-color: var(--primary);
 }
 
@@ -669,5 +771,27 @@ onMounted(async () => {
 .placeholder-text {
   font-size: var(--font-size-md);
   color: var(--text-disabled);
+}
+
+.filter-label-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--spacing-sm);
+}
+
+.filter-clear-btn {
+  font-size: var(--font-size-sm);
+  color: var(--text-tertiary);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+.filter-clear-btn:hover {
+  background: var(--color-gray-200);
+  color: var(--text-primary);
 }
 </style>
