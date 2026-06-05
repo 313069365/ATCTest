@@ -906,6 +906,7 @@ const actionButtons = [
     icon: 'bar_chart',
     iconType: 'material',
     title: '答题统计',
+    active: computed(() => showStatsDialog.value),
     action: () => showStatsDialog.value = true,
   },
   {
@@ -1087,7 +1088,6 @@ const visibleButtons = computed(() =>
 
 .action-btn.active {
   color: var(--accent);
-  background: var(--accent-light);
 }
 
 .action-btn .material-symbols-outlined {
