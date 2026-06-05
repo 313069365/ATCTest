@@ -1,88 +1,80 @@
 <template>
-  <div class="quiz-settings-modal" @click.self="$emit('close')">
-    <div class="quiz-settings-content">
-      <header class="settings-header">
-        <div class="header-spacer"></div>
-        <span class="header-title">{{ t('quizSettings') }}</span>
-        <div class="header-spacer"></div>
-      </header>
+  <BottomSheet :visible="visible" :title="t('quizSettings')" @close="$emit('close')">
+    <div class="action-row">
+      <button class="action-btn-secondary" @click="handleSubmit">
+        <span class="material-symbols-outlined">check_circle</span>
+        {{ t('submitPaper') }}
+        <span></span>
+      </button>
+      <button class="action-btn-secondary" @click="handleExit">
+        <span class="material-symbols-outlined">close</span>
+        {{ t('exit') }}
+        <span></span>
+      </button>
+    </div>
 
-      <div class="settings-body">
-        <div class="action-row">
-          <button class="action-btn-secondary" @click="handleSubmit">
-            <span class="material-symbols-outlined">check_circle</span>
-            {{ t('submitPaper') }}
-            <span></span>
-          </button>
-          <button class="action-btn-secondary" @click="handleExit">
-            <span class="material-symbols-outlined">close</span>
-            {{ t('exit') }}
-            <span></span>
+    <div class="settings-section">
+      <span class="section-label">{{ t('answerSettings') }}</span>
+      <div class="settings-group">
+        <div v-if="!showExplanationEnabled" class="toggle-item">
+          <div class="toggle-info">
+            <span class="toggle-title">{{ t('forceExplanationOnWrong') }}</span>
+            <span class="toggle-desc">{{ t('forceExplanationOnWrongDesc') }}</span>
+          </div>
+          <button class="toggle-btn" :class="{ active: forceExplanationOnWrong }"
+            @click="$emit('update:forceExplanationOnWrong', !forceExplanationOnWrong)">
+            <span class="toggle-knob"></span>
           </button>
         </div>
-
-        <div class="settings-section">
-          <span class="section-label">{{ t('answerSettings') }}</span>
-          <div class="settings-group">
-            <div v-if="!showExplanationEnabled" class="toggle-item">
-              <div class="toggle-info">
-                <span class="toggle-title">{{ t('forceExplanationOnWrong') }}</span>
-                <span class="toggle-desc">{{ t('forceExplanationOnWrongDesc') }}</span>
-              </div>
-              <button class="toggle-btn" :class="{ active: forceExplanationOnWrong }"
-                @click="$emit('update:forceExplanationOnWrong', !forceExplanationOnWrong)">
-                <span class="toggle-knob"></span>
-              </button>
-            </div>
-            <div class="toggle-item">
-              <div class="toggle-info">
-                <span class="toggle-title">{{ t('autoJump') }}</span>
-                <span class="toggle-desc">{{ t('autoJumpDesc') }}</span>
-              </div>
-              <button class="toggle-btn" :class="{ active: autoJump }" @click="$emit('update:autoJump', !autoJump)">
-                <span class="toggle-knob"></span>
-              </button>
-            </div>
+        <div class="toggle-item">
+          <div class="toggle-info">
+            <span class="toggle-title">{{ t('autoJump') }}</span>
+            <span class="toggle-desc">{{ t('autoJumpDesc') }}</span>
           </div>
-        </div>
-
-        <div class="settings-section">
-          <span class="section-label">{{ t('soundDisplay') }}</span>
-          <div class="settings-group">
-            <div class="toggle-item">
-              <div class="toggle-info">
-                <span class="toggle-title">{{ t('sound') }}</span>
-                <span class="toggle-desc">{{ t('soundDesc') }}</span>
-              </div>
-              <button class="toggle-btn" :class="{ active: soundEnabled }"
-                @click="$emit('update:soundEnabled', !soundEnabled)">
-                <span class="toggle-knob">
-                  <span class="material-symbols-outlined">{{ soundEnabled ? 'volume_up' : 'volume_off' }}</span>
-                </span>
-              </button>
-            </div>
-            <div class="toggle-item">
-              <div class="toggle-info">
-                <span class="toggle-title">{{ t('darkMode') }}</span>
-                <span class="toggle-desc">{{ t('darkModeDesc') }}</span>
-              </div>
-              <button class="toggle-btn" :class="{ active: darkMode }" @click="$emit('update:darkMode', !darkMode)">
-                <span class="toggle-knob">
-                  <span class="material-symbols-outlined">{{ darkMode ? 'dark_mode' : 'light_mode' }}</span>
-                </span>
-              </button>
-            </div>
-          </div>
+          <button class="toggle-btn" :class="{ active: autoJump }" @click="$emit('update:autoJump', !autoJump)">
+            <span class="toggle-knob"></span>
+          </button>
         </div>
       </div>
     </div>
-  </div>
+
+    <div class="settings-section">
+      <span class="section-label">{{ t('soundDisplay') }}</span>
+      <div class="settings-group">
+        <div class="toggle-item">
+          <div class="toggle-info">
+            <span class="toggle-title">{{ t('sound') }}</span>
+            <span class="toggle-desc">{{ t('soundDesc') }}</span>
+          </div>
+          <button class="toggle-btn" :class="{ active: soundEnabled }"
+            @click="$emit('update:soundEnabled', !soundEnabled)">
+            <span class="toggle-knob">
+              <span class="material-symbols-outlined">{{ soundEnabled ? 'volume_up' : 'volume_off' }}</span>
+            </span>
+          </button>
+        </div>
+        <div class="toggle-item">
+          <div class="toggle-info">
+            <span class="toggle-title">{{ t('darkMode') }}</span>
+            <span class="toggle-desc">{{ t('darkModeDesc') }}</span>
+          </div>
+          <button class="toggle-btn" :class="{ active: darkMode }" @click="$emit('update:darkMode', !darkMode)">
+            <span class="toggle-knob">
+              <span class="material-symbols-outlined">{{ darkMode ? 'dark_mode' : 'light_mode' }}</span>
+            </span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </BottomSheet>
 </template>
 
 <script setup>
 import { t } from '@/utils/i18n.js'
+import BottomSheet from '@/components/common/BottomSheet.vue'
 
 defineProps({
+  visible: { type: Boolean, default: false },
   showExplanationEnabled: { type: Boolean, default: true },
   forceExplanationOnWrong: { type: Boolean, default: true },
   autoJump: { type: Boolean, default: true },
@@ -104,59 +96,6 @@ const handleSubmit = () => {
 </script>
 
 <style scoped>
-.quiz-settings-modal {
-  position: fixed;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100%;
-  max-width: var(--app-max-width);
-  top: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.45);
-  z-index: var(--z-popup);
-  display: flex;
-  align-items: flex-end;
-}
-
-.quiz-settings-content {
-  background: var(--background-secondary);
-  width: 100%;
-  max-width: var(--app-max-width);
-  max-height: 85vh;
-  min-height: 70vh;
-  border-radius: 20px 20px 0 0;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-}
-
-.settings-header {
-  display: flex;
-  align-items: center;
-  padding: var(--spacing-smd);
-  background: var(--background);
-}
-
-.header-title {
-  flex: 1;
-  text-align: center;
-  font-size: 17px;
-  font-weight: 600;
-  color: var(--on-surface);
-}
-
-.header-spacer {
-  width: 32px;
-  flex-shrink: 0;
-}
-
-.settings-body {
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
 .action-row {
   display: flex;
   gap: 10px;
@@ -244,7 +183,7 @@ const handleSubmit = () => {
   border: none;
   cursor: pointer;
   position: relative;
-  transition: background 0.2s;
+  transition: background 0.25s;
   flex-shrink: 0;
 }
 
@@ -259,8 +198,8 @@ const handleSubmit = () => {
   width: 24px;
   height: 24px;
   border-radius: 50%;
-  background: #fff;
-  transition: transform 0.2s;
+  background: var(--background);
+  transition: transform 0.25s cubic-bezier(0.4, 0.0, 0.2, 1);
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
   display: flex;
   align-items: center;

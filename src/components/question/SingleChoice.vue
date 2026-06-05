@@ -23,7 +23,8 @@
       }" @click="handleSelect(i)" :disabled="disabled || (shouldShowAnswer && mode !== 'review')">
         <span class="option-marker"></span>
         <span class="option-text" v-if="option">{{ formatOption(option) }}
-          <div v-show="showTranslation" class="translation-text">{{ formatOption(question.translation?.options[i] || "") }}
+          <div v-show="showTranslation" class="translation-text">{{ formatOption(question.translation?.options[i] || "")
+            }}
           </div>
         </span>
       </button>

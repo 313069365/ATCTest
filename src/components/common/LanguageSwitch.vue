@@ -7,12 +7,13 @@
           <span class="toggle-title">{{ t('displayLanguage') }}</span>
           <span class="toggle-desc">{{ t('displayLanguageDesc') }}</span>
         </div>
-        <div class="lang-switch">
-          <button class="seg-btn" :class="{ active: getLanguage() === 'zh' }" @click="switchLang('zh')">
+        <div class="seg-control lang" :style="{ '--opt-count': 2, '--opt-index': getLanguage() === 'zh' ? 0 : 1 }">
+          <div class="seg-indicator"></div>
+          <button class="seg-option" :class="{ active: getLanguage() === 'zh' }" @click="switchLang('zh')">
             中文
           </button>
-          <button class="seg-btn" :class="{ active: getLanguage() === 'en' }" @click="switchLang('en')">
-            English
+          <button class="seg-option" :class="{ active: getLanguage() === 'en' }" @click="switchLang('en')">
+            EN
           </button>
         </div>
       </div>
@@ -74,35 +75,58 @@ function switchLang(lang) {
   margin-top: 2px;
 }
 
-.lang-switch {
+.seg-control {
+  position: relative;
   display: flex;
   background: var(--color-gray-100);
-  border-radius: 8px;
-  padding: 2px;
-  gap: 2px;
+  border-radius: 10px;
+  padding: 3px;
 }
 
-.seg-btn {
-  padding: 5px 14px;
+.seg-indicator {
+  position: absolute;
+  top: 3px;
+  left: calc(3px + (100% - 6px) / var(--opt-count) * var(--opt-index));
+  width: calc((100% - 6px) / var(--opt-count));
+  height: calc(100% - 6px);
+  background: var(--background);
+  border-radius: 8px;
+  transition: left 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  z-index: 0;
+}
+
+.seg-option.active {
+  color: var(--primary);
+  font-weight: 600;
+}
+
+.seg-control.lang .seg-option {
+  padding: 6px 16px;
+  font-size: 13px;
+}
+
+.seg-option {
+  flex: 1;
   border: none;
   background: transparent;
-  border-radius: 6px;
-  font-size: 13px;
+  border-radius: 8px;
+  font-size: 14px;
   font-weight: 500;
   color: var(--text-secondary);
   cursor: pointer;
-  transition: all 0.25s;
+  z-index: 1;
+  transition: color 0.25s;
   white-space: nowrap;
+  text-align: center;
 }
 
-.seg-btn.active {
-  background: var(--background);
+.seg-option.active {
   color: var(--primary);
   font-weight: 600;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
 }
 
-.seg-btn:not(.active):active {
+.seg-option:not(.active):active {
   background: var(--color-gray-200);
 }
 </style>

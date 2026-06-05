@@ -1,5 +1,6 @@
 <template>
   <div class="page">
+
     <header class="top-bar">
       <div class="top-bar-left">
         <div class="header-title">
@@ -29,8 +30,8 @@
       <span class="progress-label" @click="openJumpDialog">进度 {{ currentIndex + 1 }}/{{ bank.length }}</span>
       <div class="action-bar-right">
         <button v-for="btn in visibleButtons" :key="btn.key" class="action-btn"
-          :class="{ active: btn.active?.value, 'remove-btn': btn.key === 'removeWrong' }"
-          @click="btn.action" :title="btn.title">
+          :class="{ active: btn.active?.value, 'remove-btn': btn.key === 'removeWrong' }" @click="btn.action"
+          :title="btn.title">
           <SvgIcon v-if="btn.iconType === 'svg'" size="20px" :name="btn.icon.value || btn.icon" />
           <span v-else class="material-symbols-outlined">{{ btn.icon }}</span>
         </button>
@@ -70,14 +71,12 @@
       :current="liveStats.current" :totalQ="liveStats.totalQ" :settings="practiceData"
       @close="showStatsDialog = false" />
 
-    <QuizSettings v-if="showQuizSettings" :showExplanationEnabled="showExplanationPref"
-      :forceExplanationOnWrong="forceExplanationOnWrong"
-      :autoJump="practiceData?.autoJump ?? true" :darkMode="darkMode" :soundEnabled="soundEnabled"
-      @close="showQuizSettings = false"
+    <QuizSettings :visible="showQuizSettings" :showExplanationEnabled="showExplanationPref"
+      :forceExplanationOnWrong="forceExplanationOnWrong" :autoJump="practiceData?.autoJump ?? true" :darkMode="darkMode"
+      :soundEnabled="soundEnabled" @close="showQuizSettings = false"
       @update:forceExplanationOnWrong="forceExplanationOnWrong = $event"
       @update:autoJump="practiceData.autoJump = $event" @update:darkMode="darkMode = $event"
-      @update:soundEnabled="soundEnabled = $event"
-      @exit="exitQuiz" @submit="finishQuiz" />
+      @update:soundEnabled="soundEnabled = $event" @exit="exitQuiz" @submit="finishQuiz" />
 
     <JumpDialog :visible="jumpDialogVisible" :total="bank.length" :current="currentIndex"
       @close="jumpDialogVisible = false" @jump="gotoQuesitonIdx" />
@@ -834,7 +833,7 @@ const removeCurrentFromWrong = () => {
 const currentMode = computed(() => isWrongPractice.value ? 'wrong' : practiceMode.value)
 
 const buttonVisibility = computed(() => ({
-  translate: true,
+  translate: currentQuestion.value?.translation,
   explanation: true,
   favorite: currentMode.value !== 'wrong' && currentMode.value !== 'favorites',
   removeWrong: isInWrongBook.value,

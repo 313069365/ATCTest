@@ -1,75 +1,67 @@
 <template>
-  <div class="settings-modal" v-if="visible" @click.self="$emit('close')">
-    <div class="settings-content">
-      <header class="settings-header">
-        <!-- <button class="close-btn" @click="$emit('close')">
-          <span class="material-symbols-outlined">close</span>
-        </button> -->
-        <div class="spacer"></div>
-        <h2>{{ t('practiceSettings') }}</h2>
-        <div class="spacer"></div>
-      </header>
+  <BottomSheet :visible="visible" :title="t('practiceSettings')" @close="$emit('close')">
+    <section class="settings-section">
+      <!-- <span class="section-label">{{ t('practiceMode') }}</span> -->
+      <div class="tab-bar" :class="settings.practiceMode">
+        <div class="tab-indicator"></div>
+        <button class="tab-btn" :class="{ active: settings.practiceMode === 'review' }"
+          @click="settings.practiceMode = 'review'">
+          <span class="material-symbols-outlined">menu_book</span>
+          <span>{{ t('reviewMode') }}</span>
+        </button>
+        <button class="tab-btn" :class="{ active: settings.practiceMode === 'answer' }"
+          @click="settings.practiceMode = 'answer'">
+          <span class="material-symbols-outlined">edit_note</span>
+          <span>{{ t('answerMode') }}</span>
+        </button>
+      </div>
+    </section>
 
-      <main class="settings-main">
-        <section class="settings-section">
-          <h3>{{ t('questionOrder') }}</h3>
-          <div class="order-options">
-            <button v-for="sort in QUESTIONS_SORT" :key="sort" class="order-btn"
+    <section class="settings-section">
+      <!-- <span class="section-label">{{ t('questionOrder') }}</span> -->
+      <div class="settings-group">
+        <div class="toggle-item">
+          <div class="toggle-info">
+            <span class="toggle-title">{{ t('sortMode') }}</span>
+            <span class="toggle-desc">{{ t('sortModeDesc') }}</span>
+          </div>
+          <div class="seg-control compact"
+            :style="{ '--opt-count': QUESTIONS_SORT.length, '--opt-index': QUESTIONS_SORT.indexOf(settings.questionSort) }">
+            <div class="seg-indicator"></div>
+            <button v-for="sort in QUESTIONS_SORT" :key="sort" class="seg-option"
               :class="{ active: settings.questionSort === sort }" @click="settings.questionSort = sort">
-              <span class="material-symbols-outlined">{{ iconMap[sort] }}</span>
               {{ t(sort) }}
             </button>
           </div>
-        </section>
+        </div>
+      </div>
+    </section>
 
-        <section class="settings-section">
-          <h3>{{ t('practiceMode') }}</h3>
-          <div class="mode-cards">
-            <div class="mode-card" :class="{ active: settings.practiceMode === 'review' }"
-              @click="settings.practiceMode = 'review'">
-              <div class="mode-icon">
-                <span class="material-symbols-outlined">menu_book</span>
-              </div>
-              <div class="mode-info">
-                <h4>{{ t('reviewMode') }}</h4>
-                <p>{{ t('reviewModeDesc') }}</p>
-              </div>
-              <div class="mode-check">
-                <span class="material-symbols-outlined">check</span>
-              </div>
+    <template v-if="settings.practiceMode === 'answer'">
+      <section class="settings-section">
+        <!-- <span class="section-label">{{ t('answerDisplay') }}</span> -->
+        <div class="settings-group">
+          <div class="toggle-item">
+            <div class="toggle-info">
+              <span class="toggle-title">{{ t('displayMode') }}</span>
+              <span class="toggle-desc">{{ t('displayModeDesc') }}</span>
             </div>
-
-            <div class="mode-card" :class="{ active: settings.practiceMode === 'answer' }"
-              @click="settings.practiceMode = 'answer'">
-              <div class="mode-icon">
-                <span class="material-symbols-outlined">edit_note</span>
-              </div>
-              <div class="mode-info">
-                <h4>{{ t('answerMode') }}</h4>
-                <p>{{ t('answerModeDesc') }}</p>
-              </div>
-              <div class="mode-check">
-                <span class="material-symbols-outlined">check</span>
-              </div>
+            <div class="seg-control compact"
+              :style="{ '--opt-count': SHOW_ANSWER_MODE.length, '--opt-index': SHOW_ANSWER_MODE.findIndex(o => o.value === settings.showAnswerMode) }">
+              <div class="seg-indicator"></div>
+              <button v-for="option in SHOW_ANSWER_MODE" :key="option.value" class="seg-option"
+                :class="{ active: settings.showAnswerMode === option.value }"
+                @click="settings.showAnswerMode = option.value">
+                {{ t(option.label) }}
+              </button>
             </div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        <section class="settings-section" v-if="settings.practiceMode === 'answer'">
-          <h3>{{ t('answerDisplay') }}</h3>
-          <div class="mode-toggle">
-            <button v-for="option in SHOW_ANSWER_MODE" :key="option.value" class="mode-toggle-btn"
-              :class="{ active: settings.showAnswerMode === option.value }"
-              @click="settings.showAnswerMode = option.value">
-              <span class="material-symbols-outlined">{{ option.icon }}</span>
-              {{ t(option.label) }}
-            </button>
-          </div>
-        </section>
-
-        <section class="settings-section"
-          v-if="settings.practiceMode === 'answer' && settings.showAnswerMode === 'immediate'">
-          <div class="toggle-option">
+      <section class="settings-section" v-if="settings.showAnswerMode === 'immediate'">
+        <div class="settings-group">
+          <div class="toggle-item">
             <div class="toggle-info">
               <span class="toggle-title">{{ t('autoJump') }}</span>
               <span class="toggle-desc">{{ t('autoJumpDesc') }}</span>
@@ -79,51 +71,43 @@
               <span class="toggle-knob"></span>
             </button>
           </div>
-        </section>
+        </div>
+      </section>
+    </template>
 
-      </main>
-
-      <footer class="settings-footer">
-        <button class="start-btn" @click="gotopage">
-          {{ t('startPractice') }}
-        </button>
-      </footer>
-    </div>
-  </div>
+    <template #footer>
+      <button class="start-btn" @click="gotopage">
+        <span>{{ t('startPractice') }}</span>
+        <span class="material-symbols-outlined">arrow_forward</span>
+      </button>
+    </template>
+  </BottomSheet>
 </template>
 
 <script setup>
 import { useRouter } from 'vue-router'
 import { watch, reactive } from 'vue'
-import { iconMap } from '@/assets/fonts/IconMaps.js'
-import { t, setLanguage, getLanguage } from '@/utils/i18n.js'
+import { t } from '@/utils/i18n.js'
 import { QUESTION_SORT } from '@/utils/questionConfig'
 import { createPracticeSession } from '@/utils/session'
+import BottomSheet from '@/components/common/BottomSheet.vue'
+
 const router = useRouter()
 
-// 习题顺序配置
 const QUESTIONS_SORT = Object.values(QUESTION_SORT)
 
-
 const SHOW_ANSWER_MODE = [
-  { value: 'immediate', label: 'showImmediately', icon: 'bolt' },
-  { value: 'manual', label: 'showOnDemand', icon: 'touch_app' }
+  { value: 'immediate', label: 'showImmediately' },
+  { value: 'manual', label: 'showOnDemand' }
 ]
 
 const props = defineProps({
-  visible: {
-    type: Boolean,
-    default: false
-  },
-  subject: {
-    type: Object,
-    default: null
-  }
+  visible: { type: Boolean, default: false },
+  subject: { type: Object, default: null }
 })
 
 const emit = defineEmits(['close', 'start'])
 
-// 默认配置
 const DEFAULT_SETTINGS = {
   questionSort: QUESTION_SORT.SEQUENCE,
   practiceMode: 'answer',
@@ -131,10 +115,8 @@ const DEFAULT_SETTINGS = {
   autoJump: true
 }
 
-// 使用 reactive 统一管理状态
 const settings = reactive({ ...DEFAULT_SETTINGS })
 
-// 弹窗打开时重置状态
 watch(() => props.visible, (newVal) => {
   if (newVal) {
     Object.assign(settings, DEFAULT_SETTINGS)
@@ -152,250 +134,142 @@ const gotopage = () => {
     autoJump: settings.autoJump,
     shuffleSeed: Date.now()
   }
-  // setItem('practiceMeta', JSON.stringify(practiceData))
   emit('close')
   const sessionId = createPracticeSession(practiceData)
   router.push({
     path: '/practice/quiz',
-    query: {
-      sessionId,
-      newPractice: 'true'
-    }
+    query: { sessionId, newPractice: 'true' }
   })
 }
-
 </script>
 
 <style scoped>
-.settings-modal {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 100vh;
-  background: rgba(0, 0, 0, 0.5);
-  z-index: var(--z-popup);
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-}
-
-.settings-content {
-  background: var(--background-secondary);
-  width: 100%;
-  max-width: 100%;
-  /* max-height: 90%; */
-  border-radius: var(--radius-xl) var(--radius-xl) 0 0;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-}
-
-.settings-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: var(--spacing-mn);
-  background: var(--background-surface);
-  backdrop-filter: blur(12px);
-}
-
-.settings-header .close-btn {
-  width: 44px;
-  height: 44px;
-  border: none;
-  background: transparent;
-  border-radius: var(--radius-full);
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.settings-header h2 {
-  font-size: var(--font-size-2xl);
-  font-weight: var(--font-weight-bold);
-}
-
-.settings-header .spacer {
-  width: 44px;
-}
-
-.settings-main {
-  flex: 1;
-  overflow-y: auto;
-  padding: 0 var(--spacing-md);
-}
-
-.settings-section {
-  max-width: var(--app-max-width);
-  margin-bottom: var(--spacing-sm);
-}
-
-.settings-section h3 {
-  font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-bold);
+.section-label {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-secondary);
   text-transform: uppercase;
-  color: var(--icon-color);
-  margin-bottom: var(--spacing-sm);
+  letter-spacing: 0.5px;
+  margin-bottom: 10px;
+  padding: 0 4px;
 }
 
-.order-options {
+.settings-group {
+  background: var(--color-gray-50);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.seg-control {
+  position: relative;
   display: flex;
-  gap: 8px;
-}
-
-.order-btn {
-  flex: 1;
-  padding: 12px 16px;
-  border: 1px solid var(--border-color-strong);
-  border-radius: var(--radius-md);
-  background: var(--background);
-  font-size: 16px;
-  font-weight: 500;
-  color: var(--icon-color);
-  cursor: pointer;
-  transition: all 0.2s;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 4px;
-}
-
-.order-btn .material-symbols-outlined {
-  font-size: 16px;
-}
-
-.order-btn.active {
-  background: var(--primary);
-  color: #fff;
-  border-color: var(--primary);
-}
-
-.mode-cards {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.mode-toggle {
-  display: flex;
-  gap: 4px;
-  padding: 3px;
   background: var(--color-gray-100);
-  border-radius: 12px;
+  border-radius: 10px;
+  padding: 3px;
 }
 
-.mode-toggle-btn {
+.seg-indicator {
+  position: absolute;
+  top: 3px;
+  left: calc(3px + (100% - 6px) / var(--opt-count) * var(--opt-index));
+  width: calc((100% - 6px) / var(--opt-count));
+  height: calc(100% - 6px);
+  background: var(--background);
+  border-radius: 8px;
+  transition: left 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  z-index: 0;
+}
+
+.seg-control.compact .seg-option {
+  padding: 6px 12px;
+  font-size: 13px;
+}
+
+.seg-option {
   flex: 1;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: var(--spacing-sm);
-  padding: 8px 16px;
-  border-radius: 10px;
-  background: transparent;
+  gap: 6px;
+  padding: 10px 12px;
   border: none;
+  background: transparent;
+  border-radius: 8px;
   font-size: 14px;
   font-weight: 500;
   color: var(--text-secondary);
   cursor: pointer;
-  transition: all 0.2s;
+  z-index: 1;
+  transition: color 0.25s;
 }
 
-.mode-toggle-btn .material-symbols-outlined {
-  font-size: 18px;
-}
-
-.mode-toggle-btn.active {
-  background: var(--primary);
-  color: #fff;
-  font-weight: 600;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
-}
-
-.mode-card {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: var(--spacing-sm);
-  background: var(--background);
-  border: 2px solid transparent;
-  border-radius: var(--radius-lg);
-  cursor: pointer;
-  transition: all 0.2s;
-}
-
-.mode-card.active {
-  border-color: var(--primary);
-  background: var(--primary-light);
-}
-
-.mode-icon {
-  width: 44px;
-  height: 44px;
-  border-radius: var(--radius-lg);
-  background: var(--color-gray-100);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.mode-card.active .mode-icon {
-  background: var(--primary-light);
-}
-
-.mode-icon .material-symbols-outlined {
-  font-size: 24px;
-  color: var(--icon-color);
-}
-
-.mode-card.active .mode-icon .material-symbols-outlined {
+.seg-option.active {
   color: var(--primary);
+  font-weight: 600;
 }
 
-.mode-info {
+.seg-option:not(.active):active {
+  background: var(--color-gray-200);
+}
+
+.tab-bar {
+  position: relative;
+  display: flex;
+  background: var(--color-gray-100);
+  border-radius: 12px;
+  padding: 6px;
+  box-shadow: var(--shadow-sm);
+}
+
+.tab-indicator {
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  width: calc(50% - 6px);
+  height: calc(100% - 12px);
+  background: var(--primary);
+  border-radius: 9px;
+  transition: left 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+
+.tab-bar.answer .tab-indicator {
+  left: calc(50% + 0px);
+}
+
+.tab-btn {
   flex: 1;
-}
-
-.mode-info h4 {
-  font-size: 16px;
-  font-weight: 700;
-  margin-bottom: 4px;
-}
-
-.mode-info p {
-  font-size: 12px;
-  color: var(--text-secondary);
-}
-
-.mode-check {
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  border: 2px solid var(--border-color-strong);
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 8px;
+  padding: 12px 8px;
+  border: none;
+  background: transparent;
+  border-radius: 9px;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  cursor: pointer;
+  z-index: 1;
+  transition: color 0.25s;
 }
 
-.mode-card.active .mode-check {
-  background: var(--primary);
-  border-color: var(--primary);
+.tab-btn .material-symbols-outlined {
+  font-size: 20px;
 }
 
-.mode-check .material-symbols-outlined {
-  font-size: 16px;
-  color: #fff;
+.tab-btn.active {
+  color: var(--on-primary);
+  font-weight: 600;
 }
 
-.toggle-option {
+.toggle-item {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: var(--spacing-md);
-  background: var(--background);
-  border-radius: var(--radius-lg);
 }
 
 .toggle-info {
@@ -422,7 +296,8 @@ const gotopage = () => {
   border: none;
   cursor: pointer;
   position: relative;
-  transition: background 0.2s;
+  transition: background 0.25s;
+  flex-shrink: 0;
 }
 
 .toggle-btn.active {
@@ -437,7 +312,7 @@ const gotopage = () => {
   height: 24px;
   border-radius: 50%;
   background: var(--background);
-  transition: transform 0.2s;
+  transition: transform 0.25s cubic-bezier(0.4, 0.0, 0.2, 1);
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 }
 
@@ -445,25 +320,29 @@ const gotopage = () => {
   transform: translateX(24px);
 }
 
-.settings-footer {
-  padding: var(--spacing-md);
-  background: var(--background);
-  border-top: 1px solid var(--border-color-light);
-}
-
 .start-btn {
   width: 100%;
-  height: 56px;
-  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-gradient-end) 100%);
+  height: 52px;
+  background: var(--primary);
   color: #fff;
   border: none;
   border-radius: var(--radius-full);
-  font-size: 18px;
-  font-weight: 700;
+  font-size: 17px;
+  font-weight: 600;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 12px rgba(0, 91, 191, 0.3);
+  gap: 6px;
+  transition: opacity 0.2s, transform 0.15s;
+}
+
+.start-btn:active {
+  opacity: 0.85;
+  transform: scale(0.97);
+}
+
+.start-btn .material-symbols-outlined {
+  font-size: 20px;
 }
 </style>
