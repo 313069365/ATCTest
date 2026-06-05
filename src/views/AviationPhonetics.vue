@@ -22,7 +22,7 @@
 
     <div class="section-title">数字 0 – 9</div>
     <div class="grid">
-      <div v-for="item in digits" :key="item.char" class="card" @click="speak(item.word)">
+      <div v-for="item in digits" :key="item.char" class="card" @click="speak(item.phonetic)">
         <div class="char">{{ item.char }}</div>
         <div class="word">{{ item.word }}</div>
         <div class="phonetic">{{ item.phonetic }}</div>
@@ -56,7 +56,7 @@ const digits = [
   { char: '0', word: 'Zero', phonetic: 'ZEE-roh' },
   { char: '1', word: 'One', phonetic: 'WUN' },
   { char: '2', word: 'Two', phonetic: 'TOO' },
-  { char: '3', word: 'Three', phonetic: 'TREE' },
+  { char: '3', word: 'Tree', phonetic: 'TREE' },
   { char: '4', word: 'Four', phonetic: 'FOW-er' },
   { char: '5', word: 'Five', phonetic: 'FIFE' },
   { char: '6', word: 'Six', phonetic: 'SIX' },
