@@ -662,6 +662,19 @@ const checkAnswer = () => {
   }
 
   savePracticeProgress()
+
+  // 自动跳转（检查后全对时）
+  if (practiceData.value?.autoJump) {
+    const isAllCorrect = isComplexQuestion(question)
+      ? question.subs?.every((_, idx) => status[idx] === 'correct')
+      : status === 'correct'
+    if (isAllCorrect) {
+      setTimeout(() => {
+        if (currentQuestion.value?.id !== questionId) return
+        nextQuestion()
+      }, 500)
+    }
+  }
 }
 
 // 加载练习进度（断点续练）
