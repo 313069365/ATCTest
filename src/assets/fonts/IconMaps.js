@@ -29,6 +29,9 @@ export const iconMap = {
   singleChoice: "radio_button_checked",
   readingComprehension: "menu_book",
 
+  // airport
+  RunwayIncursionPrevention: "warning",
+
   // common
   atc: "flight",
   airport: "apartment",

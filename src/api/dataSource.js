@@ -77,7 +77,7 @@ export function getQuestionBankInfo(category) {
  * @returns {Array} 题目数组
  */
 export async function fetchQuestionFile(filename, signal) {
-  const resp = await fetch(`/data/atc/${filename}`, { signal });
+  const resp = await fetch(`/data/${filename}`, { signal });
   const questions = await resp.json();
   dataCache.set(filename, questions);
   return questions;

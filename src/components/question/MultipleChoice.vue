@@ -4,6 +4,7 @@
     <div class="question-meta">
       <span class="question-type-tag">{{ t(question?.type) }}</span>
       <span class="question-id">{{ t('questionId') }}: {{ question?.id }}</span>
+      <span class="question-difficulty">{{ t('difficulty') }}: {{ question?.difficulty }}</span>
     </div>
 
     <!-- 2. 题干区 -->
@@ -219,6 +220,15 @@ const handleSelect = (index) => {
 
 .question-id {
   color: var(--text-secondary);
+  font-size: var(--font-size-sm);
+}
+
+.question-difficulty {
+  margin-left: auto;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  background: var(--color-gray-100);
+  color: var(--text-secondary);
+  border-radius: var(--radius-sm);
   font-size: var(--font-size-sm);
 }
 

@@ -28,6 +28,10 @@ const translations = {
 
     // english
     singleChoice: "Single Choice",
+
+    // airport
+    RunwayIncursionPrevention: "Runway Incursion Prevention",
+
     readingComprehension: "Reading Comprehension",
 
     // common
@@ -289,6 +293,9 @@ const translations = {
     // english
     singleChoice: "单项选择",
     readingComprehension: "阅读理解",
+
+    // airport
+    RunwayIncursionPrevention: "跑道侵入防范",
 
     // common
     base: "基础题库",

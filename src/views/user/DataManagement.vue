@@ -21,7 +21,7 @@
           </div>
           <div class="card-row">
             <span class="card-label">版本</span>
-            <span class="card-value">Ver 0.06</span>
+            <span class="card-value">Ver {{ bankVersion }}</span>
           </div>
           <div class="card-row">
             <span class="card-label">缓存状态</span>
@@ -67,6 +67,7 @@ import { ref, computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAppStore } from '@/stores/store'
 import { storage, STORAGE_KEY } from '@/composables/useStorage'
+import { computeBankHash } from '@/api/dataSource'
 
 const router = useRouter()
 const store = useAppStore()
@@ -75,6 +76,8 @@ const clearing = ref(false)
 const refreshProgress = ref({ visible: false, indeterminate: false })
 
 const cached = computed(() => !!storage.getItem('bank_version'))
+
+const bankVersion = computed(() => computeBankHash())
 
 const totalSubjects = computed(() => {
   const meta = store.bankMeta

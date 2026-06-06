@@ -442,7 +442,7 @@ const cacheShuffledOptions = () => {
 
   shuffledOptionsCache.value = {};
   bank.value.forEach((question) => {
-    if (question && question.options && question.shuffle) {
+    if (question && question.options && question.shuffle && question.type !== 'boolean') {
       const indices = question.options.map((_, i) => i);
       const shuffledIndices = shuffleArray(indices, rng);
       shuffledOptionsCache.value[question.id] = {
@@ -461,7 +461,7 @@ const getQuestionWithShuffledOptions = (question) => {
   if (!question || !question.options) return question;
   if (practiceData.value?.practiceMode === 'review') return question;
 
-  if (question.shuffle) {
+  if (question.shuffle && question.type !== 'boolean') {
     const cached = shuffledOptionsCache.value[question.id];
     if (cached) {
       return {

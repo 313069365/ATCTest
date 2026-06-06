@@ -1,11 +1,12 @@
 {
-  "version": 1,
+  "version": 2,
   "files": [
-    "base.json",
-    "professional.json",
-    "english_translated.json",
-    "english_reading.json",
-    "base_set.json"
+    "atc/base.json",
+    "atc/professional.json",
+    "atc/english_translated.json",
+    "atc/english_reading.json",
+    "atc/base_set.json",
+    "airport/airport_base.json"
   ],
   "categories": {
     "atc": {
@@ -117,6 +118,17 @@
         "基础合集": {
           "scope": "base_set",
           "count": 2794
+        }
+      }
+    },
+    "airport": {
+      "scopes": [
+        "base"
+      ],
+      "subjects": {
+        "RunwayIncursionPrevention": {
+          "scope": "base",
+          "count": 181
         }
       }
     }
