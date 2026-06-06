@@ -107,6 +107,19 @@ export async function fetchAllQuestionFiles(onProgress, signal) {
     if (onProgress) onProgress(i + 1, total);
   }
 
+  // virtual aggregation: basicCollection = all atc/base subjects
+  const basicColl = [];
+  for (const [, questions] of Object.entries(groupedBySubject)) {
+    for (const q of questions) {
+      if (q.meta?.category === 'atc' && q.meta?.scope === 'base') {
+        basicColl.push(q);
+      }
+    }
+  }
+  if (basicColl.length > 0) {
+    groupedBySubject.basicCollection = basicColl;
+  }
+
   return groupedBySubject;
 }
 

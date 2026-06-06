@@ -31,6 +31,7 @@ const translations = {
 
     // airport
     RunwayIncursionPrevention: "Runway Incursion Prevention",
+    basicCollection: "Basic Collection",
 
     readingComprehension: "Reading Comprehension",
 
@@ -296,6 +297,7 @@ const translations = {
 
     // airport
     RunwayIncursionPrevention: "跑道侵入防范",
+    basicCollection: "基础合集",
 
     // common
     base: "基础题库",

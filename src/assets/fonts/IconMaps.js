@@ -32,6 +32,9 @@ export const iconMap = {
   // airport
   RunwayIncursionPrevention: "warning",
 
+  // virtual aggregation
+  basicCollection: "collections_bookmark",
+
   // common
   atc: "flight",
   airport: "apartment",
