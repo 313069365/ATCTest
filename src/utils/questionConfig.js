@@ -80,7 +80,7 @@ export const MANUAL_CHECK_TYPES = Object.entries(QUESTION_CAPABILITIES)
 
 export const MODE_BEHAVIOR = {
   answer: {
-    checkBtn: (s) => s.showAnswerMode === 'manual' && s.hasUserAnswer && !s.isChecked,
+    checkBtn: (s) => !s.isChecked && s.hasUserAnswer && (s.showAnswerMode === 'manual' || s.needsManualCheck),
     autoCheck: (s) => s.showAnswerMode === 'immediate' && s.canAutoCheck,
     showAnswer: (s) => s.isChecked || s.practiceMode === 'review',
     showExplanation: (s) => s.isChecked || s.practiceMode === 'review',

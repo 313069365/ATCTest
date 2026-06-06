@@ -14,26 +14,16 @@
 
     <!-- 3. 作答区 -->
     <div class="options">
-      <button
-        v-for="(option, i) in question?.options"
-        :key="i"
-        class="option-btn"
-        :class="{
-          selected: isSelected(i),
-          correct: shouldShowAnswer && isCorrectOption(i),
-          wrong: shouldShowAnswer && isWrongOption(i),
-          review: mode === 'review'
-        }"
-        @click="handleSelect(i)"
-        :disabled="disabled || (shouldShowAnswer && mode !== 'review')"
-      >
+      <button v-for="(option, i) in question?.options" :key="i" class="option-btn" :class="{
+        selected: isSelected(i),
+        correct: shouldShowAnswer && isCorrectOption(i) && (mode === 'review' || isSelected(i)),
+        wrong: shouldShowAnswer && isWrongOption(i),
+        missed: shouldShowAnswer && isMissedOption(i),
+        review: mode === 'review'
+      }" @click="handleSelect(i)" :disabled="disabled || (shouldShowAnswer && mode !== 'review')">
         <span class="option-marker"></span>
         <span class="option-text" v-if="option">{{ formatOption(option) }}</span>
       </button>
-    </div>
-
-    <div class="answer-tip" v-if="mode === 'answer' && !shouldShowAnswer">
-      <span class="tip-text">提示：多选题，可选择多个答案</span>
     </div>
 
     <!-- 检查答案按钮 -->
@@ -144,20 +134,26 @@ const isSelected = (index) => {
 
 const isCorrectOption = (index) => {
   if (!props.question?.answer || props.question.answer.length === 0) return false
-  
+
   const currentOption = props.question.options?.[index]
   if (!currentOption) return false
   const currentOptionText = currentOption.replace(/^[A-Z]\.\s*/, '')
-  
+
   const hasCorrect = props.question.answer.some(ans => {
     const correctAnswerText = String(ans).replace(/^[A-Z]\.\s*/, '')
     return currentOptionText === correctAnswerText
   })
-  
+
   if (props.mode === 'review') {
     return hasCorrect
   }
   return shouldShowAnswer.value && hasCorrect
+}
+
+const isMissedOption = (index) => {
+  if (props.mode === 'review') return false
+  if (!shouldShowAnswer.value) return false
+  return isCorrectOption(index) && !isSelected(index)
 }
 
 const isWrongOption = (index) => {
@@ -172,7 +168,7 @@ const formatOption = (option) => {
 
 const handleSelect = (index) => {
   if (props.disabled || props.showAnswer) return
-  
+
   let newAnswer
   if (Array.isArray(props.userAnswer)) {
     if (props.userAnswer.includes(index)) {
@@ -183,7 +179,7 @@ const handleSelect = (index) => {
   } else {
     newAnswer = [index]
   }
-  
+
   emit('answer', newAnswer)
 
   // 自动跳转：答题正确后自动跳下一题（多选需要手动检查，这里延迟检查）
@@ -207,11 +203,15 @@ const handleSelect = (index) => {
   display: flex;
   align-items: center;
   gap: var(--spacing-md);
-  margin-bottom: var(--spacing-md);
+  padding: var(--spacing-sm) var(--spacing-md);
+  background: var(--background);
+  border: 1px solid transparent;
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  box-shadow: var(--shadow-md);
 }
 
 .question-type-tag {
-  padding: var(--spacing-xs) var(--spacing-sm);
+  padding: var(--spacing-mn) var(--spacing-sm);
   background: var(--primary-light);
   color: var(--primary);
   border-radius: var(--radius-sm);
@@ -225,7 +225,7 @@ const handleSelect = (index) => {
 
 .question-difficulty {
   margin-left: auto;
-  padding: var(--spacing-xs) var(--spacing-sm);
+  padding: var(--spacing-mn) var(--spacing-sm);
   background: var(--color-gray-100);
   color: var(--text-secondary);
   border-radius: var(--radius-sm);
@@ -237,9 +237,9 @@ const handleSelect = (index) => {
   padding: var(--spacing-sm) var(--spacing-md);
   background: var(--background);
   border: 1px solid transparent;
-  margin-bottom: var(--spacing-md);
   border-radius: 0 0 var(--radius-lg) var(--radius-lg);
   box-shadow: var(--shadow-md);
+  margin-bottom: var(--spacing-md);
 }
 
 .question-text {
@@ -250,6 +250,7 @@ const handleSelect = (index) => {
 }
 
 .options {
+  color: var(--text-primary);
   display: flex;
   flex-direction: column;
   gap: 12px;
@@ -259,9 +260,9 @@ const handleSelect = (index) => {
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: var(--spacing-sm);
-  background: var(--background);
-  border: 1px solid transparent;
+  padding: var(--spacing-md);
+  background: var(--background-surface);
+  border: 1px solid var(--border-color-strong);
   border-radius: var(--radius-lg);
   cursor: pointer;
   transition: all 0.2s;
@@ -295,32 +296,68 @@ const handleSelect = (index) => {
   background: var(--error-light);
 }
 
+.option-btn.missed {
+  border-color: var(--success);
+  border-style: dashed;
+  background: transparent;
+}
+
+.option-btn.missed .option-marker {
+  border-color: var(--success);
+  background: transparent;
+}
+
+.option-btn.missed .option-marker::after {
+  content: "";
+}
+
 .option-marker {
   width: 20px;
   height: 20px;
-  border-radius: 50%;
+  border-radius: 4px;
   border: 2px solid var(--color-gray-500);
   background: var(--background);
   flex-shrink: 0;
   transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .option-btn.selected .option-marker {
   background-color: var(--primary);
   border-color: var(--primary);
-  box-shadow: inset 0 0 0 3px #fff;
+}
+
+.option-btn.selected .option-marker::after {
+  content: "✓";
+  color: #fff;
+  font-size: 14px;
+  font-weight: bold;
 }
 
 .option-btn.correct .option-marker {
   background-color: var(--success);
   border-color: var(--success);
-  box-shadow: inset 0 0 0 3px #fff;
+}
+
+.option-btn.correct .option-marker::after {
+  content: "✓";
+  color: #fff;
+  font-size: 14px;
+  font-weight: bold;
 }
 
 .option-btn.wrong .option-marker {
   background-color: var(--error);
   border-color: var(--error);
-  box-shadow: inset 0 0 0 3px #fff;
+}
+
+.option-btn.wrong .option-marker::after {
+  content: "✗";
+  color: #fff;
+  font-size: 14px;
+  font-weight: bold;
 }
 
 .option-btn.review.correct {
@@ -331,7 +368,13 @@ const handleSelect = (index) => {
 .option-btn.review.correct .option-marker {
   background-color: var(--success);
   border-color: var(--success);
-  box-shadow: inset 0 0 0 3px #fff;
+}
+
+.option-btn.review.correct .option-marker::after {
+  content: "✓";
+  color: #fff;
+  font-size: 14px;
+  font-weight: bold;
 }
 
 .option-text {
@@ -386,10 +429,10 @@ const handleSelect = (index) => {
   display: inline-flex;
   align-items: center;
   gap: var(--spacing-sm);
-  padding: var(--spacing-md) var(--spacing-xl);
+  padding: var(--spacing-sm) var(--spacing-lg);
   background: var(--primary);
-  color: var(--on-primary);
-  border: none;
+  color: var(--background);
+  border: 1px solid var(--primary);
   border-radius: var(--radius-lg);
   font-size: var(--font-size-md);
   font-weight: var(--font-weight-semibold);
@@ -397,7 +440,12 @@ const handleSelect = (index) => {
   transition: all 0.2s;
 }
 
+.check-answer .check-btn:hover {
+  background: var(--primary-light);
+  color: var(--primary)
+}
+
 .check-answer .check-btn:active {
-  transform: scale(0.98);
+  transform: scale(0.97);
 }
 </style>

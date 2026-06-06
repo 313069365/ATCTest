@@ -162,7 +162,7 @@ const handleInput = (e) => {
 }
 
 .question-type-tag {
-  padding: var(--spacing-xs) var(--spacing-sm);
+  padding: var(--spacing-mn) var(--spacing-sm);
   background: var(--primary-light);
   color: var(--primary);
   border-radius: var(--radius-sm);
@@ -176,7 +176,7 @@ const handleInput = (e) => {
 
 .question-difficulty {
   margin-left: auto;
-  padding: var(--spacing-xs) var(--spacing-sm);
+  padding: var(--spacing-mn) var(--spacing-sm);
   background: var(--color-gray-100);
   color: var(--text-secondary);
   border-radius: var(--radius-sm);
