@@ -1,5 +1,25 @@
 import { normalizeStatus } from './questionConfig'
 
+function readAnswers(session) {
+  return session.answers || session.progress?.answers || {}
+}
+
+function readConfig(session, field) {
+  const cfg = session.config || {}
+  if (cfg.bank) return cfg.bank[field]
+  return cfg[field]
+}
+
+function readTimestamp(session) {
+  const tl = session.timeline || {}
+  return tl.startedAt || tl.completedAt || session.meta?.timestamp || session.timestamp || 0
+}
+
+function readElapsed(session) {
+  const tl = session.timeline || {}
+  return tl.elapsedSeconds || session.meta?.elapsedSeconds || 0
+}
+
 function countAnswers(answers) {
   let correct = 0, wrong = 0, unknown = 0, unanswered = 0
   Object.values(answers).forEach(answer => {
@@ -25,7 +45,22 @@ function countAnswers(answers) {
 }
 
 export function computeSessionStats(session) {
-  const answers = session.progress?.answers || {}
+  if (session.stats && session.answers) {
+    return {
+      totalQuestions: session.stats.totalQuestions,
+      correctCount: session.stats.correctCount,
+      wrongCount: session.stats.wrongCount,
+      unknownCount: session.stats.unknownCount,
+      unansweredCount: session.stats.unansweredCount,
+      accuracy: session.stats.accuracy,
+      elapsedSeconds: session.timeline?.elapsedSeconds || 0,
+      subject: readConfig(session, 'subject') || '',
+      category: readConfig(session, 'category') || '',
+      scope: readConfig(session, 'scope') || '',
+      timestamp: readTimestamp(session),
+    }
+  }
+  const answers = readAnswers(session)
   const { correct, wrong, unknown, unanswered } = countAnswers(answers)
   const total = correct + wrong + unknown + unanswered
   const answered = correct + wrong
@@ -36,20 +71,25 @@ export function computeSessionStats(session) {
     unknownCount: unknown,
     unansweredCount: unanswered,
     accuracy: answered > 0 ? Math.round((correct / answered) * 100) : 0,
-    elapsedSeconds: session.meta?.elapsedSeconds || 0,
-    subject: session.config?.bank?.subject || '',
-    category: session.config?.bank?.category || '',
-    scope: session.config?.bank?.scope || '',
-    timestamp: session.meta?.timestamp || session.timestamp || 0
+    elapsedSeconds: readElapsed(session),
+    subject: readConfig(session, 'subject') || '',
+    category: readConfig(session, 'category') || '',
+    scope: readConfig(session, 'scope') || '',
+    timestamp: readTimestamp(session),
   }
 }
 
+function readBank(session) {
+  const cfg = session.config || {}
+  if (cfg.bank) return cfg.bank
+  return cfg
+}
+
 export function computeSubjectStats(sessions, wrongBook, { category, scope, subject }) {
-  const filtered = sessions.filter(s =>
-    s.config?.bank?.category === category &&
-    s.config?.bank?.scope === scope &&
-    s.config?.bank?.subject === subject
-  )
+  const filtered = sessions.filter(s => {
+    const bank = readBank(s)
+    return bank.category === category && bank.scope === scope && bank.subject === subject
+  })
   const sessionCount = filtered.length
   let totalQuestions = 0, correctCount = 0, wrongCount = 0, unknownCount = 0, unansweredCount = 0
   filtered.forEach(s => {
@@ -91,8 +131,8 @@ export function computeOverallStats(sessions, wrongBook) {
 
   const subjectMap = {}
   sessions.forEach(s => {
-    const bank = s.config?.bank
-    if (!bank) return
+    const bank = readBank(s)
+    if (!bank.category) return
     const key = `${bank.category}_${bank.scope}_${bank.subject}`
     if (!subjectMap[key]) subjectMap[key] = { category: bank.category, scope: bank.scope, subject: bank.subject }
   })
@@ -102,7 +142,7 @@ export function computeOverallStats(sessions, wrongBook) {
 
   const dailyMap = {}
   sessions.forEach(s => {
-    const ts = s.meta?.timestamp || s.timestamp
+    const ts = readTimestamp(s)
     if (!ts) return
     const date = new Date(ts).toISOString().split('T')[0]
     if (!dailyMap[date]) dailyMap[date] = []
@@ -130,7 +170,7 @@ export function computeDailyStats(sessions, date) {
   const dateStr = date || new Date().toISOString().split('T')[0]
   const filtered = date
     ? sessions.filter(s => {
-        const ts = s.meta?.timestamp || s.timestamp
+        const ts = readTimestamp(s)
         return ts && new Date(ts).toISOString().split('T')[0] === dateStr
       })
     : sessions

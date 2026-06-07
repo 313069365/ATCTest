@@ -7,6 +7,7 @@ import {
   computeDailyStats
 } from '@/utils/stats'
 import { getPracticeKey } from '@/utils/questionConfig'
+import { serializeSession, normalizeSession } from '@/utils/sessionAdapter'
 
 export function usePracticeService() {
   const store = useAppStore()
@@ -31,7 +32,7 @@ export function usePracticeService() {
     return computed(() => computeDailyStats(sessions.value, date))
   }
 
-  const getSessionStats = computeSessionStats
+  const getSessionStats = (session) => computeSessionStats(normalizeSession(session))
 
   function markWrong(question, parentQuestion) {
     const entry = parentQuestion
@@ -44,20 +45,29 @@ export function usePracticeService() {
     store.removeWrongQuestion(id)
   }
 
-  function completeSession(config, data) {
-    store.addPracticeHistory({
-      config,
-      progress: {
-        answers: data.answers,
-        questionIds: data.questionIds,
-        currentIndex: data.currentIndex ?? 0
+  function completeSession(config, data, startedAt = Date.now()) {
+    const bank = config.bank || config
+    const session = {
+      config: {
+        category: bank.category || '',
+        scope: bank.scope || '',
+        subject: bank.subject || '',
+        mode: config.mode || 'answer',
+        questionSort: config.questionSort || 'sequence',
+        showAnswerMode: config.showAnswerMode || 'manual',
+        autoJump: config.autoJump ?? true,
       },
-      meta: {
-        timestamp: Date.now(),
-        elapsedSeconds: data.elapsedSeconds ?? 0
-      }
-    })
-    store.clearPracticeProgress(getPracticeKey({ bank: config.bank }))
+      answers: data.answers,
+      timeline: {
+        startedAt,
+        completedAt: Date.now(),
+        lastActivityAt: Date.now(),
+        elapsedSeconds: data.elapsedSeconds ?? 0,
+      },
+      status: 'completed',
+    }
+    store.addPracticeHistory(serializeSession(session))
+    store.clearPracticeProgress(getPracticeKey({ bank: session.config }))
   }
 
   return {

@@ -166,6 +166,7 @@ const showQuizSettings = ref(false);
 const jumpDialogVisible = ref(false);
 const darkMode = ref(localStorage.getItem('darkMode') === 'true');
 const loading = ref(true);
+const startedAt = ref(Date.now()); // 练习开始时间
 
 watch(darkMode, (val) => {
   document.documentElement.classList.toggle('dark', val)
@@ -269,10 +270,14 @@ onMounted(async () => {
       loadPracticeProgress()
     }
 
-    if (source === 'bank' && isContinue && store.practiceProgress?.[practiceKey]?.meta?.elapsedSeconds) {
-      elapsedSeconds.value = store.practiceProgress[practiceKey].meta.elapsedSeconds
+    if (source === 'bank' && isContinue) {
+      const saved = store.practiceProgress?.[practiceKey]
+      const tl = saved?.timeline || saved?.meta || {}
+      if (tl.elapsedSeconds) elapsedSeconds.value = tl.elapsedSeconds
+      if (tl.startedAt) startedAt.value = tl.startedAt
     } else {
       elapsedSeconds.value = 0
+      startedAt.value = Date.now()
     }
     startTimer()
   } catch (e) {
@@ -528,6 +533,17 @@ const finishQuiz = () => {
       router.push({ name: "Home" })
       return
     }
+    // 背题模式：不保存作答记录，只清理进度
+    if (practiceMode.value === 'review') {
+      const key = getPracticeKey({
+        category: practiceData.value?.subject?.category,
+        scope: practiceData.value?.subject?.scope,
+        subject: practiceData.value?.subject?.name
+      })
+      store.clearPracticeProgress(key)
+      router.push({ name: "Home" })
+      return
+    }
     const answers = packProgress(bank.value, userAnswers.value, answerChecked.value, answerStatus.value)
     pm.completeSession(
       {
@@ -546,7 +562,8 @@ const finishQuiz = () => {
         questionIds: bank.value.map(q => q.id),
         currentIndex: currentIndex.value,
         elapsedSeconds: elapsedSeconds.value
-      }
+      },
+      startedAt.value
     )
     router.push({
       name: "PracticeResult",
@@ -680,7 +697,6 @@ const checkAnswer = () => {
   }
 }
 
-// 加载练习进度（断点续练）
 const handleCheckSub = (subIndex) => {
   const question = currentQuestion.value
   if (!question) return

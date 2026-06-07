@@ -81,6 +81,7 @@ import { useAppStore } from "@/stores/store";
 import { usePracticeService } from "@/composables/usePracticeService";
 import { t } from "@/utils/i18n.js";
 import { getPracticeKey } from "@/utils/questionConfig";
+import { normalizeSession } from "@/utils/sessionAdapter";
 
 const router = useRouter();
 const route = useRoute();
@@ -111,7 +112,7 @@ const subjectName = computed(() => stats.value?.subject ?? '');
 onMounted(async () => {
   await store.loadPracticeHistory();
 
-  const history = store.practiceHistory[0];
+  const history = normalizeSession(store.practiceHistory[0]);
   if (!history) {
     router.push({ name: "Home" });
     return;
@@ -120,8 +121,8 @@ onMounted(async () => {
   practiceData.value = history;
   stats.value = pm.getSessionStats(history);
 
-  const bank = history.config?.bank
-  if (bank) {
+  const bank = history.config
+  if (bank && (bank.category || bank.subject)) {
     const key = getPracticeKey({ bank })
     store.clearPracticeProgress(key)
   }
@@ -136,14 +137,14 @@ const goToWrongBook = () => {
 };
 
 const practiceAgain = () => {
-  if (practiceData.value?.config?.bank) {
-    const bank = practiceData.value.config.bank;
+  const cfg = practiceData.value?.config
+  if (cfg && (cfg.category || cfg.subject)) {
     router.push({
       name: "Practice",
       query: {
-        category: bank.category,
-        scope: bank.scope,
-        subject: bank.subject
+        category: cfg.category,
+        scope: cfg.scope,
+        subject: cfg.subject
       }
     });
   } else {

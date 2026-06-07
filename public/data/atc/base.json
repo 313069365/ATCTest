@@ -21099,7 +21099,7 @@
       "C. MH=300°、 ADF=130°",
       "D. MH=300°、 RB=230°"
     ],
-    "answer": ["B. MH=140°、  RB=130°"],
+    "answer": ["B. MH=140°、 RB=130°"],
     "difficulty": 2,
     "shuffle": true,
     "degree": 3,

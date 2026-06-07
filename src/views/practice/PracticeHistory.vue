@@ -91,12 +91,11 @@ onMounted(() => {
 const list = computed(() =>
   pm.sessions.value.slice(0, 50).map(s => {
     const st = pm.getSessionStats(s)
-    const ts = s.meta?.timestamp || s.timestamp
-    const date = ts ? formatRelativeTime(ts) : ''
+    const date = st.timestamp ? formatRelativeTime(st.timestamp) : ''
     const cls = st.accuracy >= 80 ? 'excellent' : st.accuracy >= 60 ? 'good' : 'needs-work'
     const timeStr = formatDuration(st.elapsedSeconds)
     return {
-      id: ts || Math.random(),
+      id: st.timestamp || Math.random(),
       subjectName: t(st.subject) || st.subject,
       date,
       accuracy: st.accuracy,
