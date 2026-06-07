@@ -93,6 +93,12 @@
   --unchecked: #64b5f6;
   --unchecked-light: #e3f2fd;
 
+  /* tag 颜色 */
+  --tag-purple-bg: #ede9fe;
+  --tag-purple-text: #7c3aed;
+  --tag-green-bg: #d4edda;
+  --tag-green-text: #155724;
+
   /* 遮罩 */
   --overlay-white: rgba(255, 255, 255, 0.5);
   --overlay-dark: rgba(0, 0, 0, 0.5);
@@ -171,6 +177,11 @@
   --secondary-light: #3a3520;
   --warning-light: #3a3020;
   --error-light: #3a1a1a;
+
+  --tag-purple-bg: #2e1a4a;
+  --tag-purple-text: #a78bfa;
+  --tag-green-bg: #1a3a2a;
+  --tag-green-text: #6fcf97;
 
   --color-gray-50: #1a1a1e;
   --color-gray-100: #2c2c2c;

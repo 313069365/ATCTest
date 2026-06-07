@@ -45,13 +45,20 @@
       </div>
 
       <div v-if="showExplanation" class="explanation-section">
-        <div class="explanation-header">
-          <span class="material-symbols-outlined">lightbulb</span>
-          <span>{{ t('explanation') }}</span>
+        <div v-if="question?.meta?.topic" class="tag-block">
+          <span class="tag tag-purple">{{ t('topic') }}</span>
+          <span class="tag-text">{{ question.meta.topic }}</span>
         </div>
-        <div class="explanation-content">
-          {{ formattedExplanation }}
+
+        <div class="tag-block">
+          <span class="tag tag-blue">{{ t('explanation') }}</span>
         </div>
+        <div class="explanation-content">{{ formattedExplanation }}</div>
+
+        <div v-if="question?.explanation?.tip" class="tag-block">
+          <span class="tag tag-green">{{ t('tip') }}</span>
+        </div>
+        <div v-if="question?.explanation?.tip" class="tip-content">{{ question.explanation.tip }}</div>
       </div>
     </div>
   </div>
@@ -125,7 +132,8 @@ const {
 
 // 格式化解析内容
 const formattedExplanation = computed(() => {
-  const explanation = props.question?.explanation
+  const raw = props.question?.explanation
+  const explanation = typeof raw === 'string' ? raw : raw?.solution
   if (explanation && explanation.trim()) {
     return explanation
   }
@@ -269,10 +277,57 @@ const handleInput = (e) => {
   font-weight: var(--font-weight-semibold);
 }
 
+.tag-block {
+  margin-bottom: var(--spacing-sm);
+}
+
+.tag {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: var(--font-weight-semibold);
+  line-height: 1.5;
+}
+
+.tag-purple {
+  background: var(--tag-purple-bg);
+  color: var(--tag-purple-text);
+}
+
+.tag-blue {
+  background: var(--primary-light);
+  color: var(--primary);
+}
+
+.tag-green {
+  background: var(--tag-green-bg);
+  color: var(--tag-green-text);
+}
+
+.tag-text {
+  margin-left: var(--spacing-sm);
+  font-size: var(--font-size-md);
+  color: var(--on-surface);
+  line-height: 1.6;
+}
+
 .explanation-content {
   font-size: var(--font-size-md);
   color: var(--on-surface);
   line-height: 1.6;
+}
+
+.tip-content {
+  font-size: var(--font-size-md);
+  color: var(--on-surface);
+  line-height: 1.6;
+}
+
+hr {
+  margin: var(--spacing-sm) 0;
+  border: none;
+  border-top: 1px solid var(--border-color);
 }
 
 .check-answer {

@@ -48,15 +48,27 @@
         "sid": "420000001_2",
         "type": "single",
         "stem": "How many people were on board when the accident happened?",
-        "options": ["A. 1", "B. 2", "C. 3", "D. 4"],
-        "answer": ["D. 4"],
+        "options": [
+          "A. 1",
+          "B. 2",
+          "C. 3",
+          "D. 4"
+        ],
+        "answer": [
+          "D. 4"
+        ],
         "difficulty": 2,
         "shuffle": true,
         "subs": null,
         "explanation": null,
         "translation": {
           "stem": "事故发生时飞机上有多少人？",
-          "options": ["A. 1", "B. 2", "C. 3", "D. 4"]
+          "options": [
+            "A. 1",
+            "B. 2",
+            "C. 3",
+            "D. 4"
+          ]
         }
       },
       {
@@ -69,7 +81,9 @@
           "C.  The takeoff was a normal one.",
           "D.  The takeoff did not look normal."
         ],
-        "answer": ["B.  Something wrong happened after takeoff."],
+        "answer": [
+          "B.  Something wrong happened after takeoff."
+        ],
         "difficulty": 2,
         "shuffle": true,
         "subs": null,
@@ -94,7 +108,9 @@
           "C.  The wreckage was found later.",
           "D.  By observing the lights on the plane."
         ],
-        "answer": ["C.  The wreckage was found later."],
+        "answer": [
+          "C.  The wreckage was found later."
+        ],
         "difficulty": 2,
         "shuffle": true,
         "subs": null,
@@ -119,7 +135,9 @@
           "C.  The pilot was too confident.",
           "D.  The pilot was afraid to fly that aircraft."
         ],
-        "answer": ["A.  The pilot was not qualified for instrument flight."],
+        "answer": [
+          "A.  The pilot was not qualified for instrument flight."
+        ],
         "difficulty": 2,
         "shuffle": true,
         "subs": null,
@@ -135,7 +153,10 @@
         }
       }
     ],
-    "explanation": null,
+    "explanation": {
+      "tip": "",
+      "solution": ""
+    },
     "updated_at": "2014-08-25",
     "status": "valid",
     "translation": {
@@ -170,7 +191,9 @@
           "C.  they want to buy some vegetable after work",
           "D.  none of the above"
         ],
-        "answer": ["A.  they have little transmission discipline"],
+        "answer": [
+          "A.  they have little transmission discipline"
+        ],
         "difficulty": 2,
         "shuffle": false,
         "subs": null,
@@ -216,15 +239,27 @@
         "sid": "420000002_3",
         "type": "single",
         "stem": "There are ______ airports with Category Ⅱ ILS approaches in China at present.",
-        "options": ["A. 8", "B. 3", "C. 2", "D.  many"],
-        "answer": ["C. 2"],
+        "options": [
+          "A. 8",
+          "B. 3",
+          "C. 2",
+          "D.  many"
+        ],
+        "answer": [
+          "C. 2"
+        ],
         "difficulty": 2,
         "shuffle": true,
         "subs": null,
         "explanation": null,
         "translation": {
           "stem": "中国目前有______个机场具备 II 类 ILS 进近。",
-          "options": ["A. 8", "B. 3", "C. 2", "D. 很多"]
+          "options": [
+            "A. 8",
+            "B. 3",
+            "C. 2",
+            "D. 很多"
+          ]
         }
       },
       {
@@ -237,7 +272,9 @@
           "C.  radar vectors is provided somehow",
           "D.  all of the above"
         ],
-        "answer": ["A.  enormous improvements has been made"],
+        "answer": [
+          "A.  enormous improvements has been made"
+        ],
         "difficulty": 2,
         "shuffle": false,
         "subs": null,
@@ -262,7 +299,9 @@
           "C.  Many controllers lack terrain awareness",
           "D.  Satellite communication will come into use quickly"
         ],
-        "answer": ["D.  Satellite communication will come into use quickly"],
+        "answer": [
+          "D.  Satellite communication will come into use quickly"
+        ],
         "difficulty": 2,
         "shuffle": true,
         "subs": null,
@@ -278,7 +317,10 @@
         }
       }
     ],
-    "explanation": null,
+    "explanation": {
+      "tip": "",
+      "solution": ""
+    },
     "updated_at": "2014-08-25",
     "status": "valid",
     "translation": {
@@ -313,7 +355,9 @@
           "C.  controllers has difficulty in understanding the system they are monitoring",
           "D.  both A and C"
         ],
-        "answer": ["D.  both A and C"],
+        "answer": [
+          "D.  both A and C"
+        ],
         "difficulty": "2",
         "shuffle": false,
         "subs": null,
@@ -365,7 +409,9 @@
           "C.  can find out resolution much eelier",
           "D.  all of the above"
         ],
-        "answer": ["D.  all of the above"],
+        "answer": [
+          "D.  all of the above"
+        ],
         "difficulty": "2",
         "shuffle": false,
         "subs": null,
@@ -390,7 +436,9 @@
           "C.  cope with the capacity barrier",
           "D.  identify and predict source of error"
         ],
-        "answer": ["C.  cope with the capacity barrier"],
+        "answer": [
+          "C.  cope with the capacity barrier"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -415,7 +463,9 @@
           "C.  Human-machine system",
           "D.  FAA's Automated En-Route ATC programme"
         ],
-        "answer": ["B.  Artificial intelligence techniques"],
+        "answer": [
+          "B.  Artificial intelligence techniques"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -431,7 +481,10 @@
         }
       }
     ],
-    "explanation": null,
+    "explanation": {
+      "tip": "",
+      "solution": ""
+    },
     "updated_at": null,
     "status": "valid",
     "translation": {
@@ -466,7 +519,9 @@
           "C.  No precipitation.",
           "D.  Not mentioned in the passage."
         ],
-        "answer": ["A.  Light to medium precipitation."],
+        "answer": [
+          "A.  Light to medium precipitation."
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -491,7 +546,9 @@
           "C.  Stars and the moon.",
           "D.  Clouds."
         ],
-        "answer": ["A.  Nothing but clear sky and stars."],
+        "answer": [
+          "A.  Nothing but clear sky and stars."
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -543,14 +600,21 @@
           "C.  the first officer",
           "D.  None of the above"
         ],
-        "answer": ["C.  the first officer"],
+        "answer": [
+          "C.  the first officer"
+        ],
         "difficulty": "2",
         "shuffle": false,
         "subs": null,
         "explanation": null,
         "translation": {
           "stem": "谁通过客舱广播通知乘务员立即就座？",
-          "options": ["A. 乘务长", "B. 机长", "C. 副驾驶", "D. 以上都不对"]
+          "options": [
+            "A. 乘务长",
+            "B. 机长",
+            "C. 副驾驶",
+            "D. 以上都不对"
+          ]
         }
       },
       {
@@ -563,7 +627,9 @@
           "C.  no passenger",
           "D. Not mentioned in the passage"
         ],
-        "answer": ["C.  no passenger"],
+        "answer": [
+          "C.  no passenger"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -579,7 +645,10 @@
         }
       }
     ],
-    "explanation": null,
+    "explanation": {
+      "tip": "",
+      "solution": ""
+    },
     "updated_at": null,
     "status": "valid",
     "translation": {
@@ -614,7 +683,9 @@
           "C.  amphibians",
           "D.  seaplanes"
         ],
-        "answer": ["D.  seaplanes"],
+        "answer": [
+          "D.  seaplanes"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -639,7 +710,9 @@
           "C.  floatplane",
           "D.  flying boat"
         ],
-        "answer": ["B.  amphibian"],
+        "answer": [
+          "B.  amphibian"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -664,7 +737,9 @@
           "C.  amphibians",
           "D.  floatplanes"
         ],
-        "answer": ["D.  floatplanes"],
+        "answer": [
+          "D.  floatplanes"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -689,7 +764,9 @@
           "C.  is without any difference",
           "D.  none of them"
         ],
-        "answer": ["A.  is almost in the same manner"],
+        "answer": [
+          "A.  is almost in the same manner"
+        ],
         "difficulty": "2",
         "shuffle": false,
         "subs": null,
@@ -732,7 +809,10 @@
         }
       }
     ],
-    "explanation": null,
+    "explanation": {
+      "tip": "",
+      "solution": ""
+    },
     "updated_at": null,
     "status": "valid",
     "translation": {
@@ -761,45 +841,81 @@
         "sid": "420000006_1",
         "type": "single",
         "stem": "If the stall speed in the landing configuration at maximum gross weight is 100 knots, the aircraft belongs to Category ______ ．",
-        "options": ["A.  C", "B.  B", "C.  D", "D.  E"],
-        "answer": ["A.  C"],
+        "options": [
+          "A.  C",
+          "B.  B",
+          "C.  D",
+          "D.  E"
+        ],
+        "answer": [
+          "A.  C"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
         "explanation": null,
         "translation": {
           "stem": "如果最大总重着陆构型下的失速速度为 100 节，则该飞机属于______类。",
-          "options": ["A. C", "B. B", "C. D", "D. E"]
+          "options": [
+            "A. C",
+            "B. B",
+            "C. D",
+            "D. E"
+          ]
         }
       },
       {
         "sid": "420000006_2",
         "type": "single",
         "stem": "If a category B aircraft circles to land at 120 knots, it should use the approach Category ______ minimums.",
-        "options": ["A.  E", "B.  C", "C.  D", "D.  B"],
-        "answer": ["D.  B"],
+        "options": [
+          "A.  E",
+          "B.  C",
+          "C.  D",
+          "D.  B"
+        ],
+        "answer": [
+          "D.  B"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
         "explanation": null,
         "translation": {
           "stem": "如果一架 B 类飞机以 120 节的速度盘旋着陆，则应使用______类进近最低标准。",
-          "options": ["A. E", "B. C", "C. D", "D. B"]
+          "options": [
+            "A. E",
+            "B. C",
+            "C. D",
+            "D. B"
+          ]
         }
       },
       {
         "sid": "420000006_3",
         "type": "single",
         "stem": "Category B aircraft require ______ visibility than Category C aircraft do.",
-        "options": ["A.  less", "B.  more", "C.  the same", "D.  None of them"],
-        "answer": ["A.  less"],
+        "options": [
+          "A.  less",
+          "B.  more",
+          "C.  the same",
+          "D.  None of them"
+        ],
+        "answer": [
+          "A.  less"
+        ],
         "difficulty": "2",
         "shuffle": false,
         "subs": null,
         "explanation": null,
         "translation": {
           "stem": "B 类飞机比 C 类飞机需要______能见度。",
-          "options": ["A. 更少", "B. 更多", "C. 相同", "D. 以上都不对"]
+          "options": [
+            "A. 更少",
+            "B. 更多",
+            "C. 相同",
+            "D. 以上都不对"
+          ]
         }
       },
       {
@@ -812,7 +928,9 @@
           "C.  safeguarding the aircraft concerned",
           "D.  All of the above"
         ],
-        "answer": ["D.  All of the above"],
+        "answer": [
+          "D.  All of the above"
+        ],
         "difficulty": "2",
         "shuffle": false,
         "subs": null,
@@ -837,7 +955,9 @@
           "C.  A go-no-go decision must be made on reaching MAP",
           "D.  A go-no-go decision must be based on DH or MDA"
         ],
-        "answer": ["A.  A go-no-go decision must be made on reaching DH"],
+        "answer": [
+          "A.  A go-no-go decision must be made on reaching DH"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -853,7 +973,10 @@
         }
       }
     ],
-    "explanation": null,
+    "explanation": {
+      "tip": "",
+      "solution": ""
+    },
     "updated_at": null,
     "status": "valid",
     "translation": {
@@ -888,7 +1011,9 @@
           "C.  terminal plates",
           "D.  all of them"
         ],
-        "answer": ["D.  all of them"],
+        "answer": [
+          "D.  all of them"
+        ],
         "difficulty": "2",
         "shuffle": false,
         "subs": null,
@@ -913,63 +1038,109 @@
           "C.  AFM",
           "D.  none of them"
         ],
-        "answer": ["B.  aeronautical publication"],
+        "answer": [
+          "B.  aeronautical publication"
+        ],
         "difficulty": "2",
         "shuffle": false,
         "subs": null,
         "explanation": null,
         "translation": {
           "stem": "飞行员可以通过阅读______来确定进近类型。",
-          "options": ["A. 终端图", "B. 航空出版物", "C. AFM", "D. 以上都不对"]
+          "options": [
+            "A. 终端图",
+            "B. 航空出版物",
+            "C. AFM",
+            "D. 以上都不对"
+          ]
         }
       },
       {
         "sid": "420000007_3",
         "type": "single",
         "stem": "Which of the following belongs to non-precision approach?",
-        "options": ["A.  ASR", "B.  ILS", "C.  PAR", "D.  MLS"],
-        "answer": ["A.  ASR"],
+        "options": [
+          "A.  ASR",
+          "B.  ILS",
+          "C.  PAR",
+          "D.  MLS"
+        ],
+        "answer": [
+          "A.  ASR"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
         "explanation": null,
         "translation": {
           "stem": "以下哪项属于非精密进近？",
-          "options": ["A. ASR", "B. ILS", "C. PAR", "D. MLS"]
+          "options": [
+            "A. ASR",
+            "B. ILS",
+            "C. PAR",
+            "D. MLS"
+          ]
         }
       },
       {
         "sid": "420000007_4",
         "type": "single",
         "stem": "Which of the following is used most widely at present?",
-        "options": ["A.  ASR", "B.  PAR", "C.  ILS", "D.  MLS"],
-        "answer": ["C.  ILS"],
+        "options": [
+          "A.  ASR",
+          "B.  PAR",
+          "C.  ILS",
+          "D.  MLS"
+        ],
+        "answer": [
+          "C.  ILS"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
         "explanation": null,
         "translation": {
           "stem": "目前以下哪项使用最广泛？",
-          "options": ["A. ASR", "B. PAR", "C. ILS", "D. MLS"]
+          "options": [
+            "A. ASR",
+            "B. PAR",
+            "C. ILS",
+            "D. MLS"
+          ]
         }
       },
       {
         "sid": "420000007_5",
         "type": "single",
         "stem": "Which ILS category gives DH of not less than 100ft?",
-        "options": ["A.  CAT Ⅰ", "B.  CAT Ⅱ", "C.  CAT Ⅲ", "D.  All of them"],
-        "answer": ["B.  CAT Ⅱ"],
+        "options": [
+          "A.  CAT Ⅰ",
+          "B.  CAT Ⅱ",
+          "C.  CAT Ⅲ",
+          "D.  All of them"
+        ],
+        "answer": [
+          "B.  CAT Ⅱ"
+        ],
         "difficulty": "2",
         "shuffle": false,
         "subs": null,
         "explanation": null,
         "translation": {
           "stem": "哪类 ILS 的决断高不低于 100 英尺？",
-          "options": ["A. CAT Ⅰ", "B. CAT Ⅱ", "C. CAT Ⅲ", "D. 以上所有"]
+          "options": [
+            "A. CAT Ⅰ",
+            "B. CAT Ⅱ",
+            "C. CAT Ⅲ",
+            "D. 以上所有"
+          ]
         }
       }
     ],
-    "explanation": null,
+    "explanation": {
+      "tip": "",
+      "solution": ""
+    },
     "updated_at": null,
     "status": "valid",
     "translation": {
@@ -1004,7 +1175,9 @@
           "C.  expand the ATC system",
           "D.  put them down on paper"
         ],
-        "answer": ["B.  simplify the clearance"],
+        "answer": [
+          "B.  simplify the clearance"
+        ],
         "difficulty": 2,
         "shuffle": true,
         "subs": null,
@@ -1029,7 +1202,9 @@
           "C.  be a competent pilot",
           "D.  both A and B"
         ],
-        "answer": ["D.  both A and B"],
+        "answer": [
+          "D.  both A and B"
+        ],
         "difficulty": 2,
         "shuffle": false,
         "subs": null,
@@ -1054,7 +1229,9 @@
           "C.  is time-consuming",
           "D.  should be used as long as possible"
         ],
-        "answer": ["D.  should be used as long as possible"],
+        "answer": [
+          "D.  should be used as long as possible"
+        ],
         "difficulty": 2,
         "shuffle": true,
         "subs": null,
@@ -1079,7 +1256,9 @@
           "C.  keep silent",
           "D.  either A or B"
         ],
-        "answer": ["B.  file it in the flight plan"],
+        "answer": [
+          "B.  file it in the flight plan"
+        ],
         "difficulty": 2,
         "shuffle": false,
         "subs": null,
@@ -1104,18 +1283,28 @@
           "C.  SIDs",
           "D.  Transition Routes"
         ],
-        "answer": ["C.  SIDs"],
+        "answer": [
+          "C.  SIDs"
+        ],
         "difficulty": 2,
         "shuffle": true,
         "subs": null,
         "explanation": null,
         "translation": {
           "stem": "以下哪项是最适合本文的标题？",
-          "options": ["A. STAR", "B. STAR 和 SID", "C. SID", "D. 过渡航线"]
+          "options": [
+            "A. STAR",
+            "B. STAR 和 SID",
+            "C. SID",
+            "D. 过渡航线"
+          ]
         }
       }
     ],
-    "explanation": null,
+    "explanation": {
+      "tip": "",
+      "solution": ""
+    },
     "updated_at": "2014-08-25",
     "status": "valid",
     "translation": {
@@ -1150,7 +1339,9 @@
           "C.  The sky was scattered",
           "D.  The sky was overcast and gray"
         ],
-        "answer": ["D.  The sky was overcast and gray"],
+        "answer": [
+          "D.  The sky was overcast and gray"
+        ],
         "difficulty": 2,
         "shuffle": true,
         "subs": null,
@@ -1175,7 +1366,9 @@
           "C.  His plane was in a diving turn",
           "D.  Not mentioned in the passage"
         ],
-        "answer": ["B.  A change of air and engine noise"],
+        "answer": [
+          "B.  A change of air and engine noise"
+        ],
         "difficulty": 2,
         "shuffle": true,
         "subs": null,
@@ -1200,7 +1393,9 @@
           "C.  about 6000m",
           "D.  about 1600m"
         ],
-        "answer": ["A.  about 6000ft"],
+        "answer": [
+          "A.  about 6000ft"
+        ],
         "difficulty": 2,
         "shuffle": true,
         "subs": null,
@@ -1252,7 +1447,9 @@
           "C.  Because the pilot did not drink alcohol before flight",
           "D.  Because the pilot had been well trained"
         ],
-        "answer": ["B.  Because he was not aware that he had lost his horizon"],
+        "answer": [
+          "B.  Because he was not aware that he had lost his horizon"
+        ],
         "difficulty": 2,
         "shuffle": true,
         "subs": null,
@@ -1268,7 +1465,10 @@
         }
       }
     ],
-    "explanation": null,
+    "explanation": {
+      "tip": "",
+      "solution": ""
+    },
     "updated_at": "2014-08-25",
     "status": "valid",
     "translation": {
@@ -1303,7 +1503,9 @@
           "C.  less net accelerating force",
           "D.  all of the above"
         ],
-        "answer": ["D.  all of the above"],
+        "answer": [
+          "D.  all of the above"
+        ],
         "difficulty": "2",
         "shuffle": false,
         "subs": null,
@@ -1328,7 +1530,9 @@
           "C.  greater indicated airspeed for takeoff as",
           "D.  all of the above"
         ],
-        "answer": ["B.  greater true airspeed for takeoff as"],
+        "answer": [
+          "B.  greater true airspeed for takeoff as"
+        ],
         "difficulty": "2",
         "shuffle": false,
         "subs": null,
@@ -1353,7 +1557,9 @@
           "C.  stays",
           "D.  depends much on the type of power plants"
         ],
-        "answer": ["B.  decreases"],
+        "answer": [
+          "B.  decreases"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -1378,14 +1584,21 @@
           "C.  density altitude",
           "D.  high altitude"
         ],
-        "answer": ["C.  density altitude"],
+        "answer": [
+          "C.  density altitude"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
         "explanation": null,
         "translation": {
           "stem": "相对来说，______是起飞滑跑的最终决定因素。",
-          "options": ["A. 气压高度", "B. 环境温度", "C. 密度高度", "D. 高海拔"]
+          "options": [
+            "A. 气压高度",
+            "B. 环境温度",
+            "C. 密度高度",
+            "D. 高海拔"
+          ]
         }
       },
       {
@@ -1416,7 +1629,10 @@
         }
       }
     ],
-    "explanation": null,
+    "explanation": {
+      "tip": "",
+      "solution": ""
+    },
     "updated_at": null,
     "status": "valid",
     "translation": {
@@ -1451,7 +1667,9 @@
           "C.  a 20 percent increase in landing distance",
           "D.  a 10 percent increase in landing speed"
         ],
-        "answer": ["A.  a 40 percent increase in landing roll"],
+        "answer": [
+          "A.  a 40 percent increase in landing roll"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -1476,29 +1694,48 @@
           "C.  calibrated airspeed",
           "D.  indicated airspeed"
         ],
-        "answer": ["B.  ground speed"],
+        "answer": [
+          "B.  ground speed"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
         "explanation": null,
         "translation": {
           "stem": "风对着陆距离的主要影响源于飞机接地时______的变化。",
-          "options": ["A. 真空速", "B. 地速", "C. 校准空速", "D. 指示空速"]
+          "options": [
+            "A. 真空速",
+            "B. 地速",
+            "C. 校准空速",
+            "D. 指示空速"
+          ]
         }
       },
       {
         "sid": "420000011_3",
         "type": "single",
         "stem": "If an aircraft landing at 150 knots in calm wind uses 1000ft to make a full stop, it will require ______ ________ft to stop in 15 knots headwind.",
-        "options": ["A. 1190", "B. 810", "C. 1210", "D. 790"],
-        "answer": ["B. 810"],
+        "options": [
+          "A. 1190",
+          "B. 810",
+          "C. 1210",
+          "D. 790"
+        ],
+        "answer": [
+          "B. 810"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
         "explanation": null,
         "translation": {
           "stem": "如果一架飞机在静风中以 150 节着陆需要 1000 英尺完全停下，那么在 15 节顶风中停下需要______英尺。",
-          "options": ["A. 1190", "B. 810", "C. 1210", "D. 790"]
+          "options": [
+            "A. 1190",
+            "B. 810",
+            "C. 1210",
+            "D. 790"
+          ]
         }
       },
       {
@@ -1511,7 +1748,9 @@
           "C.  braking friction is increased",
           "D.  landing speed is greater"
         ],
-        "answer": ["D.  landing speed is greater"],
+        "answer": [
+          "D.  landing speed is greater"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -1536,18 +1775,28 @@
           "C.  high rate of descent",
           "D.  All of the above"
         ],
-        "answer": ["D.  All of the above"],
+        "answer": [
+          "D.  All of the above"
+        ],
         "difficulty": "2",
         "shuffle": false,
         "subs": null,
         "explanation": null,
         "translation": {
           "stem": "低于最低安全速度着陆可能导致______。",
-          "options": ["A. 操纵困难", "B. 失速", "C. 高下降率", "D. 以上所有"]
+          "options": [
+            "A. 操纵困难",
+            "B. 失速",
+            "C. 高下降率",
+            "D. 以上所有"
+          ]
         }
       }
     ],
-    "explanation": null,
+    "explanation": {
+      "tip": "",
+      "solution": ""
+    },
     "updated_at": null,
     "status": "valid",
     "translation": {
@@ -1582,14 +1831,21 @@
           "C.  change",
           "D.  maintain"
         ],
-        "answer": ["A.  increases"],
+        "answer": [
+          "A.  increases"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
         "explanation": null,
         "translation": {
           "stem": "一点上方的压力随高度降低而______。",
-          "options": ["A. 增加", "B. 减小", "C. 变化", "D. 保持不变"]
+          "options": [
+            "A. 增加",
+            "B. 减小",
+            "C. 变化",
+            "D. 保持不变"
+          ]
         }
       },
       {
@@ -1602,14 +1858,21 @@
           "C.  changes",
           "D.  maintain"
         ],
-        "answer": ["B.  increases"],
+        "answer": [
+          "B.  increases"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
         "explanation": null,
         "translation": {
           "stem": "压力递减率随高度降低而______。",
-          "options": ["A. 减小", "B. 增加", "C. 变化", "D. 保持不变"]
+          "options": [
+            "A. 减小",
+            "B. 增加",
+            "C. 变化",
+            "D. 保持不变"
+          ]
         }
       },
       {
@@ -1622,14 +1885,21 @@
           "C.  less than",
           "D.  not stated here"
         ],
-        "answer": ["C.  less than"],
+        "answer": [
+          "C.  less than"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
         "explanation": null,
         "translation": {
           "stem": "暖空气中压力的递减率______冷空气中的递减率。",
-          "options": ["A. 大于", "B. 相同", "C. 小于", "D. 此处未说明"]
+          "options": [
+            "A. 大于",
+            "B. 相同",
+            "C. 小于",
+            "D. 此处未说明"
+          ]
         }
       },
       {
@@ -1642,14 +1912,21 @@
           "C.  the same air as",
           "D.  none of them"
         ],
-        "answer": ["A.  more air than"],
+        "answer": [
+          "A.  more air than"
+        ],
         "difficulty": "2",
         "shuffle": false,
         "subs": null,
         "explanation": null,
         "translation": {
           "stem": "当空气被压缩时，给定体积比未压缩时含有______空气。",
-          "options": ["A. 更多", "B. 更少", "C. 相同", "D. 以上都不对"]
+          "options": [
+            "A. 更多",
+            "B. 更少",
+            "C. 相同",
+            "D. 以上都不对"
+          ]
         }
       },
       {
@@ -1662,18 +1939,28 @@
           "C.  the same as",
           "D.  none of the above"
         ],
-        "answer": ["A.  greater than"],
+        "answer": [
+          "A.  greater than"
+        ],
         "difficulty": "2",
         "shuffle": false,
         "subs": null,
         "explanation": null,
         "translation": {
           "stem": "如果温度相同，稠密空气的总能量______较稀薄空气的总能量。",
-          "options": ["A. 大于", "B. 小于", "C. 等于", "D. 以上都不对"]
+          "options": [
+            "A. 大于",
+            "B. 小于",
+            "C. 等于",
+            "D. 以上都不对"
+          ]
         }
       }
     ],
-    "explanation": null,
+    "explanation": {
+      "tip": "",
+      "solution": ""
+    },
     "updated_at": null,
     "status": "valid",
     "translation": {
@@ -1708,14 +1995,21 @@
           "C.  send short messages",
           "D.  all of the above"
         ],
-        "answer": ["D.  all of the above"],
+        "answer": [
+          "D.  all of the above"
+        ],
         "difficulty": "2",
         "shuffle": false,
         "subs": null,
         "explanation": null,
         "translation": {
           "stem": "根据报道，到 2009 年底乘客可以在飞机上______。",
-          "options": ["A. 打电话", "B. 上网", "C. 发短信", "D. 以上所有"]
+          "options": [
+            "A. 打电话",
+            "B. 上网",
+            "C. 发短信",
+            "D. 以上所有"
+          ]
         }
       },
       {
@@ -1728,7 +2022,9 @@
           "C.  after the Beijing Olympics",
           "D.  on two aircrafts"
         ],
-        "answer": ["A.  on two routes"],
+        "answer": [
+          "A.  on two routes"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -1753,7 +2049,9 @@
           "C.  when the plane is flying at less than 3,000 m in above sea level",
           "D.  when the plane is flying at 4,000 m above sea level"
         ],
-        "answer": ["D.  when the plane is flying at 4,000 m above sea level"],
+        "answer": [
+          "D.  when the plane is flying at 4,000 m above sea level"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -1778,7 +2076,9 @@
           "C.  higher cell phone fee",
           "D.  lower cell phone fee"
         ],
-        "answer": ["C.  higher cell phone fee"],
+        "answer": [
+          "C.  higher cell phone fee"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -1803,7 +2103,9 @@
           "C.  Deer Jet airlines",
           "D.  Shenzhen airlines."
         ],
-        "answer": ["D.  Shenzhen airlines."],
+        "answer": [
+          "D.  Shenzhen airlines."
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -1819,7 +2121,10 @@
         }
       }
     ],
-    "explanation": null,
+    "explanation": {
+      "tip": "",
+      "solution": ""
+    },
     "updated_at": null,
     "status": "valid",
     "translation": {
@@ -1854,14 +2159,21 @@
           "C.  ailerons",
           "D.  slats"
         ],
-        "answer": ["C.  ailerons"],
+        "answer": [
+          "C.  ailerons"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
         "explanation": null,
         "translation": {
           "stem": "主操纵系统包括______。",
-          "options": ["A. 襟翼", "B. 调整片", "C. 副翼", "D. 缝翼"]
+          "options": [
+            "A. 襟翼",
+            "B. 调整片",
+            "C. 副翼",
+            "D. 缝翼"
+          ]
         }
       },
       {
@@ -1874,7 +2186,9 @@
           "C.  yaw to the right",
           "D.  A and B"
         ],
-        "answer": ["D.  A and B"],
+        "answer": [
+          "D.  A and B"
+        ],
         "difficulty": "2",
         "shuffle": false,
         "subs": null,
@@ -1899,7 +2213,9 @@
           "C.  The elevator will move up",
           "D.  The flap will move up"
         ],
-        "answer": ["C.  The elevator will move up"],
+        "answer": [
+          "C.  The elevator will move up"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -1924,7 +2240,9 @@
           "C.  A low pressure area will form on the left side",
           "D.  The tail will move to the left"
         ],
-        "answer": ["B.  The rudder will move to the right"],
+        "answer": [
+          "B.  The rudder will move to the right"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -1949,7 +2267,9 @@
           "C.  Rudder, yaw, vertical axis, turn",
           "D.  roll bank aileron, turn, vertical axis"
         ],
-        "answer": ["B.  Pitch, lateral axis, elevator, descend, turn"],
+        "answer": [
+          "B.  Pitch, lateral axis, elevator, descend, turn"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -1965,7 +2285,10 @@
         }
       }
     ],
-    "explanation": null,
+    "explanation": {
+      "tip": "",
+      "solution": ""
+    },
     "updated_at": null,
     "status": "valid",
     "translation": {
@@ -2000,7 +2323,9 @@
           "C.  An appropriate flying shape",
           "D.  All of them"
         ],
-        "answer": ["D.  All of them"],
+        "answer": [
+          "D.  All of them"
+        ],
         "difficulty": 2,
         "shuffle": false,
         "subs": null,
@@ -2019,15 +2344,27 @@
         "sid": "420000015_2",
         "type": "single",
         "stem": "The forces that act on a parking airplane include ______ ．",
-        "options": ["A.  lift", "B.  thrust", "C.  weight", "D.  drag"],
-        "answer": ["C.  weight"],
+        "options": [
+          "A.  lift",
+          "B.  thrust",
+          "C.  weight",
+          "D.  drag"
+        ],
+        "answer": [
+          "C.  weight"
+        ],
         "difficulty": 2,
         "shuffle": true,
         "subs": null,
         "explanation": null,
         "translation": {
           "stem": "作用在停放的飞机上的力包括______。",
-          "options": ["A. 升力", "B. 推力", "C. 重力", "D. 阻力"]
+          "options": [
+            "A. 升力",
+            "B. 推力",
+            "C. 重力",
+            "D. 阻力"
+          ]
         }
       },
       {
@@ -2040,7 +2377,9 @@
           "C.  the airplane can create lift",
           "D.  the airplane has airfoil"
         ],
-        "answer": ["A.  weather and atmospheric factor affect flight"],
+        "answer": [
+          "A.  weather and atmospheric factor affect flight"
+        ],
         "difficulty": 2,
         "shuffle": true,
         "subs": null,
@@ -2065,7 +2404,9 @@
           "C.  turn to the right or the left",
           "D.  maintain former attitude"
         ],
-        "answer": ["B.  increase lift and decrease landing speed"],
+        "answer": [
+          "B.  increase lift and decrease landing speed"
+        ],
         "difficulty": 2,
         "shuffle": true,
         "subs": null,
@@ -2090,7 +2431,9 @@
           "C.  increase airspeed",
           "D.  decrease airspeed"
         ],
-        "answer": ["B.  meet tailwind"],
+        "answer": [
+          "B.  meet tailwind"
+        ],
         "difficulty": 2,
         "shuffle": true,
         "subs": null,
@@ -2106,7 +2449,10 @@
         }
       }
     ],
-    "explanation": null,
+    "explanation": {
+      "tip": "",
+      "solution": ""
+    },
     "updated_at": "2014-08-25",
     "status": "valid",
     "translation": {
@@ -2141,7 +2487,9 @@
           "C.  thrust must be equal to drag",
           "D.  lift must be equal to weight"
         ],
-        "answer": ["C.  thrust must be equal to drag"],
+        "answer": [
+          "C.  thrust must be equal to drag"
+        ],
         "difficulty": 2,
         "shuffle": true,
         "subs": null,
@@ -2166,7 +2514,9 @@
           "C.  the aircraft must maintain a nose down attitude",
           "D.  trust must be greater than drag"
         ],
-        "answer": ["D.  trust must be greater than drag"],
+        "answer": [
+          "D.  trust must be greater than drag"
+        ],
         "difficulty": 2,
         "shuffle": true,
         "subs": null,
@@ -2191,7 +2541,9 @@
           "C.  lift is greater than weight",
           "D.  it must speed up"
         ],
-        "answer": ["B.  lift is less than weight"],
+        "answer": [
+          "B.  lift is less than weight"
+        ],
         "difficulty": 2,
         "shuffle": true,
         "subs": null,
@@ -2210,15 +2562,27 @@
         "sid": "420000016_4",
         "type": "single",
         "stem": "How many speed regimes are mentioned in the passage?",
-        "options": ["A. 1", "B. 2", "C. 3", "D. 4"],
-        "answer": ["C. 3"],
+        "options": [
+          "A. 1",
+          "B. 2",
+          "C. 3",
+          "D. 4"
+        ],
+        "answer": [
+          "C. 3"
+        ],
         "difficulty": 2,
         "shuffle": true,
         "subs": null,
         "explanation": null,
         "translation": {
           "stem": "文中提到了多少种速度范围？",
-          "options": ["A. 1", "B. 2", "C. 3", "D. 4"]
+          "options": [
+            "A. 1",
+            "B. 2",
+            "C. 3",
+            "D. 4"
+          ]
         }
       },
       {
@@ -2231,7 +2595,9 @@
           "C.  it should increase its angle of attack",
           "D.  it must increase thrust"
         ],
-        "answer": ["A.  the pilot must coordinate angle of attack and thrust"],
+        "answer": [
+          "A.  the pilot must coordinate angle of attack and thrust"
+        ],
         "difficulty": 2,
         "shuffle": true,
         "subs": null,
@@ -2247,7 +2613,10 @@
         }
       }
     ],
-    "explanation": null,
+    "explanation": {
+      "tip": "",
+      "solution": ""
+    },
     "updated_at": "2014-08-25",
     "status": "valid",
     "translation": {
@@ -2282,7 +2651,9 @@
           "C.  check along the intended takeoff path",
           "D.  observe the swimmers along the path"
         ],
-        "answer": ["B.  make sure it is clear along the intended takeoff path"],
+        "answer": [
+          "B.  make sure it is clear along the intended takeoff path"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -2307,7 +2678,9 @@
           "C.  swimmers",
           "D.  hazardous objects or obstructions"
         ],
-        "answer": ["B.  sailboats"],
+        "answer": [
+          "B.  sailboats"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -2332,7 +2705,9 @@
           "C.  surface friction",
           "D.  all of them"
         ],
-        "answer": ["B.  hydrodynamic drag"],
+        "answer": [
+          "B.  hydrodynamic drag"
+        ],
         "difficulty": "2",
         "shuffle": false,
         "subs": null,
@@ -2357,7 +2732,9 @@
           "C.  density altitude",
           "D.  all of them"
         ],
-        "answer": ["D.  all of them"],
+        "answer": [
+          "D.  all of them"
+        ],
         "difficulty": "2",
         "shuffle": false,
         "subs": null,
@@ -2382,18 +2759,28 @@
           "C.  normal",
           "D.  not stated here"
         ],
-        "answer": ["A.  less than normal"],
+        "answer": [
+          "A.  less than normal"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
         "explanation": null,
         "translation": {
           "stem": "重载的水上飞机在高密度高度下起飞需要______起飞滑跑距离。",
-          "options": ["A. 小于正常", "B. 大于正常", "C. 正常", "D. 此处未说明"]
+          "options": [
+            "A. 小于正常",
+            "B. 大于正常",
+            "C. 正常",
+            "D. 此处未说明"
+          ]
         }
       }
     ],
-    "explanation": null,
+    "explanation": {
+      "tip": "",
+      "solution": ""
+    },
     "updated_at": null,
     "status": "valid",
     "translation": {
@@ -2428,7 +2815,9 @@
           "C.  climbing at 200 ft per nautical mile",
           "D.  all of them"
         ],
-        "answer": ["A.  climbing to 400 ft above the airport elevation"],
+        "answer": [
+          "A.  climbing to 400 ft above the airport elevation"
+        ],
         "difficulty": "2",
         "shuffle": false,
         "subs": null,
@@ -2453,7 +2842,9 @@
           "C.  the greater than 200 ft per nautical mile slope",
           "D.  the 48 ft per nautical mile slope"
         ],
-        "answer": ["B.  the 150 ft per nautical mile slope"],
+        "answer": [
+          "B.  the 150 ft per nautical mile slope"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -2505,7 +2896,9 @@
           "C.  the same as normal",
           "D.  as specified"
         ],
-        "answer": ["A.  higher than normal"],
+        "answer": [
+          "A.  higher than normal"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -2530,7 +2923,9 @@
           "C.  must be within the specified visibility minimum",
           "D.  mustn't be below the specified ceiling"
         ],
-        "answer": ["C.  must be within the specified visibility minimum"],
+        "answer": [
+          "C.  must be within the specified visibility minimum"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -2546,7 +2941,10 @@
         }
       }
     ],
-    "explanation": null,
+    "explanation": {
+      "tip": "",
+      "solution": ""
+    },
     "updated_at": null,
     "status": "valid",
     "translation": {
@@ -2581,14 +2979,21 @@
           "C.  decreases",
           "D.  all of the above"
         ],
-        "answer": ["C.  decreases"],
+        "answer": [
+          "C.  decreases"
+        ],
         "difficulty": "2",
         "shuffle": false,
         "subs": null,
         "explanation": null,
         "translation": {
           "stem": "空气在大气中上升和膨胀时，温度通常______。",
-          "options": ["A. 保持不变", "B. 升高", "C. 降低", "D. 以上所有"]
+          "options": [
+            "A. 保持不变",
+            "B. 升高",
+            "C. 降低",
+            "D. 以上所有"
+          ]
         }
       },
       {
@@ -2622,15 +3027,27 @@
         "sid": "420000019_3",
         "type": "single",
         "stem": "The air layer acts as a ______ , keeping weather and pollutants trapped.",
-        "options": ["A.  lid", "B.  cover", "C.  top", "D.  all above"],
-        "answer": ["D.  all above"],
+        "options": [
+          "A.  lid",
+          "B.  cover",
+          "C.  top",
+          "D.  all above"
+        ],
+        "answer": [
+          "D.  all above"
+        ],
         "difficulty": "2",
         "shuffle": false,
         "subs": null,
         "explanation": null,
         "translation": {
           "stem": "该空气层就像一个______，将天气和污染物困在下面。",
-          "options": ["A. 盖子", "B. 覆盖物", "C. 顶部", "D. 以上所有"]
+          "options": [
+            "A. 盖子",
+            "B. 覆盖物",
+            "C. 顶部",
+            "D. 以上所有"
+          ]
         }
       },
       {
@@ -2643,7 +3060,9 @@
           "C. The high relative temperature of the air",
           "D. The low relative temperature of the air"
         ],
-        "answer": ["B. The high relative humidity of the air"],
+        "answer": [
+          "B. The high relative humidity of the air"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -2686,7 +3105,10 @@
         }
       }
     ],
-    "explanation": null,
+    "explanation": {
+      "tip": "",
+      "solution": ""
+    },
     "updated_at": null,
     "status": "valid",
     "translation": {
@@ -2721,14 +3143,21 @@
           "C.  continuously",
           "D.  properly"
         ],
-        "answer": ["B.  carefully"],
+        "answer": [
+          "B.  carefully"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
         "explanation": null,
         "translation": {
           "stem": "在“……飞行员应仔细审查细节以决定最佳飞行航线”中，“scrupulously” 的意思是______。",
-          "options": ["A. 冗长地", "B. 仔细地", "C. 持续地", "D. 适当地"]
+          "options": [
+            "A. 冗长地",
+            "B. 仔细地",
+            "C. 持续地",
+            "D. 适当地"
+          ]
         }
       },
       {
@@ -2741,7 +3170,9 @@
           "C.  forecast weather for destination and alternate",
           "D.  all of them"
         ],
-        "answer": ["D.  all of them"],
+        "answer": [
+          "D.  all of them"
+        ],
         "difficulty": "2",
         "shuffle": false,
         "subs": null,
@@ -2766,7 +3197,9 @@
           "C.  recheck the briefing",
           "D.  recheck the weather"
         ],
-        "answer": ["D.  recheck the weather"],
+        "answer": [
+          "D.  recheck the weather"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -2791,14 +3224,21 @@
           "C.  Copilots",
           "D.  Mechanics"
         ],
-        "answer": ["C.  Copilots"],
+        "answer": [
+          "C.  Copilots"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
         "explanation": null,
         "translation": {
           "stem": "______通常会检查飞机的重量和平衡状况。",
-          "options": ["A. 机长", "B. 性能工程师", "C. 副驾驶", "D. 机械师"]
+          "options": [
+            "A. 机长",
+            "B. 性能工程师",
+            "C. 副驾驶",
+            "D. 机械师"
+          ]
         }
       },
       {
@@ -2811,7 +3251,9 @@
           "C.  Computer can do all the works done by hand",
           "D.  Not all the flight plans can be filed by radio"
         ],
-        "answer": ["C.  Computer can do all the works done by hand"],
+        "answer": [
+          "C.  Computer can do all the works done by hand"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -2827,7 +3269,10 @@
         }
       }
     ],
-    "explanation": null,
+    "explanation": {
+      "tip": "",
+      "solution": ""
+    },
     "updated_at": null,
     "status": "valid",
     "translation": {
@@ -2862,7 +3307,9 @@
           "C.  the altimeter changes greatly",
           "D.  all of them"
         ],
-        "answer": ["C.  the altimeter changes greatly"],
+        "answer": [
+          "C.  the altimeter changes greatly"
+        ],
         "difficulty": "2",
         "shuffle": false,
         "subs": null,
@@ -2887,14 +3334,21 @@
           "C.  frontal inversion",
           "D.  all of them"
         ],
-        "answer": ["B.  temperature inversion"],
+        "answer": [
+          "B.  temperature inversion"
+        ],
         "difficulty": "2",
         "shuffle": false,
         "subs": null,
         "explanation": null,
         "translation": {
           "stem": "如果怀疑有______，在爬升时要准备好空速突然变化。",
-          "options": ["A. 雷暴", "B. 逆温层", "C. 锋面逆温", "D. 以上所有"]
+          "options": [
+            "A. 雷暴",
+            "B. 逆温层",
+            "C. 锋面逆温",
+            "D. 以上所有"
+          ]
         }
       },
       {
@@ -2907,7 +3361,9 @@
           "C.  at the time when the front is passing",
           "D.  dependent on existing situation"
         ],
-        "answer": ["A.  before the front passes"],
+        "answer": [
+          "A.  before the front passes"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -2932,7 +3388,9 @@
           "C.  has a short life",
           "D.  all of them"
         ],
-        "answer": ["D.  all of them"],
+        "answer": [
+          "D.  all of them"
+        ],
         "difficulty": "2",
         "shuffle": false,
         "subs": null,
@@ -2975,7 +3433,10 @@
         }
       }
     ],
-    "explanation": null,
+    "explanation": {
+      "tip": "",
+      "solution": ""
+    },
     "updated_at": null,
     "status": "valid",
     "translation": {
@@ -3010,7 +3471,9 @@
           "C.  They were verifying runway 23L Final Clear.",
           "D.  They were setting the time."
         ],
-        "answer": ["D.  They were setting the time."],
+        "answer": [
+          "D.  They were setting the time."
+        ],
         "difficulty": 2,
         "shuffle": true,
         "subs": null,
@@ -3116,18 +3579,28 @@
           "C.  Flap 15",
           "D.  Flap 20"
         ],
-        "answer": ["A.  Flap 4.9"],
+        "answer": [
+          "A.  Flap 4.9"
+        ],
         "difficulty": 2,
         "shuffle": true,
         "subs": null,
         "explanation": null,
         "translation": {
           "stem": "离地时的襟翼设定是多少？",
-          "options": ["A. 襟翼 4.9", "B. 襟翼 10", "C. 襟翼 15", "D. 襟翼 20"]
+          "options": [
+            "A. 襟翼 4.9",
+            "B. 襟翼 10",
+            "C. 襟翼 15",
+            "D. 襟翼 20"
+          ]
         }
       }
     ],
-    "explanation": null,
+    "explanation": {
+      "tip": "",
+      "solution": ""
+    },
     "updated_at": "2014-08-25",
     "status": "valid",
     "translation": {
@@ -3162,7 +3635,9 @@
           "C.  15 meters or 90 ft",
           "D.  10-30 ft"
         ],
-        "answer": ["D.  10-30 ft"],
+        "answer": [
+          "D.  10-30 ft"
+        ],
         "difficulty": 2,
         "shuffle": true,
         "subs": null,
@@ -3187,7 +3662,9 @@
           "C.  ephemeris error",
           "D.  clock errors"
         ],
-        "answer": ["B.  selective availability"],
+        "answer": [
+          "B.  selective availability"
+        ],
         "difficulty": 2,
         "shuffle": true,
         "subs": null,
@@ -3212,7 +3689,9 @@
           "C.  without ground stations, GPS may not be used for precision approach",
           "D.  none of them"
         ],
-        "answer": ["D.  none of them"],
+        "answer": [
+          "D.  none of them"
+        ],
         "difficulty": 2,
         "shuffle": false,
         "subs": null,
@@ -3237,14 +3716,21 @@
           "C.  GPS development",
           "D.  GPS"
         ],
-        "answer": ["B.  GPS errors"],
+        "answer": [
+          "B.  GPS errors"
+        ],
         "difficulty": 2,
         "shuffle": true,
         "subs": null,
         "explanation": null,
         "translation": {
           "stem": "本文最合适的标题是______。",
-          "options": ["A. GPS 应用", "B. GPS 误差", "C. GPS 发展", "D. GPS"]
+          "options": [
+            "A. GPS 应用",
+            "B. GPS 误差",
+            "C. GPS 发展",
+            "D. GPS"
+          ]
         }
       },
       {
@@ -3257,7 +3743,9 @@
           "C.  the accuracy is within 15 meters horizontally and 90 ft vertically",
           "D.  all of them"
         ],
-        "answer": ["D.  all of them"],
+        "answer": [
+          "D.  all of them"
+        ],
         "difficulty": 2,
         "shuffle": false,
         "subs": null,
@@ -3273,7 +3761,10 @@
         }
       }
     ],
-    "explanation": null,
+    "explanation": {
+      "tip": "",
+      "solution": ""
+    },
     "updated_at": "2014-08-25",
     "status": "valid",
     "translation": {
@@ -3308,14 +3799,21 @@
           "C.  Center",
           "D.  the nearest Approach"
         ],
-        "answer": ["C.  Center"],
+        "answer": [
+          "C.  Center"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
         "explanation": null,
         "translation": {
           "stem": "当你与中心联系时发生遇险情况，你应将通信指向______。",
-          "options": ["A. 塔台", "B. FSS", "C. 中心", "D. 最近的进近"]
+          "options": [
+            "A. 塔台",
+            "B. FSS",
+            "C. 中心",
+            "D. 最近的进近"
+          ]
         }
       },
       {
@@ -3328,14 +3826,21 @@
           "C.  Spanish",
           "D.  not mentioned here"
         ],
-        "answer": ["C.  Spanish"],
+        "answer": [
+          "C.  Spanish"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
         "explanation": null,
         "translation": {
           "stem": "Mayday 起源于______。",
-          "options": ["A. 古英语", "B. 法语", "C. 西班牙语", "D. 此处未提及"]
+          "options": [
+            "A. 古英语",
+            "B. 法语",
+            "C. 西班牙语",
+            "D. 此处未提及"
+          ]
         }
       },
       {
@@ -3348,7 +3853,9 @@
           "C.  Distress messages have priority over urgency messages",
           "D.  Distress messages and urgency messages have equal priority"
         ],
-        "answer": ["C.  Distress messages have priority over urgency messages"],
+        "answer": [
+          "C.  Distress messages have priority over urgency messages"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -3373,7 +3880,9 @@
           "C.  radar facilities",
           "D.  civil aircraft"
         ],
-        "answer": ["D.  civil aircraft"],
+        "answer": [
+          "D.  civil aircraft"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -3398,7 +3907,9 @@
           "C.  the nearest Tower",
           "D.  the ARTCC in whose area you are flying"
         ],
-        "answer": ["D.  the ARTCC in whose area you are flying"],
+        "answer": [
+          "D.  the ARTCC in whose area you are flying"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -3414,7 +3925,10 @@
         }
       }
     ],
-    "explanation": null,
+    "explanation": {
+      "tip": "",
+      "solution": ""
+    },
     "updated_at": null,
     "status": "valid",
     "translation": {
@@ -3449,7 +3963,9 @@
           "C. turning base",
           "D. in the opposite direction"
         ],
-        "answer": ["A.  joining right hand downwind"],
+        "answer": [
+          "A.  joining right hand downwind"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -3501,7 +4017,9 @@
           "C.  at 2 o’clock",
           "D.  at 5 to 7 o’clock"
         ],
-        "answer": ["A.  at 5 o’clock"],
+        "answer": [
+          "A.  at 5 o’clock"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -3526,7 +4044,9 @@
           "C. 1 to 2 KM",
           "D. not mentioned"
         ],
-        "answer": ["A.  5 to 7 KM"],
+        "answer": [
+          "A.  5 to 7 KM"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -3551,7 +4071,9 @@
           "C.  did not see his aircraft",
           "D.  did not turn on strobes navigation lights and landing lights."
         ],
-        "answer": ["C.  did not see his aircraft"],
+        "answer": [
+          "C.  did not see his aircraft"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -3567,7 +4089,10 @@
         }
       }
     ],
-    "explanation": null,
+    "explanation": {
+      "tip": "",
+      "solution": ""
+    },
     "updated_at": null,
     "status": "valid",
     "translation": {
@@ -3602,7 +4127,9 @@
           "C.  to provide radar guidance",
           "D.  to provide traffic information"
         ],
-        "answer": ["B.  to provide safe separation"],
+        "answer": [
+          "B.  to provide safe separation"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -3627,7 +4154,9 @@
           "C.  Updated weather information",
           "D.  Pilots reported weather"
         ],
-        "answer": ["D.  Pilots reported weather"],
+        "answer": [
+          "D.  Pilots reported weather"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -3652,7 +4181,9 @@
           "C.  there is less traffic",
           "D.  not mentioned"
         ],
-        "answer": ["C.  there is less traffic"],
+        "answer": [
+          "C.  there is less traffic"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -3677,7 +4208,9 @@
           "C.  circular polarization",
           "D.  precipitation clutter"
         ],
-        "answer": ["D.  precipitation clutter"],
+        "answer": [
+          "D.  precipitation clutter"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -3702,7 +4235,9 @@
           "C.  Secondary radar does not display weather echoes",
           "D.  Severe weather is dangerous because of clutter"
         ],
-        "answer": ["C.  Secondary radar does not display weather echoes"],
+        "answer": [
+          "C.  Secondary radar does not display weather echoes"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -3718,7 +4253,10 @@
         }
       }
     ],
-    "explanation": null,
+    "explanation": {
+      "tip": "",
+      "solution": ""
+    },
     "updated_at": null,
     "status": "valid",
     "translation": {
@@ -3753,7 +4291,9 @@
           "C.  it can be given to aircraft prior to takeoff and after entering traffic circuit",
           "D.  both A and C"
         ],
-        "answer": ["B.  altitude displayed on altimeter is above MSL"],
+        "answer": [
+          "B.  altitude displayed on altimeter is above MSL"
+        ],
         "difficulty": "2",
         "shuffle": false,
         "subs": null,
@@ -3778,7 +4318,9 @@
           "C.  the ATC controller will give QFE altitude to each aircraft landing",
           "D.  QFE altitude refers to the altitude above the airport"
         ],
-        "answer": ["D.  QFE altitude refers to the altitude above the airport"],
+        "answer": [
+          "D.  QFE altitude refers to the altitude above the airport"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -3824,15 +4366,27 @@
         "sid": "420000027_4",
         "type": "single",
         "stem": "FL should be set on ______ .",
-        "options": ["A.  QNH", "B.  QFE", "C.  QNE", "D.  not mentioned here"],
-        "answer": ["C.  QNE"],
+        "options": [
+          "A.  QNH",
+          "B.  QFE",
+          "C.  QNE",
+          "D.  not mentioned here"
+        ],
+        "answer": [
+          "C.  QNE"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
         "explanation": null,
         "translation": {
           "stem": "飞行高度层应设定在______。",
-          "options": ["A. QNH", "B. QFE", "C. QNE", "D. 此处未提及"]
+          "options": [
+            "A. QNH",
+            "B. QFE",
+            "C. QNE",
+            "D. 此处未提及"
+          ]
         }
       },
       {
@@ -3845,7 +4399,9 @@
           "C.  FL specified for various airways all allow for terrain clearance",
           "D.  none of them"
         ],
-        "answer": ["B.  different country has different transition altitude"],
+        "answer": [
+          "B.  different country has different transition altitude"
+        ],
         "difficulty": "2",
         "shuffle": false,
         "subs": null,
@@ -3861,7 +4417,10 @@
         }
       }
     ],
-    "explanation": null,
+    "explanation": {
+      "tip": "",
+      "solution": ""
+    },
     "updated_at": null,
     "status": "valid",
     "translation": {
@@ -3890,15 +4449,27 @@
         "sid": "420000028_1",
         "type": "single",
         "stem": "How many people are there on the plane?",
-        "options": ["A. 2", "B. 3", "C. 4", "D. Not mentioned."],
-        "answer": ["D. Not mentioned."],
+        "options": [
+          "A. 2",
+          "B. 3",
+          "C. 4",
+          "D. Not mentioned."
+        ],
+        "answer": [
+          "D. Not mentioned."
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
         "explanation": null,
         "translation": {
           "stem": "飞机上有多少人？",
-          "options": ["A. 2", "B. 3", "C. 4", "D. 未提及"]
+          "options": [
+            "A. 2",
+            "B. 3",
+            "C. 4",
+            "D. 未提及"
+          ]
         }
       },
       {
@@ -3911,7 +4482,9 @@
           "C.  join left-hand downwind runway 04",
           "D.  join left-hand downwind runway 22"
         ],
-        "answer": ["C.  join left-hand downwind runway 04"],
+        "answer": [
+          "C.  join left-hand downwind runway 04"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -3936,7 +4509,9 @@
           "C.  runway 22",
           "D.  All of the above."
         ],
-        "answer": ["C.  runway 22"],
+        "answer": [
+          "C.  runway 22"
+        ],
         "difficulty": "2",
         "shuffle": false,
         "subs": null,
@@ -3961,7 +4536,9 @@
           "C.  his nervousness",
           "D.  All of the above"
         ],
-        "answer": ["D.  All of the above"],
+        "answer": [
+          "D.  All of the above"
+        ],
         "difficulty": "2",
         "shuffle": false,
         "subs": null,
@@ -3986,7 +4563,9 @@
           "C.  Upon the question by the controller.",
           "D.  On the downwind leg."
         ],
-        "answer": ["C.  Upon the question by the controller."],
+        "answer": [
+          "C.  Upon the question by the controller."
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -4002,7 +4581,10 @@
         }
       }
     ],
-    "explanation": null,
+    "explanation": {
+      "tip": "",
+      "solution": ""
+    },
     "updated_at": null,
     "status": "valid",
     "translation": {
@@ -4031,60 +4613,108 @@
         "sid": "420000029_1",
         "type": "single",
         "stem": "Which of the following belongs to non - precision approaches?",
-        "options": ["A.  PAR", "B.  MLS", "C.  ASR", "D.  ILS"],
-        "answer": ["C.  ASR"],
+        "options": [
+          "A.  PAR",
+          "B.  MLS",
+          "C.  ASR",
+          "D.  ILS"
+        ],
+        "answer": [
+          "C.  ASR"
+        ],
         "difficulty": 2,
         "shuffle": true,
         "subs": null,
         "explanation": null,
         "translation": {
           "stem": "以下哪项属于非精密进近？",
-          "options": ["A. PAR", "B. MLS", "C. ASR", "D. ILS"]
+          "options": [
+            "A. PAR",
+            "B. MLS",
+            "C. ASR",
+            "D. ILS"
+          ]
         }
       },
       {
         "sid": "420000029_2",
         "type": "single",
         "stem": "Which of the following will belong to precision approaches?",
-        "options": ["A.  PAR", "B.  ILS", "C.  GPS", "D.  ASR"],
-        "answer": ["C.  GPS"],
+        "options": [
+          "A.  PAR",
+          "B.  ILS",
+          "C.  GPS",
+          "D.  ASR"
+        ],
+        "answer": [
+          "C.  GPS"
+        ],
         "difficulty": 2,
         "shuffle": true,
         "subs": null,
         "explanation": null,
         "translation": {
           "stem": "以下哪项属于精密进近？",
-          "options": ["A. PAR", "B. ILS", "C. GPS", "D. ASR"]
+          "options": [
+            "A. PAR",
+            "B. ILS",
+            "C. GPS",
+            "D. ASR"
+          ]
         }
       },
       {
         "sid": "420000029_3",
         "type": "single",
         "stem": "Which of the following has the least developing tendency? B.",
-        "options": ["A.  PAR", "B.  MLS", "C.  ILS", "D.  ASR"],
-        "answer": ["B.  MLS"],
+        "options": [
+          "A.  PAR",
+          "B.  MLS",
+          "C.  ILS",
+          "D.  ASR"
+        ],
+        "answer": [
+          "B.  MLS"
+        ],
         "difficulty": 2,
         "shuffle": true,
         "subs": null,
         "explanation": null,
         "translation": {
           "stem": "以下哪项发展潜力最小？",
-          "options": ["A. PAR", "B. MLS", "C. ILS", "D. ASR"]
+          "options": [
+            "A. PAR",
+            "B. MLS",
+            "C. ILS",
+            "D. ASR"
+          ]
         }
       },
       {
         "sid": "420000029_4",
         "type": "single",
         "stem": "Which of the following approaches won't bring you right down to the runway?",
-        "options": ["A.  PAR", "B.  VOR", "C.  Localizer", "D.  ASR"],
-        "answer": ["B.  VOR"],
+        "options": [
+          "A.  PAR",
+          "B.  VOR",
+          "C.  Localizer",
+          "D.  ASR"
+        ],
+        "answer": [
+          "B.  VOR"
+        ],
         "difficulty": 2,
         "shuffle": true,
         "subs": null,
         "explanation": null,
         "translation": {
           "stem": "以下哪种进近不会直接带你到跑道？",
-          "options": ["A. PAR", "B. VOR", "C. Localizer", "D. ASR"]
+          "options": [
+            "A. PAR",
+            "B. VOR",
+            "C. Localizer",
+            "D. ASR"
+          ]
         }
       },
       {
@@ -4097,18 +4727,28 @@
           "C.  Outer marker",
           "D.  Glide slope"
         ],
-        "answer": ["B.  HIRL"],
+        "answer": [
+          "B.  HIRL"
+        ],
         "difficulty": 2,
         "shuffle": true,
         "subs": null,
         "explanation": null,
         "translation": {
           "stem": "如果飞行员希望进行 ILS 进近，以下哪项可能不是必需的？",
-          "options": ["A. 机载接收设备", "B. HIRL", "C. 外指点标", "D. 下滑道"]
+          "options": [
+            "A. 机载接收设备",
+            "B. HIRL",
+            "C. 外指点标",
+            "D. 下滑道"
+          ]
         }
       }
     ],
-    "explanation": null,
+    "explanation": {
+      "tip": "",
+      "solution": ""
+    },
     "updated_at": "2014-08-25",
     "status": "valid",
     "translation": {
@@ -4143,7 +4783,9 @@
           "C.  Because it requires relatively less airmanship",
           "D.  Because it's more comfortable to handle practice"
         ],
-        "answer": ["A.  Because it offers a host of practice"],
+        "answer": [
+          "A.  Because it offers a host of practice"
+        ],
         "difficulty": 2,
         "shuffle": true,
         "subs": null,
@@ -4168,7 +4810,9 @@
           "C.  To see eye to eye with the Captain",
           "D.  To get relaxed when possible"
         ],
-        "answer": ["B.  To roll to the same direction as the Captain does"],
+        "answer": [
+          "B.  To roll to the same direction as the Captain does"
+        ],
         "difficulty": 2,
         "shuffle": true,
         "subs": null,
@@ -4193,7 +4837,9 @@
           "C.  Because aviation cycle changes too fast",
           "D.  Because they don't advance in rank"
         ],
-        "answer": ["D.  Because they don't advance in rank"],
+        "answer": [
+          "D.  Because they don't advance in rank"
+        ],
         "difficulty": 2,
         "shuffle": true,
         "subs": null,
@@ -4218,7 +4864,9 @@
           "C.  Respect the Captain with all heart",
           "D.  Imitate the merit of the Captain"
         ],
-        "answer": ["D.  Imitate the merit of the Captain"],
+        "answer": [
+          "D.  Imitate the merit of the Captain"
+        ],
         "difficulty": 2,
         "shuffle": true,
         "subs": null,
@@ -4261,7 +4909,10 @@
         }
       }
     ],
-    "explanation": null,
+    "explanation": {
+      "tip": "",
+      "solution": ""
+    },
     "updated_at": "2014-08-25",
     "status": "valid",
     "translation": {
@@ -4296,7 +4947,9 @@
           "C.  the friend was a pilot too",
           "D.  the friend was curious about the autopilot"
         ],
-        "answer": ["B.  the writer was unacquainted with the autopilot"],
+        "answer": [
+          "B.  the writer was unacquainted with the autopilot"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -4321,7 +4974,9 @@
           "C.  performed as expected",
           "D.  failed to work"
         ],
-        "answer": ["B.  was ignored"],
+        "answer": [
+          "B.  was ignored"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -4346,7 +5001,9 @@
           "C.  the old bird nose over",
           "D.  the trim was running wild nose–down"
         ],
-        "answer": ["C.  the old bird nose over"],
+        "answer": [
+          "C.  the old bird nose over"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -4371,7 +5028,9 @@
           "C.  the pilot's unfamiliarity of the autopilot",
           "D.  the malfunction of the pitch trim"
         ],
-        "answer": ["C.  the pilot's unfamiliarity of the autopilot"],
+        "answer": [
+          "C.  the pilot's unfamiliarity of the autopilot"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -4396,7 +5055,9 @@
           "C.  a runaway pitch trim can't be overcome by the strongest pilot",
           "D.  all of the above"
         ],
-        "answer": ["D.  all of the above"],
+        "answer": [
+          "D.  all of the above"
+        ],
         "difficulty": "2",
         "shuffle": false,
         "subs": null,
@@ -4412,7 +5073,10 @@
         }
       }
     ],
-    "explanation": null,
+    "explanation": {
+      "tip": "",
+      "solution": ""
+    },
     "updated_at": null,
     "status": "valid",
     "translation": {
@@ -4474,7 +5138,9 @@
           "C.  Because he advanced the throttle forward simultaneously.",
           "D. All of the above."
         ],
-        "answer": ["A.  Because the Take off warning was activated."],
+        "answer": [
+          "A.  Because the Take off warning was activated."
+        ],
         "difficulty": "2",
         "shuffle": false,
         "subs": null,
@@ -4499,7 +5165,9 @@
           "C.  Because the rolling distance was only 1~2 m.",
           "D.  All of the above."
         ],
-        "answer": ["A.  Because the captain took an immediate action."],
+        "answer": [
+          "A.  Because the captain took an immediate action."
+        ],
         "difficulty": "2",
         "shuffle": false,
         "subs": null,
@@ -4524,7 +5192,9 @@
           "C.  He should allow enough time to do the normal procedure.",
           "D.  All of the above."
         ],
-        "answer": ["D.  All of the above."],
+        "answer": [
+          "D.  All of the above."
+        ],
         "difficulty": "2",
         "shuffle": false,
         "subs": null,
@@ -4567,7 +5237,10 @@
         }
       }
     ],
-    "explanation": null,
+    "explanation": {
+      "tip": "",
+      "solution": ""
+    },
     "updated_at": null,
     "status": "valid",
     "translation": {
@@ -4602,14 +5275,21 @@
           "C.  NATS",
           "D.  TCAS"
         ],
-        "answer": ["B.  STCA system"],
+        "answer": [
+          "B.  STCA system"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
         "explanation": null,
         "translation": {
           "stem": "______即将在伦敦中央管制功能中心开始。",
-          "options": ["A. NODE 系统", "B. STCA 系统", "C. NATS", "D. TCAS"]
+          "options": [
+            "A. NODE 系统",
+            "B. STCA 系统",
+            "C. NATS",
+            "D. TCAS"
+          ]
         }
       },
       {
@@ -4622,7 +5302,9 @@
           "C.  It can apply separation standards according to airspace type",
           "D.  None of them is correct"
         ],
-        "answer": ["A.  It can alert the aircraft in danger of collision"],
+        "answer": [
+          "A.  It can alert the aircraft in danger of collision"
+        ],
         "difficulty": "2",
         "shuffle": false,
         "subs": null,
@@ -4647,7 +5329,9 @@
           "C.  A maneuver hazard filter",
           "D.  A current proximity filter"
         ],
-        "answer": ["D.  A current proximity filter"],
+        "answer": [
+          "D.  A current proximity filter"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -4672,7 +5356,9 @@
           "C.  Mode C errors",
           "D.  All of the above"
         ],
-        "answer": ["D.  All of the above"],
+        "answer": [
+          "D.  All of the above"
+        ],
         "difficulty": "2",
         "shuffle": false,
         "subs": null,
@@ -4715,7 +5401,10 @@
         }
       }
     ],
-    "explanation": null,
+    "explanation": {
+      "tip": "",
+      "solution": ""
+    },
     "updated_at": null,
     "status": "valid",
     "translation": {
@@ -4750,14 +5439,21 @@
           "C.  freezing rain",
           "D.  all of them"
         ],
-        "answer": ["D.  all of them"],
+        "answer": [
+          "D.  all of them"
+        ],
         "difficulty": "2",
         "shuffle": false,
         "subs": null,
         "explanation": null,
         "translation": {
           "stem": "地面积冰的形式包括______。",
-          "options": ["A. 霜", "B. 雪", "C. 冻雨", "D. 以上所有"]
+          "options": [
+            "A. 霜",
+            "B. 雪",
+            "C. 冻雨",
+            "D. 以上所有"
+          ]
         }
       },
       {
@@ -4797,7 +5493,9 @@
           "C.  he is responsible for the airworthiness of the plane",
           "D.  it is in the interest of flight safety"
         ],
-        "answer": ["C.  he is responsible for the airworthiness of the plane"],
+        "answer": [
+          "C.  he is responsible for the airworthiness of the plane"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -4816,15 +5514,27 @@
         "sid": "420000034_4",
         "type": "single",
         "stem": "Which of the following differs from the other three?",
-        "options": ["A.  Snow", "B.  Frost", "C.  Drizzle", "D.  Rain"],
-        "answer": ["B.  Frost"],
+        "options": [
+          "A.  Snow",
+          "B.  Frost",
+          "C.  Drizzle",
+          "D.  Rain"
+        ],
+        "answer": [
+          "B.  Frost"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
         "explanation": null,
         "translation": {
           "stem": "以下哪项与其他三项不同？",
-          "options": ["A. 雪", "B. 霜", "C. 毛毛雨", "D. 雨"]
+          "options": [
+            "A. 雪",
+            "B. 霜",
+            "C. 毛毛雨",
+            "D. 雨"
+          ]
         }
       },
       {
@@ -4837,7 +5547,9 @@
           "C.  The Danger of Ice",
           "D.  FAA's deicing program"
         ],
-        "answer": ["B.  Ground Ice"],
+        "answer": [
+          "B.  Ground Ice"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -4853,7 +5565,10 @@
         }
       }
     ],
-    "explanation": null,
+    "explanation": {
+      "tip": "",
+      "solution": ""
+    },
     "updated_at": null,
     "status": "valid",
     "translation": {
@@ -4882,15 +5597,27 @@
         "sid": "420000035_1",
         "type": "single",
         "stem": "How many persons are there on board the aircraft?",
-        "options": ["A. 181", "B. 194", "C. 131", "D. 201"],
-        "answer": ["B. 194"],
+        "options": [
+          "A. 181",
+          "B. 194",
+          "C. 131",
+          "D. 201"
+        ],
+        "answer": [
+          "B. 194"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
         "explanation": null,
         "translation": {
           "stem": "飞机上有多少人？",
-          "options": ["A. 181", "B. 194", "C. 131", "D. 201"]
+          "options": [
+            "A. 181",
+            "B. 194",
+            "C. 131",
+            "D. 201"
+          ]
         }
       },
       {
@@ -4903,7 +5630,9 @@
           "C.  there was smoke in the forward cabin.",
           "D.  there was smoke in the aft toilet."
         ],
-        "answer": ["A.  there was smoke in the forward cargo hold."],
+        "answer": [
+          "A.  there was smoke in the forward cargo hold."
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -4955,7 +5684,9 @@
           "C.  in the vicinity of the port inboard engine nacelle",
           "D.  in the vicinity of the empennage"
         ],
-        "answer": ["A.  in the vicinity of the nose landing gear"],
+        "answer": [
+          "A.  in the vicinity of the nose landing gear"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -4974,19 +5705,34 @@
         "sid": "420000035_5",
         "type": "single",
         "stem": "During the evacuation, how many passengers on board were injured?",
-        "options": ["A. 11", "B. 9", "C. 8", "D. 1"],
-        "answer": ["B. 9"],
+        "options": [
+          "A. 11",
+          "B. 9",
+          "C. 8",
+          "D. 1"
+        ],
+        "answer": [
+          "B. 9"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
         "explanation": null,
         "translation": {
           "stem": "在撤离过程中，机上有多少乘客受伤？",
-          "options": ["A. 11", "B. 9", "C. 8", "D. 1"]
+          "options": [
+            "A. 11",
+            "B. 9",
+            "C. 8",
+            "D. 1"
+          ]
         }
       }
     ],
-    "explanation": null,
+    "explanation": {
+      "tip": "",
+      "solution": ""
+    },
     "updated_at": null,
     "status": "valid",
     "translation": {
@@ -5021,7 +5767,9 @@
           "C.  it links all the control services",
           "D.  not stated here"
         ],
-        "answer": ["C.  it links all the control services"],
+        "answer": [
+          "C.  it links all the control services"
+        ],
         "difficulty": 2,
         "shuffle": true,
         "subs": null,
@@ -5046,7 +5794,9 @@
           "C.  Area controller",
           "D.  Transferring controller"
         ],
-        "answer": ["C.  Area controller"],
+        "answer": [
+          "C.  Area controller"
+        ],
         "difficulty": 2,
         "shuffle": true,
         "subs": null,
@@ -5098,7 +5848,9 @@
           "C.  area control",
           "D.  all of them"
         ],
-        "answer": ["C.  area control"],
+        "answer": [
+          "C.  area control"
+        ],
         "difficulty": 2,
         "shuffle": false,
         "subs": null,
@@ -5123,7 +5875,9 @@
           "C.  The aircraft mustn't penetrate another airspace without coordination",
           "D.  Area control issues the clearance for aircraft to holding point"
         ],
-        "answer": ["A.  The aerodrome control specifies takeoff time"],
+        "answer": [
+          "A.  The aerodrome control specifies takeoff time"
+        ],
         "difficulty": 2,
         "shuffle": true,
         "subs": null,
@@ -5139,7 +5893,10 @@
         }
       }
     ],
-    "explanation": null,
+    "explanation": {
+      "tip": "",
+      "solution": ""
+    },
     "updated_at": "2014-08-25",
     "status": "valid",
     "translation": {
@@ -5174,7 +5931,9 @@
           "C.  It is dependent on real situation",
           "D.  Thunderstorm is the most violent weather"
         ],
-        "answer": ["D.  Thunderstorm is the most violent weather"],
+        "answer": [
+          "D.  Thunderstorm is the most violent weather"
+        ],
         "difficulty": 2,
         "shuffle": true,
         "subs": null,
@@ -5199,7 +5958,9 @@
           "C.  area of low pressure aloft has to aid and abet it",
           "D.  all of the above three"
         ],
-        "answer": ["D.  all of the above three"],
+        "answer": [
+          "D.  all of the above three"
+        ],
         "difficulty": 2,
         "shuffle": false,
         "subs": null,
@@ -5224,7 +5985,9 @@
           "C.  necessary upper -level support",
           "D.  southwesterly flow aloft"
         ],
-        "answer": ["A.  several reasons"],
+        "answer": [
+          "A.  several reasons"
+        ],
         "difficulty": 2,
         "shuffle": true,
         "subs": null,
@@ -5249,7 +6012,9 @@
           "C.  an unstable condition",
           "D.  cold air over warm air"
         ],
-        "answer": ["C.  an unstable condition"],
+        "answer": [
+          "C.  an unstable condition"
+        ],
         "difficulty": 2,
         "shuffle": true,
         "subs": null,
@@ -5274,7 +6039,9 @@
           "C.  straight east - west flow aloft",
           "D.  all of the above three"
         ],
-        "answer": ["A.  southwesterly flow aloft"],
+        "answer": [
+          "A.  southwesterly flow aloft"
+        ],
         "difficulty": 2,
         "shuffle": false,
         "subs": null,
@@ -5290,7 +6057,10 @@
         }
       }
     ],
-    "explanation": null,
+    "explanation": {
+      "tip": "",
+      "solution": ""
+    },
     "updated_at": "2014-08-25",
     "status": "valid",
     "translation": {
@@ -5325,7 +6095,9 @@
           "C.  azimuth and altitude",
           "D.  distance and altitude"
         ],
-        "answer": ["A.  range and azimuth"],
+        "answer": [
+          "A.  range and azimuth"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -5350,14 +6122,21 @@
           "C.  decoder",
           "D.  SSR"
         ],
-        "answer": ["B.  transponder"],
+        "answer": [
+          "B.  transponder"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
         "explanation": null,
         "translation": {
           "stem": "______是飞机上的特殊部件。",
-          "options": ["A. 询问器", "B. 应答机", "C. 解码器", "D. SSR"]
+          "options": [
+            "A. 询问器",
+            "B. 应答机",
+            "C. 解码器",
+            "D. SSR"
+          ]
         }
       },
       {
@@ -5370,7 +6149,9 @@
           "C.  Precision approach radar",
           "D.  Automated radar terminal system"
         ],
-        "answer": ["A.  Airway surveillance radar"],
+        "answer": [
+          "A.  Airway surveillance radar"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -5389,15 +6170,27 @@
         "sid": "420000038_4",
         "type": "single",
         "stem": "cannot provide altitude information.",
-        "options": ["A.  PAR", "B.  SSR", "C.  ASR", "D.  ARTS"],
-        "answer": ["C.  ASR"],
+        "options": [
+          "A.  PAR",
+          "B.  SSR",
+          "C.  ASR",
+          "D.  ARTS"
+        ],
+        "answer": [
+          "C.  ASR"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
         "explanation": null,
         "translation": {
           "stem": "______不能提供高度信息。",
-          "options": ["A. PAR", "B. SSR", "C. ASR", "D. ARTS"]
+          "options": [
+            "A. PAR",
+            "B. SSR",
+            "C. ASR",
+            "D. ARTS"
+          ]
         }
       },
       {
@@ -5428,7 +6221,10 @@
         }
       }
     ],
-    "explanation": null,
+    "explanation": {
+      "tip": "",
+      "solution": ""
+    },
     "updated_at": null,
     "status": "valid",
     "translation": {
@@ -5457,30 +6253,54 @@
         "sid": "420000039_1",
         "type": "single",
         "stem": "Which runway did the American Airlines Flight 11 depart from?",
-        "options": ["A. 11", "B. 4", "C. 5", "D. 04R"],
-        "answer": ["D. 04R"],
+        "options": [
+          "A. 11",
+          "B. 4",
+          "C. 5",
+          "D. 04R"
+        ],
+        "answer": [
+          "D. 04R"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
         "explanation": null,
         "translation": {
           "stem": "美国航空 11 号航班从哪条跑道起飞？",
-          "options": ["A. 11", "B. 4", "C. 5", "D. 04R"]
+          "options": [
+            "A. 11",
+            "B. 4",
+            "C. 5",
+            "D. 04R"
+          ]
         }
       },
       {
         "sid": "420000039_2",
         "type": "single",
         "stem": "How many people were on board?",
-        "options": ["A. 9", "B. 92", "C. 81", "D. 85"],
-        "answer": ["B. 92"],
+        "options": [
+          "A. 9",
+          "B. 92",
+          "C. 81",
+          "D. 85"
+        ],
+        "answer": [
+          "B. 92"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
         "explanation": null,
         "translation": {
           "stem": "机上有多少人？",
-          "options": ["A. 9", "B. 92", "C. 81", "D. 85"]
+          "options": [
+            "A. 9",
+            "B. 92",
+            "C. 81",
+            "D. 85"
+          ]
         }
       },
       {
@@ -5493,7 +6313,9 @@
           "C.  Someone said everyone stay in their seats.",
           "D.  Someone keyed the mike."
         ],
-        "answer": ["B.  It was hijacked."],
+        "answer": [
+          "B.  It was hijacked."
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -5518,14 +6340,21 @@
           "C.  90 knots.",
           "D.  530 knots."
         ],
-        "answer": ["B.  350 knots."],
+        "answer": [
+          "B.  350 knots."
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
         "explanation": null,
         "translation": {
           "stem": "飞机以什么速度撞击了塔楼？",
-          "options": ["A. 110 节", "B. 350 节", "C. 90 节", "D. 530 节"]
+          "options": [
+            "A. 110 节",
+            "B. 350 节",
+            "C. 90 节",
+            "D. 530 节"
+          ]
         }
       },
       {
@@ -5538,7 +6367,9 @@
           "C.  110 floors of the World Trade Center Plaza.",
           "D.  Side of the World Trade Center Plaza."
         ],
-        "answer": ["D.  Side of the World Trade Center Plaza."],
+        "answer": [
+          "D.  Side of the World Trade Center Plaza."
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -5554,7 +6385,10 @@
         }
       }
     ],
-    "explanation": null,
+    "explanation": {
+      "tip": "",
+      "solution": ""
+    },
     "updated_at": null,
     "status": "valid",
     "translation": {
@@ -5583,60 +6417,108 @@
         "sid": "420000040_1",
         "type": "single",
         "stem": "According to the passage, the most common system for civil aircraft is         .",
-        "options": ["A.  VOR/DME", "B.  VOR", "C.  TACAN", "D.  VORTAC"],
-        "answer": ["B.  VOR"],
+        "options": [
+          "A.  VOR/DME",
+          "B.  VOR",
+          "C.  TACAN",
+          "D.  VORTAC"
+        ],
+        "answer": [
+          "B.  VOR"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
         "explanation": null,
         "translation": {
           "stem": "根据文章，民用飞机最常用的系统是______。",
-          "options": ["A. VOR/DME", "B. VOR", "C. TACAN", "D. VORTAC"]
+          "options": [
+            "A. VOR/DME",
+            "B. VOR",
+            "C. TACAN",
+            "D. VORTAC"
+          ]
         }
       },
       {
         "sid": "420000040_2",
         "type": "single",
         "stem": "According to the passage, the most common system for military aircraft is       .",
-        "options": ["A.  VOR/DME", "B.  TACAN", "C.  VOR", "D.  VORTAC"],
-        "answer": ["B.  TACAN"],
+        "options": [
+          "A.  VOR/DME",
+          "B.  TACAN",
+          "C.  VOR",
+          "D.  VORTAC"
+        ],
+        "answer": [
+          "B.  TACAN"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
         "explanation": null,
         "translation": {
           "stem": "根据文章，军用飞机最常用的系统是______。",
-          "options": ["A. VOR/DME", "B. TACAN", "C. VOR", "D. VORTAC"]
+          "options": [
+            "A. VOR/DME",
+            "B. TACAN",
+            "C. VOR",
+            "D. VORTAC"
+          ]
         }
       },
       {
         "sid": "420000040_3",
         "type": "single",
         "stem": "is especially suitable for unaided operation during long flights over water or land areas without enough ground stations.",
-        "options": ["A.  NDB", "B.  INS", "C.  LORAN", "D.  Decca"],
-        "answer": ["B.  INS"],
+        "options": [
+          "A.  NDB",
+          "B.  INS",
+          "C.  LORAN",
+          "D.  Decca"
+        ],
+        "answer": [
+          "B.  INS"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
         "explanation": null,
         "translation": {
           "stem": "______特别适合在没有足够地面站的水域或陆地区域上空长时间飞行时的独立运行。",
-          "options": ["A. NDB", "B. INS", "C. LORAN", "D. Decca"]
+          "options": [
+            "A. NDB",
+            "B. INS",
+            "C. LORAN",
+            "D. Decca"
+          ]
         }
       },
       {
         "sid": "420000040_4",
         "type": "single",
         "stem": "Comparatively speaking,         is the earliest system of air navigation.",
-        "options": ["A.  VOR", "B.  TACAN", "C.  NDB", "D.  LORAN"],
-        "answer": ["C.  NDB"],
+        "options": [
+          "A.  VOR",
+          "B.  TACAN",
+          "C.  NDB",
+          "D.  LORAN"
+        ],
+        "answer": [
+          "C.  NDB"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
         "explanation": null,
         "translation": {
           "stem": "相对来说，______是最早的空中导航系统。",
-          "options": ["A. VOR", "B. TACAN", "C. NDB", "D. LORAN"]
+          "options": [
+            "A. VOR",
+            "B. TACAN",
+            "C. NDB",
+            "D. LORAN"
+          ]
         }
       },
       {
@@ -5649,7 +6531,9 @@
           "C.  Air Navigation",
           "D.  The Development of Navigation"
         ],
-        "answer": ["B.  Radio Navigation"],
+        "answer": [
+          "B.  Radio Navigation"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -5665,7 +6549,10 @@
         }
       }
     ],
-    "explanation": null,
+    "explanation": {
+      "tip": "",
+      "solution": ""
+    },
     "updated_at": null,
     "status": "valid",
     "translation": {
@@ -5700,7 +6587,9 @@
           "C.  install at New York and New Jersey Airport",
           "D.  replace overrun"
         ],
-        "answer": ["A.  help the aircraft stop easily"],
+        "answer": [
+          "A.  help the aircraft stop easily"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -5719,15 +6608,27 @@
         "sid": "420000041_2",
         "type": "single",
         "stem": "By the end of 1998, at least how many airports will have installed the new system?",
-        "options": ["A. 3", "B. 4", "C. 5", "D.  Not stated here"],
-        "answer": ["A. 3"],
+        "options": [
+          "A. 3",
+          "B. 4",
+          "C. 5",
+          "D.  Not stated here"
+        ],
+        "answer": [
+          "A. 3"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
         "explanation": null,
         "translation": {
           "stem": "到 1998 年底，至少有多少机场将安装新系统？",
-          "options": ["A. 3", "B. 4", "C. 5", "D. 此处未说明"]
+          "options": [
+            "A. 3",
+            "B. 4",
+            "C. 5",
+            "D. 此处未说明"
+          ]
         }
       },
       {
@@ -5740,7 +6641,9 @@
           "C.  ESCO",
           "D.  The owner of Newark International Airport"
         ],
-        "answer": ["C.  ESCO"],
+        "answer": [
+          "C.  ESCO"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -5765,14 +6668,21 @@
           "C.  Longevity",
           "D.  All of the above"
         ],
-        "answer": ["D.  All of the above"],
+        "answer": [
+          "D.  All of the above"
+        ],
         "difficulty": "2",
         "shuffle": false,
         "subs": null,
         "explanation": null,
         "translation": {
           "stem": "______将最终决定拦阻块的构成。",
-          "options": ["A. 除雪的便利性", "B. 强度", "C. 耐久性", "D. 以上所有"]
+          "options": [
+            "A. 除雪的便利性",
+            "B. 强度",
+            "C. 耐久性",
+            "D. 以上所有"
+          ]
         }
       },
       {
@@ -5785,7 +6695,9 @@
           "C.  the foam block is fragile",
           "D.  the transportation fee is very high"
         ],
-        "answer": ["A.  the foam block is the light weight aerated block"],
+        "answer": [
+          "A.  the foam block is the light weight aerated block"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -5801,7 +6713,10 @@
         }
       }
     ],
-    "explanation": null,
+    "explanation": {
+      "tip": "",
+      "solution": ""
+    },
     "updated_at": null,
     "status": "valid",
     "translation": {
@@ -5836,7 +6751,9 @@
           "C.  From the base turn",
           "D.  From the start of the final approach"
         ],
-        "answer": ["B.  From the start of the descent"],
+        "answer": [
+          "B.  From the start of the descent"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -5861,7 +6778,9 @@
           "C.  communication facility problem",
           "D.  language difficulties"
         ],
-        "answer": ["D.  language difficulties"],
+        "answer": [
+          "D.  language difficulties"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -5886,7 +6805,9 @@
           "C.  flap system",
           "D.  navigation system"
         ],
-        "answer": ["A.  electric trimming system"],
+        "answer": [
+          "A.  electric trimming system"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -5905,15 +6826,27 @@
         "sid": "420000042_4",
         "type": "single",
         "stem": "was the magnetic inbound course prescribed by the approach chart.",
-        "options": ["A. 290", "B. 306", "C. 300", "D.  not mentioned here"],
-        "answer": ["C. 300"],
+        "options": [
+          "A. 290",
+          "B. 306",
+          "C. 300",
+          "D.  not mentioned here"
+        ],
+        "answer": [
+          "C. 300"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
         "explanation": null,
         "translation": {
           "stem": "______是进近图规定的磁向台航道。",
-          "options": ["A. 290", "B. 306", "C. 300", "D. 此处未提及"]
+          "options": [
+            "A. 290",
+            "B. 306",
+            "C. 300",
+            "D. 此处未提及"
+          ]
         }
       },
       {
@@ -5926,7 +6859,9 @@
           "C.  Not discontinuing the approach when procedural uncertainties exist",
           "D.  All of the above"
         ],
-        "answer": ["D.  All of the above"],
+        "answer": [
+          "D.  All of the above"
+        ],
         "difficulty": "2",
         "shuffle": false,
         "subs": null,
@@ -5942,7 +6877,10 @@
         }
       }
     ],
-    "explanation": null,
+    "explanation": {
+      "tip": "",
+      "solution": ""
+    },
     "updated_at": null,
     "status": "valid",
     "translation": {
@@ -5977,7 +6915,9 @@
           "C.  Circling approach runway 36L",
           "D.  Circling approach runway 18R"
         ],
-        "answer": ["A.  Straight-in approach runway 36L"],
+        "answer": [
+          "A.  Straight-in approach runway 36L"
+        ],
         "difficulty": 2,
         "shuffle": true,
         "subs": null,
@@ -5996,15 +6936,27 @@
         "sid": "420000043_2",
         "type": "single",
         "stem": "The circling altitude that Air China flight 129 had been cleared to was _____ feet.",
-        "options": ["A. 2600", "B. 600", "C. 6000", "D. 700"],
-        "answer": ["D. 700"],
+        "options": [
+          "A. 2600",
+          "B. 600",
+          "C. 6000",
+          "D. 700"
+        ],
+        "answer": [
+          "D. 700"
+        ],
         "difficulty": 2,
         "shuffle": true,
         "subs": null,
         "explanation": null,
         "translation": {
           "stem": "国航 129 号航班被许可的盘旋高度是______英尺。",
-          "options": ["A. 2600", "B. 600", "C. 6000", "D. 700"]
+          "options": [
+            "A. 2600",
+            "B. 600",
+            "C. 6000",
+            "D. 700"
+          ]
         }
       },
       {
@@ -6044,7 +6996,9 @@
           "C.  Approach controller",
           "D.  Tower controller"
         ],
-        "answer": ["A.  First officer"],
+        "answer": [
+          "A.  First officer"
+        ],
         "difficulty": 2,
         "shuffle": true,
         "subs": null,
@@ -6069,7 +7023,9 @@
           "C.  The flight crew exercised poor crew resource management.",
           "D.  All of the above."
         ],
-        "answer": ["D.  All of the above."],
+        "answer": [
+          "D.  All of the above."
+        ],
         "difficulty": 2,
         "shuffle": false,
         "subs": null,
@@ -6085,7 +7041,10 @@
         }
       }
     ],
-    "explanation": null,
+    "explanation": {
+      "tip": "",
+      "solution": ""
+    },
     "updated_at": "2014-08-25",
     "status": "valid",
     "translation": {
@@ -6120,7 +7079,9 @@
           "C.  Power distance",
           "D.  Individualism/collectivism"
         ],
-        "answer": ["A.  Masculinity/Femininity"],
+        "answer": [
+          "A.  Masculinity/Femininity"
+        ],
         "difficulty": 2,
         "shuffle": true,
         "subs": null,
@@ -6145,7 +7106,9 @@
           "C.  A culture with high uncertainty avoidance",
           "D.  Collective culture"
         ],
-        "answer": ["D.  Collective culture"],
+        "answer": [
+          "D.  Collective culture"
+        ],
         "difficulty": 2,
         "shuffle": true,
         "subs": null,
@@ -6170,7 +7133,9 @@
           "C.  Individualism/collectivism",
           "D.  Not mentioned here"
         ],
-        "answer": ["C.  Individualism/collectivism"],
+        "answer": [
+          "C.  Individualism/collectivism"
+        ],
         "difficulty": 2,
         "shuffle": true,
         "subs": null,
@@ -6195,7 +7160,9 @@
           "C.  High uncertainty avoidance",
           "D.  Low uncertainty avoidance"
         ],
-        "answer": ["A.  High power distance"],
+        "answer": [
+          "A.  High power distance"
+        ],
         "difficulty": 2,
         "shuffle": true,
         "subs": null,
@@ -6238,7 +7205,10 @@
         }
       }
     ],
-    "explanation": null,
+    "explanation": {
+      "tip": "",
+      "solution": ""
+    },
     "updated_at": "2014-08-25",
     "status": "valid",
     "translation": {
@@ -6267,15 +7237,27 @@
         "sid": "420000045_1",
         "type": "single",
         "stem": "What is the four-letter ICAO airport code of Frankfurt International Airport?",
-        "options": ["A.  EGLL", "B.  LFPG", "C.  EDDF", "D.  EFRA"],
-        "answer": ["C.  EDDF"],
+        "options": [
+          "A.  EGLL",
+          "B.  LFPG",
+          "C.  EDDF",
+          "D.  EFRA"
+        ],
+        "answer": [
+          "C.  EDDF"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
         "explanation": null,
         "translation": {
           "stem": "法兰克福国际机场的四字 ICAO 机场代码是什么？",
-          "options": ["A. EGLL", "B. LFPG", "C. EDDF", "D. EFRA"]
+          "options": [
+            "A. EGLL",
+            "B. LFPG",
+            "C. EDDF",
+            "D. EFRA"
+          ]
         }
       },
       {
@@ -6288,29 +7270,48 @@
           "C.  cargo traffic",
           "D.  service quality"
         ],
-        "answer": ["A.  passenger traffic"],
+        "answer": [
+          "A.  passenger traffic"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
         "explanation": null,
         "translation": {
           "stem": "根据文章，法兰克福国际机场在______方面在欧洲排名第三。",
-          "options": ["A. 客运量", "B. 目的地", "C. 货运量", "D. 服务质量"]
+          "options": [
+            "A. 客运量",
+            "B. 目的地",
+            "C. 货运量",
+            "D. 服务质量"
+          ]
         }
       },
       {
         "sid": "420000045_3",
         "type": "single",
         "stem": "How many terminals does Frankfurt International Airport have?",
-        "options": ["A. 2", "B. 3", "C. 4", "D. 5"],
-        "answer": ["D. 5"],
+        "options": [
+          "A. 2",
+          "B. 3",
+          "C. 4",
+          "D. 5"
+        ],
+        "answer": [
+          "D. 5"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
         "explanation": null,
         "translation": {
           "stem": "法兰克福国际机场有多少个航站楼？",
-          "options": ["A. 2", "B. 3", "C. 4", "D. 5"]
+          "options": [
+            "A. 2",
+            "B. 3",
+            "C. 4",
+            "D. 5"
+          ]
         }
       },
       {
@@ -6323,14 +7324,21 @@
           "C.  95 minutes",
           "D.  55 minutes"
         ],
-        "answer": ["B.  70 minutes"],
+        "answer": [
+          "B.  70 minutes"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
         "explanation": null,
         "translation": {
           "stem": "从法兰克福到巴黎的直飞航班需要多长时间？",
-          "options": ["A. 90 分钟", "B. 70 分钟", "C. 95 分钟", "D. 55 分钟"]
+          "options": [
+            "A. 90 分钟",
+            "B. 70 分钟",
+            "C. 95 分钟",
+            "D. 55 分钟"
+          ]
         }
       },
       {
@@ -6361,7 +7369,10 @@
         }
       }
     ],
-    "explanation": null,
+    "explanation": {
+      "tip": "",
+      "solution": ""
+    },
     "updated_at": null,
     "status": "valid",
     "translation": {
@@ -6396,7 +7407,9 @@
           "C. There were thunderstorms and heavy rain showers.",
           "D.  There was a light fog."
         ],
-        "answer": ["A.  CAVOK"],
+        "answer": [
+          "A.  CAVOK"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -6421,7 +7434,9 @@
           "C.  on 27 July at 1521",
           "D.  on 27 July at 0319"
         ],
-        "answer": ["C.  on 27 July at 1521"],
+        "answer": [
+          "C.  on 27 July at 1521"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -6446,7 +7461,9 @@
           "C.  provided by dispatcher",
           "D.  provided by Frankfurt ATIS"
         ],
-        "answer": ["D.  provided by Frankfurt ATIS"],
+        "answer": [
+          "D.  provided by Frankfurt ATIS"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -6471,7 +7488,9 @@
           "C.  Land immediately at Frankfurt",
           "D.  Divert to Berlin."
         ],
-        "answer": ["B.  Divert to Munich"],
+        "answer": [
+          "B.  Divert to Munich"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -6514,7 +7533,10 @@
         }
       }
     ],
-    "explanation": null,
+    "explanation": {
+      "tip": "",
+      "solution": ""
+    },
     "updated_at": null,
     "status": "valid",
     "translation": {
@@ -6576,14 +7598,21 @@
           "C.  Refueling hose",
           "D.  refueling nozzle."
         ],
-        "answer": ["B.  refueling adapterring"],
+        "answer": [
+          "B.  refueling adapterring"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
         "explanation": null,
         "translation": {
           "stem": "A420-200 的哪个部分被加油车损坏？",
-          "options": ["A. 机翼", "B. 加油适配环", "C. 加油软管", "D. 加油嘴"]
+          "options": [
+            "A. 机翼",
+            "B. 加油适配环",
+            "C. 加油软管",
+            "D. 加油嘴"
+          ]
         }
       },
       {
@@ -6596,14 +7625,21 @@
           "C.  refueler",
           "D.  passenger"
         ],
-        "answer": ["C.  refueler"],
+        "answer": [
+          "C.  refueler"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
         "explanation": null,
         "translation": {
           "stem": "谁应对此次事故负责？",
-          "options": ["A. 飞行员", "B. 引导员", "C. 加油员", "D. 乘客"]
+          "options": [
+            "A. 飞行员",
+            "B. 引导员",
+            "C. 加油员",
+            "D. 乘客"
+          ]
         }
       },
       {
@@ -6643,7 +7679,9 @@
           "C.  Because he was interrupted by a noise from engine.",
           "D.  Because he was distracted by filing out a paperwork."
         ],
-        "answer": ["D.  Because he was distracted by filing out a paperwork."],
+        "answer": [
+          "D.  Because he was distracted by filing out a paperwork."
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -6659,7 +7697,10 @@
         }
       }
     ],
-    "explanation": null,
+    "explanation": {
+      "tip": "",
+      "solution": ""
+    },
     "updated_at": null,
     "status": "valid",
     "translation": {
@@ -6694,7 +7735,9 @@
           "C. Clear, unambiguity and fast",
           "D.  Mumble, concise and correct"
         ],
-        "answer": ["B. Clear, concise and correct"],
+        "answer": [
+          "B. Clear, concise and correct"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -6719,7 +7762,9 @@
           "C. Use of standard phraseology",
           "D. All of the above"
         ],
-        "answer": ["D. All of the above"],
+        "answer": [
+          "D. All of the above"
+        ],
         "difficulty": "2",
         "shuffle": false,
         "subs": null,
@@ -6744,7 +7789,9 @@
           "C.  Both A and B",
           "D.  no errors"
         ],
-        "answer": ["C.  Both A and B"],
+        "answer": [
+          "C.  Both A and B"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -6769,14 +7816,21 @@
           "C.  distraction",
           "D.  expectation bias"
         ],
-        "answer": ["A.  concentration"],
+        "answer": [
+          "A.  concentration"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
         "explanation": null,
         "translation": {
           "stem": "什么可以帮助管制员发现飞行员的复诵错误？",
-          "options": ["A. 专注", "B. 多任务处理", "C. 分心", "D. 预期偏差"]
+          "options": [
+            "A. 专注",
+            "B. 多任务处理",
+            "C. 分心",
+            "D. 预期偏差"
+          ]
         }
       },
       {
@@ -6789,18 +7843,28 @@
           "C.  Distraction",
           "D.  Expectation"
         ],
-        "answer": ["B.  Confirmation"],
+        "answer": [
+          "B.  Confirmation"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
         "explanation": null,
         "translation": {
           "stem": "防止假设的最佳方法是什么？",
-          "options": ["A. 解释", "B. 确认", "C. 分心", "D. 预期"]
+          "options": [
+            "A. 解释",
+            "B. 确认",
+            "C. 分心",
+            "D. 预期"
+          ]
         }
       }
     ],
-    "explanation": null,
+    "explanation": {
+      "tip": "",
+      "solution": ""
+    },
     "updated_at": null,
     "status": "valid",
     "translation": {
@@ -6829,45 +7893,81 @@
         "sid": "420000049_1",
         "type": "single",
         "stem": "One potentially very serious runway incursion happened every _____ days according to a recent Eurocontrol study.",
-        "options": ["A. 1", "B. 14", "C. 41", "D. 20"],
-        "answer": ["B. 14"],
+        "options": [
+          "A. 1",
+          "B. 14",
+          "C. 41",
+          "D. 20"
+        ],
+        "answer": [
+          "B. 14"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
         "explanation": null,
         "translation": {
           "stem": "根据 Eurocontrol 最近的一项研究，每______天发生一次潜在非常严重的跑道入侵。",
-          "options": ["A. 1", "B. 14", "C. 41", "D. 20"]
+          "options": [
+            "A. 1",
+            "B. 14",
+            "C. 41",
+            "D. 20"
+          ]
         }
       },
       {
         "sid": "420000049_2",
         "type": "single",
         "stem": "The number of reported incursions has been increasing at a _____rate than the number of flights worldwide.",
-        "options": ["A. Faster", "B.  slower", "C.  same", "D.  not mentioned"],
-        "answer": ["A. Faster"],
+        "options": [
+          "A. Faster",
+          "B.  slower",
+          "C.  same",
+          "D.  not mentioned"
+        ],
+        "answer": [
+          "A. Faster"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
         "explanation": null,
         "translation": {
           "stem": "报告的入侵数量以______全球航班数量的速度增长。",
-          "options": ["A. 快于", "B. 慢于", "C. 相同于", "D. 未提及"]
+          "options": [
+            "A. 快于",
+            "B. 慢于",
+            "C. 相同于",
+            "D. 未提及"
+          ]
         }
       },
       {
         "sid": "420000049_3",
         "type": "single",
         "stem": "What is the average number of runway incursions per million flights from 1998 to 2003 according to EuroControl Statistical Reference Area’s data.",
-        "options": ["A. 10", "B. 21", "C. 23", "D. 17"],
-        "answer": ["D. 17"],
+        "options": [
+          "A. 10",
+          "B. 21",
+          "C. 23",
+          "D. 17"
+        ],
+        "answer": [
+          "D. 17"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
         "explanation": null,
         "translation": {
           "stem": "根据 EuroControl 统计参考区域的数据，1998 年至 2003 年间每百万次飞行的平均跑道入侵次数是多少？",
-          "options": ["A. 10", "B. 21", "C. 23", "D. 17"]
+          "options": [
+            "A. 10",
+            "B. 21",
+            "C. 23",
+            "D. 17"
+          ]
         }
       },
       {
@@ -6880,33 +7980,55 @@
           "C.  Controller",
           "D.  All of the above"
         ],
-        "answer": ["D.  All of the above"],
+        "answer": [
+          "D.  All of the above"
+        ],
         "difficulty": "2",
         "shuffle": false,
         "subs": null,
         "explanation": null,
         "translation": {
           "stem": "根据文章，谁应对跑道入侵负责？",
-          "options": ["A. 飞行员", "B. 车辆驾驶员", "C. 管制员", "D. 以上所有"]
+          "options": [
+            "A. 飞行员",
+            "B. 车辆驾驶员",
+            "C. 管制员",
+            "D. 以上所有"
+          ]
         }
       },
       {
         "sid": "420000049_5",
         "type": "single",
         "stem": "How many levels of runway incursions are there in terms of seriousness?",
-        "options": ["A. 31", "B. 34", "C. 4", "D. 30"],
-        "answer": ["C. 4"],
+        "options": [
+          "A. 31",
+          "B. 34",
+          "C. 4",
+          "D. 30"
+        ],
+        "answer": [
+          "C. 4"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
         "explanation": null,
         "translation": {
           "stem": "根据严重程度，跑道入侵有多少个等级？",
-          "options": ["A. 31", "B. 34", "C. 4", "D. 30"]
+          "options": [
+            "A. 31",
+            "B. 34",
+            "C. 4",
+            "D. 30"
+          ]
         }
       }
     ],
-    "explanation": null,
+    "explanation": {
+      "tip": "",
+      "solution": ""
+    },
     "updated_at": null,
     "status": "valid",
     "translation": {
@@ -6941,14 +8063,21 @@
           "C.  flight safety",
           "D.  all of the above"
         ],
-        "answer": ["C.  flight safety"],
+        "answer": [
+          "C.  flight safety"
+        ],
         "difficulty": 2,
         "shuffle": false,
         "subs": null,
         "explanation": null,
         "translation": {
           "stem": "引入复诵要求的目的是什么？",
-          "options": ["A. 效率", "B. 质量", "C. 飞行安全", "D. 以上所有"]
+          "options": [
+            "A. 效率",
+            "B. 质量",
+            "C. 飞行安全",
+            "D. 以上所有"
+          ]
         }
       },
       {
@@ -6988,14 +8117,21 @@
           "C.  vehicle driver",
           "D.  controller"
         ],
-        "answer": ["D.  controller"],
+        "answer": [
+          "D.  controller"
+        ],
         "difficulty": 2,
         "shuffle": true,
         "subs": null,
         "explanation": null,
         "translation": {
           "stem": "谁应监听飞行员的复诵以确认许可或指令已被飞行机组正确接收？",
-          "options": ["A. 飞行员", "B. 签派员", "C. 车辆驾驶员", "D. 管制员"]
+          "options": [
+            "A. 飞行员",
+            "B. 签派员",
+            "C. 车辆驾驶员",
+            "D. 管制员"
+          ]
         }
       },
       {
@@ -7008,7 +8144,9 @@
           "C.  ATC route clearance",
           "D.  heading"
         ],
-        "answer": ["B.  wind data"],
+        "answer": [
+          "B.  wind data"
+        ],
         "difficulty": 2,
         "shuffle": true,
         "subs": null,
@@ -7033,7 +8171,9 @@
           "C.  Either A or B",
           "D.  Not mentioned"
         ],
-        "answer": ["C.  Either A or B"],
+        "answer": [
+          "C.  Either A or B"
+        ],
         "difficulty": 2,
         "shuffle": false,
         "subs": null,
@@ -7049,7 +8189,10 @@
         }
       }
     ],
-    "explanation": null,
+    "explanation": {
+      "tip": "",
+      "solution": ""
+    },
     "updated_at": "2014-08-25",
     "status": "valid",
     "translation": {
@@ -7084,14 +8227,21 @@
           "C.  The flight engineer",
           "D.  Ground staff"
         ],
-        "answer": ["A.  The Pilot"],
+        "answer": [
+          "A.  The Pilot"
+        ],
         "difficulty": 2,
         "shuffle": true,
         "subs": null,
         "explanation": null,
         "translation": {
           "stem": "谁避免了危险接近？",
-          "options": ["A. 飞行员", "B. 管制员", "C. 飞行工程师", "D. 地面人员"]
+          "options": [
+            "A. 飞行员",
+            "B. 管制员",
+            "C. 飞行工程师",
+            "D. 地面人员"
+          ]
         }
       },
       {
@@ -7104,7 +8254,9 @@
           "C.  Because the controllers forgot the conflicting traffic.",
           "D.  Not mentioned."
         ],
-        "answer": ["D.  Not mentioned."],
+        "answer": [
+          "D.  Not mentioned."
+        ],
         "difficulty": 2,
         "shuffle": true,
         "subs": null,
@@ -7123,15 +8275,27 @@
         "sid": "420000051_3",
         "type": "single",
         "stem": "How many runway incursions occurred before June 9 in 1995 at Logan airport?",
-        "options": ["A. 5", "B. 7", "C. 9", "D. 3"],
-        "answer": ["B. 7"],
+        "options": [
+          "A. 5",
+          "B. 7",
+          "C. 9",
+          "D. 3"
+        ],
+        "answer": [
+          "B. 7"
+        ],
         "difficulty": 2,
         "shuffle": true,
         "subs": null,
         "explanation": null,
         "translation": {
           "stem": "1995 年 6 月 9 日之前，洛根机场发生了多少起跑道入侵事件？",
-          "options": ["A. 5", "B. 7", "C. 9", "D. 3"]
+          "options": [
+            "A. 5",
+            "B. 7",
+            "C. 9",
+            "D. 3"
+          ]
         }
       },
       {
@@ -7171,7 +8335,9 @@
           "C.  A Near Collision",
           "D.  A Hero pilot"
         ],
-        "answer": ["C.  A Near Collision"],
+        "answer": [
+          "C.  A Near Collision"
+        ],
         "difficulty": 2,
         "shuffle": true,
         "subs": null,
@@ -7187,7 +8353,10 @@
         }
       }
     ],
-    "explanation": null,
+    "explanation": {
+      "tip": "",
+      "solution": ""
+    },
     "updated_at": "2014-08-25",
     "status": "valid",
     "translation": {
@@ -7216,15 +8385,27 @@
         "sid": "420000052_1",
         "type": "single",
         "stem": "How many types of fog are stated in the passage?",
-        "options": ["A. 3", "B. 4", "C. 5", "D. 6"],
-        "answer": ["C. 5"],
+        "options": [
+          "A. 3",
+          "B. 4",
+          "C. 5",
+          "D. 6"
+        ],
+        "answer": [
+          "C. 5"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
         "explanation": null,
         "translation": {
           "stem": "文章陈述了多少种类型的雾？",
-          "options": ["A. 3", "B. 4", "C. 5", "D. 6"]
+          "options": [
+            "A. 3",
+            "B. 4",
+            "C. 5",
+            "D. 6"
+          ]
         }
       },
       {
@@ -7237,7 +8418,9 @@
           "C.  When moist, stable air being cooled by being moved up a sloping land surface.",
           "D.  When cold air moves over much warmer water."
         ],
-        "answer": ["A.  When moist air moves over colder ground or water."],
+        "answer": [
+          "A.  When moist air moves over colder ground or water."
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -7262,14 +8445,21 @@
           "C.  upslope fog",
           "D.  steam fog"
         ],
-        "answer": ["D.  steam fog"],
+        "answer": [
+          "D.  steam fog"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
         "explanation": null,
         "translation": {
           "stem": "哪种类型的雾也被称为“海烟”？",
-          "options": ["A. 辐射雾", "B. 平流雾", "C. 上坡雾", "D. 蒸汽雾"]
+          "options": [
+            "A. 辐射雾",
+            "B. 平流雾",
+            "C. 上坡雾",
+            "D. 蒸汽雾"
+          ]
         }
       },
       {
@@ -7282,14 +8472,21 @@
           "C.  Precipitation",
           "D.  Both A and C"
         ],
-        "answer": ["B.  Turbulence"],
+        "answer": [
+          "B.  Turbulence"
+        ],
         "difficulty": "2",
         "shuffle": false,
         "subs": null,
         "explanation": null,
         "translation": {
           "stem": "蒸汽雾对飞行有什么不利影响？",
-          "options": ["A. 闪电", "B. 颠簸", "C. 降水", "D. A 和 C"]
+          "options": [
+            "A. 闪电",
+            "B. 颠簸",
+            "C. 降水",
+            "D. A 和 C"
+          ]
         }
       },
       {
@@ -7320,7 +8517,10 @@
         }
       }
     ],
-    "explanation": null,
+    "explanation": {
+      "tip": "",
+      "solution": ""
+    },
     "updated_at": null,
     "status": "valid",
     "translation": {
@@ -7355,7 +8555,9 @@
           "C.  He was inspecting de-icing of the aircraft.",
           "D.  He was a member of the cabin crew."
         ],
-        "answer": ["B.  He was on board the aircraft as a passenger."],
+        "answer": [
+          "B.  He was on board the aircraft as a passenger."
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -7380,7 +8582,9 @@
           "C.  The first officer failed to take his advice into account.",
           "D.  De-icing was necessary but not carried out."
         ],
-        "answer": ["D.  De-icing was necessary but not carried out."],
+        "answer": [
+          "D.  De-icing was necessary but not carried out."
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -7405,7 +8609,9 @@
           "C.  an instruction from the controller",
           "D.  the pilot’s observation of icing on the wing"
         ],
-        "answer": ["A.  Advice from the pilot of the following aircraft"],
+        "answer": [
+          "A.  Advice from the pilot of the following aircraft"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -7457,18 +8663,28 @@
           "C.  relieved",
           "D.  completely satisfied"
         ],
-        "answer": ["C.  relieved"],
+        "answer": [
+          "C.  relieved"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
         "explanation": null,
         "translation": {
           "stem": "当机长宣布飞机将返回停机位时，作者感觉如何？",
-          "options": ["A. 失望", "B. 愤慨", "C. 宽慰", "D. 完全满意"]
+          "options": [
+            "A. 失望",
+            "B. 愤慨",
+            "C. 宽慰",
+            "D. 完全满意"
+          ]
         }
       }
     ],
-    "explanation": null,
+    "explanation": {
+      "tip": "",
+      "solution": ""
+    },
     "updated_at": null,
     "status": "valid",
     "translation": {
@@ -7503,7 +8719,9 @@
           "C.  only at a large angle of attack",
           "D.  at any angle of attack or airspeed"
         ],
-        "answer": ["D.  at any angle of attack or airspeed"],
+        "answer": [
+          "D.  at any angle of attack or airspeed"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -7528,7 +8746,9 @@
           "C.  the aircraft will not be able to recover from the stall",
           "D.  the pilot should increase the angle of attack to get more lift"
         ],
-        "answer": ["B.  lift is no longer sufficient to counteract weight"],
+        "answer": [
+          "B.  lift is no longer sufficient to counteract weight"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -7580,7 +8800,9 @@
           "C.  The wingtip and wing root stall at the same time.",
           "D.  None of the above."
         ],
-        "answer": ["B.  The wing root stalls first."],
+        "answer": [
+          "B.  The wing root stalls first."
+        ],
         "difficulty": "2",
         "shuffle": false,
         "subs": null,
@@ -7605,7 +8827,9 @@
           "C.  Decreasing the angle of attack",
           "D.  Both A and B."
         ],
-        "answer": ["D.  Both A and B."],
+        "answer": [
+          "D.  Both A and B."
+        ],
         "difficulty": "2",
         "shuffle": false,
         "subs": null,
@@ -7621,7 +8845,10 @@
         }
       }
     ],
-    "explanation": null,
+    "explanation": {
+      "tip": "",
+      "solution": ""
+    },
     "updated_at": null,
     "status": "valid",
     "translation": {
@@ -7683,7 +8910,9 @@
           "C.  Maintain FL100.",
           "D.  Turn to heading 100."
         ],
-        "answer": ["B.  Turn to heading 080."],
+        "answer": [
+          "B.  Turn to heading 080."
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -7762,7 +8991,9 @@
           "C.  The aircraft was further delayed.",
           "D.  Nothing serious occurred."
         ],
-        "answer": ["D.  Nothing serious occurred."],
+        "answer": [
+          "D.  Nothing serious occurred."
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -7778,7 +9009,10 @@
         }
       }
     ],
-    "explanation": null,
+    "explanation": {
+      "tip": "",
+      "solution": ""
+    },
     "updated_at": null,
     "status": "valid",
     "translation": {
@@ -7813,7 +9047,9 @@
           "C.  malfunction of airborne equipment",
           "D.  air miss"
         ],
-        "answer": ["B.  potential loss of separation"],
+        "answer": [
+          "B.  potential loss of separation"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -7838,7 +9074,9 @@
           "C.  3 o’clock",
           "D.  6 o’clock"
         ],
-        "answer": ["B.  9 o’clock"],
+        "answer": [
+          "B.  9 o’clock"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -7863,7 +9101,9 @@
           "C.  The B737 pilot.",
           "D.  Airborne equipment."
         ],
-        "answer": ["A.  The controller."],
+        "answer": [
+          "A.  The controller."
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -7888,7 +9128,9 @@
           "C.  The two pilots’ situational awareness.",
           "D.  The good performance of the two aircraft."
         ],
-        "answer": ["B.  The coordinated RAs."],
+        "answer": [
+          "B.  The coordinated RAs."
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -7913,7 +9155,9 @@
           "C.  100 feet.",
           "D.  None of the above."
         ],
-        "answer": ["A.  1400 feet."],
+        "answer": [
+          "A.  1400 feet."
+        ],
         "difficulty": "2",
         "shuffle": false,
         "subs": null,
@@ -7929,7 +9173,10 @@
         }
       }
     ],
-    "explanation": null,
+    "explanation": {
+      "tip": "",
+      "solution": ""
+    },
     "updated_at": null,
     "status": "valid",
     "translation": {
@@ -7964,14 +9211,21 @@
           "C.  alertness",
           "D.  dizziness"
         ],
-        "answer": ["A.  sleepiness"],
+        "answer": [
+          "A.  sleepiness"
+        ],
         "difficulty": 2,
         "shuffle": true,
         "subs": null,
         "explanation": null,
         "translation": {
           "stem": "第一段中的“drowsiness”是什么意思？",
-          "options": ["A. 困倦", "B. 察觉", "C. 警觉", "D. 头晕"]
+          "options": [
+            "A. 困倦",
+            "B. 察觉",
+            "C. 警觉",
+            "D. 头晕"
+          ]
         }
       },
       {
@@ -7984,7 +9238,9 @@
           "C.  Naps may be sleep of quite good qualities.",
           "D.  All of the above."
         ],
-        "answer": ["D.  All of the above."],
+        "answer": [
+          "D.  All of the above."
+        ],
         "difficulty": 2,
         "shuffle": false,
         "subs": null,
@@ -8009,7 +9265,9 @@
           "C.  They should take turns to take a nap.",
           "D.  They can schedule their naps in whatever way they want."
         ],
-        "answer": ["C.  They should take turns to take a nap."],
+        "answer": [
+          "C.  They should take turns to take a nap."
+        ],
         "difficulty": 2,
         "shuffle": true,
         "subs": null,
@@ -8034,7 +9292,9 @@
           "C.  To slow down the pace of something.",
           "D.  To quicken the pace of something."
         ],
-        "answer": ["A.  To let something happen at the same time."],
+        "answer": [
+          "A.  To let something happen at the same time."
+        ],
         "difficulty": 2,
         "shuffle": true,
         "subs": null,
@@ -8059,7 +9319,9 @@
           "C.  Naps may be taken within one hour before descent.",
           "D.  Naps can help shorten pilots’ reaction time."
         ],
-        "answer": ["C.  Naps may be taken within one hour before descent."],
+        "answer": [
+          "C.  Naps may be taken within one hour before descent."
+        ],
         "difficulty": 2,
         "shuffle": true,
         "subs": null,
@@ -8075,7 +9337,10 @@
         }
       }
     ],
-    "explanation": null,
+    "explanation": {
+      "tip": "",
+      "solution": ""
+    },
     "updated_at": "2014-08-25",
     "status": "valid",
     "translation": {
@@ -8110,7 +9375,9 @@
           "C.  Head-down work.",
           "D.  Searching for responding to abnormal situations."
         ],
-        "answer": ["B.  Competing activities."],
+        "answer": [
+          "B.  Competing activities."
+        ],
         "difficulty": 2,
         "shuffle": true,
         "subs": null,
@@ -8135,7 +9402,9 @@
           "C.  a light",
           "D.  the autopilot"
         ],
-        "answer": ["A.  failure to notice a mis-operation"],
+        "answer": [
+          "A.  failure to notice a mis-operation"
+        ],
         "difficulty": 2,
         "shuffle": true,
         "subs": null,
@@ -8160,7 +9429,9 @@
           "C. treat interruptions as not allowed, and assign pilot-flying and pilot-not-flying responsibilities.",
           "D.  all of the above."
         ],
-        "answer": ["D.  all of the above."],
+        "answer": [
+          "D.  all of the above."
+        ],
         "difficulty": 2,
         "shuffle": false,
         "subs": null,
@@ -8212,7 +9483,9 @@
           "C.  When an automatic process must not be adopted in order to avoid habit capture.",
           "D.  All of the above."
         ],
-        "answer": ["D.  All of the above."],
+        "answer": [
+          "D.  All of the above."
+        ],
         "difficulty": 2,
         "shuffle": false,
         "subs": null,
@@ -8228,7 +9501,10 @@
         }
       }
     ],
-    "explanation": null,
+    "explanation": {
+      "tip": "",
+      "solution": ""
+    },
     "updated_at": "2014-08-25",
     "status": "valid",
     "translation": {
@@ -8263,7 +9539,9 @@
           "C.  At least two.",
           "D.  More than two."
         ],
-        "answer": ["B.  One, even two."],
+        "answer": [
+          "B.  One, even two."
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -8288,14 +9566,21 @@
           "C.  terminal building",
           "D.  airline’s counter"
         ],
-        "answer": ["C.  terminal building"],
+        "answer": [
+          "C.  terminal building"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
         "explanation": null,
         "translation": {
           "stem": "当乘客到达机场时，他们在______等候航班。",
-          "options": ["A. 登机口", "B. 跑道", "C. 航站楼", "D. 航空公司柜台"]
+          "options": [
+            "A. 登机口",
+            "B. 跑道",
+            "C. 航站楼",
+            "D. 航空公司柜台"
+          ]
         }
       },
       {
@@ -8308,7 +9593,9 @@
           "C.  Pay for their over-weight luggage.",
           "D.  Check their boarding card."
         ],
-        "answer": ["A.  Go through departure gates."],
+        "answer": [
+          "A.  Go through departure gates."
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -8333,7 +9620,9 @@
           "C.  Air traffic controllers",
           "D.  Aircraft engineers"
         ],
-        "answer": ["C.  Air traffic controllers"],
+        "answer": [
+          "C.  Air traffic controllers"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -8358,7 +9647,9 @@
           "C.  A mistake made by a controller in the tower may lead to a large number of people injured or killed.",
           "D.  The pilot can see the runway clearly at night."
         ],
-        "answer": ["D.  The pilot can see the runway clearly at night."],
+        "answer": [
+          "D.  The pilot can see the runway clearly at night."
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -8374,7 +9665,10 @@
         }
       }
     ],
-    "explanation": null,
+    "explanation": {
+      "tip": "",
+      "solution": ""
+    },
     "updated_at": null,
     "status": "valid",
     "translation": {
@@ -8409,7 +9703,9 @@
           "C.  are advised to fasten their seatbelts",
           "D.  must unfasten the seatbelts"
         ],
-        "answer": ["C.  are advised to fasten their seatbelts"],
+        "answer": [
+          "C.  are advised to fasten their seatbelts"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -8434,14 +9730,21 @@
           "C.  the business class",
           "D.  the economy class"
         ],
-        "answer": ["B.  the cockpit"],
+        "answer": [
+          "B.  the cockpit"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
         "explanation": null,
         "translation": {
           "stem": "客舱布局包括三个部分。以下哪项除外______。",
-          "options": ["A. 头等舱", "B. 驾驶舱", "C. 商务舱", "D. 经济舱"]
+          "options": [
+            "A. 头等舱",
+            "B. 驾驶舱",
+            "C. 商务舱",
+            "D. 经济舱"
+          ]
         }
       },
       {
@@ -8454,7 +9757,9 @@
           "C.  serve the meals",
           "D.  give out headsets"
         ],
-        "answer": ["A.  collect the passengers’ passports"],
+        "answer": [
+          "A.  collect the passengers’ passports"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -8479,14 +9784,21 @@
           "C.  the chicken and beef",
           "D.  the snack"
         ],
-        "answer": ["C.  the chicken and beef"],
+        "answer": [
+          "C.  the chicken and beef"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
         "explanation": null,
         "translation": {
           "stem": "在餐食前，客舱乘务员应在厨房的烤箱中加热______。",
-          "options": ["A. 巧克力慕斯", "B. 沙拉", "C. 鸡肉和牛肉", "D. 小吃"]
+          "options": [
+            "A. 巧克力慕斯",
+            "B. 沙拉",
+            "C. 鸡肉和牛肉",
+            "D. 小吃"
+          ]
         }
       },
       {
@@ -8499,7 +9811,9 @@
           "C.  have a chat in the cabin",
           "D.  have a rest in turn"
         ],
-        "answer": ["D.  have a rest in turn"],
+        "answer": [
+          "D.  have a rest in turn"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -8515,7 +9829,10 @@
         }
       }
     ],
-    "explanation": null,
+    "explanation": {
+      "tip": "",
+      "solution": ""
+    },
     "updated_at": null,
     "status": "valid",
     "translation": {
@@ -8550,14 +9867,21 @@
           "C.  send short messages",
           "D.  all of the above"
         ],
-        "answer": ["D.  all of the above"],
+        "answer": [
+          "D.  all of the above"
+        ],
         "difficulty": "2",
         "shuffle": false,
         "subs": null,
         "explanation": null,
         "translation": {
           "stem": "根据报道，到 2009 年底乘客可以在飞机上______。",
-          "options": ["A. 打电话", "B. 上网", "C. 发短信", "D. 以上所有"]
+          "options": [
+            "A. 打电话",
+            "B. 上网",
+            "C. 发短信",
+            "D. 以上所有"
+          ]
         }
       },
       {
@@ -8570,7 +9894,9 @@
           "C.  after the Beijing Olympics",
           "D.  on two aircrafts"
         ],
-        "answer": ["A.  on two routes"],
+        "answer": [
+          "A.  on two routes"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -8595,7 +9921,9 @@
           "C.  using devices provided by China Mobile",
           "D.  using their own computers"
         ],
-        "answer": ["B.  using their own electronic devices"],
+        "answer": [
+          "B.  using their own electronic devices"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -8620,7 +9948,9 @@
           "C.  when the plane is flying at less than 3,000 m in above sea level",
           "D.  when the plane is flying at 4,000 m above sea level"
         ],
-        "answer": ["D.  when the plane is flying at 4,000 m above sea level"],
+        "answer": [
+          "D.  when the plane is flying at 4,000 m above sea level"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -8645,7 +9975,9 @@
           "C.  higher cell phone fee",
           "D.  lower cell phone fee"
         ],
-        "answer": ["C.  higher cell phone fee"],
+        "answer": [
+          "C.  higher cell phone fee"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -8661,7 +9993,10 @@
         }
       }
     ],
-    "explanation": null,
+    "explanation": {
+      "tip": "",
+      "solution": ""
+    },
     "updated_at": null,
     "status": "valid",
     "translation": {
@@ -8696,14 +10031,21 @@
           "C.  be conscious of",
           "D.  occur"
         ],
-        "answer": ["D.  occur"],
+        "answer": [
+          "D.  occur"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
         "explanation": null,
         "translation": {
           "stem": "第一段中使用的一些词与“be aware of”含义相似，除了______。",
-          "options": ["A. know", "B. notice", "C. be conscious of", "D. occur"]
+          "options": [
+            "A. know",
+            "B. notice",
+            "C. be conscious of",
+            "D. occur"
+          ]
         }
       },
       {
@@ -8716,7 +10058,9 @@
           "C.  to increase speed",
           "D.  to reduce speed"
         ],
-        "answer": ["B.  to move slowly"],
+        "answer": [
+          "B.  to move slowly"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -8741,7 +10085,9 @@
           "C.  Not to use the the standard instrument departure.",
           "D.  Not to use the the standard missed procedure."
         ],
-        "answer": ["A.  Not to use the standard approach procedure."],
+        "answer": [
+          "A.  Not to use the standard approach procedure."
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -8793,18 +10139,28 @@
           "C.  arrival",
           "D.  missed approach"
         ],
-        "answer": ["D.  missed approach"],
+        "answer": [
+          "D.  missed approach"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
         "explanation": null,
         "translation": {
           "stem": "以下哪项与“go around”含义相同？",
-          "options": ["A. 爬升", "B. 离场", "C. 进场", "D. 复飞"]
+          "options": [
+            "A. 爬升",
+            "B. 离场",
+            "C. 进场",
+            "D. 复飞"
+          ]
         }
       }
     ],
-    "explanation": null,
+    "explanation": {
+      "tip": "",
+      "solution": ""
+    },
     "updated_at": null,
     "status": "valid",
     "translation": {
@@ -8893,14 +10249,21 @@
           "C.  drizzle",
           "D.  Heavy rain"
         ],
-        "answer": ["C.  drizzle"],
+        "answer": [
+          "C.  drizzle"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
         "explanation": null,
         "translation": {
           "stem": "进行复飞的最常见原因之一是天气，其中不包括______。",
-          "options": ["A. 风切变", "B. 低能见度", "C. 毛毛雨", "D. 大雨"]
+          "options": [
+            "A. 风切变",
+            "B. 低能见度",
+            "C. 毛毛雨",
+            "D. 大雨"
+          ]
         }
       },
       {
@@ -8913,7 +10276,9 @@
           "C.  Descend at own discretion",
           "D.  descent to lower level"
         ],
-        "answer": ["A.  to hurry descent"],
+        "answer": [
+          "A.  to hurry descent"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -8938,7 +10303,9 @@
           "C.  confirm wether they have complete the check",
           "D.  keep silence"
         ],
-        "answer": ["D.  keep silence"],
+        "answer": [
+          "D.  keep silence"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -8954,7 +10321,10 @@
         }
       }
     ],
-    "explanation": null,
+    "explanation": {
+      "tip": "",
+      "solution": ""
+    },
     "updated_at": null,
     "status": "valid",
     "translation": {
@@ -8989,14 +10359,21 @@
           "C.  guidelines or standards",
           "D. tradition"
         ],
-        "answer": ["C.  guidelines or standards"],
+        "answer": [
+          "C.  guidelines or standards"
+        ],
         "difficulty": 2,
         "shuffle": true,
         "subs": null,
         "explanation": null,
         "translation": {
           "stem": "第一段中的“parameters”是什么意思？",
-          "options": ["A. 建议", "B. 法律", "C. 指导方针或标准", "D. 传统"]
+          "options": [
+            "A. 建议",
+            "B. 法律",
+            "C. 指导方针或标准",
+            "D. 传统"
+          ]
         }
       },
       {
@@ -9036,7 +10413,9 @@
           "C.  Electric power",
           "D.  muscle strength"
         ],
-        "answer": ["B.  engine speed, thrust lever position"],
+        "answer": [
+          "B.  engine speed, thrust lever position"
+        ],
         "difficulty": 2,
         "shuffle": true,
         "subs": null,
@@ -9055,15 +10434,27 @@
         "sid": "420000064_4",
         "type": "single",
         "stem": "What is the meaning of “prior to”?",
-        "options": ["A.  after", "B.  later", "C.  since", "D.  before"],
-        "answer": ["D.  before"],
+        "options": [
+          "A.  after",
+          "B.  later",
+          "C.  since",
+          "D.  before"
+        ],
+        "answer": [
+          "D.  before"
+        ],
         "difficulty": 2,
         "shuffle": true,
         "subs": null,
         "explanation": null,
         "translation": {
           "stem": "“prior to”是什么意思？",
-          "options": ["A. 之后", "B. 较晚", "C. 自从", "D. 之前"]
+          "options": [
+            "A. 之后",
+            "B. 较晚",
+            "C. 自从",
+            "D. 之前"
+          ]
         }
       },
       {
@@ -9076,7 +10467,9 @@
           "C.  check the level in contrast with range",
           "D.  check the height relative to the range"
         ],
-        "answer": ["A.  check altitude in relation to the range"],
+        "answer": [
+          "A.  check altitude in relation to the range"
+        ],
         "difficulty": 2,
         "shuffle": true,
         "subs": null,
@@ -9092,7 +10485,10 @@
         }
       }
     ],
-    "explanation": null,
+    "explanation": {
+      "tip": "",
+      "solution": ""
+    },
     "updated_at": "2014-08-25",
     "status": "valid",
     "translation": {
@@ -9127,7 +10523,9 @@
           "C.  approach briefing list",
           "D.  runway checklist"
         ],
-        "answer": ["C.  approach briefing list"],
+        "answer": [
+          "C.  approach briefing list"
+        ],
         "difficulty": 2,
         "shuffle": true,
         "subs": null,
@@ -9152,7 +10550,9 @@
           "C.  Conditions which will require a go-around.",
           "D.  Conditions which will happen after a go-around."
         ],
-        "answer": ["C.  Conditions which will require a go-around."],
+        "answer": [
+          "C.  Conditions which will require a go-around."
+        ],
         "difficulty": 2,
         "shuffle": true,
         "subs": null,
@@ -9177,14 +10577,21 @@
           "C.  Chart date",
           "D.  runway offset"
         ],
-        "answer": ["B.  bank angle"],
+        "answer": [
+          "B.  bank angle"
+        ],
         "difficulty": 2,
         "shuffle": true,
         "subs": null,
         "explanation": null,
         "translation": {
           "stem": "进近简令中不建议哪项？",
-          "options": ["A. 导航设备", "B. 坡度角", "C. 航图日期", "D. 跑道偏置"]
+          "options": [
+            "A. 导航设备",
+            "B. 坡度角",
+            "C. 航图日期",
+            "D. 跑道偏置"
+          ]
         }
       },
       {
@@ -9197,7 +10604,9 @@
           "C.  radio altitude",
           "D.  crossing altitude"
         ],
-        "answer": ["D.  crossing altitude"],
+        "answer": [
+          "D.  crossing altitude"
+        ],
         "difficulty": 2,
         "shuffle": true,
         "subs": null,
@@ -9222,18 +10631,28 @@
           "C.  be examined",
           "D.  be trained"
         ],
-        "answer": ["A.  be engaged in"],
+        "answer": [
+          "A.  be engaged in"
+        ],
         "difficulty": 2,
         "shuffle": true,
         "subs": null,
         "explanation": null,
         "translation": {
           "stem": "哪个词与“all crew members must be involved during the discussion of the plan”含义相同？",
-          "options": ["A. 参与", "B. 被排除", "C. 被检查", "D. 被培训"]
+          "options": [
+            "A. 参与",
+            "B. 被排除",
+            "C. 被检查",
+            "D. 被培训"
+          ]
         }
       }
     ],
-    "explanation": null,
+    "explanation": {
+      "tip": "",
+      "solution": ""
+    },
     "updated_at": "2014-08-25",
     "status": "valid",
     "translation": {
@@ -9268,7 +10687,9 @@
           "C.  a runway with slope",
           "D.  a runway with snow"
         ],
-        "answer": ["D.  a runway with snow"],
+        "answer": [
+          "D.  a runway with snow"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -9293,7 +10714,9 @@
           "C.  either RWY 42R or RWY 22",
           "D.  neither RWY 42R or RWY 22"
         ],
-        "answer": ["A.  RWY 42R"],
+        "answer": [
+          "A.  RWY 42R"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -9318,14 +10741,21 @@
           "C.  economy",
           "D.  environment"
         ],
-        "answer": ["B.  safety"],
+        "answer": [
+          "B.  safety"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
         "explanation": null,
         "translation": {
           "stem": "根据文章，进场期间哪个因素应优先考虑？",
-          "options": ["A. 准时", "B. 安全", "C. 经济", "D. 环境"]
+          "options": [
+            "A. 准时",
+            "B. 安全",
+            "C. 经济",
+            "D. 环境"
+          ]
         }
       },
       {
@@ -9338,7 +10768,9 @@
           "C.  ATC clearance and area terrain",
           "D.  weather and runway conditions"
         ],
-        "answer": ["B.  terrain and minimum safe altitude."],
+        "answer": [
+          "B.  terrain and minimum safe altitude."
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -9363,7 +10795,9 @@
           "C.  Pilots should be alert to risk factors.",
           "D.  Pilots should plan an on-time arrival."
         ],
-        "answer": ["C.  Pilots should be alert to risk factors."],
+        "answer": [
+          "C.  Pilots should be alert to risk factors."
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -9379,7 +10813,10 @@
         }
       }
     ],
-    "explanation": null,
+    "explanation": {
+      "tip": "",
+      "solution": ""
+    },
     "updated_at": null,
     "status": "valid",
     "translation": {
@@ -9414,7 +10851,9 @@
           "C.  pull up or go around",
           "D.  deteriorating conditions"
         ],
-        "answer": ["C.  pull up or go around"],
+        "answer": [
+          "C.  pull up or go around"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -9439,7 +10878,9 @@
           "C.  negligent flight crew",
           "D.  company procedure manual"
         ],
-        "answer": ["D.  company procedure manual"],
+        "answer": [
+          "D.  company procedure manual"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -9464,7 +10905,9 @@
           "C.  Evaluate environment conditions.",
           "D.  Check approach procedure."
         ],
-        "answer": ["A.  Execute the pull up action."],
+        "answer": [
+          "A.  Execute the pull up action."
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -9489,14 +10932,21 @@
           "C.  CFIT",
           "D.  TAWS"
         ],
-        "answer": ["A.  premature GPWS"],
+        "answer": [
+          "A.  premature GPWS"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
         "explanation": null,
         "translation": {
           "stem": "根据文章，哪个警告系统不太可靠？",
-          "options": ["A. 早期 GPWS", "B. 增强型 GPWS", "C. CFIT", "D. TAWS"]
+          "options": [
+            "A. 早期 GPWS",
+            "B. 增强型 GPWS",
+            "C. CFIT",
+            "D. TAWS"
+          ]
         }
       },
       {
@@ -9509,7 +10959,9 @@
           "C.  vertical airflow",
           "D.  attacking virus"
         ],
-        "answer": ["A.  updated edition"],
+        "answer": [
+          "A.  updated edition"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -9525,7 +10977,10 @@
         }
       }
     ],
-    "explanation": null,
+    "explanation": {
+      "tip": "",
+      "solution": ""
+    },
     "updated_at": null,
     "status": "valid",
     "translation": {
@@ -9560,7 +11015,9 @@
           "C.  mist",
           "D.  wind shear"
         ],
-        "answer": ["A.  ceiling and visibility below minimum"],
+        "answer": [
+          "A.  ceiling and visibility below minimum"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -9585,14 +11042,21 @@
           "C.  pilot flying",
           "D.  controller"
         ],
-        "answer": ["A.  pilot in command"],
+        "answer": [
+          "A.  pilot in command"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
         "explanation": null,
         "translation": {
           "stem": "谁做出了复飞的决定？",
-          "options": ["A. 机长", "B. 副驾驶", "C. 操纵飞行员", "D. 管制员"]
+          "options": [
+            "A. 机长",
+            "B. 副驾驶",
+            "C. 操纵飞行员",
+            "D. 管制员"
+          ]
         }
       },
       {
@@ -9605,14 +11069,21 @@
           "C.  skid away from",
           "D.  touchdown on"
         ],
-        "answer": ["C.  skid away from"],
+        "answer": [
+          "C.  skid away from"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
         "explanation": null,
         "translation": {
           "stem": "第三段中哪个词与“veer off”含义相同？",
-          "options": ["A. 脱离", "B. 撤离", "C. 偏出", "D. 接地点在"]
+          "options": [
+            "A. 脱离",
+            "B. 撤离",
+            "C. 偏出",
+            "D. 接地点在"
+          ]
         }
       },
       {
@@ -9625,7 +11096,9 @@
           "C.  thin ice on the wing’s leading edges",
           "D.  drifting above the glide slope."
         ],
-        "answer": ["C.  thin ice on the wing’s leading edges"],
+        "answer": [
+          "C.  thin ice on the wing’s leading edges"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -9650,7 +11123,9 @@
           "C.  aircraft performance limitation",
           "D.  improper instruction by the controller"
         ],
-        "answer": ["D.  improper instruction by the controller"],
+        "answer": [
+          "D.  improper instruction by the controller"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -9666,7 +11141,10 @@
         }
       }
     ],
-    "explanation": null,
+    "explanation": {
+      "tip": "",
+      "solution": ""
+    },
     "updated_at": null,
     "status": "valid",
     "translation": {
@@ -9701,7 +11179,9 @@
           "C.  make a left hand circle",
           "D.  turn left at least twice"
         ],
-        "answer": ["B.  hold in a left hand holding pattern"],
+        "answer": [
+          "B.  hold in a left hand holding pattern"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -9726,7 +11206,9 @@
           "C.  minimum fuel",
           "D.  fuel shortage"
         ],
-        "answer": ["B.  fuel emergency"],
+        "answer": [
+          "B.  fuel emergency"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -9751,14 +11233,21 @@
           "C.  Frightened",
           "D.  Hindered"
         ],
-        "answer": ["B.  Confused"],
+        "answer": [
+          "B.  Confused"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
         "explanation": null,
         "translation": {
           "stem": "第五段中的“baffled”一词是什么意思？",
-          "options": ["A. 震惊的", "B. 困惑的", "C. 害怕的", "D. 阻碍的"]
+          "options": [
+            "A. 震惊的",
+            "B. 困惑的",
+            "C. 害怕的",
+            "D. 阻碍的"
+          ]
         }
       },
       {
@@ -9798,7 +11287,9 @@
           "C.  Body language",
           "D.  Radio clutter"
         ],
-        "answer": ["C.  Body language"],
+        "answer": [
+          "C.  Body language"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -9814,7 +11305,10 @@
         }
       }
     ],
-    "explanation": null,
+    "explanation": {
+      "tip": "",
+      "solution": ""
+    },
     "updated_at": null,
     "status": "valid",
     "translation": {
@@ -9849,7 +11343,9 @@
           "C.  The quality of information",
           "D.  The appropriate reaction of people"
         ],
-        "answer": ["C.  The quality of information"],
+        "answer": [
+          "C.  The quality of information"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -9874,7 +11370,9 @@
           "C.  Maintaining reasonable workload",
           "D.  Distraction"
         ],
-        "answer": ["D.  Distraction"],
+        "answer": [
+          "D.  Distraction"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -9899,7 +11397,9 @@
           "C.  Pilot failure",
           "D.  Controller failure"
         ],
-        "answer": ["A.  Communication problems"],
+        "answer": [
+          "A.  Communication problems"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -9924,7 +11424,9 @@
           "C.  Clear, standard, and timely",
           "D.  Clear, fluent, and standard"
         ],
-        "answer": ["B.  Accurate, clear, and timely"],
+        "answer": [
+          "B.  Accurate, clear, and timely"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -9949,7 +11451,9 @@
           "C.  The Factors Affecting Situation Awareness",
           "D.  Communication and Situation Awareness"
         ],
-        "answer": ["D.  Communication and Situation Awareness"],
+        "answer": [
+          "D.  Communication and Situation Awareness"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -9965,7 +11469,10 @@
         }
       }
     ],
-    "explanation": null,
+    "explanation": {
+      "tip": "",
+      "solution": ""
+    },
     "updated_at": null,
     "status": "valid",
     "translation": {
@@ -10000,7 +11507,9 @@
           "C.  Flight attendants",
           "D.  Passengers"
         ],
-        "answer": ["B.  Trained observers"],
+        "answer": [
+          "B.  Trained observers"
+        ],
         "difficulty": 2,
         "shuffle": true,
         "subs": null,
@@ -10019,15 +11528,27 @@
         "sid": "420000071_2",
         "type": "single",
         "stem": "The “tool for monitoring normal flight operations and developing countermeasures against human error” is _______.",
-        "options": ["A.  LOSA", "B.  ICAO", "C.  TEM", "D.  CRM"],
-        "answer": ["A.  LOSA"],
+        "options": [
+          "A.  LOSA",
+          "B.  ICAO",
+          "C.  TEM",
+          "D.  CRM"
+        ],
+        "answer": [
+          "A.  LOSA"
+        ],
         "difficulty": 2,
         "shuffle": true,
         "subs": null,
         "explanation": null,
         "translation": {
           "stem": "“用于监控正常飞行运行和制定针对人为错误的应对措施的工具”是______。",
-          "options": ["A. LOSA", "B. ICAO", "C. TEM", "D. CRM"]
+          "options": [
+            "A. LOSA",
+            "B. ICAO",
+            "C. TEM",
+            "D. CRM"
+          ]
         }
       },
       {
@@ -10040,7 +11561,9 @@
           "C.  Threats include errors that are committed by other flight related persons.",
           "D.  Threats include miscommunication."
         ],
-        "answer": ["D.  Threats include miscommunication."],
+        "answer": [
+          "D.  Threats include miscommunication."
+        ],
         "difficulty": 2,
         "shuffle": true,
         "subs": null,
@@ -10065,7 +11588,9 @@
           "C.  operational decision",
           "D.  proficiency-based"
         ],
-        "answer": ["B.  procedural"],
+        "answer": [
+          "B.  procedural"
+        ],
         "difficulty": 2,
         "shuffle": true,
         "subs": null,
@@ -10090,7 +11615,9 @@
           "C.  sharing information and good ideas through company newsletters",
           "D.  good situational awareness"
         ],
-        "answer": ["A.  penalizing the pilot"],
+        "answer": [
+          "A.  penalizing the pilot"
+        ],
         "difficulty": 2,
         "shuffle": true,
         "subs": null,
@@ -10106,7 +11633,10 @@
         }
       }
     ],
-    "explanation": null,
+    "explanation": {
+      "tip": "",
+      "solution": ""
+    },
     "updated_at": "2014-08-25",
     "status": "valid",
     "translation": {
@@ -10141,7 +11671,9 @@
           "C.  pilot’s awareness of the aircraft’s proximity to obstructions",
           "D.  pilot’s awareness of the priority of tasks"
         ],
-        "answer": ["A.  pilots’ awareness of the cabin service"],
+        "answer": [
+          "A.  pilots’ awareness of the cabin service"
+        ],
         "difficulty": 2,
         "shuffle": true,
         "subs": null,
@@ -10166,7 +11698,9 @@
           "C.  Radar Approach",
           "D.  Precision Approach"
         ],
-        "answer": ["B.  Visual Approach"],
+        "answer": [
+          "B.  Visual Approach"
+        ],
         "difficulty": 2,
         "shuffle": true,
         "subs": null,
@@ -10191,7 +11725,9 @@
           "C.  while turning for the final leg",
           "D.  when on the final leg"
         ],
-        "answer": ["C.  while turning for the final leg"],
+        "answer": [
+          "C.  while turning for the final leg"
+        ],
         "difficulty": 2,
         "shuffle": true,
         "subs": null,
@@ -10216,7 +11752,9 @@
           "C.  the plane conducted a missed approach",
           "D.  the plane landed safely"
         ],
-        "answer": ["D.  the plane landed safely"],
+        "answer": [
+          "D.  the plane landed safely"
+        ],
         "difficulty": 2,
         "shuffle": true,
         "subs": null,
@@ -10241,7 +11779,9 @@
           "C.  the plane’s equipment",
           "D.  failure to communicate"
         ],
-        "answer": ["D.  failure to communicate"],
+        "answer": [
+          "D.  failure to communicate"
+        ],
         "difficulty": 2,
         "shuffle": true,
         "subs": null,
@@ -10257,7 +11797,10 @@
         }
       }
     ],
-    "explanation": null,
+    "explanation": {
+      "tip": "",
+      "solution": ""
+    },
     "updated_at": "2014-08-25",
     "status": "valid",
     "translation": {
@@ -10286,15 +11829,27 @@
         "sid": "420000073_1",
         "type": "single",
         "stem": "The rate of reported runway incursions per million flights in 1999 was _______.",
-        "options": ["A. 3", "B. 4", "C. 6", "D. 10"],
-        "answer": ["C. 6"],
+        "options": [
+          "A. 3",
+          "B. 4",
+          "C. 6",
+          "D. 10"
+        ],
+        "answer": [
+          "C. 6"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
         "explanation": null,
         "translation": {
           "stem": "1999 年每百万次飞行中报告的跑道入侵率为______。",
-          "options": ["A. 3", "B. 4", "C. 6", "D. 10"]
+          "options": [
+            "A. 3",
+            "B. 4",
+            "C. 6",
+            "D. 10"
+          ]
         }
       },
       {
@@ -10307,7 +11862,9 @@
           "C.  Controller Error",
           "D.  Weather"
         ],
-        "answer": ["A.  Pilot Error"],
+        "answer": [
+          "A.  Pilot Error"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -10326,15 +11883,27 @@
         "sid": "420000073_3",
         "type": "single",
         "stem": "________ of the reported runway incursions were viewed as being “Significantly Hazardous.”",
-        "options": ["A. 31%", "B. 34%", "C. 30%", "D. 5%"],
-        "answer": ["C. 30%"],
+        "options": [
+          "A. 31%",
+          "B. 34%",
+          "C. 30%",
+          "D. 5%"
+        ],
+        "answer": [
+          "C. 30%"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
         "explanation": null,
         "translation": {
           "stem": "______的报告的跑道入侵被视为“显著危险”。",
-          "options": ["A. 31%", "B. 34%", "C. 30%", "D. 5%"]
+          "options": [
+            "A. 31%",
+            "B. 34%",
+            "C. 30%",
+            "D. 5%"
+          ]
         }
       },
       {
@@ -10347,7 +11916,9 @@
           "C.  differences in the results of reported incursions",
           "D.  no difference in reported incursions"
         ],
-        "answer": ["B.  differences in numbers of reported incursions"],
+        "answer": [
+          "B.  differences in numbers of reported incursions"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -10372,7 +11943,9 @@
           "C.  type of aircraft",
           "D.  type of causes"
         ],
-        "answer": ["A.  severity"],
+        "answer": [
+          "A.  severity"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -10388,7 +11961,10 @@
         }
       }
     ],
-    "explanation": null,
+    "explanation": {
+      "tip": "",
+      "solution": ""
+    },
     "updated_at": null,
     "status": "valid",
     "translation": {
@@ -10417,15 +11993,27 @@
         "sid": "420000074_1",
         "type": "single",
         "stem": "The FAA indicates that during fiscal year 2004 there were _________ incursion incidents.",
-        "options": ["A. 424", "B. 325", "C. 326", "D. 327"],
-        "answer": ["C. 326"],
+        "options": [
+          "A. 424",
+          "B. 325",
+          "C. 326",
+          "D. 327"
+        ],
+        "answer": [
+          "C. 326"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
         "explanation": null,
         "translation": {
           "stem": "FAA 指出在 2004 财政年度有______起入侵事件。",
-          "options": ["A. 424", "B. 325", "C. 326", "D. 327"]
+          "options": [
+            "A. 424",
+            "B. 325",
+            "C. 326",
+            "D. 327"
+          ]
         }
       },
       {
@@ -10438,7 +12026,9 @@
           "C.  after one of them was cleared for takeoff",
           "D.  after both were cleared to land"
         ],
-        "answer": ["B.  after both were cleared for takeoff"],
+        "answer": [
+          "B.  after both were cleared for takeoff"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -10457,15 +12047,27 @@
         "sid": "420000074_3",
         "type": "single",
         "stem": "In the incident at JFK International Airport, New York, it is estimated that the cargo plane cleared the 767 by about _____ feet as it took off over the 767.",
-        "options": ["A. 50", "B. 80", "C. 100", "D. 171"],
-        "answer": ["C. 100"],
+        "options": [
+          "A. 50",
+          "B. 80",
+          "C. 100",
+          "D. 171"
+        ],
+        "answer": [
+          "C. 100"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
         "explanation": null,
         "translation": {
           "stem": "在纽约 JFK 国际机场的事件中，据估计货机在从 767 上方起飞时与 767 的净距约为______英尺。",
-          "options": ["A. 50", "B. 80", "C. 100", "D. 171"]
+          "options": [
+            "A. 50",
+            "B. 80",
+            "C. 100",
+            "D. 171"
+          ]
         }
       },
       {
@@ -10478,7 +12080,9 @@
           "C. \t Air Canada; America West",
           "D.  Israir; Airborne Express"
         ],
-        "answer": ["C. \t Air Canada; America West"],
+        "answer": [
+          "C. \t Air Canada; America West"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -10503,7 +12107,9 @@
           "C.  determine what action to take",
           "D.  determine the causes of the problem"
         ],
-        "answer": ["D.  determine the causes of the problem"],
+        "answer": [
+          "D.  determine the causes of the problem"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -10519,7 +12125,10 @@
         }
       }
     ],
-    "explanation": null,
+    "explanation": {
+      "tip": "",
+      "solution": ""
+    },
     "updated_at": null,
     "status": "valid",
     "translation": {
@@ -10554,7 +12163,9 @@
           "C.  where the amount of traffic is small",
           "D.  where an airline has a hub"
         ],
-        "answer": ["D.  where an airline has a hub"],
+        "answer": [
+          "D.  where an airline has a hub"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -10579,7 +12190,9 @@
           "C.  Runway 14",
           "D.  Runway 31"
         ],
-        "answer": ["A.  Runway 13"],
+        "answer": [
+          "A.  Runway 13"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -10604,48 +12217,82 @@
           "C.  arrival",
           "D.  landing"
         ],
-        "answer": ["B.  departure"],
+        "answer": [
+          "B.  departure"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
         "explanation": null,
         "translation": {
           "stem": "在这个例子中，TC 许可了 NYY67H ______并随后许可了转向航向和频率更换。",
-          "options": ["A. 等待", "B. 起飞", "C. 进场", "D. 着陆"]
+          "options": [
+            "A. 等待",
+            "B. 起飞",
+            "C. 进场",
+            "D. 着陆"
+          ]
         }
       },
       {
         "sid": "420000075_4",
         "type": "single",
         "stem": "“...67H, right turn westbound.” This transmission comes from _______.",
-        "options": ["A.  NXX67H", "B.  NYY67H", "C.  Cessna 152", "D.  None"],
-        "answer": ["B.  NYY67H"],
+        "options": [
+          "A.  NXX67H",
+          "B.  NYY67H",
+          "C.  Cessna 152",
+          "D.  None"
+        ],
+        "answer": [
+          "B.  NYY67H"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
         "explanation": null,
         "translation": {
           "stem": "“...67H，右转向西。”这条通话来自______。",
-          "options": ["A. NXX67H", "B. NYY67H", "C. Cessna 152", "D. 无"]
+          "options": [
+            "A. NXX67H",
+            "B. NYY67H",
+            "C. Cessna 152",
+            "D. 无"
+          ]
         }
       },
       {
         "sid": "420000075_5",
         "type": "single",
         "stem": "“The Cessna 152 saw NXX67H, initiated a go-around, and then side-stepped to avoid over flying NXX67H.” Here, “initiate” means “    ”.",
-        "options": ["A.  start", "B.  admit", "C.  introduce", "D.  instruct"],
-        "answer": ["A.  start"],
+        "options": [
+          "A.  start",
+          "B.  admit",
+          "C.  introduce",
+          "D.  instruct"
+        ],
+        "answer": [
+          "A.  start"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
         "explanation": null,
         "translation": {
           "stem": "“Cessna 152 看到了 NXX67H，开始复飞，然后侧向偏离以避免飞越 NXX67H。”这里的“initiate”的意思是______。",
-          "options": ["A. 开始", "B. 承认", "C. 介绍", "D. 指示"]
+          "options": [
+            "A. 开始",
+            "B. 承认",
+            "C. 介绍",
+            "D. 指示"
+          ]
         }
       }
     ],
-    "explanation": null,
+    "explanation": {
+      "tip": "",
+      "solution": ""
+    },
     "updated_at": null,
     "status": "valid",
     "translation": {
@@ -10680,7 +12327,9 @@
           "C.  FAA and airports",
           "D.  ICAO and airlines"
         ],
-        "answer": ["A.  FAA and airlines"],
+        "answer": [
+          "A.  FAA and airlines"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -10705,7 +12354,9 @@
           "C.  in 1 hour of weather",
           "D.  within 1 hour of weather"
         ],
-        "answer": ["B.  within 2 hours of weather"],
+        "answer": [
+          "B.  within 2 hours of weather"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -10730,14 +12381,21 @@
           "C.  GDP",
           "D.  CDM"
         ],
-        "answer": ["A.  playbook action"],
+        "answer": [
+          "A.  playbook action"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
         "explanation": null,
         "translation": {
           "stem": "根据预定计划将大量交通重新路由到航路空域区域周围是______。",
-          "options": ["A. 剧本行动", "B. 战术行动", "C. GDP", "D. CDM"]
+          "options": [
+            "A. 剧本行动",
+            "B. 战术行动",
+            "C. GDP",
+            "D. CDM"
+          ]
         }
       },
       {
@@ -10750,14 +12408,21 @@
           "C.  flight delays",
           "D.  closing the airport"
         ],
-        "answer": ["D.  closing the airport"],
+        "answer": [
+          "D.  closing the airport"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
         "explanation": null,
         "translation": {
           "stem": "航空公司可能不会通过______来应对天气或预报天气。",
-          "options": ["A. 航班取消", "B. 改航", "C. 航班延误", "D. 关闭机场"]
+          "options": [
+            "A. 航班取消",
+            "B. 改航",
+            "C. 航班延误",
+            "D. 关闭机场"
+          ]
         }
       },
       {
@@ -10770,7 +12435,9 @@
           "C.  flight cancellations",
           "D.  diversions"
         ],
-        "answer": ["B.  strategic TFM decision making"],
+        "answer": [
+          "B.  strategic TFM decision making"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -10786,7 +12453,10 @@
         }
       }
     ],
-    "explanation": null,
+    "explanation": {
+      "tip": "",
+      "solution": ""
+    },
     "updated_at": null,
     "status": "valid",
     "translation": {
@@ -10821,14 +12491,21 @@
           "C.  10 sorts.",
           "D.  14 sorts."
         ],
-        "answer": ["D.  14 sorts."],
+        "answer": [
+          "D.  14 sorts."
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
         "explanation": null,
         "translation": {
           "stem": "在航空界，云被分为多少种？",
-          "options": ["A. 4 种", "B. 12 种", "C. 10 种", "D. 14 种"]
+          "options": [
+            "A. 4 种",
+            "B. 12 种",
+            "C. 10 种",
+            "D. 14 种"
+          ]
         }
       },
       {
@@ -10841,7 +12518,9 @@
           "C.  Thunderstorm Mamma cloud.",
           "D.  Supercooled cloud."
         ],
-        "answer": ["B.  Rain cloud."],
+        "answer": [
+          "B.  Rain cloud."
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -10866,7 +12545,9 @@
           "C.  cirrus, cirrocumulus, and cirrostratus",
           "D.  altocumulus, cirrus, and fractostratus"
         ],
-        "answer": ["C.  cirrus, cirrocumulus, and cirrostratus"],
+        "answer": [
+          "C.  cirrus, cirrocumulus, and cirrostratus"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -10891,7 +12572,9 @@
           "C.  Almost entirely liquid.",
           "D.  Not stated."
         ],
-        "answer": ["C.  Almost entirely liquid."],
+        "answer": [
+          "C.  Almost entirely liquid."
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -10916,7 +12599,9 @@
           "C.  water vapor above the freezing level",
           "D.  water vapor below the freezing level"
         ],
-        "answer": ["A.  supercooled water above the freezing level"],
+        "answer": [
+          "A.  supercooled water above the freezing level"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -10932,7 +12617,10 @@
         }
       }
     ],
-    "explanation": null,
+    "explanation": {
+      "tip": "",
+      "solution": ""
+    },
     "updated_at": null,
     "status": "valid",
     "translation": {
@@ -10961,15 +12649,27 @@
         "sid": "420000078_1",
         "type": "single",
         "stem": "Medium-sized birds (101g-1000g) cause damage on less than          of occasions when they are struck",
-        "options": ["A. 0.1", "B. 0.03", "C. 0.08", "D. 0.12"],
-        "answer": ["D. 0.12"],
+        "options": [
+          "A. 0.1",
+          "B. 0.03",
+          "C. 0.08",
+          "D. 0.12"
+        ],
+        "answer": [
+          "D. 0.12"
+        ],
         "difficulty": 2,
         "shuffle": true,
         "subs": null,
         "explanation": null,
         "translation": {
           "stem": "中型鸟类在被撞击时造成损坏的比例不到______。",
-          "options": ["A. 0.1", "B. 0.03", "C. 0.08", "D. 0.12"]
+          "options": [
+            "A. 0.1",
+            "B. 0.03",
+            "C. 0.08",
+            "D. 0.12"
+          ]
         }
       },
       {
@@ -11036,7 +12736,9 @@
           "C.  Bird Strike",
           "D.  The Characteristics of Birds"
         ],
-        "answer": ["A.  Aerodrome Bird Control"],
+        "answer": [
+          "A.  Aerodrome Bird Control"
+        ],
         "difficulty": 2,
         "shuffle": true,
         "subs": null,
@@ -11079,7 +12781,10 @@
         }
       }
     ],
-    "explanation": null,
+    "explanation": {
+      "tip": "",
+      "solution": ""
+    },
     "updated_at": "2014-08-25",
     "status": "valid",
     "translation": {
@@ -11114,7 +12819,9 @@
           "C.  clearway length",
           "D.  all of the above"
         ],
-        "answer": ["D.  all of the above"],
+        "answer": [
+          "D.  all of the above"
+        ],
         "difficulty": 2,
         "shuffle": false,
         "subs": null,
@@ -11160,15 +12867,27 @@
         "sid": "420000079_3",
         "type": "single",
         "stem": "If an engine fails after the             is reached, the aeroplane will have sufficient speed and power available to complete the take-off safely in the remaining take-off distance available.",
-        "options": ["A.  V2", "B.  V1", "C.  Vr", "D.  Vmo"],
-        "answer": ["B.  V1"],
+        "options": [
+          "A.  V2",
+          "B.  V1",
+          "C.  Vr",
+          "D.  Vmo"
+        ],
+        "answer": [
+          "B.  V1"
+        ],
         "difficulty": 2,
         "shuffle": true,
         "subs": null,
         "explanation": null,
         "translation": {
           "stem": "如果在达到______后发动机失效，飞机将有足够的速度和动力在剩余的可用起飞距离内安全完成起飞。",
-          "options": ["A. V2", "B. V1", "C. Vr", "D. Vmo"]
+          "options": [
+            "A. V2",
+            "B. V1",
+            "C. Vr",
+            "D. Vmo"
+          ]
         }
       },
       {
@@ -11208,18 +12927,28 @@
           "C.  Below",
           "D.  Above"
         ],
-        "answer": ["C.  Below"],
+        "answer": [
+          "C.  Below"
+        ],
         "difficulty": 2,
         "shuffle": false,
         "subs": null,
         "explanation": null,
         "translation": {
           "stem": "______决策速度，如果发动机失效必须放弃起飞。",
-          "options": ["A. 略高于", "B. 等于", "C. 低于", "D. 高于"]
+          "options": [
+            "A. 略高于",
+            "B. 等于",
+            "C. 低于",
+            "D. 高于"
+          ]
         }
       }
     ],
-    "explanation": null,
+    "explanation": {
+      "tip": "",
+      "solution": ""
+    },
     "updated_at": "2014-08-25",
     "status": "valid",
     "translation": {
@@ -11254,14 +12983,21 @@
           "C.  climbing",
           "D.  descending"
         ],
-        "answer": ["B.  close to the ground."],
+        "answer": [
+          "B.  close to the ground."
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
         "explanation": null,
         "translation": {
           "stem": "暴露于另一架飞机尾涡环流中的飞机可能会经历气动扰动，这可能不易纠正，尤其是当飞机______时。",
-          "options": ["A. 在空中", "B. 接近地面。", "C. 爬升", "D. 下降"]
+          "options": [
+            "A. 在空中",
+            "B. 接近地面。",
+            "C. 爬升",
+            "D. 下降"
+          ]
         }
       },
       {
@@ -11328,7 +13064,9 @@
           "C.  The RMP has been developed by ICAO to direct current and future efforts.",
           "D.  None of the above"
         ],
-        "answer": ["D.  None of the above"],
+        "answer": [
+          "D.  None of the above"
+        ],
         "difficulty": "2",
         "shuffle": false,
         "subs": null,
@@ -11353,7 +13091,9 @@
           "C.  Weather Conditions",
           "D.  Wake Turbulence Research Management Plan"
         ],
-        "answer": ["B.  Wake Turbulence Separation"],
+        "answer": [
+          "B.  Wake Turbulence Separation"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -11369,7 +13109,10 @@
         }
       }
     ],
-    "explanation": null,
+    "explanation": {
+      "tip": "",
+      "solution": ""
+    },
     "updated_at": null,
     "status": "valid",
     "translation": {
@@ -11458,7 +13201,9 @@
           "C.  Runway incursions can be solved by means of the airport system.",
           "D.  It is not easy to solve the problem runway incursions"
         ],
-        "answer": ["D.  It is not easy to solve the problem runway incursions"],
+        "answer": [
+          "D.  It is not easy to solve the problem runway incursions"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -11483,7 +13228,9 @@
           "C.  Longer taxiing contributes to runway incursions.",
           "D.  None of the above"
         ],
-        "answer": ["D.  None of the above"],
+        "answer": [
+          "D.  None of the above"
+        ],
         "difficulty": "2",
         "shuffle": false,
         "subs": null,
@@ -11508,7 +13255,9 @@
           "C.  The Way to Tackle Runway Incursions",
           "D.  Introduction to Runway Incursions"
         ],
-        "answer": ["D.  Introduction to Runway Incursions"],
+        "answer": [
+          "D.  Introduction to Runway Incursions"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -11524,7 +13273,10 @@
         }
       }
     ],
-    "explanation": null,
+    "explanation": {
+      "tip": "",
+      "solution": ""
+    },
     "updated_at": null,
     "status": "valid",
     "translation": {
@@ -11613,14 +13365,21 @@
           "C. admired ",
           "D. increase in value"
         ],
-        "answer": ["B. understood"],
+        "answer": [
+          "B. understood"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
         "explanation": null,
         "translation": {
           "stem": "第三段中下划线的“appreciated”是什么意思？",
-          "options": ["A. 感激", "B. 理解", "C. 钦佩", "D. 增值"]
+          "options": [
+            "A. 感激",
+            "B. 理解",
+            "C. 钦佩",
+            "D. 增值"
+          ]
         }
       },
       {
@@ -11678,7 +13437,10 @@
         }
       }
     ],
-    "explanation": null,
+    "explanation": {
+      "tip": "",
+      "solution": ""
+    },
     "updated_at": null,
     "status": "valid",
     "translation": {
@@ -11740,7 +13502,9 @@
           "C. the author’s aircraft and the A320",
           "D.  the author’s aircraft and a vehicle "
         ],
-        "answer": ["A.  the author’s aircraft and the CRJ"],
+        "answer": [
+          "A.  the author’s aircraft and the CRJ"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -11765,7 +13529,9 @@
           "C.  the CRJ taxiing too fast ",
           "D. the author’s absent-mindedness "
         ],
-        "answer": ["D. the author’s absent-mindedness "],
+        "answer": [
+          "D. the author’s absent-mindedness "
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -11817,18 +13583,28 @@
           "C.  the author",
           "D.  the pilot of the CRJ "
         ],
-        "answer": ["C.  the author"],
+        "answer": [
+          "C.  the author"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
         "explanation": null,
         "translation": {
           "stem": "谁对滑行危险接近负主要责任？",
-          "options": ["A. 管制员", "B. 副驾驶", "C. 作者", "D. CRJ 飞行员"]
+          "options": [
+            "A. 管制员",
+            "B. 副驾驶",
+            "C. 作者",
+            "D. CRJ 飞行员"
+          ]
         }
       }
     ],
-    "explanation": null,
+    "explanation": {
+      "tip": "",
+      "solution": ""
+    },
     "updated_at": null,
     "status": "valid",
     "translation": {
@@ -11890,7 +13666,9 @@
           "C.  To show aircraft how to vacate the runway. ",
           "D. To show aircraft on approach where the runway is. "
         ],
-        "answer": ["A.  To prevent runway incursions. "],
+        "answer": [
+          "A.  To prevent runway incursions. "
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -11987,7 +13765,10 @@
         }
       }
     ],
-    "explanation": null,
+    "explanation": {
+      "tip": "",
+      "solution": ""
+    },
     "updated_at": null,
     "status": "valid",
     "translation": {
@@ -12022,7 +13803,9 @@
           "C.  The co-pilot of a VFR flight",
           "D.  A member of the ground crew at an airport "
         ],
-        "answer": ["C.  The co-pilot of a VFR flight"],
+        "answer": [
+          "C.  The co-pilot of a VFR flight"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -12101,7 +13884,9 @@
           "C.   The author himself ",
           "D.   The crew of the light twin"
         ],
-        "answer": ["A.   The controller"],
+        "answer": [
+          "A.   The controller"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -12144,7 +13929,10 @@
         }
       }
     ],
-    "explanation": null,
+    "explanation": {
+      "tip": "",
+      "solution": ""
+    },
     "updated_at": null,
     "status": "valid",
     "translation": {
@@ -12179,7 +13967,9 @@
           "C.   an arrival flight taxiing in to the apron",
           "D.   a flight taxiing to the de-icing bay "
         ],
-        "answer": ["A.   a flight taxiing out to the runway "],
+        "answer": [
+          "A.   a flight taxiing out to the runway "
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -12204,7 +13994,9 @@
           "C.   an arrival flight taxiing in to the apron",
           "D.   a flight taxiing to the de-icing bay "
         ],
-        "answer": ["B.   an arrival flight that had just touched down "],
+        "answer": [
+          "B.   an arrival flight that had just touched down "
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -12229,7 +14021,9 @@
           "C.   the crew of the departing aircraft ",
           "D.   the ground personnel "
         ],
-        "answer": ["C.   the crew of the departing aircraft "],
+        "answer": [
+          "C.   the crew of the departing aircraft "
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -12299,7 +14093,10 @@
         }
       }
     ],
-    "explanation": null,
+    "explanation": {
+      "tip": "",
+      "solution": ""
+    },
     "updated_at": null,
     "status": "valid",
     "translation": {
@@ -12334,7 +14131,9 @@
           "C.  abort takeoff",
           "D.  line up and wait "
         ],
-        "answer": ["C.  abort takeoff"],
+        "answer": [
+          "C.  abort takeoff"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -12359,7 +14158,9 @@
           "C.   Because the runway was blocked by another aircraft ",
           "D.   Because the braking action of the runway was too poor. "
         ],
-        "answer": ["A.   Because the aircraft encountered a bird strike"],
+        "answer": [
+          "A.   Because the aircraft encountered a bird strike"
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -12411,7 +14212,9 @@
           "C.   The nose gear of the aircraft collapses. ",
           "D.   The lighting system of the cabin fails."
         ],
-        "answer": ["D.   The lighting system of the cabin fails."],
+        "answer": [
+          "D.   The lighting system of the cabin fails."
+        ],
         "difficulty": "2",
         "shuffle": true,
         "subs": null,
@@ -12454,7 +14257,10 @@
         }
       }
     ],
-    "explanation": null,
+    "explanation": {
+      "tip": "",
+      "solution": ""
+    },
     "updated_at": null,
     "status": "valid",
     "translation": {
