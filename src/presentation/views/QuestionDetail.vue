@@ -2,14 +2,14 @@
   <div class="page question-detail-page">
     <header class="top-bar">
       <button class="icon-btn" @click="goBack">
-        <i-ms-arrow-back />
+        <Icon name="arrow-back" />
       </button>
       <h1 class="title">{{ t('questionDetail') }}</h1>
       <div class="header-action-placeholder"></div>
     </header>
 
     <div v-if="!question" class="not-found">
-      <i-ms-search-off class="not-found-icon" />
+      <Icon name="search-off" class="not-found-icon" />
       <p>{{ t('searchNoResults') }}</p>
     </div>
 
@@ -28,13 +28,13 @@
 
       <div v-if="ids.length > 0" class="bottom-nav">
         <button class="nav-btn" :disabled="currentIndex <= 0" @click="goPrev">
-          <i-ms-chevron-left />
+          <Icon name="chevron-left" />
           <span>{{ t('prevQuestion') }}</span>
         </button>
         <span class="nav-indicator">{{ currentIndex + 1 }} / {{ ids.length }}</span>
         <button class="nav-btn" :disabled="currentIndex >= ids.length - 1" @click="goNext">
           <span>{{ t('nextQuestion') }}</span>
-          <i-ms-chevron-right />
+          <Icon name="chevron-right" />
         </button>
       </div>
     </div>
@@ -44,6 +44,7 @@
 <script setup>
 import { ref, computed, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
+import Icon from '@/presentation/components/common/Icon.vue'
 import { useAppStore } from '@/domain/stores/store'
 import { t } from '@/infrastructure/utils/i18n.js'
 import * as API from '@/infrastructure/api/dataSource'

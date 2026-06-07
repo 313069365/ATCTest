@@ -2,12 +2,12 @@
   <BottomSheet :visible="visible" :title="t('quizSettings')" @close="$emit('close')">
     <div class="action-row">
       <button class="action-btn-secondary" @click="handleSubmit">
-        <i-ms-check-circle-outline />
+        <Icon name="check-circle-outline" />
         {{ t('submitPaper') }}
         <span></span>
       </button>
       <button class="action-btn-secondary" @click="handleExit">
-        <i-ms-close />
+        <Icon name="close" />
         {{ t('exit') }}
         <span></span>
       </button>
@@ -49,8 +49,8 @@
           <button class="toggle-btn" :class="{ active: soundEnabled }"
             @click="$emit('update:soundEnabled', !soundEnabled)">
             <span class="toggle-knob">
-              <i-ms-volume-up-outline v-if="soundEnabled" />
-              <i-ms-volume-off-outline v-else />
+              <Icon name="volume-up-outline" v-if="soundEnabled" />
+              <Icon name="volume-off-outline" v-else />
             </span>
           </button>
         </div>
@@ -61,8 +61,8 @@
           </div>
           <button class="toggle-btn" :class="{ active: darkMode }" @click="$emit('update:darkMode', !darkMode)">
             <span class="toggle-knob">
-              <i-ms-dark-mode-outline v-if="darkMode" />
-              <i-ms-light-mode-outline v-else />
+              <Icon name="dark-mode-outline" v-if="darkMode" />
+              <Icon name="light-mode-outline" v-else />
             </span>
           </button>
         </div>
@@ -72,6 +72,7 @@
 </template>
 
 <script setup>
+import Icon from '@/presentation/components/common/Icon.vue'
 import { t } from '@/infrastructure/utils/i18n.js'
 import BottomSheet from '@/presentation/components/common/BottomSheet.vue'
 

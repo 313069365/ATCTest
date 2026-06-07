@@ -4,7 +4,7 @@
 
     <div class="phonetics-top-bar">
       <button class="back-btn" @click="goBack">
-        <i-ms-arrow-back />
+        <Icon name="arrow-back" />
       </button>
       <div class="status-bar">
         <span class="status-dot" :class="statusClass"></span>
@@ -44,6 +44,7 @@
 
 <script setup>
 import { ref, onMounted } from 'vue'
+import Icon from '@/presentation/components/common/Icon.vue'
 import { useRouter } from 'vue-router'
 
 const router = useRouter()

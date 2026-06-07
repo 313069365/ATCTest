@@ -5,11 +5,11 @@
       <div class="hero-blur-2"></div>
       <header class="top-bar">
         <button class="back-btn" @click="goBack">
-          <i-ms-arrow-back />
+          <Icon name="arrow-back" />
         </button>
         <h1>{{ t('favorites') }}</h1>
         <button class="clear-btn" @click="clearAll" :disabled="favoritesList.length <= 0">
-          <i-ms-delete-sweep-outline />
+          <Icon name="delete-sweep-outline" />
         </button>
       </header>
     </div>
@@ -18,13 +18,13 @@
       <!-- 收藏加强 -->
       <button class="practice-all-btn" @click="startFavoritesPractice" v-if="favoritesList.length > 0">
         <div class="practice-all-left">
-          <i-ms-star-outline class="practice-all-icon" />
+          <Icon name="star-outline" class="practice-all-icon" />
           <div class="practice-all-text">
             <span class="practice-all-title">{{ t('practiceFavorites') }}</span>
             <span class="practice-all-desc">{{ t('favoritesReviewDesc', { count: favoritesList.length }) }}</span>
           </div>
         </div>
-        <i-ms-chevron-right class="practice-all-arrow" />
+        <Icon name="chevron-right" class="practice-all-arrow" />
       </button>
 
       <!-- 收藏列表 -->
@@ -37,7 +37,7 @@
                 <span class="favorite-badge">{{ t(item.meta?.category) || item.meta?.category || '' }}</span>
               </div>
               <button class="delete-individual-btn" @click="removeFavorite(item.id)">
-                <i-ms-close />
+                <Icon name="close" />
               </button>
             </div>
 
@@ -64,7 +64,7 @@
       <!-- 空状态 -->
       <div class="empty-state" v-else>
         <div class="empty-icon-wrapper">
-          <i-ms-star-outline />
+          <Icon name="star-outline" />
         </div>
         <h3>{{ t('noFavorites') }}</h3>
         <p>{{ t('favoritesDesc') }}</p>
@@ -77,6 +77,7 @@
 <script setup>
 import { computed, onMounted, onUnmounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
+import Icon from '@/presentation/components/common/Icon.vue'
 import { useAppStore } from '@/domain/stores/store'
 import { t } from '@/infrastructure/utils/i18n.js'
 import { createPracticeSession } from '@/infrastructure/storage/session'

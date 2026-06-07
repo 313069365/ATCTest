@@ -4,14 +4,14 @@
       <h1 class="title">{{ t('learningPlatform') }}</h1>
       <div class="header-actions">
         <button class="theme-toggle" :class="{ active: darkMode }" @click="darkMode = !darkMode">
-          <i-ms-dark-mode-outline v-if="darkMode" />
-          <i-ms-light-mode-outline v-else />
+          <Icon name="dark-mode-outline" v-if="darkMode" />
+          <Icon name="light-mode-outline" v-else />
         </button>
       </div>
     </header>
 
     <div class="search-bar" @click="pageTo('/search')">
-      <i-ms-search class="search-icon" />
+      <Icon name="search" class="search-icon" />
       <span class="search-placeholder">{{ t('searchTitle') }}</span>
     </div>
 
@@ -40,7 +40,7 @@
             <span class="action-subtitle">{{ t('reviewKeyPoints') }}</span>
           </div>
           <div class="action-icon-wrap">
-            <i-ms-menu-book></i-ms-menu-book>
+            <Icon name="menu-book" />
           </div>
         </button>
         <button class="action-btn exam" @click="pageTo('/exam')" :disabled="store.loading">
@@ -49,7 +49,7 @@
             <span class="action-subtitle">{{ t('timedExam') }}</span>
           </div>
           <div class="action-icon-wrap">
-            <i-ms-timer></i-ms-timer>
+            <Icon name="timer" />
           </div>
         </button>
       </section>
@@ -60,7 +60,7 @@
           <template v-if="lastPractice">
             <div class="continue-inner" @click="continueLastPractice">
               <div class="continue-icon">
-                <i-ms-menu-book-outline />
+                <Icon name="menu-book-outline" />
               </div>
               <div class="continue-info">
                 <h3 class="continue-title">{{ t(lastPractice.subject?.name) || '' }}</h3>
@@ -72,7 +72,7 @@
                   t(totalQuestions) }} {{ t('questions') }}</span>
               </div>
               <button class="continue-action-btn">
-                <i-ms-play-arrow-outline style="color:#fff" />
+                <Icon name="play-arrow-outline" style="color:#fff" />
               </button>
             </div>
           </template>
@@ -80,7 +80,7 @@
             <div class="continue-inner placeholder">
               <div class="placeholder-content">
                 <div class="placeholder-icon">
-                  <i-ms-book-outline />
+                  <Icon name="book-outline" />
                 </div>
                 <h3 class="placeholder-title">{{ t('noPracticeRecord') }}</h3>
                 <p class="placeholder-subtitle">{{ t('startFirstPractice') }}</p>
@@ -97,6 +97,7 @@
 <script setup>
 import { ref, computed, onMounted, watch } from 'vue'
 import { useRouter } from 'vue-router'
+import Icon from '@/presentation/components/common/Icon.vue'
 import { useAppStore } from '@/domain/stores/store'
 import { t } from '@/infrastructure/utils/i18n.js'
 import { usePracticeService } from '@/domain/composables/usePracticeService'

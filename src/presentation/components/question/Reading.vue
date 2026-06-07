@@ -3,11 +3,11 @@
 
     <div class="reading-tab-bar" v-if="question.media?.article">
       <button class="reading-tab" :class="{ active: activeTab === 'question' }" @click="activeTab = 'question'">
-        <i-ms-rate-review-outline />
+        <Icon name="rate-review-outline" />
         作答区
       </button>
       <button class="reading-tab" :class="{ active: activeTab === 'article' }" @click="activeTab = 'article'">
-        <i-ms-menu-book-outline />
+        <Icon name="menu-book-outline" />
         阅读材料
       </button>
     </div>
@@ -49,6 +49,7 @@ import { ref, computed, watch, inject } from 'vue'
 import { getAnswerStatus } from '@/domain/config/questionConfig'
 import { getStrategy } from '@/infrastructure/question-types'
 import QuestionRenderer from './QuestionRenderer.vue'
+import Icon from '@/presentation/components/common/Icon.vue'
 
 const props = defineProps({
   question: {

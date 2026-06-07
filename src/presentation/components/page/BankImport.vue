@@ -3,7 +3,7 @@
     <div class="import-content">
       <header class="import-header">
         <button class="close-btn" @click="$emit('close')">
-          <i-ms-close />
+          <Icon name="close" />
         </button>
         <h2>导入题库</h2>
         <div class="spacer"></div>
@@ -19,7 +19,7 @@
           <div class="file-upload">
             <input type="file" ref="fileInput" accept=".json" @change="handleFileChange" class="file-input" />
             <button class="upload-btn" @click="triggerFileInput">
-              <i-ms-upload-file-outline />
+              <Icon name="upload-file-outline" />
               <span>选择文件</span>
             </button>
             <p v-if="selectedFile" class="file-name">{{ selectedFile.name }}</p>
@@ -39,7 +39,7 @@
       <footer class="import-footer">
         <button class="import-btn" @click="importQuestions" :disabled="!selectedFile || loading">
           {{ loading ? '导入中...' : '开始导入' }}
-          <i-ms-send-outline />
+          <Icon name="send-outline" />
         </button>
       </footer>
     </div>
@@ -48,6 +48,7 @@
 
 <script setup>
 import { ref } from 'vue'
+import Icon from '@/presentation/components/common/Icon.vue'
 
 const fileInput = ref(null)
 const selectedFile = ref(null)

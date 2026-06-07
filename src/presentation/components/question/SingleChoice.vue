@@ -34,7 +34,7 @@
     <!-- 检查答案按钮 -->
     <div v-if="shouldShowCheckBtn" class="check-answer">
       <button class="check-btn" @click="$emit('check')">
-        <i-ms-verified-outline />
+        <Icon name="verified-outline" />
         {{ t('checkAnswer') }}
       </button>
     </div>
@@ -65,6 +65,7 @@
 import { ref, computed, inject } from 'vue'
 import { t } from '@/infrastructure/utils/i18n.js'
 import { useQuestionHandler } from '@/application/composables/useQuestionHandler'
+import Icon from '@/presentation/components/common/Icon.vue'
 
 const showTranslation = inject('showTranslation', ref(false))
 
@@ -136,7 +137,7 @@ const formattedExplanation = computed(() => {
   if (explanation && explanation.trim()) {
     return explanation
   }
-  return '暂无'
+  return t('noExplanation')
 })
 
 const isSelected = (index) => {

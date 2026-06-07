@@ -3,7 +3,7 @@
     <header class="top-bar">
       <div class="top-bar-left" @click="exitExam">
         <button class="back-btn">
-          <i-ms-close />
+          <Icon name="close" />
         </button>
         <div class="header-title">
           <h1>{{ paper?.title || t('examPaper') }}</h1>
@@ -11,12 +11,12 @@
       </div>
       <div class="top-bar-right">
         <div class="timer-display" :class="{ warning: remainingSeconds < 300 }">
-          <i-ms-timer-outline />
+          <Icon name="timer-outline" />
           <span>{{ remainingTimeDisplay }}</span>
         </div>
         <button class="grid-btn" :class="{ active: showAnswerCard }" @click="toggleAnswerCard">
-          <i-ms-grid-view-outline v-if="!showAnswerCard" />
-          <i-ms-grid-view v-else />
+          <Icon name="grid-view-outline" v-if="!showAnswerCard" />
+          <Icon name="grid-view" v-else />
         </button>
       </div>
     </header>
@@ -55,6 +55,7 @@
 <script setup>
 import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
+import Icon from '@/presentation/components/common/Icon.vue'
 import AnswerCard from '@/presentation/components/page/AnswerCard.vue'
 import QustionNavbar from '@/presentation/components/layout/QuestionNavbar.vue'
 import QuestionRenderer from '@/presentation/components/question/QuestionRenderer.vue'

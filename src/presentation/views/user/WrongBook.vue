@@ -5,11 +5,11 @@
       <div class="hero-blur-2"></div>
       <header class="top-bar">
         <button class="back-btn" @click="goBack">
-          <i-ms-arrow-back />
+          <Icon name="arrow-back" />
         </button>
         <h1>{{ t('wrongBook') }}</h1>
         <button class="clear-btn" @click="clearAll" :disabled="wrongList.length <= 0">
-          <i-ms-delete-sweep-outline />
+          <Icon name="delete-sweep-outline" />
         </button>
       </header>
     </div>
@@ -18,13 +18,13 @@
       <!-- 错题巩固 -->
       <button class="practice-all-btn" @click="startWrongPractice" v-if="wrongList.length > 0">
         <div class="practice-all-left">
-          <i-ms-rate-review-outline class="practice-all-icon" />
+          <Icon name="rate-review-outline" class="practice-all-icon" />
           <div class="practice-all-text">
             <span class="practice-all-title">{{ t('practiceWrong') }}</span>
             <span class="practice-all-desc">{{ t('wrongReviewDesc', { count: wrongList.length }) }}</span>
           </div>
         </div>
-        <i-ms-chevron-right class="practice-all-arrow" />
+        <Icon name="chevron-right" class="practice-all-arrow" />
       </button>
 
       <!-- 错题列表 -->
@@ -37,7 +37,7 @@
                 <span class="wrong-badge">{{ t(item.meta?.category) || item.meta?.category || '' }}</span>
               </div>
               <button class="delete-individual-btn" @click.stop="removeWrong(item.id)">
-                <i-ms-close />
+                <Icon name="close" />
               </button>
             </div>
 
@@ -74,7 +74,7 @@
       <!-- 空状态 -->
       <div class="empty-state" v-else>
         <div class="empty-icon-wrapper">
-          <i-ms-check-circle-outline />
+          <Icon name="check-circle-outline" />
         </div>
         <h3>暂无错题</h3>
         <p>答错的题目会自动添加到错题本</p>
@@ -87,6 +87,7 @@
 <script setup>
 import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { useRouter } from 'vue-router'
+import Icon from '@/presentation/components/common/Icon.vue'
 import { useAppStore } from '@/domain/stores/store'
 import { t } from '@/infrastructure/utils/i18n.js'
 import { createPracticeSession } from '@/infrastructure/storage/session'

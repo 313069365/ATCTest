@@ -2,7 +2,7 @@
   <footer class="footer">
     <div class="sub-pager" v-if="subCount > 0">
       <button class="pager-btn arrow" @click="pagePrev" :class="{ dim: pageIndex === 0 }" v-if="subCount > MAX_VISIBLE">
-        <i-ms-chevron-left />
+        <Icon name="chevron-left" />
        </button>
        <button v-for="i in pageSlots" :key="i" class="pager-btn num"
         v-if="subCount > MAX_VISIBLE && pageStart + i - 1 < subCount" :class="subBtnClass(pageStart + i - 1)"
@@ -15,21 +15,21 @@
       </button>
       <button class="pager-btn arrow" @click="pageNext" :class="{ dim: pageIndex >= maxPage }"
         v-if="subCount > MAX_VISIBLE">
-        <i-ms-chevron-right />
+        <Icon name="chevron-right" />
        </button>
      </div>
      <div class="nav-row">
       <button class="nav-btn prev" :disabled="prevDisabled && !(subCount > 0 && currentSubIndex > 0)" @click="handlePrev">
-        <i-ms-chevron-left />
+        <Icon name="chevron-left" />
         {{ subCount > 0 && currentSubIndex > 0 ? '上一小题' : '上一题' }}
       </button>
       <button v-if="!isLast || (subCount > 0 && currentSubIndex < subCount - 1)" class="nav-btn next" @click="handleNext">
         {{ subCount > 0 && currentSubIndex < subCount - 1 ? '下一小题' : '下一题' }}
-        <i-ms-chevron-right />
+        <Icon name="chevron-right" />
        </button>
        <button v-else class="nav-btn submit" @click="$emit('submit')">
         {{ submitText }}
-        <i-ms-check />
+        <Icon name="check" />
       </button>
     </div>
   </footer>
@@ -37,6 +37,7 @@
 
 <script setup>
 import { ref, computed, watch } from 'vue'
+import Icon from '@/presentation/components/common/Icon.vue'
 
 const props = defineProps({
   prevDisabled: { type: Boolean, default: false },

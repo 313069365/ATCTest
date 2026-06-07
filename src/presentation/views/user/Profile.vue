@@ -3,7 +3,7 @@
     <header class="top-bar">
       <h1 class="title">个人中心</h1>
       <button class="icon-btn">
-        <i-ms-more-vert />
+        <Icon name="more-vert" />
       </button>
     </header>
 
@@ -57,10 +57,10 @@
             <span class="card-value tertiary">14 天连续</span>
             <div class="streak-icons">
               <div class="streak-icon fire">
-                <i-ms-local-fire-department-outline />
+                <Icon name="local-fire-department-outline" />
               </div>
               <div class="streak-icon verified">
-                <i-ms-verified-outline />
+                <Icon name="verified-outline" />
               </div>
             </div>
           </div>
@@ -82,25 +82,25 @@
         <div class="shortcut-grid">
           <div class="shortcut-grid-item" @click="goToWrongBook">
             <div class="shortcut-icon error-bg">
-              <i-ms-error-outline />
+              <Icon name="error-outline" />
             </div>
             <span class="shortcut-grid-label">错题本</span>
           </div>
           <div class="shortcut-grid-item" @click="goToFavorites">
             <div class="shortcut-icon tertiary-bg">
-              <i-ms-bookmark-outline />
+              <Icon name="bookmark-outline" />
             </div>
             <span class="shortcut-grid-label">收藏本</span>
           </div>
           <div class="shortcut-grid-item" @click="goToPracticeHistory">
             <div class="shortcut-icon primary-bg">
-              <i-ms-assignment-turned-in-outline />
+              <Icon name="assignment-turned-in-outline" />
             </div>
             <span class="shortcut-grid-label">练习历史</span>
           </div>
           <div class="shortcut-grid-item" @click="goToExamHistory">
             <div class="shortcut-icon primary-bg">
-              <i-ms-quiz-outline />
+              <Icon name="quiz-outline" />
             </div>
             <span class="shortcut-grid-label">考试历史</span>
           </div>
@@ -108,38 +108,38 @@
         <div class="shortcut-list">
           <div class="shortcut-item" @click="goToStats">
             <div class="shortcut-icon primary-bg">
-              <i-ms-bar-chart />
+              <Icon name="bar-chart" />
             </div>
             <span class="shortcut-label">统计分析</span>
-            <i-ms-chevron-right class="shortcut-arrow" />
+            <Icon name="chevron-right" class="shortcut-arrow" />
           </div>
           <div class="shortcut-item" @click="goToAviation">
             <div class="shortcut-icon primary-bg">
-              <i-ms-record-voice-over-outline />
+              <Icon name="record-voice-over-outline" />
             </div>
             <span class="shortcut-label">字母发音</span>
-            <i-ms-chevron-right class="shortcut-arrow" />
+            <Icon name="chevron-right" class="shortcut-arrow" />
           </div>
           <div class="shortcut-item" @click="goToDataManagement">
             <div class="shortcut-icon primary-bg">
-              <i-ms-storage />
+              <Icon name="storage" />
             </div>
             <span class="shortcut-label">数据管理</span>
-            <i-ms-chevron-right class="shortcut-arrow" />
+            <Icon name="chevron-right" class="shortcut-arrow" />
           </div>
           <div class="shortcut-item" @click="goToSettings">
             <div class="shortcut-icon primary-bg">
-              <i-ms-settings-outline />
+              <Icon name="settings-outline" />
             </div>
             <span class="shortcut-label">系统设置</span>
-            <i-ms-chevron-right class="shortcut-arrow" />
+            <Icon name="chevron-right" class="shortcut-arrow" />
           </div>
         </div>
       </section>
 
       <section class="action-section">
         <button class="action-btn logout">
-          <i-ms-logout />
+          <Icon name="logout" />
           <span>xiaomi 14</span>
         </button>
       </section>
@@ -154,6 +154,7 @@ import { reactive } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAppStore } from '@/domain/stores/store'
 import { APP_VERSION } from '@/infrastructure/utils/version'
+import Icon from '@/presentation/components/common/Icon.vue'
 
 const router = useRouter()
 const store = useAppStore()

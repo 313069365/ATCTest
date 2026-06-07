@@ -32,7 +32,7 @@
     <!-- 检查答案按钮 -->
     <div v-if="shouldShowCheckBtn" class="check-answer">
       <button class="check-btn" @click="$emit('check')">
-        <i-ms-verified-outline />
+        <Icon name="verified-outline" />
         {{ t('checkAnswer') }}
       </button>
     </div>
@@ -68,6 +68,7 @@
 import { computed } from 'vue'
 import { t } from '@/infrastructure/utils/i18n.js'
 import { useQuestionHandler } from '@/application/composables/useQuestionHandler'
+import Icon from '@/presentation/components/common/Icon.vue'
 
 const props = defineProps({
   question: {
@@ -137,7 +138,7 @@ const formattedExplanation = computed(() => {
   if (explanation && explanation.trim()) {
     return explanation
   }
-  return t('explanation') + ': 无'
+  return t('noExplanation')
 })
 
 const placeholder = computed(() => props.mode === 'review' ? '' : '请输入答案...')

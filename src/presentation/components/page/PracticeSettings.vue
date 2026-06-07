@@ -6,12 +6,12 @@
         <div class="tab-indicator"></div>
         <button class="tab-btn" :class="{ active: settings.practiceMode === 'review' }"
           @click="settings.practiceMode = 'review'">
-          <i-ms-menu-book-outline />
+          <Icon name="menu-book-outline" />
           <span>{{ t('reviewMode') }}</span>
         </button>
         <button class="tab-btn" :class="{ active: settings.practiceMode === 'answer' }"
           @click="settings.practiceMode = 'answer'">
-          <i-ms-edit-note-outline />
+          <Icon name="edit-note-outline" />
           <span>{{ t('answerMode') }}</span>
         </button>
       </div>
@@ -78,7 +78,7 @@
     <template #footer>
       <button class="start-btn" @click="gotopage">
         <span>{{ t('startPractice') }}</span>
-        <i-ms-arrow-forward />
+        <Icon name="arrow-forward" />
       </button>
     </template>
   </BottomSheet>
@@ -87,6 +87,7 @@
 <script setup>
 import { useRouter } from 'vue-router'
 import { watch, reactive } from 'vue'
+import Icon from '@/presentation/components/common/Icon.vue'
 import { t } from '@/infrastructure/utils/i18n.js'
 import { QUESTION_SORT } from '@/domain/config/questionConfig'
 import { createPracticeSession } from '@/infrastructure/storage/session'

@@ -2,7 +2,7 @@
   <div class="page search-page">
     <header class="top-bar">
       <button class="icon-btn" @click="goBack">
-        <i-ms-arrow-back />
+        <Icon name="arrow-back" />
       </button>
       <h1 class="title">{{ t('search') }}</h1>
       <button v-if="keyword" class="header-action" @click="clearSearch">
@@ -13,11 +13,11 @@
 
     <div class="search-input-container">
       <div class="search-input-wrap">
-        <i-ms-search class="search-input-icon" />
+        <Icon name="search" class="search-input-icon" />
         <input ref="inputRef" v-model="keyword" class="search-input" :placeholder="t('searchPlaceholder')"
           @input="onDebouncedSearch" />
         <button v-if="keyword" class="input-clear-btn" @click="clearSearch">
-          <i-ms-close />
+          <Icon name="close" />
         </button>
       </div>
       <div v-if="!keyword && searchHistory.length > 0" class="recent-searches">
@@ -59,7 +59,7 @@
 
       <div class="filter-section" @click="filtersExpanded = !filtersExpanded">
         <span class="filter-section-label">{{ t('searchScope') }}</span>
-        <i-ms-expand-more class="filter-arrow" :class="{ expanded: filtersExpanded }" />
+        <Icon name="expand-more" class="filter-arrow" :class="{ expanded: filtersExpanded }" />
       </div>
 
       <template v-if="filtersExpanded">
@@ -113,11 +113,11 @@
         <span class="results-count">{{ t('searchResults') }} ({{ results.length }})</span>
       </div>
       <div v-if="results.length === 0 && !searching" class="results-status">
-        <i-ms-search-off class="results-status-icon" />
+        <Icon name="search-off" class="results-status-icon" />
         <span>{{ t('searchNoResults') }}</span>
       </div>
       <div v-if="searching" class="results-status">
-        <i-ms-hourglass-top class="results-status-icon" />
+        <Icon name="hourglass-top" class="results-status-icon" />
         <span>{{ t('loadingQuestions') }}</span>
       </div>
       <div v-else-if="results.length > 0" class="result-list">
@@ -133,7 +133,7 @@
       </div>
     </div>
     <div v-else-if="!keyword" class="results-placeholder">
-      <i-ms-search class="placeholder-icon" />
+      <Icon name="search" class="placeholder-icon" />
       <p class="placeholder-text">{{ t('searchPlaceholder') }}</p>
     </div>
   </div>
@@ -142,6 +142,7 @@
 <script setup>
 import { ref, reactive, computed, onMounted, nextTick, watch } from 'vue'
 import { useRouter } from 'vue-router'
+import Icon from '@/presentation/components/common/Icon.vue'
 import { useAppStore } from '@/domain/stores/store'
 import { t } from '@/infrastructure/utils/i18n.js'
 import * as API from '@/infrastructure/api/dataSource'

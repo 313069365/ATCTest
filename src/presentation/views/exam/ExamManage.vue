@@ -3,7 +3,7 @@
     <header class="top-bar">
       <h1 class="title">{{ t('examManagement') }}</h1>
       <button class="icon-btn" @click="$router.push('/exam/history')">
-        <i-ms-history />
+        <Icon name="history" />
       </button>
     </header>
 
@@ -11,11 +11,11 @@
       <section class="paper-section">
         <div class="paper-actions">
           <button class="paper-action-btn" @click="$router.push('/exam/create')">
-            <i-ms-add />
+            <Icon name="add" />
             <span>{{ t('createPaper') }}</span>
           </button>
           <button class="paper-action-btn" @click="triggerImport">
-            <i-ms-upload />
+            <Icon name="upload" />
             <span>{{ t('importPaper') }}</span>
           </button>
           <input type="file" ref="fileInput" accept=".json" @change="handleImport" style="display: none">
@@ -29,10 +29,10 @@
               <span class="paper-tag">{{ paper.paperCategory || t('mockTest') }}</span>
               <div class="paper-actions-btns">
                 <button class="icon-btn-sm" @click="exportPaper(paper)">
-                  <i-ms-download />
+                  <Icon name="download" />
                 </button>
                 <button class="icon-btn-sm delete" @click="deletePaper(paper.id)">
-                  <i-ms-delete-outline />
+                  <Icon name="delete-outline" />
                 </button>
               </div>
             </div>
@@ -41,32 +41,32 @@
             <p class="paper-desc">{{ paper.description || t('noDescription') }}</p>
             <div class="paper-stats">
               <span class="stat-item">
-                <i-ms-quiz-outline />
+                <Icon name="quiz-outline" />
                 {{ paper.questionCount }} {{ t('questions') }}
               </span>
               <span class="stat-item">
-                <i-ms-timer-outline />
+                <Icon name="timer-outline" />
                 {{ paper.duration }} {{ t('minutes') }}
               </span>
               <span class="stat-item">
-                <i-ms-grade-outline />
+                <Icon name="grade-outline" />
                 {{ paper.totalScore }} {{ t('score') }}
               </span>
               <span class="stat-item created-time">
-                <i-ms-event-outline />
+                <Icon name="event-outline" />
                 {{ formatDate(paper.createdAt) }}
               </span>
             </div>
 
             <button class="start-btn" @click="startExam(paper.id)">
               {{ t('startExam') }}
-              <i-ms-play-arrow-outline />
+              <Icon name="play-arrow-outline" />
             </button>
           </div>
         </div>
 
         <div class="empty-state" v-else>
-          <i-ms-description-outline />
+          <Icon name="description-outline" />
           <p>{{ t('noPapers') }}</p>
           <p class="empty-hint">{{ t('createFirstPaper') }}</p>
         </div>
@@ -82,6 +82,7 @@ import { computed, onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAppStore } from '@/domain/stores/store'
 import { t } from '@/infrastructure/utils/i18n'
+import Icon from '@/presentation/components/common/Icon.vue'
 
 const router = useRouter()
 const store = useAppStore()

@@ -56,16 +56,16 @@
 
       <div class="actions">
         <button class="action-btn primary" @click="goToWrongBook">
-          <i-ms-visibility-outline />
+          <Icon name="visibility-outline" />
           {{ t('viewWrongQuestions') }}
         </button>
         <div class="action-row">
           <button class="action-btn secondary" @click="practiceAgain">
-            <i-ms-restart-alt />
+            <Icon name="restart-alt" />
             {{ t('practiceAgain') }}
           </button>
           <button class="action-btn outline" @click="backToHome">
-            <i-ms-home-outline />
+            <Icon name="home-outline" />
             {{ t('backToHome') }}
           </button>
         </div>
@@ -82,6 +82,7 @@ import { usePracticeService } from "@/domain/composables/usePracticeService";
 import { t } from "@/infrastructure/utils/i18n.js";
 import { getPracticeKey } from "@/infrastructure/storage/progress";
 import { normalizeSession } from "@/infrastructure/storage/sessionAdapter";
+import Icon from '@/presentation/components/common/Icon.vue';
 
 const router = useRouter();
 const route = useRoute();

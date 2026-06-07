@@ -2,7 +2,7 @@
   <div class="data-management">
     <header class="top-bar">
       <button class="icon-btn" @click="goBack">
-        <i-ms-arrow-back />
+        <IconArrowBack />
       </button>
       <h1 class="title">数据管理</h1>
     </header>
@@ -33,7 +33,7 @@
             <div class="progress-fill" :class="{ indeterminate: refreshProgress.indeterminate }"></div>
           </div>
           <button class="card-btn" @click="refreshCache" :disabled="store.loading">
-            <i-ms-refresh />
+            <IconRefresh />
             <span>{{ store.loading ? '更新中...' : '刷新题库缓存' }}</span>
           </button>
         </div>
@@ -44,7 +44,7 @@
         <div class="data-list">
           <div v-for="item in dataItems" :key="item.key" class="data-row">
             <div class="data-info">
-              <component :is="item.icon" class="data-icon" :class="item.iconClass" />
+              <Icon :name="item.iconName" class="data-icon" :class="item.iconClass" />
               <div>
                 <span class="data-name">{{ item.name }}</span>
                 <span class="data-count">{{ item.count }}条</span>
@@ -54,7 +54,7 @@
           </div>
         </div>
         <button class="clear-all-btn" @click="clearAll" :disabled="clearing">
-          <i-ms-delete-sweep-outline />
+          <IconDeleteSweepOutline />
           <span>{{ clearing ? '清除中...' : '清除所有用户数据' }}</span>
         </button>
       </section>
@@ -63,16 +63,12 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted, markRaw } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAppStore } from '@/domain/stores/store'
 import { storage, STORAGE_KEY } from '@/infrastructure/storage/useStorage'
 import { computeBankHash } from '@/infrastructure/api/dataSource'
-import ImsErrorOutline from '~icons/material-symbols/error-outline'
-import ImsBookmark from '~icons/material-symbols/bookmark-outline'
-import ImsAssignmentTurnedIn from '~icons/material-symbols/assignment-turned-in-outline'
-import ImsQuiz from '~icons/material-symbols/quiz-outline'
-import ImsSettings from '~icons/material-symbols/settings-outline'
+import Icon from '@/presentation/components/common/Icon.vue'
 
 const router = useRouter()
 const store = useAppStore()
@@ -105,11 +101,11 @@ const totalQuestions = computed(() => {
 })
 
 const dataItems = computed(() => [
-  { key: STORAGE_KEY.USER_WRONG_BOOK, name: '错题本', count: store.wrongBook.length, icon: markRaw(ImsErrorOutline), iconClass: 'error-icon' },
-  { key: STORAGE_KEY.USER_FAVORITES, name: '收藏本', count: store.favorites.length, icon: markRaw(ImsBookmark), iconClass: 'fav-icon' },
-  { key: STORAGE_KEY.PRACTICE_HISTORY, name: '练习记录', count: store.practiceHistory.length, icon: markRaw(ImsAssignmentTurnedIn), iconClass: 'history-icon' },
-  { key: STORAGE_KEY.EXAM_PAPERS, name: '考试记录', count: store.examPapers.length, icon: markRaw(ImsQuiz), iconClass: 'exam-icon' },
-  { key: STORAGE_KEY.EXAM_PRESETS, name: '考试预设', count: store.examPresets.length, icon: markRaw(ImsSettings), iconClass: 'preset-icon' },
+  { key: STORAGE_KEY.USER_WRONG_BOOK, name: '错题本', count: store.wrongBook.length, iconName: 'error-outline', iconClass: 'error-icon' },
+  { key: STORAGE_KEY.USER_FAVORITES, name: '收藏本', count: store.favorites.length, iconName: 'bookmark-outline', iconClass: 'fav-icon' },
+  { key: STORAGE_KEY.PRACTICE_HISTORY, name: '练习记录', count: store.practiceHistory.length, iconName: 'assignment-turned-in-outline', iconClass: 'history-icon' },
+  { key: STORAGE_KEY.EXAM_PAPERS, name: '考试记录', count: store.examPapers.length, iconName: 'quiz-outline', iconClass: 'exam-icon' },
+  { key: STORAGE_KEY.EXAM_PRESETS, name: '考试预设', count: store.examPresets.length, iconName: 'settings-outline', iconClass: 'preset-icon' },
 ])
 
 function goBack() {

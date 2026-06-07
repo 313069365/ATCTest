@@ -2,7 +2,7 @@
   <div class="create-paper-page">
     <header class="top-bar">
       <button class="icon-btn" @click="exitCreate">
-                      <i-ms-close />
+                      <Icon name="close" />
       </button>
       <h1 class="title">{{ t('createPaper') }}</h1>
       <div class="placeholder"></div>
@@ -15,7 +15,7 @@
           'completed': currentStep > step.id
         }">
           <div class="step-marker">
-            <i-ms-check v-if="currentStep > step.id" class="check-icon" />
+            <Icon name="check" v-if="currentStep > step.id" class="check-icon" />
             <span v-else class="step-number">{{ step.id }}</span>
           </div>
           <div class="step-label">{{ step.label }}</div>
@@ -66,7 +66,7 @@
           <div class="step-actions">
             <button class="step-btn step-btn-primary" @click="nextStep" :disabled="!canProceed">
               <span>{{ t('nextStep') }}</span>
-              <i-ms-arrow-forward />
+              <Icon name="arrow-forward" />
             </button>
           </div>
         </div>
@@ -90,7 +90,7 @@
                     <span class="subject-card-meta">{{ t(item.category) }}</span>
                   </div>
                   <button class="btn-delete" @click="removeSubject(index)">
-        <i-ms-close />
+        <Icon name="close" />
                   </button>
                 </div>
                 <div class="subject-card-row subject-card-row-bottom">
@@ -112,25 +112,25 @@
               </div>
 
               <div class="add-subject-btn" @click="openBankModal">
-                <i-ms-add />
+                <Icon name="add" />
                 <span>{{ t('addSubject') }}</span>
               </div>
             </div>
 
             <div class="empty-tip" @click="openBankModal" v-else>
-              <i-ms-add-circle-outline />
+              <Icon name="add-circle-outline" />
               <p>{{ t('clickToAddSubject') }}</p>
             </div>
           </div>
 
           <div class="step-actions">
             <button class="step-btn step-btn-secondary" @click="prevStep">
-              <i-ms-arrow-back />
+              <Icon name="arrow-back" />
               <span>{{ t('prevStep') }}</span>
             </button>
             <button class="step-btn step-btn-primary" @click="nextStep" :disabled="!canProceed">
               <span>{{ t('nextStep') }}</span>
-              <i-ms-arrow-forward />
+              <Icon name="arrow-forward" />
             </button>
           </div>
         </div>
@@ -150,19 +150,19 @@
                 <div class="info-card-title">{{ form.title || t('paperTitle') }}</div>
                 <div class="info-card-stats">
                   <div class="info-stat-item">
-                    <i-ms-schedule-outline />
+                    <Icon name="schedule-outline" />
                     <span class="info-stat-value">{{ form.duration || 0 }}</span>
                     <span class="info-stat-label">{{ t('minutes') }}</span>
                   </div>
                   <div class="info-stat-divider"></div>
                   <div class="info-stat-item">
-                    <i-ms-quiz-outline />
+                    <Icon name="quiz-outline" />
                     <span class="info-stat-value">{{ totalQuestions }}</span>
                     <span class="info-stat-label">{{ t('totalQuestions') }}</span>
                   </div>
                   <div class="info-stat-divider"></div>
                   <div class="info-stat-item">
-                    <i-ms-grade-outline />
+                    <Icon name="grade-outline" />
                     <span class="info-stat-value">{{ autoTotalScore }}</span>
                     <span class="info-stat-label">{{ t('totalScore') }}</span>
                   </div>
@@ -199,12 +199,12 @@
 
           <div class="step-actions">
             <button class="step-btn step-btn-secondary" @click="prevStep">
-              <i-ms-arrow-back />
+              <Icon name="arrow-back" />
               <span>{{ t('prevStep') }}</span>
             </button>
             <button class="step-btn step-btn-primary" @click="createPaper" :disabled="!canProceed">
               <span>{{ t('createPaper') }}</span>
-              <i-ms-check />
+              <Icon name="check" />
             </button>
           </div>
         </div>
@@ -223,6 +223,7 @@ import { useRouter } from 'vue-router'
 import { useAppStore } from '@/domain/stores/store'
 import SubjectPicker from '@/presentation/components/page/SubjectPicker.vue'
 import { t } from '@/infrastructure/utils/i18n'
+import Icon from '@/presentation/components/common/Icon.vue'
 
 const router = useRouter()
 const store = useAppStore()

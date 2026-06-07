@@ -11,11 +11,11 @@
       </div>
       <div class="top-bar-right">
         <div class="timer-display">
-          <i-ms-timer-outline />
+          <Icon name="timer-outline" />
           <span>{{ elapsedTimeDisplay }}</span>
         </div>
         <button class="grid-btn" @click="showQuizSettings = true">
-          <i-ms-settings-outline />
+          <Icon name="settings" />
         </button>
       </div>
     </header>
@@ -32,7 +32,7 @@
         <button v-for="btn in visibleButtons" :key="btn.key" class="action-btn"
           :class="{ active: btn.active?.value, 'remove-btn': btn.key === 'removeWrong' }" @click="btn.action"
           :title="btn.title">
-          <component :is="btn.icon" />
+          <Icon :name="btn.iconName?.value ?? btn.iconName" />
         </button>
       </div>
     </div>
@@ -46,8 +46,8 @@
           <QuestionRenderer :question="currentQuestionWithOptions" :mode="practiceMode"
             :user-answer="userAnswers[currentQuestion?.id]" :show-answer="currentQuestionDisplay.shouldShowAnswer.value"
             :show-answer-mode="practiceData?.showAnswerMode" :auto-jump="practiceData?.autoJump"
-            :show-explanation="showAnswerExplanation" :current-sub-index="currentSubIndex" @answer="handleAnswer" @next-question="nextQuestion"
-            @checkSub="handleCheckSub" @check="checkAnswer" @goSub="handleGoSub" />
+            :show-explanation="showAnswerExplanation" :current-sub-index="currentSubIndex" @answer="handleAnswer"
+            @next-question="nextQuestion" @checkSub="handleCheckSub" @check="checkAnswer" @goSub="handleGoSub" />
         </div>
 
         <div v-else style="text-align: center; padding: 40px">
@@ -61,8 +61,8 @@
       @prev="prevQuestion" @next="nextQuestion" @submit="finishQuiz" @goSub="handleGoSub" />
 
     <AnswerCard v-if="showAnswerCard" :questions="bank" :currentIndex="currentIndex" :currentSubIndex="currentSubIndex"
-      :settings="practiceData" :answerStatus="answerStatus" :userAnswers="userAnswers"
-      @close="closeAnswerCard" @go="gotoQuesitonIdx" />
+      :settings="practiceData" :answerStatus="answerStatus" :userAnswers="userAnswers" @close="closeAnswerCard"
+      @go="gotoQuesitonIdx" />
 
     <PracticeStats v-if="showStatsDialog" :total="liveStats.total" :correct="liveStats.correct" :wrong="liveStats.wrong"
       :unanswered="liveStats.unanswered" :accuracy="liveStats.accuracy" :elapsed="liveStats.elapsed"
@@ -82,16 +82,9 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted, computed, provide, watch, markRaw } from "vue";
+import { ref, onMounted, onUnmounted, computed, provide, watch } from "vue";
 
-import IMsTranslate from '~icons/material-symbols/translate'
-import IMsDescriptionOutline from '~icons/material-symbols/description-outline'
-import IMsStar from '~icons/material-symbols/star'
-import IMsStarOutline from '~icons/material-symbols/star-outline'
-import IMsPlaylistRemove from '~icons/material-symbols/playlist-remove'
-import IMsBarChart from '~icons/material-symbols/bar-chart'
-import IMsGridView from '~icons/material-symbols/grid-view'
-import IMsGridViewOutline from '~icons/material-symbols/grid-view-outline'
+import Icon from '@/presentation/components/common/Icon.vue'
 import { useRouter, useRoute } from "vue-router";
 import AnswerCard from "@/presentation/components/page/AnswerCard.vue";
 import PracticeStats from "@/presentation/components/page/PracticeStats.vue";
@@ -877,42 +870,42 @@ const buttonVisibility = computed(() => ({
 const actionButtons = [
   {
     key: 'translate',
-    icon: markRaw(IMsTranslate),
+    iconName: 'translate',
     title: '翻译',
     active: computed(() => showTranslation.value),
     action: toggleTranslation,
   },
   {
     key: 'explanation',
-    icon: markRaw(IMsDescriptionOutline),
+    iconName: 'description-outline',
     title: '显示解析',
     active: computed(() => showExplanationPref.value),
     action: toggleShowExplanation,
   },
   {
     key: 'favorite',
-    icon: computed(() => isFavorited.value ? IMsStar : IMsStarOutline),
+    iconName: computed(() => isFavorited.value ? 'kid-star' : 'kid-star-outline'),
     title: '收藏',
     active: computed(() => isFavorited.value),
     action: toggleFavorite,
   },
   {
     key: 'removeWrong',
-    icon: markRaw(IMsPlaylistRemove),
+    iconName: 'playlist-remove',
     title: '移出错题集',
     active: computed(() => isInWrongBook.value),
     action: removeCurrentFromWrong,
   },
   {
     key: 'stats',
-    icon: markRaw(IMsBarChart),
+    iconName: 'bar-chart',
     title: '答题统计',
     active: computed(() => showStatsDialog.value),
     action: () => showStatsDialog.value = true,
   },
   {
     key: 'answerCard',
-    icon: computed(() => showAnswerCard.value ? IMsGridView : IMsGridViewOutline),
+    iconName: computed(() => showAnswerCard.value ? 'grid-view' : 'grid-view-outline'),
     title: '答题卡',
     active: computed(() => showAnswerCard.value),
     action: toggleAnswerCard,

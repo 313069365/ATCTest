@@ -2,11 +2,11 @@
   <div class="page">
     <header class="top-bar">
       <button class="back-btn" @click="$router.back()">
-        <i-ms-arrow-back />
+        <Icon name="arrow-back" />
       </button>
       <h1>考试记录</h1>
       <button class="clear-btn">
-        <i-ms-delete-sweep-outline />
+        <Icon name="delete-sweep-outline" />
       </button>
     </header>
 
@@ -22,10 +22,10 @@
             </div>
             <div class="header-actions">
               <button class="icon-btn">
-                <i-ms-visibility-outline />
+                <Icon name="visibility-outline" />
               </button>
               <button class="icon-btn delete">
-                <i-ms-delete-outline />
+                <Icon name="delete-outline" />
               </button>
             </div>
           </div>
@@ -69,7 +69,7 @@
       </div>
 
       <div class="empty-state" v-if="mockExams.length === 0">
-        <i-ms-history />
+        <Icon name="history" />
         <p>暂无考试记录</p>
       </div>
     </main>
@@ -77,6 +77,8 @@
 </template>
 
 <script setup>
+import Icon from '@/presentation/components/common/Icon.vue'
+
 const mockExams = [
   {
     id: 1,

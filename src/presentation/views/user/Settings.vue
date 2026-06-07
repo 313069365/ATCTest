@@ -2,7 +2,7 @@
   <div class="settings">
     <header class="top-bar">
       <button class="icon-btn" @click="goBack">
-        <i-ms-arrow-back />
+        <Icon name="arrow-back" />
       </button>
       <h1 class="title">{{ t('systemSettings') }}</h1>
       <div class="top-bar-right"></div>
@@ -20,6 +20,7 @@ import { useRouter } from 'vue-router'
 import { t } from '@/infrastructure/utils/i18n.js'
 import { APP_VERSION } from '@/infrastructure/utils/version'
 import LanguageSwitch from '@/presentation/components/common/LanguageSwitch.vue'
+import Icon from '@/presentation/components/common/Icon.vue'
 
 const router = useRouter()
 

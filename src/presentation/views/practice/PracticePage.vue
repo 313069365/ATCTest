@@ -4,7 +4,7 @@
       <h1 class="title">练习题库</h1>
       <div class="header-actions">
         <button class="import-btn" @click="showImportModal = true">
-          <i-ms-sync-alt />
+          <Icon name="sync-alt" />
         </button>
       </div>
     </header>
@@ -15,7 +15,7 @@
         <div class="bank-grid">
           <button v-for="cat in categoryOptions" :key="cat" class="bank-btn"
             :class="{ active: selectedCategory === cat }" @click="selectedCategory = cat">
-            <component :is="iconMap[cat]" />
+            <Icon :name="iconMap[cat]" />
             <span>{{ t(cat) }}</span>
           </button>
         </div>
@@ -26,7 +26,7 @@
         <div class="scope-tabs">
           <button v-for="scope in scopeOptions" :key="scope" class="scope-tab"
             :class="{ active: selectedScope === scope }" @click="selectedScope = scope">
-            <component :is="iconMap[scope]" class="tab-icon" />
+            <Icon :name="iconMap[scope]" class="tab-icon" />
             <span>{{ t(scope) }}</span>
           </button>
         </div>
@@ -39,7 +39,7 @@
             :class="{ expanded: expandedSubject === subject.name }">
             <div class="subject-header" @click="toggleExpand(subject)">
               <div class="subject-icon">
-                <component :is="iconMap[subject.name]" />
+                <Icon :name="iconMap[subject.name]" />
               </div>
               <div class="subject-info">
                 <h4>{{ t(subject.name) }}</h4>
@@ -94,9 +94,49 @@ import { ref, computed, watch, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import PracticeSetting from '@/presentation/components/page/PracticeSettings.vue'
 import BankImport from '@/presentation/components/page/BankImport.vue'
-import { iconMap } from '@/assets/fonts/IconMaps.js'
+import Icon from '@/presentation/components/common/Icon.vue'
 import { t } from '@/infrastructure/utils/i18n.js'
 import { useAppStore } from '@/domain/stores/store'
+
+const iconMap = {
+  aviationMeteorology: 'cloud',
+  airNavigation: 'explore',
+  communicationNavigationSurveillance: 'settings-input-antenna',
+  principlesOfFlight: 'air',
+  aircraftSystems: 'flight',
+  aeronauticalInformation: 'info',
+  airTrafficServicesGeneral: 'gavel',
+  airspace: 'public',
+  humanFactors: 'psychology',
+  generalAviation: 'helicopter',
+  aerodromeControl: 'apartment',
+  approachControl: 'flight-land',
+  approachRadarControl: 'radar',
+  precisionApproachRadarControl: 'track-changes',
+  areaControl: 'map',
+  areaRadarControl: 'radar',
+  flightService: 'support-agent',
+  regionalOperationsMonitoring: 'monitor-heart',
+  caacOperationsMonitoring: 'apartment',
+  specialSkillAdsb: 'star',
+  apronControl: 'flight-takeoff',
+  apronControlOld: 'flight',
+  singleChoice: 'radio-button-checked',
+  readingComprehension: 'menu-book',
+  RunwayIncursionPrevention: 'warning',
+  basicCollection: 'collections-bookmark',
+  atc: 'flight',
+  airport: 'apartment',
+  airline: 'connecting-airports',
+  base: 'flight',
+  professional: 'work',
+  english: 'language',
+  subject: 'menu-book',
+  practice: 'play-arrow',
+  sequence: 'arrow-forward',
+  reverse: 'arrow-back',
+  shuffle: 'shuffle',
+}
 import { usePracticeService } from '@/domain/composables/usePracticeService'
 import { computeSubjectStats } from '@/domain/services/stats'
 import { getPracticeKey } from '@/infrastructure/storage/progress'

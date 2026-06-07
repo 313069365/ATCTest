@@ -3,17 +3,17 @@
     <div class="hero-section">
       <header class="top-bar">
         <button class="home-btn" @click="goHome">
-          <i-ms-home-outline />
+          <Icon name="home-outline" />
         </button>
         <h1>{{ t('examResult') }}</h1>
         <button class="share-btn">
-          <i-ms-share-outline />
+          <Icon name="share-outline" />
         </button>
       </header>
 
       <div class="hero-content" v-if="hasResult">
         <div class="grade-badge" :class="gradeClass">
-          <i-ms-trophy-outline />
+          <Icon name="trophy-outline" />
           <span>{{ gradeText }}</span>
         </div>
 
@@ -36,7 +36,7 @@
       </div>
 
       <div class="hero-content empty" v-else>
-        <i-ms-assignment-outline />
+        <Icon name="assignment-outline" />
         <p>{{ t('noExamResult') }}</p>
       </div>
     </div>
@@ -71,7 +71,7 @@
       <section class="meta-section" v-if="hasResult">
         <div class="meta-card">
           <div class="meta-item">
-            <i-ms-schedule-outline />
+            <Icon name="schedule-outline" />
             <div class="meta-text">
               <span class="meta-label">{{ t('timeUsed') }}</span>
               <span class="meta-value">{{ formattedTime }}</span>
@@ -79,7 +79,7 @@
           </div>
           <div class="meta-divider"></div>
           <div class="meta-item">
-            <i-ms-calendar-today-outline />
+            <Icon name="calendar-today-outline" />
             <div class="meta-text">
               <span class="meta-label">{{ t('examDate') }}</span>
               <span class="meta-value">2024年1月15日</span>
@@ -110,11 +110,11 @@
 
       <section class="actions-section">
         <button class="action-btn primary">
-          <i-ms-visibility-outline />
+          <Icon name="visibility-outline" />
           查看答题详情
         </button>
         <button class="action-btn secondary">
-          <i-ms-restart-alt />
+          <Icon name="restart-alt" />
           重新考试
         </button>
       </section>
@@ -125,6 +125,7 @@
 <script setup>
 import { computed } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
+import Icon from '@/presentation/components/common/Icon.vue'
 import { t } from '@/infrastructure/utils/i18n.js'
 
 const router = useRouter()

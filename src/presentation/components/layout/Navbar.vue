@@ -2,28 +2,20 @@
   <nav class="navbar">
     <router-link v-slot="{ isActive }" v-for="item in navbarItems"
       :key="item.name" :to="item.link" class="nav-item" active-class="active">
-      <component :is="isActive ? navIconMap[item.icon].f : navIconMap[item.icon].o" class="icon" />
+      <Icon :name="isActive ? navIconMap[item.icon].f : navIconMap[item.icon].o" class="icon" />
       <span class="label">{{ item.name }}</span>
     </router-link>
   </nav>
 </template>
 
 <script setup>
-import { markRaw } from 'vue'
-import IMsHomeOutline from '~icons/material-symbols/home-outline'
-import IMsHome from '~icons/material-symbols/home'
-import IMsEditNoteOutline from '~icons/material-symbols/edit-note-outline'
-import IMsEditNote from '~icons/material-symbols/edit-note'
-import IMsAssignmentOutline from '~icons/material-symbols/assignment-outline'
-import IMsAssignment from '~icons/material-symbols/assignment'
-import IMsPersonOutline from '~icons/material-symbols/person-outline'
-import IMsPerson from '~icons/material-symbols/person'
+import Icon from '@/presentation/components/common/Icon.vue'
 
 const navIconMap = {
-  home: { o: markRaw(IMsHomeOutline), f: markRaw(IMsHome) },
-  edit_note: { o: markRaw(IMsEditNoteOutline), f: markRaw(IMsEditNote) },
-  assignment: { o: markRaw(IMsAssignmentOutline), f: markRaw(IMsAssignment) },
-  person: { o: markRaw(IMsPersonOutline), f: markRaw(IMsPerson) },
+  home: { o: 'home-outline', f: 'home' },
+  edit_note: { o: 'edit-note-outline', f: 'edit-note' },
+  assignment: { o: 'assignment-outline', f: 'assignment' },
+  person: { o: 'person-outline', f: 'person' },
 }
 
 const navbarItems = [

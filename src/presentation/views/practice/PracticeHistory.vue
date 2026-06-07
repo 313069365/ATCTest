@@ -2,32 +2,32 @@
   <div class="page">
     <header class="top-bar">
       <button class="back-btn" @click="$router.back()">
-        <i-ms-arrow-back />
+        <Icon name="arrow-back" />
       </button>
       <h1>历史记录</h1>
       <button class="clear-btn">
-        <i-ms-delete-sweep-outline />
+        <Icon name="delete-sweep-outline" />
       </button>
     </header>
 
     <main class="content">
       <div class="stats-section">
         <div class="stat-card">
-          <i-ms-assignment-outline class="stat-icon" />
+          <Icon name="assignment-outline" class="stat-icon" />
           <div class="stat-info">
             <span class="stat-value">{{ pm.sessions.value.length }}</span>
             <span class="stat-label">总练习</span>
           </div>
         </div>
         <div class="stat-card">
-          <i-ms-target class="stat-icon" />
+          <Icon name="target" class="stat-icon" />
           <div class="stat-info">
             <span class="stat-value">{{ pm.overallStats.value.accuracy }}%</span>
             <span class="stat-label">正确率</span>
           </div>
         </div>
         <div class="stat-card">
-          <i-ms-history class="stat-icon" />
+          <Icon name="history" class="stat-icon" />
           <div class="stat-info">
             <span class="stat-value">{{ pm.sessions.value.length }}</span>
             <span class="stat-label">记录条数</span>
@@ -67,7 +67,7 @@
 
       <div class="empty-state" v-if="list.length === 0">
         <div class="empty-icon-wrapper">
-          <i-ms-history />
+          <Icon name="history" />
         </div>
         <h3>暂无练习记录</h3>
         <p>开始练习后，记录会自动保存</p>
@@ -79,6 +79,7 @@
 
 <script setup>
 import { computed, onMounted } from 'vue'
+import Icon from '@/presentation/components/common/Icon.vue'
 import { usePracticeService } from '@/domain/composables/usePracticeService'
 import { t } from '@/infrastructure/utils/i18n.js'
 

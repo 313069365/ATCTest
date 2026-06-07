@@ -2,7 +2,7 @@
   <div class="stats-page">
     <header class="top-bar">
       <button class="icon-btn" @click="goBack">
-        <i-ms-arrow-back />
+        <Icon name="arrow-back" />
       </button>
       <h1 class="title">用户统计</h1>
       <div class="placeholder"></div>
@@ -40,28 +40,28 @@
           <h2 class="section-title">练习统计</h2>
           <div class="practice-stats">
             <div class="stat-card">
-              <i-ms-assignment-outline class="stat-icon" />
+              <Icon name="assignment-outline" class="stat-icon" />
               <div class="stat-info">
                 <span class="stat-value">{{ practiceStats.total }}</span>
                 <span class="stat-label">练习次数</span>
               </div>
             </div>
             <div class="stat-card">
-              <i-ms-check-circle-outline class="stat-icon" />
+              <Icon name="check-circle-outline" class="stat-icon" />
               <div class="stat-info">
                 <span class="stat-value">{{ practiceStats.correct }}</span>
                 <span class="stat-label">正确题数</span>
               </div>
             </div>
             <div class="stat-card">
-              <i-ms-cancel-outline class="stat-icon" />
+              <Icon name="cancel-outline" class="stat-icon" />
               <div class="stat-info">
                 <span class="stat-value">{{ practiceStats.incorrect }}</span>
                 <span class="stat-label">错误题数</span>
               </div>
             </div>
             <div class="stat-card">
-              <i-ms-trending-up class="stat-icon" />
+              <Icon name="trending-up" class="stat-icon" />
               <div class="stat-info">
                 <span class="stat-value">{{ practiceStats.accuracy }}%</span>
                 <span class="stat-label">正确率</span>
@@ -77,28 +77,28 @@
           <h2 class="section-title">考试统计</h2>
           <div class="exam-stats">
             <div class="stat-card">
-              <i-ms-quiz-outline class="stat-icon" />
+              <Icon name="quiz-outline" class="stat-icon" />
               <div class="stat-info">
                 <span class="stat-value">{{ examStats.total }}</span>
                 <span class="stat-label">考试次数</span>
               </div>
             </div>
             <div class="stat-card">
-              <i-ms-check-circle-outline class="stat-icon" />
+              <Icon name="check-circle-outline" class="stat-icon" />
               <div class="stat-info">
                 <span class="stat-value">{{ examStats.passed }}</span>
                 <span class="stat-label">通过次数</span>
               </div>
             </div>
             <div class="stat-card">
-              <i-ms-cancel-outline class="stat-icon" />
+              <Icon name="cancel-outline" class="stat-icon" />
               <div class="stat-info">
                 <span class="stat-value">{{ examStats.failed }}</span>
                 <span class="stat-label">未通过次数</span>
               </div>
             </div>
             <div class="stat-card">
-              <i-ms-star-outline class="stat-icon" />
+              <Icon name="star-outline" class="stat-icon" />
               <div class="stat-info">
                 <span class="stat-value">{{ examStats.averageScore }}</span>
                 <span class="stat-label">平均分</span>
@@ -121,8 +121,8 @@
               @click="viewRecord(record)"
             >
               <div class="recent-icon">
-                <i-ms-assignment-outline v-if="record.type === 'practice'" />
-                <i-ms-quiz-outline v-else />
+                <Icon name="assignment-outline" v-if="record.type === 'practice'" />
+                <Icon name="quiz-outline" v-else />
               </div>
               <div class="recent-info">
                 <h4>{{ record.title }}</h4>
@@ -140,7 +140,7 @@
             </div>
           </div>
           <div class="empty-state" v-else>
-            <i-ms-history />
+<Icon name="history" />
             <p>暂无记录</p>
           </div>
         </div>
@@ -149,11 +149,11 @@
       <!-- 操作按钮 -->
       <div class="action-buttons">
         <button class="action-btn" @click="goPracticeHistory">
-          <i-ms-history />
+          <IconHistory />
           练习记录
         </button>
         <button class="action-btn" @click="goExamHistory">
-          <i-ms-history />
+          <IconHistory />
           考试记录
         </button>
       </div>
@@ -165,6 +165,7 @@
 import { ref, computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { usePracticeService } from '@/domain/composables/usePracticeService'
+import Icon from '@/presentation/components/common/Icon.vue'
 
 const router = useRouter()
 const pm = usePracticeService()

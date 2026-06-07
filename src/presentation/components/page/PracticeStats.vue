@@ -60,11 +60,11 @@
 
         <div class="footer">
           <div class="footer-piece">
-            <i-ms-list-alt-outline />
+            <Icon name="list-alt-outline" />
             <span>{{ t('progress') }} {{ current }}/{{ totalQ }}</span>
           </div>
           <div class="footer-piece">
-            <i-ms-schedule-outline />
+            <Icon name="schedule-outline" />
             <span>{{ formattedTime }}</span>
           </div>
         </div>
@@ -75,6 +75,7 @@
 
 <script setup>
 import { computed } from 'vue'
+import Icon from '@/presentation/components/common/Icon.vue'
 import { t } from '@/infrastructure/utils/i18n.js'
 
 const props = defineProps({
