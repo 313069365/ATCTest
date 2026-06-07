@@ -1,0 +1,268 @@
+/* ========== 变量 ========== */
+:root {
+  /* 布局 */
+  --app-max-height: 100vh;
+  --app-max-width: 400px;
+
+  /* 字体 */
+  --font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --line-height-tight: 1.25;
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.75;
+
+  /* 字号 - 7档 */
+  --font-size-mn: 10px;
+  --font-size-sm: 12px;
+  --font-size-md: 14px;
+  --font-size-lg: 16px;
+  --font-size-xl: 18px;
+  --font-size-2xl: 20px;
+  --font-size-3xl: 24px;
+  --font-size-xxl: 36px;
+
+  /* 字重 */
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-extrabold: 800;
+  --font-weight-black: 900;
+
+  /* 主色 */
+  --primary: #005bbf;
+  --primary-dark: #03468f;
+  --primary-light: #d8e2ff;
+  --primary-container: #d8e2ff;
+  --on-primary: #ffffff;
+  --primary-gradient-end: #1a73e8;
+
+  /* 次要色 */
+  --secondary: #f39c12;
+  --secondary-light: #fcf5e2;
+
+  /* 强调色 */
+  --accent: #e67e22;
+  --accent-light: #fef3e0;
+  --accent-gradient-end: #f39c12;
+
+  /* 文字 */
+  --on-surface: #1f1f1f;
+  --on-surface-variant: #444746;
+  --text-primary: #181c20;
+  --text-secondary: #727785;
+  --text-disabled: #9e9e9e;
+
+  /* 图标颜色 */
+  --icon-color: #414754;
+  --icon-color-secondary: #727785;
+
+  /* 背景 */
+  --background: #ffffff;
+  /* --background-secondary: #ffffff; */
+  --background-secondary: #f1f1f1;
+  --background-surface: #f8f9fa;
+  --surface-variant: #f1f1f1;
+
+  /* 边框 */
+  --border-color: rgba(116, 119, 117, 0.1);
+  --border-color-strong: rgba(193, 198, 214, 0.3);
+  --border-color-light: rgba(193, 198, 214, 0.1);
+
+  /* 状态 */
+  --selected: #0e56e4;
+  --selected-light: #aed1fe;
+  --success: #34a853;
+  --success-light: #e6f4ea;
+  --warning: #f9a825;
+  --warning-light: #fef7e0;
+  --error: #ea4335;
+  --error-light: #fce8e6;
+  --partial: #66bb6a;
+  --partial-light: #e8f5e9;
+  --unchecked: #64b5f6;
+  --unchecked-light: #e3f2fd;
+
+  /* tag 颜色 */
+  --tag-purple-bg: #ede9fe;
+  --tag-purple-text: #7c3aed;
+  --tag-green-bg: #d4edda;
+  --tag-green-text: #155724;
+
+  /* 遮罩 */
+  --overlay-white: rgba(255, 255, 255, 0.5);
+  --overlay-dark: rgba(0, 0, 0, 0.5);
+
+  /* 灰度 */
+  --color-gray-50: #f5f6fa;
+  --color-gray-100: #f7f9ff;
+  --color-gray-200: #e5e8ee;
+  --color-gray-300: #dfe3e8;
+  --color-gray-400: #d8e2ff;
+  --color-gray-500: #c7c7cc;
+  --color-gray-600: #727785;
+  --color-gray-700: #414754;
+  --color-gray-800: #181c20;
+
+  /* 间距 */
+  --spacing-mn: 4px;
+  --spacing-sm: 8px;
+  --spacing-smd: 12px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  --spacing-2xl: 48px;
+  --safe-area: 80px;
+
+  /* 圆角 */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-full: 9999px;
+
+  /* 阴影 */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 2px 8px rgba(0, 0, 0, 0.04);
+  --shadow-lg: 0 4px 12px rgba(0, 0, 0, 0.08);
+
+  /* 层级 */
+  --z-sticky: 50;
+  --z-fixed: 100;
+  --z-dropdown: 150;
+  --z-popup: 200;
+
+  /* 过渡 */
+  --transition-fast: 0.15s;
+  --transition-normal: 0.2s;
+}
+
+/* ========== 夜间模式 ========== */
+.dark {
+  --primary: #4a8fe0;
+  --primary-dark: #3a7bc8;
+  --primary-light: #1a2a4a;
+  --primary-container: #1a2a4a;
+  --on-primary: #ffffff;
+  --primary-gradient-end: #5a9ff0;
+
+  --on-surface: #e0e0e0;
+  --on-surface-variant: #b0b3b8;
+  --text-primary: #e0e0e0;
+  --text-secondary: #9ea2a8;
+
+  --icon-color: #b0b3b8;
+  --icon-color-secondary: #9ea2a8;
+
+  --background: #121212;
+  --background-secondary: #1e1e1e;
+  --background-surface: #2c2c2c;
+  --surface-variant: #2c2c2c;
+
+  --border-color: rgba(255, 255, 255, 0.08);
+  --border-color-strong: rgba(255, 255, 255, 0.12);
+  --border-color-light: rgba(255, 255, 255, 0.06);
+
+  --success-light: #1a3a2a;
+  --secondary-light: #3a3520;
+  --warning-light: #3a3020;
+  --error-light: #3a1a1a;
+
+  --tag-purple-bg: #2e1a4a;
+  --tag-purple-text: #a78bfa;
+  --tag-green-bg: #1a3a2a;
+  --tag-green-text: #6fcf97;
+
+  --color-gray-50: #1a1a1e;
+  --color-gray-100: #2c2c2c;
+  --color-gray-200: #3a3a3a;
+  --color-gray-300: #484848;
+  --color-gray-400: #5a5a5a;
+  --color-gray-500: #6a6a6a;
+  --color-gray-600: #9ea2a8;
+  --color-gray-700: #b0b3b8;
+  --color-gray-800: #e0e0e0;
+
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 2px 8px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+/* ========== 基础样式 ========== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  font-family: var(--font-family);
+  background: var(--background-secondary);
+  color: var(--on-surface);
+  line-height: var(--line-height-normal);
+}
+
+#app {
+  min-height: 100vh;
+  max-width: var(--app-max-width);
+  margin: 0 auto;
+  border-left: 1px solid var(--border-color);
+  border-right: 1px solid var(--border-color);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: inherit;
+  border: none;
+  background: none;
+  cursor: pointer;
+  
+  /* 🍎 iOS 全局样式修复 */
+  -webkit-appearance: none;
+  appearance: none;
+  color: var(--text-primary);
+}
+
+button * {
+  /* 确保按钮内所有文字都继承按钮的颜色 */
+  color: inherit;
+}
+
+input,
+textarea {
+  font-family: inherit;
+}
+
+/* 页面容器 */
+.page {
+  min-height: 100vh;
+  background: var(--background);
+  width: 100%;
+  max-width: var(--app-max-width);
+  margin: 0 auto;
+}
+
+/* 通用标题 */
+h1 {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+}
+h2 {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+}
+h3 {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+}
+h4 {
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-bold);
+}
