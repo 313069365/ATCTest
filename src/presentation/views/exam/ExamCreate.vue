@@ -1,12 +1,6 @@
 <template>
   <div class="create-paper-page">
-    <header class="top-bar">
-      <button class="icon-btn" @click="exitCreate">
-                      <Icon name="close" />
-      </button>
-      <h1 class="title">{{ t('createPaper') }}</h1>
-      <div class="placeholder"></div>
-    </header>
+    <TopBar :title="t('createPaper')" showBack backIcon="close" @back="exitCreate" />
 
     <div class="stepper-container">
       <div class="stepper">
@@ -223,6 +217,7 @@ import { useRouter } from 'vue-router'
 import { useAppStore } from '@/domain/stores/store'
 import SubjectPicker from '@/presentation/components/bank/SubjectPicker.vue'
 import { t } from '@/infrastructure/utils/i18n'
+import TopBar from '@/presentation/components/layout/TopBar.vue'
 import Icon from '@/presentation/components/ui/Icon.vue'
 
 const router = useRouter()
@@ -374,48 +369,6 @@ async function createPaper() {
   overflow: hidden;
 }
 
-.top-bar {
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  background: var(--background);
-  backdrop-filter: blur(8px);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: var(--spacing-sm) var(--spacing-md);
-  height: 56px;
-  border-bottom: 1px solid var(--border-color);
-}
-
-.icon-btn {
-  width: 40px;
-  height: 40px;
-  border: none;
-  background: transparent;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  color: var(--text-secondary);
-  font-size: var(--font-size-xl);
-}
-
-.icon-btn:active {
-  background: #f1f4fa;
-  transform: scale(0.95);
-}
-
-.title {
-  font-size: var(--font-size-2xl);
-  font-weight: 700;
-  color: #181c20;
-}
-
-.placeholder {
-  width: 40px;
-}
 
 .stepper-container {
   padding: var(--spacing-md) var(--spacing-lg);

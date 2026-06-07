@@ -1,15 +1,18 @@
 <template>
   <div class="page">
     <div class="hero-section">
-      <header class="top-bar">
-        <button class="home-btn" @click="goHome">
-          <Icon name="home-outline" />
-        </button>
-        <h1>{{ t('examResult') }}</h1>
-        <button class="share-btn">
-          <Icon name="share-outline" />
-        </button>
-      </header>
+      <TopBar :title="t('examResult')" variant="transparent" style="--topbar-color: var(--on-primary)">
+        <template #left>
+          <button class="icon-btn" @click="goHome">
+            <Icon name="home-outline" />
+          </button>
+        </template>
+        <template #right>
+          <button class="icon-btn">
+            <Icon name="share-outline" />
+          </button>
+        </template>
+      </TopBar>
 
       <div class="hero-content" v-if="hasResult">
         <div class="grade-badge" :class="gradeClass">
@@ -126,6 +129,7 @@
 import { computed } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import Icon from '@/presentation/components/ui/Icon.vue'
+import TopBar from '@/presentation/components/layout/TopBar.vue'
 import { t } from '@/infrastructure/utils/i18n.js'
 
 const router = useRouter()
@@ -211,33 +215,6 @@ const retakeExam = () => {
   padding-bottom: var(--spacing-xl);
   position: relative;
   overflow: hidden;
-}
-
-.top-bar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: var(--spacing-md);
-}
-
-.home-btn, .share-btn {
-  width: 40px;
-  height: 40px;
-  border: none;
-  background: rgba(255, 255, 255, 0.2);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  color: var(--on-primary);
-  font-size: var(--font-size-xl);
-}
-
-.top-bar h1 {
-  font-size: var(--font-size-lg);
-  font-weight: var(--font-weight-semibold);
-  color: var(--on-primary);
 }
 
 .hero-content {

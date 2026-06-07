@@ -1,12 +1,6 @@
 <template>
   <div class="stats-page">
-    <header class="top-bar">
-      <button class="icon-btn" @click="goBack">
-        <Icon name="arrow-back" />
-      </button>
-      <h1 class="title">用户统计</h1>
-      <div class="placeholder"></div>
-    </header>
+    <TopBar title="用户统计" showBack @back="goBack" />
 
     <main class="content">
       <!-- 总体统计 -->
@@ -166,6 +160,7 @@ import { ref, computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { usePracticeService } from '@/domain/composables/usePracticeService'
 import Icon from '@/presentation/components/ui/Icon.vue'
+import TopBar from '@/presentation/components/layout/TopBar.vue'
 
 const router = useRouter()
 const pm = usePracticeService()
@@ -248,90 +243,7 @@ function viewRecord(record) {}
   font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue', sans-serif;
 }
 
-.top-bar {
-  position: sticky;
-  top: 0;
-  z-index: 10;
-  background: var(--background);
-  backdrop-filter: blur(8px);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 12px 20px;
-  min-height: 56px;
-  border-bottom: 1px solid var(--border-color);
-}
 
-.icon-btn {
-  width: 36px;
-  height: 36px;
-  border: none;
-  background: var(--border-color);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  color: var(--primary);
-  transition: all 0.2s ease;
-}
-
-.icon-btn:active {
-  background: var(--border-color-strong);
-  transform: scale(0.95);
-}
-
-.title {
-  font-size: 17px;
-  font-weight: 600;
-  color: var(--color-black);
-  letter-spacing: -0.2px;
-}
-
-.top-bar {
-  position: sticky;
-  top: 0;
-  z-index: 10;
-  background: var(--background);
-  backdrop-filter: blur(8px);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 12px 20px;
-  min-height: 56px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-}
-
-.icon-btn {
-  width: 36px;
-  height: 36px;
-  border: none;
-  background: rgba(0, 0, 0, 0.05);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  color: var(--primary);
-  transition: all 0.2s ease;
-  font-size: var(--font-size-xl);
-}
-
-.icon-btn:active {
-  background: rgba(0, 0, 0, 0.1);
-  transform: scale(0.95);
-}
-
-.title {
-  font-size: 17px;
-  font-weight: 600;
-  color: #000;
-  letter-spacing: -0.2px;
-}
-
-.placeholder {
-  width: 36px;
-}
 
 .content {
   padding: var(--spacing-lg);

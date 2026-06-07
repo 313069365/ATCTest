@@ -56,7 +56,7 @@
       </template>
     </main>
 
-    <QustionNavbar :prevDisabled="currentIndex === 0" :isLast="currentIndex === bank.length - 1"
+    <QuestionNavbar :prevDisabled="currentIndex === 0" :isLast="currentIndex === bank.length - 1"
       :subCount="currentSubCount" :currentSubIndex="currentSubIndex" :subStatuses="currentSubStatuses"
       @prev="prevQuestion" @next="nextQuestion" @submit="finishQuiz" @goSub="handleGoSub" />
 
@@ -89,7 +89,7 @@ import { useRouter, useRoute } from "vue-router";
 import AnswerOverview from "@/presentation/components/session/AnswerOverview.vue";
 import PracticeStats from "@/presentation/components/practice/PracticeStats.vue";
 import QuizSettings from "@/presentation/components/session/QuizSettings.vue";
-import QustionNavbar from "@/presentation/components/layout/QuestionNavbar.vue";
+import QuestionNavbar from "@/presentation/components/layout/QuestionNavbar.vue";
 import QuestionRenderer from "@/presentation/components/question/QuestionRenderer.vue";
 import JumpDialog from "@/presentation/components/session/JumpDialog.vue";
 import { useAppStore } from "@/domain/stores/store";
@@ -870,14 +870,14 @@ const buttonVisibility = computed(() => ({
 const actionButtons = [
   {
     key: 'translate',
-    iconName: 'translate',
+    iconName: 'g-translate',
     title: '翻译',
     active: computed(() => showTranslation.value),
     action: toggleTranslation,
   },
   {
     key: 'explanation',
-    iconName: 'description-outline',
+    iconName: 'rate-review-outline',
     title: '显示解析',
     active: computed(() => showExplanationPref.value),
     action: toggleShowExplanation,

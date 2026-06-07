@@ -1,83 +1,50 @@
 <template>
-  <div class="page">
-    <div class="hero-section">
-      <div class="hero-blur-1"></div>
-      <div class="hero-blur-2"></div>
-      <header class="top-bar">
-        <button class="back-btn" @click="goBack">
-          <Icon name="arrow-back" />
-        </button>
-        <h1>{{ t('favorites') }}</h1>
-        <button class="clear-btn" @click="clearAll" :disabled="favoritesList.length <= 0">
-          <Icon name="delete-sweep-outline" />
-        </button>
-      </header>
-    </div>
-
-    <main class="content">
-      <!-- 收藏加强 -->
-      <button class="practice-all-btn" @click="startFavoritesPractice" v-if="favoritesList.length > 0">
-        <div class="practice-all-left">
-          <Icon name="star-outline" class="practice-all-icon" />
-          <div class="practice-all-text">
-            <span class="practice-all-title">{{ t('practiceFavorites') }}</span>
-            <span class="practice-all-desc">{{ t('favoritesReviewDesc', { count: favoritesList.length }) }}</span>
+  <QuestionCollection
+    :title="t('favorites')"
+    :hasItems="favoritesList.length > 0"
+    practiceIcon="star-outline"
+    :practiceTitle="t('practiceFavorites')"
+    :practiceDesc="t('favoritesReviewDesc', { count: favoritesList.length })"
+    :items="paginatedList"
+    :loading="false"
+    :loaded="true"
+    :hasMore="hasMore"
+    emptyIcon="star-outline"
+    :emptyTitle="t('noFavorites')"
+    :emptyDesc="t('favoritesDesc')"
+    :startBtnText="t('startPractice')"
+    @back="goBack"
+    @clear="clearAll"
+    @practice-all="startFavoritesPractice"
+    @start-practice="goPractice"
+  >
+    <template #card="{ item }">
+      <div class="card glass">
+        <div class="card-header">
+          <div class="meta-top">
+            <span class="subject-tag">{{ t(item.meta?.subject) || item.meta?.subject || t('unknown') }}</span>
+            <span class="badge">{{ t(item.meta?.category) || item.meta?.category || '' }}</span>
           </div>
-        </div>
-        <Icon name="chevron-right" class="practice-all-arrow" />
-      </button>
-
-      <!-- 收藏列表 -->
-      <div class="favorites-list" v-if="favoritesList.length > 0">
-        <div class="favorite-card-wrapper" v-for="(item, index) in paginatedList" :key="item.id">
-          <div class="favorite-card glass">
-            <div class="favorite-header">
-              <div class="favorite-meta-top">
-                <span class="favorite-subject">{{ t(item.meta?.subject) || item.meta?.subject || t('unknown') }}</span>
-                <span class="favorite-badge">{{ t(item.meta?.category) || item.meta?.category || '' }}</span>
-              </div>
-              <button class="delete-individual-btn" @click="removeFavorite(item.id)">
-                <Icon name="close" />
-              </button>
-            </div>
-
-            <p class="favorite-question">{{ item.stem }}</p>
-
-            <div class="favorite-footer">
-              <span class="favorite-type-tag">{{ t('answer') }}: {{ formatAnswer(item.answer) }}</span>
-            </div>
-            <div class="favorite-footer">
-              <!-- <span class="favorite-type-tag">{{ item.explanation }}</span> -->
-            </div>
-          </div>
+          <button class="delete-btn" @click.stop="removeFavorite(item.id)">
+            <Icon name="close" />
+          </button>
         </div>
 
-        <div class="loading-more" v-if="hasMore">
-          <div class="loading-spinner"></div>
-          <span>加载中...</span>
-        </div>
-        <div class="loading-complete" v-else-if="!hasMore && favoritesList.length > 0">
-          <span>没有更多了</span>
+        <p class="question-text">{{ item.stem }}</p>
+
+        <div class="card-footer">
+          <span class="type-tag">{{ t('answer') }}: {{ formatAnswer(item.answer) }}</span>
         </div>
       </div>
-
-      <!-- 空状态 -->
-      <div class="empty-state" v-else>
-        <div class="empty-icon-wrapper">
-          <Icon name="star-outline" />
-        </div>
-        <h3>{{ t('noFavorites') }}</h3>
-        <p>{{ t('favoritesDesc') }}</p>
-        <button class="start-btn" @click="goPractice">{{ t('startPractice') }}</button>
-      </div>
-    </main>
-  </div>
+    </template>
+  </QuestionCollection>
 </template>
 
 <script setup>
 import { computed, onMounted, onUnmounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import Icon from '@/presentation/components/ui/Icon.vue'
+import QuestionCollection from '@/presentation/components/QuestionCollection.vue'
 import { useAppStore } from '@/domain/stores/store'
 import { t } from '@/infrastructure/utils/i18n.js'
 import { createPracticeSession } from '@/infrastructure/storage/session'
@@ -165,185 +132,29 @@ function formatAnswer(answer) {
 </script>
 
 <style scoped>
-.page {
-  min-height: 100vh;
-  background: var(--background-secondary);
-}
-
 .glass {
-  background: rgba(255, 255, 255, 0.35);
-  backdrop-filter: blur(25px) saturate(180%);
-  -webkit-backdrop-filter: blur(25px) saturate(180%);
-  border: 0.5px solid rgba(255, 255, 255, 0.4);
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08), 0 0 0 0.5px rgba(0, 0, 0, 0.04);
-  position: relative;
-  overflow: hidden;
-}
-
-.glass::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 50%;
-  background: linear-gradient(180deg,
-      rgba(255, 255, 255, 0.25) 0%,
-      rgba(255, 255, 255, 0) 100%);
-  pointer-events: none;
-}
-
-.hero-section {
-  position: relative;
-  background: linear-gradient(165deg, var(--primary-light) 0%, var(--background-secondary) 100%);
-  overflow: hidden;
-}
-
-.hero-blur-1 {
-  position: absolute;
-  top: -60px;
-  right: -60px;
-  width: 200px;
-  height: 200px;
-  background: radial-gradient(circle, rgba(255, 255, 255, 0.9) 0%, transparent 70%);
-  filter: blur(40px);
-  pointer-events: none;
-}
-
-.hero-blur-2 {
-  position: absolute;
-  bottom: -40px;
-  left: -40px;
-  width: 160px;
-  height: 160px;
-  background: radial-gradient(circle, var(--primary-light) 0%, transparent 70%);
-  filter: blur(30px);
-  pointer-events: none;
-  opacity: 0.6;
-}
-
-.top-bar {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: var(--spacing-md) var(--spacing-lg);
-  height: 56px;
-}
-
-.back-btn,
-.clear-btn {
-  width: 36px;
-  height: 36px;
-  background: rgba(255, 255, 255, 0.5);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border-radius: var(--radius-full);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  color: var(--on-surface);
-  transition: all 0.2s;
-  border: 0.5px solid rgba(255, 255, 255, 0.6);
-  font-size: var(--font-size-xl);
-}
-
-.back-btn:active,
-.clear-btn:active {
-  transform: scale(0.95);
-  background: rgba(255, 255, 255, 0.7);
-}
-
-.top-bar h1 {
-  font-size: var(--font-size-lg);
-  font-weight: var(--font-weight-bold);
-  color: var(--on-surface);
-  margin: 0;
-}
-
-.content {
-  padding: var(--spacing-md) var(--spacing-lg);
-  position: relative;
-  z-index: 1;
-}
-
-
-
-.favorites-list {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-md);
-  contain: layout;
-}
-
-.loading-more,
-.loading-complete {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: var(--spacing-sm);
-  padding: var(--spacing-lg);
-  color: var(--text-secondary);
-  font-size: var(--font-size-sm);
-}
-
-.loading-spinner {
-  width: 20px;
-  height: 20px;
-  border: 2px solid var(--border-color);
-  border-top-color: var(--primary);
-  border-radius: 50%;
-  animation: spin 0.8s linear infinite;
-}
-
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-.favorite-card-wrapper {
-  animation: fadeInUp 0.4s ease-out;
-}
-
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.favorite-card {
-  padding: var(--spacing-md);
+  background: var(--background);
+  border: 1px solid var(--border-color-light);
   border-radius: var(--radius-lg);
-  transition: all 0.2s;
+  padding: var(--spacing-md);
+  box-shadow: var(--shadow-md);
 }
 
-.favorite-card:hover {
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
-}
-
-.favorite-header {
+.card-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-bottom: var(--spacing-sm);
 }
 
-.favorite-meta-top {
+.meta-top {
   display: flex;
   align-items: center;
   gap: var(--spacing-sm);
   flex-wrap: wrap;
 }
 
-.favorite-badge {
+.badge {
   font-size: var(--font-size-sm);
   color: var(--text-secondary);
   background: rgba(0, 91, 191, 0.1);
@@ -351,7 +162,7 @@ function formatAnswer(answer) {
   border-radius: var(--radius-md);
 }
 
-.favorite-subject {
+.subject-tag {
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-medium);
   color: var(--primary);
@@ -360,7 +171,7 @@ function formatAnswer(answer) {
   border-radius: var(--radius-md);
 }
 
-.delete-individual-btn {
+.delete-btn {
   width: 25px;
   height: 25px;
   border: none;
@@ -374,19 +185,19 @@ function formatAnswer(answer) {
   transition: all 0.2s;
 }
 
-.delete-individual-btn:hover {
+.delete-btn:hover {
   background: rgba(211, 47, 47, 0.2);
 }
 
-.delete-individual-btn:active {
+.delete-btn:active {
   transform: scale(0.9);
 }
 
-.delete-individual-btn svg {
+.delete-btn svg {
   font-size: 18px;
 }
 
-.favorite-question {
+.question-text {
   font-size: var(--font-size-md);
   font-weight: var(--font-weight-medium);
   color: var(--on-surface);
@@ -394,125 +205,17 @@ function formatAnswer(answer) {
   margin: 0 0 var(--spacing-sm) 0;
 }
 
-.favorite-footer {
+.card-footer {
   display: flex;
   align-items: center;
   gap: var(--spacing-sm);
 }
 
-.favorite-type-tag {
+.type-tag {
   font-size: var(--font-size-md);
   color: var(--warning);
   background: var(--warning-container);
   border-radius: var(--radius-sm);
   font-weight: var(--font-weight-medium);
-}
-
-.empty-state {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: var(--spacing-4xl) var(--spacing-lg);
-  text-align: center;
-}
-
-.empty-icon-wrapper {
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  background: var(--success-container);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: var(--spacing-md);
-}
-
-.empty-icon-wrapper svg {
-  font-size: 40px;
-  color: var(--success);
-}
-
-.empty-state h3 {
-  font-size: var(--font-size-lg);
-  font-weight: var(--font-weight-bold);
-  color: var(--on-surface);
-  margin: 0 0 var(--spacing-xs) 0;
-}
-
-.empty-state p {
-  font-size: var(--font-size-md);
-  color: var(--text-secondary);
-  margin: 0 0 var(--spacing-xl) 0;
-}
-
-.start-btn {
-  background: var(--primary);
-  color: var(--on-primary);
-  border: none;
-  border-radius: var(--radius-xl);
-  padding: var(--spacing-md) var(--spacing-xl);
-  font-size: var(--font-size-lg);
-  font-weight: var(--font-weight-bold);
-  cursor: pointer;
-  box-shadow: 0 4px 12px rgba(0, 91, 191, 0.25);
-  transition: all 0.2s;
-}
-
-.start-btn:active {
-  transform: scale(0.96);
-  box-shadow: 0 2px 8px rgba(0, 91, 191, 0.2);
-}
-
-.practice-all-btn {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: var(--spacing-md) var(--spacing-lg);
-  margin-bottom: var(--spacing-md);
-  background: var(--primary);
-  border: none;
-  border-radius: var(--radius-lg);
-  cursor: pointer;
-  transition: transform 0.15s;
-  color: var(--on-primary);
-}
-
-.practice-all-btn:active {
-  transform: scale(0.98);
-}
-
-.practice-all-left {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-md);
-}
-
-.practice-all-icon {
-  font-size: 28px;
-  color: var(--on-primary);
-}
-
-.practice-all-text {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 2px;
-}
-
-.practice-all-title {
-  font-size: var(--font-size-lg);
-  font-weight: var(--font-weight-bold);
-}
-
-.practice-all-desc {
-  font-size: var(--font-size-sm);
-  opacity: 0.85;
-}
-
-.practice-all-arrow {
-  font-size: 24px;
-  color: var(--on-primary);
 }
 </style>

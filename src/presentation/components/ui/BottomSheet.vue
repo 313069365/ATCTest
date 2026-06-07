@@ -1,18 +1,22 @@
 <template>
   <div class="sheet-overlay" v-if="visible" @click.self="$emit('close')">
-    <div class="sheet-content">
-      <header class="sheet-header">
-        <div class="drag-handle"></div>
-        <span class="sheet-title">{{ title }}</span>
-      </header>
+    <div class="sheet-slider">
+      <div class="drag-handle"></div>
+      <div class="sheet-content">
+        <header class="sheet-header">
+          <slot name="header">
+            <span class="sheet-title">{{ title }}</span>
+          </slot>
+        </header>
 
-      <main class="sheet-body">
-        <slot />
-      </main>
+        <main class="sheet-body">
+          <slot />
+        </main>
 
-      <footer class="sheet-footer" v-if="$slots.footer">
-        <slot name="footer" />
-      </footer>
+        <footer class="sheet-footer" v-if="$slots.footer">
+          <slot name="footer" />
+        </footer>
+      </div>
     </div>
   </div>
 </template>
@@ -42,6 +46,10 @@ defineEmits(['close'])
   animation: fadeIn 0.15s ease;
 }
 
+:global(.dark) .sheet-overlay {
+  background: rgba(255, 255, 255, 0.12);
+}
+
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -52,6 +60,12 @@ defineEmits(['close'])
   }
 }
 
+.sheet-slider {
+  position: relative;
+  width: 100%;
+  animation: slideUp 0.3s cubic-bezier(0.32, 0.72, 0, 1);
+}
+
 .sheet-content {
   background: var(--background-secondary);
   width: 100%;
@@ -59,9 +73,8 @@ defineEmits(['close'])
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  animation: slideUp 0.3s cubic-bezier(0.32, 0.72, 0, 1);
-  max-height: 85vh;
-  min-height: 75vh;
+  max-height: 80vh;
+  min-height: 70vh;
 }
 
 @keyframes slideUp {
@@ -85,9 +98,9 @@ defineEmits(['close'])
 
 .drag-handle {
   position: absolute;
-  top: 8px;
   left: 50%;
   transform: translateX(-50%);
+  top: -12px;
   width: 36px;
   height: 5px;
   border-radius: 3px;
@@ -104,6 +117,7 @@ defineEmits(['close'])
 .sheet-body {
   flex: 1;
   overflow-y: auto;
+  overflow-x: hidden;
   padding: 12px 16px;
   display: flex;
   flex-direction: column;

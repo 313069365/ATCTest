@@ -1,12 +1,6 @@
 <template>
   <div class="page question-detail-page">
-    <header class="top-bar">
-      <button class="icon-btn" @click="goBack">
-        <Icon name="arrow-back" />
-      </button>
-      <h1 class="title">{{ t('questionDetail') }}</h1>
-      <div class="header-action-placeholder"></div>
-    </header>
+    <TopBar :title="t('questionDetail')" showBack @back="goBack" />
 
     <div v-if="!question" class="not-found">
       <Icon name="search-off" class="not-found-icon" />
@@ -108,47 +102,7 @@ watch(() => route.params.id, () => {
   margin: 0 auto;
 }
 
-.top-bar {
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  background: var(--background);
-  backdrop-filter: blur(8px);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: var(--spacing-sm) var(--spacing-md);
-  height: 56px;
-  border-bottom: 1px solid var(--border-color);
-  box-sizing: border-box;
-}
 
-.title {
-  font-size: var(--font-size-xl);
-  font-weight: 700;
-  color: var(--text-primary);
-}
-
-.icon-btn {
-  width: 40px;
-  height: 40px;
-  border: none;
-  background: transparent;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  color: var(--text-secondary);
-}
-
-.icon-btn:active {
-  background: var(--color-gray-400);
-}
-
-.header-action-placeholder {
-  width: 40px;
-}
 
 .bottom-nav {
   position: fixed;

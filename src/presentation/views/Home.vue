@@ -1,14 +1,13 @@
 <template>
   <div class="home">
-    <header class="top-bar">
-      <h1 class="title">{{ t('learningPlatform') }}</h1>
-      <div class="header-actions">
-        <button class="theme-toggle" :class="{ active: darkMode }" @click="darkMode = !darkMode">
+    <TopBar :title="t('learningPlatform')">
+      <template #right>
+        <button class="icon-btn" @click="darkMode = !darkMode">
           <Icon name="dark-mode-outline" v-if="darkMode" />
           <Icon name="light-mode-outline" v-else />
         </button>
-      </div>
-    </header>
+      </template>
+    </TopBar>
 
     <div class="search-bar" @click="pageTo('/search')">
       <Icon name="search" class="search-icon" />
@@ -98,6 +97,7 @@
 <script setup>
 import { ref, computed, onMounted, watch } from 'vue'
 import { useRouter } from 'vue-router'
+import TopBar from '@/presentation/components/layout/TopBar.vue'
 import Icon from '@/presentation/components/ui/Icon.vue'
 import { useAppStore } from '@/domain/stores/store'
 import { t } from '@/infrastructure/utils/i18n.js'
@@ -203,62 +203,8 @@ onMounted(() => {
   margin: 0 auto;
 }
 
-.top-bar {
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  background: var(--background);
-  backdrop-filter: blur(8px);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: var(--spacing-sm) var(--spacing-md);
-  height: 56px;
-  border-bottom: 1px solid var(--border-color);
-  box-sizing: border-box;
-}
 
-.header-actions {
-  display: flex;
-  align-items: center;
-  margin-left: auto;
-  padding-right: 4px;
-}
 
-.title {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: var(--font-size-2xl);
-  font-weight: 700;
-  color: var(--text-primary);
-  letter-spacing: -0.02em;
-  white-space: nowrap;
-}
-
-.theme-toggle {
-  /* width: 30px;
-  height: 30px; */
-  border-radius: 50%;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--text-secondary);
-  transition: background 0.2s;
-  flex-shrink: 0;
-}
-
-.theme-toggle:hover {
-  background: var(--color-gray-100);
-}
-
-.theme-toggle svg {
-  font-size: var(--font-size-lg);
-  margin-right: 10px;
-}
 
 .search-bar {
   display: flex;

@@ -1,11 +1,12 @@
 <template>
   <div class="profile">
-    <header class="top-bar">
-      <h1 class="title">个人中心</h1>
-      <button class="icon-btn">
-        <Icon name="more-vert" />
-      </button>
-    </header>
+    <TopBar title="个人中心">
+      <template #right>
+        <button class="icon-btn">
+          <Icon name="more-vert" />
+        </button>
+      </template>
+    </TopBar>
 
     <main class="content">
       <section class="user-section">
@@ -154,6 +155,7 @@ import { reactive } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAppStore } from '@/domain/stores/store'
 import { APP_VERSION } from '@/infrastructure/utils/version'
+import TopBar from '@/presentation/components/layout/TopBar.vue'
 import Icon from '@/presentation/components/ui/Icon.vue'
 
 const router = useRouter()
@@ -205,27 +207,7 @@ function goToSettings() {
   margin: 0 auto;
 }
 
-.top-bar {
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  background: var(--background);
-  backdrop-filter: blur(8px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 12px 16px;
-  height: 56px;
-  border-bottom: 1px solid var(--border-color);
-  box-sizing: border-box;
-  position: relative;
-}
-
 .icon-btn {
-  position: absolute;
-  right: 16px;
-  top: 50%;
-  transform: translateY(-50%);
   width: 44px;
   height: 44px;
   border: none;
@@ -237,13 +219,6 @@ function goToSettings() {
   cursor: pointer;
   color: var(--primary);
   font-size: var(--font-size-xl);
-}
-
-.title {
-  font-size: 20px;
-  font-weight: 700;
-  color: var(--text-primary);
-  letter-spacing: -0.02em;
 }
 
 .content {

@@ -1,14 +1,12 @@
 <template>
   <div class="page">
-    <header class="top-bar">
-      <button class="back-btn" @click="$router.back()">
-        <Icon name="arrow-back" />
-      </button>
-      <h1>历史记录</h1>
-      <button class="clear-btn">
-        <Icon name="delete-sweep-outline" />
-      </button>
-    </header>
+    <TopBar title="历史记录" showBack variant="primary" @back="$router.back()">
+      <template #right>
+        <button class="icon-btn">
+          <Icon name="delete-sweep-outline" />
+        </button>
+      </template>
+    </TopBar>
 
     <main class="content">
       <div class="stats-section">
@@ -80,6 +78,7 @@
 <script setup>
 import { computed, onMounted } from 'vue'
 import Icon from '@/presentation/components/ui/Icon.vue'
+import TopBar from '@/presentation/components/layout/TopBar.vue'
 import { usePracticeService } from '@/domain/composables/usePracticeService'
 import { t } from '@/infrastructure/utils/i18n.js'
 
@@ -136,34 +135,6 @@ function formatDuration(seconds) {
   background: var(--background-secondary);
   max-width: var(--app-max-width);
   margin: 0 auto;
-}
-
-.top-bar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: var(--spacing-md);
-  background: var(--primary);
-  color: var(--on-primary);
-}
-
-.back-btn, .clear-btn {
-  width: 40px;
-  height: 40px;
-  border: none;
-  background: rgba(255, 255, 255, 0.2);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  color: var(--on-primary);
-  font-size: var(--font-size-xl);
-}
-
-.top-bar h1 {
-  font-size: var(--font-size-lg);
-  font-weight: var(--font-weight-semibold);
 }
 
 .content {

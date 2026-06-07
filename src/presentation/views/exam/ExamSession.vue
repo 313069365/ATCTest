@@ -43,7 +43,7 @@
       </template>
     </main>
 
-    <QustionNavbar :prevDisabled="currentIndex === 0" :isLast="currentIndex === questions.length - 1"
+    <QuestionNavbar :prevDisabled="currentIndex === 0" :isLast="currentIndex === questions.length - 1"
       @prev="prevQuestion" @next="nextQuestion" @submit="submitPaper" />
 
     <AnswerOverview v-if="showAnswerCard" :questions="questions" :currentIndex="currentIndex" :currentSubIndex="0"
@@ -57,7 +57,7 @@ import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import Icon from '@/presentation/components/ui/Icon.vue'
 import AnswerOverview from '@/presentation/components/session/AnswerOverview.vue'
-import QustionNavbar from '@/presentation/components/layout/QuestionNavbar.vue'
+import QuestionNavbar from '@/presentation/components/layout/QuestionNavbar.vue'
 import QuestionRenderer from '@/presentation/components/question/QuestionRenderer.vue'
 import { useAppStore } from '@/domain/stores/store'
 import { t } from '@/infrastructure/utils/i18n.js'

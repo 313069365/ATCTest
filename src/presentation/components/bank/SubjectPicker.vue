@@ -1,51 +1,47 @@
 <template>
-  <div class="picker-wrapper" v-if="modelValue">
-    <div class="picker-backdrop" @click="close"></div>
-    <div class="picker" @click.stop>
-      <div class="picker-header">
-        <button class="picker-btn cancel" @click="close">{{ t('cancel') }}</button>
-        <span class="picker-title">{{ defaultTitle }}</span>
-        <button class="picker-btn confirm" @click="handleConfirm" :disabled="!canConfirm">{{ t('add') }}</button>
+  <BottomSheet :visible="modelValue" @close="close">
+    <div class="picker-header-row">
+      <button class="picker-btn cancel" @click="close">{{ t('cancel') }}</button>
+      <span class="picker-title">{{ defaultTitle }}</span>
+      <button class="picker-btn confirm" @click="handleConfirm" :disabled="!canConfirm">{{ t('add') }}</button>
+    </div>
+
+    <div class="picker-body">
+      <div class="picker-column">
+        <div class="picker-list">
+          <div v-for="(info, key) in categories" :key="key" class="picker-item"
+            :class="{ active: selection.category === key }" @click="selectCategory(key)">
+            {{ t(key) }}
+          </div>
+        </div>
       </div>
-      <div class="picker-body">
-        <div class="picker-column">
-          <!-- <div class="picker-column-header">{{ t('questionBank') }}</div> -->
-          <div class="picker-list">
-            <div v-for="(info, key) in categories" :key="key" class="picker-item"
-              :class="{ active: selection.category === key }" @click="selectCategory(key)">
-              {{ t(key) }}
-            </div>
+      <div class="picker-column">
+        <div class="picker-list">
+          <div v-for="scope in getScopes(selection.category)" :key="scope" class="picker-item"
+            :class="{ active: selection.scope === scope }" @click="selectScope(scope)">
+            {{ t(scope) }}
           </div>
+          <div class="picker-placeholder" v-if="!selection.category">{{ t('selectCategoryFirst') }}</div>
         </div>
-        <div class="picker-column">
-          <!-- <div class="picker-column-header">{{ t('scope') }}</div> -->
-          <div class="picker-list">
-            <div v-for="scope in getScopes(selection.category)" :key="scope" class="picker-item"
-              :class="{ active: selection.scope === scope }" @click="selectScope(scope)">
-              {{ t(scope) }}
-            </div>
-            <div class="picker-placeholder" v-if="!selection.category">{{ t('selectCategoryFirst') }}</div>
+      </div>
+      <div class="picker-column">
+        <div class="picker-list">
+          <div v-for="subj in getSubjects(selection.category, selection.scope)" :key="subj.name" class="picker-item"
+            :class="{ active: selection.subject === subj.name }" @click="selectSubject(subj.name)">
+            <span class="subject-name">{{ t(subj.name) }}</span>
           </div>
-        </div>
-        <div class="picker-column">
-          <!-- <div class="picker-column-header">{{ t('subject') }}</div> -->
-          <div class="picker-list">
-            <div v-for="subj in getSubjects(selection.category, selection.scope)" :key="subj.name" class="picker-item"
-              :class="{ active: selection.subject === subj.name }" @click="selectSubject(subj.name)">
-              <span class="subject-name">{{ t(subj.name) }}</span>
-            </div>
-            <div class="picker-placeholder" v-if="!selection.scope">{{ t('selectScopeFirst') }}</div>
-          </div>
+          <div class="picker-placeholder" v-if="!selection.scope">{{ t('selectScopeFirst') }}</div>
         </div>
       </div>
     </div>
-  </div>
+  </BottomSheet>
 </template>
 
 <script setup>
 import { ref, reactive, computed, watch, onMounted } from 'vue'
 import { t } from '@/infrastructure/utils/i18n'
 import { useAppStore } from '@/domain/stores/store'
+import BottomSheet from '@/presentation/components/ui/BottomSheet.vue'
 
 const props = defineProps({
   modelValue: Boolean,
@@ -160,40 +156,11 @@ function handleConfirm() {
 </script>
 
 <style scoped>
-.picker-wrapper {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 100;
-}
-
-.picker-backdrop {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
-}
-
-.picker {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: var(--background);
-  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
-  max-height: 70vh;
-}
-
-.picker-header {
+.picker-header-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: var(--spacing-sm);
-  border-bottom: 1px solid var(--border-color);
+  padding: var(--spacing-sm) 0;
 }
 
 .picker-btn {
@@ -242,15 +209,6 @@ function handleConfirm() {
   border-right: none;
 }
 
-.picker-column-header {
-  text-align: center;
-  padding: var(--spacing-sm) var(--spacing-md);
-  font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-semibold);
-  color: var(--text-secondary);
-  border-bottom: 1px solid var(--border-color);
-}
-
 .picker-list {
   display: flex;
   flex-direction: column;
@@ -277,11 +235,6 @@ function handleConfirm() {
 
 .subject-name {
   font-size: var(--font-size-md);
-}
-
-.subject-count {
-  font-size: var(--font-size-xs);
-  color: var(--text-secondary);
 }
 
 .picker-placeholder {

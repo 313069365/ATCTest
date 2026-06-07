@@ -1,11 +1,6 @@
 <template>
   <div class="data-management">
-    <header class="top-bar">
-      <button class="icon-btn" @click="goBack">
-        <Icon name="arrow-back" />
-      </button>
-      <h1 class="title">数据管理</h1>
-    </header>
+    <TopBar title="数据管理" showBack @back="goBack" />
 
     <main class="content">
       <section class="section">
@@ -69,6 +64,7 @@ import { useAppStore } from '@/domain/stores/store'
 import { storage, STORAGE_KEY } from '@/infrastructure/storage/useStorage'
 import { computeBankHash } from '@/infrastructure/api/dataSource'
 import Icon from '@/presentation/components/ui/Icon.vue'
+import TopBar from '@/presentation/components/layout/TopBar.vue'
 
 const router = useRouter()
 const store = useAppStore()
@@ -173,40 +169,6 @@ onMounted(() => {
   margin: 0 auto;
 }
 
-.top-bar {
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  background: var(--background);
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 12px 16px;
-  height: 56px;
-  border-bottom: 1px solid var(--border-color);
-  box-sizing: border-box;
-}
-
-.icon-btn {
-  width: 44px;
-  height: 44px;
-  border: none;
-  background: transparent;
-  border-radius: var(--radius-full);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  color: var(--primary);
-  font-size: var(--font-size-xl);
-}
-
-.title {
-  font-size: 20px;
-  font-weight: 700;
-  color: var(--text-primary);
-  letter-spacing: -0.02em;
-}
 
 .content {
   padding: var(--spacing-lg);

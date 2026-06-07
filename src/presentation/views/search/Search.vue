@@ -1,15 +1,12 @@
 <template>
   <div class="page search-page">
-    <header class="top-bar">
-      <button class="icon-btn" @click="goBack">
-        <Icon name="arrow-back" />
-      </button>
-      <h1 class="title">{{ t('search') }}</h1>
-      <button v-if="keyword" class="header-action" @click="clearSearch">
-        {{ t('searchClear') }}
-      </button>
-      <div v-else class="header-action-placeholder"></div>
-    </header>
+    <TopBar :title="t('search')" showBack @back="goBack">
+      <template #right>
+        <button v-if="keyword" class="clear-btn" @click="clearSearch">
+          {{ t('searchClear') }}
+        </button>
+      </template>
+    </TopBar>
 
     <div class="search-input-container">
       <div class="search-input-wrap">
@@ -143,6 +140,7 @@
 import { ref, reactive, computed, onMounted, nextTick, watch } from 'vue'
 import { useRouter } from 'vue-router'
 import Icon from '@/presentation/components/ui/Icon.vue'
+import TopBar from '@/presentation/components/layout/TopBar.vue'
 import { useAppStore } from '@/domain/stores/store'
 import { t } from '@/infrastructure/utils/i18n.js'
 import * as API from '@/infrastructure/api/dataSource'
@@ -374,61 +372,19 @@ onMounted(async () => {
   margin: 0 auto;
 }
 
-.top-bar {
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  background: var(--background);
-  backdrop-filter: blur(8px);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: var(--spacing-sm) var(--spacing-md);
-  height: 56px;
-  border-bottom: 1px solid var(--border-color);
-  box-sizing: border-box;
-}
-
-.title {
-  font-size: var(--font-size-xl);
-  font-weight: 700;
-  color: var(--text-primary);
-}
-
-.icon-btn {
-  width: 40px;
-  height: 40px;
-  border: none;
-  background: transparent;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  color: var(--text-secondary);
-}
-
-.icon-btn:active {
-  background: var(--color-gray-400);
-}
-
-.header-action {
-  padding: var(--spacing-sm) var(--spacing-md);
+.clear-btn {
   border: none;
   background: transparent;
   font-size: var(--font-size-md);
   font-weight: 600;
   color: var(--primary);
   cursor: pointer;
+  padding: 4px 8px;
   border-radius: var(--radius-md);
 }
 
-.header-action:active {
+.clear-btn:active {
   background: var(--color-gray-400);
-}
-
-.header-action-placeholder {
-  width: 60px;
 }
 
 .search-input-container {

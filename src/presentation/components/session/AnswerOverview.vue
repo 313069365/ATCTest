@@ -1,69 +1,60 @@
 <template>
-  <div class="answer-card-modal" @click.self="$emit('close')">
-    <div class="answer-card-content">
-      <div class="answer-card-header">
-        <div class="header-spacer"></div>
-        <span class="header-title">答题卡</span>
-        <div class="header-spacer"></div>
-      </div>
-
-      <div class="answer-card-body">
-        <div class="progress-stats">
-          <div class="legend">
-            <div class="legend-item">
-              <span class="legend-dot correct"></span>
-              <span>正确</span>
-            </div>
-            <div class="legend-item">
-              <span class="legend-dot wrong"></span>
-              <span>错误</span>
-            </div>
-            <div class="legend-item">
-              <span class="legend-dot unknown"></span>
-              <span>待定</span>
-            </div>
-            <div class="legend-item">
-              <span class="legend-dot"></span>
-              <span>未答</span>
-            </div>
-            <div class="legend-item">
-              <span class="legend-dot current"></span>
-              <span>当前</span>
-            </div>
-          </div>
+  <BottomSheet :visible="true" title="答题卡" @close="$emit('close')">
+    <div class="progress-stats">
+      <div class="legend">
+        <div class="legend-item">
+          <span class="legend-dot correct"></span>
+          <span>正确</span>
         </div>
-
-        <div class="question-list">
-          <template v-for="(q, idx) in questions" :key="idx">
-            <template v-if="q.subs && q.subs.length > 0">
-              <div class="question-group">
-                <div class="group-header">
-                  <span class="group-title">{{ t('questionId') || '' }}: {{ q.id }}</span>
-                  <div class="sub-question-grid">
-                    <button v-for="(sq, sqIdx) in q.subs" :key="sqIdx" class="sub-question-btn"
-                      :class="getSubQuestionBtnClass(idx, sqIdx, sq)" @click="$emit('go', idx, sqIdx)">
-                      {{ sqIdx + 1 }}
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </template>
-            <template v-else>
-              <button class="question-btn" :class="getQuestionBtnClass(idx, q)" @click="$emit('go', idx)">
-                {{ idx + 1 }}
-              </button>
-            </template>
-          </template>
+        <div class="legend-item">
+          <span class="legend-dot wrong"></span>
+          <span>错误</span>
+        </div>
+        <div class="legend-item">
+          <span class="legend-dot unknown"></span>
+          <span>待定</span>
+        </div>
+        <div class="legend-item">
+          <span class="legend-dot"></span>
+          <span>未答</span>
+        </div>
+        <div class="legend-item">
+          <span class="legend-dot current"></span>
+          <span>当前</span>
         </div>
       </div>
     </div>
-  </div>
+
+    <div class="question-list">
+      <template v-for="(q, idx) in questions" :key="idx">
+        <template v-if="q.subs && q.subs.length > 0">
+          <div class="question-group">
+            <div class="group-header">
+              <span class="group-title">{{ t('questionId') || '' }}: {{ q.id }}</span>
+              <div class="sub-question-grid">
+                <button v-for="(sq, sqIdx) in q.subs" :key="sqIdx" class="sub-question-btn"
+                  :class="getSubQuestionBtnClass(idx, sqIdx, sq)" @click="$emit('go', idx, sqIdx)">
+                  {{ sqIdx + 1 }}
+                </button>
+              </div>
+            </div>
+          </div>
+        </template>
+        <template v-else>
+          <button class="question-btn" :class="getQuestionBtnClass(idx, q)" @click="$emit('go', idx)">
+            {{ idx + 1 }}
+          </button>
+        </template>
+      </template>
+    </div>
+  </BottomSheet>
 </template>
 
 <script setup>
 import { computed } from 'vue'
 import { t } from '@/infrastructure/utils/i18n.js'
 import { normalizeStatus } from '@/domain/config/questionConfig'
+import BottomSheet from '@/presentation/components/ui/BottomSheet.vue'
 
 const props = defineProps({
   questions: {
@@ -92,8 +83,8 @@ const props = defineProps({
   },
 })
 
+defineEmits(['close', 'go'])
 
-// 获取按钮状态
 function getQuestionBtnClass(idx, q) {
   if (idx === props.currentIndex) {
     var status = props.answerStatus[q.id] || ''
@@ -111,7 +102,6 @@ function getQuestionBtnClass(idx, q) {
   return status === 'wrong' ? 'wrong' : status
 }
 
-// 获取子题按钮状态
 function getSubQuestionBtnClass(qIdx, sqIdx, sq) {
   if (props.currentIndex === qIdx && props.currentSubIndex === sqIdx) {
     var parentId = props.questions[qIdx].id
@@ -133,119 +123,18 @@ function getSubQuestionBtnClass(qIdx, sqIdx, sq) {
 </script>
 
 <style scoped>
-.answer-card-modal {
-  position: fixed;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100%;
-  max-width: var(--app-max-width);
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
-  z-index: var(--z-popup);
-  display: flex;
-  align-items: flex-end;
-}
-
-.answer-card-content {
-  background: var(--background-secondary);
-  width: 100%;
-  max-width: var(--app-max-width);
-  max-height: 80vh;
-  border-radius: var(--radius-xl) var(--radius-xl) 0 0;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-}
-
-.answer-card-header {
-  display: flex;
-  align-items: center;
-  padding: var(--spacing-sm);
-  background: var(--background);
-  border-bottom: 1px solid var(--border-color-strong);
-}
-
-.close-btn {
-  width: 35px;
-  height: 35px;
-  border: none;
-  background: transparent;
-  border-radius: var(--radius-full);
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
-
-.close-btn svg {
-  font-size: 18px;
-}
-
-.header-title {
-  flex: 1;
-  text-align: center;
-  font-size: var(--font-size-xl);
-  font-weight: var(--font-weight-bold);
-  color: var(--on-surface);
-}
-
-.header-spacer {
-  width: 35px;
-  flex-shrink: 0;
-}
-
-.submit-btn {
-  padding: var(--spacing-sm);
-  border: none;
-  background: transparent;
-  font-size: var(--font-size-md);
-  font-weight: var(--font-weight-bold);
-  cursor: pointer;
-  border-radius: var(--radius-sm);
-}
-
-.answer-card-body {
-  flex: 1;
-  overflow-y: auto;
-  padding: var(--spacing-md) var(--spacing-lg);
-}
-
 .progress-stats {
   border-radius: var(--radius-md);
   padding: var(--spacing-sm) var(--spacing-md);
-  margin-bottom: var(--spacing-md);
+  /* margin-bottom: var(--spacing-md); */
   box-shadow: var(--shadow-lg);
   background-color: var(--background);
-}
-
-.practice-info {
-  padding-bottom: var(--spacing-sm);
-}
-
-.tags-row {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-sm);
-  flex-wrap: wrap;
-}
-
-.info-tag {
-  font-size: 12px;
-  padding: 4px 10px;
-  background: var(--primary-light);
-  color: var(--primary);
-  border-radius: var(--radius-lg);
-  font-weight: 500;
 }
 
 .legend {
   display: flex;
   flex-wrap: wrap;
   gap: var(--spacing-md);
-  /* padding-top: var(--spacing-md); */
-  /* border-top: 1px solid var(--border-color-strong); */
 }
 
 .legend-item {
@@ -287,8 +176,6 @@ function getSubQuestionBtnClass(qIdx, sqIdx, sq) {
 
 .question-group {
   width: 100%;
-
-  /* margin-bottom: var(--spacing-sm); */
 }
 
 .group-header {
@@ -363,9 +250,8 @@ function getSubQuestionBtnClass(qIdx, sqIdx, sq) {
 }
 
 .question-list .question-btn {
-  min-width: 50px;
-  aspect-ratio: 1;
-  margin: 0 auto;
+  width: 44px;
+  height: 44px;
   border: none;
   border-radius: var(--radius-md);
   background: var(--color-gray-300);

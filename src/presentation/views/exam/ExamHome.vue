@@ -1,11 +1,12 @@
 <template>
   <div class="exam-page">
-    <header class="top-bar">
-      <h1 class="title">{{ t('examManagement') }}</h1>
-      <button class="icon-btn" @click="$router.push('/exam/history')">
-        <Icon name="history" />
-      </button>
-    </header>
+    <TopBar :title="t('examManagement')">
+      <template #right>
+        <button class="icon-btn" @click="$router.push('/exam/history')">
+          <Icon name="history" />
+        </button>
+      </template>
+    </TopBar>
 
     <main class="content">
       <section class="paper-section">
@@ -82,6 +83,7 @@ import { computed, onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAppStore } from '@/domain/stores/store'
 import { t } from '@/infrastructure/utils/i18n'
+import TopBar from '@/presentation/components/layout/TopBar.vue'
 import Icon from '@/presentation/components/ui/Icon.vue'
 
 const router = useRouter()
@@ -140,51 +142,6 @@ const fileInput = ref(null)
   background: var(--background-secondary);
   max-width: var(--app-max-width);
   margin: 0 auto;
-}
-
-.top-bar {
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  background: var(--background);
-  backdrop-filter: blur(8px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 12px 16px;
-  height: 56px;
-  border-bottom: 1px solid var(--border-color);
-  box-sizing: border-box;
-  position: relative;
-}
-
-.icon-btn {
-  position: absolute;
-  right: 16px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 44px;
-  height: 44px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  color: var(--text-secondary);
-  border: none;
-  background: transparent;
-  border-radius: 50%;
-  font-size: var(--font-size-xl);
-}
-
-.icon-btn:active {
-  background: var(--color-gray-400);
-}
-
-.title {
-  font-size: 20px;
-  font-weight: 700;
-  color: var(--text-primary);
-  letter-spacing: -0.02em;
 }
 
 .content {

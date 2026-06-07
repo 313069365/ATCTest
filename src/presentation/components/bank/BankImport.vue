@@ -1,54 +1,43 @@
 <template>
-  <div class="import-modal" v-if="visible" @click.self="$emit('close')">
-    <div class="import-content">
-      <header class="import-header">
-        <button class="close-btn" @click="$emit('close')">
-          <Icon name="close" />
+  <BottomSheet :visible="visible" title="导入题库" @close="$emit('close')">
+    <section class="import-section">
+      <div class="import-info">
+        <h3>导入方式</h3>
+        <p>支持从JSON文件导入题库数据</p>
+      </div>
+
+      <div class="file-upload">
+        <input type="file" ref="fileInput" accept=".json" @change="handleFileChange" class="file-input" />
+        <button class="upload-btn" @click="triggerFileInput">
+          <Icon name="upload-file-outline" />
+          <span>选择文件</span>
         </button>
-        <h2>导入题库</h2>
-        <div class="spacer"></div>
-      </header>
+        <p v-if="selectedFile" class="file-name">{{ selectedFile.name }}</p>
+      </div>
 
-      <main class="import-main">
-        <section class="import-section">
-          <div class="import-info">
-            <h3>导入方式</h3>
-            <p>支持从JSON文件导入题库数据</p>
-          </div>
+      <div class="import-tips">
+        <h4>文件格式要求</h4>
+        <ul>
+          <li>JSON格式文件</li>
+          <li>包含题目数组</li>
+          <li>每个题目需包含：id, subject, category, type, difficulty, content, options, correctAnswer, explanation</li>
+        </ul>
+      </div>
+    </section>
 
-          <div class="file-upload">
-            <input type="file" ref="fileInput" accept=".json" @change="handleFileChange" class="file-input" />
-            <button class="upload-btn" @click="triggerFileInput">
-              <Icon name="upload-file-outline" />
-              <span>选择文件</span>
-            </button>
-            <p v-if="selectedFile" class="file-name">{{ selectedFile.name }}</p>
-          </div>
-
-          <div class="import-tips">
-            <h4>文件格式要求</h4>
-            <ul>
-              <li>JSON格式文件</li>
-              <li>包含题目数组</li>
-              <li>每个题目需包含：id, subject, category, type, difficulty, content, options, correctAnswer, explanation</li>
-            </ul>
-          </div>
-        </section>
-      </main>
-
-      <footer class="import-footer">
-        <button class="import-btn" @click="importQuestions" :disabled="!selectedFile || loading">
-          {{ loading ? '导入中...' : '开始导入' }}
-          <Icon name="send-outline" />
-        </button>
-      </footer>
-    </div>
-  </div>
+    <template #footer>
+      <button class="import-btn" @click="importQuestions" :disabled="!selectedFile || loading">
+        {{ loading ? '导入中...' : '开始导入' }}
+        <Icon name="send-outline" />
+      </button>
+    </template>
+  </BottomSheet>
 </template>
 
 <script setup>
 import { ref } from 'vue'
 import Icon from '@/presentation/components/ui/Icon.vue'
+import BottomSheet from '@/presentation/components/ui/BottomSheet.vue'
 
 const fileInput = ref(null)
 const selectedFile = ref(null)
@@ -80,69 +69,8 @@ defineEmits(['close'])
 </script>
 
 <style scoped>
-.import-modal {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 100vh;
-  background: rgba(0, 0, 0, 0.5);
-  z-index: var(--z-popup);
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-}
-
-.import-content {
-  background: var(--background-secondary);
-  width: 100%;
-  max-width: 100%;
-  max-height: 90%;
-  border-radius: var(--radius-xl) var(--radius-xl) 0 0;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-}
-
-.import-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: var(--spacing-mn);
-  background: var(--background-surface);
-  backdrop-filter: blur(12px);
-}
-
-.import-header .close-btn {
-  width: 44px;
-  height: 44px;
-  border: none;
-  background: transparent;
-  border-radius: var(--radius-full);
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.import-header h2 {
-  font-size: var(--font-size-2xl);
-  font-weight: var(--font-weight-bold);
-}
-
-.import-header .spacer {
-  width: 44px;
-}
-
-.import-main {
-  flex: 1;
-  overflow-y: auto;
-  padding: 0 var(--spacing-md);
-}
-
 .import-section {
   max-width: var(--app-max-width);
-  margin-bottom: var(--spacing-md);
 }
 
 .import-info {
@@ -237,12 +165,6 @@ defineEmits(['close'])
   left: 0;
   color: var(--primary);
   font-weight: bold;
-}
-
-.import-footer {
-  padding: var(--spacing-md);
-  background: var(--background);
-  border-top: 1px solid var(--border-color-light);
 }
 
 .import-btn {

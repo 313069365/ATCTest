@@ -1,8 +1,6 @@
 <template>
   <div class="page">
-    <header class="top-bar">
-      <h1>{{ t('practiceResult') }}</h1>
-    </header>
+    <TopBar :title="t('practiceResult')" variant="primary" />
 
     <main class="content">
       <div class="result-card">
@@ -83,6 +81,7 @@ import { t } from "@/infrastructure/utils/i18n.js";
 import { getPracticeKey } from "@/infrastructure/storage/progress";
 import { normalizeSession } from "@/infrastructure/storage/sessionAdapter";
 import Icon from '@/presentation/components/ui/Icon.vue';
+import TopBar from '@/presentation/components/layout/TopBar.vue';
 
 const router = useRouter();
 const route = useRoute();
@@ -160,33 +159,6 @@ const practiceAgain = () => {
   background: var(--background-secondary);
   max-width: var(--app-max-width);
   margin: 0 auto;
-}
-
-.top-bar {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: var(--spacing-md);
-  background: var(--primary);
-  color: var(--on-primary);
-}
-
-.top-bar .back-btn {
-  width: 40px;
-  height: 40px;
-  border: none;
-  background: rgba(255, 255, 255, 0.2);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  color: var(--on-primary);
-}
-
-.top-bar h1 {
-  font-size: var(--font-size-2xl);
-  font-weight: var(--font-weight-semibold);
 }
 
 .content {

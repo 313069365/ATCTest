@@ -1,12 +1,6 @@
 <template>
   <div class="settings">
-    <header class="top-bar">
-      <button class="icon-btn" @click="goBack">
-        <Icon name="arrow-back" />
-      </button>
-      <h1 class="title">{{ t('systemSettings') }}</h1>
-      <div class="top-bar-right"></div>
-    </header>
+    <TopBar :title="t('systemSettings')" showBack @back="goBack" />
 
     <main class="content">
       <LanguageSwitch />
@@ -20,7 +14,7 @@ import { useRouter } from 'vue-router'
 import { t } from '@/infrastructure/utils/i18n.js'
 import { APP_VERSION } from '@/infrastructure/utils/version'
 import LanguageSwitch from '@/presentation/components/ui/LanguageSwitch.vue'
-import Icon from '@/presentation/components/ui/Icon.vue'
+import TopBar from '@/presentation/components/layout/TopBar.vue'
 
 const router = useRouter()
 
@@ -39,55 +33,7 @@ function goBack() {
   flex-direction: column;
 }
 
-.top-bar {
-  position: sticky;
-  top: 0;
-  z-index: var(--z-sticky);
-  background: var(--background);
-  backdrop-filter: blur(8px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 12px 16px;
-  height: 56px;
-  border-bottom: 1px solid var(--border-color);
-  box-sizing: border-box;
-  position: relative;
-}
 
-.icon-btn {
-  position: absolute;
-  left: 16px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 44px;
-  height: 44px;
-  border: none;
-  background: transparent;
-  border-radius: var(--radius-full);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  color: var(--primary);
-  transition: background var(--transition-fast);
-  font-size: var(--font-size-xl);
-}
-
-.icon-btn:active {
-  background: var(--color-gray-100);
-}
-
-.title {
-  font-size: 18px;
-  font-weight: 600;
-  color: var(--text-primary);
-  letter-spacing: -0.02em;
-}
-
-.top-bar-right {
-  width: 44px;
-}
 
 .content {
   flex: 1;

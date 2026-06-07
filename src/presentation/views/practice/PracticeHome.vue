@@ -1,13 +1,12 @@
 <template>
   <div class="page">
-    <header class="top-bar">
-      <h1 class="title">练习题库</h1>
-      <div class="header-actions">
-        <button class="import-btn" @click="showImportModal = true">
+    <TopBar title="练习题库">
+      <template #right>
+        <button class="icon-btn" @click="showImportModal = true">
           <Icon name="sync-alt" />
         </button>
-      </div>
-    </header>
+      </template>
+    </TopBar>
 
     <main class="content">
       <!-- Level 1: 题库选择 -->
@@ -97,6 +96,7 @@ import { ref, computed, watch, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import PracticeSetting from '@/presentation/components/practice/PracticeSettings.vue'
 import BankImport from '@/presentation/components/bank/BankImport.vue'
+import TopBar from '@/presentation/components/layout/TopBar.vue'
 import Icon from '@/presentation/components/ui/Icon.vue'
 import { t } from '@/infrastructure/utils/i18n.js'
 import { useAppStore } from '@/domain/stores/store'
@@ -348,57 +348,6 @@ const wrongPractice = (subject) => {
   margin: 0 auto;
 }
 
-.top-bar {
-  z-index: 100;
-  background: var(--background);
-  backdrop-filter: blur(8px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 12px 16px;
-  height: 56px;
-  border-bottom: 1px solid var(--border-color);
-  box-sizing: border-box;
-  position: relative;
-  flex-shrink: 0;
-}
-
-.header-actions {
-  position: absolute;
-  right: 0px;
-  top: 50%;
-  transform: translateY(-50%);
-  display: flex;
-  gap: 8px;
-}
-
-.import-btn {
-  position: absolute;
-  right: var(--spacing-xl);
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: var(--font-size-lg);
-  border: none;
-  background: transparent;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  color: var(--text-secondary);
-  transition: background 0.2s;
-}
-
-.import-btn:active {
-  background: var(--color-gray-400);
-}
-
-.title {
-  font-size: 20px;
-  font-weight: 700;
-  color: var(--text-primary);
-  letter-spacing: -0.02em;
-}
 
 .content {
   flex: 1;
