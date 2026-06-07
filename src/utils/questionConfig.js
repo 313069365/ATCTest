@@ -5,6 +5,7 @@
 
 import { STORAGE_KEY, storage } from "@/composables/useStorage";
 import { schemaRead, schemaWrite } from "@/utils/dataSchema";
+import { getStrategy } from "@/question-types";
 
 // ==================== 题型类型 ====================
 
@@ -108,29 +109,13 @@ export const MODE_BEHAVIOR = {
 // ==================== 类型判断 ====================
 
 /**
- * 判断是否简单题型
- * @param {string} type - 题型类型
- * @returns {boolean}
- */
-export function isSimpleType(type) {
-  return [
-    "single",
-    "multiple",
-    "boolean",
-    "fillin",
-    "essay",
-    "translation",
-    "media",
-  ].includes(type);
-}
-
-/**
  * 判断是否复合题型
  * @param {string} type - 题型类型
  * @returns {boolean}
  */
 export function isComplexType(type) {
-  return ["reading"].includes(type);
+  const strategy = getStrategy(type);
+  return strategy ? strategy.capabilities.isComposite : false;
 }
 
 /**
@@ -148,8 +133,8 @@ export function isComplexQuestion(question) {
  * @returns {boolean}
  */
 export function canAutoCheck(questionType) {
-  const cap = QUESTION_CAPABILITIES[questionType];
-  return cap ? cap.canAutoCheck : false;
+  const strategy = getStrategy(questionType);
+  return strategy ? strategy.capabilities.canAutoCheck : false;
 }
 
 /**
@@ -187,8 +172,8 @@ export function hasUserAnswer(userAnswer) {
  * @returns {boolean}
  */
 export function needsManualCheck(questionType) {
-  const cap = QUESTION_CAPABILITIES[questionType];
-  return cap ? cap.needsManualCheck : false;
+  const strategy = getStrategy(questionType);
+  return strategy ? strategy.capabilities.needsManualCheck : true;
 }
 
 /**
@@ -312,217 +297,25 @@ export function getStatusColor(status) {
   return STATUS_COLOR_MAP[status] || STATUS_COLOR_MAP[""];
 }
 
-// ==================== 模式配置 ====================
-
-function getModeConfig(mode) {
-  const config = {
-    practice: { isShowAnswer: false, isDisabled: false },
-    answer: { isShowAnswer: false, isDisabled: false },
-    review: { isShowAnswer: true, isDisabled: true },
-    exam: { isShowAnswer: false, isDisabled: false },
-  };
-  return config[mode] || config.practice;
-}
-
 // ==================== 状态判断 ====================
 
 /**
- * 获取简单题答案状态
- * @param {Object} question - 题目对象
- * @param {any} userAnswer - 用户答案
- * @returns {string}
- */
-export function getSimpleStatus(question, userAnswer) {
-  if (!question?.answer?.[0]) return "unknown";
-
-  const correctAnswer = question.answer[0].replace(/^[A-Z]\.\s*/, "");
-
-  if (question.type === "multiple") {
-    if (!Array.isArray(userAnswer)) return "wrong";
-    const correctSet = new Set(
-      question.answer.map((a) => a.replace(/^[A-Z]\.\s*/, "")),
-    );
-    const userSet = new Set(
-      (userAnswer || [])
-        .map((i) => question.options?.[i]?.replace(/^[A-Z]\.\s*/, ""))
-        .filter(Boolean),
-    );
-
-    if (
-      correctSet.size === userSet.size &&
-      [...correctSet].every((v) => userSet.has(v))
-    )
-      return "correct";
-    if ([...userSet].some((v) => !correctSet.has(v))) return "wrong";
-    return "partial";
-  } else {
-    if (typeof userAnswer !== "number") return "unanswered";
-    const userText = Array.isArray(question.options)
-      ? question.options?.[userAnswer]?.replace(/^[A-Z]\.\s*/, "")
-      : question.options?.[String.fromCharCode(65 + userAnswer)]?.replace(
-          /^[A-Z]\.\s*/,
-          "",
-        );
-    return userText === correctAnswer ? "correct" : "wrong";
-  }
-}
-
-/**
- * 获取复合题答案状态（返回子题状态对象）
- * @param {Object} question - 题目对象
- * @param {Object} userAnswer - 用户答案
- * @returns {Object}
- */
-export function getComplexStatus(question, userAnswer) {
-  const result = {};
-  (question.subs || []).forEach((sub, idx) => {
-    result[idx] =
-      userAnswer?.[idx] === undefined || userAnswer?.[idx] === null
-        ? "unanswered"
-        : getSimpleStatus(sub, userAnswer[idx]);
-  });
-  return result;
-}
-
-/**
- * 获取答案状态 - 总入口，自动分发
+ * 获取答案状态 - 总入口，自动分发到策略
  * @param {Object} question - 题目对象
  * @param {any} userAnswer - 用户答案
  * @returns {string|Object}
  */
 export function getAnswerStatus(question, userAnswer) {
-  if (!question) return "unanswered";
-  return isComplexType(question.type)
-    ? getComplexStatus(question, userAnswer)
-    : getSimpleStatus(question, userAnswer);
-}
-
-// ==================== 题目处理 ====================
-
-/**
- * 处理简单题
- * @param {Object} question - 题目对象
- * @param {string} mode - 模式
- * @param {Object} options - 配置
- * @returns {Object}
- */
-export function handleSimpleQuestion(question, mode, options = {}) {
-  const { shuffledOptions, userAnswer, checked, status } = options;
-  const modeConfig = getModeConfig(mode);
-
-  return {
-    id: question.id,
-    type: question.type,
-    stem: question.stem,
-    options: shuffledOptions || question.options,
-    answer: question.answer,
-    explanation: question.explanation,
-    media: question.media,
-    meta: question.meta,
-    userAnswer,
-    checked,
-    status,
-    isSimple: true,
-    isComplex: false,
-    isShowAnswer: modeConfig.isShowAnswer,
-    isDisabled: modeConfig.isDisabled,
-  };
-}
-
-/**
- * 处理复合题
- * @param {Object} question - 题目对象
- * @param {string} mode - 模式
- * @param {Object} options - 配置
- * @returns {Object}
- */
-export function handleComplexQuestion(question, mode, options = {}) {
-  const { userAnswer, checked, status } = options;
-
-  return {
-    id: question.id,
-    type: "reading",
-    article: question.media?.article || "",
-    subs: (question.subs || []).map((sub, idx) =>
-      handleSimpleQuestion(sub, mode, {
-        userAnswer: userAnswer?.[idx],
-        checked: checked?.[idx],
-        status: status?.[idx],
-      }),
-    ),
-    meta: question.meta,
-    userAnswer,
-    isSimple: false,
-    isComplex: true,
-  };
-}
-
-/**
- * 处理题目 - 总入口，自动分发
- * @param {Object} question - 题目对象
- * @param {string} mode - 模式
- * @param {Object} options - 配置
- * @returns {Object}
- */
-export function handleQuestion(question, mode, options = {}) {
-  if (!question) return null;
-  return isComplexType(question.type)
-    ? handleComplexQuestion(question, mode, options)
-    : handleSimpleQuestion(question, mode, options);
+  if (!question) return 'unanswered'
+  const strategy = getStrategy(question.type)
+  if (!strategy) return 'unknown'
+  return strategy.checkAnswer(question, userAnswer)
 }
 
 // ==================== 数据打包/解包 ====================
 
 /**
- * 打包简单题进度
- * @param {string} questionId - 题目ID
- * @param {any} userAnswer - 用户答案
- * @param {boolean} checked - 检查状态
- * @param {string} status - 答案状态
- * @returns {Object}
- */
-export function packSimpleProgress(questionId, userAnswer, checked, status, question) {
-  const selectedText = question?.options && typeof userAnswer === 'number'
-    ? question.options[userAnswer]
-    : undefined;
-  return {
-    selected: userAnswer,
-    selectedText,
-    checked: checked || false,
-    status: status || "unanswered",
-  };
-}
-
-/**
- * 打包复合题进度
- * @param {string} questionId - 题目ID
- * @param {any} userAnswer - 用户答案
- * @param {Object} checked - 检查状态
- * @param {Object} status - 答案状态
- * @returns {Object}
- */
-export function packComplexProgress(questionId, userAnswer, checked, status, question) {
-  const selectedText = {};
-  if (userAnswer && typeof userAnswer === 'object') {
-    question?.subs?.forEach((sub, idx) => {
-      const subAnswer = userAnswer[idx];
-      if (subAnswer !== undefined && sub.options && typeof subAnswer === 'number') {
-        selectedText[idx] = sub.options[subAnswer];
-      } else if (subAnswer !== undefined) {
-        selectedText[idx] = subAnswer;
-      }
-    });
-  }
-  return {
-    selected: userAnswer,
-    selectedText: Object.keys(selectedText).length > 0 ? selectedText : undefined,
-    checked,
-    status,
-  };
-}
-
-/**
- * 打包进度数据 - 总入口，自动分发
+ * 打包进度数据 - 总入口，自动分发到策略
  * @param {Array} questions - 题目数组
  * @param {Object} userAnswers - 用户答案
  * @param {Object} answerChecked - 检查状态
@@ -537,24 +330,10 @@ export function packProgress(
 ) {
   const result = {};
   questions.forEach((q) => {
-    const qId = q.id;
-    if (isComplexType(q.type)) {
-      result[qId] = packComplexProgress(
-        qId,
-        userAnswers?.[qId],
-        answerChecked?.[qId],
-        answerStatus?.[qId],
-        q,
-      );
-    } else {
-      result[qId] = packSimpleProgress(
-        qId,
-        userAnswers?.[qId],
-        answerChecked?.[qId],
-        answerStatus?.[qId],
-        q,
-      );
-    }
+    const strategy = getStrategy(q.type);
+    result[q.id] = strategy?.pack
+      ? strategy.pack(q.id, userAnswers?.[q.id], answerChecked?.[q.id], answerStatus?.[q.id], q)
+      : { selected: userAnswers?.[q.id], checked: answerChecked?.[q.id] || false, status: answerStatus?.[q.id] || 'unanswered' };
   });
   return result;
 }
@@ -681,54 +460,10 @@ export function normalizeStatus(status) {
  */
 export function countQuestions(questions) {
   if (!Array.isArray(questions)) return 0;
-  return questions.reduce(
-    (total, q) => total + (isComplexType(q.type) ? q.subs?.length || 0 : 1),
-    0,
-  );
-}
-
-/**
- * 简单题统计
- * @param {string} status - 答案状态
- * @returns {Object}
- */
-export function getSimpleStats(status) {
-  const s = normalizeStatus(status);
-  return {
-    correct: s === "correct" ? 1 : 0,
-    wrong: s === "wrong" ? 1 : 0,
-    unknown: s === "unknown" ? 1 : 0,
-    unanswered: s === "unanswered" ? 1 : 0,
-  };
-}
-
-/**
- * 复合题统计
- * @param {Object|Array} subs - 答案状态
- * @returns {Object}
- */
-export function getComplexStats(subs) {
-  const stats = { correct: 0, wrong: 0, unknown: 0, unanswered: 0 };
-
-  if (subs && typeof subs === "object" && !Array.isArray(subs)) {
-    Object.values(subs).forEach((status) => {
-      const s = normalizeStatus(status);
-      if (s === "correct") stats.correct++;
-      else if (s === "wrong") stats.wrong++;
-      else if (s === "unknown") stats.unknown++;
-      else stats.unanswered++;
-    });
-    return stats;
-  }
-
-  subs?.forEach((sub) => {
-    const s = normalizeStatus(sub.status);
-    if (s === "correct") stats.correct++;
-    else if (s === "wrong") stats.wrong++;
-    else if (s === "unknown") stats.unknown++;
-    else stats.unanswered++;
-  });
-  return stats;
+  return questions.reduce((total, q) => {
+    const strategy = getStrategy(q.type);
+    return total + (strategy?.capabilities.isComposite ? (q.subs?.length || 0) : 1);
+  }, 0);
 }
 
 /**
@@ -738,34 +473,31 @@ export function getComplexStats(subs) {
  * @returns {Object}
  */
 export function getBatchStats(questions, answers) {
-  let correct = 0,
-    wrong = 0,
-    unknown = 0,
-    unanswered = 0;
+  let correct = 0, wrong = 0, unknown = 0, unanswered = 0;
 
   questions.forEach((q) => {
     const answerData = answers?.[q.id];
     if (!answerData) {
-      if (isComplexType(q.type)) {
-        unknown += q.subs?.length || 0;
-      } else {
-        unanswered++;
-      }
+      const strategy = getStrategy(q.type);
+      unknown += strategy?.capabilities.isComposite ? (q.subs?.length || 0) : 1;
       return;
     }
 
-    if (isComplexType(q.type)) {
-      const subStats = getComplexStats(answerData.status);
-      correct += subStats.correct;
-      wrong += subStats.wrong;
-      unknown += subStats.unknown;
-      unanswered += subStats.unanswered;
-    } else {
-      const subStats = getSimpleStats(answerData.status);
-      correct += subStats.correct;
-      wrong += subStats.wrong;
-      unknown += subStats.unknown;
-      unanswered += subStats.unanswered;
+    const status = answerData.status;
+    if (typeof status === 'string') {
+      const s = normalizeStatus(status);
+      if (s === 'correct') correct++;
+      else if (s === 'wrong') wrong++;
+      else if (s === 'unknown') unknown++;
+      else unanswered++;
+    } else if (typeof status === 'object') {
+      Object.values(status).forEach((subStatus) => {
+        const s = normalizeStatus(subStatus);
+        if (s === 'correct') correct++;
+        else if (s === 'wrong') wrong++;
+        else if (s === 'unknown') unknown++;
+        else unanswered++;
+      });
     }
   });
 

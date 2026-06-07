@@ -14,7 +14,7 @@
 
     <template v-if="activeTab === 'question'">
       <div class="sub-question-section" v-if="question.subs && question.subs.length > 0">
-        <component v-if="wrappedSub" :is="componentMap[currentSub?.type] || SingleChoice" :question="wrappedSub"
+        <QuestionRenderer v-if="wrappedSub" :question="wrappedSub"
           :user-answer="props.userAnswer?.[currentSubIndex]" :mode="mode" :show-answer="currentSubShowAnswer"
           :show-answer-mode="showAnswerMode" :show-explanation="showExplanation" :disabled="isSubAnswerDisabled"
           @answer="handleSubAnswer" @check="checkSubAnswer(currentSubIndex)" />
@@ -47,21 +47,8 @@
 <script setup>
 import { ref, computed, watch, inject } from 'vue'
 import { getAnswerStatus } from '@/utils/questionConfig'
-import { useQuestionHandler, canAutoCheck } from '@/composables/useQuestionHandler'
-import SingleChoice from './SingleChoice.vue'
-import MultipleChoice from './MultipleChoice.vue'
-import BooleanQuestion from './BooleanQuestion.vue'
-import Essay from './Essay.vue'
-import FillIn from './FillIn.vue'
-
-const componentMap = {
-
-  single: SingleChoice,
-  multiple: MultipleChoice,
-  boolean: BooleanQuestion,
-  essay: Essay,
-  fillin: FillIn
-}
+import { getStrategy } from '@/question-types'
+import QuestionRenderer from './QuestionRenderer.vue'
 
 const props = defineProps({
   question: {
@@ -171,20 +158,7 @@ const wrappedSub = computed(() => {
   }
 })
 
-const {
-  practiceMode,
-  showAnswerMode,
-  shouldAutoCheck,
-  shouldShowCheckBtn,
-} = useQuestionHandler({
-  question: wrappedSub,
-  practiceMode: computed(() => props.mode),
-  userAnswer: computed(() => props.userAnswer?.[currentSubIndex.value]),
-  isChecked: computed(() => isSubAnswerChecked(currentSubIndex.value)),
-  showAnswerMode: computed(() => props.showAnswerMode)
-})
-
-const mode = computed(() => practiceMode.value)
+const mode = computed(() => props.mode)
 
 const isSubAnswered = (subIndex) => {
   const answer = props.userAnswer?.[subIndex]
@@ -194,28 +168,15 @@ const isSubAnswered = (subIndex) => {
   return !!answer
 }
 
-const getSubAnswer = (subIndex) => {
-  return props.userAnswer?.[subIndex]
-}
-
 const hasCurrentSubAnswer = computed(() => {
   return isSubAnswered(currentSubIndex.value)
 })
 
 const isSubAnswerDisabled = computed(() => {
-  // 背题模式禁用交互，只能浏览
   if (props.mode === 'review') return true
-  // 当前子题已检查则禁用
   return isSubAnswerChecked(currentSubIndex.value)
 })
 
-const goToSub = (index) => {
-  currentSubIndex.value = index
-  emit('goSub', index)
-}
-
-// 检查子题答案是否正确（立即模式下使用）
-// 使用统一入口函数判断答案正确性
 const checkSubIsCorrect = (sub, answer) => {
   if (!sub || answer === null || answer === undefined) return false
   const status = getAnswerStatus(sub, answer)
@@ -227,14 +188,11 @@ const handleSubAnswer = (answer) => {
   newAnswer[currentSubIndex.value] = answer
   emit('answer', newAnswer)
 
-  // 立即显示模式下，使用统一入口判断是否自动检查
-  if (mode.value !== 'review' && showAnswerMode.value === 'immediate') {
+  if (props.mode !== 'review' && props.showAnswerMode === 'immediate') {
     const subType = currentSub.value?.type
-    const canImmediateCheck = subType ? canAutoCheck(subType) : false
+    const canImmediateCheck = subType ? getStrategy(subType)?.capabilities.canAutoCheck : false
     if (canImmediateCheck) {
-      // 通知父组件检查当前子题并播放音效
       emit('checkSub', currentSubIndex.value)
-      // 自动跳转下一题（只有答案正确才跳转）
       if (props.autoJump) {
         const isCorrect = checkSubIsCorrect(wrappedSub.value, answer)
         if (isCorrect) {
@@ -247,7 +205,6 @@ const handleSubAnswer = (answer) => {
   }
 }
 
-// 导航到下一个子题或下一题
 const goToNextSubOrNextQuestion = () => {
   const subs = props.question?.subs || []
   if (currentSubIndex.value < subs.length - 1) {
@@ -261,11 +218,9 @@ const goToNextSubOrNextQuestion = () => {
 
 const checkSubAnswer = (index) => {
   subAnswerChecked.value[index] = true
-  // 通知 QuizPage 检查子题答案
   emit('checkSub', index)
 }
 
-// 获取当前子题的 showAnswer 状态
 const currentSubShowAnswer = computed(() => {
   return isSubAnswerChecked(currentSubIndex.value)
 })
@@ -276,7 +231,6 @@ watch(() => props.question, () => {
   subAnswerChecked.value = {}
   emit('goSub', 0)
 })
-
 
 </script>
 
@@ -397,7 +351,6 @@ watch(() => props.question, () => {
 .sub-question-section {
   display: flex;
   flex-direction: column;
-  /* gap: var(--spacing-md); */
 }
 
 .sub-question-header {

@@ -1,16 +1,9 @@
 /**
  * 题型处理 Composable
- * 统一入口，自动分配处理函数
- *
- * @example
- * import { useQuestionHandler } from '@/composables/useQuestionHandler'
- * const { answerState, displayConfig, shouldAutoCheck } = useQuestionHandler(options)
  */
 
 import { computed, isRef } from "vue";
 import {
-  isComplexQuestion,
-  isComplexType,
   canAutoCheck,
   hasUserAnswer as checkHasUserAnswer,
   getAnswerStatus,
@@ -22,8 +15,6 @@ import {
 } from "@/utils/questionConfig";
 
 export {
-  isComplexQuestion,
-  isComplexType,
   getAnswerStatus,
   getDisplayConfig,
   PRACTICE_MODE,
@@ -31,10 +22,6 @@ export {
   ANSWER_STATUS,
   canAutoCheck,
 };
-
-export function isCompositeType(questionType) {
-  return questionType === "reading";
-}
 
 export function normalizeStatus(status) {
   return normalizeStatusFn(status);
@@ -76,8 +63,6 @@ export function useQuestionHandler(options) {
   const isImmediateMode = computed(
     () => showAnswerMode.value === SHOW_ANSWER_MODE.IMMEDIATE,
   );
-  const isComplex = computed(() => isComplexQuestion(question.value));
-
   const hasUserAnswer = computed(() => checkHasUserAnswer(userAnswer.value));
 
   const answerState = computed(() => {
@@ -95,14 +80,10 @@ export function useQuestionHandler(options) {
     const q = question.value;
     const qType = q?.type || "single";
 
-    const effectiveType = qType === "reading" && q.subs?.length > 0
-      ? q.subs[0].type
-      : qType;
-
     return getDisplayConfig(
       practiceMode.value,
       showAnswerMode.value,
-      effectiveType,
+      qType,
       {
         hasUserAnswer: hasUserAnswer.value,
         isChecked: isChecked.value,
@@ -139,12 +120,8 @@ export function useQuestionHandler(options) {
     if (isChecked.value !== true) {
       if (isImmediateMode.value) {
         const q = question.value;
-        if (q) {
-          if (q.type === "reading" && q.subs?.length > 0) {
-            if (canAutoCheck(q.subs[0].type)) return ANSWER_STATUS.UNKNOWN;
-          } else if (canAutoCheck(q.type)) {
-            return ANSWER_STATUS.UNKNOWN;
-          }
+        if (q && canAutoCheck(q.type)) {
+          return ANSWER_STATUS.UNKNOWN;
         }
       }
       return ANSWER_STATUS.UNCHECKED;
@@ -192,7 +169,6 @@ export function useQuestionHandler(options) {
     isExamMode,
     isAnswerMode,
     isImmediateMode,
-    isComplex,
     hasUserAnswer,
     answerState,
     displayConfig,
@@ -208,8 +184,5 @@ export function useQuestionHandler(options) {
     getSubStatus,
     handleCheck,
     resetAnswer,
-    isComplexQuestion,
-    isComplexType,
-    canAutoCheck,
   };
 }

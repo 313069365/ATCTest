@@ -242,16 +242,13 @@ const autoSubmit = () => {
 const checkAnswer = (question, userAnswer) => {
   if (userAnswer === undefined || userAnswer === null) return false
 
-  const correctAnswer = question.answer
-
-  if (question.type === 'multiple') {
-    if (!Array.isArray(userAnswer) || !Array.isArray(correctAnswer)) return false
+  if (Array.isArray(userAnswer) && Array.isArray(question.answer)) {
     const sortedUser = [...userAnswer].sort()
-    const sortedCorrect = [...correctAnswer].sort()
+    const sortedCorrect = [...question.answer].sort()
     return JSON.stringify(sortedUser) === JSON.stringify(sortedCorrect)
   }
 
-  return userAnswer === correctAnswer
+  return userAnswer === question.answer
 }
 </script>
 

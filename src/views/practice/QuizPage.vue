@@ -99,12 +99,10 @@ import { useQuestionHandler } from "@/composables/useQuestionHandler";
 import { useSoundEffect } from "@/composables/useSoundEffect";
 import {
   QUESTION_SORT,
-  canAutoCheck,
   getAnswerStatus,
   savePracticeProgress as saveProgress,
   loadPracticeProgress as loadProgress,
   unpackProgress,
-  isComplexQuestion,
   packProgress,
   getPracticeKey
 } from "@/utils/questionConfig";
@@ -374,9 +372,8 @@ const liveStats = computed(() => {
   let correct = 0, wrong = 0, total = 0
   bank.value.forEach(q => {
     const status = answerStatus.value[q.id]
-    if (isComplexQuestion(q)) {
-      const subs = q.subs || []
-      subs.forEach((_, idx) => {
+    if (q.subs?.length > 0) {
+      q.subs.forEach((_, idx) => {
         total++
         const s = status?.[idx]
         if (s === 'correct') correct++
@@ -631,10 +628,7 @@ const handleAnswer = (answer) => {
     const capturedId = question.id
     setTimeout(() => {
       if (currentQuestion.value?.id !== capturedId) return
-      // 复合题由子组件通过 checkSub 事件逐题检查和播放音效
-      if (!isComplexQuestion(question)) {
-        checkAnswer()
-      }
+      checkAnswer()
     }, 100)
   }
 };
@@ -650,42 +644,33 @@ const checkAnswer = () => {
   // 使用统一入口函数获取状态
   const status = getAnswerStatus(question, userAnswer)
 
-  // 根据题型处理
-  if (isComplexQuestion(question)) {
-    // 复合题型：status 是对象 { 0: 'correct', 1: 'wrong' }
-    answerStatus.value[questionId] = status
-    answerChecked.value[questionId] = true
+  answerStatus.value[questionId] = status || 'unanswered'
+  answerChecked.value[questionId] = true
 
+  // 标记错题：统一处理 string 和 object 状态
+  if (typeof status === 'object') {
     question.subs?.forEach((sub, idx) => {
       if (status[idx] === 'wrong') {
         pm.markWrong(sub, question)
       }
     })
-  } else {
-    // 简单题型：status 是字符串
-    answerStatus.value[questionId] = status || 'unanswered'
-    answerChecked.value[questionId] = true
-
-    if (status === 'wrong') {
-      pm.markWrong(question)
-    }
+  } else if (status === 'wrong') {
+    pm.markWrong(question)
   }
 
   // 播放音效
   if (soundEnabled.value) {
-    if (isComplexQuestion(question)) {
-      const allCorrect = question.subs?.every((_, idx) => status[idx] === 'correct')
-      playAnswerSound(allCorrect ? 'correct' : 'wrong')
-    } else {
-      playAnswerSound(status)
-    }
+    const allCorrect = typeof status === 'object'
+      ? question.subs?.every((_, idx) => status[idx] === 'correct')
+      : status === 'correct'
+    playAnswerSound(allCorrect ? 'correct' : 'wrong')
   }
 
   savePracticeProgress()
 
   // 自动跳转（检查后全对时）
   if (practiceData.value?.autoJump) {
-    const isAllCorrect = isComplexQuestion(question)
+    const isAllCorrect = typeof status === 'object'
       ? question.subs?.every((_, idx) => status[idx] === 'correct')
       : status === 'correct'
     if (isAllCorrect) {

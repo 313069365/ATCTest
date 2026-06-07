@@ -38,7 +38,7 @@
 
         <div class="question-list">
           <template v-for="(q, idx) in questions" :key="idx">
-            <template v-if="isComplexQuestion(q)">
+            <template v-if="q.subs && q.subs.length > 0">
               <div class="question-group">
                 <div class="group-header">
                   <span class="group-title">{{ t('questionId') || '' }}: {{ q.id }}</span>
@@ -66,7 +66,7 @@
 <script setup>
 import { computed } from 'vue'
 import { t } from '@/utils/i18n.js'
-import { isComplexQuestion, normalizeStatus } from '@/utils/questionConfig'
+import { normalizeStatus } from '@/utils/questionConfig'
 
 const props = defineProps({
   questions: {
