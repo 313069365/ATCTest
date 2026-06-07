@@ -173,6 +173,7 @@ const fileInput = ref(null)
   border: none;
   background: transparent;
   border-radius: 50%;
+  font-size: var(--font-size-xl);
 }
 
 .icon-btn:active {

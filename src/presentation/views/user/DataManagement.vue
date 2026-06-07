@@ -2,7 +2,7 @@
   <div class="data-management">
     <header class="top-bar">
       <button class="icon-btn" @click="goBack">
-        <IconArrowBack />
+        <Icon name="arrow-back" />
       </button>
       <h1 class="title">数据管理</h1>
     </header>
@@ -198,6 +198,7 @@ onMounted(() => {
   justify-content: center;
   cursor: pointer;
   color: var(--primary);
+  font-size: var(--font-size-xl);
 }
 
 .title {
@@ -278,8 +279,13 @@ onMounted(() => {
 }
 
 @keyframes progress-indeterminate {
-  0% { transform: translateX(-100%); }
-  100% { transform: translateX(400%); }
+  0% {
+    transform: translateX(-100%);
+  }
+
+  100% {
+    transform: translateX(400%);
+  }
 }
 
 .card-btn {
@@ -318,7 +324,7 @@ onMounted(() => {
   padding: 12px var(--spacing-md);
 }
 
-.data-row + .data-row {
+.data-row+.data-row {
   border-top: 1px solid var(--border-color-light);
 }
 
@@ -332,11 +338,25 @@ onMounted(() => {
   font-size: 20px;
 }
 
-.data-icon.error-icon { color: var(--error); }
-.data-icon.fav-icon { color: var(--secondary); }
-.data-icon.history-icon { color: var(--primary); }
-.data-icon.exam-icon { color: var(--primary); }
-.data-icon.preset-icon { color: var(--on-surface-variant); }
+.data-icon.error-icon {
+  color: var(--error);
+}
+
+.data-icon.fav-icon {
+  color: var(--secondary);
+}
+
+.data-icon.history-icon {
+  color: var(--primary);
+}
+
+.data-icon.exam-icon {
+  color: var(--primary);
+}
+
+.data-icon.preset-icon {
+  color: var(--on-surface-variant);
+}
 
 .data-name {
   font-size: var(--font-size-sm);

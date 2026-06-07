@@ -314,6 +314,7 @@ function viewRecord(record) {}
   cursor: pointer;
   color: var(--primary);
   transition: all 0.2s ease;
+  font-size: var(--font-size-xl);
 }
 
 .icon-btn:active {

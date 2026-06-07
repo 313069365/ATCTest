@@ -399,15 +399,12 @@ async function createPaper() {
   justify-content: center;
   cursor: pointer;
   color: var(--text-secondary);
+  font-size: var(--font-size-xl);
 }
 
 .icon-btn:active {
   background: #f1f4fa;
   transform: scale(0.95);
-}
-
-.icon-btn svg {
-  font-size: 24px;
 }
 
 .title {

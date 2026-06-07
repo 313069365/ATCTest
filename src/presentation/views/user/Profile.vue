@@ -236,6 +236,7 @@ function goToSettings() {
   justify-content: center;
   cursor: pointer;
   color: var(--primary);
+  font-size: var(--font-size-xl);
 }
 
 .title {

@@ -158,6 +158,7 @@ function formatDuration(seconds) {
   justify-content: center;
   cursor: pointer;
   color: var(--on-primary);
+  font-size: var(--font-size-xl);
 }
 
 .top-bar h1 {

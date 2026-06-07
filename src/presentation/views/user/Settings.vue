@@ -71,6 +71,7 @@ function goBack() {
   cursor: pointer;
   color: var(--primary);
   transition: background var(--transition-fast);
+  font-size: var(--font-size-xl);
 }
 
 .icon-btn:active {

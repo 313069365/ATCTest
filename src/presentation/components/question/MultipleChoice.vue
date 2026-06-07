@@ -225,6 +225,7 @@ const handleSelect = (index) => {
   color: var(--primary);
   border-radius: var(--radius-sm);
   font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
 }
 
 .question-id {

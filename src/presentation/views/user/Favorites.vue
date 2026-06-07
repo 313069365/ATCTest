@@ -246,6 +246,7 @@ function formatAnswer(answer) {
   color: var(--on-surface);
   transition: all 0.2s;
   border: 0.5px solid rgba(255, 255, 255, 0.6);
+  font-size: var(--font-size-xl);
 }
 
 .back-btn:active,

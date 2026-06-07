@@ -45,10 +45,12 @@
                 <h4>{{ t(subject.name) }}</h4>
                 <p>{{ `${t('totally')} ${subject.count} ${t('questions')}` }}</p>
               </div>
-              <button v-if="hasProgress(subject)" class="continue-btn" @click.stop="continuePractice(subject)" :disabled="store.loading">
+              <button v-if="hasProgress(subject)" class="continue-btn" @click.stop="continuePractice(subject)"
+                :disabled="store.loading">
                 {{ t('continue') }}
               </button>
-              <button v-else class="new-btn" @click.stop="newQuizWith(subject)" :disabled="store.loading">{{ t('new') }}</button>
+              <button v-else class="new-btn" @click.stop="newQuizWith(subject)" :disabled="store.loading">{{ t('new')
+                }}</button>
             </div>
 
             <div v-if="expandedSubject === subject.name" class="subject-expanded">
@@ -68,7 +70,8 @@
               </div>
 
               <div class="action-row">
-                <button v-if="hasProgress(subject)" class="new-btn" @click.stop="newQuizWith(subject)" :disabled="store.loading">{{ t('new')
+                <button v-if="hasProgress(subject)" class="new-btn" @click.stop="newQuizWith(subject)"
+                  :disabled="store.loading">{{ t('new')
                   }}</button>
                 <button v-if="(expandedSubjectStats?.wrongBookCount ?? 0) > 0" class="wrong-btn"
                   @click.stop="wrongPractice(subject)" :disabled="store.loading">
@@ -371,11 +374,10 @@ const wrongPractice = (subject) => {
 
 .import-btn {
   position: absolute;
-  right: 16px;
+  right: var(--spacing-xl);
   top: 50%;
   transform: translateY(-50%);
-  width: 40px;
-  height: 40px;
+  font-size: var(--font-size-lg);
   border: none;
   background: transparent;
   border-radius: 50%;

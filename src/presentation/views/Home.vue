@@ -84,7 +84,8 @@
                 </div>
                 <h3 class="placeholder-title">{{ t('noPracticeRecord') }}</h3>
                 <p class="placeholder-subtitle">{{ t('startFirstPractice') }}</p>
-                <button class="continue-btn" @click="pageTo('/practice')" :disabled="store.loading">{{ t('startPractice') }}</button>
+                <button class="continue-btn" @click="pageTo('/practice')" :disabled="store.loading">{{
+                  t('startPractice') }}</button>
               </div>
             </div>
           </template>
@@ -236,8 +237,8 @@ onMounted(() => {
 }
 
 .theme-toggle {
-  width: 40px;
-  height: 40px;
+  /* width: 30px;
+  height: 30px; */
   border-radius: 50%;
   background: transparent;
   border: none;
@@ -255,7 +256,8 @@ onMounted(() => {
 }
 
 .theme-toggle svg {
-  font-size: 20px;
+  font-size: var(--font-size-lg);
+  margin-right: 10px;
 }
 
 .search-bar {

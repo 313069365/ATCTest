@@ -995,12 +995,12 @@ const visibleButtons = computed(() =>
 }
 
 .timer-display svg {
-  font-size: var(--font-size-2xl);
+  font-size: var(--font-size-lg);
 }
 
 .grid-btn {
-  width: 45px;
-  height: 45px;
+  width: 25px;
+  height: 25px;
   border: none;
   /* background: var(--color-gray-100); */
   /* border-radius: var(--radius-full); */
@@ -1053,6 +1053,7 @@ const visibleButtons = computed(() =>
 
 .progress-label {
   font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-regular);
   color: var(--success);
   background: var(--success-light);
   padding: 2px 8px;
