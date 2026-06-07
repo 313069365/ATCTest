@@ -95,9 +95,9 @@
 <script setup>
 import { ref, computed, watch, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
-import PracticeSetting from '@/presentation/components/page/PracticeSettings.vue'
-import BankImport from '@/presentation/components/page/BankImport.vue'
-import Icon from '@/presentation/components/common/Icon.vue'
+import PracticeSetting from '@/presentation/components/practice/PracticeSettings.vue'
+import BankImport from '@/presentation/components/bank/BankImport.vue'
+import Icon from '@/presentation/components/ui/Icon.vue'
 import { t } from '@/infrastructure/utils/i18n.js'
 import { useAppStore } from '@/domain/stores/store'
 

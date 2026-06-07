@@ -142,7 +142,7 @@
 <script setup>
 import { ref, reactive, computed, onMounted, nextTick, watch } from 'vue'
 import { useRouter } from 'vue-router'
-import Icon from '@/presentation/components/common/Icon.vue'
+import Icon from '@/presentation/components/ui/Icon.vue'
 import { useAppStore } from '@/domain/stores/store'
 import { t } from '@/infrastructure/utils/i18n.js'
 import * as API from '@/infrastructure/api/dataSource'

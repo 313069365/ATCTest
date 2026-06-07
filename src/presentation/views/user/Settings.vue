@@ -19,8 +19,8 @@
 import { useRouter } from 'vue-router'
 import { t } from '@/infrastructure/utils/i18n.js'
 import { APP_VERSION } from '@/infrastructure/utils/version'
-import LanguageSwitch from '@/presentation/components/common/LanguageSwitch.vue'
-import Icon from '@/presentation/components/common/Icon.vue'
+import LanguageSwitch from '@/presentation/components/ui/LanguageSwitch.vue'
+import Icon from '@/presentation/components/ui/Icon.vue'
 
 const router = useRouter()
 

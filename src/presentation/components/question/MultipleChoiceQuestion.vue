@@ -1,5 +1,5 @@
 <template>
-  <div class="essay-question">
+  <div class="multiple-choice">
     <!-- 1. 题目信息区 -->
     <div class="question-meta">
       <span class="question-type-tag">{{ t(question?.type) }}</span>
@@ -13,24 +13,17 @@
     </div>
 
     <!-- 3. 作答区 -->
-    <div class="answer-input" v-if="mode !== 'review'">
-      <textarea
-        class="textarea-input"
-        :class="{
-          correct: shouldShowAnswer && isCorrect,
-          wrong: shouldShowAnswer && !isCorrect,
-          unknown: shouldShowAnswer && !isAutoCheckable
-        }"
-        :value="userAnswer"
-        @input="handleInput"
-        :placeholder="placeholder"
-        :disabled="disabled || shouldShowAnswer"
-        rows="6"
-      />
-    </div>
-
-    <div class="answer-tip" v-if="mode === 'answer' && !shouldShowAnswer">
-      <span class="tip-text">提示：简答题需要人工批改，请输入您的答案</span>
+    <div class="options">
+      <button v-for="(option, i) in question?.options" :key="i" class="option-btn" :class="{
+        selected: isSelected(i),
+        correct: shouldShowAnswer && isCorrectOption(i) && (mode === 'review' || isSelected(i)),
+        wrong: shouldShowAnswer && isWrongOption(i),
+        missed: shouldShowAnswer && isMissedOption(i),
+        review: mode === 'review'
+      }" @click="handleSelect(i)" :disabled="disabled || (shouldShowAnswer && mode !== 'review')">
+        <span class="option-marker"></span>
+        <span class="option-text" v-if="option">{{ formatOption(option) }}</span>
+      </button>
     </div>
 
     <!-- 检查答案按钮 -->
@@ -42,16 +35,8 @@
     </div>
 
     <!-- 4. 答案解析区 -->
-    <div v-if="(shouldShowAnswer || mode === 'review')" class="answer-section">
-      <div class="correct-answer" v-if="question?.answer">
-        <div class="answer-header">
-          <Icon name="check-circle-outline" />
-          <span>{{ t('correctAnswer') }}</span>
-        </div>
-        <div class="answer-content">{{ question.answer }}</div>
-      </div>
-
-      <div v-if="showExplanation" class="explanation-section">
+    <div v-if="shouldShowAnswer && showExplanation" class="answer-section">
+      <div class="explanation-section">
         <div v-if="question?.meta?.topic" class="tag-block">
           <span class="tag tag-purple">{{ t('topic') }}</span>
           <span class="tag-text">{{ question.meta.topic }}</span>
@@ -75,7 +60,7 @@
 import { computed } from 'vue'
 import { t } from '@/infrastructure/utils/i18n.js'
 import { useQuestionHandler } from '@/application/composables/useQuestionHandler'
-import Icon from '@/presentation/components/common/Icon.vue'
+import Icon from '@/presentation/components/ui/Icon.vue'
 
 const props = defineProps({
   question: {
@@ -87,7 +72,7 @@ const props = defineProps({
     default: 'answer'
   },
   userAnswer: {
-    type: [String, Array],
+    type: [String, Array, Number],
     default: null
   },
   showAnswer: {
@@ -148,25 +133,78 @@ const formattedExplanation = computed(() => {
   return t('noExplanation')
 })
 
-const placeholder = computed(() => props.mode === 'review' ? '' : '请输入您的答案...')
+const isSelected = (index) => {
+  if (props.mode === 'review') return false
+  if (Array.isArray(props.userAnswer)) {
+    return props.userAnswer.includes(index)
+  }
+  return props.userAnswer === index
+}
 
-const isCorrect = computed(() => {
-  if (!props.question?.answer || !props.userAnswer) return false
-  return props.userAnswer.trim() === props.question.answer.trim()
-})
+const isCorrectOption = (index) => {
+  if (!props.question?.answer || props.question.answer.length === 0) return false
 
-const isAutoCheckable = computed(() => {
-  return false
-})
+  const currentOption = props.question.options?.[index]
+  if (!currentOption) return false
+  const currentOptionText = currentOption.replace(/^[A-Z]\.\s*/, '')
 
-const handleInput = (e) => {
-  if (props.disabled || shouldShowAnswer.value) return
-  emit('answer', e.target.value)
+  const hasCorrect = props.question.answer.some(ans => {
+    const correctAnswerText = String(ans).replace(/^[A-Z]\.\s*/, '')
+    return currentOptionText === correctAnswerText
+  })
+
+  if (props.mode === 'review') {
+    return hasCorrect
+  }
+  return shouldShowAnswer.value && hasCorrect
+}
+
+const isMissedOption = (index) => {
+  if (props.mode === 'review') return false
+  if (!shouldShowAnswer.value) return false
+  return isCorrectOption(index) && !isSelected(index)
+}
+
+const isWrongOption = (index) => {
+  if (props.mode === 'review') return false
+  if (!isSelected(index)) return false
+  return !isCorrectOption(index)
+}
+
+const formatOption = (option) => {
+  return option.replace(/^[A-Z]\.\s*/, '')
+}
+
+const handleSelect = (index) => {
+  if (props.disabled || props.showAnswer) return
+
+  let newAnswer
+  if (Array.isArray(props.userAnswer)) {
+    if (props.userAnswer.includes(index)) {
+      newAnswer = props.userAnswer.filter(i => i !== index)
+    } else {
+      newAnswer = [...props.userAnswer, index]
+    }
+  } else {
+    newAnswer = [index]
+  }
+
+  emit('answer', newAnswer)
+
+  // 自动跳转：答题正确后自动跳下一题（多选需要手动检查，这里延迟检查）
+  if (props.autoJump && props.showAnswerMode === 'immediate' && !props.mode?.includes('review')) {
+    setTimeout(() => {
+      const isCorrect = isCorrectOption(index)
+      if (isCorrect) {
+        emit('next-question')
+      }
+    }, 300)
+  }
 }
 </script>
 
 <style scoped>
-.essay-question {
+.multiple-choice {
   width: 100%;
 }
 
@@ -174,7 +212,11 @@ const handleInput = (e) => {
   display: flex;
   align-items: center;
   gap: var(--spacing-md);
-  margin-bottom: var(--spacing-md);
+  padding: var(--spacing-sm) var(--spacing-md);
+  background: var(--background);
+  border: 1px solid transparent;
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  box-shadow: var(--shadow-md);
 }
 
 .question-type-tag {
@@ -205,9 +247,9 @@ const handleInput = (e) => {
   padding: var(--spacing-sm) var(--spacing-md);
   background: var(--background);
   border: 1px solid transparent;
-  margin-bottom: var(--spacing-md);
   border-radius: 0 0 var(--radius-lg) var(--radius-lg);
   box-shadow: var(--shadow-md);
+  margin-bottom: var(--spacing-md);
 }
 
 .question-text {
@@ -217,32 +259,142 @@ const handleInput = (e) => {
   line-height: 1.6;
 }
 
-.answer-input {
-  margin-bottom: var(--spacing-md);
+.options {
+  color: var(--text-primary);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
-.textarea-input {
-  width: 100%;
+.option-btn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
   padding: var(--spacing-md);
-  font-size: var(--font-size-md);
-  border: 1px solid var(--border-color);
+  background: var(--background-surface);
+  border: 1px solid var(--border-color-strong);
   border-radius: var(--radius-lg);
-  background: var(--background);
-  resize: vertical;
-  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: left;
+  width: 100%;
+  box-shadow: var(--shadow-md);
 }
 
-.textarea-input:focus {
-  outline: none;
+.option-btn:active {
+  transform: scale(0.99);
+}
+
+.option-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.option-btn.selected {
+  border-color: var(--primary);
+  box-shadow: 0 4px 12px rgba(0, 91, 191, 0.08);
+}
+
+.option-btn.correct {
+  color: var(--success);
+  border-color: var(--success);
+  background: var(--success-light);
+}
+
+.option-btn.wrong {
+  border-color: var(--error);
+  background: var(--error-light);
+}
+
+.option-btn.missed {
+  border-color: var(--success);
+  border-style: dashed;
+  background: transparent;
+}
+
+.option-btn.missed .option-marker {
+  border-color: var(--success);
+  background: transparent;
+}
+
+.option-btn.missed .option-marker::after {
+  content: "";
+}
+
+.option-marker {
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+  border: 2px solid var(--color-gray-500);
+  background: var(--background);
+  flex-shrink: 0;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.option-btn.selected .option-marker {
+  background-color: var(--primary);
   border-color: var(--primary);
 }
 
-.textarea-input:disabled {
-  background: var(--color-gray-100);
-  cursor: not-allowed;
+.option-btn.selected .option-marker::after {
+  content: "✓";
+  color: #fff;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.option-btn.correct .option-marker {
+  background-color: var(--success);
+  border-color: var(--success);
+}
+
+.option-btn.correct .option-marker::after {
+  content: "✓";
+  color: #fff;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.option-btn.wrong .option-marker {
+  background-color: var(--error);
+  border-color: var(--error);
+}
+
+.option-btn.wrong .option-marker::after {
+  content: "✗";
+  color: #fff;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.option-btn.review.correct {
+  border-color: var(--success);
+  background: var(--success-light);
+}
+
+.option-btn.review.correct .option-marker {
+  background-color: var(--success);
+  border-color: var(--success);
+}
+
+.option-btn.review.correct .option-marker::after {
+  content: "✓";
+  color: #fff;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.option-text {
+  flex: 1;
+  font-size: 16px;
+  font-weight: 500;
 }
 
 .answer-tip {
+  margin-top: var(--spacing-md);
   padding: var(--spacing-sm);
   background: var(--color-gray-100);
   border-radius: var(--radius-md);
@@ -255,28 +407,6 @@ const handleInput = (e) => {
 
 .answer-section {
   margin-top: var(--spacing-lg);
-}
-
-.correct-answer {
-  padding: var(--spacing-md);
-  background: var(--color-gray-100);
-  border-radius: var(--radius-md);
-  margin-bottom: var(--spacing-md);
-}
-
-.answer-header {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-sm);
-  margin-bottom: var(--spacing-sm);
-  color: var(--success);
-  font-weight: var(--font-weight-semibold);
-}
-
-.answer-content {
-  font-size: var(--font-size-md);
-  color: var(--on-surface);
-  line-height: 1.6;
 }
 
 .explanation-section {
@@ -356,10 +486,10 @@ hr {
   display: inline-flex;
   align-items: center;
   gap: var(--spacing-sm);
-  padding: var(--spacing-md) var(--spacing-xl);
+  padding: var(--spacing-sm) var(--spacing-lg);
   background: var(--primary);
-  color: var(--on-primary);
-  border: none;
+  color: var(--background);
+  border: 1px solid var(--primary);
   border-radius: var(--radius-lg);
   font-size: var(--font-size-md);
   font-weight: var(--font-weight-semibold);
@@ -367,7 +497,12 @@ hr {
   transition: all 0.2s;
 }
 
+.check-answer .check-btn:hover {
+  background: var(--primary-light);
+  color: var(--primary)
+}
+
 .check-answer .check-btn:active {
-  transform: scale(0.98);
+  transform: scale(0.97);
 }
 </style>

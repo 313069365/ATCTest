@@ -221,9 +221,9 @@
 import { ref, reactive, computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAppStore } from '@/domain/stores/store'
-import SubjectPicker from '@/presentation/components/page/SubjectPicker.vue'
+import SubjectPicker from '@/presentation/components/bank/SubjectPicker.vue'
 import { t } from '@/infrastructure/utils/i18n'
-import Icon from '@/presentation/components/common/Icon.vue'
+import Icon from '@/presentation/components/ui/Icon.vue'
 
 const router = useRouter()
 const store = useAppStore()

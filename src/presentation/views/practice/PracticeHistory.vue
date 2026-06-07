@@ -79,7 +79,7 @@
 
 <script setup>
 import { computed, onMounted } from 'vue'
-import Icon from '@/presentation/components/common/Icon.vue'
+import Icon from '@/presentation/components/ui/Icon.vue'
 import { usePracticeService } from '@/domain/composables/usePracticeService'
 import { t } from '@/infrastructure/utils/i18n.js'
 

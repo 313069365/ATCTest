@@ -48,7 +48,7 @@
 
 <script setup>
 import { ref } from 'vue'
-import Icon from '@/presentation/components/common/Icon.vue'
+import Icon from '@/presentation/components/ui/Icon.vue'
 
 const fileInput = ref(null)
 const selectedFile = ref(null)

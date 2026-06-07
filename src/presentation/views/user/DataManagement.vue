@@ -68,7 +68,7 @@ import { useRouter } from 'vue-router'
 import { useAppStore } from '@/domain/stores/store'
 import { storage, STORAGE_KEY } from '@/infrastructure/storage/useStorage'
 import { computeBankHash } from '@/infrastructure/api/dataSource'
-import Icon from '@/presentation/components/common/Icon.vue'
+import Icon from '@/presentation/components/ui/Icon.vue'
 
 const router = useRouter()
 const store = useAppStore()

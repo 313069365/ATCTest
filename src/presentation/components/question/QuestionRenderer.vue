@@ -5,12 +5,12 @@
 
 <script setup>
 import { computed } from 'vue'
-import SingleChoice from './SingleChoice.vue'
-import MultipleChoice from './MultipleChoice.vue'
+import SingleChoiceQuestion from './SingleChoiceQuestion.vue'
+import MultipleChoiceQuestion from './MultipleChoiceQuestion.vue'
 import BooleanQuestion from './BooleanQuestion.vue'
-import FillIn from './FillIn.vue'
-import Essay from './Essay.vue'
-import Reading from './Reading.vue'
+import FillInQuestion from './FillInQuestion.vue'
+import EssayQuestion from './EssayQuestion.vue'
+import ReadingQuestion from './ReadingQuestion.vue'
 
 const props = defineProps({
   question: {
@@ -58,17 +58,17 @@ const props = defineProps({
 const emit = defineEmits(['answer', 'next-question', 'checkSub', 'check', 'toggle-mark', 'goSub'])
 
 const componentMap = {
-  single: SingleChoice,
-  multiple: MultipleChoice,
+  single: SingleChoiceQuestion,
+  multiple: MultipleChoiceQuestion,
   boolean: BooleanQuestion,
-  fillin: FillIn,
-  essay: Essay,
-  reading: Reading
+  fillin: FillInQuestion,
+  essay: EssayQuestion,
+  reading: ReadingQuestion
 }
 
 const rendererComponent = computed(() => {
-  if (!props.question) return SingleChoice
-  return componentMap[props.question.type] || SingleChoice
+  if (!props.question) return SingleChoiceQuestion
+  return componentMap[props.question.type] || SingleChoiceQuestion
 })
 
 const handleAnswer = (answer) => {

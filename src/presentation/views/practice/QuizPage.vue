@@ -60,7 +60,7 @@
       :subCount="currentSubCount" :currentSubIndex="currentSubIndex" :subStatuses="currentSubStatuses"
       @prev="prevQuestion" @next="nextQuestion" @submit="finishQuiz" @goSub="handleGoSub" />
 
-    <AnswerCard v-if="showAnswerCard" :questions="bank" :currentIndex="currentIndex" :currentSubIndex="currentSubIndex"
+    <AnswerOverview v-if="showAnswerCard" :questions="bank" :currentIndex="currentIndex" :currentSubIndex="currentSubIndex"
       :settings="practiceData" :answerStatus="answerStatus" :userAnswers="userAnswers" @close="closeAnswerCard"
       @go="gotoQuesitonIdx" />
 
@@ -84,14 +84,14 @@
 <script setup>
 import { ref, onMounted, onUnmounted, computed, provide, watch } from "vue";
 
-import Icon from '@/presentation/components/common/Icon.vue'
+import Icon from '@/presentation/components/ui/Icon.vue'
 import { useRouter, useRoute } from "vue-router";
-import AnswerCard from "@/presentation/components/page/AnswerCard.vue";
-import PracticeStats from "@/presentation/components/page/PracticeStats.vue";
-import QuizSettings from "@/presentation/components/page/QuizSettings.vue";
+import AnswerOverview from "@/presentation/components/session/AnswerOverview.vue";
+import PracticeStats from "@/presentation/components/practice/PracticeStats.vue";
+import QuizSettings from "@/presentation/components/session/QuizSettings.vue";
 import QustionNavbar from "@/presentation/components/layout/QuestionNavbar.vue";
 import QuestionRenderer from "@/presentation/components/question/QuestionRenderer.vue";
-import JumpDialog from "@/presentation/components/page/JumpDialog.vue";
+import JumpDialog from "@/presentation/components/session/JumpDialog.vue";
 import { useAppStore } from "@/domain/stores/store";
 import { usePracticeService } from "@/domain/composables/usePracticeService";
 import { t } from "@/infrastructure/utils/i18n.js";

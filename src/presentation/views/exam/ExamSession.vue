@@ -46,7 +46,7 @@
     <QustionNavbar :prevDisabled="currentIndex === 0" :isLast="currentIndex === questions.length - 1"
       @prev="prevQuestion" @next="nextQuestion" @submit="submitPaper" />
 
-    <AnswerCard v-if="showAnswerCard" :questions="questions" :currentIndex="currentIndex" :currentSubIndex="0"
+    <AnswerOverview v-if="showAnswerCard" :questions="questions" :currentIndex="currentIndex" :currentSubIndex="0"
       :userAnswers="userAnswers" buttonText="submitPaper" @close="closeAnswerCard" @exit="submitPaper"
       @go="gotoQuestion" />
   </div>
@@ -55,8 +55,8 @@
 <script setup>
 import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
-import Icon from '@/presentation/components/common/Icon.vue'
-import AnswerCard from '@/presentation/components/page/AnswerCard.vue'
+import Icon from '@/presentation/components/ui/Icon.vue'
+import AnswerOverview from '@/presentation/components/session/AnswerOverview.vue'
 import QustionNavbar from '@/presentation/components/layout/QuestionNavbar.vue'
 import QuestionRenderer from '@/presentation/components/question/QuestionRenderer.vue'
 import { useAppStore } from '@/domain/stores/store'
