@@ -208,6 +208,7 @@ onMounted(() => {
   backdrop-filter: blur(8px);
   display: flex;
   align-items: center;
+  justify-content: space-between;
   padding: var(--spacing-sm) var(--spacing-md);
   height: 56px;
   border-bottom: 1px solid var(--border-color);
@@ -217,15 +218,19 @@ onMounted(() => {
 .header-actions {
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  margin-left: auto;
+  padding-right: 4px;
 }
 
 .title {
-  flex: 1;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
   font-size: var(--font-size-2xl);
   font-weight: 700;
   color: var(--text-primary);
   letter-spacing: -0.02em;
+  white-space: nowrap;
 }
 
 .theme-toggle {
