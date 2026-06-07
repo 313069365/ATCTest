@@ -165,6 +165,7 @@ const wrappedSub = computed(() => {
     options: currentSub.value.options,
     answer: currentSub.value.answer,
     type: currentSub.value.type,
+    difficulty: currentSub.value.difficulty,
     explanation: currentSub.value.explanation,
     translation: currentSub.value.translation,
   }
