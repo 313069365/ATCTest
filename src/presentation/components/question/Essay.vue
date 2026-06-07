@@ -36,7 +36,7 @@
     <!-- 检查答案按钮 -->
     <div v-if="shouldShowCheckBtn" class="check-answer">
       <button class="check-btn" @click="$emit('check')">
-        <span class="material-symbols-outlined">verified</span>
+        <i-ms-verified-outline />
         {{ t('checkAnswer') }}
       </button>
     </div>
@@ -45,7 +45,7 @@
     <div v-if="(shouldShowAnswer || mode === 'review')" class="answer-section">
       <div class="correct-answer" v-if="question?.answer">
         <div class="answer-header">
-          <span class="material-symbols-outlined">check_circle</span>
+          <i-ms-check-circle-outline />
           <span>{{ t('correctAnswer') }}</span>
         </div>
         <div class="answer-content">{{ question.answer }}</div>

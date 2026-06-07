@@ -3,7 +3,7 @@
     <header class="top-bar">
       <div class="top-bar-left" @click="exitExam">
         <button class="back-btn">
-          <span class="material-symbols-outlined">close</span>
+          <i-ms-close />
         </button>
         <div class="header-title">
           <h1>{{ paper?.title || t('examPaper') }}</h1>
@@ -11,11 +11,12 @@
       </div>
       <div class="top-bar-right">
         <div class="timer-display" :class="{ warning: remainingSeconds < 300 }">
-          <span class="material-symbols-outlined">timer</span>
+          <i-ms-timer-outline />
           <span>{{ remainingTimeDisplay }}</span>
         </div>
         <button class="grid-btn" :class="{ active: showAnswerCard }" @click="toggleAnswerCard">
-          <span class="material-symbols-outlined">grid_view</span>
+          <i-ms-grid-view-outline v-if="!showAnswerCard" />
+          <i-ms-grid-view v-else />
         </button>
       </div>
     </header>
@@ -293,7 +294,7 @@ const checkAnswer = (question, userAnswer) => {
   color: var(--text-secondary);
 }
 
-.back-btn .material-symbols-outlined {
+.back-btn svg {
   font-size: var(--font-size-3xl);
 }
 
@@ -326,7 +327,7 @@ const checkAnswer = (question, userAnswer) => {
   background: var(--error-container);
 }
 
-.timer-display .material-symbols-outlined {
+.timer-display svg {
   font-size: var(--font-size-2xl);
 }
 
@@ -340,12 +341,8 @@ const checkAnswer = (question, userAnswer) => {
   cursor: pointer;
 }
 
-.grid-btn .material-symbols-outlined {
+.grid-btn svg {
   font-size: var(--font-size-3xl);
-}
-
-.grid-btn.active .material-symbols-outlined {
-  font-variation-settings: 'FILL' 1;
 }
 
 .progress-bar-container {

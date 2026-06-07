@@ -2,7 +2,7 @@
   <div class="settings">
     <header class="top-bar">
       <button class="icon-btn" @click="goBack">
-        <span class="material-symbols-outlined">arrow_back</span>
+        <i-ms-arrow-back />
       </button>
       <h1 class="title">{{ t('systemSettings') }}</h1>
       <div class="top-bar-right"></div>

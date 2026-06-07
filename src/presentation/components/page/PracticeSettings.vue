@@ -6,12 +6,12 @@
         <div class="tab-indicator"></div>
         <button class="tab-btn" :class="{ active: settings.practiceMode === 'review' }"
           @click="settings.practiceMode = 'review'">
-          <span class="material-symbols-outlined">menu_book</span>
+          <i-ms-menu-book-outline />
           <span>{{ t('reviewMode') }}</span>
         </button>
         <button class="tab-btn" :class="{ active: settings.practiceMode === 'answer' }"
           @click="settings.practiceMode = 'answer'">
-          <span class="material-symbols-outlined">edit_note</span>
+          <i-ms-edit-note-outline />
           <span>{{ t('answerMode') }}</span>
         </button>
       </div>
@@ -78,7 +78,7 @@
     <template #footer>
       <button class="start-btn" @click="gotopage">
         <span>{{ t('startPractice') }}</span>
-        <span class="material-symbols-outlined">arrow_forward</span>
+        <i-ms-arrow-forward />
       </button>
     </template>
   </BottomSheet>
@@ -256,7 +256,7 @@ const gotopage = () => {
   transition: color 0.25s;
 }
 
-.tab-btn .material-symbols-outlined {
+.tab-btn svg {
   font-size: 20px;
 }
 
@@ -342,7 +342,7 @@ const gotopage = () => {
   transform: scale(0.97);
 }
 
-.start-btn .material-symbols-outlined {
+.start-btn svg {
   font-size: 20px;
 }
 </style>

@@ -2,32 +2,32 @@
   <div class="page">
     <header class="top-bar">
       <button class="back-btn" @click="$router.back()">
-        <span class="material-symbols-outlined">arrow_back</span>
+        <i-ms-arrow-back />
       </button>
       <h1>历史记录</h1>
       <button class="clear-btn">
-        <span class="material-symbols-outlined">delete_sweep</span>
+        <i-ms-delete-sweep-outline />
       </button>
     </header>
 
     <main class="content">
       <div class="stats-section">
         <div class="stat-card">
-          <span class="material-symbols-outlined stat-icon">assignment</span>
+          <i-ms-assignment-outline class="stat-icon" />
           <div class="stat-info">
             <span class="stat-value">{{ pm.sessions.value.length }}</span>
             <span class="stat-label">总练习</span>
           </div>
         </div>
         <div class="stat-card">
-          <span class="material-symbols-outlined stat-icon">target</span>
+          <i-ms-target class="stat-icon" />
           <div class="stat-info">
             <span class="stat-value">{{ pm.overallStats.value.accuracy }}%</span>
             <span class="stat-label">正确率</span>
           </div>
         </div>
         <div class="stat-card">
-          <span class="material-symbols-outlined stat-icon">history</span>
+          <i-ms-history class="stat-icon" />
           <div class="stat-info">
             <span class="stat-value">{{ pm.sessions.value.length }}</span>
             <span class="stat-label">记录条数</span>
@@ -67,7 +67,7 @@
 
       <div class="empty-state" v-if="list.length === 0">
         <div class="empty-icon-wrapper">
-          <span class="material-symbols-outlined">history</span>
+          <i-ms-history />
         </div>
         <h3>暂无练习记录</h3>
         <p>开始练习后，记录会自动保存</p>
@@ -332,7 +332,7 @@ function formatDuration(seconds) {
   margin-bottom: var(--spacing-md);
 }
 
-.empty-icon-wrapper .material-symbols-outlined {
+.empty-icon-wrapper svg {
   font-size: 36px;
   color: var(--text-disabled);
 }

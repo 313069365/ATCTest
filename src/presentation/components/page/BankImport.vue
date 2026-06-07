@@ -3,7 +3,7 @@
     <div class="import-content">
       <header class="import-header">
         <button class="close-btn" @click="$emit('close')">
-          <span class="material-symbols-outlined">close</span>
+          <i-ms-close />
         </button>
         <h2>导入题库</h2>
         <div class="spacer"></div>
@@ -19,7 +19,7 @@
           <div class="file-upload">
             <input type="file" ref="fileInput" accept=".json" @change="handleFileChange" class="file-input" />
             <button class="upload-btn" @click="triggerFileInput">
-              <span class="material-symbols-outlined">upload_file</span>
+              <i-ms-upload-file-outline />
               <span>选择文件</span>
             </button>
             <p v-if="selectedFile" class="file-name">{{ selectedFile.name }}</p>
@@ -39,7 +39,7 @@
       <footer class="import-footer">
         <button class="import-btn" @click="importQuestions" :disabled="!selectedFile || loading">
           {{ loading ? '导入中...' : '开始导入' }}
-          <span class="material-symbols-outlined">send</span>
+          <i-ms-send-outline />
         </button>
       </footer>
     </div>
@@ -187,7 +187,7 @@ defineEmits(['close'])
   background: var(--primary-light);
 }
 
-.upload-btn .material-symbols-outlined {
+.upload-btn svg {
   font-size: 48px;
   color: var(--text-secondary);
 }

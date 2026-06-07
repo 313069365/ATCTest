@@ -4,7 +4,7 @@
 
     <div class="phonetics-top-bar">
       <button class="back-btn" @click="goBack">
-        <span class="material-symbols-outlined">arrow_back</span>
+        <i-ms-arrow-back />
       </button>
       <div class="status-bar">
         <span class="status-dot" :class="statusClass"></span>
@@ -222,7 +222,7 @@ function speak(text) {
   background: rgba(255, 255, 255, 0.15);
 }
 
-.back-btn .material-symbols-outlined {
+.back-btn svg {
   font-size: 20px;
 }
 

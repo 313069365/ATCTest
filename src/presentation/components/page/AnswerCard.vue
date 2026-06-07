@@ -2,9 +2,6 @@
   <div class="answer-card-modal" @click.self="$emit('close')">
     <div class="answer-card-content">
       <div class="answer-card-header">
-        <!-- <button class="close-btn" @click="$emit('close')">
-          <span class="material-symbols-outlined">horizontal_rule</span>
-        </button> -->
         <div class="header-spacer"></div>
         <span class="header-title">答题卡</span>
         <div class="header-spacer"></div>
@@ -182,7 +179,7 @@ function getSubQuestionBtnClass(qIdx, sqIdx, sq) {
   flex-shrink: 0;
 }
 
-.close-btn .material-symbols-outlined {
+.close-btn svg {
   font-size: 18px;
 }
 

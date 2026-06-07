@@ -4,13 +4,14 @@
       <h1 class="title">{{ t('learningPlatform') }}</h1>
       <div class="header-actions">
         <button class="theme-toggle" :class="{ active: darkMode }" @click="darkMode = !darkMode">
-          <span class="material-symbols-outlined">{{ darkMode ? 'dark_mode' : 'light_mode' }}</span>
+          <i-ms-dark-mode-outline v-if="darkMode" />
+          <i-ms-light-mode-outline v-else />
         </button>
       </div>
     </header>
 
     <div class="search-bar" @click="pageTo('/search')">
-      <span class="material-symbols-outlined search-icon">search</span>
+      <i-ms-search class="search-icon" />
       <span class="search-placeholder">{{ t('searchTitle') }}</span>
     </div>
 
@@ -39,7 +40,7 @@
             <span class="action-subtitle">{{ t('reviewKeyPoints') }}</span>
           </div>
           <div class="action-icon-wrap">
-            <span class="material-symbols-outlined">menu_book</span>
+            <i-ms-menu-book></i-ms-menu-book>
           </div>
         </button>
         <button class="action-btn exam" @click="pageTo('/exam')" :disabled="store.loading">
@@ -48,7 +49,7 @@
             <span class="action-subtitle">{{ t('timedExam') }}</span>
           </div>
           <div class="action-icon-wrap">
-            <span class="material-symbols-outlined">timer</span>
+            <i-ms-timer></i-ms-timer>
           </div>
         </button>
       </section>
@@ -59,7 +60,7 @@
           <template v-if="lastPractice">
             <div class="continue-inner" @click="continueLastPractice">
               <div class="continue-icon">
-                <span class="material-symbols-outlined">menu_book</span>
+                <i-ms-menu-book-outline />
               </div>
               <div class="continue-info">
                 <h3 class="continue-title">{{ t(lastPractice.subject?.name) || '' }}</h3>
@@ -71,7 +72,7 @@
                   t(totalQuestions) }} {{ t('questions') }}</span>
               </div>
               <button class="continue-action-btn">
-                <span class="material-symbols-outlined">play_arrow</span>
+                <i-ms-play-arrow-outline style="color:#fff" />
               </button>
             </div>
           </template>
@@ -79,7 +80,7 @@
             <div class="continue-inner placeholder">
               <div class="placeholder-content">
                 <div class="placeholder-icon">
-                  <span class="material-symbols-outlined">book</span>
+                  <i-ms-book-outline />
                 </div>
                 <h3 class="placeholder-title">{{ t('noPracticeRecord') }}</h3>
                 <p class="placeholder-subtitle">{{ t('startFirstPractice') }}</p>
@@ -252,7 +253,7 @@ onMounted(() => {
   background: var(--color-gray-100);
 }
 
-.theme-toggle .material-symbols-outlined {
+.theme-toggle svg {
   font-size: 20px;
 }
 
@@ -411,9 +412,8 @@ onMounted(() => {
   justify-content: center;
 }
 
-.action-icon-wrap .material-symbols-outlined {
+.action-icon-wrap svg {
   font-size: 28px;
-  font-variation-settings: 'FILL' 1;
 }
 
 .section-title {
@@ -464,7 +464,7 @@ onMounted(() => {
   margin: 0 auto 16px;
 }
 
-.placeholder-icon .material-symbols-outlined {
+.placeholder-icon svg {
   font-size: var(--font-size-3xl);
 }
 
@@ -523,7 +523,7 @@ onMounted(() => {
   flex-shrink: 0;
 }
 
-.continue-icon .material-symbols-outlined {
+.continue-icon svg {
   font-size: 28px;
 }
 
@@ -575,9 +575,7 @@ onMounted(() => {
   flex-shrink: 0;
 }
 
-.continue-action-btn .material-symbols-outlined {
-  color: #fff;
+.continue-action-btn svg {
   font-size: 24px;
-  fill: 1;
 }
 </style>

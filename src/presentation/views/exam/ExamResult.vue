@@ -3,17 +3,17 @@
     <div class="hero-section">
       <header class="top-bar">
         <button class="home-btn" @click="goHome">
-          <span class="material-symbols-outlined">home</span>
+          <i-ms-home-outline />
         </button>
         <h1>{{ t('examResult') }}</h1>
         <button class="share-btn">
-          <span class="material-symbols-outlined">share</span>
+          <i-ms-share-outline />
         </button>
       </header>
 
       <div class="hero-content" v-if="hasResult">
         <div class="grade-badge" :class="gradeClass">
-          <span class="material-symbols-outlined">emoji_events</span>
+          <i-ms-trophy-outline />
           <span>{{ gradeText }}</span>
         </div>
 
@@ -36,7 +36,7 @@
       </div>
 
       <div class="hero-content empty" v-else>
-        <span class="material-symbols-outlined">assignment</span>
+        <i-ms-assignment-outline />
         <p>{{ t('noExamResult') }}</p>
       </div>
     </div>
@@ -71,7 +71,7 @@
       <section class="meta-section" v-if="hasResult">
         <div class="meta-card">
           <div class="meta-item">
-            <span class="material-symbols-outlined">schedule</span>
+            <i-ms-schedule-outline />
             <div class="meta-text">
               <span class="meta-label">{{ t('timeUsed') }}</span>
               <span class="meta-value">{{ formattedTime }}</span>
@@ -79,7 +79,7 @@
           </div>
           <div class="meta-divider"></div>
           <div class="meta-item">
-            <span class="material-symbols-outlined">calendar_today</span>
+            <i-ms-calendar-today-outline />
             <div class="meta-text">
               <span class="meta-label">{{ t('examDate') }}</span>
               <span class="meta-value">2024年1月15日</span>
@@ -110,11 +110,11 @@
 
       <section class="actions-section">
         <button class="action-btn primary">
-          <span class="material-symbols-outlined">visibility</span>
+          <i-ms-visibility-outline />
           查看答题详情
         </button>
         <button class="action-btn secondary">
-          <span class="material-symbols-outlined">restart_alt</span>
+          <i-ms-restart-alt />
           重新考试
         </button>
       </section>
@@ -396,7 +396,7 @@ const retakeExam = () => {
   flex: 1;
 }
 
-.meta-item .material-symbols-outlined {
+.meta-item svg {
   color: var(--primary);
 }
 

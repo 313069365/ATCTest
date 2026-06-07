@@ -4,7 +4,7 @@
       <h1 class="title">练习题库</h1>
       <div class="header-actions">
         <button class="import-btn" @click="showImportModal = true">
-          <span class="material-symbols-outlined">import_export</span>
+          <i-ms-sync-alt />
         </button>
       </div>
     </header>
@@ -15,9 +15,7 @@
         <div class="bank-grid">
           <button v-for="cat in categoryOptions" :key="cat" class="bank-btn"
             :class="{ active: selectedCategory === cat }" @click="selectedCategory = cat">
-            <span class="material-symbols-outlined">
-              {{ iconMap[cat] }}
-            </span>
+            <component :is="iconMap[cat]" />
             <span>{{ t(cat) }}</span>
           </button>
         </div>
@@ -28,7 +26,7 @@
         <div class="scope-tabs">
           <button v-for="scope in scopeOptions" :key="scope" class="scope-tab"
             :class="{ active: selectedScope === scope }" @click="selectedScope = scope">
-            <span class="material-symbols-outlined tab-icon">{{ iconMap[scope] }}</span>
+            <component :is="iconMap[scope]" class="tab-icon" />
             <span>{{ t(scope) }}</span>
           </button>
         </div>
@@ -41,7 +39,7 @@
             :class="{ expanded: expandedSubject === subject.name }">
             <div class="subject-header" @click="toggleExpand(subject)">
               <div class="subject-icon">
-                <span class="material-symbols-outlined">{{ iconMap[subject.name] }}</span>
+                <component :is="iconMap[subject.name]" />
               </div>
               <div class="subject-info">
                 <h4>{{ t(subject.name) }}</h4>
@@ -403,7 +401,7 @@ const wrongPractice = (subject) => {
   border-color: var(--primary);
 }
 
-.bank-btn .material-symbols-outlined {
+.bank-btn svg {
   font-size: 24px;
 }
 
@@ -497,7 +495,7 @@ const wrongPractice = (subject) => {
   justify-content: center;
 }
 
-.subject-icon .material-symbols-outlined {
+.subject-icon svg {
   font-size: 24px;
 }
 

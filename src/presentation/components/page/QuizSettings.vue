@@ -2,12 +2,12 @@
   <BottomSheet :visible="visible" :title="t('quizSettings')" @close="$emit('close')">
     <div class="action-row">
       <button class="action-btn-secondary" @click="handleSubmit">
-        <span class="material-symbols-outlined">check_circle</span>
+        <i-ms-check-circle-outline />
         {{ t('submitPaper') }}
         <span></span>
       </button>
       <button class="action-btn-secondary" @click="handleExit">
-        <span class="material-symbols-outlined">close</span>
+        <i-ms-close />
         {{ t('exit') }}
         <span></span>
       </button>
@@ -49,7 +49,8 @@
           <button class="toggle-btn" :class="{ active: soundEnabled }"
             @click="$emit('update:soundEnabled', !soundEnabled)">
             <span class="toggle-knob">
-              <span class="material-symbols-outlined">{{ soundEnabled ? 'volume_up' : 'volume_off' }}</span>
+              <i-ms-volume-up-outline v-if="soundEnabled" />
+              <i-ms-volume-off-outline v-else />
             </span>
           </button>
         </div>
@@ -60,7 +61,8 @@
           </div>
           <button class="toggle-btn" :class="{ active: darkMode }" @click="$emit('update:darkMode', !darkMode)">
             <span class="toggle-knob">
-              <span class="material-symbols-outlined">{{ darkMode ? 'dark_mode' : 'light_mode' }}</span>
+              <i-ms-dark-mode-outline v-if="darkMode" />
+              <i-ms-light-mode-outline v-else />
             </span>
           </button>
         </div>
@@ -123,7 +125,7 @@ const handleSubmit = () => {
   background: var(--color-gray-100);
 }
 
-.action-btn-secondary .material-symbols-outlined {
+.action-btn-secondary svg {
   font-size: 18px;
 }
 
@@ -206,12 +208,12 @@ const handleSubmit = () => {
   justify-content: center;
 }
 
-.toggle-knob .material-symbols-outlined {
+.toggle-knob svg {
   font-size: 16px;
   color: var(--color-gray-500);
 }
 
-.toggle-btn.active .toggle-knob .material-symbols-outlined {
+.toggle-btn.active .toggle-knob svg {
   color: var(--primary);
 }
 

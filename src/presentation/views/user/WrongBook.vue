@@ -5,11 +5,11 @@
       <div class="hero-blur-2"></div>
       <header class="top-bar">
         <button class="back-btn" @click="goBack">
-          <span class="material-symbols-outlined">arrow_back</span>
+          <i-ms-arrow-back />
         </button>
         <h1>{{ t('wrongBook') }}</h1>
         <button class="clear-btn" @click="clearAll" :disabled="wrongList.length <= 0">
-          <span class="material-symbols-outlined">delete_sweep</span>
+          <i-ms-delete-sweep-outline />
         </button>
       </header>
     </div>
@@ -18,13 +18,13 @@
       <!-- 错题巩固 -->
       <button class="practice-all-btn" @click="startWrongPractice" v-if="wrongList.length > 0">
         <div class="practice-all-left">
-          <span class="material-symbols-outlined practice-all-icon">rate_review</span>
+          <i-ms-rate-review-outline class="practice-all-icon" />
           <div class="practice-all-text">
             <span class="practice-all-title">{{ t('practiceWrong') }}</span>
             <span class="practice-all-desc">{{ t('wrongReviewDesc', { count: wrongList.length }) }}</span>
           </div>
         </div>
-        <span class="material-symbols-outlined practice-all-arrow">chevron_right</span>
+        <i-ms-chevron-right class="practice-all-arrow" />
       </button>
 
       <!-- 错题列表 -->
@@ -37,7 +37,7 @@
                 <span class="wrong-badge">{{ t(item.meta?.category) || item.meta?.category || '' }}</span>
               </div>
               <button class="delete-individual-btn" @click.stop="removeWrong(item.id)">
-                <span class="material-symbols-outlined">close</span>
+                <i-ms-close />
               </button>
             </div>
 
@@ -74,7 +74,7 @@
       <!-- 空状态 -->
       <div class="empty-state" v-else>
         <div class="empty-icon-wrapper">
-          <span class="material-symbols-outlined">check_circle</span>
+          <i-ms-check-circle-outline />
         </div>
         <h3>暂无错题</h3>
         <p>答错的题目会自动添加到错题本</p>
@@ -398,7 +398,7 @@ function getWrongCount(questionId) {
   transform: scale(0.9);
 }
 
-.delete-individual-btn .material-symbols-outlined {
+.delete-individual-btn svg {
   font-size: 18px;
 }
 
@@ -463,7 +463,7 @@ function getWrongCount(questionId) {
   margin-bottom: var(--spacing-md);
 }
 
-.empty-icon-wrapper .material-symbols-outlined {
+.empty-icon-wrapper svg {
   font-size: 40px;
   color: var(--success);
 }

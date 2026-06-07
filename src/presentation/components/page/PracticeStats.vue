@@ -60,11 +60,11 @@
 
         <div class="footer">
           <div class="footer-piece">
-            <span class="material-symbols-outlined">list_alt</span>
+            <i-ms-list-alt-outline />
             <span>{{ t('progress') }} {{ current }}/{{ totalQ }}</span>
           </div>
           <div class="footer-piece">
-            <span class="material-symbols-outlined">schedule</span>
+            <i-ms-schedule-outline />
             <span>{{ formattedTime }}</span>
           </div>
         </div>
@@ -402,7 +402,7 @@ const formattedTime = computed(() => {
   color: var(--text-secondary);
 }
 
-.footer-piece .material-symbols-outlined {
+.footer-piece svg {
   font-size: 18px;
   color: var(--icon-color);
 }

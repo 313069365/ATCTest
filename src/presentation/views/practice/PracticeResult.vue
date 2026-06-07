@@ -56,16 +56,16 @@
 
       <div class="actions">
         <button class="action-btn primary" @click="goToWrongBook">
-          <span class="material-symbols-outlined">visibility</span>
+          <i-ms-visibility-outline />
           {{ t('viewWrongQuestions') }}
         </button>
         <div class="action-row">
           <button class="action-btn secondary" @click="practiceAgain">
-            <span class="material-symbols-outlined">restart_alt</span>
+            <i-ms-restart-alt />
             {{ t('practiceAgain') }}
           </button>
           <button class="action-btn outline" @click="backToHome">
-            <span class="material-symbols-outlined">home</span>
+            <i-ms-home-outline />
             {{ t('backToHome') }}
           </button>
         </div>

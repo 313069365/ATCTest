@@ -3,11 +3,11 @@
 
     <div class="reading-tab-bar" v-if="question.media?.article">
       <button class="reading-tab" :class="{ active: activeTab === 'question' }" @click="activeTab = 'question'">
-        <span class="material-symbols-outlined">rate_review</span>
+        <i-ms-rate-review-outline />
         作答区
       </button>
       <button class="reading-tab" :class="{ active: activeTab === 'article' }" @click="activeTab = 'article'">
-        <span class="material-symbols-outlined">menu_book</span>
+        <i-ms-menu-book-outline />
         阅读材料
       </button>
     </div>
@@ -259,7 +259,7 @@ watch(() => props.question, () => {
   transition: all 0.2s;
 }
 
-.reading-tab .material-symbols-outlined {
+.reading-tab svg {
   font-size: 20px;
 }
 

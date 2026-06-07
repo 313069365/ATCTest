@@ -2,7 +2,7 @@
   <div class="stats-page">
     <header class="top-bar">
       <button class="icon-btn" @click="goBack">
-        <span class="material-symbols-outlined">arrow_back</span>
+        <i-ms-arrow-back />
       </button>
       <h1 class="title">用户统计</h1>
       <div class="placeholder"></div>
@@ -40,28 +40,28 @@
           <h2 class="section-title">练习统计</h2>
           <div class="practice-stats">
             <div class="stat-card">
-              <span class="stat-icon material-symbols-outlined">assignment</span>
+              <i-ms-assignment-outline class="stat-icon" />
               <div class="stat-info">
                 <span class="stat-value">{{ practiceStats.total }}</span>
                 <span class="stat-label">练习次数</span>
               </div>
             </div>
             <div class="stat-card">
-              <span class="stat-icon material-symbols-outlined">check_circle</span>
+              <i-ms-check-circle-outline class="stat-icon" />
               <div class="stat-info">
                 <span class="stat-value">{{ practiceStats.correct }}</span>
                 <span class="stat-label">正确题数</span>
               </div>
             </div>
             <div class="stat-card">
-              <span class="stat-icon material-symbols-outlined">close_circle</span>
+              <i-ms-cancel-outline class="stat-icon" />
               <div class="stat-info">
                 <span class="stat-value">{{ practiceStats.incorrect }}</span>
                 <span class="stat-label">错误题数</span>
               </div>
             </div>
             <div class="stat-card">
-              <span class="stat-icon material-symbols-outlined">trending_up</span>
+              <i-ms-trending-up class="stat-icon" />
               <div class="stat-info">
                 <span class="stat-value">{{ practiceStats.accuracy }}%</span>
                 <span class="stat-label">正确率</span>
@@ -77,28 +77,28 @@
           <h2 class="section-title">考试统计</h2>
           <div class="exam-stats">
             <div class="stat-card">
-              <span class="stat-icon material-symbols-outlined">quiz</span>
+              <i-ms-quiz-outline class="stat-icon" />
               <div class="stat-info">
                 <span class="stat-value">{{ examStats.total }}</span>
                 <span class="stat-label">考试次数</span>
               </div>
             </div>
             <div class="stat-card">
-              <span class="stat-icon material-symbols-outlined">check_circle</span>
+              <i-ms-check-circle-outline class="stat-icon" />
               <div class="stat-info">
                 <span class="stat-value">{{ examStats.passed }}</span>
                 <span class="stat-label">通过次数</span>
               </div>
             </div>
             <div class="stat-card">
-              <span class="stat-icon material-symbols-outlined">close_circle</span>
+              <i-ms-cancel-outline class="stat-icon" />
               <div class="stat-info">
                 <span class="stat-value">{{ examStats.failed }}</span>
                 <span class="stat-label">未通过次数</span>
               </div>
             </div>
             <div class="stat-card">
-              <span class="stat-icon material-symbols-outlined">star</span>
+              <i-ms-star-outline class="stat-icon" />
               <div class="stat-info">
                 <span class="stat-value">{{ examStats.averageScore }}</span>
                 <span class="stat-label">平均分</span>
@@ -121,7 +121,8 @@
               @click="viewRecord(record)"
             >
               <div class="recent-icon">
-                <span class="material-symbols-outlined">{{ record.type === 'practice' ? 'assignment' : 'quiz' }}</span>
+                <i-ms-assignment-outline v-if="record.type === 'practice'" />
+                <i-ms-quiz-outline v-else />
               </div>
               <div class="recent-info">
                 <h4>{{ record.title }}</h4>
@@ -139,7 +140,7 @@
             </div>
           </div>
           <div class="empty-state" v-else>
-            <span class="material-symbols-outlined">history</span>
+            <i-ms-history />
             <p>暂无记录</p>
           </div>
         </div>
@@ -148,11 +149,11 @@
       <!-- 操作按钮 -->
       <div class="action-buttons">
         <button class="action-btn" @click="goPracticeHistory">
-          <span class="material-symbols-outlined">history</span>
+          <i-ms-history />
           练习记录
         </button>
         <button class="action-btn" @click="goExamHistory">
-          <span class="material-symbols-outlined">history</span>
+          <i-ms-history />
           考试记录
         </button>
       </div>
@@ -624,7 +625,7 @@ function viewRecord(record) {}
   text-align: center;
 }
 
-.empty-state .material-symbols-outlined {
+.empty-state svg {
   font-size: 48px;
   color: var(--color-gray-500);
   margin-bottom: 12px;

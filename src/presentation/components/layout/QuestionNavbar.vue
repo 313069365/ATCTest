@@ -2,9 +2,9 @@
   <footer class="footer">
     <div class="sub-pager" v-if="subCount > 0">
       <button class="pager-btn arrow" @click="pagePrev" :class="{ dim: pageIndex === 0 }" v-if="subCount > MAX_VISIBLE">
-        <span class="material-symbols-outlined">chevron_left</span>
-      </button>
-      <button v-for="i in pageSlots" :key="i" class="pager-btn num"
+        <i-ms-chevron-left />
+       </button>
+       <button v-for="i in pageSlots" :key="i" class="pager-btn num"
         v-if="subCount > MAX_VISIBLE && pageStart + i - 1 < subCount" :class="subBtnClass(pageStart + i - 1)"
         @click="$emit('goSub', pageStart + i - 1)">
         {{ pageStart + i }}
@@ -15,21 +15,21 @@
       </button>
       <button class="pager-btn arrow" @click="pageNext" :class="{ dim: pageIndex >= maxPage }"
         v-if="subCount > MAX_VISIBLE">
-        <span class="material-symbols-outlined">chevron_right</span>
-      </button>
-    </div>
-    <div class="nav-row">
+        <i-ms-chevron-right />
+       </button>
+     </div>
+     <div class="nav-row">
       <button class="nav-btn prev" :disabled="prevDisabled && !(subCount > 0 && currentSubIndex > 0)" @click="handlePrev">
-        <span class="material-symbols-outlined">chevron_left</span>
+        <i-ms-chevron-left />
         {{ subCount > 0 && currentSubIndex > 0 ? '上一小题' : '上一题' }}
       </button>
       <button v-if="!isLast || (subCount > 0 && currentSubIndex < subCount - 1)" class="nav-btn next" @click="handleNext">
         {{ subCount > 0 && currentSubIndex < subCount - 1 ? '下一小题' : '下一题' }}
-        <span class="material-symbols-outlined">chevron_right</span>
-      </button>
-      <button v-else class="nav-btn submit" @click="$emit('submit')">
+        <i-ms-chevron-right />
+       </button>
+       <button v-else class="nav-btn submit" @click="$emit('submit')">
         {{ submitText }}
-        <span class="material-symbols-outlined">check</span>
+        <i-ms-check />
       </button>
     </div>
   </footer>
@@ -240,7 +240,7 @@ const subBtnClass = (index) => {
   pointer-events: none;
 }
 
-.pager-btn.arrow .material-symbols-outlined {
+.pager-btn.arrow svg {
   font-size: 22px;
 }
 </style>

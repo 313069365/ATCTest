@@ -2,7 +2,7 @@
   <div class="create-paper-page">
     <header class="top-bar">
       <button class="icon-btn" @click="exitCreate">
-        <span class="material-symbols-outlined">close</span>
+                      <i-ms-close />
       </button>
       <h1 class="title">{{ t('createPaper') }}</h1>
       <div class="placeholder"></div>
@@ -15,7 +15,7 @@
           'completed': currentStep > step.id
         }">
           <div class="step-marker">
-            <span v-if="currentStep > step.id" class="material-symbols-outlined check-icon">check</span>
+            <i-ms-check v-if="currentStep > step.id" class="check-icon" />
             <span v-else class="step-number">{{ step.id }}</span>
           </div>
           <div class="step-label">{{ step.label }}</div>
@@ -66,7 +66,7 @@
           <div class="step-actions">
             <button class="step-btn step-btn-primary" @click="nextStep" :disabled="!canProceed">
               <span>{{ t('nextStep') }}</span>
-              <span class="material-symbols-outlined">arrow_forward</span>
+              <i-ms-arrow-forward />
             </button>
           </div>
         </div>
@@ -90,7 +90,7 @@
                     <span class="subject-card-meta">{{ t(item.category) }}</span>
                   </div>
                   <button class="btn-delete" @click="removeSubject(index)">
-                    <span class="material-symbols-outlined">close</span>
+        <i-ms-close />
                   </button>
                 </div>
                 <div class="subject-card-row subject-card-row-bottom">
@@ -112,25 +112,25 @@
               </div>
 
               <div class="add-subject-btn" @click="openBankModal">
-                <span class="material-symbols-outlined">add</span>
+                <i-ms-add />
                 <span>{{ t('addSubject') }}</span>
               </div>
             </div>
 
             <div class="empty-tip" @click="openBankModal" v-else>
-              <span class="material-symbols-outlined">add_circle</span>
+              <i-ms-add-circle-outline />
               <p>{{ t('clickToAddSubject') }}</p>
             </div>
           </div>
 
           <div class="step-actions">
             <button class="step-btn step-btn-secondary" @click="prevStep">
-              <span class="material-symbols-outlined">arrow_back</span>
+              <i-ms-arrow-back />
               <span>{{ t('prevStep') }}</span>
             </button>
             <button class="step-btn step-btn-primary" @click="nextStep" :disabled="!canProceed">
               <span>{{ t('nextStep') }}</span>
-              <span class="material-symbols-outlined">arrow_forward</span>
+              <i-ms-arrow-forward />
             </button>
           </div>
         </div>
@@ -150,19 +150,19 @@
                 <div class="info-card-title">{{ form.title || t('paperTitle') }}</div>
                 <div class="info-card-stats">
                   <div class="info-stat-item">
-                    <span class="material-symbols-outlined">schedule</span>
+                    <i-ms-schedule-outline />
                     <span class="info-stat-value">{{ form.duration || 0 }}</span>
                     <span class="info-stat-label">{{ t('minutes') }}</span>
                   </div>
                   <div class="info-stat-divider"></div>
                   <div class="info-stat-item">
-                    <span class="material-symbols-outlined">quiz</span>
+                    <i-ms-quiz-outline />
                     <span class="info-stat-value">{{ totalQuestions }}</span>
                     <span class="info-stat-label">{{ t('totalQuestions') }}</span>
                   </div>
                   <div class="info-stat-divider"></div>
                   <div class="info-stat-item">
-                    <span class="material-symbols-outlined">grade</span>
+                    <i-ms-grade-outline />
                     <span class="info-stat-value">{{ autoTotalScore }}</span>
                     <span class="info-stat-label">{{ t('totalScore') }}</span>
                   </div>
@@ -199,12 +199,12 @@
 
           <div class="step-actions">
             <button class="step-btn step-btn-secondary" @click="prevStep">
-              <span class="material-symbols-outlined">arrow_back</span>
+              <i-ms-arrow-back />
               <span>{{ t('prevStep') }}</span>
             </button>
             <button class="step-btn step-btn-primary" @click="createPaper" :disabled="!canProceed">
               <span>{{ t('createPaper') }}</span>
-              <span class="material-symbols-outlined">check</span>
+              <i-ms-check />
             </button>
           </div>
         </div>
@@ -405,7 +405,7 @@ async function createPaper() {
   transform: scale(0.95);
 }
 
-.icon-btn .material-symbols-outlined {
+.icon-btn svg {
   font-size: 24px;
 }
 
@@ -839,7 +839,7 @@ async function createPaper() {
   cursor: pointer;
 }
 
-.empty-tip .material-symbols-outlined {
+.empty-tip svg {
   font-size: 48px;
   color: var(--primary);
   margin-bottom: var(--spacing-sm);
@@ -892,7 +892,7 @@ async function createPaper() {
   gap: 2px;
 }
 
-.info-stat-item .material-symbols-outlined {
+.info-stat-item svg {
   font-size: 20px;
   color: var(--primary);
 }

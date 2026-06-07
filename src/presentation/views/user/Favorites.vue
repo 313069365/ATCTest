@@ -5,11 +5,11 @@
       <div class="hero-blur-2"></div>
       <header class="top-bar">
         <button class="back-btn" @click="goBack">
-          <span class="material-symbols-outlined">arrow_back</span>
+          <i-ms-arrow-back />
         </button>
         <h1>{{ t('favorites') }}</h1>
         <button class="clear-btn" @click="clearAll" :disabled="favoritesList.length <= 0">
-          <span class="material-symbols-outlined">delete_sweep</span>
+          <i-ms-delete-sweep-outline />
         </button>
       </header>
     </div>
@@ -18,13 +18,13 @@
       <!-- 收藏加强 -->
       <button class="practice-all-btn" @click="startFavoritesPractice" v-if="favoritesList.length > 0">
         <div class="practice-all-left">
-          <span class="material-symbols-outlined practice-all-icon">star</span>
+          <i-ms-star-outline class="practice-all-icon" />
           <div class="practice-all-text">
             <span class="practice-all-title">{{ t('practiceFavorites') }}</span>
             <span class="practice-all-desc">{{ t('favoritesReviewDesc', { count: favoritesList.length }) }}</span>
           </div>
         </div>
-        <span class="material-symbols-outlined practice-all-arrow">chevron_right</span>
+        <i-ms-chevron-right class="practice-all-arrow" />
       </button>
 
       <!-- 收藏列表 -->
@@ -37,7 +37,7 @@
                 <span class="favorite-badge">{{ t(item.meta?.category) || item.meta?.category || '' }}</span>
               </div>
               <button class="delete-individual-btn" @click="removeFavorite(item.id)">
-                <span class="material-symbols-outlined">close</span>
+                <i-ms-close />
               </button>
             </div>
 
@@ -64,7 +64,7 @@
       <!-- 空状态 -->
       <div class="empty-state" v-else>
         <div class="empty-icon-wrapper">
-          <span class="material-symbols-outlined">star_border</span>
+          <i-ms-star-outline />
         </div>
         <h3>{{ t('noFavorites') }}</h3>
         <p>{{ t('favoritesDesc') }}</p>
@@ -380,7 +380,7 @@ function formatAnswer(answer) {
   transform: scale(0.9);
 }
 
-.delete-individual-btn .material-symbols-outlined {
+.delete-individual-btn svg {
   font-size: 18px;
 }
 
@@ -426,7 +426,7 @@ function formatAnswer(answer) {
   margin-bottom: var(--spacing-md);
 }
 
-.empty-icon-wrapper .material-symbols-outlined {
+.empty-icon-wrapper svg {
   font-size: 40px;
   color: var(--success);
 }

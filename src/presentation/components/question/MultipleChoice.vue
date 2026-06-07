@@ -29,7 +29,7 @@
     <!-- 检查答案按钮 -->
     <div v-if="shouldShowCheckBtn" class="check-answer">
       <button class="check-btn" @click="$emit('check')">
-        <span class="material-symbols-outlined">verified</span>
+        <i-ms-verified-outline />
         {{ t('checkAnswer') }}
       </button>
     </div>

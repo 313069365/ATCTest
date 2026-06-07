@@ -2,7 +2,7 @@
   <div class="page search-page">
     <header class="top-bar">
       <button class="icon-btn" @click="goBack">
-        <span class="material-symbols-outlined">arrow_back</span>
+        <i-ms-arrow-back />
       </button>
       <h1 class="title">{{ t('search') }}</h1>
       <button v-if="keyword" class="header-action" @click="clearSearch">
@@ -13,11 +13,11 @@
 
     <div class="search-input-container">
       <div class="search-input-wrap">
-        <span class="material-symbols-outlined search-input-icon">search</span>
+        <i-ms-search class="search-input-icon" />
         <input ref="inputRef" v-model="keyword" class="search-input" :placeholder="t('searchPlaceholder')"
           @input="onDebouncedSearch" />
         <button v-if="keyword" class="input-clear-btn" @click="clearSearch">
-          <span class="material-symbols-outlined">close</span>
+          <i-ms-close />
         </button>
       </div>
       <div v-if="!keyword && searchHistory.length > 0" class="recent-searches">
@@ -59,9 +59,7 @@
 
       <div class="filter-section" @click="filtersExpanded = !filtersExpanded">
         <span class="filter-section-label">{{ t('searchScope') }}</span>
-        <span class="material-symbols-outlined filter-arrow" :class="{ expanded: filtersExpanded }">
-          expand_more
-        </span>
+        <i-ms-expand-more class="filter-arrow" :class="{ expanded: filtersExpanded }" />
       </div>
 
       <template v-if="filtersExpanded">
@@ -115,11 +113,11 @@
         <span class="results-count">{{ t('searchResults') }} ({{ results.length }})</span>
       </div>
       <div v-if="results.length === 0 && !searching" class="results-status">
-        <span class="material-symbols-outlined results-status-icon">search_off</span>
+        <i-ms-search-off class="results-status-icon" />
         <span>{{ t('searchNoResults') }}</span>
       </div>
       <div v-if="searching" class="results-status">
-        <span class="material-symbols-outlined results-status-icon">hourglass_top</span>
+        <i-ms-hourglass-top class="results-status-icon" />
         <span>{{ t('loadingQuestions') }}</span>
       </div>
       <div v-else-if="results.length > 0" class="result-list">
@@ -135,7 +133,7 @@
       </div>
     </div>
     <div v-else-if="!keyword" class="results-placeholder">
-      <span class="material-symbols-outlined placeholder-icon">search</span>
+      <i-ms-search class="placeholder-icon" />
       <p class="placeholder-text">{{ t('searchPlaceholder') }}</p>
     </div>
   </div>
@@ -486,7 +484,7 @@ onMounted(async () => {
   color: var(--text-secondary);
 }
 
-.input-clear-btn .material-symbols-outlined {
+.input-clear-btn svg {
   font-size: 16px;
 }
 

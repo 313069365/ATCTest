@@ -2,14 +2,14 @@
   <div class="page question-detail-page">
     <header class="top-bar">
       <button class="icon-btn" @click="goBack">
-        <span class="material-symbols-outlined">arrow_back</span>
+        <i-ms-arrow-back />
       </button>
       <h1 class="title">{{ t('questionDetail') }}</h1>
       <div class="header-action-placeholder"></div>
     </header>
 
     <div v-if="!question" class="not-found">
-      <span class="material-symbols-outlined not-found-icon">search_off</span>
+      <i-ms-search-off class="not-found-icon" />
       <p>{{ t('searchNoResults') }}</p>
     </div>
 
@@ -28,13 +28,13 @@
 
       <div v-if="ids.length > 0" class="bottom-nav">
         <button class="nav-btn" :disabled="currentIndex <= 0" @click="goPrev">
-          <span class="material-symbols-outlined">chevron_left</span>
+          <i-ms-chevron-left />
           <span>{{ t('prevQuestion') }}</span>
         </button>
         <span class="nav-indicator">{{ currentIndex + 1 }} / {{ ids.length }}</span>
         <button class="nav-btn" :disabled="currentIndex >= ids.length - 1" @click="goNext">
           <span>{{ t('nextQuestion') }}</span>
-          <span class="material-symbols-outlined">chevron_right</span>
+          <i-ms-chevron-right />
         </button>
       </div>
     </div>
@@ -192,7 +192,7 @@ watch(() => route.params.id, () => {
   cursor: default;
 }
 
-.nav-btn .material-symbols-outlined {
+.nav-btn svg {
   font-size: 20px;
 }
 
@@ -288,7 +288,7 @@ watch(() => route.params.id, () => {
   opacity: 0.85;
 }
 
-.practice-btn .material-symbols-outlined {
+.practice-btn svg {
   font-size: 20px;
 }
 </style>

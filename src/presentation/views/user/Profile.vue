@@ -3,7 +3,7 @@
     <header class="top-bar">
       <h1 class="title">个人中心</h1>
       <button class="icon-btn">
-        <span class="material-symbols-outlined">more_vert</span>
+        <i-ms-more-vert />
       </button>
     </header>
 
@@ -57,10 +57,10 @@
             <span class="card-value tertiary">14 天连续</span>
             <div class="streak-icons">
               <div class="streak-icon fire">
-                <span class="material-symbols-outlined">local_fire_department</span>
+                <i-ms-local-fire-department-outline />
               </div>
               <div class="streak-icon verified">
-                <span class="material-symbols-outlined">verified</span>
+                <i-ms-verified-outline />
               </div>
             </div>
           </div>
@@ -82,25 +82,25 @@
         <div class="shortcut-grid">
           <div class="shortcut-grid-item" @click="goToWrongBook">
             <div class="shortcut-icon error-bg">
-              <span class="material-symbols-outlined">error_outline</span>
+              <i-ms-error-outline />
             </div>
             <span class="shortcut-grid-label">错题本</span>
           </div>
           <div class="shortcut-grid-item" @click="goToFavorites">
             <div class="shortcut-icon tertiary-bg">
-              <span class="material-symbols-outlined">bookmark</span>
+              <i-ms-bookmark-outline />
             </div>
             <span class="shortcut-grid-label">收藏本</span>
           </div>
           <div class="shortcut-grid-item" @click="goToPracticeHistory">
             <div class="shortcut-icon primary-bg">
-              <span class="material-symbols-outlined">assignment_turned_in</span>
+              <i-ms-assignment-turned-in-outline />
             </div>
             <span class="shortcut-grid-label">练习历史</span>
           </div>
           <div class="shortcut-grid-item" @click="goToExamHistory">
             <div class="shortcut-icon primary-bg">
-              <span class="material-symbols-outlined">quiz</span>
+              <i-ms-quiz-outline />
             </div>
             <span class="shortcut-grid-label">考试历史</span>
           </div>
@@ -108,38 +108,38 @@
         <div class="shortcut-list">
           <div class="shortcut-item" @click="goToStats">
             <div class="shortcut-icon primary-bg">
-              <span class="material-symbols-outlined">bar_chart</span>
+              <i-ms-bar-chart />
             </div>
             <span class="shortcut-label">统计分析</span>
-            <span class="material-symbols-outlined shortcut-arrow">chevron_right</span>
+            <i-ms-chevron-right class="shortcut-arrow" />
           </div>
           <div class="shortcut-item" @click="goToAviation">
             <div class="shortcut-icon primary-bg">
-              <span class="material-symbols-outlined">record_voice_over</span>
+              <i-ms-record-voice-over-outline />
             </div>
             <span class="shortcut-label">字母发音</span>
-            <span class="material-symbols-outlined shortcut-arrow">chevron_right</span>
+            <i-ms-chevron-right class="shortcut-arrow" />
           </div>
           <div class="shortcut-item" @click="goToDataManagement">
             <div class="shortcut-icon primary-bg">
-              <span class="material-symbols-outlined">storage</span>
+              <i-ms-storage />
             </div>
             <span class="shortcut-label">数据管理</span>
-            <span class="material-symbols-outlined shortcut-arrow">chevron_right</span>
+            <i-ms-chevron-right class="shortcut-arrow" />
           </div>
           <div class="shortcut-item" @click="goToSettings">
             <div class="shortcut-icon primary-bg">
-              <span class="material-symbols-outlined">settings</span>
+              <i-ms-settings-outline />
             </div>
             <span class="shortcut-label">系统设置</span>
-            <span class="material-symbols-outlined shortcut-arrow">chevron_right</span>
+            <i-ms-chevron-right class="shortcut-arrow" />
           </div>
         </div>
       </section>
 
       <section class="action-section">
         <button class="action-btn logout">
-          <span class="material-symbols-outlined">logout</span>
+          <i-ms-logout />
           <span>xiaomi 14</span>
         </button>
       </section>
@@ -448,7 +448,7 @@ function goToSettings() {
   background: var(--secondary);
 }
 
-.streak-icon .material-symbols-outlined {
+.streak-icon svg {
   font-size: 12px;
   color: var(--on-primary);
 }
@@ -566,7 +566,7 @@ function goToSettings() {
   background: var(--error-light);
 }
 
-.shortcut-icon.error-bg .material-symbols-outlined {
+.shortcut-icon.error-bg svg {
   color: var(--error);
 }
 
@@ -574,7 +574,7 @@ function goToSettings() {
   background: var(--secondary-light);
 }
 
-.shortcut-icon.tertiary-bg .material-symbols-outlined {
+.shortcut-icon.tertiary-bg svg {
   color: var(--secondary);
 }
 
@@ -582,7 +582,7 @@ function goToSettings() {
   background: var(--primary-light);
 }
 
-.shortcut-icon.primary-bg .material-symbols-outlined {
+.shortcut-icon.primary-bg svg {
   color: var(--primary);
 }
 

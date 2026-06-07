@@ -2,11 +2,11 @@
   <div class="page">
     <header class="top-bar">
       <button class="back-btn" @click="$router.back()">
-        <span class="material-symbols-outlined">arrow_back</span>
+        <i-ms-arrow-back />
       </button>
       <h1>考试记录</h1>
       <button class="clear-btn">
-        <span class="material-symbols-outlined">delete_sweep</span>
+        <i-ms-delete-sweep-outline />
       </button>
     </header>
 
@@ -22,10 +22,10 @@
             </div>
             <div class="header-actions">
               <button class="icon-btn">
-                <span class="material-symbols-outlined">visibility</span>
+                <i-ms-visibility-outline />
               </button>
               <button class="icon-btn delete">
-                <span class="material-symbols-outlined">delete</span>
+                <i-ms-delete-outline />
               </button>
             </div>
           </div>
@@ -69,7 +69,7 @@
       </div>
 
       <div class="empty-state" v-if="mockExams.length === 0">
-        <span class="material-symbols-outlined">history</span>
+        <i-ms-history />
         <p>暂无考试记录</p>
       </div>
     </main>
@@ -231,12 +231,12 @@ const mockExams = [
   cursor: pointer;
 }
 
-.icon-btn .material-symbols-outlined {
+.icon-btn svg {
   font-size: 18px;
   color: var(--text-secondary);
 }
 
-.icon-btn.delete .material-symbols-outlined {
+.icon-btn.delete svg {
   color: var(--error);
 }
 
@@ -328,7 +328,7 @@ const mockExams = [
   text-align: center;
 }
 
-.empty-state .material-symbols-outlined {
+.empty-state svg {
   font-size: 48px;
   color: var(--text-disabled);
   margin-bottom: var(--spacing-md);

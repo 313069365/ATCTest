@@ -3,7 +3,7 @@
     <header class="top-bar">
       <h1 class="title">{{ t('examManagement') }}</h1>
       <button class="icon-btn" @click="$router.push('/exam/history')">
-        <span class="material-symbols-outlined">history</span>
+        <i-ms-history />
       </button>
     </header>
 
@@ -11,11 +11,11 @@
       <section class="paper-section">
         <div class="paper-actions">
           <button class="paper-action-btn" @click="$router.push('/exam/create')">
-            <span class="material-symbols-outlined">add</span>
+            <i-ms-add />
             <span>{{ t('createPaper') }}</span>
           </button>
           <button class="paper-action-btn" @click="triggerImport">
-            <span class="material-symbols-outlined">upload</span>
+            <i-ms-upload />
             <span>{{ t('importPaper') }}</span>
           </button>
           <input type="file" ref="fileInput" accept=".json" @change="handleImport" style="display: none">
@@ -29,10 +29,10 @@
               <span class="paper-tag">{{ paper.paperCategory || t('mockTest') }}</span>
               <div class="paper-actions-btns">
                 <button class="icon-btn-sm" @click="exportPaper(paper)">
-                  <span class="material-symbols-outlined">file_download</span>
+                  <i-ms-download />
                 </button>
                 <button class="icon-btn-sm delete" @click="deletePaper(paper.id)">
-                  <span class="material-symbols-outlined">delete</span>
+                  <i-ms-delete-outline />
                 </button>
               </div>
             </div>
@@ -41,32 +41,32 @@
             <p class="paper-desc">{{ paper.description || t('noDescription') }}</p>
             <div class="paper-stats">
               <span class="stat-item">
-                <span class="material-symbols-outlined">quiz</span>
+                <i-ms-quiz-outline />
                 {{ paper.questionCount }} {{ t('questions') }}
               </span>
               <span class="stat-item">
-                <span class="material-symbols-outlined">timer</span>
+                <i-ms-timer-outline />
                 {{ paper.duration }} {{ t('minutes') }}
               </span>
               <span class="stat-item">
-                <span class="material-symbols-outlined">grade</span>
+                <i-ms-grade-outline />
                 {{ paper.totalScore }} {{ t('score') }}
               </span>
               <span class="stat-item created-time">
-                <span class="material-symbols-outlined">event</span>
+                <i-ms-event-outline />
                 {{ formatDate(paper.createdAt) }}
               </span>
             </div>
 
             <button class="start-btn" @click="startExam(paper.id)">
               {{ t('startExam') }}
-              <span class="material-symbols-outlined">play_arrow</span>
+              <i-ms-play-arrow-outline />
             </button>
           </div>
         </div>
 
         <div class="empty-state" v-else>
-          <span class="material-symbols-outlined">description</span>
+          <i-ms-description-outline />
           <p>{{ t('noPapers') }}</p>
           <p class="empty-hint">{{ t('createFirstPaper') }}</p>
         </div>
@@ -267,12 +267,12 @@ const fileInput = ref(null)
   border: none;
 }
 
-.icon-btn-sm .material-symbols-outlined {
+.icon-btn-sm svg {
   font-size: 18px;
   color: var(--text-secondary);
 }
 
-.icon-btn-sm.delete .material-symbols-outlined {
+.icon-btn-sm.delete svg {
   color: var(--error);
 }
 
@@ -316,7 +316,7 @@ const fileInput = ref(null)
   color: var(--text-disabled);
 }
 
-.stat-item .material-symbols-outlined {
+.stat-item svg {
   font-size: 12px;
 }
 
@@ -356,7 +356,7 @@ const fileInput = ref(null)
   border-radius: var(--radius-lg);
 }
 
-.empty-state .material-symbols-outlined {
+.empty-state svg {
   font-size: 48px;
   color: var(--primary);
   margin-bottom: var(--spacing-sm);

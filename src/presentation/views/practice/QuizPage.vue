@@ -11,11 +11,11 @@
       </div>
       <div class="top-bar-right">
         <div class="timer-display">
-          <span class="material-symbols-outlined">timer</span>
+          <i-ms-timer-outline />
           <span>{{ elapsedTimeDisplay }}</span>
         </div>
         <button class="grid-btn" @click="showQuizSettings = true">
-          <SvgIcon name="settings"></SvgIcon>
+          <i-ms-settings-outline />
         </button>
       </div>
     </header>
@@ -32,8 +32,7 @@
         <button v-for="btn in visibleButtons" :key="btn.key" class="action-btn"
           :class="{ active: btn.active?.value, 'remove-btn': btn.key === 'removeWrong' }" @click="btn.action"
           :title="btn.title">
-          <SvgIcon v-if="btn.iconType === 'svg'" size="20px" :name="btn.icon.value || btn.icon" />
-          <span v-else class="material-symbols-outlined">{{ btn.icon }}</span>
+          <component :is="btn.icon" />
         </button>
       </div>
     </div>
@@ -83,7 +82,16 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted, computed, provide, watch } from "vue";
+import { ref, onMounted, onUnmounted, computed, provide, watch, markRaw } from "vue";
+
+import IMsTranslate from '~icons/material-symbols/translate'
+import IMsDescriptionOutline from '~icons/material-symbols/description-outline'
+import IMsStar from '~icons/material-symbols/star'
+import IMsStarOutline from '~icons/material-symbols/star-outline'
+import IMsPlaylistRemove from '~icons/material-symbols/playlist-remove'
+import IMsBarChart from '~icons/material-symbols/bar-chart'
+import IMsGridView from '~icons/material-symbols/grid-view'
+import IMsGridViewOutline from '~icons/material-symbols/grid-view-outline'
 import { useRouter, useRoute } from "vue-router";
 import AnswerCard from "@/presentation/components/page/AnswerCard.vue";
 import PracticeStats from "@/presentation/components/page/PracticeStats.vue";
@@ -869,48 +877,42 @@ const buttonVisibility = computed(() => ({
 const actionButtons = [
   {
     key: 'translate',
-    icon: 'translate',
-    iconType: 'svg',
+    icon: markRaw(IMsTranslate),
     title: '翻译',
     active: computed(() => showTranslation.value),
     action: toggleTranslation,
   },
   {
     key: 'explanation',
-    icon: 'description',
-    iconType: 'material',
+    icon: markRaw(IMsDescriptionOutline),
     title: '显示解析',
     active: computed(() => showExplanationPref.value),
     action: toggleShowExplanation,
   },
   {
     key: 'favorite',
-    icon: computed(() => isFavorited.value ? 'kidstar_fill' : 'kidstar'),
-    iconType: 'svg',
+    icon: computed(() => isFavorited.value ? IMsStar : IMsStarOutline),
     title: '收藏',
     active: computed(() => isFavorited.value),
     action: toggleFavorite,
   },
   {
     key: 'removeWrong',
-    icon: 'playlist_remove',
-    iconType: 'material',
+    icon: markRaw(IMsPlaylistRemove),
     title: '移出错题集',
     active: computed(() => isInWrongBook.value),
     action: removeCurrentFromWrong,
   },
   {
     key: 'stats',
-    icon: 'bar_chart',
-    iconType: 'material',
+    icon: markRaw(IMsBarChart),
     title: '答题统计',
     active: computed(() => showStatsDialog.value),
     action: () => showStatsDialog.value = true,
   },
   {
     key: 'answerCard',
-    icon: 'grid_view',
-    iconType: 'material',
+    icon: computed(() => showAnswerCard.value ? IMsGridView : IMsGridViewOutline),
     title: '答题卡',
     active: computed(() => showAnswerCard.value),
     action: toggleAnswerCard,
@@ -965,7 +967,7 @@ const visibleButtons = computed(() =>
   color: var(--text-secondary);
 }
 
-.back-btn .material-symbols-outlined {
+.back-btn svg {
   font-size: var(--font-size-3xl);
 }
 
@@ -999,7 +1001,7 @@ const visibleButtons = computed(() =>
   font-weight: var(--font-weight-semibold);
 }
 
-.timer-display .material-symbols-outlined {
+.timer-display svg {
   font-size: var(--font-size-2xl);
 }
 
@@ -1015,12 +1017,12 @@ const visibleButtons = computed(() =>
   cursor: pointer;
 }
 
-.grid-btn .material-symbols-outlined {
+.grid-btn svg {
   font-size: var(--font-size-3xl);
 }
 
-.grid-btn.active .material-symbols-outlined {
-  font-variation-settings: 'FILL' 1;
+.grid-btn.active svg {
+  color: var(--primary);
 }
 
 .progress-bar-container {
@@ -1088,7 +1090,7 @@ const visibleButtons = computed(() =>
   color: var(--accent);
 }
 
-.action-btn .material-symbols-outlined {
+.action-btn svg {
   font-size: 18px;
 }
 
@@ -1143,7 +1145,7 @@ const visibleButtons = computed(() =>
   color: var(--warning);
 }
 
-.fav-btn .material-symbols-outlined {
+.fav-btn svg {
   font-size: 20px;
 }
 
@@ -1185,16 +1187,7 @@ const visibleButtons = computed(() =>
   transform: scale(0.98);
 }
 
-.check-btn .material-symbols-outlined {
+.check-btn svg {
   font-size: var(--font-size-xl);
-}
-
-svg-icon {
-  display: inline-block;
-  /* 让它变成一个有面积的盒子 */
-  width: 20px;
-  /* 必须给明确的宽度 */
-  height: 20px;
-  /* 必须给明确的高度 */
 }
 </style>
