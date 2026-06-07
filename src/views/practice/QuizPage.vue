@@ -614,7 +614,10 @@ const handleAnswer = (answer) => {
     const capturedId = question.id
     setTimeout(() => {
       if (currentQuestion.value?.id !== capturedId) return
-      checkAnswer()
+      // 复合题由子组件通过 checkSub 事件逐题检查和播放音效
+      if (!isComplexQuestion(question)) {
+        checkAnswer()
+      }
     }, 100)
   }
 };
@@ -698,6 +701,16 @@ const handleCheckSub = (subIndex) => {
   }
   answerChecked.value[questionId][subIndex] = true
   answerStatus.value[questionId][subIndex] = status
+
+  // 标记错题
+  if (status === 'wrong') {
+    pm.markWrong(question.subs?.[subIndex], question)
+  }
+
+  // 播放当前子题音效
+  if (soundEnabled.value) {
+    playAnswerSound(status)
+  }
 };
 
 // 加载练习进度（断点续练）

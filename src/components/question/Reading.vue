@@ -231,6 +231,8 @@ const handleSubAnswer = (answer) => {
     const subType = currentSub.value?.type
     const canImmediateCheck = subType ? canAutoCheck(subType) : false
     if (canImmediateCheck) {
+      // 通知父组件检查当前子题并播放音效
+      emit('checkSub', currentSubIndex.value)
       // 自动跳转下一题（只有答案正确才跳转）
       if (props.autoJump) {
         const isCorrect = checkSubIsCorrect(wrappedSub.value, answer)
