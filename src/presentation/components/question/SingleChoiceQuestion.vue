@@ -49,13 +49,15 @@
 
         <div class="tag-block">
           <span class="tag tag-blue">{{ t('explanation') }}</span>
+          <div class="explanation-content">{{ formattedExplanation }}</div>
         </div>
-        <div class="explanation-content">{{ formattedExplanation }}</div>
+
 
         <div v-if="question?.explanation?.tip" class="tag-block">
           <span class="tag tag-green">{{ t('tip') }}</span>
+          <div v-if="question?.explanation?.tip" class="tip-content">{{ question.explanation.tip }}</div>
         </div>
-        <div v-if="question?.explanation?.tip" class="tip-content">{{ question.explanation.tip }}</div>
+
       </div>
     </div>
   </div>
@@ -383,8 +385,9 @@ const handleSelect = (index) => {
 .tag {
   display: inline-block;
   padding: 2px 8px;
+  margin-bottom: 1px;
   border-radius: 4px;
-  font-size: 12px;
+  font-size: var(--font-size-sm);
   font-weight: var(--font-weight-semibold);
   line-height: 1.5;
 }
