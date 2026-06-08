@@ -59,13 +59,13 @@
 
         <div class="tag-block">
           <span class="tag tag-blue">{{ t('explanation') }}</span>
+          <div class="explanation-content">{{ formattedExplanation }}</div>
         </div>
-        <div class="explanation-content">{{ formattedExplanation }}</div>
 
         <div v-if="question?.explanation?.tip" class="tag-block">
           <span class="tag tag-green">{{ t('tip') }}</span>
+          <div class="tip-content">{{ question.explanation.tip }}</div>
         </div>
-        <div v-if="question?.explanation?.tip" class="tip-content">{{ question.explanation.tip }}</div>
       </div>
     </div>
   </div>

@@ -25,7 +25,7 @@
         <span class="option-marker"></span>
         <span class="option-text" v-if="option">{{ formatOption(option) }}
           <div v-show="showTranslation" class="translation-text">{{ formatOption(question.translation?.options[i] || "")
-          }}
+            }}
           </div>
         </span>
       </button>
@@ -55,7 +55,7 @@
 
         <div v-if="question?.explanation?.tip" class="tag-block">
           <span class="tag tag-green">{{ t('tip') }}</span>
-          <div v-if="question?.explanation?.tip" class="tip-content">{{ question.explanation.tip }}</div>
+          <div class="tip-content">{{ question.explanation.tip }}</div>
         </div>
 
       </div>
