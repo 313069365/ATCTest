@@ -9,15 +9,8 @@
     "id": "701011001",
     "type": "single",
     "stem": "跑道侵入是指航空器、车辆或人员错误存在于指定用于航空器起降的（）。",
-    "options": [
-      "A. 跑道",
-      "B. 滑行道",
-      "C. 地面保护区",
-      "D. 跑道、滑行道"
-    ],
-    "answer": [
-      "C. 地面保护区"
-    ],
+    "options": ["A. 跑道", "B. 滑行道", "C. 地面保护区", "D. 跑道、滑行道"],
+    "answer": ["C. 地面保护区"],
     "difficulty": 1,
     "shuffle": false,
     "degree": null,
@@ -45,9 +38,7 @@
       "C. 航空地面服务企业",
       "D. 民航地区管理局"
     ],
-    "answer": [
-      "D. 民航地区管理局"
-    ],
+    "answer": ["D. 民航地区管理局"],
     "difficulty": 1,
     "shuffle": false,
     "degree": null,
@@ -69,15 +60,8 @@
     "id": "70101003",
     "type": "single",
     "stem": "地面保护区包括跑道、位于适用的跑道等待位置和跑道之间的部分滑行道、跑道中线两侧各（）范围内的土面区、仪表着陆系统临界区/敏感区和跑道端安全区。",
-    "options": [
-      "A. 60m",
-      "B. 75m",
-      "C. 80m",
-      "D. 90m"
-    ],
-    "answer": [
-      "B. 75m"
-    ],
+    "options": ["A. 60m", "B. 75m", "C. 80m", "D. 90m"],
+    "answer": ["B. 75m"],
     "difficulty": 1,
     "shuffle": false,
     "degree": null,
@@ -99,15 +83,8 @@
     "id": "70101004",
     "type": "single",
     "stem": "（） 是指飞行区内供航空器起飞、着陆和滑行的部分，但不包括停机坪。",
-    "options": [
-      "A. 敏感区",
-      "B. 飞行区",
-      "C. 活动区",
-      "D. 机动区"
-    ],
-    "answer": [
-      "D. 机动区"
-    ],
+    "options": ["A. 敏感区", "B. 飞行区", "C. 活动区", "D. 机动区"],
+    "answer": ["D. 机动区"],
     "difficulty": 1,
     "shuffle": false,
     "degree": null,
@@ -129,15 +106,8 @@
     "id": "70101005",
     "type": "single",
     "stem": "跑道侵入是指在机场发生的任何航空器、车辆或者（）误入指定用于航空器着陆和起飞地面保护区的情况。",
-    "options": [
-      "A. 动物",
-      "B. FOD",
-      "C. 人员",
-      "D. 漂浮物"
-    ],
-    "answer": [
-      "C. 人员"
-    ],
+    "options": ["A. 动物", "B. FOD", "C. 人员", "D. 漂浮物"],
+    "answer": ["C. 人员"],
     "difficulty": 1,
     "shuffle": false,
     "degree": null,
@@ -159,15 +129,8 @@
     "id": "70101006",
     "type": "single",
     "stem": "根据事件的严重程度，跑道侵入分为（）类。",
-    "options": [
-      "A. 3",
-      "B. 4",
-      "C. 5",
-      "D. 6"
-    ],
-    "answer": [
-      "C. 5"
-    ],
+    "options": ["A. 3", "B. 4", "C. 5", "D. 6"],
+    "answer": ["C. 5"],
     "difficulty": 1,
     "shuffle": false,
     "degree": null,
@@ -195,9 +158,7 @@
       "C. 有充足的时间和（或）距离采取措施避免碰撞发生的跑道侵入",
       "D. 符合跑道侵入的定义但不会立即产生安全后果的跑道侵入"
     ],
-    "answer": [
-      "D. 符合跑道侵入的定义但不会立即产生安全后果的跑道侵入"
-    ],
+    "answer": ["D. 符合跑道侵入的定义但不会立即产生安全后果的跑道侵入"],
     "difficulty": 2,
     "shuffle": false,
     "degree": null,
@@ -255,9 +216,7 @@
       "C. 航空器在滑行道等待位置停留",
       "D. 车辆进入跑道端安全区"
     ],
-    "answer": [
-      "C. 航空器在滑行道等待位置停留"
-    ],
+    "answer": ["C. 航空器在滑行道等待位置停留"],
     "difficulty": 3,
     "shuffle": false,
     "degree": null,
@@ -309,13 +268,8 @@
     "id": "70101011",
     "type": "boolean",
     "stem": "间隔减小以至于双方必须采取极度措施，勉强避免碰撞发生的跑道侵入属于B类。",
-    "options": [
-      "A. 正确",
-      "B. 错误"
-    ],
-    "answer": [
-      "A. 正确"
-    ],
+    "options": ["A. 正确", "B. 错误"],
+    "answer": ["A. 正确"],
     "difficulty": 1,
     "shuffle": false,
     "degree": null,
@@ -337,13 +291,8 @@
     "id": "70101012",
     "type": "boolean",
     "stem": "有充足的时间和距离采取措施避免碰撞发生的跑道侵入属于C类。",
-    "options": [
-      "A. 正确",
-      "B. 错误"
-    ],
-    "answer": [
-      "A. 正确"
-    ],
+    "options": ["A. 正确", "B. 错误"],
+    "answer": ["A. 正确"],
     "difficulty": 1,
     "shuffle": false,
     "degree": null,
@@ -365,13 +314,8 @@
     "id": "70101013",
     "type": "boolean",
     "stem": "跑道等待位置，是能够让在滑行道上等待的航空器或车辆不侵犯无障碍物区、进近面、起飞爬升面，并且不干扰导航设备的运行，是需要航空器、地面车辆和人员高度注意的区域。",
-    "options": [
-      "A. 正确",
-      "B. 错误"
-    ],
-    "answer": [
-      "A. 正确"
-    ],
+    "options": ["A. 正确", "B. 错误"],
+    "answer": ["A. 正确"],
     "difficulty": 1,
     "shuffle": false,
     "degree": null,
@@ -393,13 +337,8 @@
     "id": "70101014",
     "type": "boolean",
     "stem": "航空器着陆和起飞地面保护区指该区域包括机场的跑道以及滑行道位于适用的跑道等待位置和实际跑道之间的部分、跑道中心线两侧各75m范围内的土面区、ILS敏感区、ILS临界区和跑道端安全区。",
-    "options": [
-      "A. 正确",
-      "B. 错误"
-    ],
-    "answer": [
-      "A. 正确"
-    ],
+    "options": ["A. 正确", "B. 错误"],
+    "answer": ["A. 正确"],
     "difficulty": 1,
     "shuffle": false,
     "degree": null,
@@ -421,13 +360,8 @@
     "id": "70101015",
     "type": "boolean",
     "stem": "冲突多发地带（Hot Spots）指机场活动区内发生跑道侵入事件风险较大，需要地面车辆和人员高度注意的区域。",
-    "options": [
-      "A. 正确",
-      "B. 错误"
-    ],
-    "answer": [
-      "A. 正确"
-    ],
+    "options": ["A. 正确", "B. 错误"],
+    "answer": ["A. 正确"],
     "difficulty": 1,
     "shuffle": false,
     "degree": null,
@@ -449,13 +383,8 @@
     "id": "70101016",
     "type": "boolean",
     "stem": "“机动区”是飞行区内供航空器起飞、着陆和滑行的部分，不包括机坪。",
-    "options": [
-      "A. 正确",
-      "B. 错误"
-    ],
-    "answer": [
-      "A. 正确"
-    ],
+    "options": ["A. 正确", "B. 错误"],
+    "answer": ["A. 正确"],
     "difficulty": 1,
     "shuffle": false,
     "degree": null,
@@ -477,13 +406,8 @@
     "id": "70101017",
     "type": "boolean",
     "stem": "跑道侵入的定义为在机场发生的任何航空器、车辆或者人员误入指定用于航空器着陆和起飞地面保护区的情况，外来物、鸟类、小动物等误入不属于跑道侵入",
-    "options": [
-      "A. 正确",
-      "B. 错误"
-    ],
-    "answer": [
-      "A. 正确"
-    ],
+    "options": ["A. 正确", "B. 错误"],
+    "answer": ["A. 正确"],
     "difficulty": 1,
     "shuffle": false,
     "degree": null,
@@ -505,13 +429,8 @@
     "id": "70101018",
     "type": "boolean",
     "stem": "“跑道等待位置”是为保护跑道、障碍物限制面或者ILS/MLS临界区/敏感区而设定的停止等待位置。",
-    "options": [
-      "A. 正确",
-      "B. 错误"
-    ],
-    "answer": [
-      "A. 正确"
-    ],
+    "options": ["A. 正确", "B. 错误"],
+    "answer": ["A. 正确"],
     "difficulty": 2,
     "shuffle": false,
     "degree": null,
@@ -533,13 +452,8 @@
     "id": "70101019",
     "type": "boolean",
     "stem": "中间等待位置是为进行交通控制而设定的位置，若管制部门要求行进中的车辆在此停止和等待，则其应当在此停止或者等待，直到管制部门发出放行指令时才能继续前进。",
-    "options": [
-      "A. 正确",
-      "B. 错误"
-    ],
-    "answer": [
-      "A. 正确"
-    ],
+    "options": ["A. 正确", "B. 错误"],
+    "answer": ["A. 正确"],
     "difficulty": 3,
     "shuffle": false,
     "degree": null,
@@ -594,16 +508,8 @@
     "id": "70101021",
     "type": "multiple",
     "stem": "跑道侵入是指在机场发生的任何（）、（）或者（）、错误的出现或者存在指定用于航空器着陆和起飞地面保护区的情况。",
-    "options": [
-      "A. 航空器",
-      "B. 车辆",
-      "C. 人员"
-    ],
-    "answer": [
-      "A. 航空器",
-      "B. 车辆",
-      "C. 人员"
-    ],
+    "options": ["A. 航空器", "B. 车辆", "C. 人员"],
+    "answer": ["A. 航空器", "B. 车辆", "C. 人员"],
     "difficulty": 1,
     "shuffle": false,
     "degree": null,
@@ -664,11 +570,7 @@
       "C. 仅线上学习",
       "D. 覆盖相关岗位"
     ],
-    "answer": [
-      "A. 纳入单位制度",
-      "B. 开展现场培训",
-      "D. 覆盖相关岗位"
-    ],
+    "answer": ["A. 纳入单位制度", "B. 开展现场培训", "D. 覆盖相关岗位"],
     "difficulty": 2,
     "shuffle": false,
     "degree": null,
@@ -690,18 +592,8 @@
     "id": "70101024",
     "type": "multiple",
     "stem": "参加地面车辆和人员跑道侵入防范培训后，应熟悉下列哪些术语？",
-    "options": [
-      "A. 飞行区",
-      "B. 活动区",
-      "C. 机动区",
-      "D. 冲突多发地带"
-    ],
-    "answer": [
-      "A. 飞行区",
-      "B. 活动区",
-      "C. 机动区",
-      "D. 冲突多发地带"
-    ],
+    "options": ["A. 飞行区", "B. 活动区", "C. 机动区", "D. 冲突多发地带"],
+    "answer": ["A. 飞行区", "B. 活动区", "C. 机动区", "D. 冲突多发地带"],
     "difficulty": 2,
     "shuffle": false,
     "degree": null,
@@ -861,9 +753,7 @@
       "C. 呼号由驾驶员临时自定",
       "D. 呼号只在紧急情况使用"
     ],
-    "answer": [
-      "A. 呼号一般与车身标识一致"
-    ],
+    "answer": ["A. 呼号一般与车身标识一致"],
     "difficulty": 1,
     "shuffle": false,
     "degree": null,
@@ -891,9 +781,7 @@
       "C. 仅驾驶员姓名",
       "D. 仅值班电话"
     ],
-    "answer": [
-      "A. 单位名称和与任务相关的标识"
-    ],
+    "answer": ["A. 单位名称和与任务相关的标识"],
     "difficulty": 1,
     "shuffle": false,
     "degree": null,
@@ -915,14 +803,8 @@
     "id": "70102031",
     "type": "single",
     "stem": "进入地面保护区或机动区的车辆应当安装跑道侵入智能监测预警系统，系统设有地面保护区或机动区电子围栏，并在作业期间（）开启。",
-    "options": [
-      "A. 始终",
-      "B. 白天",
-      "C. 晚上"
-    ],
-    "answer": [
-      "A. 始终"
-    ],
+    "options": ["A. 始终", "B. 白天", "C. 晚上"],
+    "answer": ["A. 始终"],
     "difficulty": 1,
     "shuffle": false,
     "degree": null,
@@ -944,14 +826,8 @@
     "id": "70102032",
     "type": "single",
     "stem": "进入地面保护区或机动区的车辆顶端应当安装符合标准的灯具，并在作业期间（）开启顶部的灯光。",
-    "options": [
-      "A. 白天",
-      "B. 晚上",
-      "C. 始终"
-    ],
-    "answer": [
-      "C. 始终"
-    ],
+    "options": ["A. 白天", "B. 晚上", "C. 始终"],
+    "answer": ["C. 始终"],
     "difficulty": 1,
     "shuffle": false,
     "degree": null,
@@ -973,15 +849,8 @@
     "id": "70102033",
     "type": "single",
     "stem": "除应急车辆外，进入活动区的车辆在顶端应安装符合标准的（）障碍灯并在工作期间始终开启",
-    "options": [
-      "A. 红色",
-      "B. 白色",
-      "C. 黄色",
-      "D. 绿色"
-    ],
-    "answer": [
-      "C. 黄色"
-    ],
+    "options": ["A. 红色", "B. 白色", "C. 黄色", "D. 绿色"],
+    "answer": ["C. 黄色"],
     "difficulty": 2,
     "shuffle": false,
     "degree": null,
@@ -1003,15 +872,8 @@
     "id": "70102034",
     "type": "single",
     "stem": "车辆呼号通常应与什么一致：",
-    "options": [
-      "A. 驾驶员姓名",
-      "B. 车牌号",
-      "C. 车身标识",
-      "D. 任务时间"
-    ],
-    "answer": [
-      "C. 车身标识"
-    ],
+    "options": ["A. 驾驶员姓名", "B. 车牌号", "C. 车身标识", "D. 任务时间"],
+    "answer": ["C. 车身标识"],
     "difficulty": 2,
     "shuffle": false,
     "degree": null,
@@ -1039,9 +901,7 @@
       "C. 车辆大灯和顶部的灯光",
       "D. 危险报警闪光灯"
     ],
-    "answer": [
-      "C. 车辆大灯和顶部的灯光"
-    ],
+    "answer": ["C. 车辆大灯和顶部的灯光"],
     "difficulty": 3,
     "shuffle": false,
     "degree": null,
@@ -1069,9 +929,7 @@
       "C. 红色",
       "D. 黄白棋盘格"
     ],
-    "answer": [
-      "A. 黄色或黄黑棋盘格"
-    ],
+    "answer": ["A. 黄色或黄黑棋盘格"],
     "difficulty": 3,
     "shuffle": false,
     "degree": null,
@@ -1093,13 +951,8 @@
     "id": "70102037",
     "type": "boolean",
     "stem": "进入地面保护区或机动区的车辆车身应喷涂单位名称和标识，标识要与该车执行的任务相关",
-    "options": [
-      "A. 正确",
-      "B. 错误"
-    ],
-    "answer": [
-      "A. 正确"
-    ],
+    "options": ["A. 正确", "B. 错误"],
+    "answer": ["A. 正确"],
     "difficulty": 1,
     "shuffle": false,
     "degree": null,
@@ -1121,13 +974,8 @@
     "id": "70102038",
     "type": "boolean",
     "stem": "车辆在作业期间可以关闭顶部灯光以减少对飞行员干扰。",
-    "options": [
-      "A. 正确",
-      "B. 错误"
-    ],
-    "answer": [
-      "B. 错误"
-    ],
+    "options": ["A. 正确", "B. 错误"],
+    "answer": ["B. 错误"],
     "difficulty": 1,
     "shuffle": false,
     "degree": null,
@@ -1149,13 +997,8 @@
     "id": "70102039",
     "type": "boolean",
     "stem": "对进入飞行区日常保障的车辆应配备机场平面图，主要用于保障人员熟悉作业路线、进入或退出跑道的位置报告点、注意事项和应急处置办法。",
-    "options": [
-      "A. 正确",
-      "B. 错误"
-    ],
-    "answer": [
-      "A. 正确"
-    ],
+    "options": ["A. 正确", "B. 错误"],
+    "answer": ["A. 正确"],
     "difficulty": 1,
     "shuffle": false,
     "degree": null,
@@ -1177,13 +1020,8 @@
     "id": "70102040",
     "type": "boolean",
     "stem": "进入飞行区的车辆的车身如果已喷涂单位名称和标识，无需在顶端安装符合相关灯光标示。",
-    "options": [
-      "A. 正确",
-      "B. 错误"
-    ],
-    "answer": [
-      "B. 错误"
-    ],
+    "options": ["A. 正确", "B. 错误"],
+    "answer": ["B. 错误"],
     "difficulty": 1,
     "shuffle": false,
     "degree": null,
@@ -1205,13 +1043,8 @@
     "id": "70102041",
     "type": "boolean",
     "stem": "进行日常巡视检查的车辆应当配备机场平面图，图中标明作业路线、进出跑道或者滑行道的位置、冲突多发地带、主要注意事项和应急处置程序。",
-    "options": [
-      "A. 正确",
-      "B. 错误"
-    ],
-    "answer": [
-      "A. 正确"
-    ],
+    "options": ["A. 正确", "B. 错误"],
+    "answer": ["A. 正确"],
     "difficulty": 1,
     "shuffle": false,
     "degree": null,
@@ -1233,13 +1066,8 @@
     "id": "70102042",
     "type": "boolean",
     "stem": "进入地面保护区的车辆，其顶端灯光只在夜间开启即可。",
-    "options": [
-      "A. 正确",
-      "B. 错误"
-    ],
-    "answer": [
-      "B. 错误"
-    ],
+    "options": ["A. 正确", "B. 错误"],
+    "answer": ["B. 错误"],
     "difficulty": 1,
     "shuffle": false,
     "degree": null,
@@ -1261,13 +1089,8 @@
     "id": "70102043",
     "type": "boolean",
     "stem": "车辆标识可以与实际任务不一致，只要有标识即可。",
-    "options": [
-      "A. 正确",
-      "B. 错误"
-    ],
-    "answer": [
-      "B. 错误"
-    ],
+    "options": ["A. 正确", "B. 错误"],
+    "answer": ["B. 错误"],
     "difficulty": 2,
     "shuffle": false,
     "degree": null,
@@ -1289,13 +1112,8 @@
     "id": "70102044",
     "type": "boolean",
     "stem": "进入地面保护区或者机动区的车辆，其顶端安装符合标准的灯具，车辆颜色和灯光标示应当符合《民用机场飞行区技术标准》，并在工作期间始终开启顶部的灯光。",
-    "options": [
-      "A. 正确",
-      "B. 错误"
-    ],
-    "answer": [
-      "A. 正确"
-    ],
+    "options": ["A. 正确", "B. 错误"],
+    "answer": ["A. 正确"],
     "difficulty": 2,
     "shuffle": false,
     "degree": null,
@@ -1355,10 +1173,7 @@
       "C. 可关闭灯光",
       "D. 仅夜间开启"
     ],
-    "answer": [
-      "A. 安装标准灯光标识",
-      "B. 始终开启灯光"
-    ],
+    "answer": ["A. 安装标准灯光标识", "B. 始终开启灯光"],
     "difficulty": 2,
     "shuffle": false,
     "degree": null,
@@ -1380,17 +1195,8 @@
     "id": "70102047",
     "type": "multiple",
     "stem": "执行下列哪些任务的车辆，其车身标识示例可分别为“场务”“灯光”“消防”等？",
-    "options": [
-      "A. 场道作业",
-      "B. 助航灯光作业",
-      "C. 驱鸟作业",
-      "D. 消防任务"
-    ],
-    "answer": [
-      "A. 场道作业",
-      "B. 助航灯光作业",
-      "D. 消防任务"
-    ],
+    "options": ["A. 场道作业", "B. 助航灯光作业", "C. 驱鸟作业", "D. 消防任务"],
+    "answer": ["A. 场道作业", "B. 助航灯光作业", "D. 消防任务"],
     "difficulty": 2,
     "shuffle": false,
     "degree": null,
@@ -1484,9 +1290,7 @@
       "C. 视频抽查制度",
       "D. 随机问答制度"
     ],
-    "answer": [
-      "A. 持单复核制度"
-    ],
+    "answer": ["A. 持单复核制度"],
     "difficulty": 1,
     "shuffle": false,
     "degree": null,
@@ -1514,9 +1318,7 @@
       "C. 通知班组长即可",
       "D. 等待下一班组代为申请"
     ],
-    "answer": [
-      "A. 再次向管制员申请"
-    ],
+    "answer": ["A. 再次向管制员申请"],
     "difficulty": 1,
     "shuffle": false,
     "degree": null,
@@ -1544,9 +1346,7 @@
       "C. 仅通知值班经理",
       "D. 等待下一班航班结束"
     ],
-    "answer": [
-      "B. 向管制员重新申请"
-    ],
+    "answer": ["B. 向管制员重新申请"],
     "difficulty": 1,
     "shuffle": false,
     "degree": null,
@@ -1574,9 +1374,7 @@
       "C. 撤离后，要及时将有关情況通报管制员",
       "D. 相关车辆和人员应当按照规定的撤离路线撤离至指定位置"
     ],
-    "answer": [
-      "B. 再次进入之前应当再次申请后进入"
-    ],
+    "answer": ["B. 再次进入之前应当再次申请后进入"],
     "difficulty": 2,
     "shuffle": false,
     "degree": null,
@@ -1603,9 +1401,7 @@
       "B. 驻车等待，向塔台申请",
       "C. 培训考核通过，无需申请可自行进入"
     ],
-    "answer": [
-      "B. 驻车等待，向塔台申请"
-    ],
+    "answer": ["B. 驻车等待，向塔台申请"],
     "difficulty": 2,
     "shuffle": false,
     "degree": null,
@@ -1633,9 +1429,7 @@
       "C. 作业许可证",
       "D. 人员排班表"
     ],
-    "answer": [
-      "B. 车辆、人员进入地面保护区工作检查单"
-    ],
+    "answer": ["B. 车辆、人员进入地面保护区工作检查单"],
     "difficulty": 2,
     "shuffle": false,
     "degree": null,
@@ -1663,9 +1457,7 @@
       "C. 在进入后报告即可",
       "D. 没有航班后即可进入"
     ],
-    "answer": [
-      "B. 经管制员许可后方可进入，并严格按许可区域和时段作业"
-    ],
+    "answer": ["B. 经管制员许可后方可进入，并严格按许可区域和时段作业"],
     "difficulty": 2,
     "shuffle": false,
     "degree": null,
@@ -1693,9 +1485,7 @@
       "C. 开启灯光继续工作",
       "D. 改用手机通信"
     ],
-    "answer": [
-      "B. 及时撤离并通报管制员，除非得到许可"
-    ],
+    "answer": ["B. 及时撤离并通报管制员，除非得到许可"],
     "difficulty": 2,
     "shuffle": false,
     "degree": null,
@@ -1723,9 +1513,7 @@
       "C. 每日作业前需逐项确认",
       "D. 可由调度统一代替执行"
     ],
-    "answer": [
-      "C. 每日作业前需逐项确认"
-    ],
+    "answer": ["C. 每日作业前需逐项确认"],
     "difficulty": 2,
     "shuffle": false,
     "degree": null,
@@ -1753,9 +1541,7 @@
       "C. 关闭电台节约电量",
       "D. 驾驶员自行离车返回"
     ],
-    "answer": [
-      "B. 立即向管制员通报并尽快组织力量脱离至地面保护区或者机动区外"
-    ],
+    "answer": ["B. 立即向管制员通报并尽快组织力量脱离至地面保护区或者机动区外"],
     "difficulty": 2,
     "shuffle": false,
     "degree": null,
@@ -1777,13 +1563,8 @@
     "id": "70103060",
     "type": "boolean",
     "stem": "机场运行时，只有进入跑道时需要经过塔台同意，进入平行滑行道无需通过塔台允许。",
-    "options": [
-      "A. 正确",
-      "B. 错误"
-    ],
-    "answer": [
-      "B. 错误"
-    ],
+    "options": ["A. 正确", "B. 错误"],
+    "answer": ["B. 错误"],
     "difficulty": 1,
     "shuffle": false,
     "degree": null,
@@ -1805,13 +1586,8 @@
     "id": "70103061",
     "type": "boolean",
     "stem": "车辆在获得进入许可前，可以缓慢越过等待位置提前进入跑道边缘区域。",
-    "options": [
-      "A. 正确",
-      "B. 错误"
-    ],
-    "answer": [
-      "B. 错误"
-    ],
+    "options": ["A. 正确", "B. 错误"],
+    "answer": ["B. 错误"],
     "difficulty": 1,
     "shuffle": false,
     "degree": null,
@@ -1833,13 +1609,8 @@
     "id": "70103062",
     "type": "boolean",
     "stem": "未经塔台管制员许可，任何人员、车辆不得进入地面保护区或机动区。",
-    "options": [
-      "A. 正确",
-      "B. 错误"
-    ],
-    "answer": [
-      "A. 正确"
-    ],
+    "options": ["A. 正确", "B. 错误"],
+    "answer": ["A. 正确"],
     "difficulty": 1,
     "shuffle": false,
     "degree": null,
@@ -1861,13 +1632,8 @@
     "id": "70103063",
     "type": "boolean",
     "stem": "管制员指定撤离位置的，相关车辆和人员应当按照规定的撤离路线撤离至指定位置。",
-    "options": [
-      "A. 正确",
-      "B. 错误"
-    ],
-    "answer": [
-      "A. 正确"
-    ],
+    "options": ["A. 正确", "B. 错误"],
+    "answer": ["A. 正确"],
     "difficulty": 1,
     "shuffle": false,
     "degree": null,
@@ -1889,13 +1655,8 @@
     "id": "70103064",
     "type": "boolean",
     "stem": "申请进入地面保护区或者机动区后，车辆应当在等待位置等待，由管制员根据实际运行情况安排进入时机。",
-    "options": [
-      "A. 正确",
-      "B. 错误"
-    ],
-    "answer": [
-      "A. 正确"
-    ],
+    "options": ["A. 正确", "B. 错误"],
+    "answer": ["A. 正确"],
     "difficulty": 1,
     "shuffle": false,
     "degree": null,
@@ -1917,13 +1678,8 @@
     "id": "70103065",
     "type": "boolean",
     "stem": "某作业人员凭经验判断跑道已关闭，未申请直接进入跑道，该行为可能会导致跑道侵入风险。",
-    "options": [
-      "A. 正确",
-      "B. 错误"
-    ],
-    "answer": [
-      "A. 正确"
-    ],
+    "options": ["A. 正确", "B. 错误"],
+    "answer": ["A. 正确"],
     "difficulty": 1,
     "shuffle": false,
     "degree": null,
@@ -1945,13 +1701,8 @@
     "id": "70103066",
     "type": "boolean",
     "stem": "如在地面保护区作业时出现影响跑道安全的情况，如车辆发生故障等，需及时处理时，应立即报告塔台管制员，说明详细情况，同时采取应急措施。",
-    "options": [
-      "A. 正确",
-      "B. 错误"
-    ],
-    "answer": [
-      "A. 正确"
-    ],
+    "options": ["A. 正确", "B. 错误"],
+    "answer": ["A. 正确"],
     "difficulty": 1,
     "shuffle": false,
     "degree": null,
@@ -1973,13 +1724,8 @@
     "id": "70103067",
     "type": "boolean",
     "stem": "当巡查车辆发生故障或有其它异物需要清除，不能在指定时间脱离跑道、滑行道时，立即报告塔台管制员。",
-    "options": [
-      "A. 正确",
-      "B. 错误"
-    ],
-    "answer": [
-      "A. 正确"
-    ],
+    "options": ["A. 正确", "B. 错误"],
+    "answer": ["A. 正确"],
     "difficulty": 1,
     "shuffle": false,
     "degree": null,
@@ -2001,13 +1747,8 @@
     "id": "70103068",
     "type": "boolean",
     "stem": "当塔台管制员要求作业或检查人员撤离时，人员及车辆应当立即撤离至管制员指定的位置，并不得进入地面保护区，撒离后，要及时通知塔台。",
-    "options": [
-      "A. 正确",
-      "B. 错误"
-    ],
-    "answer": [
-      "A. 正确"
-    ],
+    "options": ["A. 正确", "B. 错误"],
+    "answer": ["A. 正确"],
     "difficulty": 1,
     "shuffle": false,
     "degree": null,
@@ -2029,13 +1770,8 @@
     "id": "70103069",
     "type": "boolean",
     "stem": "机场处于开放状态，但没有航班起降，在未联系塔台管制员的情況下，可以临时通过滑行道道肩进入地面保护区。",
-    "options": [
-      "A. 正确",
-      "B. 错误"
-    ],
-    "answer": [
-      "B. 错误"
-    ],
+    "options": ["A. 正确", "B. 错误"],
+    "answer": ["B. 错误"],
     "difficulty": 1,
     "shuffle": false,
     "degree": null,
@@ -2057,13 +1793,8 @@
     "id": "70103070",
     "type": "boolean",
     "stem": "在申请进入地面保护区前，相关人员应当对车辆状况、通讯工具和其他应急设备进行检查，确保其完好适用。",
-    "options": [
-      "A. 正确",
-      "B. 错误"
-    ],
-    "answer": [
-      "A. 正确"
-    ],
+    "options": ["A. 正确", "B. 错误"],
+    "answer": ["A. 正确"],
     "difficulty": 1,
     "shuffle": false,
     "degree": null,
@@ -2085,13 +1816,8 @@
     "id": "70103071",
     "type": "boolean",
     "stem": "机场处于开放运行状态，离航班到达时间超过30分钟的情况下，人员车辆可随意进入跑道作业。",
-    "options": [
-      "A. 正确",
-      "B. 错误"
-    ],
-    "answer": [
-      "B. 错误"
-    ],
+    "options": ["A. 正确", "B. 错误"],
+    "answer": ["B. 错误"],
     "difficulty": 1,
     "shuffle": false,
     "degree": null,
@@ -2113,13 +1839,8 @@
     "id": "70103072",
     "type": "boolean",
     "stem": "进入跑道作业时应遵循边申请边进入原则。",
-    "options": [
-      "A. 正确",
-      "B. 错误"
-    ],
-    "answer": [
-      "B. 错误"
-    ],
+    "options": ["A. 正确", "B. 错误"],
+    "answer": ["B. 错误"],
     "difficulty": 1,
     "shuffle": false,
     "degree": null,
@@ -2141,13 +1862,8 @@
     "id": "70103073",
     "type": "boolean",
     "stem": "车辆在地面保护区出现故障时，应在原地等待救援。",
-    "options": [
-      "A. 正确",
-      "B. 错误"
-    ],
-    "answer": [
-      "B. 错误"
-    ],
+    "options": ["A. 正确", "B. 错误"],
+    "answer": ["B. 错误"],
     "difficulty": 2,
     "shuffle": false,
     "degree": null,
@@ -2169,13 +1885,8 @@
     "id": "70103074",
     "type": "boolean",
     "stem": "车辆获得进入许可后，如因故不能进入，应立即通报管制员。",
-    "options": [
-      "A. 正确",
-      "B. 错误"
-    ],
-    "answer": [
-      "A. 正确"
-    ],
+    "options": ["A. 正确", "B. 错误"],
+    "answer": ["A. 正确"],
     "difficulty": 3,
     "shuffle": false,
     "degree": null,
@@ -2230,18 +1941,8 @@
     "id": "70103076",
     "type": "multiple",
     "stem": "任何车辆和人员进入地面保护区或者机动区，申请进入时需说明的信息包括：",
-    "options": [
-      "A. 当前位置",
-      "B. 作业内容",
-      "C. 预计时间",
-      "D. 行驶路线"
-    ],
-    "answer": [
-      "A. 当前位置",
-      "B. 作业内容",
-      "C. 预计时间",
-      "D. 行驶路线"
-    ],
+    "options": ["A. 当前位置", "B. 作业内容", "C. 预计时间", "D. 行驶路线"],
+    "answer": ["A. 当前位置", "B. 作业内容", "C. 预计时间", "D. 行驶路线"],
     "difficulty": 3,
     "shuffle": false,
     "degree": null,
@@ -2296,15 +1997,8 @@
     "id": "70104078",
     "type": "single",
     "stem": "机场应加强对目视助航设施的检查和维护，确保目视助航设施始终处于（）状态。保证各类标志物、标志线的清晰、有效和颜色正确，保证助航灯光系统和各类标记牌的光强、颜色、完好率、允许的失效时间等符合《民用机场飞行区技术标准》的要求，保证各类目视助航设施的齐全、有效和意义明确。",
-    "options": [
-      "A. 良好",
-      "B. 一般",
-      "C. 适用",
-      "D. 正常"
-    ],
-    "answer": [
-      "C. 适用"
-    ],
+    "options": ["A. 良好", "B. 一般", "C. 适用", "D. 正常"],
+    "answer": ["C. 适用"],
     "difficulty": 1,
     "shuffle": false,
     "degree": null,
@@ -2332,9 +2026,7 @@
       "C. 在未获得指挥中心许可前，严禁穿越该标志",
       "D. 在未获得塔台许可前，严禁穿越该标志"
     ],
-    "answer": [
-      "D. 在未获得塔台许可前，严禁穿越该标志"
-    ],
+    "answer": ["D. 在未获得塔台许可前，严禁穿越该标志"],
     "difficulty": 1,
     "shuffle": false,
     "degree": null,
@@ -2356,15 +2048,8 @@
     "id": "70104080",
     "type": "single",
     "stem": "跑道标志颜色为（）色。",
-    "options": [
-      "A. 红",
-      "B. 白",
-      "C. 绿",
-      "D. 黑"
-    ],
-    "answer": [
-      "B. 白"
-    ],
+    "options": ["A. 红", "B. 白", "C. 绿", "D. 黑"],
+    "answer": ["B. 白"],
     "difficulty": 1,
     "shuffle": false,
     "degree": null,
@@ -2386,15 +2071,8 @@
     "id": "70104081",
     "type": "single",
     "stem": "跑道标志均为（）色。",
-    "options": [
-      "A. 红",
-      "B. 黑",
-      "C. 黄",
-      "D. 白"
-    ],
-    "answer": [
-      "D. 白"
-    ],
+    "options": ["A. 红", "B. 黑", "C. 黄", "D. 白"],
+    "answer": ["D. 白"],
     "difficulty": 1,
     "shuffle": false,
     "degree": null,
@@ -2416,15 +2094,8 @@
     "id": "70104082",
     "type": "single",
     "stem": "跑道中心标志颜色为（）。",
-    "options": [
-      "A. 红",
-      "B. 白",
-      "C. 绿",
-      "D. 黑"
-    ],
-    "answer": [
-      "B. 白"
-    ],
+    "options": ["A. 红", "B. 白", "C. 绿", "D. 黑"],
+    "answer": ["B. 白"],
     "difficulty": 2,
     "shuffle": false,
     "degree": null,
@@ -2446,15 +2117,8 @@
     "id": "70104083",
     "type": "single",
     "stem": "在飞行区遇到黑底黄字的标记牌，此类标记牌表示的含义是_",
-    "options": [
-      "A. 所在位置",
-      "B. 前进方向",
-      "C. 强制指令",
-      "D. 目的地"
-    ],
-    "answer": [
-      "A. 所在位置"
-    ],
+    "options": ["A. 所在位置", "B. 前进方向", "C. 强制指令", "D. 目的地"],
+    "answer": ["A. 所在位置"],
     "difficulty": 2,
     "shuffle": false,
     "degree": null,
@@ -2476,15 +2140,8 @@
     "id": "70104084",
     "type": "single",
     "stem": "在飞行区遇到红底白字的标记牌，此类标记牌表示的含义是__。",
-    "options": [
-      "A. 所在位置",
-      "B. 目的地",
-      "C. 强制指令",
-      "D. 限速标志"
-    ],
-    "answer": [
-      "C. 强制指令"
-    ],
+    "options": ["A. 所在位置", "B. 目的地", "C. 强制指令", "D. 限速标志"],
+    "answer": ["C. 强制指令"],
     "difficulty": 2,
     "shuffle": false,
     "degree": null,
@@ -2506,15 +2163,8 @@
     "id": "70104085",
     "type": "single",
     "stem": "在飞行区遇到黄底黑字的标记牌，此类标记牌表示的含义是__。",
-    "options": [
-      "A. 所在位置",
-      "B. 目的地",
-      "C. 强制指令",
-      "D. 限速标志"
-    ],
-    "answer": [
-      "B. 目的地"
-    ],
+    "options": ["A. 所在位置", "B. 目的地", "C. 强制指令", "D. 限速标志"],
+    "answer": ["B. 目的地"],
     "difficulty": 2,
     "shuffle": false,
     "degree": null,
@@ -2536,15 +2186,8 @@
     "id": "70104086",
     "type": "single",
     "stem": "强制指令标记牌的颜色是—，看到此类标志要提高警惕。",
-    "options": [
-      "A. 黑底黄字",
-      "B. 黄底黑字",
-      "C. 红底白字",
-      "D. 白底红字"
-    ],
-    "answer": [
-      "C. 红底白字"
-    ],
+    "options": ["A. 黑底黄字", "B. 黄底黑字", "C. 红底白字", "D. 白底红字"],
+    "answer": ["C. 红底白字"],
     "difficulty": 2,
     "shuffle": false,
     "degree": null,
@@ -2566,15 +2209,8 @@
     "id": "70104087",
     "type": "single",
     "stem": "用于指示跑道区域或临界区的入口，以及禁止航空器使用的区域，进入上述区域需强制报告，未经许可不得入内的标记牌颜色为？",
-    "options": [
-      "A. 黄底黑字",
-      "B. 黑底黄字",
-      "C. 白底红字",
-      "D. 红底白字"
-    ],
-    "answer": [
-      "D. 红底白字"
-    ],
+    "options": ["A. 黄底黑字", "B. 黑底黄字", "C. 白底红字", "D. 红底白字"],
+    "answer": ["D. 红底白字"],
     "difficulty": 3,
     "shuffle": false,
     "degree": null,
@@ -2602,9 +2238,7 @@
       "C. 即将前往位置为标记牌所示位置",
       "D. 无意义信息"
     ],
-    "answer": [
-      "A. 当前所处位置为标记牌所示位置"
-    ],
+    "answer": ["A. 当前所处位置为标记牌所示位置"],
     "difficulty": 3,
     "shuffle": false,
     "degree": null,
@@ -2626,15 +2260,16 @@
     "id": "70104089",
     "type": "single",
     "stem": "以下设置在滑行道上的地面标志，哪个不是起到跑道防侵入作用的（）",
-    "options": [
-      "A. =_xlfn.DISPIMG(\"ID_CFC5EC35547A451C8D401BA32B0B2AEE\",1)",
-      "B. =_xlfn.DISPIMG(\"ID_B9EE82DF74C74B328F6FAF30FAB40907\",1)",
-      "C. =_xlfn.DISPIMG(\"ID_D6F8BCD48C7149E0A37700B8412669BB\",1)",
-      "D. =_xlfn.DISPIMG(\"ID_85EAF58D7E624FF1BDFF9F6758F9B9F6\",1)"
-    ],
-    "answer": [
-      "D. =_xlfn.DISPIMG(\"ID_85EAF58D7E624FF1BDFF9F6758F9B9F6\",1)"
-    ],
+    "options": ["A. 图片1.png", "B. 图片2.png", "C. 图片3.png", "D. 图片4.png"],
+    "attachments": {
+      "options_images": [
+        "public/data/airport/question_picture/图片1.png",
+        "public/data/airport/question_picture/图片2.png",
+        "public/data/airport/question_picture/图片3.png",
+        "public/data/airport/question_picture/图片4.png"
+      ]
+    },
+    "answer": ["D. 图片4.png"],
     "difficulty": 3,
     "shuffle": false,
     "degree": null,
@@ -2656,13 +2291,8 @@
     "id": "70104090",
     "type": "boolean",
     "stem": "施工期间临时标志必须保持清晰有效。",
-    "options": [
-      "A. 正确",
-      "B. 错误"
-    ],
-    "answer": [
-      "A. 正确"
-    ],
+    "options": ["A. 正确", "B. 错误"],
+    "answer": ["A. 正确"],
     "difficulty": 1,
     "shuffle": false,
     "degree": null,
@@ -2684,13 +2314,8 @@
     "id": "70104091",
     "type": "boolean",
     "stem": "跑道关闭标志是白色标志。",
-    "options": [
-      "A. 正确",
-      "B. 错误"
-    ],
-    "answer": [
-      "A. 正确"
-    ],
+    "options": ["A. 正确", "B. 错误"],
+    "answer": ["A. 正确"],
     "difficulty": 1,
     "shuffle": false,
     "degree": null,
@@ -2712,13 +2337,8 @@
     "id": "70104092",
     "type": "boolean",
     "stem": "强制性指令标记牌为红底白字。",
-    "options": [
-      "A. 正确",
-      "B. 错误"
-    ],
-    "answer": [
-      "A. 正确"
-    ],
+    "options": ["A. 正确", "B. 错误"],
+    "answer": ["A. 正确"],
     "difficulty": 1,
     "shuffle": false,
     "degree": null,
@@ -2740,13 +2360,8 @@
     "id": "70104093",
     "type": "boolean",
     "stem": "道路等待位置标志设置在巡场路进入地面保护区道口，地面保障人员看到“停”字标志必须停车等待，经过塔台允许方可进入。",
-    "options": [
-      "A. 正确",
-      "B. 错误"
-    ],
-    "answer": [
-      "A. 正确"
-    ],
+    "options": ["A. 正确", "B. 错误"],
+    "answer": ["A. 正确"],
     "difficulty": 1,
     "shuffle": false,
     "degree": null,
@@ -2768,13 +2383,8 @@
     "id": "70104094",
     "type": "boolean",
     "stem": "跑道等待位置标志的主要作用是为进入相关区域的地面车辆和人员提供有效的目视参考。",
-    "options": [
-      "A. 正确",
-      "B. 错误"
-    ],
-    "answer": [
-      "A. 正确"
-    ],
+    "options": ["A. 正确", "B. 错误"],
+    "answer": ["A. 正确"],
     "difficulty": 1,
     "shuffle": false,
     "degree": null,
@@ -2796,13 +2406,8 @@
     "id": "70104095",
     "type": "boolean",
     "stem": "防止跑道入重要标志标识不包括道路等待位置标志。",
-    "options": [
-      "A. 正确",
-      "B. 错误"
-    ],
-    "answer": [
-      "B. 错误"
-    ],
+    "options": ["A. 正确", "B. 错误"],
+    "answer": ["B. 错误"],
     "difficulty": 1,
     "shuffle": false,
     "degree": null,
@@ -2824,13 +2429,8 @@
     "id": "70104096",
     "type": "boolean",
     "stem": "位置标记牌为黑底黄字。",
-    "options": [
-      "A. 正确",
-      "B. 错误"
-    ],
-    "answer": [
-      "A. 正确"
-    ],
+    "options": ["A. 正确", "B. 错误"],
+    "answer": ["A. 正确"],
     "difficulty": 1,
     "shuffle": false,
     "degree": null,
@@ -2852,13 +2452,8 @@
     "id": "70104097",
     "type": "boolean",
     "stem": "方向标记牌为黄底黑字。",
-    "options": [
-      "A. 正确",
-      "B. 错误"
-    ],
-    "answer": [
-      "A. 正确"
-    ],
+    "options": ["A. 正确", "B. 错误"],
+    "answer": ["A. 正确"],
     "difficulty": 1,
     "shuffle": false,
     "degree": null,
@@ -2880,13 +2475,8 @@
     "id": "70104098",
     "type": "boolean",
     "stem": "在跑道等待位置处安装在滑行道两侧的滑行引导标记牌，用于显示跑道号码的为黄底黑字，是强制性指令标记牌。",
-    "options": [
-      "A. 正确",
-      "B. 错误"
-    ],
-    "answer": [
-      "B. 错误"
-    ],
+    "options": ["A. 正确", "B. 错误"],
+    "answer": ["B. 错误"],
     "difficulty": 3,
     "shuffle": false,
     "degree": null,
@@ -2908,15 +2498,8 @@
     "id": "70104099",
     "type": "single",
     "stem": "跑道等待位置标记牌是（）。",
-    "options": [
-      "A. 白底红字",
-      "B. 红底白字",
-      "C. 黑底黄字",
-      "D. 黄底黑字"
-    ],
-    "answer": [
-      "B. 红底白字"
-    ],
+    "options": ["A. 白底红字", "B. 红底白字", "C. 黑底黄字", "D. 黄底黑字"],
+    "answer": ["B. 红底白字"],
     "difficulty": 3,
     "shuffle": false,
     "degree": null,
@@ -3044,10 +2627,7 @@
       "C. 禁止进入标记牌",
       "D. 跑道等待位置标记牌"
     ],
-    "answer": [
-      "C. 禁止进入标记牌",
-      "D. 跑道等待位置标记牌"
-    ],
+    "answer": ["C. 禁止进入标记牌", "D. 跑道等待位置标记牌"],
     "difficulty": 3,
     "shuffle": false,
     "degree": null,
@@ -3069,15 +2649,8 @@
     "id": "70105104",
     "type": "single",
     "stem": "机坪作业人员初始培训学时不少于：",
-    "options": [
-      "A. 2学时",
-      "B. 4学时",
-      "C. 8学时",
-      "D. 16学时"
-    ],
-    "answer": [
-      "B. 4学时"
-    ],
+    "options": ["A. 2学时", "B. 4学时", "C. 8学时", "D. 16学时"],
+    "answer": ["B. 4学时"],
     "difficulty": 1,
     "shuffle": false,
     "degree": null,
@@ -3105,9 +2678,7 @@
       "C. 符合条件人员",
       "D. 值班经理"
     ],
-    "answer": [
-      "C. 符合条件人员"
-    ],
+    "answer": ["C. 符合条件人员"],
     "difficulty": 1,
     "shuffle": false,
     "degree": null,
@@ -3129,15 +2700,8 @@
     "id": "70105106",
     "type": "single",
     "stem": "复训是指向地面保护区或者机动区、机坪作业人员提供的培训，达到保持并增强以上人员跑道侵入防范意识的效果。复训与上次培训（初始培训或者上一次复训）间隔应当不超过（）年",
-    "options": [
-      "A. 半年",
-      "B. 1年",
-      "C. 2年",
-      "D. 3年"
-    ],
-    "answer": [
-      "B. 1年"
-    ],
+    "options": ["A. 半年", "B. 1年", "C. 2年", "D. 3年"],
+    "answer": ["B. 1年"],
     "difficulty": 1,
     "shuffle": false,
     "degree": null,
@@ -3165,9 +2729,7 @@
       "C. 必须被引领",
       "D. 夜间才可进入"
     ],
-    "answer": [
-      "C. 必须被引领"
-    ],
+    "answer": ["C. 必须被引领"],
     "difficulty": 1,
     "shuffle": false,
     "degree": null,
@@ -3195,9 +2757,7 @@
       "C. 全程，双向",
       "D. 进入时，双向"
     ],
-    "answer": [
-      "C. 全程，双向"
-    ],
+    "answer": ["C. 全程，双向"],
     "difficulty": 2,
     "shuffle": false,
     "degree": null,
@@ -3219,15 +2779,8 @@
     "id": "70105109",
     "type": "single",
     "stem": "进入地面保护区或者机动区作业人员应经过培训考核，初始培训不少于（）学时，复训不少于（）学时。",
-    "options": [
-      "A. 12,2В",
-      "B. 8,2",
-      "C. 16,8",
-      "D. 16,4"
-    ],
-    "answer": [
-      "D. 16,4"
-    ],
+    "options": ["A. 12,2В", "B. 8,2", "C. 16,8", "D. 16,4"],
+    "answer": ["D. 16,4"],
     "difficulty": 2,
     "shuffle": false,
     "degree": null,
@@ -3255,9 +2808,7 @@
       "C. 管理人员",
       "D. 局方监察员"
     ],
-    "answer": [
-      "B. 机坪作业人员"
-    ],
+    "answer": ["B. 机坪作业人员"],
     "difficulty": 2,
     "shuffle": false,
     "degree": null,
@@ -3285,9 +2836,7 @@
       "C. 持有特种作业证",
       "D. 由单位领导批准"
     ],
-    "answer": [
-      "B. 经培训且考核合格"
-    ],
+    "answer": ["B. 经培训且考核合格"],
     "difficulty": 2,
     "shuffle": false,
     "degree": null,
@@ -3309,15 +2858,8 @@
     "id": "70105112",
     "type": "single",
     "stem": "地面保护区或者机动区作业人员的初始培训不少于（）学时，复训不少于（）学时。机坪作业人员的初始培训不少于（）学时，复训不少于（）学时。",
-    "options": [
-      "A. 16 4 4 2В",
-      "B. 24 12 4 2",
-      "C. 16 4 2 2",
-      "D. 16 2 4 2"
-    ],
-    "answer": [
-      "A. 16 4 4 2В"
-    ],
+    "options": ["A. 16 4 4 2В", "B. 24 12 4 2", "C. 16 4 2 2", "D. 16 2 4 2"],
+    "answer": ["A. 16 4 4 2В"],
     "difficulty": 3,
     "shuffle": false,
     "degree": null,
@@ -3339,13 +2881,8 @@
     "id": "70105113",
     "type": "boolean",
     "stem": "每年定期对员工及进入飞行区作业的施工人员进行培训和考核，不合格者不得独立进入地面保护区和机动区作业。",
-    "options": [
-      "A. 正确",
-      "B. 错误"
-    ],
-    "answer": [
-      "A. 正确"
-    ],
+    "options": ["A. 正确", "B. 错误"],
+    "answer": ["A. 正确"],
     "difficulty": 1,
     "shuffle": false,
     "degree": null,
@@ -3367,13 +2904,8 @@
     "id": "70105114",
     "type": "boolean",
     "stem": "未经培训或考核不合格人员，经特殊许可可以临时独自进入跑道。",
-    "options": [
-      "A. 正确",
-      "B. 错误"
-    ],
-    "answer": [
-      "B. 错误"
-    ],
+    "options": ["A. 正确", "B. 错误"],
+    "answer": ["B. 错误"],
     "difficulty": 1,
     "shuffle": false,
     "degree": null,
@@ -3395,13 +2927,8 @@
     "id": "70105115",
     "type": "boolean",
     "stem": "地面保护区或机动区作业人员经培训且考核合格后，方可进入地面保护区或机动区。",
-    "options": [
-      "A. 正确",
-      "B. 错误"
-    ],
-    "answer": [
-      "A. 正确"
-    ],
+    "options": ["A. 正确", "B. 错误"],
+    "answer": ["A. 正确"],
     "difficulty": 1,
     "shuffle": false,
     "degree": null,
@@ -3423,13 +2950,8 @@
     "id": "70105116",
     "type": "boolean",
     "stem": "未经培训或者考核不合格的人员，确需进入地面保护区或者机动区时，应当由符合条件的人员引领，并全程与引领人员保持双向联系，听从引领人员的指令，接受引领人员监督。",
-    "options": [
-      "A. 正确",
-      "B. 错误"
-    ],
-    "answer": [
-      "A. 正确"
-    ],
+    "options": ["A. 正确", "B. 错误"],
+    "answer": ["A. 正确"],
     "difficulty": 1,
     "shuffle": false,
     "degree": null,
@@ -3451,13 +2973,8 @@
     "id": "70105117",
     "type": "boolean",
     "stem": "只有进入地面保护区或机动区人员必须参加跑道侵入防范培训。",
-    "options": [
-      "A. 正确",
-      "B. 错误"
-    ],
-    "answer": [
-      "B. 错误"
-    ],
+    "options": ["A. 正确", "B. 错误"],
+    "answer": ["B. 错误"],
     "difficulty": 1,
     "shuffle": false,
     "degree": null,
@@ -3479,13 +2996,8 @@
     "id": "70105118",
     "type": "boolean",
     "stem": "无线电通话培训属于跑道侵入防范培训内容之一。",
-    "options": [
-      "A. 正确",
-      "B. 错误"
-    ],
-    "answer": [
-      "A. 正确"
-    ],
+    "options": ["A. 正确", "B. 错误"],
+    "answer": ["A. 正确"],
     "difficulty": 1,
     "shuffle": false,
     "degree": null,
@@ -3507,13 +3019,8 @@
     "id": "70105119",
     "type": "boolean",
     "stem": "被引领人员可不完全按照引领路线行动，但必须在引领人员视线范围内。",
-    "options": [
-      "A. 正确",
-      "B. 错误"
-    ],
-    "answer": [
-      "B. 错误"
-    ],
+    "options": ["A. 正确", "B. 错误"],
+    "answer": ["B. 错误"],
     "difficulty": 2,
     "shuffle": false,
     "degree": null,
@@ -3535,13 +3042,8 @@
     "id": "70105120",
     "type": "boolean",
     "stem": "地面保护区或机动区作业人员初始培训不少于16学时，复训不少于4学时。",
-    "options": [
-      "A. 正确",
-      "B. 错误"
-    ],
-    "answer": [
-      "A. 正确"
-    ],
+    "options": ["A. 正确", "B. 错误"],
+    "answer": ["A. 正确"],
     "difficulty": 2,
     "shuffle": false,
     "degree": null,
@@ -3563,13 +3065,8 @@
     "id": "70105121",
     "type": "boolean",
     "stem": "跑道运行相关岗位从业人员应具备必要的安全运行知识，熟悉有关规章制度和程序，掌握本岗位的安全运行技能。未经安全生产教育和培训合格的从业人员，不得上岗作业。",
-    "options": [
-      "A. 正确",
-      "B. 错误"
-    ],
-    "answer": [
-      "A. 正确"
-    ],
+    "options": ["A. 正确", "B. 错误"],
+    "answer": ["A. 正确"],
     "difficulty": 2,
     "shuffle": false,
     "degree": null,
@@ -3591,13 +3088,8 @@
     "id": "70105122",
     "type": "boolean",
     "stem": "飞行区场地巡视检查人员在飞行区内连续工作10年以上的，可适当放宽复训间隔时间。",
-    "options": [
-      "A. 正确",
-      "B. 错误"
-    ],
-    "answer": [
-      "B. 错误"
-    ],
+    "options": ["A. 正确", "B. 错误"],
+    "answer": ["B. 错误"],
     "difficulty": 2,
     "shuffle": false,
     "degree": null,
@@ -3792,9 +3284,7 @@
       "C. 只要减速就可接电话",
       "D. 短信回复不受限"
     ],
-    "answer": [
-      "B. 不得接打除跟管制员联系以外的电话"
-    ],
+    "answer": ["B. 不得接打除跟管制员联系以外的电话"],
     "difficulty": 1,
     "shuffle": false,
     "degree": null,
@@ -3816,15 +3306,8 @@
     "id": "70106129",
     "type": "single",
     "stem": "作业人员与管制员通信时，应当优先使用什么设备？",
-    "options": [
-      "A. 无线电对讲机",
-      "B. 个人手机",
-      "C. 社交软件语音",
-      "D. 短信"
-    ],
-    "answer": [
-      "A. 无线电对讲机"
-    ],
+    "options": ["A. 无线电对讲机", "B. 个人手机", "C. 社交软件语音", "D. 短信"],
+    "answer": ["A. 无线电对讲机"],
     "difficulty": 1,
     "shuffle": false,
     "degree": null,
@@ -3852,9 +3335,7 @@
       "C. 仅复诵关键词",
       "D. 视情复诵"
     ],
-    "answer": [
-      "B. 完整准确清晰"
-    ],
+    "answer": ["B. 完整准确清晰"],
     "difficulty": 1,
     "shuffle": false,
     "degree": null,
@@ -3882,9 +3363,7 @@
       "C. 卫星电话",
       "D. 甚高频无线电通信监听设备"
     ],
-    "answer": [
-      "B. 车载无线电对讲机"
-    ],
+    "answer": ["B. 车载无线电对讲机"],
     "difficulty": 1,
     "shuffle": false,
     "degree": null,
@@ -3912,9 +3391,7 @@
       "C. 原地等待不报告",
       "D. 由作业人员自行选择"
     ],
-    "answer": [
-      "B. 撤离"
-    ],
+    "answer": ["B. 撤离"],
     "difficulty": 1,
     "shuffle": false,
     "degree": null,
@@ -3936,15 +3413,8 @@
     "id": "70106133",
     "type": "single",
     "stem": "进入跑道、滑行道作业的车辆和人员应配备（），确保能够始终与管制员建立稳定可靠的直连通信。",
-    "options": [
-      "A. 电话",
-      "B. 手机",
-      "C. 无线电对讲机",
-      "D. 通讯工具"
-    ],
-    "answer": [
-      "C. 无线电对讲机"
-    ],
+    "options": ["A. 电话", "B. 手机", "C. 无线电对讲机", "D. 通讯工具"],
+    "answer": ["C. 无线电对讲机"],
     "difficulty": 1,
     "shuffle": false,
     "degree": null,
@@ -3966,14 +3436,8 @@
     "id": "70106134",
     "type": "single",
     "stem": "当作业人员发现通信联系中断时，应当（）撒离地面保护区，并通过电话告知塔台。",
-    "options": [
-      "A. 缓慢",
-      "B. 立即",
-      "C. 恢复通讯后再"
-    ],
-    "answer": [
-      "B. 立即"
-    ],
+    "options": ["A. 缓慢", "B. 立即", "C. 恢复通讯后再"],
+    "answer": ["B. 立即"],
     "difficulty": 1,
     "shuffle": false,
     "degree": null,
@@ -4001,9 +3465,7 @@
       "C. 无需回应立即进入",
       "D. 使用手机再次确认"
     ],
-    "answer": [
-      "A. 复诵其指令，确保通话闭环"
-    ],
+    "answer": ["A. 复诵其指令，确保通话闭环"],
     "difficulty": 1,
     "shuffle": false,
     "degree": null,
@@ -4031,9 +3493,7 @@
       "C. 就近选择道口进入跑道",
       "D. 观察并选择一条安全的路线进入"
     ],
-    "answer": [
-      "A. 应当请求塔台管制员复诵指令确认进入路线"
-    ],
+    "answer": ["A. 应当请求塔台管制员复诵指令确认进入路线"],
     "difficulty": 2,
     "shuffle": false,
     "degree": null,
@@ -4061,9 +3521,7 @@
       "C. 值班室人员电话",
       "D. 预计作业时间"
     ],
-    "answer": [
-      "C. 值班室人员电话"
-    ],
+    "answer": ["C. 值班室人员电话"],
     "difficulty": 2,
     "shuffle": false,
     "degree": null,
@@ -4091,9 +3549,7 @@
       "C. 与管制员建立直连通信",
       "D. 进入跑道时短时开启"
     ],
-    "answer": [
-      "C. 与管制员建立直连通信"
-    ],
+    "answer": ["C. 与管制员建立直连通信"],
     "difficulty": 2,
     "shuffle": false,
     "degree": null,
@@ -4121,9 +3577,7 @@
       "C. 可以使用当地方言交流沟通",
       "D. 不使用时妥善保管，防止误触按钮占用频道"
     ],
-    "answer": [
-      "C. 可以使用当地方言交流沟通"
-    ],
+    "answer": ["C. 可以使用当地方言交流沟通"],
     "difficulty": 2,
     "shuffle": false,
     "degree": null,
@@ -4145,15 +3599,8 @@
     "id": "70106140",
     "type": "single",
     "stem": "陆空通话中数字“7”的标准发音是：",
-    "options": [
-      "A. 柒",
-      "B. 拐",
-      "C. t",
-      "D. SEVEN"
-    ],
-    "answer": [
-      "B. 拐"
-    ],
+    "options": ["A. 柒", "B. 拐", "C. t", "D. SEVEN"],
+    "answer": ["B. 拐"],
     "difficulty": 2,
     "shuffle": false,
     "degree": null,
@@ -4175,15 +3622,8 @@
     "id": "70106141",
     "type": "single",
     "stem": "与塔台管制员通话时，按照规范标准通话用语E应该读：",
-    "options": [
-      "A. Echo",
-      "B. Eagle",
-      "C. Elf",
-      "D. Earth"
-    ],
-    "answer": [
-      "A. Echo"
-    ],
+    "options": ["A. Echo", "B. Eagle", "C. Elf", "D. Earth"],
+    "answer": ["A. Echo"],
     "difficulty": 3,
     "shuffle": false,
     "degree": null,
@@ -4211,9 +3651,7 @@
       "C. 车辆顶端安装符合标准的灯具，视情开启顶部的灯光",
       "D. 优先使用无线电对讲机与管制员通信，手机作为应急通信设备"
     ],
-    "answer": [
-      "C. 车辆顶端安装符合标准的灯具，视情开启顶部的灯光"
-    ],
+    "answer": ["C. 车辆顶端安装符合标准的灯具，视情开启顶部的灯光"],
     "difficulty": 3,
     "shuffle": false,
     "degree": null,
@@ -4235,15 +3673,8 @@
     "id": "70106143",
     "type": "single",
     "stem": "塔台管制员、作业人员全程应使用规范的通话用语进行联系，M读法为（）。",
-    "options": [
-      "A. Mike",
-      "B. Much",
-      "C. Member",
-      "D. Milk"
-    ],
-    "answer": [
-      "A. Mike"
-    ],
+    "options": ["A. Mike", "B. Much", "C. Member", "D. Milk"],
+    "answer": ["A. Mike"],
     "difficulty": 3,
     "shuffle": false,
     "degree": null,
@@ -4265,13 +3696,8 @@
     "id": "70106144",
     "type": "boolean",
     "stem": "与塔台管制员通话应内容简洁、清晰、准确；口齿清晰、复述内容；使用正确的数字和字母表述。",
-    "options": [
-      "A. 正确",
-      "B. 错误"
-    ],
-    "answer": [
-      "A. 正确"
-    ],
+    "options": ["A. 正确", "B. 错误"],
+    "answer": ["A. 正确"],
     "difficulty": 1,
     "shuffle": false,
     "degree": null,
@@ -4293,13 +3719,8 @@
     "id": "70106145",
     "type": "boolean",
     "stem": "车辆及人员进入跑道作业前，应当向塔台管制员申请，报告呼号、当前等待位置、预计行驶路线、预计滞留时间等信息，确认跑道运行方向，作业人员与塔台管制员通话要使用无线通话标准用语。",
-    "options": [
-      "A. 正确",
-      "B. 错误"
-    ],
-    "answer": [
-      "A. 正确"
-    ],
+    "options": ["A. 正确", "B. 错误"],
+    "answer": ["A. 正确"],
     "difficulty": 1,
     "shuffle": false,
     "degree": null,
@@ -4321,13 +3742,8 @@
     "id": "70106146",
     "type": "boolean",
     "stem": "用手机代替对讲机通信不会增加跑道侵入风险。",
-    "options": [
-      "A. 正确",
-      "B. 错误"
-    ],
-    "answer": [
-      "B. 错误"
-    ],
+    "options": ["A. 正确", "B. 错误"],
+    "answer": ["B. 错误"],
     "difficulty": 1,
     "shuffle": false,
     "degree": null,
@@ -4349,13 +3765,8 @@
     "id": "70106147",
     "type": "boolean",
     "stem": "塔台管制员发布进入地面保护区或机动区许可后，复诵其指令，确保驾驶员与塔台管制员通话闭环。",
-    "options": [
-      "A. 正确",
-      "B. 错误"
-    ],
-    "answer": [
-      "A. 正确"
-    ],
+    "options": ["A. 正确", "B. 错误"],
+    "answer": ["A. 正确"],
     "difficulty": 1,
     "shuffle": false,
     "degree": null,
@@ -4377,13 +3788,8 @@
     "id": "70106148",
     "type": "boolean",
     "stem": "在进入地面保护区或机动区过程中，车辆驾驶员不得接打除跟管制员联系以外的电话。",
-    "options": [
-      "A. 正确",
-      "B. 错误"
-    ],
-    "answer": [
-      "A. 正确"
-    ],
+    "options": ["A. 正确", "B. 错误"],
+    "answer": ["A. 正确"],
     "difficulty": 1,
     "shuffle": false,
     "degree": null,
@@ -4405,13 +3811,8 @@
     "id": "70106149",
     "type": "boolean",
     "stem": "进入跑道、滑行道的车辆、人员应当配备无线电通讯设备，以便与塔台保持不间断的无线电双向联系。",
-    "options": [
-      "A. 正确",
-      "B. 错误"
-    ],
-    "answer": [
-      "A. 正确"
-    ],
+    "options": ["A. 正确", "B. 错误"],
+    "answer": ["A. 正确"],
     "difficulty": 1,
     "shuffle": false,
     "degree": null,
@@ -4433,13 +3834,8 @@
     "id": "70106150",
     "type": "boolean",
     "stem": "在机动区作业时，若无线电通信短暂中断，可继续作业并等待恢复。",
-    "options": [
-      "A. 正确",
-      "B. 错误"
-    ],
-    "answer": [
-      "B. 错误"
-    ],
+    "options": ["A. 正确", "B. 错误"],
+    "answer": ["B. 错误"],
     "difficulty": 2,
     "shuffle": false,
     "degree": null,
@@ -4461,13 +3857,8 @@
     "id": "70106151",
     "type": "boolean",
     "stem": "当作业或者检查人员发现通信联系中断时，应当继续完成检查后立即撤离跑道。",
-    "options": [
-      "A. 正确",
-      "B. 错误"
-    ],
-    "answer": [
-      "B. 错误"
-    ],
+    "options": ["A. 正确", "B. 错误"],
+    "answer": ["B. 错误"],
     "difficulty": 2,
     "shuffle": false,
     "degree": null,
@@ -4489,13 +3880,8 @@
     "id": "70106152",
     "type": "boolean",
     "stem": "在地面保护区巡检时，发现通信联系中断，应当快速执行原计划任务后再撤离跑道。",
-    "options": [
-      "A. 正确",
-      "B. 错误"
-    ],
-    "answer": [
-      "B. 错误"
-    ],
+    "options": ["A. 正确", "B. 错误"],
+    "answer": ["B. 错误"],
     "difficulty": 3,
     "shuffle": false,
     "degree": null,
@@ -4517,14 +3903,8 @@
     "id": "70106153",
     "type": "multiple",
     "stem": "进入地面保护区或机动区机动区的人员必须携带手持无线电（）（优先使用）和（）（应急通信设备），车辆配备车载无线电对讲机，同时确保无线电对讲机能够始终与塔台建立稳定可靠的直连通信，并在“机坪”波道上时刻保持守听。",
-    "options": [
-      "A. 对讲机",
-      "B. 手机"
-    ],
-    "answer": [
-      "A. 对讲机",
-      "B. 手机"
-    ],
+    "options": ["A. 对讲机", "B. 手机"],
+    "answer": ["A. 对讲机", "B. 手机"],
     "difficulty": 1,
     "shuffle": false,
     "degree": null,
@@ -4546,17 +3926,8 @@
     "id": "70106154",
     "type": "multiple",
     "stem": "在与管制员通讯过程中，以下数字汉语发音正确的是：",
-    "options": [
-      "A. O---洞",
-      "B. 1---么",
-      "C. 2---二",
-      "D. 7---拐"
-    ],
-    "answer": [
-      "A. O---洞",
-      "B. 1---么",
-      "D. 7---拐"
-    ],
+    "options": ["A. O---洞", "B. 1---么", "C. 2---二", "D. 7---拐"],
+    "answer": ["A. O---洞", "B. 1---么", "D. 7---拐"],
     "difficulty": 2,
     "shuffle": false,
     "degree": null,
@@ -4585,11 +3956,7 @@
       "D. 能与管制员直连E",
       "E. 可仅依赖手机"
     ],
-    "answer": [
-      "A. 配备对讲机",
-      "B. 保持持续守听",
-      "D. 能与管制员直连E"
-    ],
+    "answer": ["A. 配备对讲机", "B. 保持持续守听", "D. 能与管制员直连E"],
     "difficulty": 2,
     "shuffle": false,
     "degree": null,
@@ -4618,11 +3985,7 @@
       "D. 等待恢复E",
       "E. 确保安全退出"
     ],
-    "answer": [
-      "A. 立即撤离",
-      "C. 报告异常",
-      "E. 确保安全退出"
-    ],
+    "answer": ["A. 立即撤离", "C. 报告异常", "E. 确保安全退出"],
     "difficulty": 3,
     "shuffle": false,
     "degree": null,
@@ -4651,11 +4014,7 @@
       "D. 随意更换通信方式",
       "E. 无需实时守听"
     ],
-    "answer": [
-      "A. 使用标准用语",
-      "B. 按规定程序联系",
-      "C. 使用指定无线电波道"
-    ],
+    "answer": ["A. 使用标准用语", "B. 按规定程序联系", "C. 使用指定无线电波道"],
     "difficulty": 3,
     "shuffle": false,
     "degree": null,
@@ -4683,9 +4042,7 @@
       "C. 申请上级批准",
       "D. 开展跑道巡查，确保跑道安全"
     ],
-    "answer": [
-      "B. 开展跑道侵入危险源识别和风险评估"
-    ],
+    "answer": ["B. 开展跑道侵入危险源识别和风险评估"],
     "difficulty": 2,
     "shuffle": false,
     "degree": null,
@@ -4707,15 +4064,8 @@
     "id": "70107159",
     "type": "single",
     "stem": "作业人员下车作业时，离开车辆的距离不得超过多少米？",
-    "options": [
-      "A. 50米",
-      "B. 100米",
-      "C. 150米",
-      "D. 200米"
-    ],
-    "answer": [
-      "B. 100米"
-    ],
+    "options": ["A. 50米", "B. 100米", "C. 150米", "D. 200米"],
+    "answer": ["B. 100米"],
     "difficulty": 2,
     "shuffle": false,
     "degree": null,
@@ -4743,9 +4093,7 @@
       "C. 临时取消标准通话要求",
       "D. 立即通知航空公司"
     ],
-    "answer": [
-      "B. 事先开展跑道侵入危险源识别和风险评估"
-    ],
+    "answer": ["B. 事先开展跑道侵入危险源识别和风险评估"],
     "difficulty": 3,
     "shuffle": false,
     "degree": null,
@@ -4767,13 +4115,8 @@
     "id": "70107161",
     "type": "boolean",
     "stem": "施工监管员带领施工人员到达施工区域后，无需继续监管施工人员行进路线。",
-    "options": [
-      "A. 正确",
-      "B. 错误"
-    ],
-    "answer": [
-      "B. 错误"
-    ],
+    "options": ["A. 正确", "B. 错误"],
+    "answer": ["B. 错误"],
     "difficulty": 1,
     "shuffle": false,
     "degree": null,
@@ -4795,13 +4138,8 @@
     "id": "70107162",
     "type": "boolean",
     "stem": "跑道开放运行期间，在地面保护区或者机动区实 施作业的车辆和人员，作业期间驾驶员必须始终在车上待命。",
-    "options": [
-      "A. 正确",
-      "B. 错误"
-    ],
-    "answer": [
-      "A. 正确"
-    ],
+    "options": ["A. 正确", "B. 错误"],
+    "answer": ["A. 正确"],
     "difficulty": 1,
     "shuffle": false,
     "degree": null,
@@ -4823,13 +4161,8 @@
     "id": "70107163",
     "type": "boolean",
     "stem": "外包单位作业人员应视同本单位人员管理，经过培训的外包人员，在跑道关闭后，可以自行上道作业。",
-    "options": [
-      "A. 正确",
-      "B. 错误"
-    ],
-    "answer": [
-      "B. 错误"
-    ],
+    "options": ["A. 正确", "B. 错误"],
+    "answer": ["B. 错误"],
     "difficulty": 1,
     "shuffle": false,
     "degree": null,
@@ -4851,13 +4184,8 @@
     "id": "70107164",
     "type": "boolean",
     "stem": "任何人进入地面保护区或机动区时应穿戴反光标识，并听从引领人员指令，严禁进入申请区域以外的其他区域。",
-    "options": [
-      "A. 正确",
-      "B. 错误"
-    ],
-    "answer": [
-      "A. 正确"
-    ],
+    "options": ["A. 正确", "B. 错误"],
+    "answer": ["A. 正确"],
     "difficulty": 1,
     "shuffle": false,
     "degree": null,
@@ -4879,13 +4207,8 @@
     "id": "70107165",
     "type": "boolean",
     "stem": "车辆进入跑道过程中，在没有飞机起降的情况下，驾驶员可短暂接听紧急私人电话。",
-    "options": [
-      "A. 正确",
-      "B. 错误"
-    ],
-    "answer": [
-      "B. 错误"
-    ],
+    "options": ["A. 正确", "B. 错误"],
+    "answer": ["B. 错误"],
     "difficulty": 2,
     "shuffle": false,
     "degree": null,
@@ -4907,13 +4230,8 @@
     "id": "70107166",
     "type": "boolean",
     "stem": "发现处于开放运行的跑道存在异物，如果没有暂时没有航班起降，人员可以直接驾车或步行直接上道清理，以保障跑道运行安全。",
-    "options": [
-      "A. 正确",
-      "B. 错误"
-    ],
-    "answer": [
-      "B. 错误"
-    ],
+    "options": ["A. 正确", "B. 错误"],
+    "answer": ["B. 错误"],
     "difficulty": 2,
     "shuffle": false,
     "degree": null,
@@ -4935,13 +4253,8 @@
     "id": "70107167",
     "type": "boolean",
     "stem": "各机场要配备与工程规模相适应的现场管理人员，并采用设置路障、临时围栏、其他醒目隔离设施等方式，将施工车辆和人员的活动限制在施工区域内。",
-    "options": [
-      "A. 正确",
-      "B. 错误"
-    ],
-    "answer": [
-      "A. 正确"
-    ],
+    "options": ["A. 正确", "B. 错误"],
+    "answer": ["A. 正确"],
     "difficulty": 2,
     "shuffle": false,
     "degree": null,
@@ -4963,13 +4276,8 @@
     "id": "70107168",
     "type": "boolean",
     "stem": "跑道开放运行期间，在地面保护区或者机动区内，采用驾车方式巡视检查跑道、滑行道时，巡检人员无需持续观察跑道运行情况。",
-    "options": [
-      "A. 正确",
-      "B. 错误"
-    ],
-    "answer": [
-      "B. 错误"
-    ],
+    "options": ["A. 正确", "B. 错误"],
+    "answer": ["B. 错误"],
     "difficulty": 2,
     "shuffle": false,
     "degree": null,
@@ -4991,13 +4299,8 @@
     "id": "70107169",
     "type": "boolean",
     "stem": "在符合机场电磁环境保护要求的前提下，机场可采用电子围栏、卫星定位等新技术，有效管控飞行区车辆和人员活动范围。",
-    "options": [
-      "A. 正确",
-      "B. 错误"
-    ],
-    "answer": [
-      "A. 正确"
-    ],
+    "options": ["A. 正确", "B. 错误"],
+    "answer": ["A. 正确"],
     "difficulty": 2,
     "shuffle": false,
     "degree": null,
@@ -5019,13 +4322,8 @@
     "id": "70107170",
     "type": "boolean",
     "stem": "突发事件应急响应时，消防救援人员应核实跑道是否已关闭或哪条跑道关闭，并根据塔台指令进入机动区，防止侵入或穿越运行中的跑道。（）",
-    "options": [
-      "A. 正确",
-      "B. 错误"
-    ],
-    "answer": [
-      "A. 正确"
-    ],
+    "options": ["A. 正确", "B. 错误"],
+    "answer": ["A. 正确"],
     "difficulty": 2,
     "shuffle": false,
     "degree": null,
@@ -5047,13 +4345,8 @@
     "id": "70107171",
     "type": "boolean",
     "stem": "车辆和人员进入地面保护区或者机动区后，只要已获得许可，就可以根据现场情况适当扩大作业区域。",
-    "options": [
-      "A. 正确",
-      "B. 错误"
-    ],
-    "answer": [
-      "B. 错误"
-    ],
+    "options": ["A. 正确", "B. 错误"],
+    "answer": ["B. 错误"],
     "difficulty": 2,
     "shuffle": false,
     "degree": null,
@@ -5075,13 +4368,8 @@
     "id": "70107172",
     "type": "boolean",
     "stem": "跑道上巡视检查方向应当与航空器起降方向相同。",
-    "options": [
-      "A. 正确",
-      "B. 错误"
-    ],
-    "answer": [
-      "B. 错误"
-    ],
+    "options": ["A. 正确", "B. 错误"],
+    "answer": ["B. 错误"],
     "difficulty": 2,
     "shuffle": false,
     "degree": null,
@@ -5103,13 +4391,8 @@
     "id": "70107173",
     "type": "boolean",
     "stem": "航班运行期间不得进入地面保护区或机动区开展应急救援演练，如需进入地面保护区或机动区开展救援演练的，应在当日航班结束后进行，并事先开展跑道侵入危险源识别和风险评估，明确相关演练要求，加强重点人员培训，避免发生跑道侵入事件。",
-    "options": [
-      "A. 正确",
-      "B. 错误"
-    ],
-    "answer": [
-      "A. 正确"
-    ],
+    "options": ["A. 正确", "B. 错误"],
+    "answer": ["A. 正确"],
     "difficulty": 2,
     "shuffle": false,
     "degree": null,
@@ -5131,13 +4414,8 @@
     "id": "70107174",
     "type": "boolean",
     "stem": "作业人员下车后可以离车200米范围内活动。",
-    "options": [
-      "A. 正确",
-      "B. 错误"
-    ],
-    "answer": [
-      "B. 错误"
-    ],
+    "options": ["A. 正确", "B. 错误"],
+    "answer": ["B. 错误"],
     "difficulty": 3,
     "shuffle": false,
     "degree": null,
@@ -5159,13 +4437,8 @@
     "id": "70107175",
     "type": "boolean",
     "stem": "跑道不停航施工结束后跑道巡视检查应采取的关键措施是施工单位、建设单位、机场开展三级检查。",
-    "options": [
-      "A. 正确",
-      "B. 错误"
-    ],
-    "answer": [
-      "A. 正确"
-    ],
+    "options": ["A. 正确", "B. 错误"],
+    "answer": ["A. 正确"],
     "difficulty": 3,
     "shuffle": false,
     "degree": null,

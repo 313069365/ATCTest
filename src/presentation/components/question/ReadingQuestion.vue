@@ -1,7 +1,7 @@
 <template>
   <div class="reading-question">
 
-    <div class="reading-tab-bar" v-if="question.media?.article">
+    <div class="reading-tab-bar" v-if="question.attachments?.article">
       <button class="reading-tab" :class="{ active: activeTab === 'question' }" @click="activeTab = 'question'">
         <Icon name="rate-review-outline" />
         作答区
@@ -24,7 +24,7 @@
     <template v-if="activeTab === 'article'">
       <div class="reading-content">
         <template v-if="!showTranslation">
-          <div class="reading-article">{{ question.media.article }}</div>
+          <div class="reading-article">{{ question.attachments.article }}</div>
         </template>
         <template v-else>
           <div class="reading-divider">
@@ -36,7 +36,7 @@
             <span class="reading-divider-label">原文</span>
             <span class="reading-notch"></span>
           </div>
-          <div class="reading-article">{{ question.media.article }}</div>
+          <div class="reading-article">{{ question.attachments.article }}</div>
         </template>
       </div>
     </template>
