@@ -137,7 +137,7 @@ const subBtnClass = (index) => {
   gap: var(--spacing-mn);
   flex: 1;
   padding: var(--spacing-smd);
-  margin: var(--spacing-sm) var(--spacing-smd);
+  margin: var(--spacing-mn) var(--spacing-smd);
   background: var(--surface);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-lg);
