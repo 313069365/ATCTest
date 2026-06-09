@@ -1,5 +1,5 @@
 {
-  "version": 2.91,
+  "version": 2.7,
   "files": [
     "atc/base.json",
     "atc/professional.json",
@@ -9,7 +9,11 @@
   ],
   "categories": {
     "atc": {
-      "scopes": ["base", "professional", "english"],
+      "scopes": [
+        "base",
+        "professional",
+        "english"
+      ],
       "subjects": {
         "aviationMeteorology": {
           "scope": "base",
@@ -110,7 +114,9 @@
       }
     },
     "airport": {
-      "scopes": ["base"],
+      "scopes": [
+        "base"
+      ],
       "subjects": {
         "RunwayIncursionPrevention": {
           "scope": "base",

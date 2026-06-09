@@ -4,8 +4,9 @@
   "version": "0.1.20",
   "type": "module",
   "scripts": {
+    "update:bank": "node scripts/generate-structure.cjs",
     "dev": "vite",
-    "build": "vite build",
+    "build": "npm run update:bank && vite build",
     "preview": "npm run build && wrangler dev",
     "deploy": "npm run build && wrangler deploy"
   },
