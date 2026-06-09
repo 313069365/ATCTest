@@ -6,7 +6,7 @@
   "scripts": {
     "update:bank": "node scripts/generate-structure.cjs",
     "dev": "vite",
-    "build": "npm run update:bank && vite build",
+    "build": "vite build",
     "preview": "npm run build && wrangler dev",
     "deploy": "npm run build && wrangler deploy"
   },
