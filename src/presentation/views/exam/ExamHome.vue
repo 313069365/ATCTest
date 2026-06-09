@@ -34,71 +34,92 @@
           <div v-for="paper in examPapers.slice(0, 5)" :key="paper.id" class="paper-card"
             :class="{ expanded: expandedId === paper.id }" @click="toggleExpand(paper.id)">
 
-            <!-- 收缩行 -->
-            <div class="paper-row">
-              <div class="paper-row-left">
+            <!-- 区域1：头部标题区（收缩态始终可见） -->
+            <div class="paper-header">
+              <div class="paper-header-left">
                 <div class="paper-title-row">
-                  <h3 class="paper-title">试卷名称: {{ paper.title }}</h3>
-                  <!-- <span class="paper-tag">{{ paper.paperCategory || t('mockTest') }}</span> -->
-                  <span class="paper-tag">{{ "进行中" }}</span>
-                </div>
-                <div class="paper-sub-row">
-                  <span class="paper-deadline">截止日期: {{ formatDate(paper.Expiration) || 'yyyy-MM-dd' }}</span>
+                  <Icon name="book-outline" />
+                  <h3 class="paper-title">{{ paper.title }}</h3>
                 </div>
               </div>
-              <div class="paper-row-right">
-                <span class="paper-id">{{ t('creator') }}: {{ paper.creator || '—' }}</span>
-                <span class="paper-id">ID: {{ paper.id }}</span>
+              <div class="paper-header-right">
+                <div class="paper-title-row">
+                  <span class="header-meta">截止日期：{{ formatDate(paper.Expiration) || '无' }}</span>
+                  <span class="status-tag" :class="getPaperStatus(paper)">{{ getStatusLabel(paper) }}</span>
+                </div>
               </div>
             </div>
 
-            <!-- 展开详情 -->
+            <!-- 展开详情区域 -->
             <div class="paper-detail" v-if="expandedId === paper.id" @click.stop>
 
-              <!-- 考试范围 -->
+              <!-- 区域2：考试范围模块 -->
               <div class="detail-section">
                 <div class="detail-label">{{ t('examScope') }}</div>
                 <div class="bank-list" v-if="paper.bankInfo && paper.bankInfo.length">
                   <div class="bank-row" v-for="(bank, idx) in visibleBanks(paper)" :key="idx">
-                    <span class="bank-name">{{ bank.subject || bank.category }}</span>
-                    <span class="bank-count">{{ bank.count }} {{ t('questions') }}</span>
-                    <span class="bank-score">{{ bank.score }} {{ t('score') }}/{{ t('questions') }}</span>
+                    <span class="bank-name">{{ t(bank.subject) || t(bank.category) }}</span>
+                    <span class="bank-info">{{ bank.count }}题 × {{ bank.score }}分</span>
                   </div>
                   <button class="bank-more-btn" v-if="paper.bankInfo.length > 5 && !showAllBanks"
                     @click="showAllBanks = true">
                     <Icon name="expand-more" />
-                    {{ t('showAll') }} ({{ paper.bankInfo.length }})
+                    展开全部 ({{ paper.bankInfo.length }})
                   </button>
                 </div>
                 <div class="bank-list" v-else>
                   <div class="bank-row">
-                    <span class="bank-name">—</span>
-                    <span class="bank-count">{{ paper.questionCount || 0 }} {{ t('questions') }}</span>
+                    <span class="bank-name">暂无科目信息</span>
+                    <span class="bank-separator">｜</span>
+                    <span class="bank-info">{{ paper.questionCount || 0 }}题</span>
                   </div>
                 </div>
               </div>
 
-              <!-- 答题时间 & 通过分数 -->
-              <div class="detail-meta">
-                <span class="meta-item">{{ t('examDuration') }}: {{ paper.duration || '—' }}{{ t('minutes') }}</span>
-                <span class="meta-item">{{ t('totalQuestions') }}: {{ paper.totalQuestions ?? '-' }}</span>
-                <span class="meta-item">{{ t('totalScore') }}: {{ paper.totalScore ?? '-' }}</span>
-                <span class="meta-item">{{ t('passScore') }}: {{ paper.passScore ?? '-' }}</span>
+              <!-- 试卷ID + 创建人（展开态可见） -->
+              <!-- <div class="paper-id-row">
+                <span class="paper-id">ID：{{ paper.id }}</span>
+                <span class="paper-creator">创建人：{{ paper.creator || '无' }}</span>
+              </div> -->
 
-
+              <!-- 区域3：考试基础参数区（两行排布） -->
+              <div class="detail-params">
+                <div class="param-row">
+                  <span class="param-item">
+                    <span class="param-label">限时时长</span>
+                    <span class="param-value">{{ paper.duration ? paper.duration + '分钟' : '无' }}</span>
+                  </span>
+                  <span class="param-item">
+                    <span class="param-label">试卷总分</span>
+                    <span class="param-value">{{ paper.totalScore ?? '无' }}</span>
+                  </span>
+                </div>
+                <div class="param-row">
+                  <span class="param-item">
+                    <span class="param-label">总题量</span>
+                    <span class="param-value">{{ paper.totalQuestions ?? '无' }}</span>
+                  </span>
+                  <span class="param-item">
+                    <span class="param-label">合格分数</span>
+                    <span class="param-value">{{ paper.passScore ?? '无' }}</span>
+                  </span>
+                </div>
               </div>
 
-              <!-- 底部操作栏 -->
+              <!-- 区域4：底部操作区（全部横向一行排列） -->
               <div class="detail-actions">
-                <button class="action-btn ghost" @click="exportPaper(paper)">
+                <button class="icon-action-btn" @click="exportPaper(paper)" title="下载">
                   <Icon name="download" />
                 </button>
-                <button class="action-btn ghost danger" @click="deletePaper(paper.id)">
+                <button class="icon-action-btn danger" @click="deletePaper(paper.id)" title="删除">
                   <Icon name="delete-outline" />
                 </button>
-                <button class="action-btn primary" @click="startExam(paper.id)">
+                <button class="start-exam-btn" @click="startExam(paper.id)">
                   {{ t('startExam') }}
                   <Icon name="play-arrow-outline" />
+                </button>
+                <button class="icon-action-btn" @click="sharePaper(paper.id)" title="分享">
+                  <Icon name="share-outline" />
                 </button>
               </div>
             </div>
@@ -173,6 +194,25 @@ onMounted(() => {
 function toggleExpand(paperId) {
   expandedId.value = expandedId.value === paperId ? null : paperId
   showAllBanks.value = false
+}
+
+function getPaperStatus(paper) {
+  if (!paper.Expiration) return 'status-ongoing'
+  const now = Date.now()
+  const exp = new Date(paper.Expiration).getTime()
+  if (isNaN(exp)) return 'status-ongoing'
+  if (now > exp) return 'status-ended'
+  // 如果有开始时间可以判断未开始，目前默认为进行中
+  return 'status-ongoing'
+}
+
+function getStatusLabel(paper) {
+  if (!paper.Expiration) return '进行中'
+  const now = Date.now()
+  const exp = new Date(paper.Expiration).getTime()
+  if (isNaN(exp)) return '进行中'
+  if (now > exp) return '已结束'
+  return '进行中'
 }
 
 function visibleBanks(paper) {
@@ -284,13 +324,13 @@ const fileInput = ref(null)
 .paper-list {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-sm);
+  gap: 12px;
 }
 
 /* === 卡片整体 === */
 .paper-card {
-  background: rgba(255, 255, 255, 0.6);
-  border-radius: var(--radius-lg);
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 14px;
   box-shadow: none;
   border: 1px solid var(--border-color-light);
   overflow: hidden;
@@ -299,31 +339,28 @@ const fileInput = ref(null)
 }
 
 .paper-card.expanded {
-  background: rgba(255, 255, 255, 0.95);
-  box-shadow: 0 4px 20px rgba(0, 91, 191, 0.12), 0 1px 4px rgba(0, 0, 0, 0.06);
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow: 0 4px 24px rgba(0, 91, 191, 0.10), 0 1px 4px rgba(0, 0, 0, 0.05);
 }
 
-/* === 收缩行 === */
-.paper-row {
+/* === 区域1：头部标题区 === */
+.paper-header {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
-  padding: var(--spacing-sm) var(--spacing-md);
-  gap: var(--spacing-sm);
+  padding: 16px 18px 14px;
+  gap: 12px;
 }
 
-.paper-row-left {
+.paper-header-left {
   flex: 1;
   min-width: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
 }
 
 .paper-title-row {
   display: flex;
   align-items: center;
-  gap: var(--spacing-sm);
+  gap: 10px;
 }
 
 .paper-title {
@@ -334,26 +371,36 @@ const fileInput = ref(null)
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  line-height: 1.4;
 }
 
-.paper-sub-row {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-sm);
+/* 状态标签 - 三色区分 */
+.status-tag {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 10px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  line-height: 1.6;
 }
 
-.paper-id {
-  font-size: var(--font-size-sm);
-  color: var(--text-disabled);
-  font-family: monospace;
+.status-tag.status-ongoing {
+  color: #fff;
+  background: var(--primary, #005bbf);
 }
 
-.paper-creator {
-  font-size: var(--font-size-sm);
-  color: var(--text-secondary);
+.status-tag.status-not-started {
+  color: #666;
+  background: #e8e8e8;
 }
 
-.paper-row-right {
+.status-tag.status-ended {
+  color: #fff;
+  background: #5a6a6e;
+}
+
+.paper-header-right {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
@@ -361,24 +408,17 @@ const fileInput = ref(null)
   flex-shrink: 0;
 }
 
-.paper-deadline {
-  display: flex;
-  align-items: center;
-  gap: 2px;
+.header-meta {
   font-size: var(--font-size-sm);
   color: var(--text-secondary);
   white-space: nowrap;
 }
 
-.paper-deadline svg {
-  font-size: 14px;
-}
-
 /* === 展开详情 === */
 .paper-detail {
-  padding: 0 var(--spacing-md) var(--spacing-md);
+  padding: 0 18px 18px;
   border-top: 1px solid var(--border-color-light);
-  animation: fadeSlideIn 0.2s ease;
+  animation: fadeSlideIn 0.22s ease;
 }
 
 @keyframes fadeSlideIn {
@@ -393,17 +433,17 @@ const fileInput = ref(null)
   }
 }
 
-/* 考试范围区块 */
+/* === 区域2：考试范围模块 === */
 .detail-section {
-  margin-top: var(--spacing-sm);
-  margin-bottom: var(--spacing-sm);
+  margin-top: 14px;
+  margin-bottom: 12px;
 }
 
 .detail-label {
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-semibold);
   color: var(--text-secondary);
-  margin-bottom: var(--spacing-mn);
+  margin-bottom: 8px;
 }
 
 .bank-list {
@@ -415,31 +455,33 @@ const fileInput = ref(null)
 .bank-row {
   display: flex;
   align-items: center;
-  gap: var(--spacing-sm);
-  padding: 6px 10px;
+  justify-content: space-between;
+  padding: 8px 12px;
   background: var(--background-secondary);
-  border-radius: var(--radius-md);
+  border-radius: 10px;
 }
 
 .bank-name {
-  flex: 1;
   font-size: var(--font-size-sm);
   color: var(--on-surface);
+  font-weight: 500;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-.bank-count,
-.bank-score {
+.bank-separator {
+  font-size: var(--font-size-sm);
+  color: var(--text-disabled);
+  margin: 0 8px;
+  flex-shrink: 0;
+}
+
+.bank-info {
   font-size: var(--font-size-sm);
   color: var(--text-secondary);
   white-space: nowrap;
-}
-
-.bank-score {
-  color: var(--primary);
-  font-weight: var(--font-weight-semibold);
+  flex-shrink: 0;
 }
 
 .bank-more-btn {
@@ -448,10 +490,10 @@ const fileInput = ref(null)
   justify-content: center;
   gap: 4px;
   width: 100%;
-  padding: 4px;
+  padding: 6px;
   background: none;
   border: none;
-  border-radius: var(--radius-md);
+  border-radius: 10px;
   color: var(--primary);
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-semibold);
@@ -466,77 +508,121 @@ const fileInput = ref(null)
   font-size: 16px;
 }
 
-.paper-tag {
-  font-size: var(--font-size-mn);
-  font-weight: 600;
-  color: var(--background);
-  background: var(--primary);
-  /* border: 1px solid var(--primary); */
-  padding: 1px 4px;
-  border-radius: var(--radius-sm);
-  white-space: nowrap;
-  flex-shrink: 0;
-}
-
-/* 答题时间 & 通过分数 */
-.detail-meta {
+/* 试卷ID + 创建人行 */
+.paper-id-row {
   display: flex;
-  justify-content: space-between;
-  padding: var(--spacing-sm) 0;
-  border-top: 1px solid var(--border-color-light);
-  margin-bottom: var(--spacing-sm);
+  align-items: center;
+  gap: 16px;
+  padding-bottom: 10px;
 }
 
-.meta-item {
+.paper-id {
+  font-size: 11px;
+  color: var(--text-disabled);
+  font-family: monospace;
+}
+
+.paper-creator {
   font-size: var(--font-size-sm);
   color: var(--text-secondary);
 }
 
-/* 底部操作栏 */
+/* === 区域3：考试基础参数区（两行排布） === */
+.detail-params {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px 0;
+  border-top: 1px solid var(--border-color-light);
+  border-bottom: 1px solid var(--border-color-light);
+  margin-bottom: 14px;
+}
+
+.param-row {
+  display: flex;
+  gap: 0;
+}
+
+.param-item {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.param-label {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+.param-value {
+  font-size: var(--font-size-sm);
+  color: var(--on-surface);
+  font-weight: var(--font-weight-semibold);
+  white-space: nowrap;
+}
+
+/* === 区域4：底部操作区（全部横向一行排列） === */
 .detail-actions {
   display: flex;
   align-items: center;
-  gap: var(--spacing-sm);
+  gap: 10px;
 }
 
-.action-btn {
+.icon-action-btn {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 4px;
-  height: 36px;
+  width: 40px;
+  height: 40px;
+  background: var(--color-gray-100, #f2f2f2);
   border: none;
-  border-radius: var(--radius-full);
-  font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-semibold);
+  border-radius: 10px;
+  color: var(--text-secondary);
   cursor: pointer;
   transition: all 0.15s;
+  flex-shrink: 0;
 }
 
-.action-btn svg {
+.icon-action-btn svg {
   font-size: 18px;
 }
 
-.action-btn:active {
-  transform: scale(0.96);
+.icon-action-btn:active {
+  transform: scale(0.94);
 }
 
-.action-btn.ghost {
-  width: 36px;
-  background: var(--color-gray-100);
-  color: var(--text-secondary);
-}
-
-.action-btn.ghost.danger {
+.icon-action-btn.danger {
   color: var(--error);
 }
 
-.action-btn.primary {
+.start-exam-btn {
   flex: 1;
-  padding: 0 var(--spacing-md);
-  background: var(--primary);
-  color: var(--on-primary);
-  box-shadow: 0 2px 8px rgba(0, 91, 191, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  height: 44px;
+  padding: 0 24px;
+  background: var(--primary, #005bbf);
+  color: var(--on-primary, #fff);
+  border: none;
+  border-radius: 14px;
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-semibold);
+  cursor: pointer;
+  box-shadow: 0 2px 10px rgba(0, 91, 191, 0.22);
+  transition: all 0.15s;
+}
+
+.start-exam-btn svg {
+  font-size: 20px;
+}
+
+.start-exam-btn:active {
+  transform: scale(0.97);
+  box-shadow: 0 1px 4px rgba(0, 91, 191, 0.15);
 }
 
 .empty-state {
