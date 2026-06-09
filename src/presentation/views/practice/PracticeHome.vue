@@ -3,7 +3,7 @@
     <TopBar title="练习题库">
       <template #right>
         <button class="icon-btn" @click="showImportModal = true">
-          <Icon name="sync-alt" />
+          <Icon name="upload" />
         </button>
       </template>
     </TopBar>
@@ -49,7 +49,7 @@
                 {{ t('continue') }}
               </button>
               <button v-else class="new-btn" @click.stop="newQuizWith(subject)" :disabled="store.loading">{{ t('new')
-                }}</button>
+              }}</button>
             </div>
 
             <div v-if="expandedSubject === subject.name" class="subject-expanded">

@@ -61,6 +61,7 @@ import IconMonitorHeart from "~icons/material-symbols/monitor-heart"
 import IconMoreVert from "~icons/material-symbols/more-vert"
 import IconPerson from "~icons/material-symbols/person"
 import IconPersonOutline from "~icons/material-symbols/person-outline"
+import IconPersonAddOutline from "~icons/material-symbols/person-add-outline"
 import IconPlayArrow from "~icons/material-symbols/play-arrow"
 import IconPlayArrowOutline from "~icons/material-symbols/play-arrow-outline"
 import IconPlaylistRemove from "~icons/material-symbols/playlist-remove"
@@ -168,6 +169,7 @@ const registry = {
   'more-vert': IconMoreVert,
   person: IconPerson,
   'person-outline': IconPersonOutline,
+  'person-add-outline': IconPersonAddOutline,
   'play-arrow': IconPlayArrow,
   'play-arrow-outline': IconPlayArrowOutline,
   'playlist-remove': IconPlaylistRemove,
