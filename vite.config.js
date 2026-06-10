@@ -3,6 +3,7 @@ import vue from "@vitejs/plugin-vue";
 import Icons from "unplugin-icons/vite";
 import Components from "unplugin-vue-components/vite";
 import IconsResolver from "unplugin-icons/resolver";
+import { VantResolver } from "@vant/auto-import-resolver";
 
 // https://vite.dev/config/
 export default defineConfig({
@@ -12,6 +13,7 @@ export default defineConfig({
     Components({
       resolvers: [
         IconsResolver({ alias: { ms: "material-symbols" } }),
+        VantResolver(),
       ],
     }),
   ],
