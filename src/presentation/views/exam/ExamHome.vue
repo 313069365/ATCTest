@@ -32,97 +32,10 @@
         </div>
         <div class="paper-list" v-if="examPapers.length > 0">
           <div v-for="paper in examPapers.slice(0, 5)" :key="paper.id" class="paper-card"
-            :class="{ expanded: expandedId === paper.id }" @click="toggleExpand(paper.id)">
-
-            <!-- 区域1：头部标题区（收缩态始终可见） -->
-            <div class="paper-header">
-              <div class="paper-header-left">
-                <div class="paper-title-row">
-                  <Icon name="book-outline" />
-                  <h3 class="paper-title">{{ paper.title }}</h3>
-                </div>
-              </div>
-              <div class="paper-header-right">
-                <div class="paper-title-row">
-                  <span class="header-meta">截止日期：{{ formatDate(paper.Expiration) || '无' }}</span>
-                  <span class="status-tag" :class="getPaperStatus(paper)">{{ getStatusLabel(paper) }}</span>
-                </div>
-              </div>
-            </div>
-
-            <!-- 展开详情区域 -->
-            <div class="paper-detail" v-if="expandedId === paper.id" @click.stop>
-
-              <!-- 区域2：考试范围模块 -->
-              <div class="detail-section">
-                <div class="detail-label">{{ t('examScope') }}</div>
-                <div class="bank-list" v-if="paper.bankInfo && paper.bankInfo.length">
-                  <div class="bank-row" v-for="(bank, idx) in visibleBanks(paper)" :key="idx">
-                    <span class="bank-name">{{ t(bank.subject) || t(bank.category) }}</span>
-                    <span class="bank-info">{{ bank.count }}题 × {{ bank.score }}分</span>
-                  </div>
-                  <button class="bank-more-btn" v-if="paper.bankInfo.length > 5 && !showAllBanks"
-                    @click="showAllBanks = true">
-                    <Icon name="expand-more" />
-                    展开全部 ({{ paper.bankInfo.length }})
-                  </button>
-                </div>
-                <div class="bank-list" v-else>
-                  <div class="bank-row">
-                    <span class="bank-name">暂无科目信息</span>
-                    <span class="bank-separator">｜</span>
-                    <span class="bank-info">{{ paper.questionCount || 0 }}题</span>
-                  </div>
-                </div>
-              </div>
-
-              <!-- 试卷ID + 创建人（展开态可见） -->
-              <!-- <div class="paper-id-row">
-                <span class="paper-id">ID：{{ paper.id }}</span>
-                <span class="paper-creator">创建人：{{ paper.creator || '无' }}</span>
-              </div> -->
-
-              <!-- 区域3：考试基础参数区（两行排布） -->
-              <div class="detail-params">
-                <div class="param-row">
-                  <span class="param-item">
-                    <span class="param-label">限时时长</span>
-                    <span class="param-value">{{ paper.duration ? paper.duration + '分钟' : '无' }}</span>
-                  </span>
-                  <span class="param-item">
-                    <span class="param-label">试卷总分</span>
-                    <span class="param-value">{{ paper.totalScore ?? '无' }}</span>
-                  </span>
-                </div>
-                <div class="param-row">
-                  <span class="param-item">
-                    <span class="param-label">总题量</span>
-                    <span class="param-value">{{ paper.totalQuestions ?? '无' }}</span>
-                  </span>
-                  <span class="param-item">
-                    <span class="param-label">合格分数</span>
-                    <span class="param-value">{{ paper.passScore ?? '无' }}</span>
-                  </span>
-                </div>
-              </div>
-
-              <!-- 区域4：底部操作区（全部横向一行排列） -->
-              <div class="detail-actions">
-                <button class="icon-action-btn" @click="exportPaper(paper)" title="下载">
-                  <Icon name="download" />
-                </button>
-                <button class="icon-action-btn danger" @click="deletePaper(paper.id)" title="删除">
-                  <Icon name="delete-outline" />
-                </button>
-                <button class="start-exam-btn" @click="startExam(paper.id)">
-                  {{ t('startExam') }}
-                  <Icon name="play-arrow-outline" />
-                </button>
-                <button class="icon-action-btn" @click="sharePaper(paper.id)" title="分享">
-                  <Icon name="share-outline" />
-                </button>
-              </div>
-            </div>
+            @click="goToDetail(paper.id)">
+            <span class="status-dot" :class="getPaperStatus(paper)"></span>
+            <h3 class="paper-title">{{ paper.title }}</h3>
+            <span class="card-deadline" v-if="paper.Expiration">{{ formatDate(paper.Expiration) }}</span>
           </div>
         </div>
 
@@ -183,47 +96,32 @@ const store = useAppStore()
 
 const examPapers = computed(() => store.examPapers)
 const examHistory = computed(() => store.examHistory)
-const expandedId = ref(null)
-const showAllBanks = ref(false)
 
 onMounted(() => {
   store.loadExamPapers()
   store.loadExamHistory()
 })
 
-function toggleExpand(paperId) {
-  expandedId.value = expandedId.value === paperId ? null : paperId
-  showAllBanks.value = false
+function goToDetail(paperId) {
+  router.push(`/exam/detail/${paperId}`)
 }
 
 function getPaperStatus(paper) {
-  if (!paper.Expiration) return 'status-ongoing'
+  if (!paper.Expiration) return 'unlimited'
   const now = Date.now()
   const exp = new Date(paper.Expiration).getTime()
-  if (isNaN(exp)) return 'status-ongoing'
-  if (now > exp) return 'status-ended'
-  // 如果有开始时间可以判断未开始，目前默认为进行中
-  return 'status-ongoing'
-}
-
-function getStatusLabel(paper) {
-  if (!paper.Expiration) return '进行中'
-  const now = Date.now()
-  const exp = new Date(paper.Expiration).getTime()
-  if (isNaN(exp)) return '进行中'
-  if (now > exp) return '已结束'
-  return '进行中'
-}
-
-function visibleBanks(paper) {
-  if (!paper.bankInfo) return []
-  return showAllBanks.value ? paper.bankInfo : paper.bankInfo.slice(0, 5)
+  if (isNaN(exp)) return 'ongoing'
+  if (now > exp) return 'ended'
+  return 'ongoing'
 }
 
 function formatDate(timestamp) {
   if (!timestamp) return ''
   const date = new Date(timestamp)
-  return `${date.getMonth() + 1}月${date.getDate()}日`
+  const y = date.getFullYear()
+  const m = String(date.getMonth() + 1).padStart(2, '0')
+  const d = String(date.getDate()).padStart(2, '0')
+  return `${y}.${m}.${d}`
 }
 
 function triggerImport() {
@@ -242,20 +140,6 @@ async function handleImport(event) {
   }
 
   event.target.value = ''
-}
-
-function exportPaper(paper) {
-  store.exportPaper(paper)
-}
-
-function deletePaper(paperId) {
-  if (confirm(t('confirmDeletePaper'))) {
-    store.removeExamPaper(paperId)
-  }
-}
-
-function startExam(paperId) {
-  router.push(`/exam/paper?id=${paperId}`)
 }
 
 const showJoinDialog = ref(false)
@@ -327,43 +211,45 @@ const fileInput = ref(null)
   gap: 12px;
 }
 
-/* === 卡片整体 === */
+/* === 卡片样式 === */
 .paper-card {
-  background: rgba(255, 255, 255, 0.7);
-  border-radius: 14px;
-  box-shadow: none;
-  border: 1px solid var(--border-color-light);
-  overflow: hidden;
-  transition: box-shadow 0.25s, border-color 0.25s, background 0.25s;
-  cursor: pointer;
-}
-
-.paper-card.expanded {
-  background: rgba(255, 255, 255, 0.96);
-  box-shadow: 0 4px 24px rgba(0, 91, 191, 0.10), 0 1px 4px rgba(0, 0, 0, 0.05);
-}
-
-/* === 区域1：头部标题区 === */
-.paper-header {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  padding: 16px 18px 14px;
-  gap: 12px;
-}
-
-.paper-header-left {
-  flex: 1;
-  min-width: 0;
-}
-
-.paper-title-row {
   display: flex;
   align-items: center;
+  padding: 14px 18px;
   gap: 10px;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 14px;
+  border: 1px solid var(--border-color-light);
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.paper-card:active {
+  background: rgba(255, 255, 255, 0.95);
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.status-dot.ongoing {
+  background: var(--primary, #005bbf);
+}
+
+.status-dot.ended {
+  background: #5a6a6e;
+}
+
+.status-dot.unlimited {
+  background: #2e7d32;
 }
 
 .paper-title {
+  flex: 1;
+  min-width: 0;
   font-size: var(--font-size-md);
   font-weight: var(--font-weight-semibold);
   color: var(--on-surface);
@@ -374,255 +260,12 @@ const fileInput = ref(null)
   line-height: 1.4;
 }
 
-/* 状态标签 - 三色区分 */
-.status-tag {
-  font-size: 11px;
-  font-weight: 600;
-  padding: 2px 8px;
-  border-radius: 10px;
-  white-space: nowrap;
+.card-deadline {
   flex-shrink: 0;
-  line-height: 1.6;
-}
-
-.status-tag.status-ongoing {
-  color: #fff;
-  background: var(--primary, #005bbf);
-}
-
-.status-tag.status-not-started {
-  color: #666;
-  background: #e8e8e8;
-}
-
-.status-tag.status-ended {
-  color: #fff;
-  background: #5a6a6e;
-}
-
-.paper-header-right {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 4px;
-  flex-shrink: 0;
-}
-
-.header-meta {
   font-size: var(--font-size-sm);
-  color: var(--text-secondary);
+  color: var(--text-tertiary);
   white-space: nowrap;
-}
-
-/* === 展开详情 === */
-.paper-detail {
-  padding: 0 18px 18px;
-  border-top: 1px solid var(--border-color-light);
-  animation: fadeSlideIn 0.22s ease;
-}
-
-@keyframes fadeSlideIn {
-  from {
-    opacity: 0;
-    transform: translateY(-6px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* === 区域2：考试范围模块 === */
-.detail-section {
-  margin-top: 14px;
-  margin-bottom: 12px;
-}
-
-.detail-label {
-  font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-semibold);
-  color: var(--text-secondary);
-  margin-bottom: 8px;
-}
-
-.bank-list {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.bank-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 8px 12px;
-  background: var(--background-secondary);
-  border-radius: 10px;
-}
-
-.bank-name {
-  font-size: var(--font-size-sm);
-  color: var(--on-surface);
-  font-weight: 500;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.bank-separator {
-  font-size: var(--font-size-sm);
-  color: var(--text-disabled);
-  margin: 0 8px;
-  flex-shrink: 0;
-}
-
-.bank-info {
-  font-size: var(--font-size-sm);
-  color: var(--text-secondary);
-  white-space: nowrap;
-  flex-shrink: 0;
-}
-
-.bank-more-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 4px;
-  width: 100%;
-  padding: 6px;
-  background: none;
-  border: none;
-  border-radius: 10px;
-  color: var(--primary);
-  font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-semibold);
-  cursor: pointer;
-}
-
-.bank-more-btn:hover {
-  background: var(--primary-light);
-}
-
-.bank-more-btn svg {
-  font-size: 16px;
-}
-
-/* 试卷ID + 创建人行 */
-.paper-id-row {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  padding-bottom: 10px;
-}
-
-.paper-id {
-  font-size: 11px;
-  color: var(--text-disabled);
-  font-family: monospace;
-}
-
-.paper-creator {
-  font-size: var(--font-size-sm);
-  color: var(--text-secondary);
-}
-
-/* === 区域3：考试基础参数区（两行排布） === */
-.detail-params {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  padding: 12px 0;
-  border-top: 1px solid var(--border-color-light);
-  border-bottom: 1px solid var(--border-color-light);
-  margin-bottom: 14px;
-}
-
-.param-row {
-  display: flex;
-  gap: 0;
-}
-
-.param-item {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.param-label {
-  font-size: var(--font-size-sm);
-  color: var(--text-secondary);
-  white-space: nowrap;
-}
-
-.param-value {
-  font-size: var(--font-size-sm);
-  color: var(--on-surface);
-  font-weight: var(--font-weight-semibold);
-  white-space: nowrap;
-}
-
-/* === 区域4：底部操作区（全部横向一行排列） === */
-.detail-actions {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.icon-action-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  background: var(--color-gray-100, #f2f2f2);
-  border: none;
-  border-radius: 10px;
-  color: var(--text-secondary);
-  cursor: pointer;
-  transition: all 0.15s;
-  flex-shrink: 0;
-}
-
-.icon-action-btn svg {
-  font-size: 18px;
-}
-
-.icon-action-btn:active {
-  transform: scale(0.94);
-}
-
-.icon-action-btn.danger {
-  color: var(--error);
-}
-
-.start-exam-btn {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  height: 44px;
-  padding: 0 24px;
-  background: var(--primary, #005bbf);
-  color: var(--on-primary, #fff);
-  border: none;
-  border-radius: 14px;
-  font-size: var(--font-size-md);
-  font-weight: var(--font-weight-semibold);
-  cursor: pointer;
-  box-shadow: 0 2px 10px rgba(0, 91, 191, 0.22);
-  transition: all 0.15s;
-}
-
-.start-exam-btn svg {
-  font-size: 20px;
-}
-
-.start-exam-btn:active {
-  transform: scale(0.97);
-  box-shadow: 0 1px 4px rgba(0, 91, 191, 0.15);
+  margin-left: auto;
 }
 
 .empty-state {

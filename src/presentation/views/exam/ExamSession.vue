@@ -61,6 +61,7 @@ import QuestionNavbar from '@/presentation/components/layout/QuestionNavbar.vue'
 import QuestionRenderer from '@/presentation/components/question/QuestionRenderer.vue'
 import { useAppStore } from '@/domain/stores/store'
 import { t } from '@/infrastructure/utils/i18n.js'
+import { getAnswerStatus } from '@/domain/config/questionConfig'
 
 const router = useRouter()
 const route = useRoute()
@@ -209,48 +210,46 @@ const submitPaper = () => {
 const autoSubmit = () => {
   stopTimer()
 
-  // 计算得分
-  let correctCount = 0
   const totalScore = paper.value?.totalScore || 0
-  const questionCount = questions.value.length
+  let userScore = 0
+  let correctCount = 0
+  let totalItems = 0
 
   questions.value.forEach((q) => {
     const userAnswer = userAnswers.value[q.id]
-    const isCorrect = checkAnswer(q, userAnswer)
-    if (isCorrect) {
-      correctCount++
+
+    if (q.type === 'reading' && q.subs?.length) {
+      const statuses = getAnswerStatus(q, userAnswer || {})
+      q.subs.forEach((sub, idx) => {
+        totalItems++
+        if (statuses[idx] === 'correct') {
+          correctCount++
+          userScore++
+        }
+      })
+    } else {
+      totalItems++
+      const status = getAnswerStatus(q, userAnswer)
+      if (status === 'correct') {
+        correctCount++
+        userScore += q.score || 1
+      }
     }
   })
 
-  // 每题默认2分，计算用户得分
-  const defaultScore = 2
-  const userScore = correctCount * defaultScore
   const examResult = {
     paperId: paper.value.id,
-    totalQuestions: questionCount,
+    totalQuestions: totalItems,
     correctCount,
     totalScore,
     userScore,
     elapsedTime: elapsedSeconds.value
   }
 
-  // 跳转到结果页
   router.push({
     path: '/exam/result',
     query: examResult
   })
-}
-
-const checkAnswer = (question, userAnswer) => {
-  if (userAnswer === undefined || userAnswer === null) return false
-
-  if (Array.isArray(userAnswer) && Array.isArray(question.answer)) {
-    const sortedUser = [...userAnswer].sort()
-    const sortedCorrect = [...question.answer].sort()
-    return JSON.stringify(sortedUser) === JSON.stringify(sortedCorrect)
-  }
-
-  return userAnswer === question.answer
 }
 </script>
 

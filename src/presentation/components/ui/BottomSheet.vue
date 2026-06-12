@@ -94,6 +94,7 @@ defineEmits(['close'])
   justify-content: center;
   padding: 6px 16px 12px;
   background: var(--background);
+  border-bottom: 1px solid var(--border-color-light);
 }
 
 .drag-handle {
@@ -125,7 +126,7 @@ defineEmits(['close'])
 }
 
 .sheet-footer {
-  padding: 16px 16px 20px;
+  padding: var(--spacing-sm) var(--spacing-md);
   background: var(--background);
   border-top: 1px solid var(--border-color-light);
 }

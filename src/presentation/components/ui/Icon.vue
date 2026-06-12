@@ -21,6 +21,7 @@ import IconChevronLeft from "~icons/material-symbols/chevron-left"
 import IconChevronRight from "~icons/material-symbols/chevron-right"
 import IconClose from "~icons/material-symbols/close"
 import IconCloud from "~icons/material-symbols/cloud"
+import IconContentCopy from "~icons/material-symbols/content-copy"
 import IconCollectionsBookmark from "~icons/material-symbols/collections-bookmark"
 import IconConnectingAirports from "~icons/material-symbols/connecting-airports"
 import IconDarkModeOutline from "~icons/material-symbols/dark-mode-outline"
@@ -129,6 +130,7 @@ const registry = {
   'chevron-right': IconChevronRight,
   close: IconClose,
   cloud: IconCloud,
+  'content-copy': IconContentCopy,
   'collections-bookmark': IconCollectionsBookmark,
   'connecting-airports': IconConnectingAirports,
   'dark-mode-outline': IconDarkModeOutline,

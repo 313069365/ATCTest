@@ -55,6 +55,11 @@ const routes = [
         component: () => import("../views/exam/ExamCreate.vue"),
       },
       {
+        path: "detail/:id",
+        name: "ExamDetail",
+        component: () => import("../views/exam/ExamDetail.vue"),
+      },
+      {
         path: "paper/:id?",
         name: "ExamPaper",
         component: () => import("../views/exam/ExamSession.vue"),
