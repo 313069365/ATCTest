@@ -62,7 +62,7 @@ const routes = [
       {
         path: "paper/:id?",
         name: "ExamPaper",
-        component: () => import("../views/exam/ExamSession.vue"),
+        component: () => import("../views/practice/QuizPage.vue"),
       },
       {
         path: "result/:id?",

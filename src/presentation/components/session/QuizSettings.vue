@@ -13,7 +13,7 @@
       </button>
     </div>
 
-    <div class="settings-section">
+    <div v-if="!isExam" class="settings-section">
       <span class="section-label">{{ t('answerSettings') }}</span>
       <div class="settings-group">
         <div v-if="!showExplanationEnabled" class="toggle-item">
@@ -41,7 +41,7 @@
     <div class="settings-section">
       <span class="section-label">{{ t('soundDisplay') }}</span>
       <div class="settings-group">
-        <div class="toggle-item">
+        <div v-if="!isExam" class="toggle-item">
           <div class="toggle-info">
             <span class="toggle-title">{{ t('sound') }}</span>
             <span class="toggle-desc">{{ t('soundDesc') }}</span>
@@ -83,6 +83,7 @@ defineProps({
   autoJump: { type: Boolean, default: true },
   darkMode: { type: Boolean, default: false },
   soundEnabled: { type: Boolean, default: true },
+  isExam: { type: Boolean, default: false },
 })
 
 const emit = defineEmits(['close', 'update:forceExplanationOnWrong', 'update:autoJump', 'update:darkMode', 'exit', 'submit'])

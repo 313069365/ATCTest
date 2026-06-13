@@ -2,22 +2,34 @@
   <BottomSheet :visible="true" title="答题卡" @close="$emit('close')">
     <div class="progress-stats">
       <div class="legend">
-        <div class="legend-item">
-          <span class="legend-dot correct"></span>
-          <span>正确</span>
-        </div>
-        <div class="legend-item">
-          <span class="legend-dot wrong"></span>
-          <span>错误</span>
-        </div>
-        <div class="legend-item">
-          <span class="legend-dot unknown"></span>
-          <span>待定</span>
-        </div>
-        <div class="legend-item">
-          <span class="legend-dot"></span>
-          <span>未答</span>
-        </div>
+        <template v-if="isExam">
+          <div class="legend-item">
+            <span class="legend-dot answered"></span>
+            <span>{{ t('answered') }}</span>
+          </div>
+          <div class="legend-item">
+            <span class="legend-dot"></span>
+            <span>{{ t('unanswered') }}</span>
+          </div>
+        </template>
+        <template v-else>
+          <div class="legend-item">
+            <span class="legend-dot correct"></span>
+            <span>正确</span>
+          </div>
+          <div class="legend-item">
+            <span class="legend-dot wrong"></span>
+            <span>错误</span>
+          </div>
+          <div class="legend-item">
+            <span class="legend-dot unknown"></span>
+            <span>待定</span>
+          </div>
+          <div class="legend-item">
+            <span class="legend-dot"></span>
+            <span>未答</span>
+          </div>
+        </template>
         <div class="legend-item">
           <span class="legend-dot current"></span>
           <span>当前</span>
@@ -80,6 +92,10 @@ const props = defineProps({
   userAnswers: {
     type: Object,
     default: () => ({})
+  },
+  isExam: {
+    type: Boolean,
+    default: false
   },
 })
 
@@ -168,6 +184,10 @@ function getSubQuestionBtnClass(qIdx, sqIdx, sq) {
   background: var(--primary);
 }
 
+.legend-dot.answered {
+  background: var(--primary);
+}
+
 .question-list {
   display: flex;
   flex-wrap: wrap;
@@ -249,6 +269,17 @@ function getSubQuestionBtnClass(qIdx, sqIdx, sq) {
   color: #181c1f;
 }
 
+.sub-question-grid .sub-question-btn.answered {
+  background: var(--primary);
+  color: #fff;
+}
+
+.sub-question-grid .sub-question-btn.current-answered {
+  background: var(--primary);
+  border: 3px solid var(--primary);
+  color: #fff;
+}
+
 .question-list .question-btn {
   width: 44px;
   height: 44px;
@@ -302,5 +333,16 @@ function getSubQuestionBtnClass(qIdx, sqIdx, sq) {
   background: var(--warning);
   border: 3px solid var(--primary);
   color: #181c1f;
+}
+
+.question-btn.answered {
+  background: var(--primary);
+  color: #fff;
+}
+
+.question-btn.current-answered {
+  background: var(--primary);
+  border: 3px solid var(--primary);
+  color: #fff;
 }
 </style>

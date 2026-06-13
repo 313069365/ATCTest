@@ -2,22 +2,41 @@
   <div class="page">
 
     <header class="top-bar">
-      <div class="top-bar-left">
-        <div class="header-title">
-          <h1>{{ t(subjectDisplay) }}</h1>
-          <span class="header-subtitle">{{ t(practiceData?.category) || practiceData?.category || "" }} •
-            {{ t(practiceData?.scope) || practiceData?.scope || "" }}</span>
+      <template v-if="isExam">
+        <div class="top-bar-left">
+          <div class="header-title">
+            <h1 class="exam-title">{{ paper?.title || t('examPaper') }}</h1>
+            <span class="header-subtitle">{{ t(paper?.visibility) || '' }}</span>
+          </div>
         </div>
-      </div>
-      <div class="top-bar-right">
-        <div class="timer-display">
-          <Icon name="timer-outline" />
-          <span>{{ elapsedTimeDisplay }}</span>
+        <div class="top-bar-right">
+          <div class="timer-display" :class="{ warning: examWarning }">
+            <Icon name="timer-outline" />
+            <span>{{ remainingTimeDisplay }}</span>
+          </div>
+          <button class="grid-btn" @click="showQuizSettings = true">
+            <Icon name="settings" />
+          </button>
         </div>
-        <button class="grid-btn" @click="showQuizSettings = true">
-          <Icon name="settings" />
-        </button>
-      </div>
+      </template>
+      <template v-else>
+        <div class="top-bar-left">
+          <div class="header-title">
+            <h1>{{ t(subjectDisplay) }}</h1>
+            <span class="header-subtitle">{{ t(practiceData?.category) || practiceData?.category || "" }} •
+              {{ t(practiceData?.scope) || practiceData?.scope || "" }}</span>
+          </div>
+        </div>
+        <div class="top-bar-right">
+          <div class="timer-display">
+            <Icon name="timer-outline" />
+            <span>{{ elapsedTimeDisplay }}</span>
+          </div>
+          <button class="grid-btn" @click="showQuizSettings = true">
+            <Icon name="settings" />
+          </button>
+        </div>
+      </template>
     </header>
 
     <div class="progress-bar-container">
@@ -27,7 +46,7 @@
     </div>
 
     <div class="action-bar">
-      <span class="progress-label" @click="openJumpDialog">进度 {{ currentIndex + 1 }}/{{ bank.length }}</span>
+      <span class="progress-label" @click="isExam ? toggleAnswerCard() : openJumpDialog()">进度 {{ currentIndex + 1 }}/{{ bank.length }}</span>
       <div class="action-bar-right">
         <button v-for="btn in visibleButtons" :key="btn.key" class="action-btn"
           :class="{ active: btn.active?.value, 'remove-btn': btn.key === 'removeWrong' }" @click="btn.action"
@@ -43,11 +62,15 @@
       </div>
       <template v-else>
         <div v-if="currentQuestion">
-          <QuestionRenderer :question="currentQuestionWithOptions" :mode="practiceMode"
+          <QuestionRenderer v-if="!isExam" :question="currentQuestionWithOptions" :mode="practiceMode"
             :user-answer="userAnswers[currentQuestion?.id]" :show-answer="currentQuestionDisplay.shouldShowAnswer.value"
             :show-answer-mode="practiceData?.showAnswerMode" :auto-jump="practiceData?.autoJump"
             :show-explanation="showAnswerExplanation" :current-sub-index="currentSubIndex" @answer="handleAnswer"
             @next-question="nextQuestion" @checkSub="handleCheckSub" @check="checkAnswer" @goSub="handleGoSub" />
+          <QuestionRenderer v-else :question="currentQuestion" mode="exam"
+            :user-answer="userAnswers[currentQuestion?.id]"
+            :is-marked="markedQuestions.has(currentQuestion?.id)" :current-sub-index="currentSubIndex"
+            @answer="handleAnswer" @next-question="nextQuestion" @goSub="handleGoSub" @toggle-mark="toggleMark" />
         </div>
 
         <div v-else style="text-align: center; padding: 40px">
@@ -58,25 +81,26 @@
 
     <QuestionNavbar :prevDisabled="currentIndex === 0" :isLast="currentIndex === bank.length - 1"
       :subCount="currentSubCount" :currentSubIndex="currentSubIndex" :subStatuses="currentSubStatuses"
-      @prev="prevQuestion" @next="nextQuestion" @submit="finishQuiz" @goSub="handleGoSub" />
+      @prev="prevQuestion" @next="nextQuestion" @submit="isExam ? submitPaper : finishQuiz" @goSub="handleGoSub" />
 
     <AnswerOverview v-if="showAnswerCard" :questions="bank" :currentIndex="currentIndex" :currentSubIndex="currentSubIndex"
-      :settings="practiceData" :answerStatus="answerStatus" :userAnswers="userAnswers" @close="closeAnswerCard"
-      @go="gotoQuesitonIdx" />
-
-    <PracticeStats v-if="showStatsDialog" :total="liveStats.total" :correct="liveStats.correct" :wrong="liveStats.wrong"
+      :settings="isExam ? null : practiceData" :answerStatus="isExam ? examAnswerStatus : answerStatus"
+      :userAnswers="userAnswers" :isExam="isExam" @close="closeAnswerCard" @go="gotoQuesitonIdx" />
+    <PracticeStats v-if="!isExam && showStatsDialog" :total="liveStats.total" :correct="liveStats.correct"
+      :wrong="liveStats.wrong"
       :unanswered="liveStats.unanswered" :accuracy="liveStats.accuracy" :elapsed="liveStats.elapsed"
       :current="liveStats.current" :totalQ="liveStats.totalQ" :settings="practiceData"
       @close="showStatsDialog = false" />
 
-    <QuizSettings :visible="showQuizSettings" :showExplanationEnabled="showExplanationPref"
+    <QuizSettings :visible="showQuizSettings" :isExam="isExam" :showExplanationEnabled="showExplanationPref"
       :forceExplanationOnWrong="forceExplanationOnWrong" :autoJump="practiceData?.autoJump ?? true" :darkMode="darkMode"
       :soundEnabled="soundEnabled" @close="showQuizSettings = false"
       @update:forceExplanationOnWrong="forceExplanationOnWrong = $event"
-      @update:autoJump="practiceData.autoJump = $event" @update:darkMode="darkMode = $event"
+      @update:autoJump="practiceData && (practiceData.autoJump = $event)"
+      @update:darkMode="darkMode = $event"
       @update:soundEnabled="soundEnabled = $event" @exit="exitQuiz" @submit="finishQuiz" />
 
-    <JumpDialog :visible="jumpDialogVisible" :total="bank.length" :current="currentIndex"
+    <JumpDialog v-if="!isExam" :visible="jumpDialogVisible" :total="bank.length" :current="currentIndex"
       @close="jumpDialogVisible = false" @jump="gotoQuesitonIdx" />
   </div>
 </template>
@@ -85,7 +109,7 @@
 import { ref, onMounted, onUnmounted, computed, provide, watch } from "vue";
 
 import Icon from '@/presentation/components/ui/Icon.vue'
-import { useRouter, useRoute } from "vue-router";
+import { useRouter, useRoute, onBeforeRouteLeave } from "vue-router";
 import AnswerOverview from "@/presentation/components/session/AnswerOverview.vue";
 import PracticeStats from "@/presentation/components/practice/PracticeStats.vue";
 import QuizSettings from "@/presentation/components/session/QuizSettings.vue";
@@ -114,6 +138,15 @@ const router = useRouter();
 const route = useRoute();
 const store = useAppStore();
 const pm = usePracticeService();
+
+const isExam = computed(() => route.name === 'ExamPaper')
+
+// Exam-specific state
+const paper = ref(null)
+const markedQuestions = ref(new Set())
+const examDuration = ref(0)
+const remainingSeconds = ref(0)
+
 const soundEnabled = ref(localStorage.getItem('soundEnabled') !== 'false');
 const { playAnswerSound } = useSoundEffect(soundEnabled);
 
@@ -160,6 +193,22 @@ const currentSubIndex = ref(0); // 阅读理解子题索引
 const userAnswers = ref({});
 const answerChecked = ref({}); // 每个题目的答案检查状态
 const answerStatus = ref({}); // 每个题目的答案状态: correct/wrong/partial/unchecked/unanswered
+const examAnswerStatus = computed(() => {
+  const status = {}
+  bank.value.forEach(q => {
+    if (q.type === 'reading' && q.subs?.length) {
+      status[q.id] = {}
+      q.subs.forEach((_, idx) => {
+        const ua = userAnswers.value[q.id]
+        status[q.id][idx] = (ua && ua[idx] !== undefined && ua[idx] !== null && ua[idx] !== '') ? 'answered' : ''
+      })
+    } else {
+      const ua = userAnswers.value[q.id]
+      status[q.id] = (ua !== undefined && ua !== null && ua !== '') ? 'answered' : ''
+    }
+  })
+  return status
+})
 const shuffledOptionsCache = ref({}); // 缓存选项乱序结果
 const showStatsDialog = ref(false);
 const showQuizSettings = ref(false);
@@ -198,6 +247,28 @@ const elapsedSeconds = ref(0); // 已用时间（秒）
 let timerInterval = null; // 计时器 interval
 
 onMounted(async () => {
+  if (isExam.value) {
+    const paperId = parseInt(route.params.id || route.query.id)
+    if (!paperId) {
+      router.push('/exam')
+      loading.value = false
+      return
+    }
+    await store.loadExamPapers()
+    const foundPaper = store.examPapers.find(p => p.id === paperId)
+    if (!foundPaper) {
+      loading.value = false
+      return
+    }
+    paper.value = foundPaper
+    bank.value = foundPaper.questions || []
+    examDuration.value = foundPaper.duration || 120
+    remainingSeconds.value = examDuration.value * 60
+    loading.value = false
+    startTimer()
+    return
+  }
+
   if (!route.query.sessionId) {
     router.push({ name: "Practice" })
     loading.value = false
@@ -290,8 +361,21 @@ onMounted(async () => {
 // 页面卸载时停止计时并保存进度（刷新、关闭页面等）
 onUnmounted(() => {
   stopTimer();
-  savePracticeProgress();
+  if (!isExam.value) savePracticeProgress();
 });
+
+onBeforeRouteLeave((to, from, next) => {
+  if (isExam.value) {
+    if (confirm(t('confirmExitExam'))) {
+      stopTimer();
+      next()
+    } else {
+      next(false)
+    }
+  } else {
+    next()
+  }
+})
 
 // 进度计算
 const progress = computed(() => {
@@ -363,11 +447,21 @@ const toggleFavorite = () => {
 
 // 计时器相关
 const elapsedTimeDisplay = computed(() => {
+  if (isExam.value) return remainingTimeDisplay.value
   const hours = Math.floor(elapsedSeconds.value / 3600);
   const minutes = Math.floor((elapsedSeconds.value % 3600) / 60);
   const seconds = elapsedSeconds.value % 60;
   return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
 });
+
+const remainingTimeDisplay = computed(() => {
+  const hours = Math.floor(remainingSeconds.value / 3600)
+  const minutes = Math.floor((remainingSeconds.value % 3600) / 60)
+  const seconds = remainingSeconds.value % 60
+  return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`
+})
+
+const examWarning = computed(() => remainingSeconds.value > 0 && remainingSeconds.value < 300)
 
 // 实时答题统计
 const liveStats = computed(() => {
@@ -404,7 +498,12 @@ const liveStats = computed(() => {
 const startTimer = () => {
   if (timerInterval) clearInterval(timerInterval);
   timerInterval = setInterval(() => {
-    elapsedSeconds.value++;
+    if (isExam.value) {
+      remainingSeconds.value = Math.max(0, remainingSeconds.value - 1)
+      if (remainingSeconds.value === 0) autoSubmit()
+    } else {
+      elapsedSeconds.value++;
+    }
   }, 1000);
 };
 
@@ -439,6 +538,7 @@ const shuffleArray = (array, rng = Math.random) => {
 
 // 按每题 shuffle 字段缓存选项乱序结果（背题模式不乱序）
 const cacheShuffledOptions = () => {
+  if (isExam.value || !practiceData.value) return;
   if (practiceData.value?.practiceMode === 'review') return;
 
   const seed = practiceData.value?.shuffleSeed
@@ -462,6 +562,7 @@ const cacheShuffledOptions = () => {
 
 // 获取带乱序选项的题目（按每题 shuffle 字段，背题模式不乱序）
 const getQuestionWithShuffledOptions = (question) => {
+  if (isExam.value || !practiceData.value) return question;
   if (!question || !question.options) return question;
   if (practiceData.value?.practiceMode === 'review') return question;
 
@@ -519,6 +620,10 @@ const closeAnswerCard = () => {
 
 // 退出答题
 const exitQuiz = () => {
+  if (isExam.value) {
+    exitExam()
+    return
+  }
   if (confirm("确定要退出答题吗？")) {
     // 保存当前进度再退出
     savePracticeProgress();
@@ -526,7 +631,79 @@ const exitQuiz = () => {
   }
 };
 
+const exitExam = () => {
+  if (confirm(t('confirmExitExam'))) {
+    stopTimer();
+    router.push('/exam');
+  }
+};
+
+const toggleMark = () => {
+  if (!currentQuestion.value) return
+  const id = currentQuestion.value.id
+  if (markedQuestions.value.has(id)) {
+    markedQuestions.value.delete(id)
+  } else {
+    markedQuestions.value.add(id)
+  }
+};
+
+const autoSubmit = () => {
+  stopTimer()
+
+  const totalScore = paper.value?.totalScore || 0
+  let userScore = 0
+  let correctCount = 0
+  let totalItems = 0
+
+  bank.value.forEach((q) => {
+    const userAnswer = userAnswers.value[q.id]
+
+    if (q.type === 'reading' && q.subs?.length) {
+      const statuses = getAnswerStatus(q, userAnswer || {})
+      q.subs.forEach((sub, idx) => {
+        totalItems++
+        if (statuses[idx] === 'correct') {
+          correctCount++
+          userScore++
+        }
+      })
+    } else {
+      totalItems++
+      const status = getAnswerStatus(q, userAnswer)
+      if (status === 'correct') {
+        correctCount++
+        userScore += q.score || 1
+      }
+    }
+  })
+
+  const examResult = {
+    paperId: paper.value.id,
+    totalQuestions: totalItems,
+    correctCount,
+    totalScore,
+    userScore,
+    elapsedTime: elapsedSeconds.value
+  }
+
+  router.push({
+    path: '/exam/result',
+    query: examResult
+  })
+};
+
+const submitPaper = () => {
+  if (confirm(t('confirmSubmitPaper'))) {
+    autoSubmit()
+  }
+};
+
 const finishQuiz = () => {
+  if (isExam.value) {
+    submitPaper()
+    return
+  }
   if (confirm("确定完成答题并退出吗？")) {
     if (isWrongPractice.value) {
       router.push({ name: "Home" })
@@ -634,6 +811,7 @@ const handleAnswer = (answer) => {
 
 // 检查答案
 const checkAnswer = () => {
+  if (isExam.value) return
   const question = currentQuestionWithOptions.value || currentQuestion.value
   if (!question) return
 
@@ -682,6 +860,7 @@ const checkAnswer = () => {
 }
 
 const handleCheckSub = (subIndex) => {
+  if (isExam.value) return
   const question = currentQuestion.value
   if (!question) return
 
@@ -786,6 +965,7 @@ const loadPracticeProgress = () => {
 
 // 保存练习进度
 const savePracticeProgress = () => {
+  if (isExam.value) return
   if (practiceData.value?.wrongPractice) return
   // 错题本/收藏本练习不保存进度（无法通过题库继续）
   const source = practiceData.value?.source
@@ -858,14 +1038,22 @@ const removeCurrentFromWrong = () => {
 // 动作栏按钮配置
 const currentMode = computed(() => isWrongPractice.value ? 'wrong' : practiceMode.value)
 
-const buttonVisibility = computed(() => ({
-  translate: currentQuestion.value?.translation,
-  explanation: true,
-  favorite: currentMode.value !== 'wrong' && currentMode.value !== 'favorites',
-  removeWrong: isInWrongBook.value,
-  stats: true,
-  answerCard: true,
-}))
+const buttonVisibility = computed(() => {
+    if (isExam.value) {
+    return {
+      translate: false,
+      answerCard: true,
+    }
+  }
+  return {
+    translate: currentQuestion.value?.translation,
+    explanation: true,
+    favorite: currentMode.value !== 'wrong' && currentMode.value !== 'favorites',
+    removeWrong: isInWrongBook.value,
+    stats: true,
+    answerCard: true,
+  }
+})
 
 const actionButtons = [
   {
@@ -964,10 +1152,25 @@ const visibleButtons = computed(() =>
   font-size: var(--font-size-3xl);
 }
 
-.header-title h1 {
+.timer-display.warning {
+  color: var(--error);
+  background: rgba(255, 59, 48, 0.1);
+  animation: pulse 1s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+.exam-title {
   font-size: var(--font-size-md);
   font-weight: var(--font-weight-semibold);
   color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 160px;
 }
 
 .header-subtitle {
