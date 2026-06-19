@@ -88,6 +88,7 @@
       @start="showPracticeSetting = false" />
     <BankImport :visible="showImportModal" @close="showImportModal = false" @import-success="handleImportSuccess" />
 
+    <ConfirmDialog v-bind="confirm.state" />
   </div>
 </template>
 
@@ -145,11 +146,14 @@ import { computeSubjectStats } from '@/domain/services/stats'
 import { getPracticeKey } from '@/infrastructure/storage/progress'
 import { getAudioManager } from '@/infrastructure/services/audio-manager'
 import { createPracticeSession } from '@/infrastructure/storage/session'
+import ConfirmDialog from '@/presentation/components/ui/ConfirmDialog.vue'
+import { useConfirm } from '@/presentation/composables/useConfirm'
 
 const store = useAppStore()
 const pm = usePracticeService()
 const router = useRouter()
 const manager = getAudioManager()
+const confirm = useConfirm()
 const soundEnabled = ref(localStorage.getItem('soundEnabled') !== 'false')
 
 const showPracticeSetting = ref(false)
@@ -220,7 +224,7 @@ watch(selectedScope, () => {
   expandedSubject.value = null
 })
 
-const newQuizWith = (subject) => {
+const newQuizWith = async (subject) => {
   selectedSubject.value = {
     name: subject.name,
     category: selectedCategory.value,
@@ -230,7 +234,7 @@ const newQuizWith = (subject) => {
   const key = getPracticeKey({ bank: { category: selectedCategory.value, scope: selectedScope.value, subject: subject.name } })
 
   if (hasProgress(subject)) {
-    if (confirm('是否清除已有练习进度，开始新的练习？')) {
+    if (await confirm.show('是否清除已有练习进度，开始新的练习？')) {
       store.clearPracticeProgress(key)
       showPracticeSetting.value = true
     }

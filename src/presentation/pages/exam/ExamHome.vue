@@ -75,6 +75,7 @@
         <router-view />
       </section>
     </main>
+    <ConfirmDialog v-bind="confirm.state" />
   </div>
 </template>
 
@@ -85,9 +86,12 @@ import { useAppStore } from '@/domain/stores/store'
 import { t } from '@/infrastructure/utils/i18n'
 import TopBar from '@/presentation/components/layout/TopBar.vue'
 import Icon from '@/presentation/components/ui/Icon.vue'
+import ConfirmDialog from '@/presentation/components/ui/ConfirmDialog.vue'
+import { useConfirm } from '@/presentation/composables/useConfirm'
 
 const router = useRouter()
 const store = useAppStore()
+const confirm = useConfirm()
 
 const examPapers = computed(() => store.examPapers)
 
@@ -123,8 +127,8 @@ function exportPaper(paper) {
   store.exportPaper(paper)
 }
 
-function deletePaper(paperId) {
-  if (confirm(t('confirmDeletePaper'))) {
+async function deletePaper(paperId) {
+  if (await confirm.show(t('confirmDeletePaper'))) {
     store.removeExamPaper(paperId)
   }
 }

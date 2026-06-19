@@ -45,6 +45,7 @@
       </div>
     </template>
   </QuestionCollection>
+  <ConfirmDialog v-bind="confirm.state" />
 </template>
 
 <script setup>
@@ -55,9 +56,12 @@ import QuestionCollection from '@/presentation/components/question/QuestionColle
 import { useAppStore } from '@/domain/stores/store'
 import { t } from '@/infrastructure/utils/i18n.js'
 import { createPracticeSession } from '@/infrastructure/storage/session'
+import ConfirmDialog from '@/presentation/components/ui/ConfirmDialog.vue'
+import { useConfirm } from '@/presentation/composables/useConfirm'
 
 const router = useRouter()
 const store = useAppStore()
+const confirm = useConfirm()
 
 const wrongList = computed(() => store.wrongBook)
 const pageSize = 20
@@ -117,14 +121,14 @@ function goPractice() {
   router.push('/practice')
 }
 
-function removeWrong(id) {
-  if (confirm(t('confirmRemoveWrong'))) {
+async function removeWrong(id) {
+  if (await confirm.show(t('confirmRemoveWrong'))) {
     store.removeWrongQuestion(id)
   }
 }
 
-function clearAll() {
-  if (confirm(t('confirmClearAll'))) {
+async function clearAll() {
+  if (await confirm.show(t('confirmClearAll'))) {
     store.wrongBook.forEach(q => store.removeWrongQuestion(q.id))
   }
 }

@@ -54,6 +54,7 @@
         </button>
       </section>
     </main>
+    <ConfirmDialog v-bind="confirm.state" />
   </div>
 </template>
 
@@ -65,9 +66,12 @@ import { storage, STORAGE_KEY } from '@/infrastructure/storage/useStorage'
 import { computeBankHash } from '@/infrastructure/api/dataSource'
 import Icon from '@/presentation/components/ui/Icon.vue'
 import TopBar from '@/presentation/components/layout/TopBar.vue'
+import ConfirmDialog from '@/presentation/components/ui/ConfirmDialog.vue'
+import { useConfirm } from '@/presentation/composables/useConfirm'
 
 const router = useRouter()
 const store = useAppStore()
+const confirm = useConfirm()
 
 const clearing = ref(false)
 const refreshProgress = ref({ visible: false, indeterminate: false })
@@ -120,7 +124,7 @@ async function refreshCache() {
 }
 
 async function clearSingle(key, name) {
-  if (!confirm(`清除${name}？此操作不可撤销。`)) return
+  if (!await confirm.show(`清除${name}？此操作不可撤销。`)) return
   storage.removeItem(key)
   reloadData(key)
 }
@@ -128,7 +132,7 @@ async function clearSingle(key, name) {
 async function clearAll() {
   const items = dataItems.value
   const detail = items.map(i => `${i.name}(${i.count}条)`).join('、')
-  if (!confirm(`将删除以下所有本地数据：\n${detail}\n\n此操作不可撤销。`)) return
+  if (!await confirm.show(`将删除以下所有本地数据：\n${detail}\n\n此操作不可撤销。`)) return
   clearing.value = true
   try {
     for (const item of items) {

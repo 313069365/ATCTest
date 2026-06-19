@@ -38,6 +38,7 @@
       </div>
     </template>
   </QuestionCollection>
+  <ConfirmDialog v-bind="confirm.state" />
 </template>
 
 <script setup>
@@ -48,9 +49,12 @@ import QuestionCollection from '@/presentation/components/question/QuestionColle
 import { useAppStore } from '@/domain/stores/store'
 import { t } from '@/infrastructure/utils/i18n.js'
 import { createPracticeSession } from '@/infrastructure/storage/session'
+import ConfirmDialog from '@/presentation/components/ui/ConfirmDialog.vue'
+import { useConfirm } from '@/presentation/composables/useConfirm'
 
 const router = useRouter()
 const store = useAppStore()
+const confirm = useConfirm()
 
 const favoritesList = computed(() => store.favorites)
 const pageSize = 20
@@ -110,14 +114,14 @@ function goPractice() {
   router.push('/practice')
 }
 
-function removeFavorite(id) {
-  if (confirm(t('confirmRemoveFavorite'))) {
+async function removeFavorite(id) {
+  if (await confirm.show(t('confirmRemoveFavorite'))) {
     store.removeFavorite(id)
   }
 }
 
-function clearAll() {
-  if (confirm(t('confirmClearFavorites'))) {
+async function clearAll() {
+  if (await confirm.show(t('confirmClearFavorites'))) {
     store.favorites.forEach(q => store.removeFavorite(q.id))
   }
 }

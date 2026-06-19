@@ -464,8 +464,8 @@ function goToSettings() {
 }
 
 .shortcut-icon {
-  width: 40px;
-  height: 40px;
+  width: 44px;
+  height: 44px;
   border-radius: var(--radius-md);
   display: flex;
   align-items: center;

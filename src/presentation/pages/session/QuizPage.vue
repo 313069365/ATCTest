@@ -37,7 +37,7 @@
         </div>
       </div>
       <div class="action-bar">
-        <span class="progress-label" @click="openJumpDialog">进度 {{ currentIndex + 1 }}/{{ isExamMode ? questions.length
+        <span class="progress-label" @click="openJumpDialog">{{ currentIndex + 1 }} / {{ isExamMode ? questions.length
           :
           bank.length
         }}</span>
@@ -98,8 +98,7 @@
     <QuizSettings v-if="showQuizSettings" :visible="showQuizSettings" :is-exam-mode="isExamMode"
       :showExplanationEnabled="showExplanationPref" :forceExplanationOnWrong="forceExplanationOnWrong"
       :autoJump="practiceData?.autoJump ?? true" :darkMode="darkMode" :soundEnabled="soundEnabled"
-      :on-exit="isExamMode ? exitExam : exitQuiz"
-      :on-submit="isExamMode ? submitPaper : finishQuiz"
+      :on-exit="isExamMode ? exitExam : exitQuiz" :on-submit="isExamMode ? submitPaper : finishQuiz"
       @close="showQuizSettings = false" @update:forceExplanationOnWrong="forceExplanationOnWrong = $event"
       @update:autoJump="practiceData.autoJump = $event" @update:darkMode="darkMode = $event"
       @update:soundEnabled="soundEnabled = $event" />
@@ -108,6 +107,8 @@
     <JumpDialog v-if="jumpDialogVisible" :visible="jumpDialogVisible"
       :total="isExamMode ? questions.length : bank.length" :current="currentIndex"
       :on-jump="isExamMode ? gotoQuestion : gotoQuesitonIdx" @close="jumpDialogVisible = false" />
+
+    <ConfirmDialog v-bind="confirm.state" />
   </div>
 </template>
 
@@ -121,6 +122,8 @@ import QuizSettings from '@/presentation/components/practice/QuizSettings.vue'
 import QuestNav from '@/presentation/components/layout/QuestNav.vue'
 import QuestionRenderer from '@/presentation/components/question/QuestionRenderer.vue'
 import JumpDialog from '@/presentation/components/practice/JumpDialog.vue'
+import ConfirmDialog from '@/presentation/components/ui/ConfirmDialog.vue'
+import { useConfirm } from '@/presentation/composables/useConfirm'
 import { useAppStore } from '@/domain/stores/store'
 import { usePracticeService } from '@/domain/composables/usePracticeService'
 import { t } from '@/infrastructure/utils/i18n.js'
@@ -143,6 +146,8 @@ const router = useRouter()
 const route = useRoute()
 const store = useAppStore()
 const pm = usePracticeService()
+
+const confirm = useConfirm()
 
 const isExamMode = computed(() => route.name === 'ExamPaper')
 
@@ -234,15 +239,15 @@ function checkAnswer(question, userAnswer) {
   return userAnswer === question.answer
 }
 
-const exitExam = () => {
-  if (confirm(t('confirmExitExam') || '确定要退出考试吗？')) {
+const exitExam = async () => {
+  if (await confirm.show(t('confirmExitExam') || '确定要退出考试吗？')) {
     stopTimer()
     router.push('/exam')
   }
 }
 
-const submitPaper = () => {
-  if (confirm(t('confirmSubmitPaper') || '确定要交卷吗？')) {
+const submitPaper = async () => {
+  if (await confirm.show(t('confirmSubmitPaper') || '确定要交卷吗？')) {
     autoSubmit()
   }
 }
@@ -813,15 +818,15 @@ const savePracticeProgress = () => {
 }
 
 // ========== 练习模式 - 退出/完成 ==========
-const exitQuiz = () => {
-  if (confirm('确定要退出答题吗？')) {
+const exitQuiz = async () => {
+  if (await confirm.show('确定要退出答题吗？')) {
     savePracticeProgress()
     router.push({ name: 'Practice' })
   }
 }
 
-const finishQuiz = () => {
-  if (confirm('确定完成答题并退出吗？')) {
+const finishQuiz = async () => {
+  if (await confirm.show('确定完成答题并退出吗？')) {
     if (isWrongPractice.value) {
       router.push({ name: 'Home' })
       return
@@ -890,8 +895,8 @@ const toggleFavorite = () => {
   }
 }
 
-const removeCurrentFromWrong = () => {
-  if (confirm('将该题从错题集中移除？')) {
+const removeCurrentFromWrong = async () => {
+  if (await confirm.show('将该题从错题集中移除？')) {
     const q = bank.value[currentIndex.value]
     if (!q) return
     store.removeWrongQuestion(q.id)

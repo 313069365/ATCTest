@@ -209,6 +209,7 @@
       <SubjectPicker v-model="showBankModal" :bank-meta="bankMeta" @add="handleAddSubject" />
     </div>
   </div>
+  <ConfirmDialog v-bind="confirm.state" />
 </template>
 
 <script setup>
@@ -219,9 +220,12 @@ import SubjectPicker from '@/presentation/components/bank/SubjectPicker.vue'
 import { t } from '@/infrastructure/utils/i18n'
 import TopBar from '@/presentation/components/layout/TopBar.vue'
 import Icon from '@/presentation/components/ui/Icon.vue'
+import ConfirmDialog from '@/presentation/components/ui/ConfirmDialog.vue'
+import { useConfirm } from '@/presentation/composables/useConfirm'
 
 const router = useRouter()
 const store = useAppStore()
+const confirm = useConfirm()
 
 const bankMeta = computed(() => store.bankMeta)
 
@@ -267,8 +271,8 @@ const canProceed = computed(() => {
   return true
 })
 
-function exitCreate() {
-  if (confirm('确定要退出吗？已填写的内容将丢失。')) {
+async function exitCreate() {
+  if (await confirm.show('确定要退出吗？已填写的内容将丢失。')) {
     router.back()
   }
 }
