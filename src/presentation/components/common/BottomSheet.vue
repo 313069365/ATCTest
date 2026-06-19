@@ -125,7 +125,7 @@ defineEmits(['close'])
 }
 
 .sheet-footer {
-  padding: 16px 16px 20px;
+  padding: 12px 16px;
   background: var(--background);
   border-top: 1px solid var(--border-color-light);
 }

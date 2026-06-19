@@ -2,19 +2,7 @@
   <BottomSheet :visible="visible" :title="t('practiceSettings')" @close="$emit('close')">
     <section class="settings-section">
       <!-- <span class="section-label">{{ t('practiceMode') }}</span> -->
-      <div class="tab-bar" :class="settings.practiceMode">
-        <div class="tab-indicator"></div>
-        <button class="tab-btn" :class="{ active: settings.practiceMode === 'review' }"
-          @click="settings.practiceMode = 'review'">
-          <Icon name="menu-book-outline" />
-          <span>{{ t('reviewMode') }}</span>
-        </button>
-        <button class="tab-btn" :class="{ active: settings.practiceMode === 'answer' }"
-          @click="settings.practiceMode = 'answer'">
-          <Icon name="edit-note-outline" />
-          <span>{{ t('answerMode') }}</span>
-        </button>
-      </div>
+      <SegmentedControl v-model="settings.practiceMode" :options="modeOptions" variant="primary" size="md" />
     </section>
 
     <section class="settings-section">
@@ -25,14 +13,7 @@
             <span class="toggle-title">{{ t('sortMode') }}</span>
             <span class="toggle-desc">{{ t('sortModeDesc') }}</span>
           </div>
-          <div class="seg-control compact"
-            :style="{ '--opt-count': QUESTIONS_SORT.length, '--opt-index': QUESTIONS_SORT.indexOf(settings.questionSort) }">
-            <div class="seg-indicator"></div>
-            <button v-for="sort in QUESTIONS_SORT" :key="sort" class="seg-option"
-              :class="{ active: settings.questionSort === sort }" @click="settings.questionSort = sort">
-              {{ t(sort) }}
-            </button>
-          </div>
+          <SegmentedControl v-model="settings.questionSort" :options="sortOptions" compact />
         </div>
       </div>
     </section>
@@ -46,15 +27,7 @@
               <span class="toggle-title">{{ t('displayMode') }}</span>
               <span class="toggle-desc">{{ t('displayModeDesc') }}</span>
             </div>
-            <div class="seg-control compact"
-              :style="{ '--opt-count': SHOW_ANSWER_MODE.length, '--opt-index': SHOW_ANSWER_MODE.findIndex(o => o.value === settings.showAnswerMode) }">
-              <div class="seg-indicator"></div>
-              <button v-for="option in SHOW_ANSWER_MODE" :key="option.value" class="seg-option"
-                :class="{ active: settings.showAnswerMode === option.value }"
-                @click="settings.showAnswerMode = option.value">
-                {{ t(option.label) }}
-              </button>
-            </div>
+            <SegmentedControl v-model="settings.showAnswerMode" :options="displayOptions" compact />
           </div>
         </div>
       </section>
@@ -86,21 +59,31 @@
 
 <script setup>
 import { useRouter } from 'vue-router'
-import { watch, reactive } from 'vue'
+import { watch, reactive, computed } from 'vue'
 import Icon from '@/presentation/components/common/Icon.vue'
 import { t } from '@/infrastructure/utils/i18n.js'
 import { QUESTION_SORT } from '@/domain/config/questionConfig'
 import { createPracticeSession } from '@/infrastructure/storage/session'
 import BottomSheet from '@/presentation/components/common/BottomSheet.vue'
+import SegmentedControl from '@/presentation/components/common/SegmentedControl.vue'
 
 const router = useRouter()
 
 const QUESTIONS_SORT = Object.values(QUESTION_SORT)
 
+const modeOptions = [
+  { value: 'review', label: t('reviewMode'), icon: 'menu-book-outline' },
+  { value: 'answer', label: t('answerMode'), icon: 'edit-note-outline' },
+]
+
+const sortOptions = computed(() => QUESTIONS_SORT.map(sort => ({ value: sort, label: t(sort) })))
+
 const SHOW_ANSWER_MODE = [
   { value: 'immediate', label: 'showImmediately' },
   { value: 'manual', label: 'showOnDemand' }
 ]
+
+const displayOptions = computed(() => SHOW_ANSWER_MODE.map(opt => ({ value: opt.value, label: t(opt.label) })))
 
 const props = defineProps({
   visible: { type: Boolean, default: false },
@@ -162,110 +145,6 @@ const gotopage = () => {
   overflow: hidden;
 }
 
-.seg-control {
-  position: relative;
-  display: flex;
-  background: var(--color-gray-100);
-  border-radius: 10px;
-  padding: 3px;
-}
-
-.seg-indicator {
-  position: absolute;
-  top: 3px;
-  left: calc(3px + (100% - 6px) / var(--opt-count) * var(--opt-index));
-  width: calc((100% - 6px) / var(--opt-count));
-  height: calc(100% - 6px);
-  background: var(--background);
-  border-radius: 8px;
-  transition: left 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
-  z-index: 0;
-}
-
-.seg-control.compact .seg-option {
-  padding: 6px 12px;
-  font-size: 13px;
-}
-
-.seg-option {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  padding: 10px 12px;
-  border: none;
-  background: transparent;
-  border-radius: 8px;
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--text-secondary);
-  cursor: pointer;
-  z-index: 1;
-  transition: color 0.25s;
-}
-
-.seg-option.active {
-  color: var(--primary);
-  font-weight: 600;
-}
-
-.seg-option:not(.active):active {
-  background: var(--color-gray-200);
-}
-
-.tab-bar {
-  position: relative;
-  display: flex;
-  background: var(--color-gray-100);
-  border-radius: 12px;
-  padding: 6px;
-  box-shadow: var(--shadow-sm);
-}
-
-.tab-indicator {
-  position: absolute;
-  top: 6px;
-  left: 6px;
-  width: calc(50% - 6px);
-  height: calc(100% - 12px);
-  background: var(--primary);
-  border-radius: 9px;
-  transition: left 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
-}
-
-.tab-bar.answer .tab-indicator {
-  left: calc(50% + 0px);
-}
-
-.tab-btn {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  padding: 12px 8px;
-  border: none;
-  background: transparent;
-  border-radius: 9px;
-  font-size: 15px;
-  font-weight: 500;
-  color: var(--text-secondary);
-  cursor: pointer;
-  z-index: 1;
-  transition: color 0.25s;
-}
-
-.tab-btn svg {
-  font-size: 20px;
-}
-
-.tab-btn.active {
-  color: var(--on-primary);
-  font-weight: 600;
-}
-
 .toggle-item {
   display: flex;
   align-items: center;
@@ -322,19 +201,20 @@ const gotopage = () => {
 }
 
 .start-btn {
-  width: 100%;
-  height: 52px;
+  width: 60%;
+  margin: 0 auto;
+  padding: 12px 24px;
   background: var(--primary);
   color: #fff;
   border: none;
   border-radius: var(--radius-full);
-  font-size: 17px;
+  font-size: 16px;
   font-weight: 600;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
+  gap: 8px;
   transition: opacity 0.2s, transform 0.15s;
 }
 

@@ -1,6 +1,7 @@
 <template>
   <footer class="footer">
-    <SubPager :sub-count="subCount" :current-sub-index="currentSubIndex" :sub-statuses="subStatuses" @go-sub="(i) => $emit('goSub', i)" />
+    <SubPager :sub-count="subCount" :current-sub-index="currentSubIndex" :sub-statuses="subStatuses"
+      @go-sub="(i) => $emit('goSub', i)" />
     <div class="nav-row">
       <button class="nav-btn prev" :disabled="prevDisabled && !(subCount > 0 && currentSubIndex > 0)"
         @click="handlePrev">
@@ -8,8 +9,8 @@
         {{ subCount > 0 && currentSubIndex > 0 ? '上一小题' : '上一题' }}
       </button>
       <button class="nav-btn next" :disabled="nextDisabled" @click="handleNext">
-        {{ subCount > 0 && currentSubIndex < subCount - 1 ? '下一小题' : '下一题' }}
-        <Icon name="chevron-right" />
+        {{ subCount > 0 && currentSubIndex
+          < subCount - 1 ? '下一小题' : '下一题' }} <Icon name="chevron-right" />
       </button>
     </div>
   </footer>
@@ -89,7 +90,7 @@ const handleNext = () => {
   margin: var(--spacing-mn) var(--spacing-smd);
   background: var(--surface);
   border: 1px solid var(--border-color);
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-full);
   color: var(--primary);
   font-size: var(--font-size-md);
   font-weight: var(--font-weight-medium);
@@ -104,7 +105,7 @@ const handleNext = () => {
 }
 
 .nav-btn:hover {
-  background: var(--color-gray-100);
+  background: var(--primary-light);
   box-shadow: var(--shadow-md);
 }
 

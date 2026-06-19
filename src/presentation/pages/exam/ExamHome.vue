@@ -2,8 +2,8 @@
   <div class="exam-page">
     <TopBar :title="t('examManagement')">
       <template #right>
-        <button class="icon-btn" @click="$router.push('/exam/history')">
-          <Icon name="history" />
+        <button class="icon-btn" @click="triggerImport">
+          <Icon name="upload" />
         </button>
       </template>
     </TopBar>
@@ -15,14 +15,16 @@
             <Icon name="add" />
             <span>{{ t('createPaper') }}</span>
           </button>
-          <button class="paper-action-btn" @click="triggerImport">
-            <Icon name="upload" />
-            <span>{{ t('importPaper') }}</span>
+          <button class="paper-action-btn" @click="">
+            <Icon name="person" />
+            <span>{{ t('joinExam') }}</span>
           </button>
           <input type="file" ref="fileInput" accept=".json" @change="handleImport" style="display: none">
         </div>
 
         <h2 class="section-title">{{ t('paperList') }}</h2>
+
+        <SegmentedControl v-model="activeFilter" :options="filterOptions" variant="primary" />
 
         <div class="paper-list" v-if="examPapers.length > 0">
           <div v-for="paper in examPapers" :key="paper.id" class="paper-card">
@@ -87,11 +89,20 @@ import { t } from '@/infrastructure/utils/i18n'
 import TopBar from '@/presentation/components/layout/TopBar.vue'
 import Icon from '@/presentation/components/common/Icon.vue'
 import ConfirmDialog from '@/presentation/components/common/ConfirmDialog.vue'
+import SegmentedControl from '@/presentation/components/common/SegmentedControl.vue'
 import { useConfirm } from '@/presentation/composables/useConfirm'
 
 const router = useRouter()
 const store = useAppStore()
 const confirm = useConfirm()
+
+const activeFilter = ref('in-progress')
+
+const filterOptions = computed(() => [
+  { value: 'in-progress', label: t('inProgress') },
+  { value: 'completed', label: t('completed') },
+  { value: 'expired', label: t('expired') },
+])
 
 const examPapers = computed(() => store.examPapers)
 
@@ -112,14 +123,14 @@ function triggerImport() {
 async function handleImport(event) {
   const file = event.target.files[0]
   if (!file) return
-  
+
   try {
     await store.importPaper(file)
     alert(t('importSuccess') || '导入成功')
   } catch (err) {
     alert((t('importFailed') || '导入失败') + ': ' + err.message)
   }
-  
+
   event.target.value = ''
 }
 
@@ -149,25 +160,25 @@ const fileInput = ref(null)
 }
 
 .content {
-  padding: var(--spacing-lg);
+  padding: var(--spacing-md) var(--spacing-lg);
   padding-bottom: 100px;
 }
 
 .paper-section {
-  margin-bottom: var(--spacing-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
 }
 
 .section-title {
   font-size: var(--font-size-md);
   font-weight: var(--font-weight-bold);
   color: var(--on-surface);
-  margin-bottom: var(--spacing-sm);
 }
 
 .paper-actions {
   display: flex;
   gap: var(--spacing-lg);
-  margin-bottom: var(--spacing-md);
 }
 
 .paper-action-btn {

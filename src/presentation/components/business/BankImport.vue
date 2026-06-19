@@ -168,20 +168,21 @@ defineEmits(['close'])
 }
 
 .import-btn {
-  width: 100%;
-  height: 56px;
-  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-gradient-end) 100%);
+  width: 60%;
+  margin: 0 auto;
+  padding: 12px 24px;
+  background: var(--primary);
   color: #fff;
   border: none;
   border-radius: var(--radius-full);
-  font-size: 18px;
-  font-weight: 700;
+  font-size: 16px;
+  font-weight: 600;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 12px rgba(0, 91, 191, 0.3);
-  transition: all 0.2s;
+  gap: 8px;
+  transition: opacity 0.2s, transform 0.15s;
 }
 
 .import-btn:disabled {
@@ -189,8 +190,8 @@ defineEmits(['close'])
   cursor: not-allowed;
 }
 
-.import-btn:not(:disabled):hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(0, 91, 191, 0.4);
+.import-btn:active:not(:disabled) {
+  opacity: 0.85;
+  transform: scale(0.97);
 }
 </style>

@@ -1,17 +1,6 @@
 <template>
   <BottomSheet :visible="visible" :title="t('quizSettings')" @close="$emit('close')">
-    <div class="action-row">
-      <button class="action-btn-secondary" @click="handleSubmit">
-        <Icon name="check-circle-outline" />
-        {{ t('submitPaper') }}
-        <span></span>
-      </button>
-      <button class="action-btn-secondary" @click="handleExit">
-        <Icon name="close" />
-        {{ t('exit') }}
-        <span></span>
-      </button>
-    </div>
+
 
     <div v-if="!isExamMode" class="settings-section">
       <span class="section-label">{{ t('answerSettings') }}</span>
@@ -68,6 +57,13 @@
         </div>
       </div>
     </div>
+
+    <template #footer>
+      <button class="action-btn-primary" @click="isExamMode ? handleSubmit() : handleExit()">
+        <Icon :name="isExamMode ? 'assignment-turned-in-outline' : 'logout'" />
+        {{ isExamMode ? t('submitPaper') : t('exit') }}
+      </button>
+    </template>
   </BottomSheet>
 </template>
 
@@ -101,36 +97,34 @@ function handleExit() {
 </script>
 
 <style scoped>
-.action-row {
-  display: flex;
-  gap: 10px;
-}
-
-.action-btn-secondary {
-  flex: 1;
+.action-btn-primary {
+  width: 60%;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
-  padding: 12px 16px;
-  border-radius: var(--radius-lg);
-  font-size: 15px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s;
+  gap: 8px;
+  margin: 0 auto;
+  padding: 12px 24px;
   border: none;
-  background: var(--background);
-  color: var(--text-secondary);
-  border: 1px solid var(--border-color-light);
+  border-radius: var(--radius-full);
+  font-size: 16px;
+  font-weight: 600;
+  background: var(--primary);
+  color: #fff;
+  cursor: pointer;
+  transition: opacity 0.2s, transform 0.15s;
 }
 
-.action-btn-secondary:hover {
-  background: var(--color-gray-100);
+.action-btn-primary svg {
+  font-size: 20px;
 }
 
-.action-btn-secondary svg {
-  font-size: 18px;
+.action-btn-primary:active {
+  opacity: 0.85;
+  transform: scale(0.97);
 }
+
+
 
 .settings-section {
   display: flex;
@@ -160,7 +154,7 @@ function handleExit() {
   padding: var(--spacing-md);
 }
 
-.toggle-item + .toggle-item {
+.toggle-item+.toggle-item {
   border-top: 0.5px solid var(--border-color-light);
 }
 

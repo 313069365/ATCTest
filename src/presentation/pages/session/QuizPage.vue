@@ -40,7 +40,7 @@
         <span class="progress-label" @click="openJumpDialog">{{ currentIndex + 1 }} / {{ isExamMode ? questions.length
           :
           bank.length
-        }}</span>
+          }}</span>
         <div class="action-bar-right">
           <button v-for="btn in visibleButtons" :key="btn.key" class="action-btn"
             :class="{ active: btn.active?.value, 'remove-btn': btn.key === 'removeWrong' }" @click="btn.action"
@@ -997,7 +997,6 @@ const visibleButtons = computed(() =>
   justify-content: space-between;
   padding: 12px 16px;
   height: 56px;
-  border-bottom: 1px solid var(--border-color);
 }
 
 .top-bar-left {
@@ -1070,7 +1069,7 @@ const visibleButtons = computed(() =>
 }
 
 .progress-bar-container {
-  padding: var(--spacing-sm) var(--spacing-md) 0;
+  padding: 0 var(--spacing-md);
 }
 
 .progress-bar {
@@ -1101,11 +1100,11 @@ const visibleButtons = computed(() =>
 
 .progress-label {
   font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-regular);
-  color: var(--primary);
-  background: var(--primary-light);
+  font-weight: var(--font-weight-semibold);
+  color: var(--accent);
+  background: var(--accent-light);
   padding: 2px 8px;
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-full);
   cursor: pointer;
   user-select: none;
 }

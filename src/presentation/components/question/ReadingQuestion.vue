@@ -1,16 +1,7 @@
 <template>
   <div class="reading-question">
 
-    <div class="reading-tab-bar" v-if="question.attachments?.article">
-      <button class="reading-tab" :class="{ active: activeTab === 'question' }" @click="activeTab = 'question'">
-        <Icon name="rate-review-outline" />
-        作答区
-      </button>
-      <button class="reading-tab" :class="{ active: activeTab === 'article' }" @click="activeTab = 'article'">
-        <Icon name="menu-book-outline" />
-        阅读材料
-      </button>
-    </div>
+    <SegmentedControl v-if="question.attachments?.article" v-model="activeTab" :options="articleTabOptions" variant="primary" />
 
     <template v-if="activeTab === 'question'">
       <div class="sub-question-section" v-if="question.subs && question.subs.length > 0">
@@ -50,6 +41,7 @@ import { getAnswerStatus } from '@/domain/config/questionConfig'
 import { getStrategy } from '@/infrastructure/question-types'
 import QuestionRenderer from './QuestionRenderer.vue'
 import Icon from '@/presentation/components/common/Icon.vue'
+import SegmentedControl from '@/presentation/components/common/SegmentedControl.vue'
 
 const props = defineProps({
   question: {
@@ -93,6 +85,11 @@ const props = defineProps({
 const emit = defineEmits(['answer', 'checkSub', 'next-question', 'goSub'])
 
 const showTranslation = inject('showTranslation', ref(false))
+
+const articleTabOptions = [
+  { value: 'question', label: '作答区', icon: 'rate-review-outline' },
+  { value: 'article', label: '阅读材料', icon: 'menu-book-outline' },
+]
 
 const activeTab = ref('question')
 const currentSubIndex = ref(0)
@@ -233,42 +230,6 @@ watch(() => props.question, () => {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-md);
-}
-
-.reading-tab-bar {
-  display: flex;
-  gap: 4px;
-  padding: 3px;
-  background: var(--color-gray-100);
-  border-radius: 12px;
-}
-
-.reading-tab {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: var(--spacing-sm);
-  padding: 8px 16px;
-  border-radius: 10px;
-  border: none;
-  background: transparent;
-  font-size: var(--font-size-md);
-  font-weight: 500;
-  color: var(--text-secondary);
-  cursor: pointer;
-  transition: all 0.2s;
-}
-
-.reading-tab svg {
-  font-size: 20px;
-}
-
-.reading-tab.active {
-  background: var(--primary);
-  color: #fff;
-  font-weight: 600;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
 }
 
 .reading-content {

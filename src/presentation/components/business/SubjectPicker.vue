@@ -1,246 +1,637 @@
 <template>
   <BottomSheet :visible="modelValue" @close="close">
-    <div class="picker-header-row">
-      <button class="picker-btn cancel" @click="close">{{ t('cancel') }}</button>
-      <span class="picker-title">{{ defaultTitle }}</span>
-      <button class="picker-btn confirm" @click="handleConfirm" :disabled="!canConfirm">{{ t('add') }}</button>
+    <template #header>
+      <div style="max-width:260px">
+        <SegmentedControl v-model="activeTab" :options="headerTabOptions" variant="primary" compact />
+      </div>
+    </template>
+
+    <div class="picker-container">
+      <!-- 选题面板 -->
+      <div v-show="activeTab === 'select'" class="picker-body">
+        <div class="nav-column">
+          <div v-for="cat in categoryList" :key="cat.key" class="nav-item"
+            :class="{ active: activeCategory === cat.key }" @click="switchCategory(cat.key)">
+            <span class="nav-label">{{ t(cat.key) }}</span>
+            <span class="nav-count">{{ cat.total }}</span>
+          </div>
+        </div>
+        <div class="content-column">
+          <template v-for="group in groupedSubjects" :key="group.scope">
+            <div class="scope-header">{{ t(group.scope) }}</div>
+            <div v-for="subj in group.items" :key="subj.name" class="subject-item"
+              :class="{ checked: isChecked(subj), added: subj.alreadyAdded }" @click="toggleSubject(subj)">
+              <div class="check-box" :class="{ checked: isChecked(subj) }">
+                <Icon name="check" v-if="isChecked(subj)" />
+              </div>
+              <div class="subject-info">
+                <span class="subject-name">{{ t(subj.name) }}</span>
+                <span class="subject-meta">共 {{ subj.count }} 题</span>
+              </div>
+              <span v-if="subj.alreadyAdded" class="added-tag">已添加</span>
+            </div>
+          </template>
+          <div class="empty-state" v-if="groupedSubjects.length === 0">暂无科目</div>
+        </div>
+      </div>
+
+      <!-- 配置面板 -->
+      <div v-show="activeTab === 'config'" class="config-panel">
+        <div class="config-summary">
+          <span>共 {{ totalPickCount }} 题</span>
+          <span>总分 {{ totalScore }}</span>
+        </div>
+        <div v-for="item in checkedList" :key="getItemKey(item)" class="config-card">
+          <div class="config-card-header">
+            <span class="config-name">{{ t(item.subject) }}
+              <span class="stepper-max">共{{ item.count }}题</span>
+            </span>
+            <span class="config-subtotal">{{ item.pickCount }} 题 · {{ item.pickCount * item.score }} 分</span>
+          </div>
+          <div class="config-controls">
+            <div class="stepper-group">
+              <span class="stepper-label">该科题量</span>
+              <div class="stepper">
+                <button class="stepper-btn" @click="adjustValue(item, 'pickCount', -1)"
+                  :disabled="item.pickCount <= 1">−</button>
+                <input class="stepper-input" type="number" :value="item.pickCount" @change="setPickCount(item, $event)"
+                  :max="item.count" min="1" />
+                <button class="stepper-btn" @click="adjustValue(item, 'pickCount', 1)"
+                  :disabled="item.pickCount >= item.count">+</button>
+              </div>
+
+            </div>
+            <div class="stepper-group">
+              <span class="stepper-label">每题分值</span>
+              <div class="stepper">
+                <button class="stepper-btn" @click="adjustValue(item, 'score', -1)"
+                  :disabled="item.score <= 1">−</button>
+                <input class="stepper-input" type="number" :value="item.score" @change="setScore(item, $event)"
+                  min="1" />
+                <button class="stepper-btn" @click="adjustValue(item, 'score', 1)">+</button>
+              </div>
+              <!-- <span class="stepper-max">分/题</span> -->
+            </div>
+          </div>
+        </div>
+
+      </div>
     </div>
 
-    <div class="picker-body">
-      <div class="picker-column">
-        <div class="picker-list">
-          <div v-for="(info, key) in categories" :key="key" class="picker-item"
-            :class="{ active: selection.category === key }" @click="selectCategory(key)">
-            {{ t(key) }}
-          </div>
-        </div>
-      </div>
-      <div class="picker-column">
-        <div class="picker-list">
-          <div v-for="scope in getScopes(selection.category)" :key="scope" class="picker-item"
-            :class="{ active: selection.scope === scope }" @click="selectScope(scope)">
-            {{ t(scope) }}
-          </div>
-          <div class="picker-placeholder" v-if="!selection.category">{{ t('selectCategoryFirst') }}</div>
-        </div>
-      </div>
-      <div class="picker-column">
-        <div class="picker-list">
-          <div v-for="subj in getSubjects(selection.category, selection.scope)" :key="subj.name" class="picker-item"
-            :class="{ active: selection.subject === subj.name }" @click="selectSubject(subj.name)">
-            <span class="subject-name">{{ t(subj.name) }}</span>
-          </div>
-          <div class="picker-placeholder" v-if="!selection.scope">{{ t('selectScopeFirst') }}</div>
-        </div>
-      </div>
-    </div>
+    <template #footer>
+      <button v-if="activeTab === 'select'" class="action-btn" :disabled="checkedList.length === 0"
+        @click="activeTab = 'config'">
+        去配置 {{ checkedList.length > 0 ? `(${checkedList.length})` : '' }}
+      </button>
+      <button v-else class="action-btn confirm" @click="handleConfirm">
+        确认添加 ({{ checkedList.length }})
+      </button>
+    </template>
   </BottomSheet>
 </template>
 
 <script setup>
-import { ref, reactive, computed, watch, onMounted } from 'vue'
+import { ref, computed, watch } from 'vue'
+
 import { t } from '@/infrastructure/utils/i18n'
 import { useAppStore } from '@/domain/stores/store'
 import BottomSheet from '@/presentation/components/common/BottomSheet.vue'
-
+import Icon from '@/presentation/components/common/Icon.vue'
+import SegmentedControl from '@/presentation/components/common/SegmentedControl.vue'
 const props = defineProps({
   modelValue: Boolean,
-  bankMeta: {
-    type: Object,
-    default: () => ({})
-  },
-  title: {
-    type: String,
-    default: ''
-  }
+  bankMeta: { type: Object, default: () => ({}) },
+  existingSubjects: { type: Array, default: () => [] },
 })
 
-const defaultTitle = computed(() => props.title || t('addSubject'))
+const emit = defineEmits(['update:modelValue', 'add-multiple'])
 
-const emit = defineEmits(['update:modelValue', 'add'])
+const activeTab = ref('select')
+const activeCategory = ref('')
+const checkedMap = ref(new Map())
 
-const selection = reactive({
-  category: '',
-  scope: '',
-  subject: ''
-})
-
-const categories = computed(() => {
-  return props.bankMeta || {}
-})
-
-const canConfirm = computed(() => {
-  return selection.category && selection.scope && selection.subject
-})
-
-async function loadBankMetaIfNeeded() {
-  const store = useAppStore()
-  if (!store.bankMeta || Object.keys(store.bankMeta).length === 0) {
-    await store.loadBankMeta()
-  }
-}
-
-function setDefaultSelection() {
+const categoryList = computed(() => {
   const store = useAppStore()
   const meta = store.bankMeta
+  return Object.entries(meta).map(([key, info]) => {
+    const total = Object.values(info.subjects || {}).reduce((sum, s) => sum + (s.count || 0), 0)
+    return { key, total }
+  })
+})
 
-  const firstCategory = Object.keys(meta)[0]
-  if (firstCategory) {
-    selection.category = firstCategory
-    const firstScope = meta[firstCategory]?.scopes?.[0]
-    if (firstScope) {
-      selection.scope = firstScope
-    }
-  }
-  selection.subject = ''
-}
-
-watch(() => props.modelValue, async (val) => {
-  if (val) {
-    await loadBankMetaIfNeeded()
-    setDefaultSelection()
-  }
-}, { immediate: true })
-
-function getScopes(category) {
+const groupedSubjects = computed(() => {
+  if (!activeCategory.value) return []
   const store = useAppStore()
-  const catMeta = store.bankMeta[category]
-  return catMeta?.scopes || []
-}
-
-function getSubjects(category, scope) {
-  const store = useAppStore()
-  const catMeta = store.bankMeta[category]
+  const catMeta = store.bankMeta[activeCategory.value]
   if (!catMeta) return []
-  return Object.entries(catMeta.subjects)
-    .filter(([_, info]) => info.scope === scope)
-    .map(([name, info]) => ({ name, count: info.count }))
+
+  const groups = {}
+  for (const [name, info] of Object.entries(catMeta.subjects || {})) {
+    const scope = info.scope
+    if (!groups[scope]) groups[scope] = []
+    groups[scope].push({
+      name,
+      count: info.count,
+      scope,
+      alreadyAdded: props.existingSubjects.some(
+        s => s.subject === name && s.category === activeCategory.value && s.scope === scope
+      )
+    })
+  }
+  return Object.entries(groups).map(([scope, items]) => ({ scope, items }))
+})
+
+const headerTabOptions = computed(() => [
+  { value: 'select', label: '选择科目' },
+  { value: 'config', label: '配置参数', badge: checkedList.value.length > 0 ? checkedList.value.length : undefined, disabled: checkedList.value.length === 0 }
+])
+
+const checkedList = computed(() => Array.from(checkedMap.value.values()))
+
+const totalPickCount = computed(() =>
+  checkedList.value.reduce((sum, item) => sum + (item.pickCount || 10), 0)
+)
+
+const totalScore = computed(() =>
+  checkedList.value.reduce((sum, item) => sum + (item.pickCount || 10) * (item.score || 1), 0)
+)
+
+function getKey(subj) {
+  return `${activeCategory.value}|${subj.scope}|${subj.name}`
 }
 
+function getItemKey(item) {
+  return `${item.category}|${item.scope}|${item.subject}`
+}
 
-function selectCategory(key) {
+function isChecked(subj) {
+  return checkedMap.value.has(getKey(subj))
+}
+
+function toggleSubject(subj) {
+  const key = getKey(subj)
+  const newMap = new Map(checkedMap.value)
+  if (subj.alreadyAdded && newMap.has(key)) {
+    // 已添加的科目点击直接跳到配置页
+    activeTab.value = 'config'
+    return
+  }
+  if (newMap.has(key)) {
+    newMap.delete(key)
+  } else {
+    newMap.set(key, {
+      category: activeCategory.value,
+      scope: subj.scope,
+      subject: subj.name,
+      count: subj.count,
+      pickCount: Math.min(10, subj.count),
+      score: 1
+    })
+  }
+  checkedMap.value = newMap
+}
+
+function uncheck(item) {
+  const newMap = new Map(checkedMap.value)
+  newMap.delete(getItemKey(item))
+  checkedMap.value = newMap
+}
+
+function adjustValue(item, field, delta) {
+  const key = getItemKey(item)
+  const newMap = new Map(checkedMap.value)
+  const entry = { ...newMap.get(key) }
+  const current = entry[field] || (field === 'pickCount' ? 10 : 2)
+  const newVal = current + delta
+  if (field === 'pickCount') {
+    entry[field] = Math.max(1, Math.min(newVal, item.count))
+  } else {
+    entry[field] = Math.max(1, newVal)
+  }
+  newMap.set(key, entry)
+  checkedMap.value = newMap
+}
+
+function setPickCount(item, event) {
+  const val = parseInt(event.target.value) || 1
+  const key = getItemKey(item)
+  const newMap = new Map(checkedMap.value)
+  const entry = { ...newMap.get(key) }
+  entry.pickCount = Math.max(1, Math.min(val, item.count))
+  newMap.set(key, entry)
+  checkedMap.value = newMap
+}
+
+function setScore(item, event) {
+  const val = parseInt(event.target.value) || 1
+  const key = getItemKey(item)
+  const newMap = new Map(checkedMap.value)
+  const entry = { ...newMap.get(key) }
+  entry.score = Math.max(1, val)
+  newMap.set(key, entry)
+  checkedMap.value = newMap
+}
+
+function switchCategory(key) {
+  activeCategory.value = key
+}
+
+function setDefault() {
   const store = useAppStore()
-  selection.category = key
-  const firstScope = store.bankMeta[key]?.scopes?.[0]
-  selection.scope = firstScope || ''
-  selection.subject = ''
+  const meta = store.bankMeta
+  activeCategory.value = Object.keys(meta)[0] || ''
+  checkedMap.value = new Map()
+  activeTab.value = 'select'
+  // 预加载已有科目到 checkedMap
+  for (const subj of props.existingSubjects) {
+    const key = `${subj.category}|${subj.scope}|${subj.subject}`
+    checkedMap.value.set(key, {
+      category: subj.category,
+      scope: subj.scope,
+      subject: subj.subject,
+      count: subj.maxCount || subj.count,
+      pickCount: subj.count,
+      score: subj.score || 1
+    })
+  }
 }
 
-function selectScope(scope) {
-  selection.scope = scope
-  selection.subject = ''
-}
-
-function selectSubject(name) {
-  selection.subject = name
-}
+watch(() => props.modelValue, (val) => {
+  if (val) setDefault()
+}, { immediate: true })
 
 function close() {
   emit('update:modelValue', false)
 }
 
 function handleConfirm() {
-  if (!canConfirm.value) return
-
-  const subjectInfo = getSubjects(selection.category, selection.scope)
-    .find(s => s.name === selection.subject)
-
-  emit('add', {
-    category: selection.category,
-    scope: selection.scope,
-    subject: selection.subject,
-    count: subjectInfo?.count || 0
-  })
+  if (checkedList.value.length === 0) return
+  emit('add-multiple', checkedList.value.map(item => ({
+    category: item.category,
+    scope: item.scope,
+    subject: item.subject,
+    count: item.count,
+    pickCount: item.pickCount || 10,
+    score: item.score || 1
+  })))
+  checkedMap.value = new Map()
+  activeTab.value = 'select'
   close()
 }
 </script>
 
 <style scoped>
-.picker-header-row {
+
+
+/* Container */
+.picker-container {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: var(--spacing-sm) 0;
-}
-
-.picker-btn {
-  padding: var(--spacing-sm) var(--spacing-md);
-  border: none;
-  background: transparent;
-  font-size: var(--font-size-md);
-  cursor: pointer;
-}
-
-.picker-btn.cancel {
-  color: var(--text-secondary);
-}
-
-.picker-btn.confirm {
-  color: var(--primary);
-  font-weight: var(--font-weight-semibold);
-}
-
-.picker-btn.confirm:disabled {
-  color: var(--text-secondary);
-  opacity: 0.5;
-}
-
-.picker-title {
-  font-size: var(--font-size-lg);
-  font-weight: var(--font-weight-semibold);
+  flex-direction: column;
+  height: 62vh;
+  max-height: 62vh;
 }
 
 .picker-body {
-  display: flex;
-  overflow-x: auto;
-  max-height: 60vh;
-  min-height: 50vh;
-}
-
-.picker-column {
   flex: 1;
-  min-width: 100px;
-  border-right: 1px solid var(--border-color);
   display: flex;
-  flex-direction: column;
+  overflow: hidden;
+  min-height: 0;
+  margin: -12px -16px;
 }
 
-.picker-column:last-child {
-  border-right: none;
-}
-
-.picker-list {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-mn);
-  padding: var(--spacing-mn);
+.nav-column {
+  width: 86px;
+  flex-shrink: 0;
+  background: var(--background-secondary);
   overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
-.picker-item {
-  padding: var(--spacing-sm);
-  text-align: center;
-  cursor: pointer;
-  border-radius: var(--radius-md);
+.nav-column::-webkit-scrollbar {
+  display: none;
+}
+
+.nav-item {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 2px;
+  gap: 3px;
+  padding: 14px 6px;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.18s ease;
 }
 
-.picker-item.active {
-  background: var(--primary-light);
+.nav-item.active {
+  background: var(--background);
+}
+
+.nav-item.active::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3px;
+  height: 22px;
+  background: var(--primary);
+  border-radius: 0 3px 3px 0;
+}
+
+.nav-label {
+  font-size: var(--font-size-sm);
+  color: var(--on-surface);
+  text-align: center;
+  line-height: 1.3;
+}
+
+.nav-item.active .nav-label {
   color: var(--primary);
+  font-weight: var(--font-weight-semibold);
+}
+
+.nav-count {
+  font-size: 11px;
+  color: var(--text-disabled);
+}
+
+.content-column {
+  flex: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 0 8px 60px;
+  background: var(--background);
+}
+
+.scope-header {
+  padding: 10px 8px 6px;
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  font-weight: var(--font-weight-semibold);
+  position: sticky;
+  top: 0;
+  background: var(--background);
+  z-index: 1;
+}
+
+.subject-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 11px 10px;
+  margin: 2px 0;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.12s;
+}
+
+.subject-item:active:not(.disabled) {
+  background: var(--background-secondary);
+}
+
+.subject-item.checked {
+  background: var(--primary-light);
+}
+
+.subject-item.added {
+  border-left: 3px solid var(--primary);
+  padding-left: 7px;
+}
+
+.check-box {
+  width: 22px;
+  height: 22px;
+  border: 2px solid var(--border-color);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all 0.18s ease;
+}
+
+.check-box.checked {
+  background: var(--primary);
+  border-color: var(--primary);
+}
+
+.check-box.checked svg {
+  color: #fff;
+  font-size: 14px;
+}
+
+.subject-info {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-width: 0;
 }
 
 .subject-name {
   font-size: var(--font-size-md);
+  color: var(--on-surface);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.picker-placeholder {
-  padding: var(--spacing-lg);
-  text-align: center;
-  color: var(--text-secondary);
+.subject-meta {
   font-size: var(--font-size-sm);
+  color: var(--text-disabled);
+  white-space: nowrap;
+  margin-left: 8px;
+}
+
+.added-tag {
+  font-size: 11px;
+  color: var(--text-disabled);
+  background: var(--background-secondary);
+  padding: 2px 8px;
+  border-radius: 10px;
+}
+
+.empty-state {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 0;
+  color: var(--text-disabled);
+  font-size: var(--font-size-sm);
+}
+
+/* === 配置面板 === */
+.config-panel {
+  flex: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 4px 4px 60px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.config-card {
+  background: var(--background);
+  border-radius: 14px;
+  padding: 14px 16px;
+  border: 1px solid var(--border-color-light);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+}
+
+.config-card-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border-color-light);
+}
+
+.config-name {
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-semibold);
+  color: var(--on-surface);
+  flex: 1;
+}
+
+.config-subtotal {
+  font-size: 12px;
+  color: var(--primary);
+  font-weight: var(--font-weight-semibold);
+  background: var(--primary-light);
+  padding: 3px 10px;
+  border-radius: 12px;
+  white-space: nowrap;
+}
+
+.config-controls {
+  display: flex;
+  justify-content: space-between;
+  /* flex-direction: column; */
+  gap: 10px;
+}
+
+.stepper-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.stepper-label {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  width: 28px;
+  flex-shrink: 0;
+  font-weight: var(--font-weight-medium);
+}
+
+.stepper {
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--background);
+  flex-shrink: 0;
+}
+
+.stepper-btn {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: var(--background-secondary);
+  color: var(--on-surface);
+  font-size: 18px;
+  font-weight: var(--font-weight-bold);
+  cursor: pointer;
+  transition: all 0.12s;
+  user-select: none;
+}
+
+.stepper-btn:active:not(:disabled) {
+  background: var(--primary-light);
+  color: var(--primary);
+}
+
+.stepper-btn:disabled {
+  opacity: 0.25;
+  cursor: default;
+}
+
+.stepper-input {
+  width: 38px;
+  height: 32px;
+  border: none;
+  border-left: 1px solid var(--border-color-light);
+  border-right: 1px solid var(--border-color-light);
+  text-align: center;
+  font-size: 15px;
+  font-weight: var(--font-weight-semibold);
+  color: var(--on-surface);
+  background: var(--background);
+  -moz-appearance: textfield;
+}
+
+.stepper-input::-webkit-outer-spin-button,
+.stepper-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+.stepper-max {
+  font-size: 12px;
+  color: var(--text-disabled);
+  white-space: nowrap;
+}
+
+.config-summary {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 12px 16px;
+  background: var(--background-surface);
+  border-radius: 12px;
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  font-weight: var(--font-weight-medium);
+  flex-shrink: 0;
+}
+
+.config-summary span {
+  color: var(--primary);
+  font-weight: var(--font-weight-bold);
+}
+
+/* 底部按钮 */
+.action-btn {
+  width: 60%;
+  margin: 0 auto;
+  padding: 12px 24px;
+  background: var(--primary);
+  color: var(--on-primary);
+  border: none;
+  border-radius: var(--radius-full);
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: opacity 0.2s, transform 0.15s;
+}
+
+.action-btn:disabled {
+  background: var(--color-gray-300, #d1d5db);
+  box-shadow: none;
+  cursor: default;
+}
+
+.action-btn:active:not(:disabled) {
+  opacity: 0.85;
+  transform: scale(0.97);
 }
 </style>
