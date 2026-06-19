@@ -12,7 +12,7 @@
       <section class="user-section">
         <div class="avatar-container">
           <div class="avatar">
-            <img src="/Users/wyd/CodeBase/Active/ATCTest/public/logo.jpeg" alt="头像" />
+            <img src="/logo.jpeg" alt="头像" />
           </div>
         </div>
         <div class="user-info">
