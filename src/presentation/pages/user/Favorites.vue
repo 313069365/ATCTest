@@ -1,21 +1,21 @@
 <template>
   <QuestionCollection
-    :title="t('wrongBook')"
-    :hasItems="wrongList.length > 0"
-    practiceIcon="rate-review-outline"
-    :practiceTitle="t('practiceWrong')"
-    :practiceDesc="t('wrongReviewDesc', { count: wrongList.length })"
+    :title="t('favorites')"
+    :hasItems="favoritesList.length > 0"
+    practiceIcon="star-outline"
+    :practiceTitle="t('practiceFavorites')"
+    :practiceDesc="t('favoritesReviewDesc', { count: favoritesList.length })"
     :items="paginatedList"
     :loading="false"
     :loaded="true"
     :hasMore="hasMore"
-    emptyIcon="check-circle-outline"
-    emptyTitle="暂无错题"
-    emptyDesc="答错的题目会自动添加到错题本"
-    startBtnText="开始练习"
+    emptyIcon="star-outline"
+    :emptyTitle="t('noFavorites')"
+    :emptyDesc="t('favoritesDesc')"
+    :startBtnText="t('startPractice')"
     @back="goBack"
     @clear="clearAll"
-    @practice-all="startWrongPractice"
+    @practice-all="startFavoritesPractice"
     @start-practice="goPractice"
   >
     <template #card="{ item }">
@@ -25,22 +25,15 @@
             <span class="subject-tag">{{ t(item.meta?.subject) || item.meta?.subject || t('unknown') }}</span>
             <span class="badge">{{ t(item.meta?.category) || item.meta?.category || '' }}</span>
           </div>
-          <button class="delete-btn" @click.stop="removeWrong(item.id)">
+          <button class="delete-btn" @click.stop="removeFavorite(item.id)">
             <Icon name="close" />
           </button>
         </div>
 
         <p class="question-text">{{ item.stem }}</p>
 
-        <div class="answer-section">
-          <span class="answer-label">{{ t('correctAnswer') }}：</span>
-          <span class="answer-value">{{ formatAnswer(item.answer) }}</span>
-        </div>
-
         <div class="card-footer">
-          <span class="wrong-count" v-if="getWrongCount(item.id) > 1">
-            {{ t('wrongCount') }} {{ getWrongCount(item.id) }} {{ t('times') }}
-          </span>
+          <span class="type-tag">{{ t('answer') }}: {{ formatAnswer(item.answer) }}</span>
         </div>
       </div>
     </template>
@@ -48,10 +41,10 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted, onUnmounted } from 'vue'
+import { computed, onMounted, onUnmounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import Icon from '@/presentation/components/ui/Icon.vue'
-import QuestionCollection from '@/presentation/components/QuestionCollection.vue'
+import QuestionCollection from '@/presentation/components/question/QuestionCollection.vue'
 import { useAppStore } from '@/domain/stores/store'
 import { t } from '@/infrastructure/utils/i18n.js'
 import { createPracticeSession } from '@/infrastructure/storage/session'
@@ -59,22 +52,22 @@ import { createPracticeSession } from '@/infrastructure/storage/session'
 const router = useRouter()
 const store = useAppStore()
 
-const wrongList = computed(() => store.wrongBook)
+const favoritesList = computed(() => store.favorites)
 const pageSize = 20
 const currentPage = ref(1)
 
 const paginatedList = computed(() => {
   const start = (currentPage.value - 1) * pageSize
   const end = currentPage.value * pageSize
-  return wrongList.value.slice(start, end)
+  return favoritesList.value.slice(start, end)
 })
 
 const hasMore = computed(() => {
-  return currentPage.value * pageSize < wrongList.value.length
+  return currentPage.value * pageSize < favoritesList.value.length
 })
 
 onMounted(() => {
-  store.loadWrongBook()
+  store.loadFavorites()
   window.addEventListener('scroll', handleScroll)
 })
 
@@ -96,12 +89,12 @@ function goBack() {
   router.back()
 }
 
-function startWrongPractice() {
+function startFavoritesPractice() {
   const sessionId = createPracticeSession({
-    source: 'wrongbook',
-    subject: { name: 'practiceWrong' },
-    category: 'wrongBook',
-    scope: 'wrongBook',
+    source: 'favorites',
+    subject: { name: 'practiceFavorites' },
+    category: 'favorites',
+    scope: 'favorites',
     practiceMode: 'answer',
     questionSort: 'shuffle',
     showAnswerMode: 'immediate',
@@ -117,15 +110,15 @@ function goPractice() {
   router.push('/practice')
 }
 
-function removeWrong(id) {
-  if (confirm(t('confirmRemoveWrong'))) {
-    store.removeWrongQuestion(id)
+function removeFavorite(id) {
+  if (confirm(t('confirmRemoveFavorite'))) {
+    store.removeFavorite(id)
   }
 }
 
 function clearAll() {
-  if (confirm(t('confirmClearAll'))) {
-    store.wrongBook.forEach(q => store.removeWrongQuestion(q.id))
+  if (confirm(t('confirmClearFavorites'))) {
+    store.favorites.forEach(q => store.removeFavorite(q.id))
   }
 }
 
@@ -135,11 +128,6 @@ function formatAnswer(answer) {
     return answer.join(', ')
   }
   return answer
-}
-
-function getWrongCount(questionId) {
-  const item = store.wrongBook.find(q => q.id === questionId)
-  return item?.wrongCount || 1
 }
 </script>
 
@@ -217,35 +205,16 @@ function getWrongCount(questionId) {
   margin: 0 0 var(--spacing-sm) 0;
 }
 
-.answer-section {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-xs);
-  margin-bottom: var(--spacing-xs);
-}
-
-.answer-label {
-  font-size: var(--font-size-sm);
-  color: var(--text-secondary);
-}
-
-.answer-value {
-  font-size: var(--font-size-sm);
-  color: var(--success);
-  font-weight: var(--font-weight-semibold);
-}
-
 .card-footer {
   display: flex;
   align-items: center;
   gap: var(--spacing-sm);
 }
 
-.wrong-count {
-  font-size: var(--font-size-xs);
+.type-tag {
+  font-size: var(--font-size-md);
   color: var(--warning);
   background: var(--warning-container);
-  padding: 4px 10px;
   border-radius: var(--radius-sm);
   font-weight: var(--font-weight-medium);
 }

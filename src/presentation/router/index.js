@@ -4,17 +4,17 @@ const routes = [
   {
     path: "/",
     name: "Home",
-    component: () => import("../views/Home.vue"),
+    component: () => import("../pages/Home.vue"),
   },
   {
     path: "/search",
     name: "Search",
-    component: () => import("../views/search/Search.vue"),
+    component: () => import("../pages/search/Search.vue"),
   },
   {
     path: "/question/:id",
     name: "QuestionDetail",
-    component: () => import("../views/search/QuestionDetail.vue"),
+    component: () => import("../pages/search/QuestionDetail.vue"),
   },
   {
     path: "/practice",
@@ -22,22 +22,22 @@ const routes = [
       {
         path: "",
         name: "Practice",
-        component: () => import("../views/practice/PracticeHome.vue"),
+        component: () => import("../pages/practice/PracticeHome.vue"),
       },
       {
         path: "quiz",
         name: "Quiz",
-        component: () => import("../views/practice/QuizPage.vue"),
+        component: () => import("../pages/practice/QuizPage.vue"),
       },
       {
         path: "practice-history",
         name: "PracticeHistory",
-        component: () => import("../views/practice/PracticeHistory.vue"),
+        component: () => import("../pages/practice/PracticeHistory.vue"),
       },
       {
         path: "result/:id?",
         name: "PracticeResult",
-        component: () => import("../views/practice/PracticeResult.vue"),
+        component: () => import("../pages/practice/PracticeResult.vue"),
       },
     ],
   },
@@ -47,34 +47,34 @@ const routes = [
       {
         path: "",
         name: "Exam",
-        component: () => import("../views/exam/ExamHome.vue"),
+        component: () => import("../pages/exam/ExamHome.vue"),
       },
       {
         path: "create",
         name: "ExamCreate",
-        component: () => import("../views/exam/ExamCreate.vue"),
+        component: () => import("../pages/exam/ExamCreate.vue"),
       },
       {
         path: "paper/:id?",
         name: "ExamPaper",
-        component: () => import("../views/exam/ExamSession.vue"),
+        component: () => import("../pages/exam/ExamSession.vue"),
       },
       {
         path: "result/:id?",
         name: "ExamResult",
-        component: () => import("../views/exam/ExamResult.vue"),
+        component: () => import("../pages/exam/ExamResult.vue"),
       },
       {
         path: "exam-history",
         name: "ExamHistory",
-        component: () => import("../views/exam/ExamHistory.vue"),
+        component: () => import("../pages/exam/ExamHistory.vue"),
       },
     ],
   },
   {
     path: "/aviation",
     name: "AviationPhonetics",
-    component: () => import("../views/tools/AviationPhonetics.vue"),
+    component: () => import("../pages/tools/AviationPhonetics.vue"),
   },
   {
     path: "/user",
@@ -82,32 +82,32 @@ const routes = [
       {
         path: "/stats",
         name: "Stats",
-        component: () => import("../views/user/Stats.vue"),
+        component: () => import("../pages/user/Stats.vue"),
       },
       {
         path: "/profile",
         name: "Profile",
-        component: () => import("../views/user/UserHome.vue"),
+        component: () => import("../pages/user/UserHome.vue"),
       },
       {
         path: "/wrongbook",
         name: "WrongBook",
-        component: () => import("../views/user/WrongBook.vue"),
+        component: () => import("../pages/user/WrongBook.vue"),
       },
       {
         path: "/favorites",
         name: "Favorites",
-        component: () => import("../views/user/Favorites.vue"),
+        component: () => import("../pages/user/Favorites.vue"),
       },
       {
         path: "/settings",
         name: "Settings",
-        component: () => import("../views/user/Settings.vue"),
+        component: () => import("../pages/user/Settings.vue"),
       },
       {
         path: "/data-management",
         name: "DataManagement",
-        component: () => import("../views/user/DataManagement.vue"),
+        component: () => import("../pages/user/DataManagement.vue"),
       },
     ],
   },

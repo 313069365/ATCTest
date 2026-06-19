@@ -6,7 +6,11 @@
 import { defineStore } from "pinia";
 import { ref, computed } from "vue";
 import * as API from "@/infrastructure/api/dataSource";
-import { bankStorage, storage, STORAGE_KEY } from "@/infrastructure/storage/useStorage";
+import {
+  bankStorage,
+  storage,
+  STORAGE_KEY,
+} from "@/infrastructure/storage/useStorage";
 import { schemaRead, schemaWrite } from "@/infrastructure/storage/dataSchema";
 import { loadPracticeProgress as loadPracticeProgressFromUtil } from "@/infrastructure/storage/progress";
 import { APP_VERSION } from "@/infrastructure/utils/version";
@@ -21,7 +25,7 @@ export const useAppStore = defineStore("app", () => {
   const loading = ref(false);
 
   /** 题库加载提示文字 */
-  const loadingText = ref('');
+  const loadingText = ref("");
 
   /** 题库加载进度 0-100 */
   const loadingProgress = ref(0);
@@ -118,7 +122,7 @@ export const useAppStore = defineStore("app", () => {
       bankStorage.setBank(subject, questions),
     );
     await Promise.all(promises);
-    storage.setItem('bank_version', String(API.computeBankHash()));
+    storage.setItem("bank_version", String(API.computeBankHash()));
   }
 
   /**
@@ -127,33 +131,38 @@ export const useAppStore = defineStore("app", () => {
    */
   async function loadQuestions() {
     loading.value = true;
-    loadingText.value = '加载题库...';
+    loadingText.value = "加载题库...";
     loadingProgress.value = 0;
 
     try {
       // 检测 file:// 协议，fetch 在该协议下会无限挂起
-      if (location.protocol === 'file:') {
-        throw new Error('不支持 file:// 协议，请使用本地服务器运行 (如: npx vite preview)');
+      if (location.protocol === "file:") {
+        throw new Error(
+          "不支持 file:// 协议，请使用本地服务器运行 (如: npx vite preview)",
+        );
       }
 
       const controller = new AbortController();
-      const timeout = setTimeout(() => controller.abort(), 15000);
-      await downloadAndCacheAll(
-        (cur, total) => {
-          loadingText.value = `下载题库 ${cur}/${total}`;
-          loadingProgress.value = Math.round((cur / total) * 100);
-        },
-        controller.signal,
-      );
+      const timeout = setTimeout(() => controller.abort(), 60000);
+      await downloadAndCacheAll((cur, total) => {
+        loadingText.value = `下载题库 ${cur}/${total}`;
+        loadingProgress.value = Math.round((cur / total) * 100);
+      }, controller.signal);
       clearTimeout(timeout);
     } catch (e) {
       console.error("加载题库失败:", e);
-      loadingText.value = e.message || '加载失败';
-      await new Promise(r => setTimeout(r, 3000));
+      if (e.name === "AbortError") {
+        loadingText.value = "题库较大，加载超时，请刷新页面";
+      } else {
+        loadingText.value = e.message || "加载失败";
+      }
+      await new Promise((r) => setTimeout(r, 3000));
     } finally {
       loading.value = false;
       loadingProgress.value = 0;
-      setTimeout(() => { loadingText.value = ''; }, 100);
+      setTimeout(() => {
+        loadingText.value = "";
+      }, 100);
     }
   }
 
@@ -199,7 +208,7 @@ export const useAppStore = defineStore("app", () => {
    */
   async function checkForUpdates() {
     const currentVer = API.computeBankHash();
-    const storedVer = storage.getItem('bank_version');
+    const storedVer = storage.getItem("bank_version");
     return {
       hasUpdate: String(storedVer) !== String(currentVer),
       currentVer,
@@ -230,7 +239,7 @@ export const useAppStore = defineStore("app", () => {
    * 强制刷新题库
    */
   async function forceRefreshQuestions() {
-    storage.removeItem('bank_version');
+    storage.removeItem("bank_version");
     await loadQuestions();
   }
 
@@ -245,7 +254,7 @@ export const useAppStore = defineStore("app", () => {
         console.log(`后台更新题库 ${cur}/${total}`);
       });
     } catch (e) {
-      console.error('后台更新题库失败:', e);
+      console.error("后台更新题库失败:", e);
     }
   }
 
@@ -396,7 +405,7 @@ export const useAppStore = defineStore("app", () => {
     }
     storage.setItem(STORAGE_KEY.APP_VERSION, APP_VERSION);
 
-    const storedVer = storage.getItem('bank_version');
+    const storedVer = storage.getItem("bank_version");
     const currentVer = API.computeBankHash();
 
     if (storedVer && String(storedVer) === String(currentVer)) {
@@ -433,7 +442,7 @@ export const useAppStore = defineStore("app", () => {
    * 删除试卷
    */
   function removeExamPaper(paperId) {
-    examPapers.value = examPapers.value.filter(p => p.id !== paperId);
+    examPapers.value = examPapers.value.filter((p) => p.id !== paperId);
     schemaWrite(STORAGE_KEY.EXAM_PAPERS, examPapers.value);
   }
 
@@ -459,7 +468,7 @@ export const useAppStore = defineStore("app", () => {
    */
   function deleteExamPreset(presetId) {
     const existing = schemaRead(STORAGE_KEY.EXAM_PRESETS) || [];
-    const filtered = existing.filter(p => p.id !== presetId);
+    const filtered = existing.filter((p) => p.id !== presetId);
     schemaWrite(STORAGE_KEY.EXAM_PRESETS, filtered);
     examPresets.value = filtered;
   }
@@ -470,53 +479,53 @@ export const useAppStore = defineStore("app", () => {
    * @returns {Object} { valid: boolean, errors: string[] }
    */
   function validatePaper(paper) {
-    const errors = []
+    const errors = [];
 
     if (!paper.title || !paper.title.trim()) {
-      errors.push('缺少试卷标题')
+      errors.push("缺少试卷标题");
     }
 
     if (!paper.questions || !Array.isArray(paper.questions)) {
-      errors.push('题目格式无效')
+      errors.push("题目格式无效");
     }
 
     if (paper.questions && paper.questions.length > 0) {
       paper.questions.forEach((q, index) => {
         if (!q.meta) {
-          errors.push(`第${index + 1}题：缺少 meta 信息`)
+          errors.push(`第${index + 1}题：缺少 meta 信息`);
         } else {
           if (!q.meta.category) {
-            errors.push(`第${index + 1}题：缺少 category`)
+            errors.push(`第${index + 1}题：缺少 category`);
           }
           if (!q.meta.scope) {
-            errors.push(`第${index + 1}题：缺少 scope`)
+            errors.push(`第${index + 1}题：缺少 scope`);
           }
           if (!q.meta.subject) {
-            errors.push(`第${index + 1}题：缺少 subject`)
+            errors.push(`第${index + 1}题：缺少 subject`);
           }
         }
-      })
+      });
     }
 
     return {
       valid: errors.length === 0,
-      errors
-    }
+      errors,
+    };
   }
 
   /**
    * 导出试卷为 JSON 文件
    */
   function exportPaper(paper) {
-    const json = JSON.stringify(paper, null, 2)
-    const blob = new Blob([json], { type: 'application/json' })
-    const url = URL.createObjectURL(blob)
-    const a = document.createElement('a')
-    a.href = url
-    const safeTitle = paper.title.replace(/[^a-zA-Z0-9\u4e00-\u9fa5]/g, '_')
-    a.download = `ATCTest考卷_${safeTitle}_${Date.now()}.json`
-    a.click()
-    URL.revokeObjectURL(url)
+    const json = JSON.stringify(paper, null, 2);
+    const blob = new Blob([json], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    const safeTitle = paper.title.replace(/[^a-zA-Z0-9\u4e00-\u9fa5]/g, "_");
+    a.download = `ATCTest考卷_${safeTitle}_${Date.now()}.json`;
+    a.click();
+    URL.revokeObjectURL(url);
   }
 
   /**
@@ -524,34 +533,34 @@ export const useAppStore = defineStore("app", () => {
    */
   function importPaper(file) {
     return new Promise((resolve, reject) => {
-      const reader = new FileReader()
+      const reader = new FileReader();
       reader.onload = (e) => {
         try {
-          const paper = JSON.parse(e.target.result)
+          const paper = JSON.parse(e.target.result);
 
-          const validation = validatePaper(paper)
+          const validation = validatePaper(paper);
           if (!validation.valid) {
-            reject(new Error(validation.errors.join('; ')))
-            return
+            reject(new Error(validation.errors.join("; ")));
+            return;
           }
 
-          paper.id = Date.now()
-          paper.createdAt = Date.now()
+          paper.id = Date.now();
+          paper.createdAt = Date.now();
 
           paper.questions = paper.questions.map((q, index) => ({
             ...q,
-            id: paper.id * 1000 + index
-          }))
+            id: paper.id * 1000 + index,
+          }));
 
-          addExamPaper(paper)
-          resolve(paper)
+          addExamPaper(paper);
+          resolve(paper);
         } catch (err) {
-          reject(err)
+          reject(err);
         }
-      }
-      reader.onerror = () => reject(new Error('文件读取失败'))
-      reader.readAsText(file)
-    })
+      };
+      reader.onerror = () => reject(new Error("文件读取失败"));
+      reader.readAsText(file);
+    });
   }
 
   // 导出

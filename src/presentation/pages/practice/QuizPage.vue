@@ -86,12 +86,12 @@ import { ref, onMounted, onUnmounted, computed, provide, watch } from "vue";
 
 import Icon from '@/presentation/components/ui/Icon.vue'
 import { useRouter, useRoute } from "vue-router";
-import AnswerOverview from "@/presentation/components/session/AnswerOverview.vue";
+import AnswerOverview from "@/presentation/components/practice/AnswerOverview.vue";
 import PracticeStats from "@/presentation/components/practice/PracticeStats.vue";
-import QuizSettings from "@/presentation/components/session/QuizSettings.vue";
+import QuizSettings from "@/presentation/components/practice/QuizSettings.vue";
 import QuestionNavbar from "@/presentation/components/layout/QuestionNavbar.vue";
 import QuestionRenderer from "@/presentation/components/question/QuestionRenderer.vue";
-import JumpDialog from "@/presentation/components/session/JumpDialog.vue";
+import JumpDialog from "@/presentation/components/practice/JumpDialog.vue";
 import { useAppStore } from "@/domain/stores/store";
 import { usePracticeService } from "@/domain/composables/usePracticeService";
 import { t } from "@/infrastructure/utils/i18n.js";

@@ -56,7 +56,7 @@
 import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import Icon from '@/presentation/components/ui/Icon.vue'
-import AnswerOverview from '@/presentation/components/session/AnswerOverview.vue'
+import AnswerOverview from '@/presentation/components/practice/AnswerOverview.vue'
 import QuestionNavbar from '@/presentation/components/layout/QuestionNavbar.vue'
 import QuestionRenderer from '@/presentation/components/question/QuestionRenderer.vue'
 import { useAppStore } from '@/domain/stores/store'
