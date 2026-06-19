@@ -12,9 +12,7 @@
       <section class="user-section">
         <div class="avatar-container">
           <div class="avatar">
-            <img
-              src="https://ts1.tc.mm.bing.net/th/id/R-C.14eaad76ba079248cac4fdb19dd11951?rik=n2D2PnNwJoLVTA&riu=http%3a%2f%2fn.sinaimg.cn%2fsinacn19%2f442%2fw1846h996%2f20180714%2fd240-hfhfwmv5289140.jpg&ehk=J%2b1i5USaNLpkeaA2ZdSiGujnqZhEogEAWNGdta2paZE%3d&risl=&pid=ImgRaw&r=0"
-              alt="头像" />
+            <img src="/Users/wyd/CodeBase/Active/ATCTest/public/logo.jpeg" alt="头像" />
           </div>
         </div>
         <div class="user-info">
@@ -23,63 +21,8 @@
         </div>
       </section>
 
-      <!-- <section class="performance-section">
-        <h3 class="section-title">表现分析</h3>
-        <div class="performance-grid">
-          <div class="perf-card accuracy-card">
-            <div class="card-header">
-              <span class="card-label">正确率</span>
-              <span class="card-value primary">84.2%</span>
-            </div>
-            <div class="chart-bars">
-              <div class="bar" style="height: 50%"></div>
-              <div class="bar" style="height: 75%"></div>
-              <div class="bar" style="height: 66%"></div>
-              <div class="bar active" style="height: 100%"></div>
-              <div class="bar" style="height: 80%"></div>
-            </div>
-            <p class="card-footer">最近30天提升了 4.5%</p>
-          </div>
-
-          <div class="perf-card radar-card">
-            <span class="card-label">知识掌握度</span>
-            <div class="radar-container">
-              <div class="radar radar-1"></div>
-              <div class="radar radar-2"></div>
-              <div class="radar radar-3"></div>
-            </div>
-            <p class="radar-text">
-              高: 临床理论<br />低: 伦理框架
-            </p>
-          </div>
-
-          <div class="perf-card streak-card">
-            <span class="card-label">总答题</span>
-            <span class="card-value tertiary">14 天连续</span>
-            <div class="streak-icons">
-              <div class="streak-icon fire">
-                <Icon name="local-fire-department-outline" />
-              </div>
-              <div class="streak-icon verified">
-                <Icon name="verified-outline" />
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="history-section">
-        <div class="section-header">
-          <h3 class="section-title">练习记录</h3>
-          <button class="more-btn">查看全部</button>
-        </div>
-        <div class="empty-history">
-          <p>暂无练习记录</p>
-        </div>
-      </section> -->
-
       <section class="shortcut-section">
-        <h3 class="section-title">快速操作</h3>
+
         <div class="shortcut-grid">
           <div class="shortcut-grid-item" @click="goToWrongBook">
             <div class="shortcut-icon error-bg">
@@ -91,21 +34,22 @@
             <div class="shortcut-icon tertiary-bg">
               <Icon name="bookmark-outline" />
             </div>
-            <span class="shortcut-grid-label">收藏本</span>
+            <span class="shortcut-grid-label">收藏夹</span>
           </div>
           <div class="shortcut-grid-item" @click="goToPracticeHistory">
             <div class="shortcut-icon primary-bg">
               <Icon name="assignment-turned-in-outline" />
             </div>
-            <span class="shortcut-grid-label">练习历史</span>
+            <span class="shortcut-grid-label">练习记录</span>
           </div>
           <div class="shortcut-grid-item" @click="goToExamHistory">
             <div class="shortcut-icon primary-bg">
               <Icon name="quiz-outline" />
             </div>
-            <span class="shortcut-grid-label">考试历史</span>
+            <span class="shortcut-grid-label">考试记录</span>
           </div>
         </div>
+        <h3 class="section-title">数据管理</h3>
         <div class="shortcut-list">
           <div class="shortcut-item" @click="goToStats">
             <div class="shortcut-icon primary-bg">
@@ -118,7 +62,7 @@
             <div class="shortcut-icon primary-bg">
               <Icon name="storage" />
             </div>
-            <span class="shortcut-label">数据管理</span>
+            <span class="shortcut-label">应用数据</span>
             <Icon name="chevron-right" class="shortcut-arrow" />
           </div>
           <div class="shortcut-item" @click="goToSettings">
@@ -134,7 +78,7 @@
       <section class="action-section">
         <button class="action-btn logout">
           <Icon name="logout" />
-          <span>xiaomi 14</span>
+          <span>退出登录</span>
         </button>
       </section>
 

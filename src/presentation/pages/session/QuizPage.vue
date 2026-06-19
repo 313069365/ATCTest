@@ -98,15 +98,16 @@
     <QuizSettings v-if="showQuizSettings" :visible="showQuizSettings" :is-exam-mode="isExamMode"
       :showExplanationEnabled="showExplanationPref" :forceExplanationOnWrong="forceExplanationOnWrong"
       :autoJump="practiceData?.autoJump ?? true" :darkMode="darkMode" :soundEnabled="soundEnabled"
+      :on-exit="isExamMode ? exitExam : exitQuiz"
+      :on-submit="isExamMode ? submitPaper : finishQuiz"
       @close="showQuizSettings = false" @update:forceExplanationOnWrong="forceExplanationOnWrong = $event"
       @update:autoJump="practiceData.autoJump = $event" @update:darkMode="darkMode = $event"
-      @update:soundEnabled="soundEnabled = $event" @exit="isExamMode ? exitExam : exitQuiz"
-      @submit="isExamMode ? submitPaper : finishQuiz" />
+      @update:soundEnabled="soundEnabled = $event" />
 
     <!-- 跳转对话框 -->
     <JumpDialog v-if="jumpDialogVisible" :visible="jumpDialogVisible"
-      :total="isExamMode ? questions.length : bank.length" :current="currentIndex" @close="jumpDialogVisible = false"
-      @jump="isExamMode ? gotoQuestion : gotoQuesitonIdx" />
+      :total="isExamMode ? questions.length : bank.length" :current="currentIndex"
+      :on-jump="isExamMode ? gotoQuestion : gotoQuesitonIdx" @close="jumpDialogVisible = false" />
   </div>
 </template>
 

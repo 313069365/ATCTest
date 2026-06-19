@@ -27,12 +27,12 @@ const routes = [
       {
         path: "quiz",
         name: "Quiz",
-        component: () => import("../pages/practice/QuizPage.vue"),
+        component: () => import("../pages/session/QuizPage.vue"),
       },
       {
         path: "practice-history",
         name: "PracticeHistory",
-        component: () => import("../pages/practice/PracticeHistory.vue"),
+        component: () => import("../pages/session/HistoryPage.vue"),
       },
       {
         path: "result/:id?",
@@ -57,7 +57,7 @@ const routes = [
       {
         path: "paper/:id?",
         name: "ExamPaper",
-        component: () => import("../pages/practice/QuizPage.vue"),
+        component: () => import("../pages/session/QuizPage.vue"),
       },
       {
         path: "result/:id?",
@@ -67,7 +67,7 @@ const routes = [
       {
         path: "exam-history",
         name: "ExamHistory",
-        component: () => import("../pages/exam/ExamHistory.vue"),
+        component: () => import("../pages/session/HistoryPage.vue"),
       },
     ],
   },

@@ -20,9 +20,10 @@ const props = defineProps({
   visible: Boolean,
   total: { type: Number, required: true },
   current: { type: Number, required: true },
+  onJump: { type: Function, default: null },
 })
 
-const emit = defineEmits(['close', 'jump'])
+const emit = defineEmits(['close'])
 
 const inputValue = ref('')
 const inputRef = ref(null)
@@ -41,7 +42,7 @@ function handleConfirm() {
     return
   }
   const idx = Math.max(1, Math.min(num, props.total)) - 1
-  emit('jump', idx)
+  props.onJump?.(idx)
   emit('close')
 }
 </script>

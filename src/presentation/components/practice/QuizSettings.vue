@@ -76,7 +76,7 @@ import Icon from '@/presentation/components/ui/Icon.vue'
 import { t } from '@/infrastructure/utils/i18n.js'
 import BottomSheet from '@/presentation/components/ui/BottomSheet.vue'
 
-defineProps({
+const props = defineProps({
   visible: { type: Boolean, default: false },
   showExplanationEnabled: { type: Boolean, default: true },
   forceExplanationOnWrong: { type: Boolean, default: true },
@@ -84,19 +84,20 @@ defineProps({
   darkMode: { type: Boolean, default: false },
   soundEnabled: { type: Boolean, default: true },
   isExamMode: { type: Boolean, default: false },
+  onExit: { type: Function, default: null },
+  onSubmit: { type: Function, default: null },
 })
 
-const emit = defineEmits(['close', 'update:forceExplanationOnWrong', 'update:autoJump', 'update:darkMode', 'exit', 'submit'])
+const emit = defineEmits(['close', 'update:forceExplanationOnWrong', 'update:autoJump', 'update:darkMode'])
 
-const handleExit = () => {
-  emit('close')
-  emit('exit')
+function handleSubmit() {
+  props.onSubmit?.()
+}
+function handleExit() {
+  props.onExit?.()
 }
 
-const handleSubmit = () => {
-  emit('close')
-  emit('submit')
-}
+
 </script>
 
 <style scoped>

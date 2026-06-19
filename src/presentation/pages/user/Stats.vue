@@ -4,153 +4,61 @@
 
     <main class="content">
       <!-- 总体统计 -->
-      <section class="overview-section">
-        <div class="overview-card">
-          <h2 class="section-title">总体统计</h2>
-          <div class="overview-grid">
-            <div class="overview-item">
-              <span class="overview-value">{{ totalPracticeCount }}</span>
-              <span class="overview-label">总练习次数</span>
+      <section class="performance-section">
+        <h3 class="section-title">表现分析</h3>
+        <div class="performance-grid">
+          <div class="perf-card accuracy-card">
+            <div class="card-header">
+              <span class="card-label">正确率</span>
+              <span class="card-value primary">84.2%</span>
             </div>
-            <div class="overview-item">
-              <span class="overview-value">{{ totalExamCount }}</span>
-              <span class="overview-label">总考试次数</span>
+            <div class="chart-bars">
+              <div class="bar" style="height: 50%"></div>
+              <div class="bar" style="height: 75%"></div>
+              <div class="bar" style="height: 66%"></div>
+              <div class="bar active" style="height: 100%"></div>
+              <div class="bar" style="height: 80%"></div>
             </div>
-            <div class="overview-item">
-              <span class="overview-value">{{ totalQuestionsAnswered }}</span>
-              <span class="overview-label">总答题数</span>
-            </div>
-            <div class="overview-item">
-              <span class="overview-value">{{ averageAccuracy }}%</span>
-              <span class="overview-label">平均正确率</span>
-            </div>
+            <p class="card-footer">最近30天提升了 4.5%</p>
           </div>
-        </div>
-      </section>
 
-      <!-- 练习统计 -->
-      <section class="practice-section">
-        <div class="practice-card">
-          <h2 class="section-title">练习统计</h2>
-          <div class="practice-stats">
-            <div class="stat-card">
-              <Icon name="assignment-outline" class="stat-icon" />
-              <div class="stat-info">
-                <span class="stat-value">{{ practiceStats.total }}</span>
-                <span class="stat-label">练习次数</span>
-              </div>
+          <div class="perf-card radar-card">
+            <span class="card-label">知识掌握度</span>
+            <div class="radar-container">
+              <div class="radar radar-1"></div>
+              <div class="radar radar-2"></div>
+              <div class="radar radar-3"></div>
             </div>
-            <div class="stat-card">
-              <Icon name="check-circle-outline" class="stat-icon" />
-              <div class="stat-info">
-                <span class="stat-value">{{ practiceStats.correct }}</span>
-                <span class="stat-label">正确题数</span>
+            <p class="radar-text">
+              高: 临床理论<br />低: 伦理框架
+            </p>
+          </div>
+
+          <div class="perf-card streak-card">
+            <span class="card-label">总答题</span>
+            <span class="card-value tertiary">14 天连续</span>
+            <div class="streak-icons">
+              <div class="streak-icon fire">
+                <Icon name="local-fire-department-outline" />
               </div>
-            </div>
-            <div class="stat-card">
-              <Icon name="cancel-outline" class="stat-icon" />
-              <div class="stat-info">
-                <span class="stat-value">{{ practiceStats.incorrect }}</span>
-                <span class="stat-label">错误题数</span>
-              </div>
-            </div>
-            <div class="stat-card">
-              <Icon name="trending-up" class="stat-icon" />
-              <div class="stat-info">
-                <span class="stat-value">{{ practiceStats.accuracy }}%</span>
-                <span class="stat-label">正确率</span>
+              <div class="streak-icon verified">
+                <Icon name="verified-outline" />
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- 考试统计 -->
-      <section class="exam-section">
-        <div class="exam-card">
-          <h2 class="section-title">考试统计</h2>
-          <div class="exam-stats">
-            <div class="stat-card">
-              <Icon name="quiz-outline" class="stat-icon" />
-              <div class="stat-info">
-                <span class="stat-value">{{ examStats.total }}</span>
-                <span class="stat-label">考试次数</span>
-              </div>
-            </div>
-            <div class="stat-card">
-              <Icon name="check-circle-outline" class="stat-icon" />
-              <div class="stat-info">
-                <span class="stat-value">{{ examStats.passed }}</span>
-                <span class="stat-label">通过次数</span>
-              </div>
-            </div>
-            <div class="stat-card">
-              <Icon name="cancel-outline" class="stat-icon" />
-              <div class="stat-info">
-                <span class="stat-value">{{ examStats.failed }}</span>
-                <span class="stat-label">未通过次数</span>
-              </div>
-            </div>
-            <div class="stat-card">
-              <Icon name="star-outline" class="stat-icon" />
-              <div class="stat-info">
-                <span class="stat-value">{{ examStats.averageScore }}</span>
-                <span class="stat-label">平均分</span>
-              </div>
-            </div>
-          </div>
+      <section class="history-section">
+        <div class="section-header">
+          <h3 class="section-title">练习记录</h3>
+          <button class="more-btn">查看全部</button>
+        </div>
+        <div class="empty-history">
+          <p>暂无练习记录</p>
         </div>
       </section>
 
-      <!-- 最近记录 -->
-      <section class="recent-section">
-        <div class="recent-card">
-          <h2 class="section-title">最近记录</h2>
-          <div class="recent-list" v-if="recentRecords.length > 0">
-            <div 
-              v-for="record in recentRecords" 
-              :key="record.id"
-              class="recent-item"
-              :class="{ practice: record.type === 'practice', exam: record.type === 'exam' }"
-              @click="viewRecord(record)"
-            >
-              <div class="recent-icon">
-                <Icon name="assignment-outline" v-if="record.type === 'practice'" />
-                <Icon name="quiz-outline" v-else />
-              </div>
-              <div class="recent-info">
-                <h4>{{ record.title }}</h4>
-                <div class="recent-meta">
-                  <span class="recent-date">{{ formatDate(record.timestamp) }}</span>
-                  <span class="recent-type">{{ record.type === 'practice' ? '练习' : '考试' }}</span>
-                </div>
-                <div class="recent-stats">
-                  <span class="score" :class="getScoreClass(record.score, record.totalScore)">
-                    {{ record.score }}/{{ record.totalScore }}
-                  </span>
-                  <span class="accuracy">{{ record.accuracy }}%</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="empty-state" v-else>
-<Icon name="history" />
-            <p>暂无记录</p>
-          </div>
-        </div>
-      </section>
-
-      <!-- 操作按钮 -->
-      <div class="action-buttons">
-        <button class="action-btn" @click="goPracticeHistory">
-          <IconHistory />
-          练习记录
-        </button>
-        <button class="action-btn" @click="goExamHistory">
-          <IconHistory />
-          考试记录
-        </button>
-      </div>
     </main>
   </div>
 </template>
@@ -577,6 +485,186 @@ function viewRecord(record) {}
 .action-btn:active {
   transform: scale(0.98);
   background: #f0f8ff;
+}
+
+.performance-section {
+  margin-top: var(--spacing-sm);
+}
+
+.performance-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-md);
+}
+
+.perf-card {
+  background: var(--background-surface);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-md);
+  border: 1px solid var(--border-color-light);
+}
+
+.accuracy-card {
+  grid-column: span 2;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: var(--spacing-md);
+}
+
+.card-label {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-bold);
+  color: var(--on-surface-variant);
+}
+
+.card-value {
+  font-size: var(--font-size-xxl);
+  font-weight: var(--font-weight-bold);
+}
+
+.card-value.primary {
+  color: var(--primary);
+}
+
+.card-value.tertiary {
+  color: var(--secondary);
+}
+
+.chart-bars {
+  display: flex;
+  gap: var(--spacing-md);
+  align-items: flex-end;
+  height: 64px;
+}
+
+.bar {
+  flex: 1;
+  background: var(--border-color-strong);
+  border-radius: 4px 4px 0 0;
+}
+
+.bar.active {
+  background: var(--primary);
+}
+
+.card-footer {
+  font-size: 11px;
+  color: var(--on-surface-variant);
+  font-style: italic;
+  margin-top: var(--spacing-sm);
+}
+
+.radar-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.radar-container {
+  position: relative;
+  width: 96px;
+  height: 96px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: var(--spacing-md) 0;
+}
+
+.radar {
+  position: absolute;
+  clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);
+}
+
+.radar-1 {
+  inset: 0;
+  background: var(--border-color-strong);
+  opacity: 0.5;
+}
+
+.radar-2 {
+  inset: 8px;
+  background: var(--primary);
+  opacity: 0.4;
+}
+
+.radar-3 {
+  inset: 16px;
+  background: var(--primary);
+  opacity: 0.6;
+  transform: scale(0.75);
+}
+
+.radar-text {
+  font-size: 10px;
+  color: var(--on-surface-variant);
+  text-align: center;
+  line-height: 1.5;
+}
+
+.streak-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.streak-icons {
+  display: flex;
+  gap: calc(var(--spacing-sm) * -1);
+  margin-top: var(--spacing-sm);
+}
+
+.streak-icon {
+  width: 24px;
+  height: 24px;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--background);
+}
+
+.streak-icon.fire {
+  background: var(--secondary);
+}
+
+.streak-icon svg {
+  font-size: 12px;
+  color: var(--on-primary);
+}
+
+.streak-icon.verified {
+  background: var(--primary);
+}
+
+.history-section {
+  margin-top: var(--spacing-md);
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-sm);
+}
+
+.more-btn {
+  background: none;
+  border: none;
+  color: var(--primary);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+}
+
+.empty-history {
+  text-align: center;
+  padding: 48px 16px;
+  color: var(--on-surface-variant);
+  font-size: var(--font-size-sm);
 }
 
 @media (max-width: 768px) {
