@@ -1,8 +1,16 @@
 <template>
   <div class="page">
-
+    <!-- 顶部栏 -->
     <header class="top-bar">
-      <div class="top-bar-left">
+      <div v-if="isExamMode" class="top-bar-left" @click="exitExam">
+        <button class="back-btn">
+          <Icon name="close" />
+        </button>
+        <div class="header-title">
+          <h1>{{ paper?.title || t('examPaper') }}</h1>
+        </div>
+      </div>
+      <div v-else class="top-bar-left">
         <div class="header-title">
           <h1>{{ t(subjectDisplay) }}</h1>
           <span class="header-subtitle">{{ t(practiceData?.category) || practiceData?.category || "" }} •
@@ -10,113 +18,531 @@
         </div>
       </div>
       <div class="top-bar-right">
-        <div class="timer-display">
+        <div class="timer-display" :class="{ warning: isExamMode && remainingSeconds < 300 }">
           <Icon name="timer-outline" />
-          <span>{{ elapsedTimeDisplay }}</span>
+          <span>{{ isExamMode ? remainingTimeDisplay : elapsedTimeDisplay }}</span>
         </div>
         <button class="grid-btn" @click="showQuizSettings = true">
           <Icon name="settings" />
         </button>
+
       </div>
     </header>
 
-    <div class="progress-bar-container">
-      <div class="progress-bar">
-        <div class="progress" :style="{ width: progress + '%' }"></div>
+    <!-- 进度条和操作栏 -->
+    <div class="progress-action-bar">
+      <div class="progress-bar-container">
+        <div class="progress-bar">
+          <div class="progress" :style="{ width: progress + '%' }"></div>
+        </div>
+      </div>
+      <div class="action-bar">
+        <span class="progress-label" @click="openJumpDialog">进度 {{ currentIndex + 1 }}/{{ isExamMode ? questions.length
+          :
+          bank.length
+        }}</span>
+        <div class="action-bar-right">
+          <button v-for="btn in visibleButtons" :key="btn.key" class="action-btn"
+            :class="{ active: btn.active?.value, 'remove-btn': btn.key === 'removeWrong' }" @click="btn.action"
+            :title="btn.title">
+            <Icon :name="btn.iconName?.value ?? btn.iconName" />
+          </button>
+        </div>
       </div>
     </div>
 
-    <div class="action-bar">
-      <span class="progress-label" @click="openJumpDialog">进度 {{ currentIndex + 1 }}/{{ bank.length }}</span>
-      <div class="action-bar-right">
-        <button v-for="btn in visibleButtons" :key="btn.key" class="action-btn"
-          :class="{ active: btn.active?.value, 'remove-btn': btn.key === 'removeWrong' }" @click="btn.action"
-          :title="btn.title">
-          <Icon :name="btn.iconName?.value ?? btn.iconName" />
-        </button>
-      </div>
-    </div>
-
+    <!-- 问题容器 -->
     <main class="question-container">
       <div v-if="loading" style="text-align: center; padding: 40px">
-        <p>{{ t("loadingQuestions") }}</p>
+        <p>{{ t('loadingQuestions') }}</p>
       </div>
-      <template v-else>
-        <div v-if="currentQuestion">
+      <div v-else-if="isExamMode && !paper" style="text-align: center; padding: 40px">
+        <p>{{ t('paperNotFound') }}</p>
+      </div>
+      <template v-else-if="currentQuestion">
+        <template v-if="isExamMode">
+          <QuestionRenderer :question="currentQuestion" mode="exam" :user-answer="userAnswers[currentQuestion?.id]"
+            :is-marked="markedQuestions.has(currentQuestion.id)" @answer="handleAnswer" @toggle-mark="toggleMark" />
+        </template>
+        <template v-else>
           <QuestionRenderer :question="currentQuestionWithOptions" :mode="practiceMode"
             :user-answer="userAnswers[currentQuestion?.id]" :show-answer="currentQuestionDisplay.shouldShowAnswer.value"
             :show-answer-mode="practiceData?.showAnswerMode" :auto-jump="practiceData?.autoJump"
             :show-explanation="showAnswerExplanation" :current-sub-index="currentSubIndex" @answer="handleAnswer"
             @next-question="nextQuestion" @checkSub="handleCheckSub" @check="checkAnswer" @goSub="handleGoSub" />
-        </div>
-
-        <div v-else style="text-align: center; padding: 40px">
-          <p>{{ bank.length === 0 ? t("noQuestions") : t("loadingQuestions") }}</p>
-        </div>
+        </template>
       </template>
+      <div v-else style="text-align: center; padding: 40px">
+        <p>{{ t('noQuestions') }}</p>
+      </div>
     </main>
 
-    <QuestionNavbar :prevDisabled="currentIndex === 0" :isLast="currentIndex === bank.length - 1"
+    <!-- 问题导航栏 -->
+    <QuestNav v-if="isExamMode" :prevDisabled="currentIndex === 0" :isLast="currentIndex === questions.length - 1"
+      @prev="prevQuestion" @next="nextQuestion" />
+    <QuestNav v-else :prevDisabled="currentIndex === 0" :isLast="currentIndex === bank.length - 1"
       :subCount="currentSubCount" :currentSubIndex="currentSubIndex" :subStatuses="currentSubStatuses"
-      @prev="prevQuestion" @next="nextQuestion" @submit="finishQuiz" @goSub="handleGoSub" />
+      @prev="prevQuestion" @next="nextQuestion" @goSub="handleGoSub" />
 
-    <AnswerOverview v-if="showAnswerCard" :questions="bank" :currentIndex="currentIndex" :currentSubIndex="currentSubIndex"
-      :settings="practiceData" :answerStatus="answerStatus" :userAnswers="userAnswers" @close="closeAnswerCard"
-      @go="gotoQuesitonIdx" />
+    <!-- 答案概览 -->
+    <AnswerOverview v-if="showAnswerCard" v-bind="answerOverviewProps" @close="closeAnswerCard"
+      @go="isExamMode ? gotoQuestion : gotoQuesitonIdx" @exit="isExamMode ? submitPaper : undefined" />
 
+    <!-- 统计 -->
     <PracticeStats v-if="showStatsDialog" :total="liveStats.total" :correct="liveStats.correct" :wrong="liveStats.wrong"
       :unanswered="liveStats.unanswered" :accuracy="liveStats.accuracy" :elapsed="liveStats.elapsed"
-      :current="liveStats.current" :totalQ="liveStats.totalQ" :settings="practiceData"
+      :current="liveStats.current" :totalQ="liveStats.totalQ" :settings="practiceData" :is-exam-mode="isExamMode"
       @close="showStatsDialog = false" />
 
-    <QuizSettings :visible="showQuizSettings" :showExplanationEnabled="showExplanationPref"
-      :forceExplanationOnWrong="forceExplanationOnWrong" :autoJump="practiceData?.autoJump ?? true" :darkMode="darkMode"
-      :soundEnabled="soundEnabled" @close="showQuizSettings = false"
-      @update:forceExplanationOnWrong="forceExplanationOnWrong = $event"
+    <!--  quiz 设置 -->
+    <QuizSettings v-if="showQuizSettings" :visible="showQuizSettings" :is-exam-mode="isExamMode"
+      :showExplanationEnabled="showExplanationPref" :forceExplanationOnWrong="forceExplanationOnWrong"
+      :autoJump="practiceData?.autoJump ?? true" :darkMode="darkMode" :soundEnabled="soundEnabled"
+      @close="showQuizSettings = false" @update:forceExplanationOnWrong="forceExplanationOnWrong = $event"
       @update:autoJump="practiceData.autoJump = $event" @update:darkMode="darkMode = $event"
-      @update:soundEnabled="soundEnabled = $event" @exit="exitQuiz" @submit="finishQuiz" />
+      @update:soundEnabled="soundEnabled = $event" @exit="isExamMode ? exitExam : exitQuiz"
+      @submit="isExamMode ? submitPaper : finishQuiz" />
 
-    <JumpDialog :visible="jumpDialogVisible" :total="bank.length" :current="currentIndex"
-      @close="jumpDialogVisible = false" @jump="gotoQuesitonIdx" />
+    <!-- 跳转对话框 -->
+    <JumpDialog v-if="jumpDialogVisible" :visible="jumpDialogVisible"
+      :total="isExamMode ? questions.length : bank.length" :current="currentIndex" @close="jumpDialogVisible = false"
+      @jump="isExamMode ? gotoQuestion : gotoQuesitonIdx" />
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted, computed, provide, watch } from "vue";
-
+import { ref, computed, onMounted, onUnmounted, provide, watch } from 'vue'
+import { useRouter, useRoute } from 'vue-router'
 import Icon from '@/presentation/components/ui/Icon.vue'
-import { useRouter, useRoute } from "vue-router";
-import AnswerOverview from "@/presentation/components/practice/AnswerOverview.vue";
-import PracticeStats from "@/presentation/components/practice/PracticeStats.vue";
-import QuizSettings from "@/presentation/components/practice/QuizSettings.vue";
-import QuestionNavbar from "@/presentation/components/layout/QuestionNavbar.vue";
-import QuestionRenderer from "@/presentation/components/question/QuestionRenderer.vue";
-import JumpDialog from "@/presentation/components/practice/JumpDialog.vue";
-import { useAppStore } from "@/domain/stores/store";
-import { usePracticeService } from "@/domain/composables/usePracticeService";
-import { t } from "@/infrastructure/utils/i18n.js";
-import { useQuestionHandler } from "@/application/composables/useQuestionHandler";
-import { useSoundEffect } from "@/application/composables/useSoundEffect";
+import AnswerOverview from '@/presentation/components/practice/AnswerOverview.vue'
+import PracticeStats from '@/presentation/components/practice/PracticeStats.vue'
+import QuizSettings from '@/presentation/components/practice/QuizSettings.vue'
+import QuestNav from '@/presentation/components/layout/QuestNav.vue'
+import QuestionRenderer from '@/presentation/components/question/QuestionRenderer.vue'
+import JumpDialog from '@/presentation/components/practice/JumpDialog.vue'
+import { useAppStore } from '@/domain/stores/store'
+import { usePracticeService } from '@/domain/composables/usePracticeService'
+import { t } from '@/infrastructure/utils/i18n.js'
+import { useQuestionHandler } from '@/application/composables/useQuestionHandler'
+import { useSoundEffect } from '@/application/composables/useSoundEffect'
 import {
   QUESTION_SORT,
   getAnswerStatus,
-} from "@/domain/config/questionConfig";
+} from '@/domain/config/questionConfig'
 import {
   savePracticeProgress as saveProgress,
   unpackProgress,
   packProgress,
   getPracticeKey,
-} from "@/infrastructure/storage/progress";
-import { getStrategy } from "@/infrastructure/question-types";
-import { getPracticeSession } from "@/infrastructure/storage/session";
+} from '@/infrastructure/storage/progress'
+import { getStrategy } from '@/infrastructure/question-types'
+import { getPracticeSession } from '@/infrastructure/storage/session'
 
-const router = useRouter();
-const route = useRoute();
-const store = useAppStore();
-const pm = usePracticeService();
-const soundEnabled = ref(localStorage.getItem('soundEnabled') !== 'false');
-const { playAnswerSound } = useSoundEffect(soundEnabled);
+const router = useRouter()
+const route = useRoute()
+const store = useAppStore()
+const pm = usePracticeService()
 
+const isExamMode = computed(() => route.name === 'ExamPaper')
+
+// ========== 共享状态 ==========
+const currentIndex = ref(0)
+const userAnswers = ref({})
+const showAnswerCard = ref(false)
+const loading = ref(true)
+
+const questions = ref([])
+const currentQuestion = computed(() => {
+  const list = isExamMode.value ? questions.value : bank.value
+  if (list && list.length > 0 && list[currentIndex.value]) {
+    return list[currentIndex.value]
+  }
+  return null
+})
+
+const progress = computed(() => {
+  const list = isExamMode.value ? questions.value : bank.value
+  if (list.length === 0) return 0
+  return Math.round(((currentIndex.value + 1) / list.length) * 100)
+})
+
+// ========== 计时器 ==========
+const elapsedSeconds = ref(0)
+const remainingSeconds = ref(0)
+let timerInterval = null
+
+const elapsedTimeDisplay = computed(() => {
+  const hours = Math.floor(elapsedSeconds.value / 3600)
+  const minutes = Math.floor((elapsedSeconds.value % 3600) / 60)
+  const seconds = elapsedSeconds.value % 60
+  return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`
+})
+
+const remainingTimeDisplay = computed(() => {
+  const hours = Math.floor(remainingSeconds.value / 3600)
+  const minutes = Math.floor((remainingSeconds.value % 3600) / 60)
+  const seconds = remainingSeconds.value % 60
+  return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`
+})
+
+const startTimer = () => {
+  if (timerInterval) clearInterval(timerInterval)
+  if (isExamMode.value) {
+    timerInterval = setInterval(() => {
+      elapsedSeconds.value++
+      remainingSeconds.value = Math.max(0, remainingSeconds.value - 1)
+      if (remainingSeconds.value === 0) {
+        autoSubmit()
+      }
+    }, 1000)
+  } else {
+    timerInterval = setInterval(() => {
+      elapsedSeconds.value++
+    }, 1000)
+  }
+}
+
+const stopTimer = () => {
+  if (timerInterval) {
+    clearInterval(timerInterval)
+    timerInterval = null
+  }
+}
+
+// ========== 考试模式特定状态 ==========
+const paper = ref(null)
+const markedQuestions = ref(new Set())
+
+function toggleMark() {
+  if (!currentQuestion.value) return
+  const id = currentQuestion.value.id
+  if (markedQuestions.value.has(id)) {
+    markedQuestions.value.delete(id)
+  } else {
+    markedQuestions.value.add(id)
+  }
+}
+
+function checkAnswer(question, userAnswer) {
+  if (userAnswer === undefined || userAnswer === null) return false
+  if (Array.isArray(userAnswer) && Array.isArray(question.answer)) {
+    const sortedUser = [...userAnswer].sort()
+    const sortedCorrect = [...question.answer].sort()
+    return JSON.stringify(sortedUser) === JSON.stringify(sortedCorrect)
+  }
+  return userAnswer === question.answer
+}
+
+const exitExam = () => {
+  if (confirm(t('confirmExitExam') || '确定要退出考试吗？')) {
+    stopTimer()
+    router.push('/exam')
+  }
+}
+
+const submitPaper = () => {
+  if (confirm(t('confirmSubmitPaper') || '确定要交卷吗？')) {
+    autoSubmit()
+  }
+}
+
+const autoSubmit = () => {
+  stopTimer()
+  let correctCount = 0
+  const totalScore = paper.value?.totalScore || 0
+  const questionCount = questions.value.length
+  questions.value.forEach((q) => {
+    const userAnswer = userAnswers.value[q.id]
+    if (checkAnswer(q, userAnswer)) {
+      correctCount++
+    }
+  })
+  const defaultScore = 2
+  const userScore = correctCount * defaultScore
+  router.push({
+    path: '/exam/result',
+    query: {
+      paperId: paper.value.id,
+      totalQuestions: questionCount,
+      correctCount,
+      totalScore,
+      userScore,
+      elapsedTime: elapsedSeconds.value
+    }
+  })
+}
+
+// ========== 练习模式特定状态 ==========
+const practiceData = ref(null)
+const bank = ref([])
+const currentSubIndex = ref(0)
+const answerChecked = ref({})
+const answerStatus = ref({})
+const shuffledOptionsCache = ref({})
+const showStatsDialog = ref(false)
+const showQuizSettings = ref(false)
+const jumpDialogVisible = ref(false)
+const showExplanationPref = ref(localStorage.getItem('showExplanationPref') !== 'false')
+const forceExplanationOnWrong = ref(localStorage.getItem('forceExplanationOnWrong') !== 'false')
+const darkMode = ref(localStorage.getItem('darkMode') === 'true')
+const soundEnabled = ref(localStorage.getItem('soundEnabled') !== 'false')
+const { playAnswerSound } = useSoundEffect(soundEnabled)
+const showTranslation = ref(false)
+const startedAt = ref(Date.now())
+
+provide('showTranslation', showTranslation)
+
+watch(darkMode, (val) => {
+  document.documentElement.classList.toggle('dark', val)
+  localStorage.setItem('darkMode', val)
+}, { immediate: true })
+
+watch(soundEnabled, (val) => {
+  localStorage.setItem('soundEnabled', val)
+})
+
+watch(showExplanationPref, (val) => {
+  localStorage.setItem('showExplanationPref', val)
+})
+
+watch(forceExplanationOnWrong, (val) => {
+  localStorage.setItem('forceExplanationOnWrong', val)
+})
+
+const practiceMode = computed(() => {
+  return practiceData.value?.practiceMode || 'answer'
+})
+
+const subjectDisplay = computed(() => {
+  if (!practiceData.value) return ''
+  const subject = practiceData.value.subject
+  return typeof subject === 'object' ? subject.name : subject
+})
+
+const isWrongPractice = computed(() => practiceData.value?.wrongPractice)
+
+const showAnswerExplanation = computed(() => {
+  const q = bank.value[currentIndex.value]
+  if (!q) return false
+  if (practiceMode.value === 'review') return true
+  const isChecked = answerChecked.value[q.id]
+  if (!isChecked) return false
+  if (showExplanationPref.value) return true
+  if (forceExplanationOnWrong.value) {
+    const status = answerStatus.value[q.id]
+    if (isWrongStatus(status)) return true
+  }
+  return false
+})
+
+const currentSubCount = computed(() => currentQuestion.value?.subs?.length || 0)
+
+const currentSubStatuses = computed(() => {
+  const q = currentQuestion.value
+  if (!q || !q.subs) return []
+  const status = answerStatus.value[q.id]
+  const answers = userAnswers.value[q.id]
+  return q.subs.map((_, i) => {
+    if (status && status[i] === 'correct') return 'correct'
+    if (status && status[i] === 'wrong') return 'wrong'
+    if (answers && answers[i] !== undefined && answers[i] !== null && answers[i] !== '') return 'answered'
+    return null
+  })
+})
+
+const isFavorited = computed(() => {
+  if (!currentQuestion.value) return false
+  return store.favorites.some(q => q.id === currentQuestion.value.id)
+})
+
+const isInWrongBook = computed(() => {
+  if (!currentQuestion.value) return false
+  return store.wrongBook.some(q => q.id === currentQuestion.value.id)
+})
+
+const liveStats = computed(() => {
+  let correct = 0, wrong = 0, total = 0
+  const list = isExamMode.value ? questions.value : bank.value
+  if (isExamMode.value) {
+    total = list.length
+    correct = Object.keys(userAnswers.value).length
+  } else {
+    list.forEach(q => {
+      const status = answerStatus.value[q.id]
+      if (q.subs?.length > 0) {
+        q.subs.forEach((_, idx) => {
+          total++
+          const s = status?.[idx]
+          if (s === 'correct') correct++
+          else if (s === 'wrong') wrong++
+        })
+      } else {
+        total++
+        if (status === 'correct') correct++
+        else if (status === 'wrong') wrong++
+      }
+    })
+  }
+  const unanswered = total - correct - wrong
+  return {
+    total, correct, wrong, unanswered,
+    accuracy: (correct + wrong) > 0 ? Math.round(correct / (correct + wrong) * 100) : 0,
+    current: currentIndex.value + 1,
+    totalQ: list.length,
+    elapsed: elapsedSeconds.value
+  }
+})
+
+// ========== 选项乱序 ==========
+function seededRandom(seed) {
+  let s = seed | 0
+  return () => {
+    s = (s + 0x6D2B79F5) | 0
+    let t = Math.imul(s ^ (s >>> 15), 1 | s)
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296
+  }
+}
+
+const shuffleArray = (array, rng = Math.random) => {
+  const arr = [...array]
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(rng() * (i + 1))
+      ;[arr[i], arr[j]] = [arr[j], arr[i]]
+  }
+  return arr
+}
+
+const cacheShuffledOptions = () => {
+  if (practiceData.value?.practiceMode === 'review') return
+  const seed = practiceData.value?.shuffleSeed
+  const rng = seed ? seededRandom(seed) : Math.random
+  shuffledOptionsCache.value = {}
+  bank.value.forEach((question) => {
+    if (question && question.options && question.shuffle && getStrategy(question.type)?.capabilities.canShuffle) {
+      const indices = question.options.map((_, i) => i)
+      const shuffledIndices = shuffleArray(indices, rng)
+      shuffledOptionsCache.value[question.id] = {
+        options: shuffledIndices.map(i => question.options[i]),
+        translationOptions: question.translation?.options
+          ? shuffledIndices.map(i => question.translation.options[i])
+          : null
+      }
+    }
+  })
+}
+
+const getQuestionWithShuffledOptions = (question) => {
+  if (!question || !question.options) return question
+  if (practiceData.value?.practiceMode === 'review') return question
+  if (question.shuffle && getStrategy(question.type)?.capabilities.canShuffle) {
+    const cached = shuffledOptionsCache.value[question.id]
+    if (cached) {
+      return {
+        ...question,
+        options: cached.options,
+        ...(cached.translationOptions && {
+          translation: { ...question.translation, options: cached.translationOptions }
+        })
+      }
+    }
+    const indices = question.options.map((_, i) => i)
+    const shuffledIndices = shuffleArray(indices)
+    const result = {
+      options: shuffledIndices.map(i => question.options[i]),
+      translationOptions: question.translation?.options
+        ? shuffledIndices.map(i => question.translation.options[i])
+        : null
+    }
+    shuffledOptionsCache.value[question.id] = result
+    return {
+      ...question,
+      options: result.options,
+      ...(result.translationOptions && {
+        translation: { ...question.translation, options: result.translationOptions }
+      })
+    }
+  }
+  return question
+}
+
+const currentQuestionWithOptions = computed(() => {
+  if (!currentQuestion.value) return null
+  return getQuestionWithShuffledOptions(currentQuestion.value)
+})
+
+// ========== AnswerOverview props ==========
+const answerOverviewProps = computed(() => {
+  if (isExamMode.value) {
+    return {
+      questions: questions.value,
+      currentIndex: currentIndex.value,
+      currentSubIndex: 0,
+      userAnswers: userAnswers.value,
+      buttonText: 'submitPaper'
+    }
+  }
+  return {
+    questions: bank.value,
+    currentIndex: currentIndex.value,
+    currentSubIndex: currentSubIndex.value,
+    settings: practiceData.value,
+    answerStatus: answerStatus.value,
+    userAnswers: userAnswers.value
+  }
+})
+
+// ========== 导航 ==========
+const prevQuestion = () => {
+  if (currentIndex.value > 0) {
+    currentIndex.value--
+    if (!isExamMode.value) savePracticeProgress()
+  }
+}
+
+const nextQuestion = () => {
+  const maxIdx = isExamMode.value ? questions.value.length : bank.value.length
+  if (currentIndex.value < maxIdx - 1) {
+    currentIndex.value++
+    if (!isExamMode.value) savePracticeProgress()
+  }
+}
+
+const gotoQuestion = (idx) => {
+  currentIndex.value = idx
+  closeAnswerCard()
+}
+
+const toggleAnswerCard = () => {
+  showAnswerCard.value = !showAnswerCard.value
+}
+
+const closeAnswerCard = () => {
+  showAnswerCard.value = false
+}
+
+// ========== 考试挂载 ==========
+async function loadExamPaper() {
+  const paperId = parseInt(route.query.id)
+  if (!paperId) {
+    router.push('/exam')
+    return
+  }
+  store.loadExamPapers()
+  const foundPaper = store.examPapers.find(p => p.id === paperId)
+  if (!foundPaper) {
+    loading.value = false
+    return
+  }
+  paper.value = foundPaper
+  questions.value = foundPaper.questions || []
+  const duration = foundPaper.duration || 120
+  remainingSeconds.value = duration * 60
+  loading.value = false
+  startTimer()
+}
+
+// ========== 练习挂载 ==========
 const questionLoaders = {
   bank: async (data) => {
     const subjectName = typeof data.subject === 'object' ? data.subject.name : data.subject
@@ -134,142 +560,59 @@ const questionLoaders = {
   favorites: () => [...store.favorites],
 }
 
-const showAnswerCard = ref(false);
-const showAnswerExplanation = computed(() => {
-  const q = bank.value[currentIndex.value]
-  if (!q) return false
-
-  if (practiceMode.value === 'review') return true
-
-  const isChecked = answerChecked.value[q.id]
-  if (!isChecked) return false
-
-  if (showExplanationPref.value) return true
-
-  if (forceExplanationOnWrong.value) {
-    const status = answerStatus.value[q.id]
-    if (isWrongStatus(status)) return true
-  }
-
-  return false
-})
-const practiceData = ref(null);
-const bank = ref([]);
-const currentIndex = ref(0);
-const currentSubIndex = ref(0); // 阅读理解子题索引
-const userAnswers = ref({});
-const answerChecked = ref({}); // 每个题目的答案检查状态
-const answerStatus = ref({}); // 每个题目的答案状态: correct/wrong/partial/unchecked/unanswered
-const shuffledOptionsCache = ref({}); // 缓存选项乱序结果
-const showStatsDialog = ref(false);
-const showQuizSettings = ref(false);
-const jumpDialogVisible = ref(false);
-const darkMode = ref(localStorage.getItem('darkMode') === 'true');
-const loading = ref(true);
-const startedAt = ref(Date.now()); // 练习开始时间
-
-watch(darkMode, (val) => {
-  document.documentElement.classList.toggle('dark', val)
-  localStorage.setItem('darkMode', val)
-}, { immediate: true })
-
-watch(soundEnabled, (val) => {
-  localStorage.setItem('soundEnabled', val)
-})
-
-const showExplanationPref = ref(localStorage.getItem('showExplanationPref') !== 'false')
-watch(showExplanationPref, (val) => {
-  localStorage.setItem('showExplanationPref', val)
-})
-
-const forceExplanationOnWrong = ref(localStorage.getItem('forceExplanationOnWrong') !== 'false')
-watch(forceExplanationOnWrong, (val) => {
-  localStorage.setItem('forceExplanationOnWrong', val)
-})
-
-function isWrongStatus(status) {
-  if (typeof status === 'string') return status === 'wrong' || status === 'partial'
-  if (typeof status === 'object') return Object.values(status).some(s => s === 'wrong')
-  return false
-}
-
-// 计时器相关
-const elapsedSeconds = ref(0); // 已用时间（秒）
-let timerInterval = null; // 计时器 interval
-
-onMounted(async () => {
+async function loadPracticeSession() {
   if (!route.query.sessionId) {
-    router.push({ name: "Practice" })
-    loading.value = false
+    router.push({ name: 'Practice' })
     return
   }
-
   try {
     practiceData.value = getPracticeSession(route.query.sessionId)
     if (!practiceData.value) {
-      router.push({ name: "Practice" })
-      loading.value = false
+      router.push({ name: 'Practice' })
       return
     }
     const { category, scope, subject, questionSort, source: dataSource } = practiceData.value
     const source = dataSource || 'bank'
-    const subjectName = typeof subject === "object" ? subject.name : subject
-
-    console.log("QuizPage 接收参数:", { category, scope, subject: subjectName, questionSort, source })
-
+    const subjectName = typeof subject === 'object' ? subject.name : subject
     const loader = questionLoaders[source]
     if (!loader) {
-      router.push({ name: "Practice" })
-      loading.value = false
+      router.push({ name: 'Practice' })
       return
     }
-
-    let questions = await loader(practiceData.value)
-
-    if (questions.length === 0) {
+    let rawQuestions = await loader(practiceData.value)
+    if (rawQuestions.length === 0) {
       if (source === 'wrongbook') router.push({ name: 'WrongBook' })
       else if (source === 'favorites') router.push({ name: 'Favorites' })
       else router.push({ name: 'Practice' })
-      loading.value = false
       return
     }
-
-    console.log("题目数量:", questions.length)
-
     const practiceKey = getPracticeKey({ bank: { category, scope, subject: subjectName } })
     const isContinue = route.query.continue === 'true'
-
     if (source === 'bank' && isContinue) {
       const savedProgress = store.getPracticeProgress(practiceKey)
       const isSameSubject = savedProgress?.config?.bank?.subject === subjectName
       if (isSameSubject && savedProgress?.progress?.questionIds?.length > 0) {
         const savedQuestionIds = savedProgress.progress.questionIds
-        const existingQuestions = new Set(questions.map(q => q.id))
+        const existingQuestions = new Set(rawQuestions.map(q => q.id))
         const validIds = savedQuestionIds.filter(id => existingQuestions.has(id))
-        questions = validIds.map(id => questions.find(q => q.id === id)).filter(Boolean)
-        console.log("已恢复题目顺序，题数:", questions.length)
+        rawQuestions = validIds.map(id => rawQuestions.find(q => q.id === id)).filter(Boolean)
       }
     } else if (source === 'bank') {
       if (practiceData.value?.practiceMode !== 'review') {
         if (questionSort === QUESTION_SORT.SHUFFLE) {
-          questions = shuffleArray(questions)
+          rawQuestions = shuffleArray(rawQuestions)
         } else if (questionSort === QUESTION_SORT.REVERSE) {
-          questions = [...questions].reverse()
+          rawQuestions = [...rawQuestions].reverse()
         }
       }
     } else {
-      questions = [...questions].sort(() => Math.random() - 0.5)
+      rawQuestions = [...rawQuestions].sort(() => Math.random() - 0.5)
     }
-
-    bank.value = questions
-
+    bank.value = rawQuestions
     cacheShuffledOptions()
-    console.log("bank.value 长度:", bank.value.length)
-
     if (source === 'bank') {
       loadPracticeProgress()
     }
-
     if (source === 'bank' && isContinue) {
       const saved = store.practiceProgress?.[practiceKey]
       const tl = saved?.timeline || saved?.meta || {}
@@ -281,258 +624,207 @@ onMounted(async () => {
     }
     startTimer()
   } catch (e) {
-    console.error("解析练习数据失败:", e)
-    router.push({ name: "Practice" })
+    console.error('解析练习数据失败:', e)
+    router.push({ name: 'Practice' })
+  }
+}
+
+onMounted(async () => {
+  if (isExamMode.value) {
+    await loadExamPaper()
+  } else {
+    await loadPracticeSession()
   }
   loading.value = false
 })
 
-// 页面卸载时停止计时并保存进度（刷新、关闭页面等）
 onUnmounted(() => {
-  stopTimer();
-  savePracticeProgress();
-});
-
-// 进度计算
-const progress = computed(() => {
-  if (bank.value.length === 0) return 0;
-  return Math.round(((currentIndex.value + 1) / bank.value.length) * 100);
-});
-
-// 当前题目
-const currentQuestion = computed(() => {
-  if (bank.value && bank.value.length > 0 && bank.value[currentIndex.value]) {
-    return bank.value[currentIndex.value];
+  stopTimer()
+  if (!isExamMode.value) {
+    savePracticeProgress()
   }
-  return null;
-});
-
-const currentSubCount = computed(() => currentQuestion.value?.subs?.length || 0)
-
-const currentSubStatuses = computed(() => {
-  const q = currentQuestion.value
-  if (!q || !q.subs) return []
-  const status = answerStatus.value[q.id]
-  const answers = userAnswers.value[q.id]
-  return q.subs.map((_, i) => {
-    if (status && status[i] === 'correct') return 'correct'
-    if (status && status[i] === 'wrong') return 'wrong'
-    if (answers && answers[i] !== undefined && answers[i] !== null && answers[i] !== '') return 'answered'
-    return null
-  })
 })
 
-// 科目显示名称
-const subjectDisplay = computed(() => {
-  if (!practiceData.value) return "练习";
-  const subject = practiceData.value.subject;
-  return typeof subject === "object" ? subject.name : subject;
-});
-
-const isWrongPractice = computed(() => practiceData.value?.wrongPractice)
-
-const showTranslation = ref(false)
-provide('showTranslation', showTranslation)
-
-const toggleTranslation = () => {
-  showTranslation.value = !showTranslation.value
-}
-
-const toggleShowExplanation = () => {
-  showExplanationPref.value = !showExplanationPref.value
-}
-
-const isFavorited = computed(() => {
+// ========== 练习模式 - 答题检查 ==========
+const isCurrentAnswerChecked = computed(() => {
   if (!currentQuestion.value) return false
-  return store.favorites.some(q => q.id === currentQuestion.value.id)
+  if (practiceMode.value === 'review') return true
+  return answerChecked.value[currentQuestion.value.id] || false
 })
 
-const isInWrongBook = computed(() => {
-  if (!currentQuestion.value) return false
-  return store.wrongBook.some(q => q.id === currentQuestion.value.id)
+const currentQuestionDisplay = useQuestionHandler({
+  practiceMode,
+  showAnswerMode: computed(() => practiceData.value?.showAnswerMode),
+  question: currentQuestion,
+  userAnswer: computed(() => userAnswers.value[currentQuestion.value?.id]),
+  isChecked: isCurrentAnswerChecked
 })
 
-const toggleFavorite = () => {
+const handleAnswer = (answer) => {
   if (!currentQuestion.value) return
-  if (isFavorited.value) {
-    store.removeFavorite(currentQuestion.value.id)
-  } else {
-    store.addFavorite(currentQuestion.value)
+  const questionId = currentQuestion.value.id
+  userAnswers.value[questionId] = answer
+  if (!isExamMode.value && currentQuestionDisplay.shouldAutoCheck.value) {
+    const capturedId = questionId
+    setTimeout(() => {
+      if (currentQuestion.value?.id !== capturedId) return
+      checkCurrentAnswer()
+    }, 100)
   }
 }
 
-// 计时器相关
-const elapsedTimeDisplay = computed(() => {
-  const hours = Math.floor(elapsedSeconds.value / 3600);
-  const minutes = Math.floor((elapsedSeconds.value % 3600) / 60);
-  const seconds = elapsedSeconds.value % 60;
-  return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
-});
-
-// 实时答题统计
-const liveStats = computed(() => {
-  let correct = 0, wrong = 0, total = 0
-  bank.value.forEach(q => {
-    const status = answerStatus.value[q.id]
-    if (q.subs?.length > 0) {
-      q.subs.forEach((_, idx) => {
-        total++
-        const s = status?.[idx]
-        if (s === 'correct') correct++
-        else if (s === 'wrong') wrong++
-      })
-    } else {
-      total++
-      if (status === 'correct') correct++
-      else if (status === 'wrong') wrong++
+const checkCurrentAnswer = () => {
+  const question = currentQuestionWithOptions.value || currentQuestion.value
+  if (!question) return
+  const questionId = question.id
+  const userAnswer = userAnswers.value[questionId]
+  const status = getAnswerStatus(question, userAnswer)
+  answerStatus.value[questionId] = status || 'unanswered'
+  answerChecked.value[questionId] = true
+  if (typeof status === 'object') {
+    question.subs?.forEach((sub, idx) => {
+      if (status[idx] === 'wrong') pm.markWrong(sub, question)
+    })
+  } else if (status === 'wrong') {
+    pm.markWrong(question)
+  }
+  if (soundEnabled.value) {
+    const allCorrect = typeof status === 'object'
+      ? question.subs?.every((_, idx) => status[idx] === 'correct')
+      : status === 'correct'
+    playAnswerSound(allCorrect ? 'correct' : 'wrong')
+  }
+  savePracticeProgress()
+  if (practiceData.value?.autoJump) {
+    const isAllCorrect = typeof status === 'object'
+      ? question.subs?.every((_, idx) => status[idx] === 'correct')
+      : status === 'correct'
+    if (isAllCorrect) {
+      setTimeout(() => {
+        if (currentQuestion.value?.id !== questionId) return
+        nextQuestion()
+      }, 500)
     }
-  })
-  const unanswered = total - correct - wrong
-  return {
-    total,
-    correct,
-    wrong,
-    unanswered,
-    accuracy: (correct + wrong) > 0 ? Math.round(correct / (correct + wrong) * 100) : 0,
-    current: currentIndex.value + 1,
-    totalQ: bank.value.length,
-    elapsed: elapsedSeconds.value
-  }
-})
-
-// 开始计时
-const startTimer = () => {
-  if (timerInterval) clearInterval(timerInterval);
-  timerInterval = setInterval(() => {
-    elapsedSeconds.value++;
-  }, 1000);
-};
-
-// 停止计时
-const stopTimer = () => {
-  if (timerInterval) {
-    clearInterval(timerInterval);
-    timerInterval = null;
-  }
-};
-
-// 种子随机数生成器（mulberry32）
-function seededRandom(seed) {
-  let s = seed | 0
-  return () => {
-    s = (s + 0x6D2B79F5) | 0
-    let t = Math.imul(s ^ (s >>> 15), 1 | s)
-    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t
-    return ((t ^ (t >>> 14)) >>> 0) / 4294967296
   }
 }
 
-// Fisher-Yates 洗牌算法
-const shuffleArray = (array, rng = Math.random) => {
-  const arr = [...array];
-  for (let i = arr.length - 1; i > 0; i--) {
-    const j = Math.floor(rng() * (i + 1));
-    [arr[i], arr[j]] = [arr[j], arr[i]];
-  }
-  return arr;
-};
+const handleCheckSub = (subIndex) => {
+  const question = currentQuestion.value
+  if (!question) return
+  const questionId = question.id
+  const userAnswer = userAnswers.value[questionId]
+  const subAnswer = userAnswer?.[subIndex]
+  const status = getAnswerStatus(question.subs?.[subIndex], subAnswer)
+  if (!answerChecked.value[questionId]) answerChecked.value[questionId] = {}
+  if (!answerStatus.value[questionId]) answerStatus.value[questionId] = {}
+  answerChecked.value[questionId][subIndex] = true
+  answerStatus.value[questionId][subIndex] = status
+  if (status === 'wrong') pm.markWrong(question.subs?.[subIndex], question)
+  if (soundEnabled.value) playAnswerSound(status)
+}
 
-// 按每题 shuffle 字段缓存选项乱序结果（背题模式不乱序）
-const cacheShuffledOptions = () => {
-  if (practiceData.value?.practiceMode === 'review') return;
+const handleGoSub = (index) => {
+  currentSubIndex.value = index
+}
 
-  const seed = practiceData.value?.shuffleSeed
-  const rng = seed ? seededRandom(seed) : Math.random
-
-  shuffledOptionsCache.value = {};
-  bank.value.forEach((question) => {
-    if (question && question.options && question.shuffle && getStrategy(question.type)?.capabilities.canShuffle) {
-      const indices = question.options.map((_, i) => i);
-      const shuffledIndices = shuffleArray(indices, rng);
-      shuffledOptionsCache.value[question.id] = {
-        options: shuffledIndices.map(i => question.options[i]),
-        translationOptions: question.translation?.options
-          ? shuffledIndices.map(i => question.translation.options[i])
-          : null
-      };
-    }
-  });
-  console.log("已缓存选项乱序，题数:", Object.keys(shuffledOptionsCache.value).length);
-};
-
-// 获取带乱序选项的题目（按每题 shuffle 字段，背题模式不乱序）
-const getQuestionWithShuffledOptions = (question) => {
-  if (!question || !question.options) return question;
-  if (practiceData.value?.practiceMode === 'review') return question;
-
-  if (question.shuffle && getStrategy(question.type)?.capabilities.canShuffle) {
-    const cached = shuffledOptionsCache.value[question.id];
-    if (cached) {
-      return {
-        ...question,
-        options: cached.options,
-        ...(cached.translationOptions && {
-          translation: { ...question.translation, options: cached.translationOptions }
-        })
-      };
-    }
-    const indices = question.options.map((_, i) => i);
-    const shuffledIndices = shuffleArray(indices);
-    const result = {
-      options: shuffledIndices.map(i => question.options[i]),
-      translationOptions: question.translation?.options
-        ? shuffledIndices.map(i => question.translation.options[i])
-        : null
-    };
-    shuffledOptionsCache.value[question.id] = result;
-    return {
-      ...question,
-      options: result.options,
-      ...(result.translationOptions && {
-        translation: { ...question.translation, options: result.translationOptions }
+// ========== 练习模式 - 进度 ==========
+const loadPracticeProgress = () => {
+  if (!practiceData.value) return
+  if (route.query.continue !== 'true') return
+  const { category, scope, subject } = practiceData.value
+  const subjectName = typeof subject === 'object' ? subject.name : subject
+  const key = getPracticeKey({ bank: { category, scope, subject: subjectName } })
+  const savedProgress = store.getPracticeProgress(key)
+  if (savedProgress && savedProgress.config?.bank) {
+    const sameSubject = savedProgress.config.bank.subject === subjectDisplay.value
+    if (sameSubject) {
+      currentIndex.value = savedProgress.progress.currentIndex || 0
+      currentSubIndex.value = savedProgress.progress.currentSubIndex || 0
+      const { userAnswers: ua, answerChecked: ac, answerStatus: as } =
+        unpackProgress(savedProgress.progress.answers || {})
+      Object.entries(ua).forEach(([qId, answer]) => {
+        const q = bank.value.find(q => q.id === qId)
+        if (!q) return
+        const cache = shuffledOptionsCache.value[qId]
+        if (cache) {
+          const packed = savedProgress.progress.answers?.[qId]
+          if (packed?.selectedText !== undefined && typeof packed.selectedText === 'string') {
+            const idx = cache.options.indexOf(packed.selectedText)
+            if (idx !== -1) ua[qId] = idx
+          }
+        } else if (q.options && !q.shuffle) {
+          const packed = savedProgress.progress.answers?.[qId]
+          if (packed?.selectedText !== undefined && typeof packed.selectedText === 'string') {
+            const idx = q.options.indexOf(packed.selectedText)
+            if (idx !== -1) ua[qId] = idx
+          }
+        }
+        if (q.subs && typeof answer === 'object' && answer !== null) {
+          const packed = savedProgress.progress.answers?.[qId]
+          const st = packed?.selectedText
+          if (st && typeof st === 'object') {
+            const newAnswer = { ...answer }
+            q.subs.forEach((sub, idx) => {
+              if (st[idx] !== undefined && sub.options) {
+                const subCache = shuffledOptionsCache.value[qId]?.subOptions?.[idx]
+                const opts = subCache || sub.options
+                const pos = opts.indexOf(st[idx])
+                if (pos !== -1) newAnswer[idx] = pos
+              }
+            })
+            ua[qId] = newAnswer
+          }
+        }
       })
-    };
+      userAnswers.value = ua
+      answerChecked.value = ac
+      answerStatus.value = as
+    }
   }
-  return question;
-};
+}
 
-// 当前题目（带乱序选项）
-const currentQuestionWithOptions = computed(() => {
-  if (!currentQuestion.value) return null;
-  return getQuestionWithShuffledOptions(currentQuestion.value);
-});
+const savePracticeProgress = () => {
+  if (practiceData.value?.wrongPractice) return
+  const source = practiceData.value?.source
+  if (source && source !== 'bank') return
+  saveProgress(
+    {
+      bank: {
+        subject: practiceData.value?.subject?.name,
+        category: practiceData.value?.subject?.category,
+        scope: practiceData.value?.subject?.scope
+      },
+      mode: practiceData.value?.practiceMode,
+      questionSort: practiceData.value?.questionSort,
+      showAnswerMode: practiceData.value?.showAnswerMode,
+      autoJump: practiceData.value?.autoJump
+    },
+    currentIndex.value,
+    currentSubIndex.value,
+    bank.value,
+    userAnswers.value,
+    answerChecked.value,
+    answerStatus.value,
+    elapsedSeconds.value,
+    practiceData.value?.shuffleSeed
+  )
+  store.loadPracticeProgress()
+}
 
-// 用户答案（简化：直接返回，不做额外处理）
-const userAnswerForRenderer = computed(() => {
-  if (!currentQuestion.value) return null;
-  return userAnswers.value[currentQuestion.value.id] ?? null;
-})
-
-// 切换答案卡片
-const toggleAnswerCard = () => {
-  showAnswerCard.value = !showAnswerCard.value;
-};
-
-const closeAnswerCard = () => {
-  showAnswerCard.value = false;
-};
-
-// 退出答题
+// ========== 练习模式 - 退出/完成 ==========
 const exitQuiz = () => {
-  if (confirm("确定要退出答题吗？")) {
-    // 保存当前进度再退出
-    savePracticeProgress();
-    router.push({ name: "Practice" });
+  if (confirm('确定要退出答题吗？')) {
+    savePracticeProgress()
+    router.push({ name: 'Practice' })
   }
-};
+}
 
 const finishQuiz = () => {
-  if (confirm("确定完成答题并退出吗？")) {
+  if (confirm('确定完成答题并退出吗？')) {
     if (isWrongPractice.value) {
-      router.push({ name: "Home" })
+      router.push({ name: 'Home' })
       return
     }
-    // 背题模式：不保存作答记录，只清理进度
     if (practiceMode.value === 'review') {
       const key = getPracticeKey({
         category: practiceData.value?.subject?.category,
@@ -540,7 +832,7 @@ const finishQuiz = () => {
         subject: practiceData.value?.subject?.name
       })
       store.clearPracticeProgress(key)
-      router.push({ name: "Home" })
+      router.push({ name: 'Home' })
       return
     }
     const answers = packProgress(bank.value, userAnswers.value, answerChecked.value, answerStatus.value)
@@ -564,298 +856,60 @@ const finishQuiz = () => {
       },
       startedAt.value
     )
-    router.push({
-      name: "PracticeResult",
-    });
+    router.push({ name: 'PracticeResult' })
   }
-};
-
-const handleGoSub = (index) => {
-  currentSubIndex.value = index
 }
 
 const gotoQuesitonIdx = (idx, sqIdx) => {
-  currentIndex.value = idx;
-  if (sqIdx !== undefined) {
-    currentSubIndex.value = sqIdx;
-  }
-  resetQuestionState();
-  closeAnswerCard();
-
+  currentIndex.value = idx
+  if (sqIdx !== undefined) currentSubIndex.value = sqIdx
+  savePracticeProgress()
+  closeAnswerCard()
 }
 
 const openJumpDialog = () => {
   jumpDialogVisible.value = true
 }
 
-// 练习模式
-const practiceMode = computed(() => {
-  return practiceData.value?.practiceMode || "answer";
-});
+// ========== 练习模式 - 工具栏 ==========
+const toggleTranslation = () => {
+  showTranslation.value = !showTranslation.value
+}
 
-// 当前题目是否已检查答案（需要先定义）
-const isCurrentAnswerChecked = computed(() => {
-  if (!currentQuestion.value) return false;
-  // 背题模式：直接显示答案
-  if (practiceMode.value === 'review') return true;
-  return answerChecked.value[currentQuestion.value.id] || false;
-});
+const toggleShowExplanation = () => {
+  showExplanationPref.value = !showExplanationPref.value
+}
 
-// 当前题目的答案显示逻辑
-const currentQuestionDisplay = useQuestionHandler({
-  practiceMode,
-  showAnswerMode: computed(() => practiceData.value?.showAnswerMode),
-  question: currentQuestion,
-  userAnswer: computed(() => userAnswers.value[currentQuestion.value?.id]),
-  isChecked: isCurrentAnswerChecked
-})
-
-// 是否应该显示检查答案按钮
-const shouldShowCheckBtn = computed(() => currentQuestionDisplay.shouldShowCheckBtn.value)
-
-// 是否有用户答案（使用题目 ID 查询）
-const hasUserAnswer = computed(() => currentQuestionDisplay.hasUserAnswer.value)
-
-// 处理用户作答 - 直接保存，不做题型判断
-const handleAnswer = (answer) => {
+const toggleFavorite = () => {
   if (!currentQuestion.value) return
-  const question = currentQuestion.value
-  console.log('[QuizPage handleAnswer] answer:', answer, 'questionId:', question.id)
-  userAnswers.value[question.id] = answer
-  // 自动检查答案（立即显示模式）
-  if (currentQuestionDisplay.shouldAutoCheck.value) {
-    const capturedId = question.id
-    setTimeout(() => {
-      if (currentQuestion.value?.id !== capturedId) return
-      checkAnswer()
-    }, 100)
-  }
-};
-
-// 检查答案
-const checkAnswer = () => {
-  const question = currentQuestionWithOptions.value || currentQuestion.value
-  if (!question) return
-
-  const questionId = question.id
-  const userAnswer = userAnswers.value[questionId]
-
-  // 使用统一入口函数获取状态
-  const status = getAnswerStatus(question, userAnswer)
-
-  answerStatus.value[questionId] = status || 'unanswered'
-  answerChecked.value[questionId] = true
-
-  // 标记错题：统一处理 string 和 object 状态
-  if (typeof status === 'object') {
-    question.subs?.forEach((sub, idx) => {
-      if (status[idx] === 'wrong') {
-        pm.markWrong(sub, question)
-      }
-    })
-  } else if (status === 'wrong') {
-    pm.markWrong(question)
-  }
-
-  // 播放音效
-  if (soundEnabled.value) {
-    const allCorrect = typeof status === 'object'
-      ? question.subs?.every((_, idx) => status[idx] === 'correct')
-      : status === 'correct'
-    playAnswerSound(allCorrect ? 'correct' : 'wrong')
-  }
-
-  savePracticeProgress()
-
-  // 自动跳转（检查后全对时）
-  if (practiceData.value?.autoJump) {
-    const isAllCorrect = typeof status === 'object'
-      ? question.subs?.every((_, idx) => status[idx] === 'correct')
-      : status === 'correct'
-    if (isAllCorrect) {
-      setTimeout(() => {
-        if (currentQuestion.value?.id !== questionId) return
-        nextQuestion()
-      }, 500)
-    }
+  if (isFavorited.value) {
+    store.removeFavorite(currentQuestion.value.id)
+  } else {
+    store.addFavorite(currentQuestion.value)
   }
 }
 
-const handleCheckSub = (subIndex) => {
-  const question = currentQuestion.value
-  if (!question) return
-
-  const questionId = question.id
-  const userAnswer = userAnswers.value[questionId]
-  const subAnswer = userAnswer?.[subIndex]
-
-  // 使用工具函数获取子题状态
-  const status = getAnswerStatus(question.subs?.[subIndex], subAnswer)
-
-  // 保存状态
-  if (!answerChecked.value[questionId]) {
-    answerChecked.value[questionId] = {}
-  }
-  if (!answerStatus.value[questionId]) {
-    answerStatus.value[questionId] = {}
-  }
-  answerChecked.value[questionId][subIndex] = true
-  answerStatus.value[questionId][subIndex] = status
-
-  // 标记错题
-  if (status === 'wrong') {
-    pm.markWrong(question.subs?.[subIndex], question)
-  }
-
-  // 播放当前子题音效
-  if (soundEnabled.value) {
-    playAnswerSound(status)
-  }
-};
-
-// 加载练习进度（断点续练）
-const loadPracticeProgress = () => {
-  if (!practiceData.value) return
-  if (route.query.continue !== 'true') return
-  const { category, scope, subject } = practiceData.value
-  const subjectName = typeof subject === 'object' ? subject.name : subject
-  const key = getPracticeKey({ bank: { category, scope, subject: subjectName } })
-  const progress = store.getPracticeProgress(key);
-  if (progress && progress.config?.bank) {
-    // 检查是否是同一个练习
-    const sameSubject = progress.config.bank.subject === subjectDisplay.value;
-    if (sameSubject) {
-      currentIndex.value = progress.progress.currentIndex || 0;
-      currentSubIndex.value = progress.progress.currentSubIndex || 0;
-
-      // 使用工具函数解包数据
-      const { userAnswers: ua, answerChecked: ac, answerStatus: as } =
-        unpackProgress(progress.progress.answers || {})
-
-      // 用 selectedText 重映射索引（适应当前打乱顺序）
-      Object.entries(ua).forEach(([qId, answer]) => {
-        const q = bank.value.find(q => q.id === qId)
-        if (!q) return
-        const cache = shuffledOptionsCache.value[qId]
-        if (cache) {
-          // 简单题：selectedText → 当前打乱后的索引
-          const packed = progress.progress.answers?.[qId]
-          if (packed?.selectedText !== undefined && typeof packed.selectedText === 'string') {
-            const idx = cache.options.indexOf(packed.selectedText)
-            if (idx !== -1) ua[qId] = idx
-          }
-        } else if (q.options && !q.shuffle) {
-          // 未打乱的题：直接取 selectedText 在原始选项中的索引
-          const packed = progress.progress.answers?.[qId]
-          if (packed?.selectedText !== undefined && typeof packed.selectedText === 'string') {
-            const idx = q.options.indexOf(packed.selectedText)
-            if (idx !== -1) ua[qId] = idx
-          }
-        }
-        // 复合题：selectedText 是对象，对每个子题做相同映射
-        if (q.subs && typeof answer === 'object' && answer !== null) {
-          const packed = progress.progress.answers?.[qId]
-          const st = packed?.selectedText
-          if (st && typeof st === 'object') {
-            const newAnswer = { ...answer }
-            q.subs.forEach((sub, idx) => {
-              if (st[idx] !== undefined && sub.options) {
-                const subCache = shuffledOptionsCache.value[qId]?.subOptions?.[idx]
-                const opts = subCache || sub.options
-                const pos = opts.indexOf(st[idx])
-                if (pos !== -1) newAnswer[idx] = pos
-              }
-            })
-            ua[qId] = newAnswer
-          }
-        }
-      })
-      userAnswers.value = ua;
-      answerChecked.value = ac;
-      answerStatus.value = as;
-
-      console.log('已恢复练习进度:', {
-        currentIndex: currentIndex.value,
-        currentSubIndex: currentSubIndex.value,
-        answeredCount: Object.keys(userAnswers.value).length,
-        elapsedSeconds: progress.meta?.elapsedSeconds || 0
-      });
-    }
-  }
-};
-
-// 保存练习进度
-const savePracticeProgress = () => {
-  if (practiceData.value?.wrongPractice) return
-  // 错题本/收藏本练习不保存进度（无法通过题库继续）
-  const source = practiceData.value?.source
-  if (source && source !== 'bank') return
-
-  // 使用工具函数保存进度
-  saveProgress(
-    {
-      bank: {
-        subject: practiceData.value?.subject?.name,
-        category: practiceData.value?.subject?.category,
-        scope: practiceData.value?.subject?.scope
-      },
-      mode: practiceData.value?.practiceMode,
-      questionSort: practiceData.value?.questionSort,
-      showAnswerMode: practiceData.value?.showAnswerMode,
-      autoJump: practiceData.value?.autoJump
-    },
-    currentIndex.value,
-    currentSubIndex.value,
-    bank.value,
-    userAnswers.value,
-    answerChecked.value,
-    answerStatus.value,
-    elapsedSeconds.value,
-    practiceData.value?.shuffleSeed
-  )
-  store.loadPracticeProgress();
-};
-
-// 上一题
-const prevQuestion = () => {
-  if (currentIndex.value > 0) {
-    currentIndex.value--;
-    resetQuestionState();
-  }
-};
-
-// 下一题
-const nextQuestion = () => {
-  if (currentIndex.value < bank.value.length - 1) {
-    currentIndex.value++;
-    resetQuestionState();
-  }
-};
-
-// 重置题目状态
-const resetQuestionState = () => {
-  savePracticeProgress();
-};
-
-// 移除当前题目出错的题集
 const removeCurrentFromWrong = () => {
-  if (confirm("将该题从错题集中移除？")) {
+  if (confirm('将该题从错题集中移除？')) {
     const q = bank.value[currentIndex.value]
     if (!q) return
-
     store.removeWrongQuestion(q.id)
-
     if (isWrongPractice.value) {
       bank.value.splice(currentIndex.value, 1)
       if (currentIndex.value >= bank.value.length && currentIndex.value > 0) {
         currentIndex.value--
       }
-      resetQuestionState()
+      savePracticeProgress()
     }
   }
 }
 
-// 动作栏按钮配置
+function isWrongStatus(status) {
+  if (typeof status === 'string') return status === 'wrong' || status === 'partial'
+  if (typeof status === 'object') return Object.values(status).some(s => s === 'wrong')
+  return false
+}
+
 const currentMode = computed(() => isWrongPractice.value ? 'wrong' : practiceMode.value)
 
 const buttonVisibility = computed(() => ({
@@ -937,31 +991,14 @@ const visibleButtons = computed(() =>
   justify-content: space-between;
   padding: 12px 16px;
   height: 56px;
-  /* border-bottom: 1px solid var(--border-color); */
+  border-bottom: 1px solid var(--border-color);
 }
 
 .top-bar-left {
-  margin-left: 10px;
   display: flex;
   align-items: center;
   gap: var(--spacing-sm);
-}
-
-.back-btn {
-  /* width: 40px;
-  height: 40px; */
-  border: none;
-  background: transparent;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   cursor: pointer;
-  color: var(--text-secondary);
-}
-
-.back-btn svg {
-  font-size: var(--font-size-3xl);
 }
 
 .header-title h1 {
@@ -994,16 +1031,19 @@ const visibleButtons = computed(() =>
   font-weight: var(--font-weight-semibold);
 }
 
+.timer-display.warning {
+  color: var(--error);
+  background: var(--error-container);
+}
+
 .timer-display svg {
-  font-size: var(--font-size-lg);
+  font-size: var(--font-size-2xl);
 }
 
 .grid-btn {
   width: 25px;
   height: 25px;
   border: none;
-  /* background: var(--color-gray-100); */
-  /* border-radius: var(--radius-full); */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1018,9 +1058,13 @@ const visibleButtons = computed(() =>
   color: var(--primary);
 }
 
-.progress-bar-container {
-  padding: 0 var(--spacing-md);
+.progress-action-bar {
   background: var(--background);
+  border-bottom: 1px solid var(--border-color-light);
+}
+
+.progress-bar-container {
+  padding: var(--spacing-sm) var(--spacing-md) 0;
 }
 
 .progress-bar {
@@ -1032,7 +1076,7 @@ const visibleButtons = computed(() =>
 
 .progress {
   height: 100%;
-  background: var(--success);
+  background: var(--primary);
   border-radius: var(--radius-full);
 }
 
@@ -1041,9 +1085,7 @@ const visibleButtons = computed(() =>
   justify-content: space-between;
   align-items: center;
   gap: 6px;
-  padding: 6px var(--spacing-md);
-  background: var(--background);
-  border-bottom: 1px solid var(--border-color-light);
+  padding: 4px var(--spacing-md) 6px;
 }
 
 .action-bar-right {
@@ -1054,8 +1096,8 @@ const visibleButtons = computed(() =>
 .progress-label {
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-regular);
-  color: var(--success);
-  background: var(--success-light);
+  color: var(--primary);
+  background: var(--primary-light);
   padding: 2px 8px;
   border-radius: var(--radius-md);
   cursor: pointer;
@@ -1090,98 +1132,5 @@ const visibleButtons = computed(() =>
 
 .question-container {
   padding: var(--spacing-md);
-}
-
-.question-meta {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-sm);
-  padding: var(--spacing-sm) var(--spacing-md);
-  background: var(--background);
-  border: 1px solid transparent;
-  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
-}
-
-.question-type-tag {
-  padding: var(--spacing-mn) var(--spacing-sm);
-  background: var(--primary-light);
-  color: var(--primary);
-  border-radius: var(--radius-full);
-  font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-semibold);
-}
-
-.question-id {
-  font-size: var(--font-size-sm);
-  color: var(--text-secondary);
-  flex: 1;
-}
-
-.fav-btn {
-  width: 36px;
-  height: 36px;
-  border: none;
-  background: var(--color-gray-100);
-  border-radius: var(--radius-md);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  color: var(--text-secondary);
-  transition: all 0.2s;
-}
-
-.fav-btn:active {
-  transform: scale(0.95);
-}
-
-.fav-btn.active {
-  color: var(--warning);
-}
-
-.fav-btn svg {
-  font-size: 20px;
-}
-
-.question-text {
-  font-size: var(--font-size-lg);
-  font-weight: var(--font-weight-medium);
-  color: var(--on-surface);
-  line-height: 1.6;
-  margin-bottom: var(--spacing-lg);
-}
-
-/* 检查答案按钮 */
-.check-answer {
-  display: flex;
-  justify-content: center;
-  margin-top: 20px;
-}
-
-.check-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: var(--spacing-sm) var(--spacing-lg);
-  border: 1px solid var(--color-gray-500);
-  border-radius: var(--radius-full);
-  background: var(--background);
-  color: var(--primary);
-  font-size: var(--font-size-md);
-  font-weight: var(--font-weight-bold);
-  cursor: pointer;
-  transition: all 0.2s;
-}
-
-.check-btn:hover {
-  background: var(--color-gray-100);
-}
-
-.check-btn:active {
-  transform: scale(0.98);
-}
-
-.check-btn svg {
-  font-size: var(--font-size-xl);
 }
 </style>

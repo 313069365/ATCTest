@@ -10,14 +10,14 @@
       </div>
     </div>
     <RouterView v-else />
-    <Navbar v-if="!store.loading && ['/', '/Home', '/exam', '/practice', '/profile'].includes(route.path)" />
+    <HomeNav v-if="!store.loading && ['/', '/Home', '/exam', '/practice', '/profile'].includes(route.path)" />
   </div>
 </template>
 
 <script setup>
 import { onMounted } from 'vue'
 import { RouterView } from 'vue-router'
-import Navbar from '@/presentation/components/layout/Navbar.vue'
+import HomeNav from '@/presentation/components/layout/HomeNav.vue'
 import { useRoute } from 'vue-router'
 import { useAppStore } from '@/domain/stores/store'
 const route = useRoute()

@@ -4,7 +4,7 @@ const routes = [
   {
     path: "/",
     name: "Home",
-    component: () => import("../pages/Home.vue"),
+    component: () => import("../pages/home/Home.vue"),
   },
   {
     path: "/search",
@@ -57,7 +57,7 @@ const routes = [
       {
         path: "paper/:id?",
         name: "ExamPaper",
-        component: () => import("../pages/exam/ExamSession.vue"),
+        component: () => import("../pages/practice/QuizPage.vue"),
       },
       {
         path: "result/:id?",
@@ -70,11 +70,6 @@ const routes = [
         component: () => import("../pages/exam/ExamHistory.vue"),
       },
     ],
-  },
-  {
-    path: "/aviation",
-    name: "AviationPhonetics",
-    component: () => import("../pages/tools/AviationPhonetics.vue"),
   },
   {
     path: "/user",
@@ -92,12 +87,12 @@ const routes = [
       {
         path: "/wrongbook",
         name: "WrongBook",
-        component: () => import("../pages/user/WrongBook.vue"),
+        component: () => import("../pages/collection/WrongBook.vue"),
       },
       {
         path: "/favorites",
         name: "Favorites",
-        component: () => import("../pages/user/Favorites.vue"),
+        component: () => import("../pages/collection/Favorites.vue"),
       },
       {
         path: "/settings",

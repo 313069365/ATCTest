@@ -114,13 +114,6 @@
             <span class="shortcut-label">统计分析</span>
             <Icon name="chevron-right" class="shortcut-arrow" />
           </div>
-          <div class="shortcut-item" @click="goToAviation">
-            <div class="shortcut-icon primary-bg">
-              <Icon name="record-voice-over-outline" />
-            </div>
-            <span class="shortcut-label">字母发音</span>
-            <Icon name="chevron-right" class="shortcut-arrow" />
-          </div>
           <div class="shortcut-item" @click="goToDataManagement">
             <div class="shortcut-icon primary-bg">
               <Icon name="storage" />
@@ -188,10 +181,6 @@ function goToStats() {
 
 function goToDataManagement() {
   router.push({ name: 'DataManagement' })
-}
-
-function goToAviation() {
-  router.push({ name: 'AviationPhonetics' })
 }
 
 function goToSettings() {

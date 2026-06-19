@@ -6,12 +6,12 @@
       </div>
 
       <div class="body">
-        <div class="tags-row" v-if="settings">
+        <div class="tags-row" v-if="settings && !isExamMode">
           <span class="info-tag">{{ orderDisplay }}·{{ modeDisplay }}</span>
           <span class="info-tag" v-if="settings.practiceMode === 'answer'">{{ showAnswerDisplay }}</span>
           <span class="info-tag" v-if="settings.practiceMode === 'answer' && settings.autoJump">自动跳转</span>
         </div>
-        <div class="ring-block">
+        <div v-if="!isExamMode" class="ring-block">
           <svg class="ring" viewBox="0 0 136 136">
             <circle class="ring-bg" cx="68" cy="68" r="58" />
             <circle class="ring-fill" :class="accuracyClass" cx="68" cy="68" r="58" :stroke-dasharray="364.4"
@@ -38,14 +38,14 @@
           </div>
         </div>
 
-        <div class="result-bar">
+        <div v-if="!isExamMode" class="result-bar">
           <div class="result-segment" :style="{ flex: correct + wrong || 1 }">
             <div class="result-track correct" :style="{ flex: correct }"></div>
             <div class="result-track wrong" :style="{ flex: wrong }"></div>
           </div>
         </div>
 
-        <div class="result-labels">
+        <div v-if="!isExamMode" class="result-labels">
           <div class="result-label">
             <span class="result-dot correct"></span>
             <span>{{ t('correct') }}</span>
@@ -87,7 +87,8 @@ const props = defineProps({
   elapsed: { type: Number, default: 0 },
   current: { type: Number, default: 0 },
   totalQ: { type: Number, default: 0 },
-  settings: { type: Object, default: null }
+  settings: { type: Object, default: null },
+  isExamMode: { type: Boolean, default: false }
 })
 
 defineEmits(['close'])

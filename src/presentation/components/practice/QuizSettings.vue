@@ -13,7 +13,7 @@
       </button>
     </div>
 
-    <div class="settings-section">
+    <div v-if="!isExamMode" class="settings-section">
       <span class="section-label">{{ t('answerSettings') }}</span>
       <div class="settings-group">
         <div v-if="!showExplanationEnabled" class="toggle-item">
@@ -83,6 +83,7 @@ defineProps({
   autoJump: { type: Boolean, default: true },
   darkMode: { type: Boolean, default: false },
   soundEnabled: { type: Boolean, default: true },
+  isExamMode: { type: Boolean, default: false },
 })
 
 const emit = defineEmits(['close', 'update:forceExplanationOnWrong', 'update:autoJump', 'update:darkMode', 'exit', 'submit'])

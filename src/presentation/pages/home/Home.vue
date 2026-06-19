@@ -1,5 +1,6 @@
 <template>
   <div class="home">
+    <!-- 顶栏 -->
     <TopBar :title="t('learningPlatform')">
       <template #right>
         <button class="icon-btn" @click="darkMode = !darkMode">
@@ -9,12 +10,15 @@
       </template>
     </TopBar>
 
+    <!-- 搜索栏 -->
     <div class="search-bar" @click="pageTo('/search')">
       <Icon name="search" class="search-icon" />
       <span class="search-placeholder">{{ t('searchTitle') }}</span>
     </div>
 
+    <!-- 主要内容区 -->
     <main class="content">
+      <!-- 统计信息区 -->
       <section class="stats-bento">
         <div class="stat-card">
           <span class="stat-label">{{ t('practiceToday') }}</span>
@@ -32,6 +36,7 @@
         </div>
       </section>
 
+      <!-- 主要操作区 -->
       <section class="main-actions">
         <button class="action-btn practice" @click="pageTo('/practice')" :disabled="store.loading">
           <div class="action-text">
@@ -53,6 +58,7 @@
         </button>
       </section>
 
+      <!-- 继续上次练习区 -->
       <section class="continue-section">
         <h2 class="section-title">{{ t('lastPractice') }}</h2>
         <div class="continue-card">
