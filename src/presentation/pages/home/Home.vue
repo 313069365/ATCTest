@@ -70,15 +70,17 @@
               <div class="continue-info">
                 <h3 class="continue-title">{{ t(lastPractice.subject?.name) || '' }}</h3>
                 <p class="continue-subtitle">{{ t(lastPractice.category) }} • {{ t(lastPractice.scope) }}</p>
-                <div class="progress-bar">
-                  <div class="progress" :style="{ width: lastPracticeProgress + '%' }"></div>
-                </div>
-                <span class="progress-text">{{ t('practiced') }} {{ t(lastPractice.currentIndex + 1) }} / {{
-                  t(totalQuestions) }} {{ t('questions') }}</span>
               </div>
-              <button class="continue-action-btn">
-                <Icon name="play-arrow-outline" style="color:#fff" />
-              </button>
+              <div class="circular-progress">
+                <svg class="circular-progress-svg" viewBox="0 0 100 100">
+                  <circle class="progress-bg" cx="50" cy="50" r="42" />
+                  <circle class="progress-fg" cx="50" cy="50" r="42"
+                    :style="{ strokeDashoffset: circularProgressOffset }" />
+                </svg>
+                <div class="circular-progress-content">
+                  <span class="progress-text">{{ t(lastPractice.currentIndex + 1) }}/{{ t(totalQuestions) }}</span>
+                </div>
+              </div>
             </div>
           </template>
           <template v-else>
@@ -157,6 +159,13 @@ const totalQuestions = computed(() => {
 const lastPracticeProgress = computed(() => {
   if (!lastPractice.value || !totalQuestions.value) return 0
   return Math.round(((lastPractice.value.currentIndex + 1) / totalQuestions.value) * 100)
+})
+
+// 圆形进度 SVG stroke-dashoffset
+const circularProgressOffset = computed(() => {
+  const radius = 42
+  const circumference = 2 * Math.PI * radius
+  return circumference * (1 - lastPracticeProgress.value / 100)
 })
 
 // 继续上次练习
@@ -497,39 +506,54 @@ onMounted(() => {
   color: var(--text-secondary);
 }
 
-.progress-bar {
-  height: 5px;
-  background: var(--color-gray-300);
-  border-radius: var(--radius-full);
-  overflow: hidden;
-  margin-top: 4px;
-}
-
-.progress {
-  height: 100%;
-  background: var(--primary);
-  border-radius: var(--radius-full);
-}
-
-.progress-text {
-  font-size: var(--font-size-sm);
-  color: var(--text-secondary);
-}
-
-.continue-action-btn {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background: var(--primary);
-  border: none;
+.circular-progress {
+  position: relative;
+  width: 60px;
+  height: 60px;
+  flex-shrink: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
-  flex-shrink: 0;
 }
 
-.continue-action-btn svg {
-  font-size: 24px;
+.circular-progress-svg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.progress-bg {
+  fill: none;
+  stroke: var(--color-gray-300);
+  stroke-width: 6;
+}
+
+.progress-fg {
+  fill: none;
+  stroke: var(--primary);
+  stroke-width: 6;
+  stroke-linecap: round;
+  stroke-dasharray: 263.89;
+  transition: stroke-dashoffset 0.4s ease;
+}
+
+.circular-progress-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1px;
+  z-index: 1;
+}
+
+.play-icon {
+  font-size: 20px;
+  color: var(--primary);
+}
+
+.circular-progress-content .progress-text {
+  font-size: 13px;
+  color: var(--text-secondary);
+  white-space: nowrap;
 }
 </style>

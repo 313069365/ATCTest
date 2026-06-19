@@ -1,7 +1,7 @@
 <template>
   <nav class="navbar">
-    <router-link v-slot="{ isActive }" v-for="item in navbarItems"
-      :key="item.name" :to="item.link" class="nav-item" active-class="active">
+    <router-link v-slot="{ isActive }" v-for="item in navbarItems" :key="item.name" :to="item.link" class="nav-item"
+      active-class="active">
       <Icon :name="isActive ? navIconMap[item.icon].f : navIconMap[item.icon].o" class="icon" />
       <span class="label">{{ item.name }}</span>
     </router-link>
@@ -54,7 +54,7 @@ const navbarItems = [
 }
 
 .nav-item .icon {
-  font-size: 24px;
+  font-size: 20px;
 }
 
 .nav-item .label {
