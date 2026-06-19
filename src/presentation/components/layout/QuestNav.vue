@@ -17,7 +17,7 @@
 
 <script setup>
 import { computed } from 'vue'
-import Icon from '@/presentation/components/ui/Icon.vue'
+import Icon from '@/presentation/components/common/Icon.vue'
 import SubPager from '@/presentation/components/layout/SubPager.vue'
 
 const props = defineProps({

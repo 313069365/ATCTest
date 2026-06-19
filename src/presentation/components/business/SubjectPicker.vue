@@ -41,7 +41,7 @@
 import { ref, reactive, computed, watch, onMounted } from 'vue'
 import { t } from '@/infrastructure/utils/i18n'
 import { useAppStore } from '@/domain/stores/store'
-import BottomSheet from '@/presentation/components/ui/BottomSheet.vue'
+import BottomSheet from '@/presentation/components/common/BottomSheet.vue'
 
 const props = defineProps({
   modelValue: Boolean,

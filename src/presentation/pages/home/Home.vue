@@ -104,7 +104,7 @@
 import { ref, computed, onMounted, watch } from 'vue'
 import { useRouter } from 'vue-router'
 import TopBar from '@/presentation/components/layout/TopBar.vue'
-import Icon from '@/presentation/components/ui/Icon.vue'
+import Icon from '@/presentation/components/common/Icon.vue'
 import { useAppStore } from '@/domain/stores/store'
 import { t } from '@/infrastructure/utils/i18n.js'
 import { usePracticeService } from '@/domain/composables/usePracticeService'
@@ -383,8 +383,7 @@ onMounted(() => {
 }
 
 .continue-card {
-  background: var(--border-color-light);
-  padding: 4px;
+  padding: 4px 0;
   border-radius: var(--radius-lg);
 }
 

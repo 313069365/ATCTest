@@ -80,7 +80,7 @@ import { usePracticeService } from "@/domain/composables/usePracticeService";
 import { t } from "@/infrastructure/utils/i18n.js";
 import { getPracticeKey } from "@/infrastructure/storage/progress";
 import { normalizeSession } from "@/infrastructure/storage/sessionAdapter";
-import Icon from '@/presentation/components/ui/Icon.vue';
+import Icon from '@/presentation/components/common/Icon.vue';
 import TopBar from '@/presentation/components/layout/TopBar.vue';
 
 const router = useRouter();

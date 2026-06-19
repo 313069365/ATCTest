@@ -95,7 +95,7 @@
       @close="showStatsDialog = false" />
 
     <!--  quiz 设置 -->
-    <QuizSettings v-if="showQuizSettings" :visible="showQuizSettings" :is-exam-mode="isExamMode"
+    <SessionControls v-if="showQuizSettings" :visible="showQuizSettings" :is-exam-mode="isExamMode"
       :showExplanationEnabled="showExplanationPref" :forceExplanationOnWrong="forceExplanationOnWrong"
       :autoJump="practiceData?.autoJump ?? true" :darkMode="darkMode" :soundEnabled="soundEnabled"
       :on-exit="isExamMode ? exitExam : exitQuiz" :on-submit="isExamMode ? submitPaper : finishQuiz"
@@ -115,14 +115,14 @@
 <script setup>
 import { ref, computed, onMounted, onUnmounted, provide, watch } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
-import Icon from '@/presentation/components/ui/Icon.vue'
-import AnswerOverview from '@/presentation/components/practice/AnswerOverview.vue'
-import PracticeStats from '@/presentation/components/practice/PracticeStats.vue'
-import QuizSettings from '@/presentation/components/practice/QuizSettings.vue'
+import Icon from '@/presentation/components/common/Icon.vue'
+import AnswerOverview from '@/presentation/components/business/AnswerOverview.vue'
+import PracticeStats from '@/presentation/components/business/PracticeStats.vue'
+import SessionControls from '@/presentation/components/business/SessionControls.vue'
 import QuestNav from '@/presentation/components/layout/QuestNav.vue'
 import QuestionRenderer from '@/presentation/components/question/QuestionRenderer.vue'
-import JumpDialog from '@/presentation/components/practice/JumpDialog.vue'
-import ConfirmDialog from '@/presentation/components/ui/ConfirmDialog.vue'
+import JumpDialog from '@/presentation/components/business/JumpDialog.vue'
+import ConfirmDialog from '@/presentation/components/common/ConfirmDialog.vue'
 import { useConfirm } from '@/presentation/composables/useConfirm'
 import { useAppStore } from '@/domain/stores/store'
 import { usePracticeService } from '@/domain/composables/usePracticeService'

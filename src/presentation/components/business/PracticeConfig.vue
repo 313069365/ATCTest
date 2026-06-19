@@ -87,11 +87,11 @@
 <script setup>
 import { useRouter } from 'vue-router'
 import { watch, reactive } from 'vue'
-import Icon from '@/presentation/components/ui/Icon.vue'
+import Icon from '@/presentation/components/common/Icon.vue'
 import { t } from '@/infrastructure/utils/i18n.js'
 import { QUESTION_SORT } from '@/domain/config/questionConfig'
 import { createPracticeSession } from '@/infrastructure/storage/session'
-import BottomSheet from '@/presentation/components/ui/BottomSheet.vue'
+import BottomSheet from '@/presentation/components/common/BottomSheet.vue'
 
 const router = useRouter()
 

@@ -36,8 +36,8 @@
 
 <script setup>
 import { ref } from 'vue'
-import Icon from '@/presentation/components/ui/Icon.vue'
-import BottomSheet from '@/presentation/components/ui/BottomSheet.vue'
+import Icon from '@/presentation/components/common/Icon.vue'
+import BottomSheet from '@/presentation/components/common/BottomSheet.vue'
 
 const fileInput = ref(null)
 const selectedFile = ref(null)

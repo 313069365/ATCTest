@@ -67,7 +67,7 @@
 import { ref, computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { usePracticeService } from '@/domain/composables/usePracticeService'
-import Icon from '@/presentation/components/ui/Icon.vue'
+import Icon from '@/presentation/components/common/Icon.vue'
 import TopBar from '@/presentation/components/layout/TopBar.vue'
 
 const router = useRouter()

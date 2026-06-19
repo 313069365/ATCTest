@@ -49,7 +49,7 @@ import { ref, computed, watch, inject } from 'vue'
 import { getAnswerStatus } from '@/domain/config/questionConfig'
 import { getStrategy } from '@/infrastructure/question-types'
 import QuestionRenderer from './QuestionRenderer.vue'
-import Icon from '@/presentation/components/ui/Icon.vue'
+import Icon from '@/presentation/components/common/Icon.vue'
 
 const props = defineProps({
   question: {

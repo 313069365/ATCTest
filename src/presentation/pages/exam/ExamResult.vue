@@ -128,7 +128,7 @@
 <script setup>
 import { computed } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
-import Icon from '@/presentation/components/ui/Icon.vue'
+import Icon from '@/presentation/components/common/Icon.vue'
 import TopBar from '@/presentation/components/layout/TopBar.vue'
 import { t } from '@/infrastructure/utils/i18n.js'
 

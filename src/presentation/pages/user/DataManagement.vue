@@ -64,9 +64,9 @@ import { useRouter } from 'vue-router'
 import { useAppStore } from '@/domain/stores/store'
 import { storage, STORAGE_KEY } from '@/infrastructure/storage/useStorage'
 import { computeBankHash } from '@/infrastructure/api/dataSource'
-import Icon from '@/presentation/components/ui/Icon.vue'
+import Icon from '@/presentation/components/common/Icon.vue'
 import TopBar from '@/presentation/components/layout/TopBar.vue'
-import ConfirmDialog from '@/presentation/components/ui/ConfirmDialog.vue'
+import ConfirmDialog from '@/presentation/components/common/ConfirmDialog.vue'
 import { useConfirm } from '@/presentation/composables/useConfirm'
 
 const router = useRouter()

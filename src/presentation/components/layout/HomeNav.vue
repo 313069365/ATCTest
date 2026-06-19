@@ -9,7 +9,7 @@
 </template>
 
 <script setup>
-import Icon from '@/presentation/components/ui/Icon.vue'
+import Icon from '@/presentation/components/common/Icon.vue'
 
 const navIconMap = {
   home: { o: 'home-outline', f: 'home' },

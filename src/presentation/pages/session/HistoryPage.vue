@@ -96,7 +96,7 @@
 <script setup>
 import { computed, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
-import Icon from '@/presentation/components/ui/Icon.vue'
+import Icon from '@/presentation/components/common/Icon.vue'
 import TopBar from '@/presentation/components/layout/TopBar.vue'
 import { usePracticeService } from '@/domain/composables/usePracticeService'
 import { t } from '@/infrastructure/utils/i18n.js'

@@ -13,7 +13,7 @@
 import { useRouter } from 'vue-router'
 import { t } from '@/infrastructure/utils/i18n.js'
 import { APP_VERSION } from '@/infrastructure/utils/version'
-import LanguageSwitch from '@/presentation/components/ui/LanguageSwitch.vue'
+import LanguageSwitch from '@/presentation/components/common/LanguageSwitch.vue'
 import TopBar from '@/presentation/components/layout/TopBar.vue'
 
 const router = useRouter()

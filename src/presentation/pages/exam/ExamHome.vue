@@ -85,8 +85,8 @@ import { useRouter } from 'vue-router'
 import { useAppStore } from '@/domain/stores/store'
 import { t } from '@/infrastructure/utils/i18n'
 import TopBar from '@/presentation/components/layout/TopBar.vue'
-import Icon from '@/presentation/components/ui/Icon.vue'
-import ConfirmDialog from '@/presentation/components/ui/ConfirmDialog.vue'
+import Icon from '@/presentation/components/common/Icon.vue'
+import ConfirmDialog from '@/presentation/components/common/ConfirmDialog.vue'
 import { useConfirm } from '@/presentation/composables/useConfirm'
 
 const router = useRouter()
