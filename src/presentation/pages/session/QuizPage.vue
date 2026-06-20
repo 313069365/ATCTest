@@ -2,17 +2,9 @@
   <div class="page">
     <!-- 顶部栏 -->
     <header class="top-bar">
-      <div v-if="isExamMode" class="top-bar-left" @click="exitExam">
-        <button class="back-btn">
-          <Icon name="close" />
-        </button>
+      <div class="top-bar-left">
         <div class="header-title">
-          <h1>{{ paper?.title || t('examPaper') }}</h1>
-        </div>
-      </div>
-      <div v-else class="top-bar-left">
-        <div class="header-title">
-          <h1>{{ t(subjectDisplay) }}</h1>
+          <h1>{{ t(subjectDisplay) || paper?.title || t('examPaper') }}</h1>
           <span class="header-subtitle">{{ t(practiceData?.category) || practiceData?.category || "" }} •
             {{ t(practiceData?.scope) || practiceData?.scope || "" }}</span>
         </div>
@@ -40,7 +32,7 @@
         <span class="progress-label" @click="openJumpDialog">{{ currentIndex + 1 }} / {{ isExamMode ? questions.length
           :
           bank.length
-        }}</span>
+          }}</span>
         <div class="action-bar-right">
           <button v-for="btn in visibleButtons" :key="btn.key" class="action-btn"
             :class="{ active: btn.active?.value, 'remove-btn': btn.key === 'removeWrong' }" @click="btn.action"
@@ -85,8 +77,8 @@
       @prev="prevQuestion" @next="nextQuestion" @goSub="handleGoSub" />
 
     <!-- 答案概览 -->
-    <AnswerOverview v-if="showAnswerCard" v-bind="answerOverviewProps" @close="closeAnswerCard"
-      @go="isExamMode ? gotoQuestion : gotoQuesitonIdx" @exit="isExamMode ? submitPaper : undefined" />
+    <AnswerOverview v-if="showAnswerCard" v-bind="answerOverviewProps" @close="closeAnswerCard" @go="handleGo"
+      @exit="handleExit" />
 
     <!-- 统计 -->
     <PracticeStats v-if="showStatsDialog" :total="liveStats.total" :correct="liveStats.correct" :wrong="liveStats.wrong"
@@ -871,6 +863,20 @@ const gotoQuesitonIdx = (idx, sqIdx) => {
   if (sqIdx !== undefined) currentSubIndex.value = sqIdx
   savePracticeProgress()
   closeAnswerCard()
+}
+
+const handleGo = (idx, sqIdx) => {
+  if (isExamMode.value) {
+    gotoQuestion(idx)
+  } else {
+    gotoQuesitonIdx(idx, sqIdx)
+  }
+}
+
+const handleExit = () => {
+  if (isExamMode.value) {
+    submitPaper()
+  }
 }
 
 const openJumpDialog = () => {

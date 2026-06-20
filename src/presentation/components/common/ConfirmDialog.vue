@@ -2,7 +2,7 @@
   <div v-if="visible" class="confirm-overlay" @click.self="onCancel">
     <div class="confirm-dialog">
       <h3 v-if="title" class="confirm-title">{{ title }}</h3>
-      <p class="confirm-message">{{ message }}</p>
+      <p class="confirm-message" style="white-space: pre-line">{{ message }}</p>
       <div class="confirm-actions">
         <button class="confirm-btn cancel" @click="onCancel">{{ cancelText }}</button>
         <button class="confirm-btn confirm" @click="onConfirm">{{ confirmText }}</button>

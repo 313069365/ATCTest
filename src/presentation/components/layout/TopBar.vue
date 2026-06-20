@@ -70,7 +70,11 @@ defineEmits(['back'])
   justify-content: flex-start;
   margin-left: 0;
 }
-.right { justify-content: flex-end; margin-right: 0; }
+
+.right {
+  justify-content: flex-end;
+  margin-right: 0;
+}
 
 .title {
   flex: 1;
