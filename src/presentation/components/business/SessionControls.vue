@@ -1,7 +1,5 @@
 <template>
   <BottomSheet :visible="visible" :title="t('quizSettings')" @close="$emit('close')">
-
-
     <div v-if="!isExamMode" class="settings-section">
       <span class="section-label">{{ t('answerSettings') }}</span>
       <div class="settings-group">

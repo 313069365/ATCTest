@@ -1,16 +1,12 @@
 <template>
-  <div class="seg-control" :class="[variant === 'primary' ? 'variant-primary' : '', compact ? 'compact' : '', `size-${size}`]" :style="cssVars">
+  <div class="seg-control"
+    :class="[variant === 'primary' ? 'variant-primary' : '', compact ? 'compact' : '', `size-${size}`]"
+    :style="cssVars">
     <div class="seg-indicator"></div>
-    <button
-      v-for="opt in options"
-      :key="opt.value"
-      class="seg-option"
-      :class="{ active: modelValue === opt.value }"
-      :disabled="opt.disabled"
-      @click="$emit('update:modelValue', opt.value)"
-    >
+    <button v-for="opt in options" :key="opt.value" class="seg-option" :class="{ active: modelValue === opt.value }"
+      :disabled="opt.disabled" @click="$emit('update:modelValue', opt.value)">
       <Icon v-if="opt.icon" :name="opt.icon" />
-      <span>{{ opt.label }}</span>
+      <span class="seg-label">{{ opt.label }}</span>
       <span v-if="opt.badge != null" class="seg-badge">{{ opt.badge }}</span>
     </button>
   </div>

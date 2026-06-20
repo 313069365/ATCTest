@@ -1,215 +1,113 @@
 <template>
-  <div class="create-paper-page">
-    <TopBar :title="t('createPaper')" showBack backIcon="close" @back="exitCreate" />
+    <div class="create-page">
+        <TopBar :title="t('createPaper')" showBack backIcon="close" @back="exitCreate" />
 
-    <div class="stepper-container">
-      <div class="stepper">
-        <div v-for="(step, index) in steps" :key="step.id" class="stepper-step" :class="{
-          'active': currentStep === step.id,
-          'completed': currentStep > step.id
-        }">
-          <div class="step-marker">
-            <Icon name="check" v-if="currentStep > step.id" class="check-icon" />
-            <span v-else class="step-number">{{ step.id }}</span>
-          </div>
-          <div class="step-label">{{ step.label }}</div>
-          <div v-if="index < steps.length - 1" class="step-connector"></div>
+        <main class="form-scroll">
+            <!-- 基本信息 -->
+            <section class="form-card">
+                <div class="card-header">
+                    <span class="card-bar"></span>
+                    <span>考试信息</span>
+                </div>
+                <div class="card-body">
+                    <div class="form-group">
+                        <label>{{ t('paperTitle') }} <span class="req">*</span></label>
+                        <input v-model="form.title" type="text" :placeholder="t('paperTitlePlaceholder')"
+                            :class="{ error: showErrors && !form.title.trim() }" />
+                    </div>
+
+                    <div class="form-group">
+                        <label>生效范围</label>
+                        <div class="scope-row">
+                            <label class="scope-opt" :class="{ on: form.visibility === 'private' }">
+                                <input type="radio" v-model="form.visibility" value="private" />
+                                <span>仅自己</span>
+                            </label>
+                            <label class="scope-opt" :class="{ on: form.visibility === 'department' }">
+                                <input type="radio" v-model="form.visibility" value="department" />
+                                <span>科室</span>
+                            </label>
+                            <label class="scope-opt" :class="{ on: form.visibility === 'public' }">
+                                <input type="radio" v-model="form.visibility" value="public" />
+                                <span>公开</span>
+                            </label>
+                        </div>
+                        <input v-if="form.visibility === 'public'" v-model="form.password" type="text"
+                            placeholder="设置访问密码" class="password-input" />
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>{{ t('duration') }}</label>
+                            <input v-model.number="form.duration" type="number" min="1" placeholder="120" />
+                        </div>
+                        <div class="form-group">
+                            <label>考试次数</label>
+                            <input v-model.number="form.maxAttempts" type="number" min="1" placeholder="1" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>截止时间</label>
+                        <input v-model="form.expiration" type="datetime-local" />
+                    </div>
+                </div>
+            </section>
+
+            <!-- 科目选择 -->
+            <section class="form-card">
+                <div class="card-header">
+                    <span class="card-bar"></span>
+                    <span>{{ t('subjectSelection') }}</span>
+                    <span class="header-count">{{ selectedSubjects.length }} 科</span>
+                    <button class="header-add" @click="openBankModal">
+                        <Icon name="add" />
+                    </button>
+                </div>
+                <div class="card-body">
+                    <div v-if="selectedSubjects.length > 0" class="subject-list">
+                        <div v-for="(item, i) in selectedSubjects" :key="i" class="subject-card">
+                            <div class="subject-top">
+                                <span class="subject-name">{{ t(item.subjectName) }}</span>
+                                <button class="btn-del" @click="removeSubject(i)">
+                                    <Icon name="close" />
+                                </button>
+                            </div>
+                            <div class="subject-info">
+                                <span>{{ t(item.category) }}</span>
+                                <span class="dot">·</span>
+                                <span>{{ item.count }} 题</span>
+                                <span class="dot">·</span>
+                                <span>{{ item.score }} 分/题</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div v-else class="empty-box" @click="openBankModal">
+                        <Icon name="add-circle-outline" />
+                        <p>{{ t('clickToAddSubject') }}</p>
+                    </div>
+
+                    <div v-if="selectedSubjects.length > 0" class="summary-row">
+                        <span>共 <strong>{{ totalQuestions }}</strong> 题</span>
+                        <span>总分 <strong>{{ totalScore }}</strong></span>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <div class="bottom-bar">
+            <button class="create-btn" :disabled="!canCreate" @click="createPaper">
+                {{ t('createPaper') }}
+            </button>
         </div>
-      </div>
+
+        <div class="modal-overlay" v-if="showBankModal">
+            <SubjectPicker v-model="showBankModal" :bank-meta="bankMeta" :existing-subjects="selectedSubjects"
+                @add-multiple="handleAddMultiple" />
+        </div>
+
+        <ConfirmDialog v-bind="confirm.state" />
     </div>
-
-    <div class="step-content">
-      <div class="steps-wrapper"
-        :style="{ transform: `translateX(${- (currentStep - 1) * 100}%)`, transition: 'transform 0.3s ease' }">
-        <div class="step-panel">
-          <div class="step-header">
-            <h2>基本信息</h2>
-            <p>填写试卷的基本信息</p>
-          </div>
-
-          <div class="form-section">
-            <div class="form-card">
-              <div class="form-card-header">
-                <span>试卷信息</span>
-              </div>
-              <div class="form-card-body">
-                <div class="form-group">
-                  <label>{{ t('paperTitle') }} <span class="required">*</span></label>
-                  <input v-model="form.title" type="text" :placeholder="t('paperTitle')" class="required-input"
-                    :class="{ error: currentStep === 1 && !form.title }" />
-                </div>
-
-                <div class="form-group">
-                  <label>{{ t('duration') }}</label>
-                  <input v-model="form.duration" type="number" min="1" placeholder="120" />
-                </div>
-
-                <div class="form-group">
-                  <label>{{ t('paperCategory') }}</label>
-                  <input v-model="form.paperCategory" type="text" :placeholder="t('paperCategory')" />
-                </div>
-
-                <div class="form-group">
-                  <label>{{ t('description') }}</label>
-                  <textarea v-model="form.description" :placeholder="t('description')" rows="3"></textarea>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="step-actions">
-            <button class="step-btn step-btn-primary" @click="nextStep" :disabled="!canProceed">
-              <span>{{ t('nextStep') }}</span>
-              <Icon name="arrow-forward" />
-            </button>
-          </div>
-        </div>
-
-        <div class="step-panel">
-          <div class="step-header">
-            <h2>{{ t('subjectSelection') }}</h2>
-            <p>{{ t('selectSubjectsSetCount') }}</p>
-          </div>
-
-          <div class="question-select-area">
-            <div class="question-select-header">
-              <span class="question-select-title">{{ t('selectedSubjects') }}</span>
-            </div>
-
-            <div class="subject-list" v-if="selectedSubjects.length > 0">
-              <div class="subject-card" v-for="(item, index) in selectedSubjects" :key="index">
-                <div class="subject-card-row subject-card-row-top">
-                  <div class="subject-card-main">
-                    <span class="subject-card-name">{{ t(item.subjectName) }}</span>
-                    <span class="subject-card-meta">{{ t(item.category) }}</span>
-                  </div>
-                  <button class="btn-delete" @click="removeSubject(index)">
-        <Icon name="close" />
-                  </button>
-                </div>
-                <div class="subject-card-row subject-card-row-bottom">
-                  <div class="subject-card-field">
-                    <span class="field-label">{{ t('questionCount') }}</span>
-                    <div class="field-input-wrap">
-                      <input type="number" class="field-input" v-model="item.count" :max="item.maxCount">
-                      <span class="field-suffix">/ {{ item.maxCount }}</span>
-                    </div>
-                  </div>
-                  <div class="subject-card-field">
-                    <span class="field-label">{{ t('scorePerQuestion') }}</span>
-                    <div class="field-input-wrap">
-                      <input type="number" class="field-input" v-model="item.score">
-                      <span class="field-suffix">{{ t('score') }}</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="add-subject-btn" @click="openBankModal">
-                <Icon name="add" />
-                <span>{{ t('addSubject') }}</span>
-              </div>
-            </div>
-
-            <div class="empty-tip" @click="openBankModal" v-else>
-              <Icon name="add-circle-outline" />
-              <p>{{ t('clickToAddSubject') }}</p>
-            </div>
-          </div>
-
-          <div class="step-actions">
-            <button class="step-btn step-btn-secondary" @click="prevStep">
-              <Icon name="arrow-back" />
-              <span>{{ t('prevStep') }}</span>
-            </button>
-            <button class="step-btn step-btn-primary" @click="nextStep" :disabled="!canProceed">
-              <span>{{ t('nextStep') }}</span>
-              <Icon name="arrow-forward" />
-            </button>
-          </div>
-        </div>
-
-        <div class="step-panel">
-          <div class="step-header">
-            <h2>{{ t('previewConfirm') }}</h2>
-            <p>{{ t('confirmExamInfo') }}</p>
-          </div>
-
-          <div class="review-section">
-            <div class="info-card">
-              <div class="info-card-header">
-                <span>{{ t('paperTitle') }}</span>
-              </div>
-              <div class="info-card-body">
-                <div class="info-card-title">{{ form.title || t('paperTitle') }}</div>
-                <div class="info-card-stats">
-                  <div class="info-stat-item">
-                    <Icon name="schedule-outline" />
-                    <span class="info-stat-value">{{ form.duration || 0 }}</span>
-                    <span class="info-stat-label">{{ t('minutes') }}</span>
-                  </div>
-                  <div class="info-stat-divider"></div>
-                  <div class="info-stat-item">
-                    <Icon name="quiz-outline" />
-                    <span class="info-stat-value">{{ totalQuestions }}</span>
-                    <span class="info-stat-label">{{ t('totalQuestions') }}</span>
-                  </div>
-                  <div class="info-stat-divider"></div>
-                  <div class="info-stat-item">
-                    <Icon name="grade-outline" />
-                    <span class="info-stat-value">{{ autoTotalScore }}</span>
-                    <span class="info-stat-label">{{ t('totalScore') }}</span>
-                  </div>
-                </div>
-                <div class="info-card-desc" v-if="form.description">
-                  {{ form.description }}
-                </div>
-              </div>
-            </div>
-
-            <div class="rules-card">
-              <div class="rules-card-header">
-                <span>{{ t('subjectSetting') }}</span>
-              </div>
-              <div class="rules-card-body">
-                <div class="rules-list-compact">
-                  <div class="rule-item-compact" v-for="(item, index) in selectedSubjects" :key="index">
-                    <div class="rule-item-info">
-                      <span class="rule-item-subject">{{ t(item.subjectName) }}</span>
-                      <span class="rule-item-bank">{{ t(item.category) }}</span>
-                    </div>
-                    <div class="rule-item-count">
-                      <span class="count-num">{{ item.count }}</span>
-                      <span class="count-unit">{{ t('questions') }}</span>
-                    </div>
-                  </div>
-                </div>
-                <div class="rules-card-footer">
-                  <span>共 {{ totalQuestions }} 题</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="step-actions">
-            <button class="step-btn step-btn-secondary" @click="prevStep">
-              <Icon name="arrow-back" />
-              <span>{{ t('prevStep') }}</span>
-            </button>
-            <button class="step-btn step-btn-primary" @click="createPaper" :disabled="!canProceed">
-              <span>{{ t('createPaper') }}</span>
-              <Icon name="check" />
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="picker-container" v-if="showBankModal">
-      <SubjectPicker v-model="showBankModal" :bank-meta="bankMeta" @add="handleAddSubject" />
-    </div>
-  </div>
-  <ConfirmDialog v-bind="confirm.state" />
 </template>
 
 <script setup>
@@ -228,732 +126,394 @@ const store = useAppStore()
 const confirm = useConfirm()
 
 const bankMeta = computed(() => store.bankMeta)
-
-const currentStep = ref(1)
-
-const steps = [
-  { id: 1, label: '基本信息' },
-  { id: 2, label: '题目选择' },
-  { id: 3, label: '预览确认' }
-]
-
 const showBankModal = ref(false)
-
+const showErrors = ref(false)
 const selectedSubjects = ref([])
 
+const tomorrow = new Date()
+tomorrow.setDate(tomorrow.getDate() + 1)
+const defaultExp = tomorrow.toISOString().slice(0, 16)
+
 const form = reactive({
-  title: '',
-  duration: 120,
-  totalScore: 100,
-  description: '',
-  paperCategory: ''
+    title: '',
+    visibility: 'private',
+    password: '',
+    duration: 120,
+    maxAttempts: 1,
+    expiration: defaultExp,
 })
 
-onMounted(async () => {
-  await store.loadBankMeta()
-})
+onMounted(() => store.loadBankMeta())
 
-const totalQuestions = computed(() => {
-  return selectedSubjects.value.reduce((sum, item) => sum + (item.count || 0), 0)
-})
-
-const autoTotalScore = computed(() => {
-  return selectedSubjects.value.reduce((sum, item) => sum + (item.count || 0) * (item.score || 0), 0)
-})
-
-const canProceed = computed(() => {
-  if (currentStep.value === 1) {
-    return form.title && form.title.trim().length > 0
-  }
-  if (currentStep.value === 2) {
-    return selectedSubjects.value.length > 0
-  }
-  return true
-})
+const totalQuestions = computed(() =>
+    selectedSubjects.value.reduce((s, i) => s + (i.count || 0), 0)
+)
+const totalScore = computed(() =>
+    selectedSubjects.value.reduce((s, i) => s + (i.count || 0) * (i.score || 0), 0)
+)
+const canCreate = computed(() => form.title.trim() && selectedSubjects.value.length > 0)
 
 async function exitCreate() {
-  if (await confirm.show('确定要退出吗？已填写的内容将丢失。')) {
-    router.back()
-  }
+    if (await confirm.show('确定要退出吗？已填写的内容将丢失。')) {
+        router.back()
+    }
 }
 
-function prevStep() {
-  if (currentStep.value > 1) {
-    currentStep.value--
-  }
+function openBankModal() { showBankModal.value = true }
+
+function handleAddMultiple(items) {
+    selectedSubjects.value = items.map(item => ({
+        category: item.category,
+        scope: item.scope,
+        subject: item.subject,
+        subjectName: item.subject,
+        count: item.pickCount || 10,
+        score: item.score || 1,
+        maxCount: item.count,
+    }))
 }
 
-function nextStep() {
-  if (!canProceed.value) return
-  if (currentStep.value < 3) {
-    currentStep.value++
-  } else {
-    createPaper()
-  }
-}
-
-function openBankModal() {
-  showBankModal.value = true
-}
-
-function handleAddSubject(data) {
-  const isDuplicate = selectedSubjects.value.some(item =>
-    item.category === data.category &&
-    item.scope === data.scope &&
-    item.subject === data.subject
-  )
-
-  if (isDuplicate) {
-    alert('该科目已经添加过了！')
-    return
-  }
-
-  selectedSubjects.value.push({
-    category: data.category,
-    scope: data.scope,
-    subject: data.subject,
-    subjectName: data.subject,
-    bankName: data.category,
-    count: 10,
-    score: 2,
-    maxCount: data.count
-  })
-}
-
-function removeSubject(index) {
-  selectedSubjects.value.splice(index, 1)
+function removeSubject(i) {
+    selectedSubjects.value.splice(i, 1)
 }
 
 async function createPaper() {
-  const allQuestions = []
+    showErrors.value = true
+    if (!canCreate.value) return
 
-  for (const item of selectedSubjects.value) {
-    if (item.count <= 0) continue
+    const allQuestions = []
+    for (const item of selectedSubjects.value) {
+        if (item.count <= 0) continue
+        const questions = await store.getSubjectQuestions(item.category, item.scope, item.subject, 'shuffle')
+        allQuestions.push(...questions.slice(0, item.count))
+    }
 
-    const questions = await store.getSubjectQuestions(
-      item.category,
-      item.scope,
-      item.subject,
-      'shuffle'
-    )
-    
-    const selected = questions.slice(0, item.count)
-    allQuestions.push(...selected)
-  }
+    const paper = {
+        id: Date.now(),
+        title: form.title,
+        creator: '',
+        visibility: form.visibility,
+        password: form.visibility === 'public' ? form.password : '',
+        expiration: form.expiration ? new Date(form.expiration).getTime() : null,
+        duration: form.duration || 120,
+        maxAttempts: form.maxAttempts || 1,
+        passScore: 60,
+        questionCount: allQuestions.length,
+        totalScore: totalScore.value || allQuestions.length,
+        bankInfo: selectedSubjects.value.map(s => ({
+            subject: s.subjectName,
+            category: s.category,
+            scope: s.scope,
+            count: s.count,
+            score: s.score,
+        })),
+        questions: allQuestions,
+        createdAt: Date.now(),
+    }
 
-  const paper = {
-    id: Date.now(),
-    title: form.title,
-    description: form.description,
-    duration: parseInt(form.duration) || 120,
-    paperCategory: form.paperCategory,
-    questionCount: allQuestions.length,
-    totalScore: autoTotalScore.value || allQuestions.length,
-    bankInfo: selectedSubjects.value.map(s => ({
-      subject: s.subjectName,
-      category: s.category,
-      scope: s.scope,
-      count: s.count,
-      score: s.score
-    })),
-    questions: allQuestions,
-    createdAt: Date.now()
-  }
-
-  await store.addExamPaper(paper)
-  alert(t('createPaperSuccess') || '试卷创建成功')
-  router.push('/exam')
+    await store.addExamPaper(paper)
+    alert(t('createPaperSuccess') || '试卷创建成功')
+    router.push('/exam')
 }
 </script>
 
 <style scoped>
-.create-paper-page {
-  min-height: 100vh;
-  background: var(--background-secondary);
-  overflow: hidden;
+.create-page {
+    min-height: 100vh;
+    background: var(--background-secondary);
+    display: flex;
+    flex-direction: column;
 }
 
-
-.stepper-container {
-  padding: var(--spacing-md) var(--spacing-lg);
-  background: var(--background-secondary);
+.form-scroll {
+    flex: 1;
+    overflow-y: auto;
+    padding: 12px 16px 88px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
 }
 
-.stepper {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  position: relative;
-}
-
-.stepper-step {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  position: relative;
-  z-index: 1;
-  cursor: pointer;
-  flex: 1;
-}
-
-.step-marker {
-  width: 36px;
-  height: 36px;
-  border-radius: var(--radius-full);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: var(--spacing-sm);
-  background: var(--background);
-  border: 2px solid var(--border-color-strong);
-}
-
-.step-number {
-  font-size: var(--font-size-md);
-  font-weight: var(--font-weight-semibold);
-  color: var(--text-secondary);
-}
-
-.check-icon {
-  font-size: 18px;
-  color: var(--success);
-}
-
-.step-label {
-  font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-medium);
-  color: var(--text-secondary);
-  text-align: center;
-}
-
-.step-connector {
-  position: absolute;
-  top: 18px;
-  left: 50%;
-  right: -50%;
-  height: 2px;
-  background: var(--border-color-strong);
-  z-index: -1;
-}
-
-.stepper-step.active .step-marker {
-  background: var(--primary);
-  border-color: var(--primary);
-}
-
-.stepper-step.active .step-number {
-  color: var(--on-primary);
-}
-
-.stepper-step.active .step-label {
-  color: var(--primary);
-  font-weight: var(--font-weight-semibold);
-}
-
-.stepper-step.completed .step-marker {
-  background: var(--success-light);
-  border-color: var(--success);
-}
-
-.stepper-step.completed .step-label {
-  color: var(--success);
-}
-
-.stepper-step.completed .step-connector {
-  background: var(--success);
-}
-
-.step-content {
-  margin: var(--spacing-sm) var(--spacing-lg);
-  overflow: hidden;
-}
-
-.steps-wrapper {
-  display: flex;
-  transition: transform 0.3s ease;
-}
-
-.step-panel {
-  flex: 0 0 100%;
-  min-height: 100%;
-}
-
-.step-header {
-  margin-bottom: var(--spacing-sm);
-}
-
-.step-header h2 {
-  font-size: var(--font-size-3xl);
-  font-weight: var(--font-weight-semibold);
-  color: var(--on-surface);
-  margin: 0;
-}
-
-.step-header p {
-  font-size: 15px;
-  color: var(--text-secondary);
-}
-
-.form-section {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-md);
-}
-
+/* Card */
 .form-card {
-  background: var(--background);
-  border-radius: var(--radius-lg);
-  overflow: hidden;
+    background: var(--background);
+    border-radius: 12px;
+    overflow: hidden;
 }
 
-.form-card-header {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-md);
-  padding: var(--spacing-md);
-  font-size: var(--font-size-md);
-  font-weight: var(--font-weight-semibold);
-  color: var(--on-surface);
-  border-bottom: 1px solid var(--border-color);
+.card-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 16px;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--on-surface);
+    border-bottom: 1px solid var(--border-color-light);
 }
 
-.form-card-header::before {
-  content: '';
-  width: 4px;
-  height: 18px;
-  background: var(--primary);
-  border-radius: var(--radius-sm);
-  flex-shrink: 0;
+.card-bar {
+    width: 3px;
+    height: 16px;
+    background: var(--primary);
+    border-radius: 2px;
 }
 
-.form-card-body {
-  padding: var(--spacing-md);
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-md);
+.card-header .header-count {
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--text-secondary);
 }
 
+.header-add {
+    margin-left: auto;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--primary-light);
+    border: none;
+    border-radius: 50%;
+    color: var(--primary);
+    cursor: pointer;
+    transition: all 0.15s;
+}
+
+.header-add:active {
+    background: var(--primary);
+    color: #fff;
+    transform: rotate(90deg);
+}
+
+.card-body {
+    padding: 14px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* Form */
 .form-group {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-sm);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    flex: 1;
 }
 
 .form-group label {
-  font-size: var(--font-size-md);
-  font-weight: var(--font-weight-medium);
-  color: var(--text-secondary);
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-secondary);
 }
 
-.required {
-  color: var(--error);
+.req {
+    color: var(--error);
 }
 
-.required-input.error {
-  box-shadow: inset 0 0 0 2px var(--error);
+.form-group input {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1.5px solid var(--border-color-light);
+    border-radius: 10px;
+    background: var(--background-secondary);
+    font-size: 15px;
+    color: var(--on-surface);
+    transition: border-color 0.15s;
 }
 
-.form-group input,
-.form-group textarea {
-  width: 100%;
-  padding: var(--spacing-md);
-  border: none;
-  border-radius: var(--radius-lg);
-  background: var(--background-secondary);
-  font-size: 16px;
-  color: var(--on-surface);
+.form-group input:focus {
+    outline: none;
+    border-color: var(--primary);
 }
 
-.form-group input:focus,
-.form-group textarea:focus {
-  outline: none;
-  background: var(--background);
-  box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.25);
+.form-group input.error {
+    border-color: var(--error);
 }
 
-.form-group textarea {
-  resize: vertical;
-  min-height: 80px;
+.form-row {
+    display: flex;
+    gap: 12px;
 }
 
-.step-actions {
-  display: flex;
-  gap: var(--spacing-md);
-  margin-top: var(--spacing-lg);
+.scope-row {
+    display: flex;
+    gap: 8px;
 }
 
-.step-btn {
-  flex: 0.8;
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: var(--spacing-sm);
-  padding: var(--spacing-md);
-  border: none;
-  border-radius: var(--radius-full);
-  font-size: var(--font-size-lg);
-  font-weight: var(--font-weight-semibold);
-  cursor: pointer;
+.scope-opt {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+    border: 1.5px solid var(--border-color);
+    border-radius: 10px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.15s;
+    background: var(--background-secondary);
 }
 
-.step-btn-primary {
-  background: var(--primary);
-  color: var(--on-primary);
+.scope-opt input {
+    display: none;
 }
 
-.step-btn-primary:disabled {
-  background: var(--color-gray-300);
-  cursor: not-allowed;
+.scope-opt.on {
+    border-color: var(--primary);
+    background: var(--primary-light);
+    color: var(--primary);
+    font-weight: 600;
 }
 
-.step-btn-secondary {
-  background: var(--background);
-  color: var(--text-secondary);
-  border: 1px solid var(--border-color);
+.password-input {
+    margin-top: 4px;
 }
 
-.question-select-area {
-  margin-top: var(--spacing-md);
-}
-
-.question-select-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: var(--spacing-sm);
-}
-
-.question-select-title {
-  font-size: var(--font-size-md);
-  font-weight: var(--font-weight-semibold);
-}
-
-.add-subject-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: var(--spacing-sm);
-  padding: var(--spacing-md);
-  background: var(--background);
-  border: 1px dashed var(--border-color);
-  border-radius: var(--radius-lg);
-  color: var(--primary);
-  font-size: var(--font-size-md);
-  font-weight: var(--font-weight-medium);
-  cursor: pointer;
-  transition: all 0.2s;
-}
-
-.add-subject-btn:hover {
-  border-color: var(--primary);
-  background: var(--primary-light);
-}
-
-.add-subject-btn:active {
-  transform: scale(0.98);
-}
-
+/* Subject list */
 .subject-list {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-sm);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
 }
 
 .subject-card {
-  background: var(--background);
-  border-radius: 12px;
-  padding: 16px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
-  transition: all 0.2s;
+    background: var(--background-secondary);
+    border-radius: 10px;
+    padding: 10px 12px;
 }
 
-.subject-card:hover {
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+.subject-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
-.subject-card-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+.subject-name {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--on-surface);
 }
 
-.subject-card-row-top {
-  margin-bottom: 12px;
+.btn-del {
+    width: 24px;
+    height: 24px;
+    border: none;
+    background: transparent;
+    border-radius: 6px;
+    cursor: pointer;
+    color: var(--text-disabled);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.subject-card-row-bottom {
-  gap: 16px;
+.btn-del:active {
+    background: rgba(255, 59, 48, 0.1);
+    color: var(--error);
 }
 
-.subject-card-main {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  flex: 1;
-  min-width: 0;
+.subject-info {
+    display: flex;
+    gap: 5px;
+    font-size: 13px;
+    color: var(--text-secondary);
+    margin-top: 2px;
 }
 
-.subject-card-name {
-  font-size: 15px;
-  font-weight: 600;
-  color: #1a1a1a;
+.dot {
+    color: var(--text-disabled);
 }
 
-.subject-card-meta {
-  font-size: 11px;
-  color: #8e8e93;
-  background: #f2f2f7;
-  padding: 2px 8px;
-  border-radius: 4px;
-  white-space: nowrap;
+.empty-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 36px 20px;
+    border: 2px dashed var(--border-color);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.15s;
 }
 
-.btn-delete {
-  flex-shrink: 0;
-  width: 28px;
-  height: 28px;
-  border: none;
-  background: #f5f5f5;
-  border-radius: 8px;
-  cursor: pointer;
-  color: #8e8e93;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.2s;
+.empty-box:active {
+    border-color: var(--primary);
+    background: var(--primary-light);
 }
 
-.btn-delete:hover {
-  background: #ffe5e5;
-  color: #ff3b30;
+.empty-box svg {
+    font-size: 36px;
+    color: var(--primary);
+    opacity: 0.4;
+    margin-bottom: 6px;
 }
 
-.subject-card-field {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  gap: 8px;
+.empty-box p {
+    font-size: 14px;
+    color: var(--text-secondary);
+    margin: 0;
 }
 
-.field-label {
-  font-size: 13px;
-  color: #8e8e93;
-  white-space: nowrap;
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 12px;
+    background: var(--primary-light);
+    border-radius: 8px;
+    font-size: 14px;
+    color: var(--text-secondary);
 }
 
-.field-input-wrap {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  flex: 1;
+.summary-row strong {
+    color: var(--primary);
+    font-weight: 700;
+    font-size: 15px;
 }
 
-.field-input {
-  width: 52px;
-  height: 32px;
-  padding: 0 8px;
-  border: 1px solid #e5e5ea;
-  border-radius: 8px;
-  text-align: center;
-  font-size: 14px;
-  color: #1a1a1a;
-  background: #f2f2f7;
-  transition: all 0.2s;
-  -moz-appearance: textfield;
+/* Bottom bar */
+.bottom-bar {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: var(--app-max-width);
+    padding: 10px 16px;
+    padding-bottom: calc(10px + env(safe-area-inset-bottom, 0px));
+    background: var(--background);
+    border-top: 1px solid var(--border-color-light);
+    z-index: 50;
 }
 
-.field-input::-webkit-outer-spin-button,
-.field-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+.create-btn {
+    width: 100%;
+    height: 48px;
+    background: var(--primary);
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+    box-shadow: 0 4px 12px rgba(0, 91, 191, 0.2);
 }
 
-.field-input:focus {
-  outline: none;
-  border-color: #007aff;
-  background: #fff;
-  box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.1);
+.create-btn:disabled {
+    background: var(--color-gray-300, #d1d5db);
+    box-shadow: none;
+    cursor: not-allowed;
 }
 
-.field-suffix {
-  font-size: 12px;
-  color: #8e8e93;
-  white-space: nowrap;
+.create-btn:active:not(:disabled) {
+    transform: scale(0.97);
 }
 
-.empty-tip {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 60px 24px;
-  text-align: center;
-  background: var(--background);
-  border-radius: var(--radius-lg);
-  cursor: pointer;
-}
-
-.empty-tip svg {
-  font-size: 48px;
-  color: var(--primary);
-  margin-bottom: var(--spacing-sm);
-  opacity: 0.5;
-}
-
-.empty-tip p {
-  font-size: var(--font-size-md);
-  color: var(--text-secondary);
-}
-
-.review-section {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-md);
-}
-
-.info-card {
-  background: var(--background);
-  border-radius: var(--radius-lg);
-}
-
-.info-card-header {
-  padding: var(--spacing-md);
-  font-size: var(--font-size-md);
-  font-weight: var(--font-weight-semibold);
-  border-bottom: 1px solid var(--border-color);
-}
-
-.info-card-body {
-  padding: var(--spacing-md);
-}
-
-.info-card-title {
-  font-size: var(--font-size-2xl);
-  font-weight: var(--font-weight-bold);
-  margin-bottom: var(--spacing-md);
-}
-
-.info-card-stats {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-}
-
-.info-stat-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 2px;
-}
-
-.info-stat-item svg {
-  font-size: 20px;
-  color: var(--primary);
-}
-
-.info-stat-value {
-  font-size: var(--font-size-2xl);
-  font-weight: var(--font-weight-bold);
-  color: var(--primary);
-}
-
-.info-stat-label {
-  font-size: var(--font-size-sm);
-  color: var(--text-secondary);
-}
-
-.info-stat-divider {
-  width: 1px;
-  height: 40px;
-  background: var(--border-color);
-}
-
-.info-card-desc {
-  margin-top: var(--spacing-md);
-  padding-top: var(--spacing-md);
-  border-top: 1px solid var(--border-color);
-  color: var(--text-secondary);
-}
-
-.rules-card {
-  background: var(--background);
-  border-radius: var(--radius-lg);
-}
-
-.rules-card-header {
-  padding: var(--spacing-md);
-  font-size: var(--font-size-md);
-  font-weight: var(--font-weight-semibold);
-  border-bottom: 1px solid var(--border-color);
-}
-
-.rules-card-body {
-  padding: var(--spacing-md);
-}
-
-.rules-list-compact {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-sm);
-}
-
-.rule-item-compact {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.rule-item-info {
-  display: flex;
-  flex-direction: column;
-}
-
-.rule-item-subject {
-  font-size: var(--font-size-md);
-  font-weight: var(--font-weight-medium);
-}
-
-.rule-item-bank {
-  font-size: var(--font-size-sm);
-  color: var(--text-secondary);
-}
-
-.rule-item-count {
-  display: flex;
-  align-items: baseline;
-  gap: 2px;
-}
-
-.count-num {
-  font-size: var(--font-size-xl);
-  font-weight: var(--font-weight-bold);
-  color: var(--primary);
-}
-
-.count-unit {
-  font-size: var(--font-size-sm);
-  color: var(--text-secondary);
-}
-
-.rules-card-footer {
-  margin-top: var(--spacing-md);
-  padding-top: var(--spacing-md);
-  border-top: 1px solid var(--border-color);
-  text-align: right;
-  color: var(--text-secondary);
-}
-
-.picker-container {
-  position: fixed;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100%;
-  max-width: var(--app-max-width);
-  height: 100vh;
-  z-index: 100;
+/* Modal */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
 }
 </style>
-
-

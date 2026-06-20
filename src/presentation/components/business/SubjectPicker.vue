@@ -1,89 +1,81 @@
 <template>
   <BottomSheet :visible="modelValue" @close="close">
     <template #header>
-      <div style="max-width:260px">
-        <SegmentedControl v-model="activeTab" :options="headerTabOptions" variant="primary" compact />
-      </div>
+      <span class="header-title">选择科目</span>
+      <span class="header-count" v-if="checkedList.length > 0">已选 {{ checkedList.length }} 科 · {{ totalPickCount }} 题 ·
+        {{ totalScore }} 分</span>
     </template>
 
     <div class="picker-container">
       <!-- 选题面板 -->
-      <div v-show="activeTab === 'select'" class="picker-body">
-        <div class="nav-column">
-          <div v-for="cat in categoryList" :key="cat.key" class="nav-item"
-            :class="{ active: activeCategory === cat.key }" @click="switchCategory(cat.key)">
-            <span class="nav-label">{{ t(cat.key) }}</span>
-            <span class="nav-count">{{ cat.total }}</span>
+      <div class="select-panel">
+        <!-- 题库标签行 -->
+        <div class="filter-row">
+          <div class="filter-scroll">
+            <button v-for="cat in categoryList" :key="cat.key" class="filter-chip"
+              :class="{ active: activeCategory === cat.key }" @click="switchCategory(cat.key)">
+              {{ t(cat.key) }}
+            </button>
           </div>
         </div>
-        <div class="content-column">
-          <template v-for="group in groupedSubjects" :key="group.scope">
-            <div class="scope-header">{{ t(group.scope) }}</div>
-            <div v-for="subj in group.items" :key="subj.name" class="subject-item"
-              :class="{ checked: isChecked(subj), added: subj.alreadyAdded }" @click="toggleSubject(subj)">
+
+        <!-- 分类标签行 -->
+        <div class="filter-row" v-if="scopeList.length > 1">
+          <div class="filter-scroll">
+            <button v-for="scope in scopeList" :key="scope.name" class="filter-chip"
+              :class="{ active: activeScope === scope.name }" @click="activeScope = scope.name">
+              {{ t(scope.name) }}
+            </button>
+          </div>
+        </div>
+
+        <!-- 科目列表 -->
+        <div class="subject-list">
+          <div v-for="subj in filteredSubjects" :key="subj.name" class="subject-card"
+            :class="{ checked: isChecked(subj) }">
+            <!-- 第一行：选择区 -->
+            <div class="card-row-top" @click="toggleSubject(subj)">
               <div class="check-box" :class="{ checked: isChecked(subj) }">
                 <Icon name="check" v-if="isChecked(subj)" />
               </div>
-              <div class="subject-info">
-                <span class="subject-name">{{ t(subj.name) }}</span>
-                <span class="subject-meta">共 {{ subj.count }} 题</span>
-              </div>
-              <span v-if="subj.alreadyAdded" class="added-tag">已添加</span>
+              <span class="subject-name">{{ t(subj.name) }}</span>
+              <span class="subject-meta">共 {{ subj.count }} 题</span>
             </div>
-          </template>
-          <div class="empty-state" v-if="groupedSubjects.length === 0">暂无科目</div>
+            <!-- 第二行：配置区（选中时显示） -->
+            <div v-if="isChecked(subj)" class="card-row-config" @click.stop>
+              <div class="inline-stepper">
+                <span class="inline-label">题量</span>
+                <div class="stepper">
+                  <button class="stepper-btn" @click="adjustValue(getCheckedItem(subj), 'pickCount', -1)"
+                    :disabled="getPickCount(subj) <= 1">−</button>
+                  <input class="stepper-input" type="number" :value="getPickCount(subj)"
+                    @change="setPickCount(getCheckedItem(subj), $event)" :max="subj.count" min="1" />
+                  <button class="stepper-btn" @click="adjustValue(getCheckedItem(subj), 'pickCount', 1)"
+                    :disabled="getPickCount(subj) >= subj.count">+</button>
+                </div>
+              </div>
+              <div class="config-divider"></div>
+              <div class="inline-stepper">
+                <span class="inline-label">分值</span>
+                <div class="stepper">
+                  <button class="stepper-btn" @click="adjustValue(getCheckedItem(subj), 'score', -1)"
+                    :disabled="getScore(subj) <= 1">−</button>
+                  <input class="stepper-input" type="number" :value="getScore(subj)"
+                    @change="setScore(getCheckedItem(subj), $event)" min="1" />
+                  <button class="stepper-btn" @click="adjustValue(getCheckedItem(subj), 'score', 1)">+</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="empty-state" v-if="filteredSubjects.length === 0">暂无科目</div>
         </div>
       </div>
 
-      <!-- 配置面板 -->
-      <div v-show="activeTab === 'config'" class="config-panel">
-        <div class="config-summary">
-          <span>共 {{ totalPickCount }} 题</span>
-          <span>总分 {{ totalScore }}</span>
-        </div>
-        <div v-for="item in checkedList" :key="getItemKey(item)" class="config-card">
-          <div class="config-card-header">
-            <span class="config-name">{{ t(item.subject) }}
-              <span class="stepper-max">共{{ item.count }}题</span>
-            </span>
-            <span class="config-subtotal">{{ item.pickCount }} 题 · {{ item.pickCount * item.score }} 分</span>
-          </div>
-          <div class="config-controls">
-            <div class="stepper-group">
-              <span class="stepper-label">该科题量</span>
-              <div class="stepper">
-                <button class="stepper-btn" @click="adjustValue(item, 'pickCount', -1)"
-                  :disabled="item.pickCount <= 1">−</button>
-                <input class="stepper-input" type="number" :value="item.pickCount" @change="setPickCount(item, $event)"
-                  :max="item.count" min="1" />
-                <button class="stepper-btn" @click="adjustValue(item, 'pickCount', 1)"
-                  :disabled="item.pickCount >= item.count">+</button>
-              </div>
-
-            </div>
-            <div class="stepper-group">
-              <span class="stepper-label">每题分值</span>
-              <div class="stepper">
-                <button class="stepper-btn" @click="adjustValue(item, 'score', -1)"
-                  :disabled="item.score <= 1">−</button>
-                <input class="stepper-input" type="number" :value="item.score" @change="setScore(item, $event)"
-                  min="1" />
-                <button class="stepper-btn" @click="adjustValue(item, 'score', 1)">+</button>
-              </div>
-              <!-- <span class="stepper-max">分/题</span> -->
-            </div>
-          </div>
-        </div>
-
-      </div>
+      <!-- 配置面板已合并到科目列表右侧 -->
     </div>
 
     <template #footer>
-      <button v-if="activeTab === 'select'" class="action-btn" :disabled="checkedList.length === 0"
-        @click="activeTab = 'config'">
-        去配置 {{ checkedList.length > 0 ? `(${checkedList.length})` : '' }}
-      </button>
-      <button v-else class="action-btn confirm" @click="handleConfirm">
+      <button class="action-btn confirm" :disabled="checkedList.length === 0" @click="handleConfirm">
         确认添加 ({{ checkedList.length }})
       </button>
     </template>
@@ -92,12 +84,11 @@
 
 <script setup>
 import { ref, computed, watch } from 'vue'
-
 import { t } from '@/infrastructure/utils/i18n'
 import { useAppStore } from '@/domain/stores/store'
 import BottomSheet from '@/presentation/components/common/BottomSheet.vue'
 import Icon from '@/presentation/components/common/Icon.vue'
-import SegmentedControl from '@/presentation/components/common/SegmentedControl.vue'
+
 const props = defineProps({
   modelValue: Boolean,
   bankMeta: { type: Object, default: () => ({}) },
@@ -106,8 +97,8 @@ const props = defineProps({
 
 const emit = defineEmits(['update:modelValue', 'add-multiple'])
 
-const activeTab = ref('select')
 const activeCategory = ref('')
+const activeScope = ref('')
 const checkedMap = ref(new Map())
 
 const categoryList = computed(() => {
@@ -119,32 +110,40 @@ const categoryList = computed(() => {
   })
 })
 
-const groupedSubjects = computed(() => {
+// 当前分类下的范围列表
+const scopeList = computed(() => {
   if (!activeCategory.value) return []
   const store = useAppStore()
   const catMeta = store.bankMeta[activeCategory.value]
   if (!catMeta) return []
 
-  const groups = {}
+  const scopes = {}
   for (const [name, info] of Object.entries(catMeta.subjects || {})) {
     const scope = info.scope
-    if (!groups[scope]) groups[scope] = []
-    groups[scope].push({
-      name,
-      count: info.count,
-      scope,
-      alreadyAdded: props.existingSubjects.some(
-        s => s.subject === name && s.category === activeCategory.value && s.scope === scope
-      )
-    })
+    if (!scopes[scope]) scopes[scope] = { name: scope, count: 0 }
+    scopes[scope].count += info.count || 0
   }
-  return Object.entries(groups).map(([scope, items]) => ({ scope, items }))
+  return Object.values(scopes)
 })
 
-const headerTabOptions = computed(() => [
-  { value: 'select', label: '选择科目' },
-  { value: 'config', label: '配置参数', badge: checkedList.value.length > 0 ? checkedList.value.length : undefined, disabled: checkedList.value.length === 0 }
-])
+// 过滤后的科目列表
+const filteredSubjects = computed(() => {
+  if (!activeCategory.value) return []
+  const store = useAppStore()
+  const catMeta = store.bankMeta[activeCategory.value]
+  if (!catMeta) return []
+
+  const result = []
+  for (const [name, info] of Object.entries(catMeta.subjects || {})) {
+    if (activeScope.value && info.scope !== activeScope.value) continue
+    result.push({
+      name,
+      count: info.count,
+      scope: info.scope,
+    })
+  }
+  return result
+})
 
 const checkedList = computed(() => Array.from(checkedMap.value.values()))
 
@@ -168,14 +167,23 @@ function isChecked(subj) {
   return checkedMap.value.has(getKey(subj))
 }
 
+function getCheckedItem(subj) {
+  return checkedMap.value.get(getKey(subj))
+}
+
+function getPickCount(subj) {
+  const item = getCheckedItem(subj)
+  return item ? item.pickCount : 10
+}
+
+function getScore(subj) {
+  const item = getCheckedItem(subj)
+  return item ? item.score : 1
+}
+
 function toggleSubject(subj) {
   const key = getKey(subj)
   const newMap = new Map(checkedMap.value)
-  if (subj.alreadyAdded && newMap.has(key)) {
-    // 已添加的科目点击直接跳到配置页
-    activeTab.value = 'config'
-    return
-  }
   if (newMap.has(key)) {
     newMap.delete(key)
   } else {
@@ -188,12 +196,6 @@ function toggleSubject(subj) {
       score: 1
     })
   }
-  checkedMap.value = newMap
-}
-
-function uncheck(item) {
-  const newMap = new Map(checkedMap.value)
-  newMap.delete(getItemKey(item))
   checkedMap.value = newMap
 }
 
@@ -234,15 +236,30 @@ function setScore(item, event) {
 
 function switchCategory(key) {
   activeCategory.value = key
+  // 自动选择第一个范围
+  const store = useAppStore()
+  const catMeta = store.bankMeta[key]
+  if (catMeta) {
+    const firstScope = Object.values(catMeta.subjects || {})[0]?.scope
+    activeScope.value = firstScope || ''
+  }
 }
 
 function setDefault() {
   const store = useAppStore()
   const meta = store.bankMeta
-  activeCategory.value = Object.keys(meta)[0] || ''
+  const firstCat = Object.keys(meta)[0] || ''
+  activeCategory.value = firstCat
   checkedMap.value = new Map()
-  activeTab.value = 'select'
-  // 预加载已有科目到 checkedMap
+
+  // 设置默认范围
+  if (firstCat) {
+    const catMeta = meta[firstCat]
+    const firstScope = Object.values(catMeta.subjects || {})[0]?.scope
+    activeScope.value = firstScope || ''
+  }
+
+  // 预加载已有科目
   for (const subj of props.existingSubjects) {
     const key = `${subj.category}|${subj.scope}|${subj.subject}`
     checkedMap.value.set(key, {
@@ -275,15 +292,11 @@ function handleConfirm() {
     score: item.score || 1
   })))
   checkedMap.value = new Map()
-  activeTab.value = 'select'
   close()
 }
 </script>
 
 <style scoped>
-
-
-/* Container */
 .picker-container {
   display: flex;
   flex-direction: column;
@@ -291,164 +304,173 @@ function handleConfirm() {
   max-height: 62vh;
 }
 
-.picker-body {
+/* 选题面板 */
+.select-panel {
   flex: 1;
   display: flex;
+  flex-direction: column;
   overflow: hidden;
-  min-height: 0;
-  margin: -12px -16px;
 }
 
-.nav-column {
-  width: 86px;
+/* 筛选行 */
+.filter-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 4px;
   flex-shrink: 0;
-  background: var(--background-secondary);
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
 }
 
-.nav-column::-webkit-scrollbar {
+.filter-scroll {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 4px 0;
+}
+
+.filter-scroll::-webkit-scrollbar {
   display: none;
 }
 
-.nav-item {
+.filter-chip {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  gap: 3px;
-  padding: 14px 6px;
-  cursor: pointer;
-  position: relative;
-  transition: all 0.18s ease;
-}
-
-.nav-item.active {
+  padding: 6px 14px;
+  border: 1.5px solid var(--border-color);
+  border-radius: 6px;
   background: var(--background);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.15s;
+  flex-shrink: 0;
 }
 
-.nav-item.active::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 3px;
-  height: 22px;
+.filter-chip:active {
+  transform: scale(0.96);
+}
+
+.filter-chip.active {
   background: var(--primary);
-  border-radius: 0 3px 3px 0;
+  border-color: var(--primary);
+  color: #fff;
+  font-weight: 600;
 }
 
-.nav-label {
-  font-size: var(--font-size-sm);
-  color: var(--on-surface);
-  text-align: center;
-  line-height: 1.3;
-}
-
-.nav-item.active .nav-label {
-  color: var(--primary);
-  font-weight: var(--font-weight-semibold);
-}
-
-.nav-count {
-  font-size: 11px;
-  color: var(--text-disabled);
-}
-
-.content-column {
+/* 科目列表 */
+.subject-list {
   flex: 1;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
-  padding: 0 8px 60px;
-  background: var(--background);
+  padding: 2px 6px;
 }
 
-.scope-header {
-  padding: 10px 8px 6px;
-  font-size: var(--font-size-sm);
-  color: var(--text-secondary);
-  font-weight: var(--font-weight-semibold);
-  position: sticky;
-  top: 0;
+/* 科目卡片 */
+.subject-card {
+  margin: 6px 0;
+  border-radius: 12px;
   background: var(--background);
-  z-index: 1;
+  border: 1.5px solid var(--border-color-light);
+  transition: all 0.2s ease;
+  overflow: hidden;
 }
 
-.subject-item {
+.subject-card.checked {
+  border-color: var(--primary);
+  box-shadow: 0 2px 8px rgba(0, 91, 191, 0.08);
+}
+
+/* 第一行：选择区 */
+.card-row-top {
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 11px 10px;
-  margin: 2px 0;
-  border-radius: 10px;
+  padding: 12px 14px;
   cursor: pointer;
-  transition: background 0.12s;
+  transition: background 0.15s;
 }
 
-.subject-item:active:not(.disabled) {
+.card-row-top:active {
   background: var(--background-secondary);
 }
 
-.subject-item.checked {
-  background: var(--primary-light);
+.subject-card.checked .card-row-top {
+  background: rgba(0, 91, 191, 0.03);
 }
 
-.subject-item.added {
-  border-left: 3px solid var(--primary);
-  padding-left: 7px;
-}
-
+/* 复选框 */
 .check-box {
-  width: 22px;
-  height: 22px;
+  width: 20px;
+  height: 20px;
   border: 2px solid var(--border-color);
-  border-radius: 6px;
+  border-radius: var(--radius-sm);
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  transition: all 0.18s ease;
+  transition: all 0.2s ease;
 }
 
 .check-box.checked {
   background: var(--primary);
   border-color: var(--primary);
+  box-shadow: 0 1px 4px rgba(0, 91, 191, 0.3);
 }
 
 .check-box.checked svg {
   color: #fff;
-  font-size: 14px;
+  font-size: 12px;
 }
 
-.subject-info {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  min-width: 0;
-}
-
+/* 科目名 */
 .subject-name {
-  font-size: var(--font-size-md);
+  flex: 1;
+  font-size: 14px;
+  font-weight: 600;
   color: var(--on-surface);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  min-width: 0;
 }
 
 .subject-meta {
-  font-size: var(--font-size-sm);
+  font-size: 12px;
   color: var(--text-disabled);
-  white-space: nowrap;
-  margin-left: 8px;
+  flex-shrink: 0;
 }
 
-.added-tag {
-  font-size: 11px;
-  color: var(--text-disabled);
-  background: var(--background-secondary);
-  padding: 2px 8px;
-  border-radius: 10px;
+/* 第二行：配置区 */
+.card-row-config {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  background: rgba(0, 91, 191, 0.03);
+  border-top: 1px solid var(--border-color-light);
+}
+
+.config-divider {
+  width: 1px;
+  height: 24px;
+  background: var(--border-color-light);
+  flex-shrink: 0;
+}
+
+.inline-stepper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.inline-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  flex-shrink: 0;
 }
 
 .empty-state {
@@ -457,96 +479,31 @@ function handleConfirm() {
   justify-content: center;
   padding: 40px 0;
   color: var(--text-disabled);
-  font-size: var(--font-size-sm);
+  font-size: 14px;
 }
 
-/* === 配置面板 === */
-.config-panel {
-  flex: 1;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
-  padding: 4px 4px 60px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.config-card {
-  background: var(--background);
-  border-radius: 14px;
-  padding: 14px 16px;
-  border: 1px solid var(--border-color-light);
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
-}
-
-.config-card-header {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 12px;
-  padding-bottom: 10px;
-  border-bottom: 1px solid var(--border-color-light);
-}
-
-.config-name {
-  font-size: var(--font-size-md);
-  font-weight: var(--font-weight-semibold);
-  color: var(--on-surface);
-  flex: 1;
-}
-
-.config-subtotal {
-  font-size: 12px;
-  color: var(--primary);
-  font-weight: var(--font-weight-semibold);
-  background: var(--primary-light);
-  padding: 3px 10px;
-  border-radius: 12px;
-  white-space: nowrap;
-}
-
-.config-controls {
-  display: flex;
-  justify-content: space-between;
-  /* flex-direction: column; */
-  gap: 10px;
-}
-
-.stepper-group {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.stepper-label {
-  font-size: var(--font-size-sm);
-  color: var(--text-secondary);
-  width: 28px;
-  flex-shrink: 0;
-  font-weight: var(--font-weight-medium);
-}
-
+/* 步进器 */
 .stepper {
   display: flex;
   align-items: center;
   border: 1px solid var(--border-color);
-  border-radius: 8px;
+  border-radius: 6px;
   overflow: hidden;
   background: var(--background);
   flex-shrink: 0;
 }
 
 .stepper-btn {
-  width: 32px;
-  height: 32px;
+  width: 28px;
+  height: 28px;
   display: flex;
   align-items: center;
   justify-content: center;
   border: none;
   background: var(--background-secondary);
   color: var(--on-surface);
-  font-size: 18px;
-  font-weight: var(--font-weight-bold);
+  font-size: 16px;
+  font-weight: 700;
   cursor: pointer;
   transition: all 0.12s;
   user-select: none;
@@ -563,14 +520,14 @@ function handleConfirm() {
 }
 
 .stepper-input {
-  width: 38px;
-  height: 32px;
+  width: 32px;
+  height: 28px;
   border: none;
   border-left: 1px solid var(--border-color-light);
   border-right: 1px solid var(--border-color-light);
   text-align: center;
-  font-size: 15px;
-  font-weight: var(--font-weight-semibold);
+  font-size: 13px;
+  font-weight: 600;
   color: var(--on-surface);
   background: var(--background);
   -moz-appearance: textfield;
@@ -581,28 +538,18 @@ function handleConfirm() {
   -webkit-appearance: none;
 }
 
-.stepper-max {
-  font-size: 12px;
-  color: var(--text-disabled);
-  white-space: nowrap;
+/* Header */
+.header-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--on-surface);
 }
 
-.config-summary {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  padding: 12px 16px;
-  background: var(--background-surface);
-  border-radius: 12px;
-  font-size: var(--font-size-sm);
-  color: var(--text-secondary);
-  font-weight: var(--font-weight-medium);
-  flex-shrink: 0;
-}
-
-.config-summary span {
+.header-count {
+  font-size: 13px;
   color: var(--primary);
-  font-weight: var(--font-weight-bold);
+  font-weight: 500;
+  margin-left: auto;
 }
 
 /* 底部按钮 */
@@ -613,7 +560,7 @@ function handleConfirm() {
   background: var(--primary);
   color: var(--on-primary);
   border: none;
-  border-radius: var(--radius-full);
+  border-radius: 24px;
   font-size: 16px;
   font-weight: 600;
   cursor: pointer;
@@ -626,7 +573,6 @@ function handleConfirm() {
 
 .action-btn:disabled {
   background: var(--color-gray-300, #d1d5db);
-  box-shadow: none;
   cursor: default;
 }
 
