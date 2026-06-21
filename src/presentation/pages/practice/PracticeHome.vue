@@ -346,7 +346,7 @@ const wrongPractice = (subject) => {
   height: 100vh;
   display: flex;
   flex-direction: column;
-  background: var(--gray-100);
+  background: var(--color-muted);
   padding-bottom: var(--space-safe);
   max-width: var(--app-max-width);
   margin: 0 auto;
@@ -357,7 +357,7 @@ const wrongPractice = (subject) => {
   flex: 1;
   overflow-y: auto;
   padding: var(--space-lg);
-  padding-bottom: var(--spacing-bm);
+  padding-bottom: var(--space-safe);
   -webkit-overflow-scrolling: touch;
 }
 
@@ -555,7 +555,7 @@ const wrongPractice = (subject) => {
 }
 
 .stat-value.warn {
-  color: var(--color-error);
+  color: var(--color-destructive);
 }
 
 .stat-label {

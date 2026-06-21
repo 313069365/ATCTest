@@ -25,28 +25,31 @@
       </div>
     </div>
 
-    <div class="question-list">
-      <template v-for="(q, idx) in questions" :key="idx">
-        <template v-if="q.subs && q.subs.length > 0">
-          <div class="question-group">
-            <div class="group-header">
-              <span class="group-title">{{ t('questionId') || '' }}: {{ q.id }}</span>
-              <div class="sub-question-grid">
-                <button v-for="(sq, sqIdx) in q.subs" :key="sqIdx" class="sub-question-btn"
-                  :class="getSubQuestionBtnClass(idx, sqIdx, sq)" @click="$emit('go', idx, sqIdx)">
-                  {{ sqIdx + 1 }}
-                </button>
+    <div class="question-list-wrapper">
+      <div class="question-list">
+        <template v-for="(q, idx) in questions" :key="idx">
+          <template v-if="q.subs && q.subs.length > 0">
+            <div class="question-group">
+              <div class="group-header">
+                <span class="group-title">{{ t('questionId') || '' }}: {{ q.id }}</span>
+                <div class="sub-question-grid">
+                  <button v-for="(sq, sqIdx) in q.subs" :key="sqIdx" class="sub-question-btn"
+                    :class="getSubQuestionBtnClass(idx, sqIdx, sq)" @click="$emit('go', idx, sqIdx)">
+                    {{ sqIdx + 1 }}
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
+          </template>
+          <template v-else>
+            <button class="question-btn" :class="getQuestionBtnClass(idx, q)" @click="$emit('go', idx)">
+              {{ idx + 1 }}
+            </button>
+          </template>
         </template>
-        <template v-else>
-          <button class="question-btn" :class="getQuestionBtnClass(idx, q)" @click="$emit('go', idx)">
-            {{ idx + 1 }}
-          </button>
-        </template>
-      </template>
+      </div>
     </div>
+
   </BottomSheet>
 </template>
 
@@ -135,6 +138,8 @@ function getSubQuestionBtnClass(qIdx, sqIdx, sq) {
   display: flex;
   flex-wrap: wrap;
   gap: var(--space-md);
+  justify-content: center;
+  align-items: center;
 }
 
 .legend-item {
@@ -168,10 +173,17 @@ function getSubQuestionBtnClass(qIdx, sqIdx, sq) {
   background: var(--color-primary);
 }
 
+.question-list-wrapper {
+  margin: 0 auto;
+}
+
 .question-list {
   display: flex;
   flex-wrap: wrap;
   gap: var(--space-ms);
+  justify-content: flex-start;
+  margin: 0 auto;
+  padding-inline: var(--space-sm);
 }
 
 .question-group {

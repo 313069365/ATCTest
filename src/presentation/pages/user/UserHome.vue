@@ -135,7 +135,7 @@ function goToSettings() {
 <style scoped>
 .profile {
   min-height: 100vh;
-  background: var(--color-background);
+  background: var(--color-muted);
   max-width: var(--app-max-width);
   margin: 0 auto;
 }
@@ -202,7 +202,7 @@ function goToSettings() {
 .user-info p {
   color: var(--color-text-secondary);
   font-weight: var(--font-weight-medium);
-  margin-top: var(--spacing-xs);
+  margin-top: var(--space-xs);
 }
 
 .section-title {

@@ -1,7 +1,7 @@
 /* ========== 变量 ========== */
 :root {
   --app-max-height: 100vh;
-  --app-max-width: 400px;
+  --app-max-width: 430px;
 
   /* 字体 */
   --font-family:
@@ -103,6 +103,7 @@
   --space-safe: 80px;
 
   /* 圆角 */
+  --radius-xs: 2px;
   --radius-sm: 4px;
   --radius-md: 8px;
   --radius-lg: 12px;

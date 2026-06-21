@@ -26,7 +26,7 @@ function goBack() {
 <style scoped>
 .settings {
   min-height: 100vh;
-  background: var(--color-muted);
+  background: var(--color-background);
   max-width: var(--app-max-width);
   margin: 0 auto;
   display: flex;

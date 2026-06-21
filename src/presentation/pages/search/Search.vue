@@ -366,7 +366,7 @@ onMounted(async () => {
 
 <style scoped>
 .search-page {
-  background: var(--gray-100);
+  background: var(--color-muted);
   min-height: 100vh;
   max-width: var(--app-max-width);
   margin: 0 auto;
@@ -506,7 +506,7 @@ onMounted(async () => {
   flex-wrap: nowrap;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
-  padding-bottom: var(--spacing-xs);
+  padding-bottom: var(--space-xs);
 }
 
 .chip-row-even {
@@ -737,7 +737,7 @@ onMounted(async () => {
 
 .filter-clear-btn {
   font-size: var(--font-size-sm);
-  color: var(--text-tertiary);
+  color: var(--color-text-secondary);
   background: none;
   border: none;
   cursor: pointer;

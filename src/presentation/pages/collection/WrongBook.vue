@@ -224,8 +224,8 @@ function getWrongCount(questionId) {
 .answer-section {
   display: flex;
   align-items: center;
-  gap: var(--spacing-xs);
-  margin-bottom: var(--spacing-xs);
+  gap: var(--space-xs);
+  margin-bottom: var(--space-xs);
 }
 
 .answer-label {
@@ -248,7 +248,7 @@ function getWrongCount(questionId) {
 .wrong-count {
   font-size: var(--font-size-xs);
   color: var(--color-warning);
-  background: var(--color-warning-container);
+  background: var(--color-warning-bg);
   padding: 4px 10px;
   border-radius: var(--radius-sm);
   font-weight: var(--font-weight-medium);

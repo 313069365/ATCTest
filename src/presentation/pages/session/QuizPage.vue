@@ -1044,7 +1044,7 @@ const visibleButtons = computed(() =>
 
 .timer-display.warning {
   color: var(--color-destructive);
-  background: var(--color-destructive-container);
+  background: var(--color-destructive-bg);
 }
 
 .timer-display svg {

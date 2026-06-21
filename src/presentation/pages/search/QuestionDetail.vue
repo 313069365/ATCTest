@@ -96,7 +96,7 @@ watch(() => route.params.id, () => {
 
 <style scoped>
 .question-detail-page {
-  background: var(--gray-100);
+  background: var(--color-muted);
   min-height: 100vh;
   max-width: var(--app-max-width);
   margin: 0 auto;

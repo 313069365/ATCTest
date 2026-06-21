@@ -147,7 +147,7 @@ function viewRecord(record) {}
 <style scoped>
 .stats-page {
   min-height: 100vh;
-  background: var(--color-muted);
+  background: var(--color-background);
   font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue', sans-serif;
 }
 

@@ -254,7 +254,7 @@ const topbarStyle = computed(() => {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: var(--spacing-4xl) var(--space-lg);
+  padding: var(--space-2xl) var(--space-lg);
   text-align: center;
 }
 
@@ -262,7 +262,7 @@ const topbarStyle = computed(() => {
   width: 80px;
   height: 80px;
   border-radius: 50%;
-  background: var(--color-success-container);
+  background: var(--color-success-bg);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -278,7 +278,7 @@ const topbarStyle = computed(() => {
   font-size: var(--font-size-lg);
   font-weight: var(--font-weight-bold);
   color: var(--color-text);
-  margin: 0 0 var(--spacing-xs) 0;
+  margin: 0 0 var(--space-xs) 0;
 }
 
 .empty-state p {

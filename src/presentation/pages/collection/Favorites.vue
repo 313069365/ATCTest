@@ -218,7 +218,7 @@ function formatAnswer(answer) {
 .type-tag {
   font-size: var(--font-size-md);
   color: var(--color-warning);
-  background: var(--color-warning-container);
+  background: var(--color-warning-bg);
   border-radius: var(--radius-sm);
   font-weight: var(--font-weight-medium);
 }

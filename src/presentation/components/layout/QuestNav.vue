@@ -88,7 +88,7 @@ const handleNext = () => {
   flex: 1;
   padding: var(--space-ms);
   margin: var(--space-xs) var(--space-ms);
-  background: var(--surface);
+  background: var(--color-background);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-full);
   color: var(--color-primary);

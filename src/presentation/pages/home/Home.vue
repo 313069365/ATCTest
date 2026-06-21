@@ -213,7 +213,7 @@ onMounted(() => {
 <style scoped>
 .home {
   min-height: 100vh;
-  background: var(--gray-100);
+  background: var(--color-muted);
   max-width: var(--app-max-width);
   margin: 0 auto;
 }
