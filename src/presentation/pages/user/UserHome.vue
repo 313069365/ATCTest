@@ -37,13 +37,13 @@
             <span class="shortcut-grid-label">收藏夹</span>
           </div>
           <div class="shortcut-grid-item" @click="goToPracticeHistory">
-            <div class="shortcut-icon primary-bg">
+            <div class="shortcut-icon practice-bg">
               <Icon name="assignment-turned-in-outline" />
             </div>
             <span class="shortcut-grid-label">练习记录</span>
           </div>
           <div class="shortcut-grid-item" @click="goToExamHistory">
-            <div class="shortcut-icon primary-bg">
+            <div class="shortcut-icon exam-bg">
               <Icon name="quiz-outline" />
             </div>
             <span class="shortcut-grid-label">考试记录</span>
@@ -67,7 +67,7 @@
           </div>
           <div class="shortcut-item" @click="goToSettings">
             <div class="shortcut-icon primary-bg">
-              <Icon name="settings-outline" />
+              <Icon name="settings" />
             </div>
             <span class="shortcut-label">系统设置</span>
             <Icon name="chevron-right" class="shortcut-arrow" />
@@ -155,7 +155,7 @@ function goToSettings() {
 }
 
 .content {
-  padding: var(--space-lg);
+  padding: var(--space-md) var(--space-lg);
   padding-bottom: 100px;
 }
 
@@ -488,11 +488,30 @@ function goToSettings() {
   color: var(--color-secondary);
 }
 
-.shortcut-icon.primary-bg {
+
+
+.shortcut-icon.practice-bg {
   background: var(--color-primary-light);
 }
 
+.shortcut-icon.practice-bg svg {
+  color: var(--color-primary);
+}
+
+.shortcut-icon.exam-bg {
+  background: var(--color-success-light);
+}
+
+.shortcut-icon.exam-bg svg {
+  color: var(--color-success);
+}
+
+.shortcut-icon.primary-bg {
+  /* background: var(--color-primary-light); */
+}
+
 .shortcut-icon.primary-bg svg {
+  font-size: var(--font-size-2xl);
   color: var(--color-primary);
 }
 

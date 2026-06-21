@@ -356,7 +356,7 @@ const wrongPractice = (subject) => {
 .content {
   flex: 1;
   overflow-y: auto;
-  padding: var(--space-lg);
+  padding: var(--space-md) var(--space-lg);
   padding-bottom: var(--space-safe);
   -webkit-overflow-scrolling: touch;
 }
@@ -366,7 +366,7 @@ const wrongPractice = (subject) => {
   gap: var(--space-md);
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
-  margin-bottom: var(--space-md);
+  margin-bottom: var(--space-sm);
 }
 
 .bank-grid {

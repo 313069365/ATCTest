@@ -373,7 +373,7 @@ const translations = {
     practiceStats: "答题统计",
     answered: "已答",
     progress: "进度",
-    quizSettings: "练习设置",
+    quizSettings: "答题设置",
     answerSettings: "答题设置",
     soundDisplay: "声音与外观",
     showExplanation: "显示解析",

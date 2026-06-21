@@ -180,6 +180,7 @@ onMounted(() => {
 .content {
   padding: var(--space-lg);
   padding-bottom: 100px;
+  background: var(--color-muted);
 }
 
 .section {
@@ -320,7 +321,7 @@ onMounted(() => {
 }
 
 .data-icon.exam-icon {
-  color: var(--color-primary);
+  color: var(--color-success);
 }
 
 .data-icon.preset-icon {
@@ -340,7 +341,8 @@ onMounted(() => {
 }
 
 .clear-btn {
-  background: var(--color-background);
+  background: var(--color-muted);
+  padding: var(--space-xs) var(--space-2xs);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-sm);
   font-size: var(--font-size-sm);

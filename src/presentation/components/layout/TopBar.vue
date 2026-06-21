@@ -104,6 +104,24 @@ defineEmits(['back'])
   background: var(--gray-400);
 }
 
+.left :deep(.icon-btn) {
+  width: 44px;
+  height: 44px;
+  border: none;
+  background: transparent;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--topbar-color, var(--color-text-secondary));
+  font-size: var(--font-size-xl);
+}
+
+.left :deep(.icon-btn:active) {
+  background: var(--gray-400);
+}
+
 .right :deep(.icon-btn) {
   width: 44px;
   height: 44px;
