@@ -59,7 +59,6 @@ const navbarItems = [
 
 .nav-item .label {
   font-size: var(--font-size-sm);
-  margin-top: 2px;
 }
 
 .nav-item.active {

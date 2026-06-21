@@ -78,7 +78,7 @@
                     :style="{ strokeDashoffset: circularProgressOffset }" />
                 </svg>
                 <div class="circular-progress-content">
-                  <span class="progress-text">{{ t(lastPractice.currentIndex + 1) }}/{{ t(totalQuestions) }}</span>
+                  <span class="progress-percent">{{ lastPracticeProgress }}%</span>
                 </div>
               </div>
             </div>
@@ -508,12 +508,9 @@ onMounted(() => {
 
 .circular-progress {
   position: relative;
-  width: 60px;
-  height: 60px;
+  width: 56px;
+  height: 56px;
   flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .circular-progress-svg {
@@ -540,20 +537,26 @@ onMounted(() => {
 
 .circular-progress-content {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  gap: var(--space-xs);
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
   z-index: 1;
+  gap: 0;
+}
+
+.circular-progress-content .progress-percent {
+  font-size: 13px;
+  font-weight: var(--font-weight-bold);
+  color: var(--color-primary);
+  line-height: 1;
 }
 
 .play-icon {
   font-size: var(--font-size-xl);
   color: var(--color-primary);
-}
-
-.circular-progress-content .progress-text {
-  font-size: var(--font-size-sm);
-  color: var(--color-text-secondary);
-  white-space: nowrap;
 }
 </style>
