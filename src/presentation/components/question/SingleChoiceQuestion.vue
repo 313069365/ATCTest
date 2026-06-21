@@ -67,7 +67,7 @@
 import { ref, computed, inject } from 'vue'
 import { t } from '@/infrastructure/utils/i18n.js'
 import { useQuestionHandler } from '@/application/composables/useQuestionHandler'
-import Icon from '@/presentation/components/common/Icon.vue'
+import Icon from '@/presentation/components/ui/Icon.vue'
 
 const showTranslation = inject('showTranslation', ref(false))
 

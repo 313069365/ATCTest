@@ -14,7 +14,7 @@
 
 <script setup>
 import { computed } from 'vue'
-import Icon from '@/presentation/components/common/Icon.vue'
+import Icon from '@/presentation/components/ui/Icon.vue'
 
 const props = defineProps({
   modelValue: { type: String, required: true },

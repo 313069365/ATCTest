@@ -1,8 +1,8 @@
 <template>
   <div class="page">
-    <TopBar :title="isExamMode ? '考试记录' : '练习记录'" showBack variant="primary" @back="$router.back()">
+    <TopBar :title="title" showBack :variant="topbarVariant" :style="topbarStyle" @back="$emit('back')">
       <template #right>
-        <button class="icon-btn">
+        <button class="icon-btn" @click="$emit('clear')">
           <Icon name="delete-sweep-outline" />
         </button>
       </template>
@@ -85,86 +85,31 @@
         <div class="empty-icon-wrapper">
           <Icon name="history" />
         </div>
-        <h3>{{ isExamMode ? '暂无考试记录' : '暂无练习记录' }}</h3>
-        <p>{{ isExamMode ? '参加考试后，记录会自动保存' : '开始练习后，记录会自动保存' }}</p>
-        <button v-if="!isExamMode" class="start-btn" @click="$router.push({ name: 'Practice' })">开始练习</button>
+        <h3>{{ emptyTitle }}</h3>
+        <p>{{ emptyDesc }}</p>
+        <button v-if="showStartBtn" class="start-btn" @click="$emit('start-practice')">{{ startBtnText }}</button>
       </div>
     </main>
   </div>
 </template>
 
 <script setup>
-import { computed, onMounted } from 'vue'
-import { useRoute } from 'vue-router'
-import Icon from '@/presentation/components/common/Icon.vue'
-import TopBar from '@/presentation/components/layout/TopBar.vue'
-import { usePracticeService } from '@/domain/composables/usePracticeService'
-import { t } from '@/infrastructure/utils/i18n.js'
+import Icon from '@/presentation/components/ui/Icon.vue'
+import TopBar from '@/presentation/components/shared/TopBar.vue'
 
-const route = useRoute()
-const isExamMode = computed(() => route.name === 'ExamHistory')
-
-const pm = usePracticeService()
-
-onMounted(() => {
-  if (!isExamMode.value) pm.refresh()
+defineProps({
+  title: { type: String, default: '' },
+  topbarVariant: { type: String, default: 'default' },
+  topbarStyle: { type: Object, default: () => ({}) },
+  list: { type: Array, default: () => [] },
+  avgAccuracy: { type: Number, default: 0 },
+  emptyTitle: { type: String, default: '' },
+  emptyDesc: { type: String, default: '' },
+  showStartBtn: { type: Boolean, default: false },
+  startBtnText: { type: String, default: '' }
 })
 
-function getTier(accuracy) {
-  if (accuracy >= 80) return 'excellent'
-  if (accuracy >= 60) return 'good'
-  return 'needs-work'
-}
-
-function formatRelativeTime(ts) {
-  const diff = Date.now() - ts
-  const minutes = Math.floor(diff / 60000)
-  const hours = Math.floor(diff / 3600000)
-  const days = Math.floor(diff / 86400000)
-  if (minutes < 1) return '刚刚'
-  if (minutes < 60) return `${minutes}分钟前`
-  if (hours < 24) return `${hours}小时前`
-  if (days < 7) return `${days}天前`
-  const d = new Date(ts)
-  return `${d.getMonth() + 1}月${d.getDate()}日`
-}
-
-function formatDuration(seconds) {
-  const m = Math.floor(seconds / 60)
-  const s = seconds % 60
-  if (m === 0) return `${s}秒`
-  return `${m}分钟${s}秒`
-}
-
-const list = computed(() => {
-  if (isExamMode.value) return []
-  return pm.sessions.value.slice(0, 50).map((s, idx) => {
-    const st = pm.getSessionStats(s)
-    const altClass = idx % 2 === 0 ? 'alt-blue' : 'alt-amber'
-    const total = st.correctCount + st.wrongCount + st.unansweredCount + st.unknownCount
-    return {
-      id: st.timestamp || Math.random(),
-      title: t(st.subject) || st.subject,
-      date: st.timestamp ? formatRelativeTime(st.timestamp) : '',
-      accuracy: st.accuracy,
-      correct: st.correctCount,
-      total: st.totalQuestions,
-      score: st.correctCount,
-      totalScore: total,
-      time: formatDuration(st.elapsedSeconds),
-      cardClass: ['practice', altClass],
-      altClass,
-      badge: '练习',
-      badgeClass: [altClass],
-    }
-  })
-})
-
-const avgAccuracy = computed(() => {
-  if (list.value.length === 0) return 0
-  const sum = list.value.reduce((acc, item) => acc + item.accuracy, 0)
-  return Math.round(sum / list.value.length)
-})
+defineEmits(['back', 'clear', 'start-practice'])
 </script>
 
 <style scoped>
@@ -179,7 +124,6 @@ const avgAccuracy = computed(() => {
   padding: var(--space-md);
 }
 
-/* ── stats overview ── */
 .stats-section {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -214,7 +158,6 @@ const avgAccuracy = computed(() => {
   color: var(--color-text-secondary);
 }
 
-/* ── history list ── */
 .history-list {
   display: flex;
   flex-direction: column;
@@ -294,7 +237,6 @@ const avgAccuracy = computed(() => {
   color: var(--color-warning);
 }
 
-/* ── metrics ── */
 .metrics-row {
   display: flex;
   align-items: center;
@@ -341,7 +283,6 @@ const avgAccuracy = computed(() => {
   background: var(--color-border-light);
 }
 
-/* ── actions ── */
 .card-actions {
   display: flex;
   gap: var(--space-sm);
@@ -390,7 +331,6 @@ const avgAccuracy = computed(() => {
   font-size: var(--font-size-lg);
 }
 
-/* ── empty state ── */
 .empty-state {
   display: flex;
   flex-direction: column;

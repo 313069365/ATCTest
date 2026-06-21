@@ -92,8 +92,8 @@ import { reactive } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAppStore } from '@/domain/stores/store'
 import { APP_VERSION } from '@/infrastructure/utils/version'
-import TopBar from '@/presentation/components/layout/TopBar.vue'
-import Icon from '@/presentation/components/common/Icon.vue'
+import TopBar from '@/presentation/components/shared/TopBar.vue'
+import Icon from '@/presentation/components/ui/Icon.vue'
 
 const router = useRouter()
 const store = useAppStore()

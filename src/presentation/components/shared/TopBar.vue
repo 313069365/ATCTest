@@ -17,7 +17,7 @@
 </template>
 
 <script setup>
-import Icon from '@/presentation/components/common/Icon.vue'
+import Icon from '@/presentation/components/ui/Icon.vue'
 
 defineProps({
   title: { type: String, default: '' },
@@ -57,6 +57,8 @@ defineEmits(['back'])
   background: var(--color-primary);
   border-bottom: none;
 }
+
+
 
 .left,
 .right {

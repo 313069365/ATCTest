@@ -66,9 +66,9 @@
 </template>
 
 <script setup>
-import Icon from '@/presentation/components/common/Icon.vue'
+import Icon from '@/presentation/components/ui/Icon.vue'
 import { t } from '@/infrastructure/utils/i18n.js'
-import BottomSheet from '@/presentation/components/common/BottomSheet.vue'
+import BottomSheet from '@/presentation/components/ui/BottomSheet.vue'
 
 const props = defineProps({
   visible: { type: Boolean, default: false },

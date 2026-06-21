@@ -1,8 +1,6 @@
 <template>
   <div class="page">
     <div class="hero-section">
-      <div class="hero-blur-1"></div>
-      <div class="hero-blur-2"></div>
       <TopBar :title="title" showBack @back="$emit('back')" :style="topbarStyle">
         <template #right>
           <button class="clear-btn" @click="$emit('clear')" :disabled="!hasItems">
@@ -53,8 +51,8 @@
 
 <script setup>
 import { computed } from 'vue'
-import Icon from '@/presentation/components/common/Icon.vue'
-import TopBar from '@/presentation/components/layout/TopBar.vue'
+import Icon from '@/presentation/components/ui/Icon.vue'
+import TopBar from '@/presentation/components/shared/TopBar.vue'
 
 const props = defineProps({
   title: { type: String, default: '' },
@@ -84,6 +82,8 @@ const topbarStyle = computed(() => {
   if (props.headerColor) style['--topbar-color'] = props.headerColor
   return style
 })
+
+
 </script>
 
 <style scoped>
@@ -94,31 +94,8 @@ const topbarStyle = computed(() => {
 
 .hero-section {
   position: relative;
-  background: linear-gradient(165deg, var(--hero-color, var(--color-primary-light)) 0%, var(--color-muted) 100%);
+  background: transparent;
   overflow: hidden;
-}
-
-.hero-blur-1 {
-  position: absolute;
-  top: -60px;
-  right: -60px;
-  width: 200px;
-  height: 200px;
-  background: radial-gradient(circle, rgba(255, 255, 255, 0.9) 0%, transparent 70%);
-  filter: blur(40px);
-  pointer-events: none;
-}
-
-.hero-blur-2 {
-  position: absolute;
-  bottom: -40px;
-  left: -40px;
-  width: 160px;
-  height: 160px;
-  background: radial-gradient(circle, var(--hero-color, var(--color-primary-light)) 0%, transparent 70%);
-  filter: blur(30px);
-  pointer-events: none;
-  opacity: 0.6;
 }
 
 .clear-btn {
@@ -165,6 +142,7 @@ const topbarStyle = computed(() => {
     opacity: 0;
     transform: translateY(20px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);

@@ -27,44 +27,8 @@
         <SegmentedControl v-model="activeFilter" :options="filterOptions" variant="primary" />
 
         <div class="paper-list" v-if="examPapers.length > 0">
-          <div v-for="paper in examPapers" :key="paper.id" class="paper-card">
-            <div class="paper-header">
-              <h3 class="paper-title">{{ paper.title }}</h3>
-              <span class="paper-tag">ID: {{ paper.id }}</span>
-            </div>
-
-            <div class="paper-stats">
-              <span class="stat-item">
-                <Icon name="quiz-outline" />
-                {{ paper.questionCount }} {{ t('questions') }}
-              </span>
-              <span class="stat-item">
-                <Icon name="grade-outline" />
-                {{ paper.totalScore }} {{ t('score') }}
-              </span>
-              <span class="stat-item">
-                <Icon name="timer-outline" />
-                {{ paper.duration }} {{ t('minutes') }}
-              </span>
-              <span class="stat-item created-time">
-                <Icon name="event-outline" />
-                {{ formatDate(paper.createdAt) }}
-              </span>
-            </div>
-            <div class="paper-actions">
-              <div class="paper-actions-btns">
-                <button class="icon-btn-sm" @click="exportPaper(paper)">
-                  <Icon name="download" />
-                </button>
-                <button class="icon-btn-sm delete" @click="deletePaper(paper.id)">
-                  <Icon name="delete-outline" />
-                </button>
-              </div>
-              <button class="start-btn" @click="startExam(paper.id)">
-                {{ t('startExam') }}
-              </button>
-            </div>
-          </div>
+          <PaperCard v-for="paper in examPapers" :key="paper.id" :paper="paper" @export="exportPaper"
+            @delete="deletePaper" @start="startExam" />
         </div>
 
         <div class="empty-state" v-else>
@@ -85,10 +49,11 @@ import { computed, onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAppStore } from '@/domain/stores/store'
 import { t } from '@/infrastructure/utils/i18n'
-import TopBar from '@/presentation/components/layout/TopBar.vue'
-import Icon from '@/presentation/components/common/Icon.vue'
-import ConfirmDialog from '@/presentation/components/common/ConfirmDialog.vue'
-import SegmentedControl from '@/presentation/components/common/SegmentedControl.vue'
+import TopBar from '@/presentation/components/shared/TopBar.vue'
+import Icon from '@/presentation/components/ui/Icon.vue'
+import ConfirmDialog from '@/presentation/components/ui/ConfirmDialog.vue'
+import SegmentedControl from '@/presentation/components/shared/SegmentedControl.vue'
+import PaperCard from './components/PaperCard.vue'
 import { useConfirm } from '@/presentation/composables/useConfirm'
 
 const router = useRouter()
@@ -108,12 +73,6 @@ const examPapers = computed(() => store.examPapers)
 onMounted(() => {
   store.loadExamPapers()
 })
-
-function formatDate(timestamp) {
-  if (!timestamp) return ''
-  const date = new Date(timestamp)
-  return `${date.getMonth() + 1}月${date.getDate()}日`
-}
 
 function triggerImport() {
   fileInput.value.click()
@@ -206,114 +165,9 @@ const fileInput = ref(null)
 .paper-list {
   display: flex;
   flex-direction: column;
-  gap: var(--space-md);
-}
-
-.paper-card {
-  background: var(--color-background);
   border-radius: var(--radius-lg);
-  padding: var(--space-md);
-  box-shadow: var(--shadow-md);
-  border: 1px solid var(--color-border-light);
-}
-
-.paper-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 8px;
-}
-
-.paper-actions-btns {
-  display: flex;
-  gap: var(--space-2xs);
-}
-
-.icon-btn-sm {
-  width: 32px;
-  height: 32px;
-  background: var(--gray-100);
-  border-radius: var(--radius-md);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  border: none;
-}
-
-.icon-btn-sm svg {
-  font-size: var(--font-size-xl);
-  color: var(--color-text-secondary);
-}
-
-.icon-btn-sm.delete svg {
-  color: var(--color-destructive);
-}
-
-.paper-tag {
-  font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-bold);
-  color: var(--color-text-secondary);
-  background: var(--gray-200);
-  padding: var(--space-xs) var(--space-md);
-  border-radius: var(--radius-md);
-}
-
-.paper-title {
-  font-size: var(--font-size-xl);
-  font-weight: var(--font-weight-bold);
-  color: var(--color-text);
-  margin: var(--space-xs);
-}
-
-.paper-desc {
-  font-size: var(--font-size-sm);
-  color: var(--color-text-secondary);
-  margin: var(--space-xs);
-}
-
-.paper-stats {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-2xs);
-  margin-bottom: var(--space-md);
-}
-
-.stat-item {
-  display: flex;
-  align-items: center;
-  gap: var(--space-xs);
-  padding: 3px 8px;
-  background: var(--color-muted);
-  border-radius: var(--radius-lg);
-  font-size: var(--font-size-xs);
-  color: var(--color-disabled);
-}
-
-.stat-item svg {
-  font-size: var(--font-size-sm);
-}
-
-.stat-item.created-time {}
-
-.start-btn {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: var(--space-sm);
-  background: var(--color-primary);
-  color: var(--color-primary-foreground);
-  border: none;
-  border-radius: var(--radius-full);
-  font-size: var(--font-size-lg);
-  font-weight: var(--font-weight-bold);
-  cursor: pointer;
-  box-shadow: 0 4px 12px var(--color-primary-bg);
-}
-
-.start-btn:active {
-  transform: scale(0.98);
+  overflow: hidden;
+  /* gap: var(--space-md); */
 }
 
 .empty-state {

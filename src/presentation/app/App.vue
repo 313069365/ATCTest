@@ -17,7 +17,7 @@
 <script setup>
 import { onMounted } from 'vue'
 import { RouterView } from 'vue-router'
-import HomeNav from '@/presentation/components/layout/HomeNav.vue'
+import HomeNav from '@/presentation/components/shared/HomeNav.vue'
 import { useRoute } from 'vue-router'
 import { useAppStore } from '@/domain/stores/store'
 const route = useRoute()

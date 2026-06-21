@@ -18,8 +18,8 @@
 
 <script setup>
 import { computed } from 'vue'
-import Icon from '@/presentation/components/common/Icon.vue'
-import SubPager from '@/presentation/components/layout/SubPager.vue'
+import Icon from '@/presentation/components/ui/Icon.vue'
+import SubPager from '@/presentation/components/shared/SubPager.vue'
 
 const props = defineProps({
   prevDisabled: { type: Boolean, default: false },

@@ -95,10 +95,10 @@
 <script setup>
 import { ref, computed, watch, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
-import PracticeConfig from '@/presentation/components/business/PracticeConfig.vue'
-import BankImport from '@/presentation/components/business/BankImport.vue'
-import TopBar from '@/presentation/components/layout/TopBar.vue'
-import Icon from '@/presentation/components/common/Icon.vue'
+import PracticeConfig from '@/presentation/pages/practice/components/PracticeConfig.vue'
+import BankImport from '@/presentation/pages/practice/components/BankImport.vue'
+import TopBar from '@/presentation/components/shared/TopBar.vue'
+import Icon from '@/presentation/components/ui/Icon.vue'
 import { t } from '@/infrastructure/utils/i18n.js'
 import { useAppStore } from '@/domain/stores/store'
 
@@ -146,7 +146,7 @@ import { computeSubjectStats } from '@/domain/services/stats'
 import { getPracticeKey } from '@/infrastructure/storage/progress'
 import { getAudioManager } from '@/infrastructure/services/audio-manager'
 import { createPracticeSession } from '@/infrastructure/storage/session'
-import ConfirmDialog from '@/presentation/components/common/ConfirmDialog.vue'
+import ConfirmDialog from '@/presentation/components/ui/ConfirmDialog.vue'
 import { useConfirm } from '@/presentation/composables/useConfirm'
 
 const store = useAppStore()

@@ -57,7 +57,7 @@
 import { computed } from 'vue'
 import { t } from '@/infrastructure/utils/i18n.js'
 import { normalizeStatus } from '@/domain/config/questionConfig'
-import BottomSheet from '@/presentation/components/common/BottomSheet.vue'
+import BottomSheet from '@/presentation/components/ui/BottomSheet.vue'
 
 const props = defineProps({
   questions: {

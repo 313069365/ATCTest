@@ -40,8 +40,8 @@ import { ref, computed, watch, inject } from 'vue'
 import { getAnswerStatus } from '@/domain/config/questionConfig'
 import { getStrategy } from '@/infrastructure/question-types'
 import QuestionRenderer from './QuestionRenderer.vue'
-import Icon from '@/presentation/components/common/Icon.vue'
-import SegmentedControl from '@/presentation/components/common/SegmentedControl.vue'
+import Icon from '@/presentation/components/ui/Icon.vue'
+import SegmentedControl from '@/presentation/components/shared/SegmentedControl.vue'
 
 const props = defineProps({
   question: {

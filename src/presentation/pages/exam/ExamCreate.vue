@@ -84,12 +84,11 @@
                                     <Icon name="close" />
                                 </button>
                             </div>
-
-                        </div>
-                        <div class="subject-info">
-                            <span>{{ t(item.category) }}</span>
-                            <span class="dot">·</span>
-                            <span>{{ item.count }} 题 x {{ item.score }} 分/题 = {{ item.count * item.score }} 分</span>
+                            <div class="subject-info">
+                                <span>{{ t(item.category) }}</span>
+                                <span class="dot">·</span>
+                                <span>{{ item.count }} 题 x {{ item.score }} 分/题 = {{ item.count * item.score }} 分</span>
+                            </div>
                         </div>
                     </div>
                     <div v-else class="preset-section">
@@ -215,11 +214,11 @@
 import { ref, reactive, computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAppStore } from '@/domain/stores/store'
-import SubjectPicker from '@/presentation/components/business/SubjectPicker.vue'
+import SubjectPicker from '@/presentation/pages/exam/components/SubjectPicker.vue'
 import { t } from '@/infrastructure/utils/i18n'
-import TopBar from '@/presentation/components/layout/TopBar.vue'
-import Icon from '@/presentation/components/common/Icon.vue'
-import ConfirmDialog from '@/presentation/components/common/ConfirmDialog.vue'
+import TopBar from '@/presentation/components/shared/TopBar.vue'
+import Icon from '@/presentation/components/ui/Icon.vue'
+import ConfirmDialog from '@/presentation/components/ui/ConfirmDialog.vue'
 import { useConfirm } from '@/presentation/composables/useConfirm'
 
 const router = useRouter()

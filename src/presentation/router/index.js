@@ -32,7 +32,7 @@ const routes = [
       {
         path: "practice-history",
         name: "PracticeHistory",
-        component: () => import("../pages/session/HistoryPage.vue"),
+        component: () => import("../pages/session/PracticeHistory.vue"),
       },
       {
         path: "result/:id?",
@@ -67,7 +67,7 @@ const routes = [
       {
         path: "exam-history",
         name: "ExamHistory",
-        component: () => import("../pages/session/HistoryPage.vue"),
+        component: () => import("../pages/session/ExamHistory.vue"),
       },
     ],
   },

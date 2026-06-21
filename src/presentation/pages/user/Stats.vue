@@ -67,8 +67,8 @@
 import { ref, computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { usePracticeService } from '@/domain/composables/usePracticeService'
-import Icon from '@/presentation/components/common/Icon.vue'
-import TopBar from '@/presentation/components/layout/TopBar.vue'
+import Icon from '@/presentation/components/ui/Icon.vue'
+import TopBar from '@/presentation/components/shared/TopBar.vue'
 
 const router = useRouter()
 const pm = usePracticeService()

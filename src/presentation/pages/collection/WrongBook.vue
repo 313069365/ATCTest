@@ -13,6 +13,8 @@
     emptyTitle="暂无错题"
     emptyDesc="答错的题目会自动添加到错题本"
     startBtnText="开始练习"
+    :headerBg="'var(--color-destructive)'"
+    :headerColor="'#fff'"
     @back="goBack"
     @clear="clearAll"
     @practice-all="startWrongPractice"
@@ -51,12 +53,12 @@
 <script setup>
 import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { useRouter } from 'vue-router'
-import Icon from '@/presentation/components/common/Icon.vue'
-import QuestionCollection from '@/presentation/components/business/QuestionCollection.vue'
+import Icon from '@/presentation/components/ui/Icon.vue'
+import QuestionCollection from '@/presentation/pages/collection/components/QuestionCollection.vue'
 import { useAppStore } from '@/domain/stores/store'
 import { t } from '@/infrastructure/utils/i18n.js'
 import { createPracticeSession } from '@/infrastructure/storage/session'
-import ConfirmDialog from '@/presentation/components/common/ConfirmDialog.vue'
+import ConfirmDialog from '@/presentation/components/ui/ConfirmDialog.vue'
 import { useConfirm } from '@/presentation/composables/useConfirm'
 
 const router = useRouter()
