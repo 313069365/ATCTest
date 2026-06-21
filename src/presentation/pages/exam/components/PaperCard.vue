@@ -1,57 +1,55 @@
 <template>
-  <div class="paper-card" :class="{ expanded }">
+  <div class="paper-card" :class="{ expanded, 'is-expired': isExpired }">
+    <!-- 顶部状态条 -->
+    <div class="status-bar" :class="statusClass"></div>
+
     <div class="paper-header" @click="expanded = !expanded" role="button" tabindex="0"
       @keydown.enter="expanded = !expanded">
-      <div class="header-left">
+      <div class="header-main">
         <h3 class="paper-title">{{ paper.title }}</h3>
-        <span class="paper-tag">ID: {{ paper.id }}</span>
+        <div class="header-meta">
+          <span class="status-badge" :class="statusClass">ID</span>
+          <span class="paper-id">{{ paper.id }}</span>
+        </div>
+      </div>
+      <div class="header-right">
+        <div class="quick-stats">
+          <span class="quick-stat">{{ paper.questionCount }}题</span>
+          <span class="quick-stat-dot"></span>
+          <span class="quick-stat">{{ paper.duration }}分钟</span>
+        </div>
+        <Icon name="expand-more" class="expand-icon" :class="{ rotated: expanded }" />
       </div>
     </div>
-    <!-- <div class="meta-row">
-      <div class="meta-item">
-        <span class="meta-label">创建者</span>
-        <span class="meta-value">{{ paper.creator }}</span>
-      </div>
-      <div class="meta-item">
-        <span class="meta-label">创建时间</span>
-        <span class="meta-value">{{ paper.createTime }}</span>
-      </div>
-      <div class="meta-item">
-        <span class="meta-label">截止时间</span>
-        <span class="meta-value" :class="{ expired: isExpired }">{{ deadlineText }}</span>
-      </div>
-    </div> -->
+
     <div v-if="expanded" class="expand-section">
-
       <div class="expand-divider"></div>
-      <div class="meta-grid">
 
-        <div class="meta-item">
-          <span class="meta-label">时长</span>
-          <span class="meta-value">{{ paper.duration }} 分钟</span>
+      <div class="stats-grid">
+        <div class="stat-cell">
+          <span class="stat-value">{{ paper.questionCount }}</span>
+          <span class="stat-label">题量</span>
         </div>
-        <div class="meta-item">
-          <span class="meta-label">题量</span>
-          <span class="meta-value">{{ paper.questionCount }} 题</span>
+        <div class="stat-cell">
+          <span class="stat-value">{{ paper.duration }}</span>
+          <span class="stat-label">时长(分钟)</span>
         </div>
-        <div class="meta-item">
-          <span class="meta-label">总分</span>
-          <span class="meta-value">{{ paper.totalScore }} 分</span>
+        <div class="stat-cell">
+          <span class="stat-value">{{ paper.totalScore }}</span>
+          <span class="stat-label">总分</span>
         </div>
-        <div class="meta-item">
-          <span class="meta-label">及格线</span>
-          <span class="meta-value">{{ paper.passScore }} 分</span>
+        <div class="stat-cell">
+          <span class="stat-value">{{ paper.passScore }}</span>
+          <span class="stat-label">及格线</span>
         </div>
-        <div class="meta-item">
-          <span class="meta-label">允许次数</span>
-          <span class="meta-value">{{ paper.maxAttempts }} 次</span>
+        <div class="stat-cell">
+          <span class="stat-value">{{ paper.maxAttempts }}</span>
+          <span class="stat-label">允许次数</span>
         </div>
-
-
       </div>
 
       <div class="subject-section" v-if="paper.bankInfo">
-        <span class="subject-section-label">科目</span>
+        <span class="section-label">考试科目</span>
         <div class="subject-list">
           <span v-for="info in paper.bankInfo" :key="info.subject" class="subject-chip">
             {{ t(info.subject) }}
@@ -59,8 +57,9 @@
         </div>
       </div>
 
-      <button class="start-btn" @click.stop="handleStart">
-        开始考试
+      <button class="start-btn" :class="{ disabled: isExpired }" @click.stop="handleStart" :disabled="isExpired">
+        <Icon name="play-arrow" class="btn-icon" />
+        {{ isExpired ? '考试已结束' : '开始考试' }}
       </button>
     </div>
 
@@ -88,13 +87,18 @@ const isExpired = computed(() => {
   return props.paper.expiration && props.paper.expiration < Date.now()
 })
 
-const deadlineText = computed(() => {
-  if (!props.paper.expiration) return '未设置'
-  const d = new Date(props.paper.expiration)
-  return `${d.getFullYear()}年${d.getMonth() + 1}月${d.getDate()}日`
+const statusClass = computed(() => {
+  if (isExpired.value) return 'expired'
+  return 'active'
+})
+
+const statusText = computed(() => {
+  if (isExpired.value) return '已结束'
+  return '进行中'
 })
 
 async function handleStart() {
+  if (isExpired.value) return
   const msg = `考试名称：${props.paper.title}\n考试时长：${props.paper.duration} 分钟\n允许次数：${props.paper.maxAttempts} 次`
   const ok = await confirm.show(msg, { title: '确认开始考试' })
   if (ok) emit('start', props.paper.id)
@@ -103,130 +107,141 @@ async function handleStart() {
 
 <style scoped>
 .paper-card {
-  background: var(--color-background);
-
-  padding: var(--space-md);
-  box-shadow: var(--shadow-md);
+  background: var(--color-card);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
   border: 1px solid var(--color-border-light);
-  transition: box-shadow 0.2s, border-color 0.2s;
+  overflow: hidden;
+  transition: box-shadow 0.25s ease, border-color 0.25s ease, transform 0.2s ease;
+}
+
+.paper-card:active {
+  transform: scale(0.995);
 }
 
 .paper-card.expanded {
   border-color: var(--color-primary);
-  box-shadow: 0 2px 16px var(--color-primary-bg);
-  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
 }
 
+.paper-card.is-expired {
+  opacity: 0.75;
+}
+
+/* 顶部状态条 */
+.status-bar {
+  height: 3px;
+  transition: background 0.2s;
+}
+
+
+
+/* 头部 */
 .paper-header {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
+  padding: var(--space-md);
   cursor: pointer;
   user-select: none;
-}
-
-.header-left {
-  display: flex;
-  align-items: center;
   gap: var(--space-sm);
-  min-width: 0;
 }
 
-.expand-icon {
-  font-size: var(--font-size-2xl);
-  color: var(--color-text-secondary);
-  flex-shrink: 0;
-  transition: transform 0.2s;
+.header-main {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
 }
 
 .paper-title {
-  font-size: var(--font-size-xl);
-  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
   color: var(--color-text);
   margin: 0;
-  white-space: nowrap;
+  line-height: var(--line-height-tight);
   overflow: hidden;
   text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
-.paper-tag {
-  font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-bold);
-  color: var(--color-primary);
-  border: 1px solid var(--color-primary);
-  padding: var(--space-xs) var(--space-sm);
-  border-radius: var(--radius-md);
-  flex-shrink: 0;
-}
-
-.meta-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: var(--space-sm);
-  margin-top: var(--space-sm);
-}
-
-.meta-cell {
+.header-meta {
   display: flex;
-  flex-direction: row;
   align-items: center;
-  gap: var(--space-2xs);
-  padding: var(--space-xs);
+  gap: var(--space-sm);
+}
+
+.status-badge {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  padding: 1px 8px;
+  border-radius: var(--radius-full);
+  line-height: 1.6;
+}
+
+.status-badge.active {
+  color: var(--color-primary);
+  background: var(--color-primary-bg);
+}
+
+.status-badge.expired {
+  color: var(--color-text-secondary);
   background: var(--color-muted);
-  border-radius: var(--radius-sm);
+}
+
+.paper-id {
+  font-size: var(--font-size-xs);
+  color: var(--color-disabled);
+  font-family: 'SF Mono', 'Menlo', monospace;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
   flex-shrink: 0;
 }
 
-.meta-icon {
-  color: var(--color-text-tertiary);
+.quick-stats {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
 }
 
-.meta-label {
+.quick-stat {
   font-size: var(--font-size-xs);
   color: var(--color-text-secondary);
+  white-space: nowrap;
 }
 
-.meta-value {
-  font-size: var(--font-size-xs);
+.quick-stat-dot {
+  width: 3px;
+  height: 3px;
+  border-radius: var(--radius-full);
+  background: var(--color-disabled);
+}
+
+.expand-icon {
+  font-size: 20px;
   color: var(--color-text-secondary);
-  font-weight: var(--font-weight-bold);
+  transition: transform 0.25s ease;
 }
 
-.meta-value.expired {
-  color: var(--color-destructive);
+.expand-icon.rotated {
+  transform: rotate(180deg);
 }
 
-.start-btn {
-  width: 100%;
-  padding: var(--space-sm);
-  background: var(--color-primary);
-  color: var(--color-primary-foreground);
-  border: none;
-  border-radius: var(--radius-md);
-  font-size: var(--font-size-md);
-  font-weight: var(--font-weight-bold);
-  cursor: pointer;
-  box-shadow: 0 2px 8px var(--color-primary-bg);
-}
-
-.start-btn:active {
-  transform: scale(0.97);
-}
-
-.expand-divider {
-  height: 1px;
-  background: var(--color-border-light);
-  margin: var(--space-sm) 0;
-}
-
+/* 展开区域 */
 .expand-section {
-  animation: expandIn 0.2s ease-out;
+  padding: 0 var(--space-md) var(--space-md);
+  animation: expandIn 0.25s ease-out;
 }
 
 @keyframes expandIn {
   from {
     opacity: 0;
-    transform: translateY(-4px);
+    transform: translateY(-6px);
   }
 
   to {
@@ -235,42 +250,67 @@ async function handleStart() {
   }
 }
 
-.meta-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: var(--space-sm);
+.expand-divider {
+  height: 1px;
+  background: var(--color-border-light);
   margin-bottom: var(--space-md);
 }
 
-.meta-item {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  padding: var(--space-sm);
-  background: var(--color-muted);
+/* 数据网格 */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--color-border-light);
   border-radius: var(--radius-md);
+  overflow: hidden;
+  margin-bottom: var(--space-md);
 }
 
-.meta-label {
+.stat-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  padding: var(--space-sm) var(--space-xs);
+  background: var(--color-muted);
+}
+
+.stat-cell:nth-child(n+4) {
+  /* 第二行 */
+  padding-top: var(--space-xs);
+}
+
+.stat-value {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text);
+  line-height: var(--line-height-tight);
+}
+
+.stat-label {
   font-size: var(--font-size-xs);
   color: var(--color-text-secondary);
 }
 
+/* 科目区域 */
 .subject-section {
   margin-bottom: var(--space-md);
 }
 
-.subject-section-label {
+.section-label {
   font-size: var(--font-size-xs);
   color: var(--color-text-secondary);
   display: block;
-  margin-bottom: var(--space-2xs);
+  margin-bottom: var(--space-xs);
+  font-weight: var(--font-weight-medium);
 }
 
 .subject-list {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--space-2xs);
+  gap: var(--space-xs);
 }
 
 .subject-chip {
@@ -278,6 +318,41 @@ async function handleStart() {
   color: var(--color-primary);
   background: var(--color-primary-bg);
   padding: 2px 10px;
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius-full);
+  font-weight: var(--font-weight-medium);
+}
+
+/* 开始按钮 */
+.start-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-xs);
+  padding: var(--space-ms);
+  background: var(--color-primary);
+  color: var(--color-primary-foreground);
+  border: none;
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-semibold);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(0, 91, 191, 0.25);
+}
+
+.start-btn:active:not(.disabled) {
+  transform: scale(0.98);
+  box-shadow: 0 1px 4px rgba(0, 91, 191, 0.2);
+}
+
+.start-btn.disabled {
+  background: var(--color-disabled);
+  box-shadow: none;
+  cursor: not-allowed;
+}
+
+.btn-icon {
+  font-size: 18px;
 }
 </style>

@@ -167,7 +167,7 @@ const fileInput = ref(null)
   flex-direction: column;
   border-radius: var(--radius-lg);
   overflow: hidden;
-  /* gap: var(--space-md); */
+  gap: var(--space-sm);
 }
 
 .empty-state {

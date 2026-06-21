@@ -139,6 +139,7 @@ const registry = {
   'edit-note-outline': IconEditNoteOutline,
   'error-outline': IconErrorOutline,
   'event-outline': IconEventOutline,
+  'expand-less': IconExpandMore,
   'expand-more': IconExpandMore,
   explore: IconExplore,
   flight: IconFlight,
