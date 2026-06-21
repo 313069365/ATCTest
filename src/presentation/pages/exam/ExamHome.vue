@@ -28,7 +28,7 @@
 
         <div class="paper-list" v-if="examPapers.length > 0">
           <PaperCard v-for="paper in examPapers" :key="paper.id" :paper="paper" @export="exportPaper"
-            @delete="deletePaper" @start="startExam" />
+            @delete="deletePaper" @start="startExam" @share="sharePaper" />
         </div>
 
         <div class="empty-state" v-else>
@@ -102,8 +102,23 @@ async function deletePaper(paperId) {
   }
 }
 
-function startExam(paperId) {
-  router.push(`/exam/paper?id=${paperId}`)
+async function startExam(paperId) {
+  const paper = examPapers.value.find(p => p.id === paperId)
+  if (!paper) return
+  const msg = `考试名称：${paper.title}\n考试时长：${paper.duration} 分钟\n允许次数：${paper.maxAttempts} 次`
+  if (await confirm.show(msg, { title: '确认开始考试' })) {
+    router.push(`/exam/paper?id=${paperId}`)
+  }
+}
+
+async function sharePaper(paperId) {
+  const text = `${paperId}`
+  try {
+    await navigator.clipboard.writeText(text)
+    alert('试卷ID已复制到剪贴板\n' + text)
+  } catch {
+    alert(text)
+  }
 }
 
 const fileInput = ref(null)

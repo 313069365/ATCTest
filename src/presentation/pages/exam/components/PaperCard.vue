@@ -8,8 +8,8 @@
       <div class="header-main">
         <h3 class="paper-title">{{ paper.title }}</h3>
         <div class="header-meta">
-          <span class="status-badge" :class="statusClass">ID</span>
-          <span class="paper-id">{{ paper.id }}</span>
+          <span class="status-badge" :class="statusClass">{{ statusText }}</span>
+          <span class="paper-id">#{{ paper.id }}</span>
         </div>
       </div>
       <div class="header-right">
@@ -57,13 +57,23 @@
         </div>
       </div>
 
-      <button class="start-btn" :class="{ disabled: isExpired }" @click.stop="handleStart" :disabled="isExpired">
+      <div class="action-row">
+        <button class="action-btn secondary" @click.stop="emit('share', paper.id)">
+          <Icon name="share-outline" />
+          <span>分享</span>
+        </button>
+        <button class="action-btn danger" @click.stop="emit('delete', paper.id)">
+          <Icon name="delete-outline" />
+          <span>删除</span>
+        </button>
+      </div>
+
+      <button class="start-btn" :class="{ disabled: isExpired }" @click.stop="emit('start', paper.id)"
+        :disabled="isExpired">
         <Icon name="play-arrow" class="btn-icon" />
         {{ isExpired ? '考试已结束' : '开始考试' }}
       </button>
     </div>
-
-    <ConfirmDialog v-bind="confirm.state" />
   </div>
 </template>
 
@@ -71,17 +81,14 @@
 import { ref, computed } from 'vue'
 import Icon from '@/presentation/components/ui/Icon.vue'
 import { t } from '@/infrastructure/utils/i18n.js'
-import ConfirmDialog from '@/presentation/components/ui/ConfirmDialog.vue'
-import { useConfirm } from '@/presentation/composables/useConfirm'
 
 const props = defineProps({
   paper: { type: Object, required: true }
 })
 
-const emit = defineEmits(['export', 'delete', 'start'])
+const emit = defineEmits(['export', 'delete', 'start', 'share'])
 
 const expanded = ref(false)
-const confirm = useConfirm()
 
 const isExpired = computed(() => {
   return props.paper.expiration && props.paper.expiration < Date.now()
@@ -96,13 +103,6 @@ const statusText = computed(() => {
   if (isExpired.value) return '已结束'
   return '进行中'
 })
-
-async function handleStart() {
-  if (isExpired.value) return
-  const msg = `考试名称：${props.paper.title}\n考试时长：${props.paper.duration} 分钟\n允许次数：${props.paper.maxAttempts} 次`
-  const ok = await confirm.show(msg, { title: '确认开始考试' })
-  if (ok) emit('start', props.paper.id)
-}
 </script>
 
 <style scoped>
@@ -320,6 +320,48 @@ async function handleStart() {
   padding: 2px 10px;
   border-radius: var(--radius-full);
   font-weight: var(--font-weight-medium);
+}
+
+/* 操作按钮行 */
+.action-row {
+  display: flex;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-sm);
+}
+
+.action-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-xs);
+  padding: var(--space-sm);
+  border: none;
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.action-btn.secondary {
+  background: var(--color-muted);
+  color: var(--color-text-secondary);
+}
+
+.action-btn.secondary:active {
+  background: var(--color-primary-bg);
+  color: var(--color-primary);
+}
+
+.action-btn.danger {
+  background: var(--color-muted);
+  color: var(--color-text-secondary);
+}
+
+.action-btn.danger:active {
+  background: var(--color-destructive-bg);
+  color: var(--color-destructive);
 }
 
 /* 开始按钮 */
