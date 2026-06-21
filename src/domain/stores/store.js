@@ -14,6 +14,7 @@ import {
 import { schemaRead, schemaWrite } from "@/infrastructure/storage/dataSchema";
 import { loadPracticeProgress as loadPracticeProgressFromUtil } from "@/infrastructure/storage/progress";
 import { APP_VERSION } from "@/infrastructure/utils/version";
+import * as userRepository from "@/infrastructure/api/userRepository";
 
 export const useAppStore = defineStore("app", () => {
   // ========== 题库相关 (BANK) ==========
@@ -373,34 +374,51 @@ export const useAppStore = defineStore("app", () => {
   /**
    * 加载错题本
    */
-  function loadWrongBook() {
-    wrongBook.value = schemaRead(STORAGE_KEY.USER_WRONG_BOOK) || [];
+  async function loadWrongBook() {
+    try {
+      wrongBook.value = await userRepository.getWrongBook();
+    } catch (e) {
+      console.error('加载错题本失败，降级到本地存储', e);
+      wrongBook.value = schemaRead(STORAGE_KEY.USER_WRONG_BOOK) || [];
+    }
   }
 
   /**
    * 添加错题
    */
-  function addWrongQuestion(question) {
-    const exists = wrongBook.value.find((q) => q.id === question.id);
-    if (exists) {
-      exists.wrongCount = (exists.wrongCount || 1) + 1;
-      exists.wrongTime = Date.now();
-    } else {
-      wrongBook.value.push({
-        ...question,
-        wrongTime: Date.now(),
-        wrongCount: 1,
-      });
+  async function addWrongQuestion(question) {
+    try {
+      await userRepository.addWrongQuestion(question);
+      wrongBook.value = await userRepository.getWrongBook();
+    } catch (e) {
+      console.error('添加错题失败，降级到本地存储', e);
+      const exists = wrongBook.value.find((q) => q.id === question.id);
+      if (exists) {
+        exists.wrongCount = (exists.wrongCount || 1) + 1;
+        exists.wrongTime = Date.now();
+      } else {
+        wrongBook.value.push({
+          ...question,
+          wrongTime: Date.now(),
+          wrongCount: 1,
+        });
+      }
+      schemaWrite(STORAGE_KEY.USER_WRONG_BOOK, wrongBook.value);
     }
-    schemaWrite(STORAGE_KEY.USER_WRONG_BOOK, wrongBook.value);
   }
 
   /**
    * 移除错题
    */
-  function removeWrongQuestion(questionId) {
-    wrongBook.value = wrongBook.value.filter((q) => q.id !== questionId);
-    schemaWrite(STORAGE_KEY.USER_WRONG_BOOK, wrongBook.value);
+  async function removeWrongQuestion(questionId) {
+    try {
+      await userRepository.removeWrongQuestion(questionId);
+      wrongBook.value = await userRepository.getWrongBook();
+    } catch (e) {
+      console.error('移除错题失败，降级到本地存储', e);
+      wrongBook.value = wrongBook.value.filter((q) => q.id !== questionId);
+      schemaWrite(STORAGE_KEY.USER_WRONG_BOOK, wrongBook.value);
+    }
   }
 
   // ========== 收藏 Actions ==========
@@ -408,30 +426,47 @@ export const useAppStore = defineStore("app", () => {
   /**
    * 加载收藏
    */
-  function loadFavorites() {
-    favorites.value = schemaRead(STORAGE_KEY.USER_FAVORITES) || [];
+  async function loadFavorites() {
+    try {
+      favorites.value = await userRepository.getFavorites();
+    } catch (e) {
+      console.error('加载收藏失败，降级到本地存储', e);
+      favorites.value = schemaRead(STORAGE_KEY.USER_FAVORITES) || [];
+    }
   }
 
   /**
    * 添加收藏
    */
-  function addFavorite(question) {
-    const exists = favorites.value.find((q) => q.id === question.id);
-    if (!exists) {
-      favorites.value.push({
-        ...question,
-        favoriteTime: Date.now(),
-      });
-      schemaWrite(STORAGE_KEY.USER_FAVORITES, favorites.value);
+  async function addFavorite(question) {
+    try {
+      await userRepository.addFavorite(question);
+      favorites.value = await userRepository.getFavorites();
+    } catch (e) {
+      console.error('添加收藏失败，降级到本地存储', e);
+      const exists = favorites.value.find((q) => q.id === question.id);
+      if (!exists) {
+        favorites.value.push({
+          ...question,
+          favoriteTime: Date.now(),
+        });
+        schemaWrite(STORAGE_KEY.USER_FAVORITES, favorites.value);
+      }
     }
   }
 
   /**
    * 移除收藏
    */
-  function removeFavorite(questionId) {
-    favorites.value = favorites.value.filter((q) => q.id !== questionId);
-    schemaWrite(STORAGE_KEY.USER_FAVORITES, favorites.value);
+  async function removeFavorite(questionId) {
+    try {
+      await userRepository.removeFavorite(questionId);
+      favorites.value = await userRepository.getFavorites();
+    } catch (e) {
+      console.error('移除收藏失败，降级到本地存储', e);
+      favorites.value = favorites.value.filter((q) => q.id !== questionId);
+      schemaWrite(STORAGE_KEY.USER_FAVORITES, favorites.value);
+    }
   }
 
   // ========== 练习 Progress Actions ==========
@@ -450,27 +485,44 @@ export const useAppStore = defineStore("app", () => {
    * @param {string} key - category_scope_subject
    * @param {Object} progress - 进度数据
    */
-  function savePracticeProgress(key, progress) {
+  async function savePracticeProgress(key, progress) {
     if (!key) return;
-    practiceProgress.value[key] = progress;
-    schemaWrite(STORAGE_KEY.PRACTICE_PROGRESS, practiceProgress.value);
+    try {
+      await userRepository.savePracticeProgress(key, progress);
+      practiceProgress.value = await userRepository.getPracticeProgress();
+    } catch (e) {
+      console.error('保存练习进度失败，降级到本地存储', e);
+      practiceProgress.value[key] = progress;
+      schemaWrite(STORAGE_KEY.PRACTICE_PROGRESS, practiceProgress.value);
+    }
   }
 
   /**
    * 清除某科目的练习进度
    * @param {string} key - category_scope_subject
    */
-  function clearPracticeProgress(key) {
+  async function clearPracticeProgress(key) {
     if (!key) return;
-    delete practiceProgress.value[key];
-    schemaWrite(STORAGE_KEY.PRACTICE_PROGRESS, practiceProgress.value);
+    try {
+      await userRepository.clearPracticeProgress(key);
+      practiceProgress.value = await userRepository.getPracticeProgress();
+    } catch (e) {
+      console.error('清除练习进度失败，降级到本地存储', e);
+      delete practiceProgress.value[key];
+      schemaWrite(STORAGE_KEY.PRACTICE_PROGRESS, practiceProgress.value);
+    }
   }
 
   /**
    * 从 localStorage 加载练习进度 map
    */
-  function loadPracticeProgress() {
-    practiceProgress.value = loadPracticeProgressFromUtil();
+  async function loadPracticeProgress() {
+    try {
+      practiceProgress.value = await userRepository.getPracticeProgress();
+    } catch (e) {
+      console.error('加载练习进度失败，降级到本地存储', e);
+      practiceProgress.value = loadPracticeProgressFromUtil();
+    }
   }
 
   // ========== 练习 History Actions ==========
@@ -478,19 +530,30 @@ export const useAppStore = defineStore("app", () => {
   /**
    * 添加练习历史
    */
-  function addPracticeHistory(history) {
-    practiceHistory.value.unshift({
-      ...history,
-      timestamp: Date.now(),
-    });
-    schemaWrite(STORAGE_KEY.PRACTICE_HISTORY, practiceHistory.value);
+  async function addPracticeHistory(history) {
+    try {
+      await userRepository.addPracticeHistory(history);
+      practiceHistory.value = await userRepository.getPracticeHistory();
+    } catch (e) {
+      console.error('添加练习历史失败，降级到本地存储', e);
+      practiceHistory.value.unshift({
+        ...history,
+        timestamp: Date.now(),
+      });
+      schemaWrite(STORAGE_KEY.PRACTICE_HISTORY, practiceHistory.value);
+    }
   }
 
   /**
    * 加载练习历史
    */
-  function loadPracticeHistory() {
-    practiceHistory.value = schemaRead(STORAGE_KEY.PRACTICE_HISTORY) || [];
+  async function loadPracticeHistory() {
+    try {
+      practiceHistory.value = await userRepository.getPracticeHistory();
+    } catch (e) {
+      console.error('加载练习历史失败，降级到本地存储', e);
+      practiceHistory.value = schemaRead(STORAGE_KEY.PRACTICE_HISTORY) || [];
+    }
   }
 
   // ========== 初始化 ==========
@@ -500,13 +563,21 @@ export const useAppStore = defineStore("app", () => {
    * 扫描已有缓存 → 全部已缓存则直接进入，否则不阻塞（用户手动下载）
    */
   async function init() {
+    try {
+      await userRepository.initUserRepository();
+      const currentUserId = userRepository.getCurrentUserId() || 'guest';
+      userRepository.setCurrentUser(currentUserId);
+    } catch (e) {
+      console.error('初始化用户仓库失败:', e);
+    }
+    
     loadBankMeta();
-    loadWrongBook();
-    loadFavorites();
-    loadPracticeProgress();
-    loadPracticeHistory();
-    loadExamPapers();
-    loadExamPresets();
+    await loadWrongBook();
+    await loadFavorites();
+    await loadPracticeProgress();
+    await loadPracticeHistory();
+    await loadExamPapers();
+    await loadExamPresets();
 
     // 应用版本追踪
     const prevAppVer = storage.getItem(STORAGE_KEY.APP_VERSION);
@@ -534,51 +605,85 @@ export const useAppStore = defineStore("app", () => {
   /**
    * 加载试卷列表
    */
-  function loadExamPapers() {
-    examPapers.value = schemaRead(STORAGE_KEY.EXAM_PAPERS) || [];
+  async function loadExamPapers() {
+    try {
+      examPapers.value = await userRepository.getExamPapers();
+    } catch (e) {
+      console.error('加载试卷失败，降级到本地存储', e);
+      examPapers.value = schemaRead(STORAGE_KEY.EXAM_PAPERS) || [];
+    }
   }
 
   /**
    * 添加试卷
    */
-  function addExamPaper(paper) {
-    examPapers.value.unshift(paper);
-    schemaWrite(STORAGE_KEY.EXAM_PAPERS, examPapers.value);
+  async function addExamPaper(paper) {
+    try {
+      await userRepository.addExamPaper(paper);
+      examPapers.value = await userRepository.getExamPapers();
+    } catch (e) {
+      console.error('添加试卷失败，降级到本地存储', e);
+      examPapers.value.unshift(paper);
+      schemaWrite(STORAGE_KEY.EXAM_PAPERS, examPapers.value);
+    }
   }
 
   /**
    * 删除试卷
    */
-  function removeExamPaper(paperId) {
-    examPapers.value = examPapers.value.filter((p) => p.id !== paperId);
-    schemaWrite(STORAGE_KEY.EXAM_PAPERS, examPapers.value);
+  async function removeExamPaper(paperId) {
+    try {
+      await userRepository.removeExamPaper(paperId);
+      examPapers.value = await userRepository.getExamPapers();
+    } catch (e) {
+      console.error('删除试卷失败，降级到本地存储', e);
+      examPapers.value = examPapers.value.filter((p) => p.id !== paperId);
+      schemaWrite(STORAGE_KEY.EXAM_PAPERS, examPapers.value);
+    }
   }
 
   /**
    * 加载预设
    */
-  function loadExamPresets() {
-    examPresets.value = schemaRead(STORAGE_KEY.EXAM_PRESETS) || [];
+  async function loadExamPresets() {
+    try {
+      examPresets.value = await userRepository.getExamPresets();
+    } catch (e) {
+      console.error('加载预设失败，降级到本地存储', e);
+      examPresets.value = schemaRead(STORAGE_KEY.EXAM_PRESETS) || [];
+    }
   }
 
   /**
    * 保存预设
    */
-  function saveExamPreset(preset) {
-    const existing = schemaRead(STORAGE_KEY.EXAM_PRESETS) || [];
-    existing.push(preset);
-    schemaWrite(STORAGE_KEY.EXAM_PRESETS, existing);
-    examPresets.value = existing;
+  async function saveExamPreset(preset) {
+    try {
+      await userRepository.saveExamPreset(preset);
+      examPresets.value = await userRepository.getExamPresets();
+    } catch (e) {
+      console.error('保存预设失败，降级到本地存储', e);
+      const existing = schemaRead(STORAGE_KEY.EXAM_PRESETS) || [];
+      existing.push(preset);
+      schemaWrite(STORAGE_KEY.EXAM_PRESETS, existing);
+      examPresets.value = existing;
+    }
   }
 
   /**
    * 删除预设
    */
-  function deleteExamPreset(presetId) {
-    const existing = schemaRead(STORAGE_KEY.EXAM_PRESETS) || [];
-    const filtered = existing.filter((p) => p.id !== presetId);
-    schemaWrite(STORAGE_KEY.EXAM_PRESETS, filtered);
-    examPresets.value = filtered;
+  async function deleteExamPreset(presetId) {
+    try {
+      await userRepository.deleteExamPreset(presetId);
+      examPresets.value = await userRepository.getExamPresets();
+    } catch (e) {
+      console.error('删除预设失败，降级到本地存储', e);
+      const existing = schemaRead(STORAGE_KEY.EXAM_PRESETS) || [];
+      const filtered = existing.filter((p) => p.id !== presetId);
+      schemaWrite(STORAGE_KEY.EXAM_PRESETS, filtered);
+      examPresets.value = filtered;
+    }
   }
 
   /**

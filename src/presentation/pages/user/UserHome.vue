@@ -2,8 +2,11 @@
   <div class="profile">
     <TopBar title="个人中心">
       <template #right>
-        <button class="icon-btn">
-          <Icon name="more-vert" />
+        <button v-if="isGuest" class="icon-btn" @click="goToLogin">
+          <Icon name="login" />
+        </button>
+        <button v-else class="icon-btn" @click="handleLogout">
+          <Icon name="logout" />
         </button>
       </template>
     </TopBar>
@@ -15,9 +18,21 @@
             <img src="/logo.jpeg" alt="头像" />
           </div>
         </div>
-        <div class="user-info">
-          <h2>{{ user.username }}</h2>
-          <p>{{ user.title }}</p>
+        <div v-if="!isGuest" class="user-info">
+          <h2>{{ currentAccount?.nickname || currentAccount?.username || currentAccount?.username }}</h2>
+          <p>{{ currentAccount?.role }}</p>
+        </div>
+
+        <div v-if="isGuest" class="guest-action">
+          <button @click="goToLogin" class="login-now-btn">
+            <Icon name="login" />
+            <span>去登录</span>
+          </button>
+
+        </div>
+        <div v-if="isGuest" class="guest-banner">
+          <Icon name="info-outline" />
+          <span>登录后数据将保存在云端，多设备同步</span>
         </div>
       </section>
 
@@ -82,33 +97,55 @@
         </div>
       </section>
 
-      <section class="action-section">
-        <button class="action-btn logout">
-          <Icon name="logout" />
-          <span>退出登录</span>
-        </button>
-      </section>
-
       <div class="version-footer">Version {{ APP_VERSION }}</div>
     </main>
   </div>
 </template>
 
 <script setup>
-import { reactive } from 'vue'
+import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAppStore } from '@/domain/stores/store'
 import { APP_VERSION } from '@/infrastructure/utils/version'
 import TopBar from '@/presentation/components/shared/TopBar.vue'
 import Icon from '@/presentation/components/ui/Icon.vue'
+import * as userRepository from '@/infrastructure/api/userRepository'
 
 const router = useRouter()
 const store = useAppStore()
 
-const user = reactive({
-  username: "wyd",
-  title: "开发者",
+const currentAccount = ref(null)
+const isGuest = ref(true)
+
+onMounted(async () => {
+  try {
+    const currentId = userRepository.getCurrentUserId()
+    if (currentId && currentId !== 'guest') {
+      isGuest.value = false
+      const account = await userRepository.getAccountById(currentId)
+      currentAccount.value = account || { id: currentId, username: currentId }
+    } else {
+      isGuest.value = true
+      currentAccount.value = null
+    }
+  } catch (e) {
+    console.error('加载账户信息失败:', e)
+    isGuest.value = true
+    currentAccount.value = null
+  }
 })
+
+function handleLogout() {
+  if (confirm('确定要退出登录吗？')) {
+    userRepository.setCurrentUser(null)
+    localStorage.removeItem('current_user_id')
+    router.push('/login')
+  }
+}
+
+function goToLogin() {
+  router.push('/login')
+}
 
 function goToWrongBook() {
   router.push({ name: 'WrongBook' })
@@ -174,7 +211,7 @@ function goToSettings() {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: var(--space-md);
+  gap: var(--space-xs);
 }
 
 .avatar-container {
@@ -216,6 +253,48 @@ function goToSettings() {
   margin-top: var(--space-xs);
 }
 
+.guest-banner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-xs);
+  padding: var(--space-sm);
+  background: var(--color-primary-light);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-sm);
+  color: var(--color-primary);
+}
+
+.guest-banner svg {
+  font-size: var(--font-size-lg);
+}
+
+.guest-action {
+  margin: var(--space-md) auto;
+  display: flex;
+  justify-content: center;
+}
+
+.login-now-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-xs);
+  padding: var(--space-sm) var(--space-lg);
+  background: var(--color-primary);
+  color: var(--color-primary-foreground);
+  border: none;
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-semibold);
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.login-now-btn:active {
+  opacity: 0.8;
+}
+
 .section-title {
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-bold);
@@ -223,199 +302,6 @@ function goToSettings() {
   letter-spacing: 0.05em;
   color: var(--color-text-secondary);
   margin-bottom: var(--space-sm);
-}
-
-.performance-section {
-  margin-top: var(--space-sm);
-}
-
-.performance-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--space-md);
-}
-
-.perf-card {
-  background: var(--color-card);
-  border-radius: var(--radius-lg);
-  padding: var(--space-md);
-  border: 1px solid var(--color-border-light);
-}
-
-.accuracy-card {
-  grid-column: span 2;
-}
-
-.card-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  margin-bottom: var(--space-md);
-}
-
-.card-label {
-  font-size: var(--font-size-xs);
-  font-weight: var(--font-weight-bold);
-  color: var(--color-text-secondary);
-}
-
-.card-value {
-  font-size: var(--font-size-3xl);
-  font-weight: var(--font-weight-bold);
-}
-
-.card-value.primary {
-  color: var(--color-primary);
-}
-
-.card-value.tertiary {
-  color: var(--color-secondary);
-}
-
-.chart-bars {
-  display: flex;
-  gap: var(--space-md);
-  align-items: flex-end;
-  height: 64px;
-}
-
-.bar {
-  flex: 1;
-  background: var(--color-border-strong);
-  border-radius: var(--radius-sm) var(--radius-sm) 0 0;
-}
-
-.bar.active {
-  background: var(--color-primary);
-}
-
-.card-footer {
-  font-size: var(--font-size-sm);
-  color: var(--color-text-secondary);
-  font-style: italic;
-  margin-top: var(--space-sm);
-}
-
-.radar-card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.radar-container {
-  position: relative;
-  width: 96px;
-  height: 96px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: var(--space-md) 0;
-}
-
-.radar {
-  position: absolute;
-  clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);
-}
-
-.radar-1 {
-  inset: 0;
-  background: var(--color-border-strong);
-  opacity: 0.5;
-}
-
-.radar-2 {
-  inset: 8px;
-  background: var(--color-primary);
-  opacity: 0.4;
-}
-
-.radar-3 {
-  inset: 16px;
-  background: var(--color-primary);
-  opacity: 0.6;
-  transform: scale(0.75);
-}
-
-.radar-text {
-  font-size: var(--font-size-xs);
-  color: var(--color-text-secondary);
-  text-align: center;
-  line-height: var(--line-height-normal);
-}
-
-.streak-card {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.streak-icons {
-  display: flex;
-  gap: calc(var(--space-sm) * -1);
-  margin-top: var(--space-sm);
-}
-
-.streak-icon {
-  width: 24px;
-  height: 24px;
-  border-radius: var(--radius-full);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 2px solid var(--color-background);
-}
-
-.streak-icon.fire {
-  background: var(--color-secondary);
-}
-
-.streak-icon svg {
-  font-size: var(--font-size-sm);
-  color: var(--color-primary-foreground);
-}
-
-.streak-icon.verified {
-  background: var(--color-primary);
-}
-
-.history-section {
-  margin-top: var(--space-md);
-}
-
-.section-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: var(--space-sm);
-}
-
-.more-btn {
-  background: none;
-  border: none;
-  color: var(--color-primary);
-  font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-medium);
-  cursor: pointer;
-}
-
-.history-scroll {
-  display: flex;
-  gap: var(--space-md);
-  overflow-x: auto;
-  padding-bottom: var(--space-md);
-  margin: 0 calc(var(--space-md) * -1);
-  padding: 0 var(--space-md);
-}
-
-.history-scroll::-webkit-scrollbar {
-  display: none;
-}
-
-.empty-history {
-  text-align: center;
-  padding: 48px 16px;
-  color: var(--color-text-secondary);
-  font-size: var(--font-size-sm);
 }
 
 .shortcut-section {
@@ -499,8 +385,6 @@ function goToSettings() {
   color: var(--color-secondary);
 }
 
-
-
 .shortcut-icon.practice-bg {
   background: var(--color-primary-light);
 }
@@ -517,10 +401,6 @@ function goToSettings() {
   color: var(--color-success);
 }
 
-.shortcut-icon.primary-bg {
-  /* background: var(--color-primary-light); */
-}
-
 .shortcut-icon.primary-bg svg {
   font-size: var(--font-size-2xl);
   color: var(--color-primary);
@@ -534,44 +414,6 @@ function goToSettings() {
 
 .shortcut-arrow {
   color: var(--color-text-secondary);
-}
-
-.action-section {
-  margin-top: var(--space-md);
-  padding-top: var(--space-md);
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-md);
-}
-
-.action-btn {
-  width: 100%;
-  padding: var(--space-md);
-  background: var(--color-card);
-  border: none;
-  border-radius: var(--radius-lg);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: var(--space-sm);
-  font-size: var(--font-size-md);
-  font-weight: var(--font-weight-medium);
-  color: var(--color-text-secondary);
-  cursor: pointer;
-  transition: background 0.2s;
-}
-
-.action-btn:active {
-  background: var(--color-border-light);
-}
-
-.action-btn.logout {
-  background: var(--color-destructive-light);
-  color: var(--color-destructive);
-}
-
-.action-btn.logout:active {
-  background: var(--color-destructive-light);
 }
 
 .version-footer {

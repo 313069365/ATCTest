@@ -103,6 +103,8 @@ import IconVolumeOffOutline from "~icons/material-symbols/volume-off-outline"
 import IconVolumeUpOutline from "~icons/material-symbols/volume-up-outline"
 import IconWarning from "~icons/material-symbols/warning"
 import IconWork from "~icons/material-symbols/work"
+import IconLogin from "~icons/material-symbols/login"
+
 
 const props = defineProps({
   name: { type: String, required: true }
@@ -112,6 +114,7 @@ const registry = {
   add: IconAdd,
   'add-circle-outline': IconAddCircleOutline,
   air: IconAir,
+  login: IconLogin,
   apartment: IconApartment,
   'arrow-back': IconArrowBack,
   'arrow-forward': IconArrowForward,
