@@ -171,19 +171,19 @@ onMounted(() => {
 <style scoped>
 .data-management {
   min-height: 100vh;
-  background: var(--background);
+  background: var(--color-background);
   max-width: var(--app-max-width);
   margin: 0 auto;
 }
 
 
 .content {
-  padding: var(--spacing-lg);
+  padding: var(--space-lg);
   padding-bottom: 100px;
 }
 
 .section {
-  margin-bottom: var(--spacing-lg);
+  margin-bottom: var(--space-lg);
 }
 
 .section-title {
@@ -191,55 +191,55 @@ onMounted(() => {
   font-weight: var(--font-weight-bold);
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  color: var(--on-surface-variant);
-  margin-bottom: var(--spacing-sm);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-sm);
 }
 
 .card {
-  background: var(--background-surface);
+  background: var(--color-card);
   border-radius: var(--radius-lg);
-  padding: var(--spacing-md);
-  border: 1px solid var(--border-color-light);
+  padding: var(--space-md);
+  border: 1px solid var(--color-border-light);
 }
 
 .card-row {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 6px 0;
+  padding: var(--space-2xs) 0;
 }
 
 .card-label {
   font-size: var(--font-size-sm);
-  color: var(--on-surface-variant);
+  color: var(--color-text-secondary);
 }
 
 .card-value {
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-semibold);
-  color: var(--on-surface);
+  color: var(--color-text);
 }
 
 .status-cached {
-  color: var(--primary);
+  color: var(--color-primary);
 }
 
 .status-uncached {
-  color: var(--error);
+  color: var(--color-destructive);
 }
 
 .progress-bar {
   margin: 8px 0;
   height: 4px;
-  background: var(--border-color-light);
-  border-radius: 2px;
+  background: var(--color-border-light);
+  border-radius: var(--radius-xs);
   overflow: hidden;
 }
 
 .progress-fill {
   height: 100%;
-  background: var(--primary);
-  border-radius: 2px;
+  background: var(--color-primary);
+  border-radius: var(--radius-xs);
 }
 
 .progress-fill.indeterminate {
@@ -260,17 +260,17 @@ onMounted(() => {
 .card-btn {
   width: 100%;
   margin-top: 12px;
-  padding: var(--spacing-smd);
-  background: var(--primary);
+  padding: var(--space-ms);
+  background: var(--color-primary);
   border: none;
   border-radius: var(--radius-md);
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
+  gap: var(--space-2xs);
   font-size: var(--font-size-md);
   font-weight: var(--font-weight-semibold);
-  color: var(--on-primary);
+  color: var(--color-primary-foreground);
   cursor: pointer;
 }
 
@@ -280,9 +280,9 @@ onMounted(() => {
 }
 
 .data-list {
-  background: var(--background-surface);
+  background: var(--color-card);
   border-radius: var(--radius-lg);
-  border: 1px solid var(--border-color-light);
+  border: 1px solid var(--color-border-light);
   overflow: hidden;
 }
 
@@ -290,81 +290,81 @@ onMounted(() => {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 12px var(--spacing-md);
+  padding: 12px var(--space-md);
 }
 
 .data-row+.data-row {
-  border-top: 1px solid var(--border-color-light);
+  border-top: 1px solid var(--color-border-light);
 }
 
 .data-info {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: var(--space-ms);
 }
 
 .data-icon {
-  font-size: 20px;
+  font-size: var(--font-size-xl);
 }
 
 .data-icon.error-icon {
-  color: var(--error);
+  color: var(--color-destructive);
 }
 
 .data-icon.fav-icon {
-  color: var(--secondary);
+  color: var(--color-secondary);
 }
 
 .data-icon.history-icon {
-  color: var(--primary);
+  color: var(--color-primary);
 }
 
 .data-icon.exam-icon {
-  color: var(--primary);
+  color: var(--color-primary);
 }
 
 .data-icon.preset-icon {
-  color: var(--on-surface-variant);
+  color: var(--color-text-secondary);
 }
 
 .data-name {
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-semibold);
-  color: var(--on-surface);
+  color: var(--color-text);
   display: block;
 }
 
 .data-count {
-  font-size: 12px;
-  color: var(--on-surface-variant);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
 }
 
 .clear-btn {
-  background: var(--background);
-  border: 1px solid var(--border-color);
+  background: var(--color-background);
+  border: 1px solid var(--color-border);
   border-radius: var(--radius-sm);
-  font-size: 12px;
-  color: var(--on-surface-variant);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
   cursor: pointer;
 }
 
 .clear-btn:active {
-  background: var(--border-color-light);
+  background: var(--color-border-light);
 }
 
 .clear-all-btn {
   width: 100%;
-  padding: var(--spacing-smd);
-  background: var(--error-light);
+  padding: var(--space-ms);
+  background: var(--color-destructive-light);
   border: none;
   border-radius: var(--radius-lg);
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: var(--spacing-sm);
+  gap: var(--space-sm);
   font-size: var(--font-size-md);
   font-weight: var(--font-weight-medium);
-  color: var(--error);
+  color: var(--color-destructive);
   cursor: pointer;
 }
 

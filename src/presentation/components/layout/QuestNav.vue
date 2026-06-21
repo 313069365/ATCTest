@@ -76,22 +76,22 @@ const handleNext = () => {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: var(--spacing-mn);
-  background: var(--background);
+  padding: var(--space-xs);
+  background: var(--color-background);
 }
 
 .nav-btn {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: var(--spacing-mn);
+  gap: var(--space-xs);
   flex: 1;
-  padding: var(--spacing-smd);
-  margin: var(--spacing-mn) var(--spacing-smd);
+  padding: var(--space-ms);
+  margin: var(--space-xs) var(--space-ms);
   background: var(--surface);
-  border: 1px solid var(--border-color);
+  border: 1px solid var(--color-border);
   border-radius: var(--radius-full);
-  color: var(--primary);
+  color: var(--color-primary);
   font-size: var(--font-size-md);
   font-weight: var(--font-weight-medium);
   cursor: pointer;
@@ -105,13 +105,13 @@ const handleNext = () => {
 }
 
 .nav-btn:hover {
-  background: var(--primary-light);
+  background: var(--color-primary-light);
   box-shadow: var(--shadow-md);
 }
 
 .nav-btn:disabled {
-  background: var(--color-gray-200);
-  color: var(--text-disabled);
+  background: var(--gray-200);
+  color: var(--color-disabled);
   cursor: not-allowed;
   box-shadow: none;
   transform: none;

@@ -125,53 +125,53 @@ function getSubQuestionBtnClass(qIdx, sqIdx, sq) {
 <style scoped>
 .progress-stats {
   border-radius: var(--radius-md);
-  padding: var(--spacing-sm) var(--spacing-md);
-  /* margin-bottom: var(--spacing-md); */
+  padding: var(--space-sm) var(--space-md);
+  /* margin-bottom: var(--space-md); */
   box-shadow: var(--shadow-lg);
-  background-color: var(--background);
+  background-color: var(--color-background);
 }
 
 .legend {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--spacing-md);
+  gap: var(--space-md);
 }
 
 .legend-item {
   display: flex;
   align-items: center;
-  gap: var(--spacing-sm);
-  font-size: 11px;
-  color: var(--icon-color);
+  gap: var(--space-sm);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
 }
 
 .legend-dot {
   width: 10px;
   height: 10px;
   border-radius: var(--radius-sm);
-  background: var(--border-color-strong);
+  background: var(--color-border-strong);
 }
 
 .legend-dot.correct {
-  background: var(--success);
+  background: var(--color-success);
 }
 
 .legend-dot.wrong {
-  background: var(--error);
+  background: var(--color-destructive);
 }
 
 .legend-dot.unknown {
-  background: var(--warning);
+  background: var(--color-warning);
 }
 
 .legend-dot.current {
-  background: var(--primary);
+  background: var(--color-primary);
 }
 
 .question-list {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: var(--space-ms);
 }
 
 .question-group {
@@ -182,71 +182,71 @@ function getSubQuestionBtnClass(qIdx, sqIdx, sq) {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: var(--spacing-sm);
-  background-color: var(--background);
+  padding: var(--space-sm);
+  background-color: var(--color-background);
   border-radius: var(--radius-md);
 }
 
 .group-title {
   font-size: var(--font-size-sm);
-  font-weight: 500;
-  color: var(--icon-color);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-secondary);
 }
 
 .sub-question-grid {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--spacing-sm);
+  gap: var(--space-sm);
 }
 
 .sub-question-grid .sub-question-btn {
   min-width: 30px;
   aspect-ratio: 1;
   border-radius: var(--radius-full);
-  background: var(--color-gray-300);
+  background: var(--gray-300);
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-bold);
-  color: var(--icon-color);
+  color: var(--color-text-secondary);
   cursor: pointer;
 }
 
 .sub-question-grid .sub-question-btn.correct {
-  background: var(--success);
-  color: #fff;
+  background: var(--color-success);
+  color: var(--color-primary-foreground);
 }
 
 .sub-question-grid .sub-question-btn.wrong {
-  background: var(--error);
-  color: #fff;
+  background: var(--color-destructive);
+  color: var(--color-primary-foreground);
 }
 
 .sub-question-grid .sub-question-btn.unknown {
-  background: var(--warning);
-  color: #181c1f;
+  background: var(--color-warning);
+  color: var(--color-text);
 }
 
 .sub-question-grid .sub-question-btn.current {
-  background: var(--primary);
-  border: 3px solid var(--primary);
-  color: #fff;
+  background: var(--color-primary);
+  border: 3px solid var(--color-primary);
+  color: var(--color-primary-foreground);
 }
 
 .sub-question-grid .sub-question-btn.current-correct {
-  background: var(--success);
-  border: 3px solid var(--primary);
-  color: #fff;
+  background: var(--color-success);
+  border: 3px solid var(--color-primary);
+  color: var(--color-primary-foreground);
 }
 
 .sub-question-grid .sub-question-btn.current-wrong {
-  background: var(--error);
-  border: 3px solid var(--primary);
-  color: #fff;
+  background: var(--color-destructive);
+  border: 3px solid var(--color-primary);
+  color: var(--color-primary-foreground);
 }
 
 .sub-question-grid .sub-question-btn.current-unknown {
-  background: var(--warning);
-  border: 3px solid var(--primary);
-  color: #181c1f;
+  background: var(--color-warning);
+  border: 3px solid var(--color-primary);
+  color: var(--color-text);
 }
 
 .question-list .question-btn {
@@ -254,10 +254,10 @@ function getSubQuestionBtnClass(qIdx, sqIdx, sq) {
   height: 44px;
   border: none;
   border-radius: var(--radius-md);
-  background: var(--color-gray-300);
+  background: var(--gray-300);
   font-size: var(--font-size-md);
   font-weight: var(--font-weight-bold);
-  color: var(--icon-color);
+  color: var(--color-text-secondary);
   cursor: pointer;
 }
 
@@ -266,41 +266,41 @@ function getSubQuestionBtnClass(qIdx, sqIdx, sq) {
 }
 
 .question-btn.correct {
-  background: var(--success);
-  color: #fff;
+  background: var(--color-success);
+  color: var(--color-primary-foreground);
 }
 
 .question-btn.wrong {
-  background: var(--error);
-  color: #fff;
+  background: var(--color-destructive);
+  color: var(--color-primary-foreground);
 }
 
 .question-btn.unknown {
-  background: var(--warning);
-  color: #181c1f;
+  background: var(--color-warning);
+  color: var(--color-text);
 }
 
 .question-btn.current {
-  background: var(--primary);
-  border: 3px solid var(--primary);
-  color: #fff;
+  background: var(--color-primary);
+  border: 3px solid var(--color-primary);
+  color: var(--color-primary-foreground);
 }
 
 .question-btn.current-correct {
-  background: var(--success);
-  border: 3px solid var(--primary);
-  color: #fff;
+  background: var(--color-success);
+  border: 3px solid var(--color-primary);
+  color: var(--color-primary-foreground);
 }
 
 .question-btn.current-wrong {
-  background: var(--error);
-  border: 3px solid var(--primary);
-  color: #fff;
+  background: var(--color-destructive);
+  border: 3px solid var(--color-primary);
+  color: var(--color-primary-foreground);
 }
 
 .question-btn.current-unknown {
-  background: var(--warning);
-  border: 3px solid var(--primary);
-  color: #181c1f;
+  background: var(--color-warning);
+  border: 3px solid var(--color-primary);
+  color: var(--color-text);
 }
 </style>

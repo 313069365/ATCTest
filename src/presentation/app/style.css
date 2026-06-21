@@ -1,6 +1,5 @@
 /* ========== 变量 ========== */
 :root {
-  /* 布局 */
   --app-max-height: 100vh;
   --app-max-width: 400px;
 
@@ -12,107 +11,96 @@
   --line-height-relaxed: 1.75;
 
   /* 字号 - 7档 */
-  --font-size-mn: 10px;
+  --font-size-xs: 10px;
   --font-size-sm: 12px;
   --font-size-md: 14px;
   --font-size-lg: 16px;
   --font-size-xl: 18px;
-  --font-size-2xl: 20px;
-  --font-size-3xl: 24px;
-  --font-size-xxl: 36px;
+  --font-size-2xl: 24px;
+  --font-size-3xl: 36px;
 
   /* 字重 */
-  --font-weight-regular: 400;
   --font-weight-medium: 500;
   --font-weight-semibold: 600;
   --font-weight-bold: 700;
   --font-weight-extrabold: 800;
   --font-weight-black: 900;
 
+  /* 文字 */
+  --color-text: #181c20;
+  --color-text-secondary: #727785;
+  --color-disabled: #9e9e9e;
+
   /* 主色 */
-  --primary: #005bbf;
-  --primary-dark: #03468f;
-  --primary-light: #d8e2ff;
-  --primary-container: #d8e2ff;
-  --on-primary: #ffffff;
-  --primary-gradient-end: #1a73e8;
+  --color-primary: #005bbf;
+  --color-primary-dark: #03468f;
+  --color-primary-light: #d8e2ff;
+  --color-primary-foreground: #ffffff;
+  --color-primary-gradient: #1a73e8;
 
   /* 次要色 */
-  --secondary: #f39c12;
-  --secondary-light: #fcf5e2;
+  --color-secondary: #f39c12;
+  --color-secondary-light: #fcf5e2;
 
   /* 强调色 */
-  --accent: #e67e22;
-  --accent-light: #fef3e0;
-  --accent-gradient-end: #f39c12;
-
-  /* 文字 */
-  --on-surface: #1f1f1f;
-  --on-surface-variant: #444746;
-  --text-primary: #181c20;
-  --text-secondary: #727785;
-  --text-disabled: #9e9e9e;
-
-  /* 图标颜色 */
-  --icon-color: #414754;
-  --icon-color-secondary: #727785;
+  --color-accent: #e67e22;
+  --color-accent-gradient: #f39c12;
 
   /* 背景 */
-  --background: #ffffff;
-  /* --background-secondary: #ffffff; */
-  --background-secondary: #f1f1f1;
-  --background-surface: #f8f9fa;
-  --surface-variant: #f1f1f1;
+  --color-background: #ffffff;
+  --color-muted: #f1f1f1;
+  --color-card: #ffffff;
 
   /* 边框 */
-  --border-color: rgba(116, 119, 117, 0.1);
-  --border-color-strong: rgba(193, 198, 214, 0.3);
-  --border-color-light: rgba(193, 198, 214, 0.1);
+  --color-border: rgba(116, 119, 117, 0.1);
+  --color-border-strong: rgba(193, 198, 214, 0.3);
+  --color-border-light: rgba(193, 198, 214, 0.1);
 
   /* 状态 */
-  --selected: #0e56e4;
-  --selected-light: #aed1fe;
-  --success: #34a853;
-  --success-light: #e6f4ea;
-  --warning: #f9a825;
-  --warning-light: #fef7e0;
-  --error: #ea4335;
-  --error-light: #fce8e6;
-  --partial: #66bb6a;
-  --partial-light: #e8f5e9;
-  --unchecked: #64b5f6;
-  --unchecked-light: #e3f2fd;
+  --color-success: #34a853;
+  --color-success-light: #e6f4ea;
+  --color-success-bg: rgba(34, 197, 94, 0.12);
+  --color-warning: #f9a825;
+  --color-warning-light: #fef7e0;
+  --color-warning-bg: rgba(245, 158, 11, 0.12);
+  --color-destructive: #ea4335;
+  --color-destructive-light: #fce8e6;
+  --color-destructive-bg: rgba(211, 47, 47, 0.1);
+  --color-destructive-bg-hover: rgba(211, 47, 47, 0.2);
+  --color-partial: #66bb6a;
+  --color-partial-bg: rgba(255, 255, 255, 0.2);
+  --color-primary-bg: rgba(0, 91, 191, 0.1);
+  --color-partial-light: #e8f5e9;
 
   /* tag 颜色 */
-  --tag-purple-bg: #ede9fe;
-  --tag-purple-text: #7c3aed;
-  --tag-green-bg: #d4edda;
-  --tag-green-text: #155724;
+  --color-tag-purple: #ede9fe;
+  --color-tag-purple-foreground: #7c3aed;
+  --color-tag-green: #d4edda;
+  --color-tag-green-foreground: #155724;
 
   /* 遮罩 */
-  --overlay-white: rgba(255, 255, 255, 0.5);
-  --overlay-dark: rgba(0, 0, 0, 0.5);
+  --color-overlay: rgba(0, 0, 0, 0.5);
+  --color-overlay-light: rgba(255, 255, 255, 0.5);
+  --color-overlay-medium: rgba(0, 0, 0, 0.4);
 
   /* 灰度 */
-  --color-gray-50: #f5f6fa;
-  --color-gray-100: #f7f9ff;
-  --color-gray-200: #e5e8ee;
-  --color-gray-300: #dfe3e8;
-  --color-gray-400: #d8e2ff;
-  --color-gray-500: #c7c7cc;
-  --color-gray-600: #727785;
-  --color-gray-700: #414754;
-  --color-gray-800: #181c20;
+  --gray-50: #e6e7eb;
+  --gray-100: #f5f6fa;
+  --gray-200: #e5e8ee;
+  --gray-300: #dfe3e8;
+  --gray-400: #c7c7cc;
+  --gray-500: #b0b0b0;
 
   /* 间距 */
-  --spacing-mn: 4px;
-  --spacing-sm: 8px;
-  --spacing-smd: 12px;
-  --spacing-md: 16px;
-  --spacing-lg: 24px;
-  --spacing-xl: 32px;
-  --spacing-2xl: 48px;
-  --safe-area: 80px;
+  --space-xs: 4px;
+  --space-2xs: 6px;
+  --space-sm: 8px;
+  --space-ms: 12px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-2xl: 48px;
+  --space-safe: 80px;
 
   /* 圆角 */
   --radius-sm: 4px;
@@ -139,49 +127,44 @@
 
 /* ========== 夜间模式 ========== */
 .dark {
-  --primary: #4a8fe0;
-  --primary-dark: #3a7bc8;
-  --primary-light: #1a2a4a;
-  --primary-container: #1a2a4a;
-  --on-primary: #ffffff;
-  --primary-gradient-end: #5a9ff0;
+  --color-primary: #4a8fe0;
+  --color-primary-dark: #3a7bc8;
+  --color-primary-light: #1a2a4a;
+  --color-primary-foreground: #ffffff;
+  --color-primary-gradient: #5a9ff0;
 
-  --on-surface: #e0e0e0;
-  --on-surface-variant: #b0b3b8;
-  --text-primary: #e0e0e0;
-  --text-secondary: #9ea2a8;
+  --color-text: #e0e0e0;
+  --color-text-secondary: #9ea2a8;
+  --color-background: #121212;
+  --color-muted: #1e1e1e;
+  --color-card: #2c2c2c;
 
-  --icon-color: #b0b3b8;
-  --icon-color-secondary: #9ea2a8;
+  --color-border: rgba(255, 255, 255, 0.08);
+  --color-border-strong: rgba(255, 255, 255, 0.12);
+  --color-border-light: rgba(255, 255, 255, 0.06);
 
-  --background: #121212;
-  --background-secondary: #1e1e1e;
-  --background-surface: #2c2c2c;
-  --surface-variant: #2c2c2c;
+  --color-success-light: #1a3a2a;
+  --color-success-bg: rgba(34, 197, 94, 0.2);
+  --color-secondary-light: #3a3520;
+  --color-warning-light: #3a3020;
+  --color-warning-bg: rgba(245, 158, 11, 0.2);
+  --color-destructive-light: #3a1a1a;
+  --color-destructive-bg: rgba(211, 47, 47, 0.2);
+  --color-destructive-bg-hover: rgba(211, 47, 47, 0.3);
+  --color-partial-bg: rgba(255, 255, 255, 0.15);
+  --color-primary-bg: rgba(0, 91, 191, 0.15);
 
-  --border-color: rgba(255, 255, 255, 0.08);
-  --border-color-strong: rgba(255, 255, 255, 0.12);
-  --border-color-light: rgba(255, 255, 255, 0.06);
+  --color-tag-purple: #2e1a4a;
+  --color-tag-purple-foreground: #a78bfa;
+  --color-tag-green: #1a3a2a;
+  --color-tag-green-foreground: #6fcf97;
 
-  --success-light: #1a3a2a;
-  --secondary-light: #3a3520;
-  --warning-light: #3a3020;
-  --error-light: #3a1a1a;
-
-  --tag-purple-bg: #2e1a4a;
-  --tag-purple-text: #a78bfa;
-  --tag-green-bg: #1a3a2a;
-  --tag-green-text: #6fcf97;
-
-  --color-gray-50: #1a1a1e;
-  --color-gray-100: #2c2c2c;
-  --color-gray-200: #3a3a3a;
-  --color-gray-300: #484848;
-  --color-gray-400: #5a5a5a;
-  --color-gray-500: #6a6a6a;
-  --color-gray-600: #9ea2a8;
-  --color-gray-700: #b0b3b8;
-  --color-gray-800: #e0e0e0;
+  --gray-50: #1a1a1e;
+  --gray-100: #2c2c2c;
+  --gray-200: #3a3a3a;
+  --gray-300: #484848;
+  --gray-400: #5a5a5a;
+  --gray-500: #6a6a6a;
 
   --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
   --shadow-md: 0 2px 8px rgba(0, 0, 0, 0.4);
@@ -199,8 +182,8 @@
 
 body {
   font-family: var(--font-family);
-  background: var(--background-secondary);
-  color: var(--on-surface);
+  background: var(--color-muted);
+  color: var(--color-text);
   line-height: var(--line-height-normal);
 }
 
@@ -208,8 +191,8 @@ body {
   min-height: 100vh;
   max-width: var(--app-max-width);
   margin: 0 auto;
-  border-left: 1px solid var(--border-color);
-  border-right: 1px solid var(--border-color);
+  border-left: 1px solid var(--color-border);
+  border-right: 1px solid var(--color-border);
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
 }
 
@@ -223,15 +206,12 @@ button {
   border: none;
   background: none;
   cursor: pointer;
-  
-  /* 🍎 iOS 全局样式修复 */
   -webkit-appearance: none;
   appearance: none;
-  color: var(--text-primary);
+  color: var(--color-text);
 }
 
 button * {
-  /* 确保按钮内所有文字都继承按钮的颜色 */
   color: inherit;
 }
 
@@ -243,7 +223,7 @@ textarea {
 /* 页面容器 */
 .page {
   min-height: 100vh;
-  background: var(--background);
+  background: var(--color-background);
   width: 100%;
   max-width: var(--app-max-width);
   margin: 0 auto;
@@ -251,7 +231,7 @@ textarea {
 
 /* 通用标题 */
 h1 {
-  font-size: var(--font-size-2xl);
+  font-size: var(--font-size-xl);
   font-weight: var(--font-weight-bold);
 }
 h2 {

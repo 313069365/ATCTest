@@ -39,7 +39,7 @@ defineEmits(['close'])
   max-width: var(--app-max-width);
   top: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.45);
+  background: var(--color-overlay-medium);
   z-index: var(--z-popup);
   display: flex;
   align-items: flex-end;
@@ -47,7 +47,7 @@ defineEmits(['close'])
 }
 
 :global(.dark) .sheet-overlay {
-  background: rgba(255, 255, 255, 0.12);
+  background: var(--color-overlay-light);
 }
 
 @keyframes fadeIn {
@@ -67,7 +67,7 @@ defineEmits(['close'])
 }
 
 .sheet-content {
-  background: var(--background-secondary);
+  background: var(--color-muted);
   width: 100%;
   border-radius: var(--radius-xl) var(--radius-xl) 0 0;
   overflow: hidden;
@@ -92,8 +92,8 @@ defineEmits(['close'])
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 6px 16px 12px;
-  background: var(--background);
+  padding: var(--space-2xs) var(--space-md) var(--space-ms);
+  background: var(--color-background);
 }
 
 .drag-handle {
@@ -103,15 +103,15 @@ defineEmits(['close'])
   top: -12px;
   width: 36px;
   height: 5px;
-  border-radius: 3px;
-  background: var(--color-gray-300);
+  border-radius: var(--radius-xs);
+  background: var(--gray-300);
 }
 
 .sheet-title {
   margin-top: 10px;
-  font-size: 17px;
-  font-weight: 600;
-  color: var(--text-primary);
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text);
 }
 
 .sheet-body {
@@ -121,12 +121,12 @@ defineEmits(['close'])
   padding: 12px 16px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: var(--space-ms);
 }
 
 .sheet-footer {
   padding: 12px 16px;
-  background: var(--background);
-  border-top: 1px solid var(--border-color-light);
+  background: var(--color-background);
+  border-top: 1px solid var(--color-border-light);
 }
 </style>

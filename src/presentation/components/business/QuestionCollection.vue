@@ -89,12 +89,12 @@ const topbarStyle = computed(() => {
 <style scoped>
 .page {
   min-height: 100vh;
-  background: var(--background-secondary);
+  background: var(--color-muted);
 }
 
 .hero-section {
   position: relative;
-  background: linear-gradient(165deg, var(--hero-color, var(--primary-light)) 0%, var(--background-secondary) 100%);
+  background: linear-gradient(165deg, var(--hero-color, var(--color-primary-light)) 0%, var(--color-muted) 100%);
   overflow: hidden;
 }
 
@@ -115,7 +115,7 @@ const topbarStyle = computed(() => {
   left: -40px;
   width: 160px;
   height: 160px;
-  background: radial-gradient(circle, var(--hero-color, var(--primary-light)) 0%, transparent 70%);
+  background: radial-gradient(circle, var(--hero-color, var(--color-primary-light)) 0%, transparent 70%);
   filter: blur(30px);
   pointer-events: none;
   opacity: 0.6;
@@ -132,7 +132,7 @@ const topbarStyle = computed(() => {
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  color: var(--on-surface);
+  color: var(--color-text);
   transition: all 0.2s;
   border: 0.5px solid rgba(255, 255, 255, 0.6);
   font-size: var(--font-size-xl);
@@ -144,7 +144,7 @@ const topbarStyle = computed(() => {
 }
 
 .content {
-  padding: var(--spacing-md) var(--spacing-lg);
+  padding: var(--space-md) var(--space-lg);
   position: relative;
   z-index: 1;
 }
@@ -152,7 +152,7 @@ const topbarStyle = computed(() => {
 .item-list {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-md);
+  gap: var(--space-md);
   contain: layout;
 }
 
@@ -176,17 +176,17 @@ const topbarStyle = computed(() => {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: var(--spacing-sm);
-  padding: var(--spacing-lg);
-  color: var(--text-secondary);
+  gap: var(--space-sm);
+  padding: var(--space-lg);
+  color: var(--color-text-secondary);
   font-size: var(--font-size-sm);
 }
 
 .loading-spinner {
   width: 20px;
   height: 20px;
-  border: 2px solid var(--border-color);
-  border-top-color: var(--primary);
+  border: 2px solid var(--color-border);
+  border-top-color: var(--color-primary);
   border-radius: 50%;
   animation: spin 0.8s linear infinite;
 }
@@ -202,14 +202,14 @@ const topbarStyle = computed(() => {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: var(--spacing-md) var(--spacing-lg);
-  margin-bottom: var(--spacing-md);
-  background: var(--primary);
+  padding: var(--space-md) var(--space-lg);
+  margin-bottom: var(--space-md);
+  background: var(--color-primary);
   border: none;
   border-radius: var(--radius-lg);
   cursor: pointer;
   transition: transform 0.15s;
-  color: var(--on-primary);
+  color: var(--color-primary-foreground);
 }
 
 .practice-all-btn:active {
@@ -219,19 +219,19 @@ const topbarStyle = computed(() => {
 .practice-all-left {
   display: flex;
   align-items: center;
-  gap: var(--spacing-md);
+  gap: var(--space-md);
 }
 
 .practice-all-icon {
-  font-size: 28px;
-  color: var(--on-primary);
+  font-size: var(--font-size-2xl);
+  color: var(--color-primary-foreground);
 }
 
 .practice-all-text {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 2px;
+  gap: var(--space-xs);
 }
 
 .practice-all-title {
@@ -245,8 +245,8 @@ const topbarStyle = computed(() => {
 }
 
 .practice-all-arrow {
-  font-size: 24px;
-  color: var(--on-primary);
+  font-size: var(--font-size-2xl);
+  color: var(--color-primary-foreground);
 }
 
 .empty-state {
@@ -254,7 +254,7 @@ const topbarStyle = computed(() => {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: var(--spacing-4xl) var(--spacing-lg);
+  padding: var(--spacing-4xl) var(--space-lg);
   text-align: center;
 }
 
@@ -262,46 +262,46 @@ const topbarStyle = computed(() => {
   width: 80px;
   height: 80px;
   border-radius: 50%;
-  background: var(--success-container);
+  background: var(--color-success-container);
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: var(--spacing-md);
+  margin-bottom: var(--space-md);
 }
 
 .empty-icon-wrapper svg {
   font-size: 40px;
-  color: var(--success);
+  color: var(--color-success);
 }
 
 .empty-state h3 {
   font-size: var(--font-size-lg);
   font-weight: var(--font-weight-bold);
-  color: var(--on-surface);
+  color: var(--color-text);
   margin: 0 0 var(--spacing-xs) 0;
 }
 
 .empty-state p {
   font-size: var(--font-size-md);
-  color: var(--text-secondary);
-  margin: 0 0 var(--spacing-xl) 0;
+  color: var(--color-text-secondary);
+  margin: 0 0 var(--space-xl) 0;
 }
 
 .start-btn {
-  background: var(--primary);
-  color: var(--on-primary);
+  background: var(--color-primary);
+  color: var(--color-primary-foreground);
   border: none;
   border-radius: var(--radius-xl);
-  padding: var(--spacing-md) var(--spacing-xl);
+  padding: var(--space-md) var(--space-xl);
   font-size: var(--font-size-lg);
   font-weight: var(--font-weight-bold);
   cursor: pointer;
-  box-shadow: 0 4px 12px rgba(0, 91, 191, 0.25);
+  box-shadow: 0 4px 12px var(--color-primary-bg);
   transition: all 0.2s;
 }
 
 .start-btn:active {
   transform: scale(0.96);
-  box-shadow: 0 2px 8px rgba(0, 91, 191, 0.2);
+  box-shadow: 0 2px 8px var(--color-primary-bg);
 }
 </style>

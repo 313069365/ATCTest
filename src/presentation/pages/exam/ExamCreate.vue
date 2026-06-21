@@ -410,7 +410,7 @@ async function createPaper() {
 <style scoped>
 .create-page {
     min-height: 100vh;
-    background: var(--background-secondary);
+    background: var(--color-muted);
     display: flex;
     flex-direction: column;
 }
@@ -421,32 +421,32 @@ async function createPaper() {
     padding: 12px 16px 88px;
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: var(--space-ms);
 }
 
 /* Card */
 .form-card {
-    background: var(--background);
-    border-radius: 12px;
+    background: var(--color-background);
+    border-radius: var(--radius-lg);
     overflow: hidden;
 }
 
 .card-header {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: var(--space-sm);
     padding: 12px 16px;
-    font-size: 15px;
-    font-weight: 600;
-    color: var(--on-surface);
-    border-bottom: 1px solid var(--border-color-light);
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text);
+    border-bottom: 1px solid var(--color-border-light);
 }
 
 .card-bar {
     width: 3px;
     height: 16px;
-    background: var(--primary);
-    border-radius: 2px;
+    background: var(--color-primary);
+    border-radius: var(--radius-xs);
 }
 
 .header-add {
@@ -454,74 +454,74 @@ async function createPaper() {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: var(--primary);
+    background: var(--color-primary);
     border: none;
     padding: 4px 8px;
     border-radius: var(--radius-sm);
-    color: #fff;
+    color: var(--color-primary-foreground);
     cursor: pointer;
-    font-weight: 600;
+    font-weight: var(--font-weight-semibold);
     transition: all 0.15s;
 }
 
 .header-add:active {
-    background: var(--primary);
-    color: #fff;
+    background: var(--color-primary);
+    color: var(--color-primary-foreground);
 }
 
 .card-body {
     padding: 8px 16px;
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: var(--space-ms);
 }
 
 /* Form */
 .form-group {
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: var(--space-2xs);
     flex: 1;
 }
 
 .form-group label {
-    font-size: 14px;
-    font-weight: 500;
-    color: var(--text-secondary);
+    font-size: var(--font-size-md);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-text-secondary);
 }
 
 .req {
-    color: var(--error);
+    color: var(--color-destructive);
 }
 
 .form-group input {
     width: 100%;
     padding: 10px 12px;
-    border: 1.5px solid var(--border-color-light);
+    border: 1.5px solid var(--color-border-light);
     border-radius: 10px;
-    background: var(--background-secondary);
-    font-size: 15px;
-    color: var(--on-surface);
+    background: var(--color-muted);
+    font-size: var(--font-size-lg);
+    color: var(--color-text);
     transition: border-color 0.15s;
 }
 
 .form-group input:focus {
     outline: none;
-    border-color: var(--primary);
+    border-color: var(--color-primary);
 }
 
 .form-group input.error {
-    border-color: var(--error);
+    border-color: var(--color-destructive);
 }
 
 .form-row {
     display: flex;
-    gap: 12px;
+    gap: var(--space-ms);
 }
 
 .scope-row {
     display: flex;
-    gap: 8px;
+    gap: var(--space-sm);
 }
 
 .scope-opt {
@@ -530,12 +530,12 @@ async function createPaper() {
     align-items: center;
     justify-content: center;
     padding: 8px;
-    border: 1.5px solid var(--border-color);
+    border: 1.5px solid var(--color-border);
     border-radius: 10px;
-    font-size: 14px;
+    font-size: var(--font-size-md);
     cursor: pointer;
     transition: all 0.15s;
-    background: var(--background-secondary);
+    background: var(--color-muted);
 }
 
 .scope-opt input {
@@ -543,10 +543,10 @@ async function createPaper() {
 }
 
 .scope-opt.on {
-    border-color: var(--primary);
-    background: var(--primary-light);
-    color: var(--primary);
-    font-weight: 600;
+    border-color: var(--color-primary);
+    background: var(--color-primary-light);
+    color: var(--color-primary);
+    font-weight: var(--font-weight-semibold);
 }
 
 .password-input {
@@ -557,14 +557,14 @@ async function createPaper() {
 .subject-list {
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: var(--space-2xs);
 }
 
 .subject-card {
-    background: var(--background-secondary);
-    border-radius: 10px;
+    background: var(--color-muted);
+    border-radius: var(--radius-md);
     padding: 10px 12px;
-    border: 1px solid var(--primary);
+    border: 1px solid var(--color-primary);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
@@ -575,9 +575,9 @@ async function createPaper() {
 }
 
 .subject-name {
-    font-size: 15px;
-    font-weight: 600;
-    color: var(--on-surface);
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text);
 }
 
 .btn-del {
@@ -585,9 +585,9 @@ async function createPaper() {
     height: 24px;
     border: none;
     background: transparent;
-    border-radius: 6px;
+    border-radius: var(--radius-sm);
     cursor: pointer;
-    color: var(--text-disabled);
+    color: var(--color-disabled);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -595,26 +595,26 @@ async function createPaper() {
 
 .btn-del:active {
     background: rgba(255, 59, 48, 0.1);
-    color: var(--error);
+    color: var(--color-destructive);
 }
 
 .subject-info {
     display: flex;
     gap: 5px;
-    font-size: 13px;
-    color: var(--text-secondary);
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
     margin-top: 2px;
 }
 
 .dot {
-    color: var(--text-disabled);
+    color: var(--color-disabled);
 }
 
 /* 预设区 */
 .preset-section {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: var(--space-ms);
 }
 
 
@@ -622,36 +622,36 @@ async function createPaper() {
 .preset-list {
     display: flex;
     flex-wrap: wrap;
-    gap: 8px;
+    gap: var(--space-sm);
 }
 
 .preset-chip {
     display: flex;
     align-items: center;
-    gap: 6px;
-    padding: 6px 12px;
-    border: 1.5px dashed var(--border-color);
-    border-radius: 8px;
+    gap: var(--space-2xs);
+    padding: var(--space-2xs) var(--space-ms);
+    border: 1.5px dashed var(--color-border);
+    border-radius: var(--radius-md);
     background: transparent;
     cursor: pointer;
     transition: all 0.15s;
 }
 
 .preset-chip:active {
-    border-color: var(--primary);
+    border-color: var(--color-primary);
     border-style: solid;
-    background: var(--primary-light);
+    background: var(--color-primary-light);
 }
 
 .preset-chip-name {
-    font-size: 13px;
-    font-weight: 500;
-    color: var(--on-surface);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-text);
 }
 
 .preset-chip-count {
-    font-size: 11px;
-    color: var(--text-disabled);
+    font-size: var(--font-size-sm);
+    color: var(--color-disabled);
 }
 
 .preset-chip-del {
@@ -661,30 +661,30 @@ async function createPaper() {
     align-items: center;
     justify-content: center;
     border-radius: 50%;
-    background: var(--background-secondary);
-    color: var(--text-disabled);
+    background: var(--color-muted);
+    color: var(--color-disabled);
     transition: all 0.15s;
     margin-left: 2px;
 }
 
 .preset-chip-del svg {
-    font-size: 12px;
+    font-size: var(--font-size-sm);
 }
 
 .preset-chip-del:active {
-    background: var(--error-light);
-    color: var(--error);
+    background: var(--color-destructive-light);
+    color: var(--color-destructive);
 }
 
 .preset-chip-add {
     display: flex;
     align-items: center;
-    gap: 6px;
-    padding: 6px 12px;
-    border: 1.5px solid var(--background-secondary);
-    border-radius: 8px;
-    color: var(--color-gray-600);
-    font-weight: 600;
+    gap: var(--space-2xs);
+    padding: var(--space-2xs) var(--space-ms);
+    border: 1.5px solid var(--color-muted);
+    border-radius: var(--radius-md);
+    color: var(--color-text-secondary);
+    font-weight: var(--font-weight-semibold);
     background: transparent;
     cursor: pointer;
     transition: all 0.15s;
@@ -695,17 +695,17 @@ async function createPaper() {
     flex-direction: column;
     align-items: center;
     padding: 20px;
-    color: var(--text-disabled);
+    color: var(--color-disabled);
 }
 
 .preset-empty svg {
-    font-size: 32px;
+    font-size: var(--font-size-3xl);
     opacity: 0.4;
-    margin-bottom: 6px;
+    margin-bottom: var(--space-2xs);
 }
 
 .preset-empty p {
-    font-size: 13px;
+    font-size: var(--font-size-sm);
     text-align: center;
     margin: 0;
 }
@@ -714,35 +714,35 @@ async function createPaper() {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 6px;
+    gap: var(--space-2xs);
     padding: 10px;
-    border: 1.5px dashed var(--border-color);
+    border: 1.5px dashed var(--color-border);
     border-radius: 10px;
     background: transparent;
-    color: var(--primary);
-    font-size: 14px;
-    font-weight: 500;
+    color: var(--color-primary);
+    font-size: var(--font-size-md);
+    font-weight: var(--font-weight-medium);
     cursor: pointer;
     transition: all 0.15s;
 }
 
 .add-subject-btn:active {
-    border-color: var(--primary);
-    background: var(--primary-light);
+    border-color: var(--color-primary);
+    background: var(--color-primary-light);
 }
 
 .save-preset-btn {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 6px;
+    gap: var(--space-2xs);
     padding: 10px;
-    border: 1.5px solid var(--primary);
-    border-radius: 10px;
-    background: var(--primary-light);
-    color: var(--primary);
-    font-size: 14px;
-    font-weight: 500;
+    border: 1.5px solid var(--color-primary);
+    border-radius: var(--radius-md);
+    background: var(--color-primary-light);
+    color: var(--color-primary);
+    font-size: var(--font-size-md);
+    font-weight: var(--font-weight-medium);
     cursor: pointer;
     transition: all 0.15s;
 }
@@ -753,8 +753,8 @@ async function createPaper() {
 }
 
 .save-preset-btn:active:not(:disabled) {
-    background: var(--primary);
-    color: #fff;
+    background: var(--color-primary);
+    color: var(--color-primary-foreground);
 }
 
 /* 预设对话框 */
@@ -762,7 +762,7 @@ async function createPaper() {
     position: fixed;
     inset: 0;
     z-index: 200;
-    background: rgba(0, 0, 0, 0.4);
+    background: var(--color-overlay-medium);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -770,8 +770,8 @@ async function createPaper() {
 }
 
 .preset-dialog {
-    background: var(--background);
-    border-radius: 16px;
+    background: var(--color-background);
+    border-radius: var(--radius-xl);
     padding: 20px;
     width: 100%;
     max-width: 380px;
@@ -788,9 +788,9 @@ async function createPaper() {
 }
 
 .preset-dialog-title {
-    font-size: 17px;
-    font-weight: 700;
-    color: var(--on-surface);
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-text);
     margin: 0;
 }
 
@@ -801,40 +801,40 @@ async function createPaper() {
     align-items: center;
     justify-content: center;
     border: none;
-    background: var(--background-secondary);
+    background: var(--color-muted);
     border-radius: 50%;
     cursor: pointer;
-    color: var(--text-secondary);
+    color: var(--color-text-secondary);
     transition: all 0.15s;
 }
 
 .preset-dialog-close:active {
-    background: var(--background);
-    color: var(--on-surface);
+    background: var(--color-background);
+    color: var(--color-text);
 }
 
 .preset-dialog-input {
     width: 100%;
     padding: 10px 12px;
-    border: 1.5px solid var(--border-color);
+    border: 1.5px solid var(--color-border);
     border-radius: 10px;
-    font-size: 15px;
-    color: var(--on-surface);
-    background: var(--background-secondary);
+    font-size: var(--font-size-lg);
+    color: var(--color-text);
+    background: var(--color-muted);
     margin-bottom: 10px;
 }
 
 .preset-dialog-input:focus {
     outline: none;
-    border-color: var(--primary);
+    border-color: var(--color-primary);
 }
 
 .preset-dialog-info {
     display: flex;
     align-items: center;
-    gap: 6px;
-    font-size: 13px;
-    color: var(--text-secondary);
+    gap: var(--space-2xs);
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
     margin-bottom: 16px;
 }
 
@@ -844,7 +844,7 @@ async function createPaper() {
 
 .preset-dialog-actions {
     display: flex;
-    gap: 10px;
+    gap: var(--space-ms);
 }
 
 .btn-cancel,
@@ -853,20 +853,20 @@ async function createPaper() {
     padding: 10px;
     border: none;
     border-radius: 10px;
-    font-size: 15px;
-    font-weight: 600;
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-semibold);
     cursor: pointer;
     transition: all 0.15s;
 }
 
 .btn-cancel {
-    background: var(--background-secondary);
-    color: var(--text-secondary);
+    background: var(--color-muted);
+    color: var(--color-text-secondary);
 }
 
 .btn-confirm {
-    background: var(--primary);
-    color: #fff;
+    background: var(--color-primary);
+    color: var(--color-primary-foreground);
 }
 
 .btn-confirm:disabled {
@@ -882,16 +882,15 @@ async function createPaper() {
     display: flex;
     justify-content: space-between;
     padding: 4px 8px 0;
-    /* background: var(--secondary); */
-    border-radius: 8px;
-    font-size: 14px;
-    color: var(--text-secondary);
+    border-radius: var(--radius-md);
+    font-size: var(--font-size-md);
+    color: var(--color-text-secondary);
 }
 
 .summary-row strong {
-    color: var(--primary);
-    font-weight: 700;
-    font-size: 15px;
+    color: var(--color-primary);
+    font-weight: var(--font-weight-bold);
+    font-size: var(--font-size-lg);
 }
 
 /* Bottom bar */
@@ -904,8 +903,8 @@ async function createPaper() {
     max-width: var(--app-max-width);
     padding: 10px 16px;
     padding-bottom: calc(10px + env(safe-area-inset-bottom, 0px));
-    background: var(--background);
-    border-top: 1px solid var(--border-color-light);
+    background: var(--color-background);
+    border-top: 1px solid var(--color-border-light);
     z-index: 50;
     display: flex;
     align-items: center;
@@ -916,19 +915,19 @@ async function createPaper() {
 
     width: 60%;
     height: 48px;
-    background: var(--primary);
-    color: #fff;
+    background: var(--color-primary);
+    color: var(--color-primary-foreground);
     border: none;
     border-radius: var(--radius-full);
-    font-size: 16px;
-    font-weight: 600;
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-semibold);
     cursor: pointer;
     transition: all 0.15s;
-    box-shadow: 0 4px 12px rgba(0, 91, 191, 0.2);
+    box-shadow: 0 4px 12px var(--color-primary-bg);
 }
 
 .create-btn:disabled {
-    background: var(--color-gray-300, #d1d5db);
+    background: var(--gray-300, #d1d5db);
     box-shadow: none;
     cursor: not-allowed;
 }

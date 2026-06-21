@@ -32,7 +32,7 @@
         <span class="progress-label" @click="openJumpDialog">{{ currentIndex + 1 }} / {{ isExamMode ? questions.length
           :
           bank.length
-          }}</span>
+        }}</span>
         <div class="action-bar-right">
           <button v-for="btn in visibleButtons" :key="btn.key" class="action-btn"
             :class="{ active: btn.active?.value, 'remove-btn': btn.key === 'removeWrong' }" @click="btn.action"
@@ -986,7 +986,7 @@ const visibleButtons = computed(() =>
 <style scoped>
 .page {
   min-height: 100vh;
-  background: var(--background-secondary);
+  background: var(--color-muted);
   max-width: var(--app-max-width);
   margin: 0 auto;
   padding-bottom: 120px;
@@ -996,7 +996,7 @@ const visibleButtons = computed(() =>
   position: sticky;
   top: 0;
   z-index: 100;
-  background: var(--background);
+  background: var(--color-background);
   backdrop-filter: blur(8px);
   display: flex;
   align-items: center;
@@ -1008,47 +1008,47 @@ const visibleButtons = computed(() =>
 .top-bar-left {
   display: flex;
   align-items: center;
-  gap: var(--spacing-sm);
+  gap: var(--space-sm);
   cursor: pointer;
 }
 
 .header-title h1 {
   font-size: var(--font-size-md);
   font-weight: var(--font-weight-semibold);
-  color: var(--text-primary);
+  color: var(--color-text);
 }
 
 .header-subtitle {
   display: block;
   font-size: var(--font-size-sm);
-  color: var(--text-secondary);
+  color: var(--color-text-secondary);
 }
 
 .top-bar-right {
   display: flex;
   align-items: center;
-  gap: var(--spacing-sm);
+  gap: var(--space-sm);
 }
 
 .timer-display {
   display: flex;
   align-items: center;
-  gap: var(--spacing-mn);
-  padding: var(--spacing-sm) var(--spacing-md);
-  background: var(--color-gray-100);
+  gap: var(--space-xs);
+  padding: var(--space-sm) var(--space-md);
+  background: var(--gray-100);
   border-radius: var(--radius-full);
   font-size: var(--font-size-md);
-  color: var(--primary);
+  color: var(--color-primary);
   font-weight: var(--font-weight-semibold);
 }
 
 .timer-display.warning {
-  color: var(--error);
-  background: var(--error-container);
+  color: var(--color-destructive);
+  background: var(--color-destructive-container);
 }
 
 .timer-display svg {
-  font-size: var(--font-size-2xl);
+  font-size: var(--font-size-md);
 }
 
 .grid-btn {
@@ -1062,32 +1062,32 @@ const visibleButtons = computed(() =>
 }
 
 .grid-btn svg {
-  font-size: var(--font-size-3xl);
+  font-size: var(--font-size-2xl);
 }
 
 .grid-btn.active svg {
-  color: var(--primary);
+  color: var(--color-primary);
 }
 
 .progress-action-bar {
-  background: var(--background);
-  border-bottom: 1px solid var(--border-color-light);
+  background: var(--color-background);
+  border-bottom: 1px solid var(--color-border-light);
 }
 
 .progress-bar-container {
-  padding: 0 var(--spacing-md);
+  padding: 0 var(--space-md);
 }
 
 .progress-bar {
   height: 6px;
-  background: var(--color-gray-300);
+  background: var(--gray-300);
   border-radius: var(--radius-full);
   overflow: hidden;
 }
 
 .progress {
   height: 100%;
-  background: var(--primary);
+  background: var(--color-primary);
   border-radius: var(--radius-full);
 }
 
@@ -1095,20 +1095,20 @@ const visibleButtons = computed(() =>
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 6px;
-  padding: 4px var(--spacing-md) 6px;
+  gap: var(--space-2xs);
+  padding: 4px var(--space-md) var(--space-2xs);
 }
 
 .action-bar-right {
   display: flex;
-  gap: 6px;
+  gap: var(--space-2xs);
 }
 
 .progress-label {
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-semibold);
-  color: var(--partial);
-  background: var(--partial-light);
+  color: var(--color-partial);
+  background: var(--color-partial-light);
   padding: 2px 8px;
   border-radius: var(--radius-full);
   cursor: pointer;
@@ -1124,24 +1124,24 @@ const visibleButtons = computed(() =>
   border: none;
   border-radius: var(--radius-full);
   background: transparent;
-  color: var(--icon-color);
+  color: var(--color-text-secondary);
   cursor: pointer;
   transition: all 0.2s;
 }
 
 .action-btn:hover {
-  background: var(--color-gray-200);
+  background: var(--gray-200);
 }
 
 .action-btn.active {
-  color: var(--accent);
+  color: var(--color-accent);
 }
 
 .action-btn svg {
-  font-size: 18px;
+  font-size: var(--font-size-xl);
 }
 
 .question-container {
-  padding: var(--spacing-md);
+  padding: var(--space-md);
 }
 </style>

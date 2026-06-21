@@ -166,39 +166,39 @@ const handleInput = (e) => {
 .question-meta {
   display: flex;
   align-items: center;
-  gap: var(--spacing-md);
-  margin-bottom: var(--spacing-md);
+  gap: var(--space-md);
+  margin-bottom: var(--space-md);
 }
 
 .question-type-tag {
-  padding: var(--spacing-mn) var(--spacing-sm);
-  background: var(--primary-light);
-  color: var(--primary);
+  padding: var(--space-xs) var(--space-sm);
+  background: var(--color-primary-light);
+  color: var(--color-primary);
   border-radius: var(--radius-sm);
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-semibold);
 }
 
 .question-id {
-  color: var(--text-secondary);
+  color: var(--color-text-secondary);
   font-size: var(--font-size-sm);
 }
 
 .question-difficulty {
   margin-left: auto;
-  padding: var(--spacing-mn) var(--spacing-sm);
-  background: var(--color-gray-100);
-  color: var(--text-secondary);
+  padding: var(--space-xs) var(--space-sm);
+  background: var(--gray-100);
+  color: var(--color-text-secondary);
   border-radius: var(--radius-sm);
   font-size: var(--font-size-sm);
 }
 
 
 .question-stem {
-  padding: var(--spacing-sm) var(--spacing-md);
-  background: var(--background);
+  padding: var(--space-sm) var(--space-md);
+  background: var(--color-background);
   border: 1px solid transparent;
-  margin-bottom: var(--spacing-md);
+  margin-bottom: var(--space-md);
   border-radius: 0 0 var(--radius-lg) var(--radius-lg);
   box-shadow: var(--shadow-md);
 }
@@ -206,144 +206,144 @@ const handleInput = (e) => {
 .question-text {
   font-size: var(--font-size-lg);
   font-weight: var(--font-weight-medium);
-  color: var(--on-surface);
-  line-height: 1.6;
+  color: var(--color-text);
+  line-height: var(--line-height-relaxed);
 }
 
 .answer-input {
-  margin-bottom: var(--spacing-md);
+  margin-bottom: var(--space-md);
 }
 
 .text-input {
   width: 100%;
-  padding: var(--spacing-md);
+  padding: var(--space-md);
   font-size: var(--font-size-md);
-  border: 1px solid var(--border-color);
+  border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
-  background: var(--background);
+  background: var(--color-background);
 }
 
 .text-input:focus {
   outline: none;
-  border-color: var(--primary);
+  border-color: var(--color-primary);
 }
 
 .text-input.correct {
-  border-color: var(--success);
-  background: var(--success-light);
+  border-color: var(--color-success);
+  background: var(--color-success-light);
 }
 
 .text-input.wrong {
-  border-color: var(--error);
-  background: var(--error-light);
+  border-color: var(--color-destructive);
+  background: var(--color-destructive-light);
 }
 
 .text-input:disabled {
-  background: var(--color-gray-100);
+  background: var(--gray-100);
   cursor: not-allowed;
 }
 
 .answer-section {
-  margin-top: var(--spacing-lg);
+  margin-top: var(--space-lg);
 }
 
 .correct-answer {
-  padding: var(--spacing-md);
-  background: var(--color-gray-100);
+  padding: var(--space-md);
+  background: var(--gray-100);
   border-radius: var(--radius-md);
-  margin-bottom: var(--spacing-md);
+  margin-bottom: var(--space-md);
 }
 
 .correct-answer .label {
   font-weight: var(--font-weight-semibold);
-  margin-right: var(--spacing-sm);
+  margin-right: var(--space-sm);
 }
 
 .correct-answer .answer {
-  color: var(--success);
+  color: var(--color-success);
   font-weight: var(--font-weight-medium);
 }
 
 .explanation-section {
-  padding: var(--spacing-md);
-  background: var(--color-gray-100);
+  padding: var(--space-md);
+  background: var(--gray-100);
   border-radius: var(--radius-md);
 }
 
 .explanation-header {
   display: flex;
   align-items: center;
-  gap: var(--spacing-sm);
-  margin-bottom: var(--spacing-sm);
-  color: var(--primary);
+  gap: var(--space-sm);
+  margin-bottom: var(--space-sm);
+  color: var(--color-primary);
   font-weight: var(--font-weight-semibold);
 }
 
 .tag-block {
-  margin-bottom: var(--spacing-sm);
+  margin-bottom: var(--space-sm);
 }
 
 .tag {
   display: inline-block;
   padding: 2px 8px;
-  border-radius: 4px;
-  font-size: 12px;
+  border-radius: var(--radius-sm);
+  font-size: var(--font-size-sm);
   font-weight: var(--font-weight-semibold);
   line-height: 1.5;
 }
 
 .tag-purple {
-  background: var(--tag-purple-bg);
-  color: var(--tag-purple-text);
+  background: var(--color-tag-purple);
+  color: var(--color-tag-purple-foreground);
 }
 
 .tag-blue {
-  background: var(--primary-light);
-  color: var(--primary);
+  background: var(--color-primary-light);
+  color: var(--color-primary);
 }
 
 .tag-green {
-  background: var(--tag-green-bg);
-  color: var(--tag-green-text);
+  background: var(--color-tag-green);
+  color: var(--color-tag-green-foreground);
 }
 
 .tag-text {
-  margin-left: var(--spacing-sm);
+  margin-left: var(--space-sm);
   font-size: var(--font-size-md);
-  color: var(--on-surface);
-  line-height: 1.6;
+  color: var(--color-text);
+  line-height: var(--line-height-relaxed);
 }
 
 .explanation-content {
   font-size: var(--font-size-md);
-  color: var(--on-surface);
-  line-height: 1.6;
+  color: var(--color-text);
+  line-height: var(--line-height-relaxed);
 }
 
 .tip-content {
   font-size: var(--font-size-md);
-  color: var(--on-surface);
-  line-height: 1.6;
+  color: var(--color-text);
+  line-height: var(--line-height-relaxed);
 }
 
 hr {
-  margin: var(--spacing-sm) 0;
+  margin: var(--space-sm) 0;
   border: none;
-  border-top: 1px solid var(--border-color);
+  border-top: 1px solid var(--color-border);
 }
 
 .check-answer {
-  margin-top: var(--spacing-md);
+  margin-top: var(--space-md);
   text-align: center;
 }
 
 .check-answer .check-btn {
   display: inline-flex;
   align-items: center;
-  gap: var(--spacing-sm);
-  padding: var(--spacing-md) var(--spacing-xl);
-  background: var(--primary);
-  color: var(--on-primary);
+  gap: var(--space-sm);
+  padding: var(--space-md) var(--space-xl);
+  background: var(--color-primary);
+  color: var(--color-primary-foreground);
   border: none;
   border-radius: var(--radius-lg);
   font-size: var(--font-size-md);

@@ -26,7 +26,7 @@ function goBack() {
 <style scoped>
 .settings {
   min-height: 100vh;
-  background: var(--background-secondary);
+  background: var(--color-muted);
   max-width: var(--app-max-width);
   margin: 0 auto;
   display: flex;
@@ -46,7 +46,7 @@ function goBack() {
   text-align: center;
   padding: 24px 16px 32px;
   font-size: var(--font-size-sm);
-  color: var(--text-secondary);
+  color: var(--color-text-secondary);
   margin-top: auto;
 }
 </style>

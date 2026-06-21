@@ -34,7 +34,7 @@ onMounted(() => {
 .app-container {
   min-height: 100vh;
   position: relative;
-  background: var(--background-secondary);
+  background: var(--color-muted);
   max-width: var(--app-max-width);
   margin: 0 auto;
 }
@@ -46,7 +46,7 @@ onMounted(() => {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--background);
+  background: var(--color-background);
 }
 
 .loading-content {
@@ -54,14 +54,14 @@ onMounted(() => {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 16px;
+  gap: var(--space-md);
 }
 
 .spinner {
   width: 40px;
   height: 40px;
-  border: 3px solid var(--border-color);
-  border-top-color: var(--primary);
+  border: 3px solid var(--color-border);
+  border-top-color: var(--color-primary);
   border-radius: 50%;
   animation: spin 0.8s linear infinite;
 }
@@ -74,21 +74,21 @@ onMounted(() => {
 
 .loading-text {
   font-size: var(--font-size-md);
-  color: var(--on-surface-variant);
+  color: var(--color-text-secondary);
 }
 
 .progress-bar {
   width: 200px;
   height: 4px;
-  background: var(--border-color-light);
-  border-radius: 2px;
+  background: var(--color-border-light);
+  border-radius: var(--radius-xs);
   overflow: hidden;
 }
 
 .progress-fill {
   height: 100%;
-  background: var(--primary);
-  border-radius: 2px;
+  background: var(--color-primary);
+  border-radius: var(--radius-xs);
   transition: width 0.3s ease;
 }
 </style>

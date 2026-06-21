@@ -32,15 +32,15 @@ const navbarItems = [
   bottom: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: calc(400px - (var(--spacing-sm) * 2));
+  width: calc(400px - (var(--space-sm) * 2));
   display: flex;
   justify-content: space-around;
-  background: var(--background);
-  border-top: 1px solid var(--border-color-light);
+  background: var(--color-background);
+  border-top: 1px solid var(--color-border-light);
   border-radius: var(--radius-full);
   box-shadow: var(--shadow-md);
-  padding: 0 var(--spacing-sm);
-  margin-bottom: var(--spacing-sm);
+  padding: 0 var(--space-sm);
+  margin-bottom: var(--space-sm);
   z-index: var(--z-fixed);
 }
 
@@ -48,13 +48,13 @@ const navbarItems = [
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: var(--spacing-sm);
-  color: var(--text-secondary);
+  padding: var(--space-sm);
+  color: var(--color-text-secondary);
   transition: color var(--transition-normal);
 }
 
 .nav-item .icon {
-  font-size: 20px;
+  font-size: var(--font-size-xl);
 }
 
 .nav-item .label {
@@ -63,11 +63,11 @@ const navbarItems = [
 }
 
 .nav-item.active {
-  color: var(--primary);
+  color: var(--color-primary);
 }
 
 .nav-item.active .icon {
   transform: scale(1.1);
-  filter: drop-shadow(0 2px 4px rgba(0, 91, 191, 0.3));
+  filter: drop-shadow(0 2px 4px var(--color-primary-bg));
 }
 </style>

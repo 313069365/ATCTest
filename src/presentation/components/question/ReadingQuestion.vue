@@ -229,14 +229,14 @@ watch(() => props.question, () => {
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-md);
+  gap: var(--space-md);
 }
 
 .reading-content {
-  padding: var(--spacing-md);
-  background: var(--background);
+  padding: var(--space-md);
+  background: var(--color-background);
   border-radius: var(--radius-lg);
-  color: var(--on-surface);
+  color: var(--color-text);
   line-height: 1.8;
   white-space: pre-wrap;
 }
@@ -246,19 +246,19 @@ watch(() => props.question, () => {
   hyphens: auto;
   overflow-wrap: break-word;
   line-height: 1.8;
-  font-size: 15px;
+  font-size: var(--font-size-lg);
 }
 
 .reading-divider {
   position: relative;
   display: flex;
   align-items: center;
-  gap: var(--spacing-sm);
-  margin: 0 0 var(--spacing-sm);
+  gap: var(--space-sm);
+  margin: 0 0 var(--space-sm);
 }
 
 .reading-divider.with-top {
-  margin: var(--spacing-sm) 0;
+  margin: var(--space-sm) 0;
 }
 
 .reading-notch {
@@ -266,7 +266,7 @@ watch(() => props.question, () => {
   width: 14px;
   height: 14px;
   border-radius: 50%;
-  background: var(--background-secondary);
+  background: var(--color-muted);
   top: 50%;
   transform: translateY(-50%);
   z-index: 1;
@@ -285,21 +285,21 @@ watch(() => props.question, () => {
   content: '';
   flex: 1;
   height: 1px;
-  background: var(--border-color-strong);
+  background: var(--color-border-strong);
 }
 
 .reading-divider-label {
   font-size: var(--font-size-sm);
-  color: var(--text-disabled);
-  font-weight: 500;
+  color: var(--color-disabled);
+  font-weight: var(--font-weight-medium);
   flex-shrink: 0;
 }
 
 .reading-translation {
   white-space: pre-wrap;
-  color: var(--text-secondary);
+  color: var(--color-text-secondary);
   line-height: 1.8;
-  font-size: 16px;
+  font-size: var(--font-size-lg);
 }
 
 .sub-question-section {
@@ -310,63 +310,63 @@ watch(() => props.question, () => {
 .sub-question-header {
   display: flex;
   align-items: center;
-  gap: var(--spacing-sm);
-  padding: var(--spacing-md) var(--spacing-md) 0 var(--spacing-md);
-  background: var(--background);
+  gap: var(--space-sm);
+  padding: var(--space-md) var(--space-md) 0 var(--space-md);
+  background: var(--color-background);
   border-radius: var(--radius-lg) var(--radius-lg) 0 0;
 }
 
 .sub-index {
   font-size: var(--font-size-lg);
   font-weight: var(--font-weight-semibold);
-  color: var(--primary);
+  color: var(--color-primary);
 }
 
 .sub-type-tag {
   font-size: var(--font-size-sm);
-  color: var(--text-secondary);
-  background: var(--color-gray-100);
+  color: var(--color-text-secondary);
+  background: var(--gray-100);
   padding: 2px 8px;
   border-radius: var(--radius-sm);
 }
 
 .sub-explanation {
-  margin-top: var(--spacing-md);
-  padding: var(--spacing-md);
-  background: var(--color-gray-100);
+  margin-top: var(--space-md);
+  padding: var(--space-md);
+  background: var(--gray-100);
   border-radius: var(--radius-md);
 }
 
 .sub-explanation .explanation-header {
   display: flex;
   align-items: center;
-  gap: var(--spacing-sm);
-  margin-bottom: var(--spacing-sm);
-  color: var(--primary);
+  gap: var(--space-sm);
+  margin-bottom: var(--space-sm);
+  color: var(--color-primary);
   font-weight: var(--font-weight-semibold);
 }
 
 .sub-explanation .explanation-content {
   font-size: var(--font-size-md);
-  color: var(--on-surface);
-  line-height: 1.6;
+  color: var(--color-text);
+  line-height: var(--line-height-relaxed);
 }
 
 .sub-check-answer {
   display: flex;
   justify-content: center;
-  margin-top: var(--spacing-md);
+  margin-top: var(--space-md);
 }
 
 .sub-check-answer .check-btn {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: var(--spacing-sm) var(--spacing-lg);
-  border: 1px solid var(--color-gray-500);
+  padding: var(--space-sm) var(--space-lg);
+  border: 1px solid var(--gray-500);
   border-radius: var(--radius-full);
-  background: var(--background);
-  color: var(--primary);
+  background: var(--color-background);
+  color: var(--color-primary);
   font-size: var(--font-size-md);
   font-weight: var(--font-weight-bold);
   cursor: pointer;
@@ -374,7 +374,7 @@ watch(() => props.question, () => {
 }
 
 .sub-check-answer .check-btn:hover {
-  background: var(--color-gray-100);
+  background: var(--gray-100);
 }
 
 .sub-check-answer .check-btn:active {

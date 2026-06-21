@@ -149,10 +149,10 @@ function getWrongCount(questionId) {
 
 <style scoped>
 .glass {
-  background: var(--background);
-  border: 1px solid var(--border-color-light);
+  background: var(--color-background);
+  border: 1px solid var(--color-border-light);
   border-radius: var(--radius-lg);
-  padding: var(--spacing-md);
+  padding: var(--space-md);
   box-shadow: var(--shadow-md);
 }
 
@@ -160,20 +160,20 @@ function getWrongCount(questionId) {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: var(--spacing-sm);
+  margin-bottom: var(--space-sm);
 }
 
 .meta-top {
   display: flex;
   align-items: center;
-  gap: var(--spacing-sm);
+  gap: var(--space-sm);
   flex-wrap: wrap;
 }
 
 .badge {
   font-size: var(--font-size-sm);
-  color: var(--text-secondary);
-  background: rgba(0, 91, 191, 0.1);
+  color: var(--color-text-secondary);
+  background: var(--color-primary-bg);
   padding: 4px 10px;
   border-radius: var(--radius-md);
 }
@@ -181,8 +181,8 @@ function getWrongCount(questionId) {
 .subject-tag {
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-medium);
-  color: var(--primary);
-  background: rgba(0, 0, 0, 0.05);
+  color: var(--color-primary);
+  background: var(--shadow-sm);
   padding: 4px 10px;
   border-radius: var(--radius-md);
 }
@@ -191,18 +191,18 @@ function getWrongCount(questionId) {
   width: 25px;
   height: 25px;
   border: none;
-  background: rgba(211, 47, 47, 0.1);
+  background: var(--color-destructive-bg);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  color: var(--error);
+  color: var(--color-destructive);
   transition: all 0.2s;
 }
 
 .delete-btn:hover {
-  background: rgba(211, 47, 47, 0.2);
+  background: var(--color-destructive-bg-hover);
 }
 
 .delete-btn:active {
@@ -210,15 +210,15 @@ function getWrongCount(questionId) {
 }
 
 .delete-btn svg {
-  font-size: 18px;
+  font-size: var(--font-size-xl);
 }
 
 .question-text {
   font-size: var(--font-size-md);
   font-weight: var(--font-weight-medium);
-  color: var(--on-surface);
-  line-height: 1.5;
-  margin: 0 0 var(--spacing-sm) 0;
+  color: var(--color-text);
+  line-height: var(--line-height-normal);
+  margin: 0 0 var(--space-sm) 0;
 }
 
 .answer-section {
@@ -230,25 +230,25 @@ function getWrongCount(questionId) {
 
 .answer-label {
   font-size: var(--font-size-sm);
-  color: var(--text-secondary);
+  color: var(--color-text-secondary);
 }
 
 .answer-value {
   font-size: var(--font-size-sm);
-  color: var(--success);
+  color: var(--color-success);
   font-weight: var(--font-weight-semibold);
 }
 
 .card-footer {
   display: flex;
   align-items: center;
-  gap: var(--spacing-sm);
+  gap: var(--space-sm);
 }
 
 .wrong-count {
   font-size: var(--font-size-xs);
-  color: var(--warning);
-  background: var(--warning-container);
+  color: var(--color-warning);
+  background: var(--color-warning-container);
   padding: 4px 10px;
   border-radius: var(--radius-sm);
   font-weight: var(--font-weight-medium);

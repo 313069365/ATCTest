@@ -74,22 +74,22 @@ defineEmits(['close'])
 }
 
 .import-info {
-  margin-bottom: var(--spacing-lg);
+  margin-bottom: var(--space-lg);
 }
 
 .import-info h3 {
   font-size: var(--font-size-lg);
   font-weight: var(--font-weight-bold);
-  margin-bottom: var(--spacing-sm);
+  margin-bottom: var(--space-sm);
 }
 
 .import-info p {
   font-size: var(--font-size-md);
-  color: var(--text-secondary);
+  color: var(--color-text-secondary);
 }
 
 .file-upload {
-  margin-bottom: var(--spacing-lg);
+  margin-bottom: var(--space-lg);
   text-align: center;
 }
 
@@ -99,51 +99,51 @@ defineEmits(['close'])
 
 .upload-btn {
   width: 100%;
-  padding: var(--spacing-lg);
-  border: 2px dashed var(--border-color-strong);
+  padding: var(--space-lg);
+  border: 2px dashed var(--color-border-strong);
   border-radius: var(--radius-lg);
-  background: var(--background);
+  background: var(--color-background);
   cursor: pointer;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: var(--spacing-sm);
+  gap: var(--space-sm);
   transition: all 0.2s;
 }
 
 .upload-btn:hover {
-  border-color: var(--primary);
-  background: var(--primary-light);
+  border-color: var(--color-primary);
+  background: var(--color-primary-light);
 }
 
 .upload-btn svg {
   font-size: 48px;
-  color: var(--text-secondary);
+  color: var(--color-text-secondary);
 }
 
 .upload-btn span:last-child {
   font-size: var(--font-size-md);
   font-weight: var(--font-weight-semibold);
-  color: var(--text-primary);
+  color: var(--color-text);
 }
 
 .file-name {
-  margin-top: var(--spacing-md);
+  margin-top: var(--space-md);
   font-size: var(--font-size-sm);
-  color: var(--text-secondary);
+  color: var(--color-text-secondary);
 }
 
 .import-tips {
-  background: var(--background);
+  background: var(--color-background);
   border-radius: var(--radius-lg);
-  padding: var(--spacing-md);
-  border: 1px solid var(--border-color-light);
+  padding: var(--space-md);
+  border: 1px solid var(--color-border-light);
 }
 
 .import-tips h4 {
   font-size: var(--font-size-md);
   font-weight: var(--font-weight-bold);
-  margin-bottom: var(--spacing-sm);
+  margin-bottom: var(--space-sm);
 }
 
 .import-tips ul {
@@ -153,9 +153,9 @@ defineEmits(['close'])
 
 .import-tips li {
   font-size: var(--font-size-sm);
-  color: var(--text-secondary);
-  margin-bottom: var(--spacing-sm);
-  padding-left: var(--spacing-md);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-sm);
+  padding-left: var(--space-md);
   position: relative;
 }
 
@@ -163,7 +163,7 @@ defineEmits(['close'])
   content: '•';
   position: absolute;
   left: 0;
-  color: var(--primary);
+  color: var(--color-primary);
   font-weight: bold;
 }
 
@@ -171,17 +171,17 @@ defineEmits(['close'])
   width: 60%;
   margin: 0 auto;
   padding: 12px 24px;
-  background: var(--primary);
-  color: #fff;
+  background: var(--color-primary);
+  color: var(--color-primary-foreground);
   border: none;
   border-radius: var(--radius-full);
-  font-size: 16px;
-  font-weight: 600;
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: var(--space-sm);
   transition: opacity 0.2s, transform 0.15s;
 }
 

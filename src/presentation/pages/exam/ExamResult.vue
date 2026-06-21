@@ -1,7 +1,7 @@
 <template>
   <div class="page">
     <div class="hero-section">
-      <TopBar :title="t('examResult')" variant="transparent" style="--topbar-color: var(--on-primary)">
+      <TopBar :title="t('examResult')" variant="transparent" style="--topbar-color: var(--color-primary-foreground)">
         <template #left>
           <button class="icon-btn" @click="goHome">
             <Icon name="home-outline" />
@@ -205,14 +205,14 @@ const retakeExam = () => {
 <style scoped>
 .page {
   min-height: 100vh;
-  background: var(--background);
+  background: var(--color-background);
   max-width: var(--app-max-width);
   margin: 0 auto;
 }
 
 .hero-section {
-  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-  padding-bottom: var(--spacing-xl);
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+  padding-bottom: var(--space-xl);
   position: relative;
   overflow: hidden;
 }
@@ -221,27 +221,27 @@ const retakeExam = () => {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: var(--spacing-md);
+  padding: var(--space-md);
 }
 
 .grade-badge {
   display: flex;
   align-items: center;
-  gap: var(--spacing-sm);
-  padding: var(--spacing-sm) var(--spacing-md);
-  background: rgba(255, 255, 255, 0.2);
+  gap: var(--space-sm);
+  padding: var(--space-sm) var(--space-md);
+  background: var(--color-partial-bg);
   border-radius: var(--radius-full);
-  color: var(--on-primary);
+  color: var(--color-primary-foreground);
   font-size: var(--font-size-md);
   font-weight: var(--font-weight-semibold);
-  margin-bottom: var(--spacing-md);
+  margin-bottom: var(--space-md);
 }
 
 .score-ring {
   position: relative;
   width: 120px;
   height: 120px;
-  margin-bottom: var(--spacing-md);
+  margin-bottom: var(--space-md);
 }
 
 .score-ring svg {
@@ -258,7 +258,7 @@ const retakeExam = () => {
 
 .ring-progress {
   fill: none;
-  stroke: var(--on-primary);
+  stroke: var(--color-primary-foreground);
   stroke-width: 8;
   stroke-linecap: round;
 }
@@ -273,26 +273,26 @@ const retakeExam = () => {
 
 .score-main {
   display: block;
-  font-size: 28px;
-  font-weight: 700;
-  color: var(--on-primary);
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-primary-foreground);
 }
 
 .score-sub {
   font-size: var(--font-size-sm);
-  color: rgba(255, 255, 255, 0.8);
+  color: var(--color-primary-foreground);
 }
 
 .score-detail {
   display: flex;
   align-items: baseline;
-  gap: var(--spacing-sm);
-  color: var(--on-primary);
+  gap: var(--space-sm);
+  color: var(--color-primary-foreground);
 }
 
 .score-value {
-  font-size: var(--font-size-xxl);
-  font-weight: 700;
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-bold);
 }
 
 .score-divider {
@@ -304,26 +304,26 @@ const retakeExam = () => {
 }
 
 .content {
-  padding: var(--spacing-md);
-  margin-top: -var(--spacing-lg);
+  padding: var(--space-md);
+  margin-top: -var(--space-lg);
 }
 
 .stats-section {
-  margin-bottom: var(--spacing-md);
+  margin-bottom: var(--space-md);
 }
 
 .stats-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: var(--spacing-sm);
+  gap: var(--space-sm);
 }
 
 .stat-card {
   display: flex;
   align-items: center;
-  gap: var(--spacing-sm);
-  padding: var(--spacing-md);
-  background: var(--background);
+  gap: var(--space-sm);
+  padding: var(--space-md);
+  background: var(--color-background);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-md);
 }
@@ -335,48 +335,48 @@ const retakeExam = () => {
 }
 
 .stat-card.correct .stat-indicator {
-  background: var(--success);
+  background: var(--color-success);
 }
 
 .stat-card.wrong .stat-indicator {
-  background: var(--error);
+  background: var(--color-destructive);
 }
 
 .stat-card.total .stat-indicator {
-  background: var(--primary);
+  background: var(--color-primary);
 }
 
 .stat-value {
   display: block;
   font-size: var(--font-size-xl);
-  font-weight: 700;
-  color: var(--on-surface);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text);
 }
 
 .stat-label {
   font-size: var(--font-size-sm);
-  color: var(--text-secondary);
+  color: var(--color-text-secondary);
 }
 
 .meta-card {
   display: flex;
   align-items: center;
-  padding: var(--spacing-md);
-  background: var(--background);
+  padding: var(--space-md);
+  background: var(--color-background);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-md);
-  margin-bottom: var(--spacing-md);
+  margin-bottom: var(--space-md);
 }
 
 .meta-item {
   display: flex;
   align-items: center;
-  gap: var(--spacing-sm);
+  gap: var(--space-sm);
   flex: 1;
 }
 
 .meta-item svg {
-  color: var(--primary);
+  color: var(--color-primary);
 }
 
 .meta-text {
@@ -386,35 +386,35 @@ const retakeExam = () => {
 
 .meta-label {
   font-size: var(--font-size-sm);
-  color: var(--text-secondary);
+  color: var(--color-text-secondary);
 }
 
 .meta-value {
   font-size: var(--font-size-md);
   font-weight: var(--font-weight-semibold);
-  color: var(--on-surface);
+  color: var(--color-text);
 }
 
 .meta-divider {
   width: 1px;
   height: 32px;
-  background: var(--border-color-light);
-  margin: 0 var(--spacing-md);
+  background: var(--color-border-light);
+  margin: 0 var(--space-md);
 }
 
 .section-title {
   font-size: var(--font-size-md);
   font-weight: var(--font-weight-semibold);
-  color: var(--on-surface);
-  margin-bottom: var(--spacing-sm);
+  color: var(--color-text);
+  margin-bottom: var(--space-sm);
 }
 
 .breakdown-card {
-  padding: var(--spacing-md);
-  background: var(--background);
+  padding: var(--space-md);
+  background: var(--color-background);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-md);
-  margin-bottom: var(--spacing-md);
+  margin-bottom: var(--space-md);
 }
 
 .breakdown-bar {
@@ -422,15 +422,15 @@ const retakeExam = () => {
   height: 12px;
   border-radius: var(--radius-full);
   overflow: hidden;
-  margin-bottom: var(--spacing-sm);
+  margin-bottom: var(--space-sm);
 }
 
 .bar-segment.correct {
-  background: var(--success);
+  background: var(--color-success);
 }
 
 .bar-segment.wrong {
-  background: var(--error);
+  background: var(--color-destructive);
 }
 
 .breakdown-legend {
@@ -441,9 +441,9 @@ const retakeExam = () => {
 .legend-item {
   display: flex;
   align-items: center;
-  gap: var(--spacing-sm);
+  gap: var(--space-sm);
   font-size: var(--font-size-sm);
-  color: var(--text-secondary);
+  color: var(--color-text-secondary);
 }
 
 .dot {
@@ -453,25 +453,25 @@ const retakeExam = () => {
 }
 
 .dot.correct {
-  background: var(--success);
+  background: var(--color-success);
 }
 
 .dot.wrong {
-  background: var(--error);
+  background: var(--color-destructive);
 }
 
 .actions-section {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-sm);
+  gap: var(--space-sm);
 }
 
 .action-btn {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: var(--spacing-sm);
-  padding: var(--spacing-md);
+  gap: var(--space-sm);
+  padding: var(--space-md);
   border: none;
   border-radius: var(--radius-md);
   font-size: var(--font-size-md);
@@ -480,12 +480,12 @@ const retakeExam = () => {
 }
 
 .action-btn.primary {
-  background: var(--primary);
-  color: var(--on-primary);
+  background: var(--color-primary);
+  color: var(--color-primary-foreground);
 }
 
 .action-btn.secondary {
-  background: var(--background-surface);
-  color: var(--on-surface);
+  background: var(--color-card);
+  color: var(--color-text);
 }
 </style>

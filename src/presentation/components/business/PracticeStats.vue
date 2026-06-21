@@ -137,7 +137,7 @@ const formattedTime = computed(() => {
   max-width: var(--app-max-width);
   top: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.45);
+  background: var(--color-overlay-medium);
   z-index: var(--z-popup);
   display: flex;
   align-items: center;
@@ -145,7 +145,7 @@ const formattedTime = computed(() => {
 }
 
 .practice-stats-card {
-  background: var(--background-secondary);
+  background: var(--color-muted);
   width: calc(100% - 48px);
   max-width: 340px;
   max-height: 80vh;
@@ -160,15 +160,15 @@ const formattedTime = computed(() => {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: var(--spacing-smd) var(--spacing-md);
-  background: var(--background);
-  margin-bottom: var(--spacing-sm);
+  padding: var(--space-ms) var(--space-md);
+  background: var(--color-background);
+  margin-bottom: var(--space-sm);
 }
 
 .header-title {
-  font-size: 17px;
-  font-weight: 600;
-  color: var(--on-surface);
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text);
 }
 
 
@@ -176,31 +176,31 @@ const formattedTime = computed(() => {
 .tags-row {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: var(--space-sm);
   flex-wrap: wrap;
 }
 
 .info-tag {
-  font-size: 12px;
+  font-size: var(--font-size-sm);
   padding: 4px 10px;
-  background: var(--primary-light);
-  color: var(--primary);
-  border-radius: 6px;
-  font-weight: 500;
+  background: var(--color-primary-light);
+  color: var(--color-primary);
+  border-radius: var(--radius-sm);
+  font-weight: var(--font-weight-medium);
 }
 
 /* === Body === */
 .body {
-  background: var(--background);
-  margin: 0 var(--spacing-md) var(--spacing-md);
+  background: var(--color-background);
+  margin: 0 var(--space-md) var(--space-md);
   flex: 1;
   overflow-y: auto;
-  padding: var(--spacing-lg);
+  padding: var(--space-lg);
   border-radius: var(--radius-lg);
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 22px;
+  gap: var(--space-lg);
 }
 
 /* === Ring === */
@@ -220,7 +220,7 @@ const formattedTime = computed(() => {
 
 .ring-bg {
   fill: none;
-  stroke: #f0f0f3;
+  stroke: var(--gray-100);
   stroke-width: 10;
 }
 
@@ -232,15 +232,15 @@ const formattedTime = computed(() => {
 }
 
 .ring-fill.high {
-  stroke: var(--success);
+  stroke: var(--color-success);
 }
 
 .ring-fill.mid {
-  stroke: var(--warning);
+  stroke: var(--color-warning);
 }
 
 .ring-fill.low {
-  stroke: var(--error);
+  stroke: var(--color-destructive);
 }
 
 .ring-inner {
@@ -254,27 +254,27 @@ const formattedTime = computed(() => {
 
 .ring-pct {
   font-size: 30px;
-  font-weight: 800;
-  line-height: 1;
+  font-weight: var(--font-weight-extrabold);
+  line-height: var(--line-height-tight);
 }
 
 .ring-pct.high {
-  color: var(--success);
+  color: var(--color-success);
 }
 
 .ring-pct.mid {
-  color: var(--warning);
+  color: var(--color-warning);
 }
 
 .ring-pct.low {
-  color: var(--error);
+  color: var(--color-destructive);
 }
 
 .ring-lbl {
-  font-size: 11px;
-  color: var(--text-secondary);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
   margin-top: 5px;
-  font-weight: 500;
+  font-weight: var(--font-weight-medium);
   letter-spacing: 0.5px;
 }
 
@@ -282,49 +282,49 @@ const formattedTime = computed(() => {
 .stat-cards {
   width: 100%;
   display: flex;
-  gap: 10px;
+  gap: var(--space-ms);
 }
 
 .stat-card {
   flex: 1;
-  background: var(--background);
-  border-radius: 14px;
+  background: var(--color-background);
+  border-radius: var(--radius-lg);
   padding: 14px 8px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 4px;
+  gap: var(--space-xs);
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
 }
 
 .stat-card-value {
-  font-size: 26px;
-  font-weight: 800;
-  color: var(--text-primary);
-  line-height: 1;
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-extrabold);
+  color: var(--color-text);
+  line-height: var(--line-height-tight);
 }
 
 .stat-card-value.answered {
-  color: var(--primary);
+  color: var(--color-primary);
 }
 
 .stat-card-value.muted {
-  color: var(--text-secondary);
+  color: var(--color-text-secondary);
 }
 
 .stat-card-label {
-  font-size: 11px;
-  color: var(--text-secondary);
-  font-weight: 500;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  font-weight: var(--font-weight-medium);
 }
 
 /* === Result bar === */
 .result-bar {
   width: 100%;
   height: 8px;
-  border-radius: 4px;
+  border-radius: var(--radius-sm);
   overflow: hidden;
-  background: var(--color-gray-200);
+  background: var(--gray-200);
   display: flex;
 }
 
@@ -338,11 +338,11 @@ const formattedTime = computed(() => {
 }
 
 .result-track.correct {
-  background: var(--success);
+  background: var(--color-success);
 }
 
 .result-track.wrong {
-  background: var(--error);
+  background: var(--color-destructive);
 }
 
 /* === Result labels === */
@@ -356,10 +356,10 @@ const formattedTime = computed(() => {
 .result-label {
   display: flex;
   align-items: center;
-  gap: 6px;
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--text-primary);
+  gap: var(--space-2xs);
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text);
 }
 
 .result-dot {
@@ -370,16 +370,16 @@ const formattedTime = computed(() => {
 }
 
 .result-dot.correct {
-  background: var(--success);
+  background: var(--color-success);
 }
 
 .result-dot.wrong {
-  background: var(--error);
+  background: var(--color-destructive);
 }
 
 .result-count {
-  font-weight: 700;
-  color: var(--text-primary);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text);
   min-width: 20px;
   text-align: right;
 }
@@ -391,21 +391,21 @@ const formattedTime = computed(() => {
   justify-content: space-between;
   align-items: center;
   padding-top: 14px;
-  border-top: 1px solid var(--border-color-light);
+  border-top: 1px solid var(--color-border-light);
   margin-top: auto;
 }
 
 .footer-piece {
   display: flex;
   align-items: center;
-  gap: 6px;
-  font-size: 13px;
-  font-weight: 500;
-  color: var(--text-secondary);
+  gap: var(--space-2xs);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-secondary);
 }
 
 .footer-piece svg {
-  font-size: 18px;
-  color: var(--icon-color);
+  font-size: var(--font-size-xl);
+  color: var(--color-text-secondary);
 }
 </style>

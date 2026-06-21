@@ -156,44 +156,44 @@ const practiceAgain = () => {
 <style scoped>
 .page {
   min-height: 100vh;
-  background: var(--background-secondary);
+  background: var(--color-muted);
   max-width: var(--app-max-width);
   margin: 0 auto;
 }
 
 .content {
-  padding: var(--spacing-md);
+  padding: var(--space-md);
 }
 
 .result-card {
-  background: var(--background);
+  background: var(--color-background);
   border-radius: var(--radius-xl);
-  padding: var(--spacing-xl);
+  padding: var(--space-xl);
   box-shadow: var(--shadow-lg);
-  margin-bottom: var(--spacing-md);
+  margin-bottom: var(--space-md);
 }
 
 .result-header {
   text-align: center;
-  margin-bottom: var(--spacing-lg);
+  margin-bottom: var(--space-lg);
 }
 
 .result-icon {
   font-size: 48px;
-  margin-bottom: var(--spacing-sm);
+  margin-bottom: var(--space-sm);
 }
 
 .result-title {
   font-size: var(--font-size-xl);
   font-weight: var(--font-weight-bold);
-  color: var(--on-surface);
+  color: var(--color-text);
 }
 
 .accuracy-circle {
   position: relative;
   width: 120px;
   height: 120px;
-  margin: 0 auto var(--spacing-lg);
+  margin: 0 auto var(--space-lg);
 }
 
 .accuracy-circle svg {
@@ -204,13 +204,13 @@ const practiceAgain = () => {
 
 .accuracy-circle .bg {
   fill: none;
-  stroke: var(--color-gray-300);
+  stroke: var(--gray-300);
   stroke-width: 8;
 }
 
 .accuracy-circle .progress {
   fill: none;
-  stroke: var(--primary);
+  stroke: var(--color-primary);
   stroke-width: 8;
   stroke-linecap: round;
 }
@@ -220,20 +220,20 @@ const practiceAgain = () => {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-size: var(--font-size-xxl);
-  font-weight: 700;
-  color: var(--primary);
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-primary);
 }
 
 .meta-row {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: var(--spacing-md);
-  padding: var(--spacing-md);
-  background: var(--background-surface);
+  gap: var(--space-md);
+  padding: var(--space-md);
+  background: var(--color-card);
   border-radius: var(--radius-lg);
-  margin-bottom: var(--spacing-md);
+  margin-bottom: var(--space-md);
 }
 
 .meta-item {
@@ -246,34 +246,34 @@ const practiceAgain = () => {
 .meta-subject {
   font-size: var(--font-size-md);
   font-weight: var(--font-weight-semibold);
-  color: var(--on-surface);
+  color: var(--color-text);
   text-align: center;
 }
 
 .meta-time {
   font-size: var(--font-size-lg);
-  font-weight: 700;
-  color: var(--primary);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-primary);
 }
 
 .meta-label {
   font-size: var(--font-size-sm);
-  color: var(--text-secondary);
+  color: var(--color-text-secondary);
 }
 
 .meta-divider {
   width: 1px;
   height: 40px;
-  background: var(--border-color-light);
+  background: var(--color-border-light);
 }
 
 .stats {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: var(--spacing-sm);
-  margin-top: var(--spacing-md);
-  padding-top: var(--spacing-md);
-  border-top: 1px solid var(--border-color-light);
+  gap: var(--space-sm);
+  margin-top: var(--space-md);
+  padding-top: var(--space-md);
+  border-top: 1px solid var(--color-border-light);
 }
 
 .stat-item {
@@ -283,43 +283,43 @@ const practiceAgain = () => {
 .stat-value {
   display: block;
   font-size: var(--font-size-xl);
-  font-weight: 700;
-  color: var(--on-surface);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text);
 }
 
 .stat-value.correct {
-  color: var(--success);
+  color: var(--color-success);
 }
 
 .stat-value.wrong {
-  color: var(--error);
+  color: var(--color-destructive);
 }
 
 .stat-value.unknown {
-  color: var(--warning);
+  color: var(--color-warning);
 }
 
 .stat-value.unanswered {
-  color: var(--text-disabled);
+  color: var(--color-disabled);
 }
 
 .stat-label {
   font-size: var(--font-size-sm);
-  color: var(--text-secondary);
+  color: var(--color-text-secondary);
 }
 
 .actions {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-sm);
+  gap: var(--space-sm);
 }
 
 .action-btn {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: var(--spacing-sm);
-  padding: var(--spacing-md);
+  gap: var(--space-sm);
+  padding: var(--space-md);
   border: none;
   border-radius: var(--radius-md);
   font-size: var(--font-size-md);
@@ -328,25 +328,25 @@ const practiceAgain = () => {
 }
 
 .action-btn.primary {
-  background: var(--primary);
-  color: var(--on-primary);
+  background: var(--color-primary);
+  color: var(--color-primary-foreground);
 }
 
 .action-row {
   display: flex;
-  gap: var(--spacing-sm);
+  gap: var(--space-sm);
 }
 
 .action-btn.secondary {
   flex: 1;
-  background: var(--background-surface);
-  color: var(--on-surface);
+  background: var(--color-card);
+  color: var(--color-text);
 }
 
 .action-btn.outline {
   flex: 1;
-  background: var(--background);
-  color: var(--on-surface);
-  border: 1px solid var(--border-color-strong);
+  background: var(--color-background);
+  color: var(--color-text);
+  border: 1px solid var(--color-border-strong);
 }
 </style>

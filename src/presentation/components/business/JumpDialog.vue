@@ -56,7 +56,7 @@ function handleConfirm() {
   max-width: var(--app-max-width);
   top: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.4);
+  background: var(--color-overlay-medium);
   z-index: var(--z-popup);
   display: flex;
   align-items: center;
@@ -64,42 +64,42 @@ function handleConfirm() {
 }
 
 .jump-dialog {
-  background: var(--background);
+  background: var(--color-background);
   border-radius: var(--radius-xl);
-  padding: var(--spacing-lg);
+  padding: var(--space-lg);
   width: 280px;
   box-shadow: var(--shadow-lg);
 }
 
 .jump-dialog-title {
   font-size: var(--font-size-lg);
-  font-weight: 700;
-  margin-bottom: var(--spacing-sm);
+  font-weight: var(--font-weight-bold);
+  margin-bottom: var(--space-sm);
 }
 
 .jump-dialog-desc {
   font-size: var(--font-size-sm);
-  color: var(--text-secondary);
-  margin-bottom: var(--spacing-md);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-md);
 }
 
 .jump-dialog-input {
   width: 100%;
-  padding: var(--spacing-sm) var(--spacing-md);
-  border: 2px solid var(--border-color-strong);
+  padding: var(--space-sm) var(--space-md);
+  border: 2px solid var(--color-border-strong);
   border-radius: var(--radius-md);
   font-size: var(--font-size-lg);
-  font-weight: 700;
+  font-weight: var(--font-weight-bold);
   text-align: center;
   outline: none;
-  background: var(--background);
-  color: var(--text-primary);
+  background: var(--color-background);
+  color: var(--color-text);
   -moz-appearance: textfield;
   box-sizing: border-box;
 }
 
 .jump-dialog-input:focus {
-  border-color: var(--primary);
+  border-color: var(--color-primary);
 }
 
 .jump-dialog-input::-webkit-outer-spin-button,
@@ -110,28 +110,28 @@ function handleConfirm() {
 
 .jump-dialog-actions {
   display: flex;
-  gap: var(--spacing-sm);
-  margin-top: var(--spacing-lg);
+  gap: var(--space-sm);
+  margin-top: var(--space-lg);
 }
 
 .jump-dialog-btn {
   flex: 1;
-  padding: var(--spacing-sm) var(--spacing-md);
+  padding: var(--space-sm) var(--space-md);
   border-radius: var(--radius-full);
   border: none;
   font-size: var(--font-size-md);
-  font-weight: 600;
+  font-weight: var(--font-weight-semibold);
   cursor: pointer;
   transition: all 0.15s;
 }
 
 .jump-dialog-btn.cancel {
-  background: var(--color-gray-200);
-  color: var(--text-secondary);
+  background: var(--gray-200);
+  color: var(--color-text-secondary);
 }
 
 .jump-dialog-btn.confirm {
-  background: var(--primary);
-  color: #fff;
+  background: var(--color-primary);
+  color: var(--color-primary-foreground);
 }
 </style>

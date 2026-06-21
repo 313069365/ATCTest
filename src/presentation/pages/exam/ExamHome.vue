@@ -153,31 +153,31 @@ const fileInput = ref(null)
 <style scoped>
 .exam-page {
   min-height: 100vh;
-  background: var(--background-secondary);
+  background: var(--color-muted);
   max-width: var(--app-max-width);
   margin: 0 auto;
 }
 
 .content {
-  padding: var(--spacing-md) var(--spacing-lg);
+  padding: var(--space-md) var(--space-lg);
   padding-bottom: 100px;
 }
 
 .paper-section {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-sm);
+  gap: var(--space-sm);
 }
 
 .section-title {
   font-size: var(--font-size-md);
   font-weight: var(--font-weight-bold);
-  color: var(--on-surface);
+  color: var(--color-text);
 }
 
 .paper-actions {
   display: flex;
-  gap: var(--spacing-lg);
+  gap: var(--space-lg);
   align-items: center;
 }
 
@@ -186,10 +186,10 @@ const fileInput = ref(null)
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: var(--spacing-sm);
-  background: var(--color-gray-100);
+  padding: var(--space-sm);
+  background: var(--color-card);
   border-radius: var(--radius-md);
-  color: var(--primary);
+  color: var(--color-primary);
   font-size: var(--font-size-md);
   font-weight: var(--font-weight-semibold);
   cursor: pointer;
@@ -206,15 +206,15 @@ const fileInput = ref(null)
 .paper-list {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-md);
+  gap: var(--space-md);
 }
 
 .paper-card {
-  background: var(--background);
+  background: var(--color-background);
   border-radius: var(--radius-lg);
-  padding: var(--spacing-md);
+  padding: var(--space-md);
   box-shadow: var(--shadow-md);
-  border: 1px solid var(--border-color-light);
+  border: 1px solid var(--color-border-light);
 }
 
 .paper-header {
@@ -226,13 +226,13 @@ const fileInput = ref(null)
 
 .paper-actions-btns {
   display: flex;
-  gap: 6px;
+  gap: var(--space-2xs);
 }
 
 .icon-btn-sm {
   width: 32px;
   height: 32px;
-  background: var(--color-gray-100);
+  background: var(--gray-100);
   border-radius: var(--radius-md);
   display: flex;
   align-items: center;
@@ -242,56 +242,56 @@ const fileInput = ref(null)
 }
 
 .icon-btn-sm svg {
-  font-size: 18px;
-  color: var(--text-secondary);
+  font-size: var(--font-size-xl);
+  color: var(--color-text-secondary);
 }
 
 .icon-btn-sm.delete svg {
-  color: var(--error);
+  color: var(--color-destructive);
 }
 
 .paper-tag {
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-bold);
-  color: var(--color-gray-600);
-  background: var(--color-gray-200);
-  padding: var(--spacing-mn) var(--spacing-md);
+  color: var(--color-text-secondary);
+  background: var(--gray-200);
+  padding: var(--space-xs) var(--space-md);
   border-radius: var(--radius-md);
 }
 
 .paper-title {
-  font-size: var(--font-size-2xl);
+  font-size: var(--font-size-xl);
   font-weight: var(--font-weight-bold);
-  color: var(--on-surface);
-  margin: var(--spacing-mn);
+  color: var(--color-text);
+  margin: var(--space-xs);
 }
 
 .paper-desc {
   font-size: var(--font-size-sm);
-  color: var(--text-secondary);
-  margin: var(--spacing-mn);
+  color: var(--color-text-secondary);
+  margin: var(--space-xs);
 }
 
 .paper-stats {
   display: flex;
   flex-wrap: wrap;
-  gap: 6px;
-  margin-bottom: var(--spacing-md);
+  gap: var(--space-2xs);
+  margin-bottom: var(--space-md);
 }
 
 .stat-item {
   display: flex;
   align-items: center;
-  gap: 3px;
+  gap: var(--space-xs);
   padding: 3px 8px;
-  background: var(--background-secondary);
+  background: var(--color-muted);
   border-radius: var(--radius-lg);
-  font-size: var(--font-size-mn);
-  color: var(--text-disabled);
+  font-size: var(--font-size-xs);
+  color: var(--color-disabled);
 }
 
 .stat-item svg {
-  font-size: 12px;
+  font-size: var(--font-size-sm);
 }
 
 .stat-item.created-time {}
@@ -301,15 +301,15 @@ const fileInput = ref(null)
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: var(--spacing-sm);
-  background: var(--primary);
-  color: var(--on-primary);
+  padding: var(--space-sm);
+  background: var(--color-primary);
+  color: var(--color-primary-foreground);
   border: none;
   border-radius: var(--radius-full);
   font-size: var(--font-size-lg);
   font-weight: var(--font-weight-bold);
   cursor: pointer;
-  box-shadow: 0 4px 12px rgba(0, 91, 191, 0.25);
+  box-shadow: 0 4px 12px var(--color-primary-bg);
 }
 
 .start-btn:active {
@@ -323,26 +323,26 @@ const fileInput = ref(null)
   justify-content: center;
   padding: 60px 24px;
   text-align: center;
-  background: var(--background);
+  background: var(--color-background);
   border-radius: var(--radius-lg);
 }
 
 .empty-state svg {
   font-size: 48px;
-  color: var(--primary);
-  margin-bottom: var(--spacing-sm);
+  color: var(--color-primary);
+  margin-bottom: var(--space-sm);
   opacity: 0.5;
 }
 
 .empty-state p {
   font-size: var(--font-size-md);
-  color: var(--text-secondary);
+  color: var(--color-text-secondary);
   margin: 0;
 }
 
 .empty-state .empty-hint {
   font-size: var(--font-size-sm);
-  color: var(--text-disabled);
-  margin-top: var(--spacing-sm);
+  color: var(--color-disabled);
+  margin-top: var(--space-sm);
 }
 </style>

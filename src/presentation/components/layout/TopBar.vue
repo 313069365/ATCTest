@@ -34,14 +34,14 @@ defineEmits(['back'])
   position: sticky;
   top: 0;
   z-index: 100;
-  background: var(--topbar-bg, var(--background));
+  background: var(--topbar-bg, var(--color-background));
   backdrop-filter: blur(8px);
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 12px 16px;
   height: 56px;
-  border-bottom: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--color-border);
   box-sizing: border-box;
   flex-shrink: 0;
 }
@@ -53,8 +53,8 @@ defineEmits(['back'])
 }
 
 .top-bar.primary {
-  --topbar-color: var(--on-primary);
-  background: var(--primary);
+  --topbar-color: var(--color-primary-foreground);
+  background: var(--color-primary);
   border-bottom: none;
 }
 
@@ -79,9 +79,9 @@ defineEmits(['back'])
 .title {
   flex: 1;
   text-align: center;
-  font-size: 20px;
-  font-weight: 700;
-  color: var(--topbar-color, var(--text-primary));
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--topbar-color, var(--color-text));
   letter-spacing: -0.02em;
   white-space: nowrap;
 }
@@ -96,12 +96,12 @@ defineEmits(['back'])
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  color: var(--topbar-color, var(--text-secondary));
+  color: var(--topbar-color, var(--color-text-secondary));
   font-size: var(--font-size-xl);
 }
 
 .icon-btn:active {
-  background: var(--color-gray-400);
+  background: var(--gray-400);
 }
 
 .right :deep(.icon-btn) {
@@ -114,11 +114,11 @@ defineEmits(['back'])
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  color: var(--topbar-color, var(--text-secondary));
+  color: var(--topbar-color, var(--color-text-secondary));
   font-size: var(--font-size-xl);
 }
 
 .right :deep(.icon-btn:active) {
-  background: var(--color-gray-400);
+  background: var(--gray-400);
 }
 </style>

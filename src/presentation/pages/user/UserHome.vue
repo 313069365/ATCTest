@@ -135,7 +135,7 @@ function goToSettings() {
 <style scoped>
 .profile {
   min-height: 100vh;
-  background: var(--background);
+  background: var(--color-background);
   max-width: var(--app-max-width);
   margin: 0 auto;
 }
@@ -150,12 +150,12 @@ function goToSettings() {
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  color: var(--primary);
+  color: var(--color-primary);
   font-size: var(--font-size-xl);
 }
 
 .content {
-  padding: var(--spacing-lg);
+  padding: var(--space-lg);
   padding-bottom: 100px;
 }
 
@@ -163,7 +163,7 @@ function goToSettings() {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: var(--spacing-md);
+  gap: var(--space-md);
 }
 
 .avatar-container {
@@ -194,13 +194,13 @@ function goToSettings() {
 }
 
 .user-info h2 {
-  font-size: var(--font-size-2xl);
+  font-size: var(--font-size-xl);
   font-weight: var(--font-weight-bold);
-  color: var(--on-surface);
+  color: var(--color-text);
 }
 
 .user-info p {
-  color: var(--on-surface-variant);
+  color: var(--color-text-secondary);
   font-weight: var(--font-weight-medium);
   margin-top: var(--spacing-xs);
 }
@@ -210,25 +210,25 @@ function goToSettings() {
   font-weight: var(--font-weight-bold);
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  color: var(--on-surface-variant);
-  margin-bottom: var(--spacing-sm);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-sm);
 }
 
 .performance-section {
-  margin-top: var(--spacing-sm);
+  margin-top: var(--space-sm);
 }
 
 .performance-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: var(--spacing-md);
+  gap: var(--space-md);
 }
 
 .perf-card {
-  background: var(--background-surface);
+  background: var(--color-card);
   border-radius: var(--radius-lg);
-  padding: var(--spacing-md);
-  border: 1px solid var(--border-color-light);
+  padding: var(--space-md);
+  border: 1px solid var(--color-border-light);
 }
 
 .accuracy-card {
@@ -239,50 +239,50 @@ function goToSettings() {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  margin-bottom: var(--spacing-md);
+  margin-bottom: var(--space-md);
 }
 
 .card-label {
   font-size: var(--font-size-xs);
   font-weight: var(--font-weight-bold);
-  color: var(--on-surface-variant);
+  color: var(--color-text-secondary);
 }
 
 .card-value {
-  font-size: var(--font-size-xxl);
+  font-size: var(--font-size-3xl);
   font-weight: var(--font-weight-bold);
 }
 
 .card-value.primary {
-  color: var(--primary);
+  color: var(--color-primary);
 }
 
 .card-value.tertiary {
-  color: var(--secondary);
+  color: var(--color-secondary);
 }
 
 .chart-bars {
   display: flex;
-  gap: var(--spacing-md);
+  gap: var(--space-md);
   align-items: flex-end;
   height: 64px;
 }
 
 .bar {
   flex: 1;
-  background: var(--border-color-strong);
-  border-radius: 4px 4px 0 0;
+  background: var(--color-border-strong);
+  border-radius: var(--radius-sm) var(--radius-sm) 0 0;
 }
 
 .bar.active {
-  background: var(--primary);
+  background: var(--color-primary);
 }
 
 .card-footer {
-  font-size: 11px;
-  color: var(--on-surface-variant);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
   font-style: italic;
-  margin-top: var(--spacing-sm);
+  margin-top: var(--space-sm);
 }
 
 .radar-card {
@@ -298,7 +298,7 @@ function goToSettings() {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: var(--spacing-md) 0;
+  margin: var(--space-md) 0;
 }
 
 .radar {
@@ -308,28 +308,28 @@ function goToSettings() {
 
 .radar-1 {
   inset: 0;
-  background: var(--border-color-strong);
+  background: var(--color-border-strong);
   opacity: 0.5;
 }
 
 .radar-2 {
   inset: 8px;
-  background: var(--primary);
+  background: var(--color-primary);
   opacity: 0.4;
 }
 
 .radar-3 {
   inset: 16px;
-  background: var(--primary);
+  background: var(--color-primary);
   opacity: 0.6;
   transform: scale(0.75);
 }
 
 .radar-text {
-  font-size: 10px;
-  color: var(--on-surface-variant);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
   text-align: center;
-  line-height: 1.5;
+  line-height: var(--line-height-normal);
 }
 
 .streak-card {
@@ -340,8 +340,8 @@ function goToSettings() {
 
 .streak-icons {
   display: flex;
-  gap: calc(var(--spacing-sm) * -1);
-  margin-top: var(--spacing-sm);
+  gap: calc(var(--space-sm) * -1);
+  margin-top: var(--space-sm);
 }
 
 .streak-icon {
@@ -351,37 +351,37 @@ function goToSettings() {
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 2px solid var(--background);
+  border: 2px solid var(--color-background);
 }
 
 .streak-icon.fire {
-  background: var(--secondary);
+  background: var(--color-secondary);
 }
 
 .streak-icon svg {
-  font-size: 12px;
-  color: var(--on-primary);
+  font-size: var(--font-size-sm);
+  color: var(--color-primary-foreground);
 }
 
 .streak-icon.verified {
-  background: var(--primary);
+  background: var(--color-primary);
 }
 
 .history-section {
-  margin-top: var(--spacing-md);
+  margin-top: var(--space-md);
 }
 
 .section-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: var(--spacing-sm);
+  margin-bottom: var(--space-sm);
 }
 
 .more-btn {
   background: none;
   border: none;
-  color: var(--primary);
+  color: var(--color-primary);
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-medium);
   cursor: pointer;
@@ -389,11 +389,11 @@ function goToSettings() {
 
 .history-scroll {
   display: flex;
-  gap: var(--spacing-md);
+  gap: var(--space-md);
   overflow-x: auto;
-  padding-bottom: var(--spacing-md);
-  margin: 0 calc(var(--spacing-md) * -1);
-  padding: 0 var(--spacing-md);
+  padding-bottom: var(--space-md);
+  margin: 0 calc(var(--space-md) * -1);
+  padding: 0 var(--space-md);
 }
 
 .history-scroll::-webkit-scrollbar {
@@ -403,28 +403,28 @@ function goToSettings() {
 .empty-history {
   text-align: center;
   padding: 48px 16px;
-  color: var(--on-surface-variant);
+  color: var(--color-text-secondary);
   font-size: var(--font-size-sm);
 }
 
 .shortcut-section {
-  margin-top: var(--spacing-md);
+  margin-top: var(--space-md);
 }
 
 .shortcut-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: var(--spacing-sm);
-  margin-bottom: var(--spacing-md);
+  gap: var(--space-sm);
+  margin-bottom: var(--space-md);
 }
 
 .shortcut-grid-item {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: var(--spacing-sm);
-  padding: var(--spacing-md) var(--spacing-sm);
-  background: var(--background-surface);
+  gap: var(--space-sm);
+  padding: var(--space-md) var(--space-sm);
+  background: var(--color-card);
   border-radius: var(--radius-lg);
   cursor: pointer;
   transition: transform 0.1s;
@@ -437,7 +437,7 @@ function goToSettings() {
 .shortcut-grid-label {
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-semibold);
-  color: var(--on-surface);
+  color: var(--color-text);
   text-align: center;
   white-space: nowrap;
 }
@@ -445,15 +445,15 @@ function goToSettings() {
 .shortcut-list {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-sm);
+  gap: var(--space-sm);
 }
 
 .shortcut-item {
   display: flex;
   align-items: center;
-  gap: var(--spacing-md);
-  padding: var(--spacing-sm) var(--spacing-md);
-  background: var(--background-surface);
+  gap: var(--space-md);
+  padding: var(--space-sm) var(--space-md);
+  background: var(--color-card);
   border-radius: var(--radius-lg);
   cursor: pointer;
   transition: transform 0.1s;
@@ -473,81 +473,81 @@ function goToSettings() {
 }
 
 .shortcut-icon.error-bg {
-  background: var(--error-light);
+  background: var(--color-destructive-light);
 }
 
 .shortcut-icon.error-bg svg {
-  color: var(--error);
+  color: var(--color-destructive);
 }
 
 .shortcut-icon.tertiary-bg {
-  background: var(--secondary-light);
+  background: var(--color-secondary-light);
 }
 
 .shortcut-icon.tertiary-bg svg {
-  color: var(--secondary);
+  color: var(--color-secondary);
 }
 
 .shortcut-icon.primary-bg {
-  background: var(--primary-light);
+  background: var(--color-primary-light);
 }
 
 .shortcut-icon.primary-bg svg {
-  color: var(--primary);
+  color: var(--color-primary);
 }
 
 .shortcut-label {
   flex: 1;
   font-weight: var(--font-weight-semibold);
-  color: var(--on-surface);
+  color: var(--color-text);
 }
 
 .shortcut-arrow {
-  color: var(--icon-color-secondary);
+  color: var(--color-text-secondary);
 }
 
 .action-section {
-  margin-top: var(--spacing-md);
-  padding-top: var(--spacing-md);
+  margin-top: var(--space-md);
+  padding-top: var(--space-md);
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-md);
+  gap: var(--space-md);
 }
 
 .action-btn {
   width: 100%;
-  padding: var(--spacing-md);
-  background: var(--background-surface);
+  padding: var(--space-md);
+  background: var(--color-card);
   border: none;
   border-radius: var(--radius-lg);
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: var(--spacing-sm);
+  gap: var(--space-sm);
   font-size: var(--font-size-md);
   font-weight: var(--font-weight-medium);
-  color: var(--on-surface-variant);
+  color: var(--color-text-secondary);
   cursor: pointer;
   transition: background 0.2s;
 }
 
 .action-btn:active {
-  background: var(--border-color-light);
+  background: var(--color-border-light);
 }
 
 .action-btn.logout {
-  background: var(--error-light);
-  color: var(--error);
+  background: var(--color-destructive-light);
+  color: var(--color-destructive);
 }
 
 .action-btn.logout:active {
-  background: var(--error-light);
+  background: var(--color-destructive-light);
 }
 
 .version-footer {
   text-align: center;
   padding: 24px 16px 32px;
   font-size: var(--font-size-sm);
-  color: var(--text-secondary);
+  color: var(--color-text-secondary);
 }
 </style>

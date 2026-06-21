@@ -346,8 +346,8 @@ const wrongPractice = (subject) => {
   height: 100vh;
   display: flex;
   flex-direction: column;
-  background: var(--color-gray-100);
-  padding-bottom: var(--safe-area);
+  background: var(--gray-100);
+  padding-bottom: var(--space-safe);
   max-width: var(--app-max-width);
   margin: 0 auto;
 }
@@ -356,23 +356,23 @@ const wrongPractice = (subject) => {
 .content {
   flex: 1;
   overflow-y: auto;
-  padding: var(--spacing-lg);
+  padding: var(--space-lg);
   padding-bottom: var(--spacing-bm);
   -webkit-overflow-scrolling: touch;
 }
 
 .category-area {
   /* display: flex; */
-  gap: var(--spacing-md);
+  gap: var(--space-md);
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
-  margin-bottom: var(--spacing-md);
+  margin-bottom: var(--space-md);
 }
 
 .bank-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: var(--spacing-md);
+  gap: var(--space-md);
 }
 
 .bank-btn {
@@ -381,23 +381,23 @@ const wrongPractice = (subject) => {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: var(--spacing-sm);
-  padding: var(--spacing-lg) var(--spacing-xl);
-  border: 1px solid var(--border-color-strong);
+  gap: var(--space-sm);
+  padding: var(--space-lg) var(--space-xl);
+  border: 1px solid var(--color-border-strong);
   border-radius: var(--radius-md);
-  background: var(--background);
+  background: var(--color-background);
   cursor: pointer;
   transition: all var(--transition-normal);
 }
 
 .bank-btn.active {
-  background: var(--primary);
-  color: var(--on-primary);
-  border-color: var(--primary);
+  background: var(--color-primary);
+  color: var(--color-primary-foreground);
+  border-color: var(--color-primary);
 }
 
 .bank-btn svg {
-  font-size: 24px;
+  font-size: var(--font-size-2xl);
 }
 
 .bank-btn span:last-child {
@@ -406,13 +406,13 @@ const wrongPractice = (subject) => {
 }
 
 .scope-area {
-  margin-bottom: var(--spacing-md);
+  margin-bottom: var(--space-md);
 }
 
 .scope-tabs {
   display: flex;
-  gap: var(--spacing-sm);
-  /* padding: var(--spacing-md); */
+  gap: var(--space-sm);
+  /* padding: var(--space-md); */
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
 }
@@ -425,24 +425,24 @@ const wrongPractice = (subject) => {
   position: relative;
   display: flex;
   align-items: center;
-  gap: 2px;
-  padding: var(--spacing-sm);
+  gap: var(--space-xs);
+  padding: var(--space-sm);
   border: none;
   border-radius: var(--radius-lg);
   font-size: var(--font-size-md);
   font-weight: var(--font-weight-bold);
-  color: var(--icon-color);
+  color: var(--color-text-secondary);
   cursor: pointer;
   white-space: nowrap;
   transition: all 0.2s;
 }
 
 .scope-tab.active {
-  color: var(--primary);
+  color: var(--color-primary);
 }
 
 .scope-tab .tab-icon {
-  font-size: 18px;
+  font-size: var(--font-size-xl);
 }
 
 .scope-tab.active::after {
@@ -452,20 +452,20 @@ const wrongPractice = (subject) => {
   left: 0;
   right: 0;
   height: 3px;
-  background: var(--primary);
-  border-radius: 3px;
+  background: var(--color-primary);
+  border-radius: var(--radius-xs);
 }
 
 .subject-list {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-sm);
+  gap: var(--space-sm);
 }
 
 .subject-card {
-  background: var(--background);
+  background: var(--color-background);
   border-radius: var(--radius-md);
-  border: 1px solid var(--border-color-light);
+  border: 1px solid var(--color-border-light);
   box-shadow: var(--shadow-sm);
   overflow: hidden;
 }
@@ -473,17 +473,17 @@ const wrongPractice = (subject) => {
 .subject-header {
   display: flex;
   align-items: center;
-  gap: var(--spacing-sm);
+  gap: var(--space-sm);
   cursor: pointer;
-  padding: var(--spacing-md);
+  padding: var(--space-md);
 }
 
 .subject-icon {
   width: 48px;
   height: 48px;
-  background: var(--secondary);
-  color: var(--on-primary);
-  font-size: 24px;
+  background: var(--color-secondary);
+  color: var(--color-primary-foreground);
+  font-size: var(--font-size-2xl);
   border-radius: var(--radius-md);
   display: flex;
   align-items: center;
@@ -491,7 +491,7 @@ const wrongPractice = (subject) => {
 }
 
 .subject-icon svg {
-  font-size: 24px;
+  font-size: var(--font-size-2xl);
 }
 
 .subject-info {
@@ -501,17 +501,17 @@ const wrongPractice = (subject) => {
 .subject-info h4 {
   font-size: var(--font-size-lg);
   font-weight: var(--font-weight-semibold);
-  color: var(--on-surface);
+  color: var(--color-text);
 }
 
 .subject-info p {
   font-size: var(--font-size-md);
-  color: var(--icon-color);
+  color: var(--color-text-secondary);
 }
 
 .subject-expanded {
-  border-top: 1px solid var(--border-color-light);
-  padding: var(--spacing-md);
+  border-top: 1px solid var(--color-border-light);
+  padding: var(--space-md);
   animation: slideDown 0.25s ease;
 }
 
@@ -529,8 +529,8 @@ const wrongPractice = (subject) => {
 
 .stats-row {
   display: flex;
-  gap: var(--spacing-md);
-  margin-bottom: var(--spacing-md);
+  gap: var(--space-md);
+  margin-bottom: var(--space-md);
 }
 
 .stat-item {
@@ -538,20 +538,20 @@ const wrongPractice = (subject) => {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 2px;
-  padding: var(--spacing-sm) 0;
-  background: var(--color-gray-100);
+  gap: var(--space-xs);
+  padding: var(--space-sm) 0;
+  background: var(--gray-100);
   border-radius: var(--radius-md);
 }
 
 .stat-value {
-  font-size: 20px;
+  font-size: var(--font-size-xl);
   font-weight: var(--font-weight-bold);
-  color: var(--text-primary);
+  color: var(--color-text);
 }
 
 .stat-value.accent {
-  color: var(--primary);
+  color: var(--color-primary);
 }
 
 .stat-value.warn {
@@ -560,21 +560,21 @@ const wrongPractice = (subject) => {
 
 .stat-label {
   font-size: var(--font-size-sm);
-  color: var(--icon-color);
+  color: var(--color-text-secondary);
 }
 
 .action-row {
   display: flex;
-  gap: 8px;
+  gap: var(--space-sm);
   justify-content: flex-end;
 }
 
 .continue-btn {
-  background: var(--primary);
-  color: #fff;
+  background: var(--color-primary);
+  color: var(--color-primary-foreground);
   border: none;
   border-radius: var(--radius-full);
-  padding: 6px 14px;
+  padding: var(--space-2xs) 14px;
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-semibold);
   cursor: pointer;
@@ -582,11 +582,11 @@ const wrongPractice = (subject) => {
 }
 
 .new-btn {
-  background: rgba(0, 91, 191, 0.1);
-  color: var(--primary);
+  background: var(--color-primary-bg);
+  color: var(--color-primary);
   border: none;
   border-radius: var(--radius-full);
-  padding: 6px 14px;
+  padding: var(--space-2xs) 14px;
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-semibold);
   cursor: pointer;
@@ -594,11 +594,11 @@ const wrongPractice = (subject) => {
 }
 
 .wrong-btn {
-  background: rgba(211, 47, 47, 0.1);
-  color: var(--error);
+  background: var(--color-destructive-bg);
+  color: var(--color-destructive);
   border: none;
   border-radius: var(--radius-full);
-  padding: 6px 14px;
+  padding: var(--space-2xs) 14px;
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-semibold);
   cursor: pointer;
@@ -606,6 +606,6 @@ const wrongPractice = (subject) => {
 }
 
 .wrong-btn:active {
-  background: rgba(211, 47, 47, 0.2);
+  background: var(--color-destructive-bg-hover);
 }
 </style>

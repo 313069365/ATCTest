@@ -39,18 +39,18 @@ const cssVars = computed(() => {
 .seg-control {
   position: relative;
   display: flex;
-  background: var(--color-gray-200);
+  background: var(--gray-200);
   border-radius: var(--radius-lg);
-  padding: 3px;
+  padding: var(--space-2xs);
 }
 
 .seg-indicator {
   position: absolute;
-  top: 3px;
-  left: calc(3px + (100% - 6px) / var(--opt-count) * var(--opt-index));
-  width: calc((100% - 6px) / var(--opt-count));
-  height: calc(100% - 6px);
-  background: var(--background);
+  top: var(--space-2xs);
+  left: calc(var(--space-2xs) + (100% - var(--space-2xs) * 2) / var(--opt-count) * var(--opt-index));
+  width: calc((100% - var(--space-2xs) * 2) / var(--opt-count));
+  height: calc(100% - var(--space-2xs) * 2);
+  background: var(--color-background);
   border-radius: calc(var(--radius-lg) - 2px);
   transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   box-shadow: var(--shadow-sm);
@@ -62,14 +62,14 @@ const cssVars = computed(() => {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
-  padding: var(--spacing-sm) var(--spacing-md);
+  gap: var(--space-2xs);
+  padding: var(--space-sm) var(--space-md);
   border: none;
   background: transparent;
   border-radius: calc(var(--radius-lg) - 2px);
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-medium);
-  color: var(--text-secondary);
+  color: var(--color-text-secondary);
   cursor: pointer;
   z-index: 1;
   transition: color 0.25s;
@@ -81,23 +81,23 @@ const cssVars = computed(() => {
 }
 
 .seg-option.active {
-  color: var(--primary);
+  color: var(--color-primary);
   font-weight: var(--font-weight-bold);
 }
 
 .seg-option svg {
-  font-size: 18px;
+  font-size: var(--font-size-xl);
 }
 
 .seg-badge {
-  font-size: 11px;
+  font-size: var(--font-size-sm);
   min-width: 18px;
   text-align: center;
   padding: 1px 5px;
-  border-radius: 8px;
+  border-radius: var(--radius-md);
   font-weight: var(--font-weight-bold);
-  background: var(--primary-light);
-  color: var(--primary);
+  background: var(--color-primary-light);
+  color: var(--color-primary);
 }
 
 .seg-option.active .seg-badge {
@@ -107,36 +107,36 @@ const cssVars = computed(() => {
 
 /* compact */
 .seg-control.compact .seg-option {
-  padding: 6px 12px;
-  font-size: 13px;
+  padding: var(--space-2xs) var(--space-ms);
+  font-size: var(--font-size-sm);
 }
 
 /* size md */
 .seg-control.size-md .seg-option {
-  font-size: 15px;
+  font-size: var(--font-size-lg);
   padding: 10px 16px;
 }
 
 .seg-control.size-md .seg-option svg {
-  font-size: 20px;
+  font-size: var(--font-size-xl);
 }
 
 /* primary variant */
 .seg-control.variant-primary {
-  background: var(--color-gray-100);
+  background: var(--color-card);
 }
 
 .seg-control.variant-primary .seg-indicator {
-  background: var(--primary);
+  background: var(--color-primary);
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
 }
 
 .seg-control.variant-primary .seg-option.active {
-  color: var(--on-primary);
-  font-weight: 600;
+  color: var(--color-primary-foreground);
+  font-weight: var(--font-weight-semibold);
 }
 
 .seg-control.variant-primary .seg-option.active .seg-badge {
-  background: rgba(255, 255, 255, 0.2);
+  background: var(--color-partial-bg);
 }
 </style>

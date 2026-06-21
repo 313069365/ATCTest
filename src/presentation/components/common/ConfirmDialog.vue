@@ -32,7 +32,7 @@ defineProps({
   max-width: var(--app-max-width);
   top: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.4);
+  background: var(--color-overlay-medium);
   z-index: var(--z-popup);
   display: flex;
   align-items: center;
@@ -40,9 +40,9 @@ defineProps({
 }
 
 .confirm-dialog {
-  background: var(--background);
+  background: var(--color-background);
   border-radius: var(--radius-xl);
-  padding: var(--spacing-lg);
+  padding: var(--space-lg);
   width: 280px;
   box-shadow: var(--shadow-lg);
   text-align: center;
@@ -50,40 +50,40 @@ defineProps({
 
 .confirm-title {
   font-size: var(--font-size-lg);
-  font-weight: 700;
-  margin-bottom: var(--spacing-sm);
+  font-weight: var(--font-weight-bold);
+  margin-bottom: var(--space-sm);
 }
 
 .confirm-message {
   font-size: var(--font-size-sm);
-  color: var(--text-secondary);
-  margin-bottom: var(--spacing-lg);
-  line-height: 1.5;
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-lg);
+  line-height: var(--line-height-normal);
 }
 
 .confirm-actions {
   display: flex;
-  gap: var(--spacing-sm);
+  gap: var(--space-sm);
 }
 
 .confirm-btn {
   flex: 1;
-  padding: var(--spacing-sm) var(--spacing-md);
+  padding: var(--space-sm) var(--space-md);
   border-radius: var(--radius-full);
   border: none;
   font-size: var(--font-size-md);
-  font-weight: 600;
+  font-weight: var(--font-weight-semibold);
   cursor: pointer;
   transition: all 0.15s;
 }
 
 .confirm-btn.cancel {
-  background: var(--color-gray-200);
-  color: var(--text-secondary);
+  background: var(--gray-200);
+  color: var(--color-text-secondary);
 }
 
 .confirm-btn.confirm {
-  background: var(--primary);
-  color: #fff;
+  background: var(--color-primary);
+  color: var(--color-primary-foreground);
 }
 </style>

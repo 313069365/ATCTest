@@ -316,14 +316,14 @@ function handleConfirm() {
 .filter-row {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: var(--space-sm);
   padding: 0 4px;
   flex-shrink: 0;
 }
 
 .filter-scroll {
   display: flex;
-  gap: 8px;
+  gap: var(--space-sm);
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
   padding: 4px 0;
@@ -336,13 +336,13 @@ function handleConfirm() {
 .filter-chip {
   display: flex;
   align-items: center;
-  padding: 6px 14px;
-  border: 1.5px solid var(--border-color);
-  border-radius: 6px;
-  background: var(--background);
-  font-size: 13px;
-  font-weight: 500;
-  color: var(--text-secondary);
+  padding: var(--space-2xs) 14px;
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-background);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-secondary);
   cursor: pointer;
   white-space: nowrap;
   transition: all 0.15s;
@@ -354,10 +354,10 @@ function handleConfirm() {
 }
 
 .filter-chip.active {
-  background: var(--primary);
-  border-color: var(--primary);
-  color: #fff;
-  font-weight: 600;
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: var(--color-primary-foreground);
+  font-weight: var(--font-weight-semibold);
 }
 
 /* 科目列表 */
@@ -365,47 +365,47 @@ function handleConfirm() {
   flex: 1;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
-  padding: 2px 6px;
+  padding: 2px var(--space-2xs);
 }
 
 /* 科目卡片 */
 .subject-card {
-  margin: 6px 0;
-  border-radius: 12px;
-  background: var(--background);
-  border: 1.5px solid var(--border-color-light);
+  margin: var(--space-2xs) 0;
+  border-radius: var(--radius-lg);
+  background: var(--color-background);
+  border: 1.5px solid var(--color-border-light);
   transition: all 0.2s ease;
   overflow: hidden;
 }
 
 .subject-card.checked {
-  border-color: var(--primary);
-  box-shadow: 0 2px 8px rgba(0, 91, 191, 0.08);
+  border-color: var(--color-primary);
+  box-shadow: 0 2px 8px var(--color-primary-bg);
 }
 
 /* 第一行：选择区 */
 .card-row-top {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: var(--space-ms);
   padding: 12px 14px;
   cursor: pointer;
   transition: background 0.15s;
 }
 
 .card-row-top:active {
-  background: var(--background-secondary);
+  background: var(--color-muted);
 }
 
 .subject-card.checked .card-row-top {
-  background: rgba(0, 91, 191, 0.03);
+  background: var(--color-primary-bg);
 }
 
 /* 复选框 */
 .check-box {
   width: 20px;
   height: 20px;
-  border: 2px solid var(--border-color);
+  border: 2px solid var(--color-border);
   border-radius: var(--radius-sm);
   display: flex;
   align-items: center;
@@ -415,22 +415,22 @@ function handleConfirm() {
 }
 
 .check-box.checked {
-  background: var(--primary);
-  border-color: var(--primary);
-  box-shadow: 0 1px 4px rgba(0, 91, 191, 0.3);
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  box-shadow: 0 1px 4px var(--color-primary-bg);
 }
 
 .check-box.checked svg {
-  color: #fff;
-  font-size: 12px;
+  color: var(--color-primary-foreground);
+  font-size: var(--font-size-sm);
 }
 
 /* 科目名 */
 .subject-name {
   flex: 1;
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--on-surface);
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -438,8 +438,8 @@ function handleConfirm() {
 }
 
 .subject-meta {
-  font-size: 12px;
-  color: var(--text-disabled);
+  font-size: var(--font-size-sm);
+  color: var(--color-disabled);
   flex-shrink: 0;
 }
 
@@ -449,27 +449,27 @@ function handleConfirm() {
   align-items: center;
   justify-content: space-between;
   padding: 10px 14px;
-  background: rgba(0, 91, 191, 0.03);
-  border-top: 1px solid var(--border-color-light);
+  background: var(--color-primary-bg);
+  border-top: 1px solid var(--color-border-light);
 }
 
 .config-divider {
   width: 1px;
   height: 24px;
-  background: var(--border-color-light);
+  background: var(--color-border-light);
   flex-shrink: 0;
 }
 
 .inline-stepper {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: var(--space-sm);
 }
 
 .inline-label {
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--text-secondary);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-secondary);
   flex-shrink: 0;
 }
 
@@ -478,18 +478,18 @@ function handleConfirm() {
   align-items: center;
   justify-content: center;
   padding: 40px 0;
-  color: var(--text-disabled);
-  font-size: 14px;
+  color: var(--color-disabled);
+  font-size: var(--font-size-md);
 }
 
 /* 步进器 */
 .stepper {
   display: flex;
   align-items: center;
-  border: 1px solid var(--border-color);
-  border-radius: 6px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
   overflow: hidden;
-  background: var(--background);
+  background: var(--color-background);
   flex-shrink: 0;
 }
 
@@ -500,18 +500,18 @@ function handleConfirm() {
   align-items: center;
   justify-content: center;
   border: none;
-  background: var(--background-secondary);
-  color: var(--on-surface);
-  font-size: 16px;
-  font-weight: 700;
+  background: var(--color-muted);
+  color: var(--color-text);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
   cursor: pointer;
   transition: all 0.12s;
   user-select: none;
 }
 
 .stepper-btn:active:not(:disabled) {
-  background: var(--primary-light);
-  color: var(--primary);
+  background: var(--color-primary-light);
+  color: var(--color-primary);
 }
 
 .stepper-btn:disabled {
@@ -523,13 +523,13 @@ function handleConfirm() {
   width: 32px;
   height: 28px;
   border: none;
-  border-left: 1px solid var(--border-color-light);
-  border-right: 1px solid var(--border-color-light);
+  border-left: 1px solid var(--color-border-light);
+  border-right: 1px solid var(--color-border-light);
   text-align: center;
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--on-surface);
-  background: var(--background);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text);
+  background: var(--color-background);
   -moz-appearance: textfield;
 }
 
@@ -540,15 +540,15 @@ function handleConfirm() {
 
 /* Header */
 .header-title {
-  font-size: 16px;
-  font-weight: 600;
-  color: var(--on-surface);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text);
 }
 
 .header-count {
-  font-size: 13px;
-  color: var(--primary);
-  font-weight: 500;
+  font-size: var(--font-size-sm);
+  color: var(--color-primary);
+  font-weight: var(--font-weight-medium);
   margin-left: auto;
 }
 
@@ -557,22 +557,22 @@ function handleConfirm() {
   width: 60%;
   margin: 0 auto;
   padding: 12px 24px;
-  background: var(--primary);
-  color: var(--on-primary);
+  background: var(--color-primary);
+  color: var(--color-primary-foreground);
   border: none;
   border-radius: 24px;
-  font-size: 16px;
-  font-weight: 600;
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: var(--space-sm);
   transition: opacity 0.2s, transform 0.15s;
 }
 
 .action-btn:disabled {
-  background: var(--color-gray-300, #d1d5db);
+  background: var(--gray-300, #d1d5db);
   cursor: default;
 }
 

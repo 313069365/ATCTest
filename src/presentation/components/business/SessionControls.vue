@@ -100,21 +100,21 @@ function handleExit() {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: var(--space-sm);
   margin: 0 auto;
   padding: 12px 24px;
   border: none;
   border-radius: var(--radius-full);
-  font-size: 16px;
-  font-weight: 600;
-  background: var(--primary);
-  color: #fff;
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  background: var(--color-primary);
+  color: var(--color-primary-foreground);
   cursor: pointer;
   transition: opacity 0.2s, transform 0.15s;
 }
 
 .action-btn-primary svg {
-  font-size: 20px;
+  font-size: var(--font-size-xl);
 }
 
 .action-btn-primary:active {
@@ -127,20 +127,20 @@ function handleExit() {
 .settings-section {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: var(--space-sm);
 }
 
 .section-label {
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--text-secondary);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-secondary);
   text-transform: uppercase;
   letter-spacing: 0.5px;
   padding: 0 4px;
 }
 
 .settings-group {
-  background: var(--background);
+  background: var(--color-background);
   border-radius: var(--radius-lg);
   overflow: hidden;
 }
@@ -149,11 +149,11 @@ function handleExit() {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: var(--spacing-md);
+  padding: var(--space-md);
 }
 
 .toggle-item+.toggle-item {
-  border-top: 0.5px solid var(--border-color-light);
+  border-top: 0.5px solid var(--color-border-light);
 }
 
 .toggle-info {
@@ -162,13 +162,13 @@ function handleExit() {
 }
 
 .toggle-title {
-  font-size: 14px;
-  font-weight: 600;
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-semibold);
 }
 
 .toggle-desc {
-  font-size: 11px;
-  color: var(--text-secondary);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
   margin-top: 2px;
 }
 
@@ -176,7 +176,7 @@ function handleExit() {
   width: 52px;
   height: 28px;
   border-radius: var(--radius-full);
-  background: var(--color-gray-300);
+  background: var(--gray-300);
   border: none;
   cursor: pointer;
   position: relative;
@@ -185,7 +185,7 @@ function handleExit() {
 }
 
 .toggle-btn.active {
-  background: var(--primary);
+  background: var(--color-primary);
 }
 
 .toggle-knob {
@@ -195,7 +195,7 @@ function handleExit() {
   width: 24px;
   height: 24px;
   border-radius: 50%;
-  background: var(--background);
+  background: var(--color-background);
   transition: transform 0.25s cubic-bezier(0.4, 0.0, 0.2, 1);
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
   display: flex;
@@ -204,12 +204,12 @@ function handleExit() {
 }
 
 .toggle-knob svg {
-  font-size: 16px;
-  color: var(--color-gray-500);
+  font-size: var(--font-size-lg);
+  color: var(--gray-500);
 }
 
 .toggle-btn.active .toggle-knob svg {
-  color: var(--primary);
+  color: var(--color-primary);
 }
 
 .toggle-btn.active .toggle-knob {

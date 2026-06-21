@@ -130,9 +130,9 @@ const gotopage = () => {
 <style scoped>
 .section-label {
   display: block;
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--text-secondary);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-secondary);
   text-transform: uppercase;
   letter-spacing: 0.5px;
   margin-bottom: 10px;
@@ -140,7 +140,7 @@ const gotopage = () => {
 }
 
 .settings-group {
-  background: var(--color-gray-50);
+  background: var(--gray-50);
   border-radius: var(--radius-lg);
   overflow: hidden;
 }
@@ -149,7 +149,7 @@ const gotopage = () => {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: var(--spacing-md);
+  padding: var(--space-md);
 }
 
 .toggle-info {
@@ -158,13 +158,13 @@ const gotopage = () => {
 }
 
 .toggle-title {
-  font-size: 14px;
-  font-weight: 600;
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-semibold);
 }
 
 .toggle-desc {
-  font-size: 11px;
-  color: var(--text-secondary);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
   margin-top: 2px;
 }
 
@@ -172,7 +172,7 @@ const gotopage = () => {
   width: 52px;
   height: 28px;
   border-radius: var(--radius-full);
-  background: var(--color-gray-300);
+  background: var(--gray-300);
   border: none;
   cursor: pointer;
   position: relative;
@@ -181,7 +181,7 @@ const gotopage = () => {
 }
 
 .toggle-btn.active {
-  background: var(--primary);
+  background: var(--color-primary);
 }
 
 .toggle-knob {
@@ -191,7 +191,7 @@ const gotopage = () => {
   width: 24px;
   height: 24px;
   border-radius: 50%;
-  background: var(--background);
+  background: var(--color-background);
   transition: transform 0.25s cubic-bezier(0.4, 0.0, 0.2, 1);
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 }
@@ -204,17 +204,17 @@ const gotopage = () => {
   width: 60%;
   margin: 0 auto;
   padding: 12px 24px;
-  background: var(--primary);
-  color: #fff;
+  background: var(--color-primary);
+  color: var(--color-primary-foreground);
   border: none;
   border-radius: var(--radius-full);
-  font-size: 16px;
-  font-weight: 600;
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: var(--space-sm);
   transition: opacity 0.2s, transform 0.15s;
 }
 
@@ -224,6 +224,6 @@ const gotopage = () => {
 }
 
 .start-btn svg {
-  font-size: 20px;
+  font-size: var(--font-size-xl);
 }
 </style>

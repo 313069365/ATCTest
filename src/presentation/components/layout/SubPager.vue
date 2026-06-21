@@ -71,8 +71,8 @@ const subBtnClass = (index) => {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 14px;
-  padding: 6px;
+  gap: var(--space-md);
+  padding: var(--space-2xs);
 }
 
 .pager-btn {
@@ -92,14 +92,14 @@ const subBtnClass = (index) => {
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border: 1px solid rgba(255, 255, 255, 0.5);
-  font-size: 15px;
+  font-size: var(--font-size-lg);
   font-weight: var(--font-weight-semibold);
-  color: var(--text-secondary);
+  color: var(--color-text-secondary);
   cursor: pointer;
 }
 
 :global(.dark) .pager-btn.num {
-  background: rgba(50, 50, 50, 0.2);
+  background: var(--color-overlay-medium);
   border-color: rgba(255, 255, 255, 0.1);
 }
 
@@ -108,30 +108,30 @@ const subBtnClass = (index) => {
 }
 
 .pager-btn.num.current {
-  background: var(--primary);
-  color: #fff;
-  box-shadow: 0 2px 6px rgba(0, 91, 191, 0.3);
+  background: var(--color-primary);
+  color: var(--color-primary-foreground);
+  box-shadow: 0 2px 6px var(--color-primary-bg);
 }
 
 .pager-btn.num.correct {
-  background: var(--success);
-  color: #fff;
+  background: var(--color-success);
+  color: var(--color-primary-foreground);
 }
 
 .pager-btn.num.wrong {
-  background: var(--error);
-  color: #fff;
+  background: var(--color-destructive);
+  color: var(--color-primary-foreground);
 }
 
 .pager-btn.num.answered {
-  background: var(--success-light);
-  color: var(--success);
+  background: var(--color-success-light);
+  color: var(--color-success);
 }
 
 .pager-btn.arrow {
   border-radius: var(--radius-sm);
   background: transparent;
-  color: var(--text-secondary);
+  color: var(--color-text-secondary);
   cursor: pointer;
 }
 
@@ -145,6 +145,6 @@ const subBtnClass = (index) => {
 }
 
 .pager-btn.arrow svg {
-  font-size: 22px;
+  font-size: var(--font-size-2xl);
 }
 </style>

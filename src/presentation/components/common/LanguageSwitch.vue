@@ -37,9 +37,9 @@ function switchLang(lang) {
 
 .section-label {
   display: block;
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--text-secondary);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-secondary);
   text-transform: uppercase;
   letter-spacing: 0.5px;
   padding: 0 4px;
@@ -47,7 +47,7 @@ function switchLang(lang) {
 }
 
 .settings-group {
-  background: var(--background);
+  background: var(--color-background);
   border-radius: var(--radius-lg);
   overflow: hidden;
 }
@@ -56,7 +56,7 @@ function switchLang(lang) {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: var(--spacing-md);
+  padding: var(--space-md);
 }
 
 .toggle-info {
@@ -65,21 +65,21 @@ function switchLang(lang) {
 }
 
 .toggle-title {
-  font-size: 14px;
-  font-weight: 600;
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-semibold);
 }
 
 .toggle-desc {
-  font-size: 11px;
-  color: var(--text-secondary);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
   margin-top: 2px;
 }
 
 .seg-control {
   position: relative;
   display: flex;
-  background: var(--color-gray-100);
-  border-radius: 10px;
+  background: var(--gray-100);
+  border-radius: var(--radius-md);
   padding: 3px;
 }
 
@@ -89,31 +89,31 @@ function switchLang(lang) {
   left: calc(3px + (100% - 6px) / var(--opt-count) * var(--opt-index));
   width: calc((100% - 6px) / var(--opt-count));
   height: calc(100% - 6px);
-  background: var(--background);
-  border-radius: 8px;
+  background: var(--color-background);
+  border-radius: var(--radius-md);
   transition: left 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
   z-index: 0;
 }
 
 .seg-option.active {
-  color: var(--primary);
-  font-weight: 600;
+  color: var(--color-primary);
+  font-weight: var(--font-weight-semibold);
 }
 
 .seg-control.lang .seg-option {
-  padding: 6px 16px;
-  font-size: 13px;
+  padding: var(--space-2xs) var(--space-md);
+  font-size: var(--font-size-sm);
 }
 
 .seg-option {
   flex: 1;
   border: none;
   background: transparent;
-  border-radius: 8px;
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--text-secondary);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-secondary);
   cursor: pointer;
   z-index: 1;
   transition: color 0.25s;
@@ -122,11 +122,11 @@ function switchLang(lang) {
 }
 
 .seg-option.active {
-  color: var(--primary);
-  font-weight: 600;
+  color: var(--color-primary);
+  font-weight: var(--font-weight-semibold);
 }
 
 .seg-option:not(.active):active {
-  background: var(--color-gray-200);
+  background: var(--gray-200);
 }
 </style>

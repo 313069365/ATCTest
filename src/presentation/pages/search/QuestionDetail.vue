@@ -96,7 +96,7 @@ watch(() => route.params.id, () => {
 
 <style scoped>
 .question-detail-page {
-  background: var(--color-gray-100);
+  background: var(--gray-100);
   min-height: 100vh;
   max-width: var(--app-max-width);
   margin: 0 auto;
@@ -114,10 +114,10 @@ watch(() => route.params.id, () => {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: var(--spacing-smd) var(--spacing-lg);
-  padding-bottom: calc(var(--spacing-smd) + env(safe-area-inset-bottom, 0px));
-  background: var(--background);
-  border-top: 1px solid var(--border-color);
+  padding: var(--space-ms) var(--space-lg);
+  padding-bottom: calc(var(--space-ms) + env(safe-area-inset-bottom, 0px));
+  background: var(--color-background);
+  border-top: 1px solid var(--color-border);
   box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.06);
   box-sizing: border-box;
 }
@@ -125,14 +125,14 @@ watch(() => route.params.id, () => {
 .nav-btn {
   display: flex;
   align-items: center;
-  gap: var(--spacing-sm);
-  padding: var(--spacing-smd) var(--spacing-lg);
+  gap: var(--space-sm);
+  padding: var(--space-ms) var(--space-lg);
   border: none;
-  background: var(--color-gray-200);
+  background: var(--gray-200);
   border-radius: var(--radius-lg);
   font-size: var(--font-size-lg);
-  font-weight: 700;
-  color: var(--text-primary);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text);
   cursor: pointer;
   transition: opacity var(--transition-fast);
 }
@@ -142,19 +142,19 @@ watch(() => route.params.id, () => {
 }
 
 .nav-btn:disabled {
-  color: var(--text-disabled);
+  color: var(--color-disabled);
   background: transparent;
   cursor: default;
 }
 
 .nav-btn svg {
-  font-size: 20px;
+  font-size: var(--font-size-xl);
 }
 
 .nav-indicator {
   font-size: var(--font-size-md);
-  font-weight: 700;
-  color: var(--text-primary);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text);
 }
 
 .not-found {
@@ -162,59 +162,59 @@ watch(() => route.params.id, () => {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: var(--spacing-2xl) 0;
-  gap: var(--spacing-md);
-  color: var(--text-secondary);
+  padding: var(--space-2xl) 0;
+  gap: var(--space-md);
+  color: var(--color-text-secondary);
 }
 
 .not-found-icon {
   font-size: 64px;
-  color: var(--text-disabled);
+  color: var(--color-disabled);
 }
 
 .detail-content {
-  padding: var(--spacing-lg);
+  padding: var(--space-lg);
   padding-bottom: 80px;
 }
 
 .question-meta-bar {
-  margin-bottom: var(--spacing-md);
+  margin-bottom: var(--space-md);
 }
 
 .meta-tags {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--spacing-sm);
+  gap: var(--space-sm);
 }
 
 .meta-tag {
   font-size: var(--font-size-sm);
-  padding: var(--spacing-mn) var(--spacing-md);
+  padding: var(--space-xs) var(--space-md);
   border-radius: var(--radius-full);
-  font-weight: 500;
+  font-weight: var(--font-weight-medium);
 }
 
 .tag-category {
-  background: var(--primary-light);
-  color: var(--primary);
+  background: var(--color-primary-light);
+  color: var(--color-primary);
 }
 
 .tag-scope {
-  background: var(--secondary-light);
-  color: var(--accent);
+  background: var(--color-secondary-light);
+  color: var(--color-accent);
 }
 
 .tag-subject {
-  background: var(--color-gray-200);
-  color: var(--text-secondary);
+  background: var(--gray-200);
+  color: var(--color-text-secondary);
 }
 
 .question-renderer-wrap {
-  background: var(--background);
+  background: var(--color-background);
   border-radius: var(--radius-lg);
-  padding: var(--spacing-md);
+  padding: var(--space-md);
   box-shadow: var(--shadow-sm);
-  margin-bottom: var(--spacing-lg);
+  margin-bottom: var(--space-lg);
 }
 
 .detail-actions {
@@ -224,18 +224,18 @@ watch(() => route.params.id, () => {
 
 .practice-btn {
   width: 100%;
-  padding: var(--spacing-md) var(--spacing-lg);
-  background: var(--primary);
-  color: var(--on-primary);
+  padding: var(--space-md) var(--space-lg);
+  background: var(--color-primary);
+  color: var(--color-primary-foreground);
   border: none;
   border-radius: var(--radius-lg);
   font-size: var(--font-size-md);
-  font-weight: 700;
+  font-weight: var(--font-weight-bold);
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: var(--spacing-sm);
+  gap: var(--space-sm);
   transition: opacity var(--transition-fast);
 }
 
@@ -244,6 +244,6 @@ watch(() => route.params.id, () => {
 }
 
 .practice-btn svg {
-  font-size: 20px;
+  font-size: var(--font-size-xl);
 }
 </style>
