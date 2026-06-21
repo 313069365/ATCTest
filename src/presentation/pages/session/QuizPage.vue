@@ -61,7 +61,7 @@
             :user-answer="userAnswers[currentQuestion?.id]" :show-answer="currentQuestionDisplay.shouldShowAnswer.value"
             :show-answer-mode="practiceData?.showAnswerMode" :auto-jump="practiceData?.autoJump"
             :show-explanation="showAnswerExplanation" :current-sub-index="currentSubIndex" @answer="handleAnswer"
-            @next-question="nextQuestion" @checkSub="handleCheckSub" @check="checkAnswer" @goSub="handleGoSub" />
+            @next-question="nextQuestion" @checkSub="handleCheckSub" @check="checkCurrentAnswer" @goSub="handleGoSub" />
         </template>
       </template>
       <div v-else style="text-align: center; padding: 40px">
