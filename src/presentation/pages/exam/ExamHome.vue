@@ -15,8 +15,8 @@
             <Icon name="add" />
             <span>{{ t('createPaper') }}</span>
           </button>
-          <button class="paper-action-btn" @click="">
-            <Icon name="person" />
+          <button class="paper-action-btn" @click="$router.push('/exam/join')">
+            <Icon name="person-add" />
             <span>{{ t('joinExam') }}</span>
           </button>
           <input type="file" ref="fileInput" accept=".json" @change="handleImport" style="display: none">

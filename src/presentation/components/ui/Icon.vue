@@ -59,6 +59,7 @@ import IconMenuBook from "~icons/material-symbols/menu-book"
 import IconMenuBookOutline from "~icons/material-symbols/menu-book-outline"
 import IconMonitorHeart from "~icons/material-symbols/monitor-heart"
 import IconMoreVert from "~icons/material-symbols/more-vert"
+import IconPersonAdd from "~icons/material-symbols/person-add"
 import IconPerson from "~icons/material-symbols/person"
 import IconPersonOutline from "~icons/material-symbols/person-outline"
 import IconPlayArrow from "~icons/material-symbols/play-arrow"
@@ -167,6 +168,7 @@ const registry = {
   'menu-book-outline': IconMenuBookOutline,
   'monitor-heart': IconMonitorHeart,
   'more-vert': IconMoreVert,
+  'person-add': IconPersonAdd,
   person: IconPerson,
   'person-outline': IconPersonOutline,
   'play-arrow': IconPlayArrow,
