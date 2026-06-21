@@ -77,6 +77,17 @@ export const bankStorage = {
   async clearBank() {
     await bankDb.clear();
   },
+  /**
+   * 获取所有已缓存的 subject keys
+   */
+  async keys() {
+    try {
+      return await bankDb.keys();
+    } catch (e) {
+      console.error("获取缓存 keys 失败:", e);
+      return [];
+    }
+  },
 };
 
 /**

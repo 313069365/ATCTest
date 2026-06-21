@@ -69,6 +69,35 @@ export function getQuestionBankInfo(category) {
   return { scopes: [...cat.scopes], subjects: Object.keys(cat.subjects) };
 }
 
+/**
+ * 获取文件清单及其元信息
+ * 从 structure.json 反推每个文件包含哪些 subjects
+ * @returns {Array<{filename, category, scope, subjects: string[], questionCount: number}>}
+ */
+export function getFileManifest() {
+  return structure.files.map((filename) => {
+    const parts = filename.split("/");
+    const category = parts[0];
+    const baseName = parts[1].replace(".json", "");
+    const scope = baseName.split("_")[0];
+
+    const catData = structure.categories[category];
+    const subjects = [];
+    let questionCount = 0;
+
+    if (catData) {
+      for (const [name, info] of Object.entries(catData.subjects)) {
+        if (info.scope === scope) {
+          subjects.push(name);
+          questionCount += info.count || 0;
+        }
+      }
+    }
+
+    return { filename, category, scope, subjects, questionCount };
+  });
+}
+
 // ==================== 文件下载 ====================
 
 /**
@@ -111,7 +140,7 @@ export async function fetchAllQuestionFiles(onProgress, signal) {
   const basicColl = [];
   for (const [, questions] of Object.entries(groupedBySubject)) {
     for (const q of questions) {
-      if (q.meta?.category === 'atc' && q.meta?.scope === 'base') {
+      if (q.meta?.category === "atc" && q.meta?.scope === "base") {
         basicColl.push(q);
       }
     }
@@ -270,6 +299,7 @@ export default {
   getQuestionBankStructure,
   getQuestionBanks,
   getQuestionBankInfo,
+  getFileManifest,
   importQuestions,
   searchQuestions,
 };

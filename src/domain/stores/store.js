@@ -36,6 +36,9 @@ export const useAppStore = defineStore("app", () => {
   /** 题库元数据（预计算的 category/scope/subject 结构） */
   const bankMeta = ref({});
 
+  /** 每个文件的下载状态: { filename: 'idle' | 'cached' | 'downloading' | 'error' } */
+  const fileStatus = ref({});
+
   // ========== 用户相关 (USER) ==========
 
   /** 错题本 (USER_WRONG_BOOK) */
@@ -114,7 +117,108 @@ export const useAppStore = defineStore("app", () => {
   }
 
   /**
-   * 后台下载所有题目文件并写入 IndexedDB
+   * 扫描 IndexedDB，初始化每个文件的缓存状态
+   * 优先读取 downloaded_files 记录，降级到 IndexedDB subject 扫描
+   */
+  async function initFileStatus() {
+    const cachedKeys = await bankStorage.keys();
+    const cachedSet = new Set(cachedKeys);
+    const downloadedFiles = new Set(storage.getItem("downloaded_files") || []);
+    const manifest = API.getFileManifest();
+    const status = {};
+    for (const file of manifest) {
+      // 优先检查显式下载记录
+      if (downloadedFiles.has(file.filename)) {
+        status[file.filename] = "cached";
+        continue;
+      }
+      // 降级：检查该文件的 subjects 是否有任意已缓存
+      const hasCachedSubject = file.subjects.some((s) => cachedSet.has(s));
+      status[file.filename] = hasCachedSubject ? "cached" : "idle";
+    }
+    fileStatus.value = status;
+  }
+
+  /** 记录已下载文件到 localStorage */
+  function markFileDownloaded(filename) {
+    const list = storage.getItem("downloaded_files") || [];
+    if (!list.includes(filename)) {
+      list.push(filename);
+      storage.setItem("downloaded_files", list);
+    }
+  }
+
+  /** 从 localStorage 移除已下载文件记录 */
+  function markFileRemoved(filename) {
+    const list = storage.getItem("downloaded_files") || [];
+    storage.setItem(
+      "downloaded_files",
+      list.filter((f) => f !== filename),
+    );
+  }
+
+  /**
+   * 下载单个题库文件并写入 IndexedDB
+   */
+  async function downloadFile(filename) {
+    fileStatus.value[filename] = "downloading";
+    try {
+      const questions = await API.fetchQuestionFile(filename);
+      const grouped = {};
+      for (const q of questions) {
+        const subject = q.meta?.subject;
+        if (!subject) continue;
+        if (!grouped[subject]) grouped[subject] = [];
+        grouped[subject].push(q);
+      }
+      for (const [subject, qs] of Object.entries(grouped)) {
+        await bankStorage.setBank(subject, qs);
+      }
+      // 同步内存缓存
+      API.populateCache(grouped);
+      fileStatus.value[filename] = "cached";
+      markFileDownloaded(filename);
+      storage.setItem("bank_version", String(API.computeBankHash()));
+    } catch (e) {
+      console.error(`下载文件失败: ${filename}`, e);
+      fileStatus.value[filename] = "error";
+    }
+  }
+
+  /**
+   * 删除单个题库文件的缓存
+   */
+  async function deleteFile(filename) {
+    const manifest = API.getFileManifest();
+    const file = manifest.find((f) => f.filename === filename);
+    if (file) {
+      for (const subject of file.subjects) {
+        await bankStorage.removeBank(subject);
+      }
+    }
+    fileStatus.value[filename] = "idle";
+    markFileRemoved(filename);
+  }
+
+  /**
+   * 下载所有未缓存的文件（增量下载）
+   */
+  async function downloadAllFiles(onProgress, signal) {
+    const manifest = API.getFileManifest();
+    const uncached = manifest.filter(
+      (f) => fileStatus.value[f.filename] !== "cached",
+    );
+    if (uncached.length === 0) return;
+    for (let i = 0; i < uncached.length; i++) {
+      if (signal?.aborted) break;
+      await downloadFile(uncached[i].filename);
+      if (onProgress) onProgress(i + 1, uncached.length);
+    }
+    storage.setItem("bank_version", String(API.computeBankHash()));
+  }
+
+  /**
+   * 后台下载所有题目文件并写入 IndexedDB（保留兼容）
    */
   async function downloadAndCacheAll(onProgress, signal) {
     const grouped = await API.fetchAllQuestionFiles(onProgress, signal);
@@ -122,6 +226,12 @@ export const useAppStore = defineStore("app", () => {
       bankStorage.setBank(subject, questions),
     );
     await Promise.all(promises);
+    // 记录所有文件已下载
+    const manifest = API.getFileManifest();
+    storage.setItem(
+      "downloaded_files",
+      manifest.map((f) => f.filename),
+    );
     storage.setItem("bank_version", String(API.computeBankHash()));
   }
 
@@ -387,7 +497,7 @@ export const useAppStore = defineStore("app", () => {
 
   /**
    * 初始化所有数据
-   * 首次启动阻塞下载，后续启动后台检测
+   * 扫描已有缓存 → 全部已缓存则直接进入，否则不阻塞（用户手动下载）
    */
   async function init() {
     loadBankMeta();
@@ -405,22 +515,20 @@ export const useAppStore = defineStore("app", () => {
     }
     storage.setItem(STORAGE_KEY.APP_VERSION, APP_VERSION);
 
-    const storedVer = storage.getItem("bank_version");
-    const currentVer = API.computeBankHash();
+    // 扫描已有缓存，确定每个文件的状态
+    await initFileStatus();
 
-    if (storedVer && String(storedVer) === String(currentVer)) {
+    const manifest = API.getFileManifest();
+    const allCached = manifest.every(
+      (f) => fileStatus.value[f.filename] === "cached",
+    );
+
+    if (allCached) {
+      // 全部已缓存：填充内存缓存，后台检测更新
       populateCacheFromIndexedDB();
       checkForUpdatesInBackground();
-      return;
     }
-
-    if (!storedVer) {
-      await loadQuestions();
-      return;
-    }
-
-    // 版本不一致：后台静默更新
-    checkForUpdatesInBackground();
+    // 有未缓存文件：不阻塞应用，用户可从数据管理页手动下载
   }
 
   /**
@@ -574,12 +682,17 @@ export const useAppStore = defineStore("app", () => {
     questionBanks,
     questionsBySubject,
     bankMeta,
+    fileStatus,
     loadQuestions,
     loadBankMeta,
     loadSubjectQuestions,
     getSubjectQuestions,
     checkForUpdates,
     forceRefreshQuestions,
+    initFileStatus,
+    downloadFile,
+    deleteFile,
+    downloadAllFiles,
 
     // 错题本
     wrongBook,

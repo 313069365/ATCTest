@@ -104,6 +104,11 @@ const routes = [
         name: "DataManagement",
         component: () => import("../pages/user/DataManagement.vue"),
       },
+      {
+        path: "/user-data",
+        name: "UserData",
+        component: () => import("../pages/user/UserData.vue"),
+      },
     ],
   },
 ];

@@ -62,7 +62,14 @@
             <div class="shortcut-icon primary-bg">
               <Icon name="storage" />
             </div>
-            <span class="shortcut-label">应用数据</span>
+            <span class="shortcut-label">题库管理</span>
+            <Icon name="chevron-right" class="shortcut-arrow" />
+          </div>
+          <div class="shortcut-item" @click="goToUserData">
+            <div class="shortcut-icon primary-bg">
+              <Icon name="delete-sweep-outline" />
+            </div>
+            <span class="shortcut-label">用户数据</span>
             <Icon name="chevron-right" class="shortcut-arrow" />
           </div>
           <div class="shortcut-item" @click="goToSettings">
@@ -125,6 +132,10 @@ function goToStats() {
 
 function goToDataManagement() {
   router.push({ name: 'DataManagement' })
+}
+
+function goToUserData() {
+  router.push({ name: 'UserData' })
 }
 
 function goToSettings() {
