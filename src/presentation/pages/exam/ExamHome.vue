@@ -29,7 +29,29 @@
         <div class="paper-list" v-if="examPapers.length > 0">
           <div v-for="paper in examPapers" :key="paper.id" class="paper-card">
             <div class="paper-header">
-              <span class="paper-tag">{{ paper.paperCategory || t('mockTest') }}</span>
+              <h3 class="paper-title">{{ paper.title }}</h3>
+              <span class="paper-tag">ID: {{ paper.id }}</span>
+            </div>
+
+            <div class="paper-stats">
+              <span class="stat-item">
+                <Icon name="quiz-outline" />
+                {{ paper.questionCount }} {{ t('questions') }}
+              </span>
+              <span class="stat-item">
+                <Icon name="grade-outline" />
+                {{ paper.totalScore }} {{ t('score') }}
+              </span>
+              <span class="stat-item">
+                <Icon name="timer-outline" />
+                {{ paper.duration }} {{ t('minutes') }}
+              </span>
+              <span class="stat-item created-time">
+                <Icon name="event-outline" />
+                {{ formatDate(paper.createdAt) }}
+              </span>
+            </div>
+            <div class="paper-actions">
               <div class="paper-actions-btns">
                 <button class="icon-btn-sm" @click="exportPaper(paper)">
                   <Icon name="download" />
@@ -38,33 +60,10 @@
                   <Icon name="delete-outline" />
                 </button>
               </div>
+              <button class="start-btn" @click="startExam(paper.id)">
+                {{ t('startExam') }}
+              </button>
             </div>
-
-            <h3 class="paper-title">{{ paper.title }}</h3>
-            <p class="paper-desc">{{ paper.description || t('noDescription') }}</p>
-            <div class="paper-stats">
-              <span class="stat-item">
-                <Icon name="quiz-outline" />
-                {{ paper.questionCount }} {{ t('questions') }}
-              </span>
-              <span class="stat-item">
-                <Icon name="timer-outline" />
-                {{ paper.duration }} {{ t('minutes') }}
-              </span>
-              <span class="stat-item">
-                <Icon name="grade-outline" />
-                {{ paper.totalScore }} {{ t('score') }}
-              </span>
-              <span class="stat-item created-time">
-                <Icon name="event-outline" />
-                {{ formatDate(paper.createdAt) }}
-              </span>
-            </div>
-
-            <button class="start-btn" @click="startExam(paper.id)">
-              {{ t('startExam') }}
-              <Icon name="play-arrow-outline" />
-            </button>
           </div>
         </div>
 
@@ -179,6 +178,7 @@ const fileInput = ref(null)
 .paper-actions {
   display: flex;
   gap: var(--spacing-lg);
+  align-items: center;
 }
 
 .paper-action-btn {
@@ -253,10 +253,10 @@ const fileInput = ref(null)
 .paper-tag {
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-bold);
-  color: var(--primary);
-  background: var(--primary-light);
+  color: var(--color-gray-600);
+  background: var(--color-gray-200);
   padding: var(--spacing-mn) var(--spacing-md);
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-md);
 }
 
 .paper-title {
@@ -294,10 +294,7 @@ const fileInput = ref(null)
   font-size: 12px;
 }
 
-.stat-item.created-time {
-  background: rgba(0, 91, 191, 0.1);
-  color: var(--primary);
-}
+.stat-item.created-time {}
 
 .start-btn {
   width: 100%;

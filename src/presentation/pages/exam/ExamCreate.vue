@@ -19,8 +19,8 @@
                     <div class="form-group">
                         <label>权限范围</label>
                         <div class="scope-row">
-                            <label class="scope-opt" :class="{ on: form.visibility === 'personal' }">
-                                <input type="radio" v-model="form.visibility" value="personal" />
+                            <label class="scope-opt" :class="{ on: form.visibility === 'private' }">
+                                <input type="radio" v-model="form.visibility" value="private" />
                                 <span>个人</span>
                             </label>
                             <label class="scope-opt" :class="{ on: form.visibility === 'department' }">
@@ -66,7 +66,7 @@
 
                     <button class="header-add" @click="openBankModal">
                         <Icon name="add" />
-                        <span>{{ t('add') }}</span>
+                        <span>{{ t('addSubject') }}</span>
                     </button>
                 </div>
 
@@ -84,15 +84,21 @@
                                     <Icon name="close" />
                                 </button>
                             </div>
-                            <div class="subject-info">
-                                <span>{{ t(item.category) }}</span>
-                                <span class="dot">·</span>
-                                <span>{{ item.count }} 题 x {{ item.score }} 分/题 = {{ item.count * item.score }} 分</span>
-                            </div>
+
+                        </div>
+                        <div class="subject-info">
+                            <span>{{ t(item.category) }}</span>
+                            <span class="dot">·</span>
+                            <span>{{ item.count }} 题 x {{ item.score }} 分/题 = {{ item.count * item.score }} 分</span>
                         </div>
                     </div>
                     <div v-else class="preset-section">
-                        <div v-if="store.examPresets.length > 0" class="preset-list">
+                        <div v-if="store.examPresets.length === 0" class="preset-empty">
+                            <Icon name="bookmark-outline" />
+                            <p>添加预设后可快速创建试卷</p>
+                        </div>
+
+                        <div class="preset-list">
                             <button v-for="preset in store.examPresets" :key="preset.id" class="preset-chip"
                                 @click="applyPreset(preset)">
                                 <span class="preset-chip-name">{{ preset.title }}</span>
@@ -102,15 +108,12 @@
                                 </span>
                             </button>
                             <button class="preset-chip-add" @click="openPresetDialog">
-                                <Icon name="bookmark-add-outline" />
+                                <Icon name="add" />
                                 <span>添加预设</span>
                             </button>
                         </div>
 
-                        <div v-if="store.examPresets.length === 0" class="preset-empty">
-                            <Icon name="bookmark-outline" />
-                            <p>添加预设后可快速创建试卷</p>
-                        </div>
+
                     </div>
 
                 </div>
@@ -678,9 +681,10 @@ async function createPaper() {
     align-items: center;
     gap: 6px;
     padding: 6px 12px;
-    border: 1.5px solid var(--primary);
+    border: 1.5px solid var(--background-secondary);
     border-radius: 8px;
-    color: var(--primary);
+    color: var(--color-gray-600);
+    font-weight: 600;
     background: transparent;
     cursor: pointer;
     transition: all 0.15s;

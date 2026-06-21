@@ -47,11 +47,15 @@
             </div>
             <button class="clear-btn" @click="clearSingle(item.key, item.name)">清除</button>
           </div>
+          <div class="data-row">
+            <button class="clear-all-btn" @click="clearAll" :disabled="clearing">
+              <IconDeleteSweepOutline />
+              <span>{{ clearing ? '清除中...' : '清除所有用户数据' }}</span>
+            </button>
+          </div>
+
         </div>
-        <button class="clear-all-btn" @click="clearAll" :disabled="clearing">
-          <IconDeleteSweepOutline />
-          <span>{{ clearing ? '清除中...' : '清除所有用户数据' }}</span>
-        </button>
+
       </section>
     </main>
     <ConfirmDialog v-bind="confirm.state" />
@@ -105,7 +109,6 @@ const dataItems = computed(() => [
   { key: STORAGE_KEY.USER_FAVORITES, name: '收藏本', count: store.favorites.length, iconName: 'bookmark-outline', iconClass: 'fav-icon' },
   { key: STORAGE_KEY.PRACTICE_HISTORY, name: '练习记录', count: store.practiceHistory.length, iconName: 'assignment-turned-in-outline', iconClass: 'history-icon' },
   { key: STORAGE_KEY.EXAM_PAPERS, name: '考试记录', count: store.examPapers.length, iconName: 'quiz-outline', iconClass: 'exam-icon' },
-  { key: STORAGE_KEY.EXAM_PRESETS, name: '考试预设', count: store.examPresets.length, iconName: 'settings-outline', iconClass: 'preset-icon' },
 ])
 
 function goBack() {
@@ -257,7 +260,7 @@ onMounted(() => {
 .card-btn {
   width: 100%;
   margin-top: 12px;
-  padding: 10px;
+  padding: var(--spacing-smd);
   background: var(--primary);
   border: none;
   border-radius: var(--radius-md);
@@ -265,7 +268,7 @@ onMounted(() => {
   align-items: center;
   justify-content: center;
   gap: 6px;
-  font-size: var(--font-size-sm);
+  font-size: var(--font-size-md);
   font-weight: var(--font-weight-semibold);
   color: var(--on-primary);
   cursor: pointer;
@@ -337,7 +340,6 @@ onMounted(() => {
 }
 
 .clear-btn {
-  padding: 4px 12px;
   background: var(--background);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-sm);
@@ -352,8 +354,7 @@ onMounted(() => {
 
 .clear-all-btn {
   width: 100%;
-  margin-top: var(--spacing-md);
-  padding: var(--spacing-md);
+  padding: var(--spacing-smd);
   background: var(--error-light);
   border: none;
   border-radius: var(--radius-lg);
