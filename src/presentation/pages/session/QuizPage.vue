@@ -9,6 +9,7 @@
             {{ t(practiceData?.scope) || practiceData?.scope || "" }}</span>
         </div>
       </div>
+
       <div class="top-bar-right">
         <div class="timer-display" :class="{ warning: isExamMode && remainingSeconds < 300 }">
           <Icon name="timer-outline" />
@@ -17,7 +18,6 @@
         <button class="grid-btn" @click="showQuizSettings = true">
           <Icon name="settings" />
         </button>
-
       </div>
     </header>
 
@@ -32,7 +32,7 @@
         <span class="progress-label" @click="openJumpDialog">{{ currentIndex + 1 }} / {{ isExamMode ? questions.length
           :
           bank.length
-        }}</span>
+          }}</span>
         <div class="action-bar-right">
           <button v-for="btn in visibleButtons" :key="btn.key" class="action-btn"
             :class="{ active: btn.active?.value, 'remove-btn': btn.key === 'removeWrong' }" @click="btn.action"
