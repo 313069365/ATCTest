@@ -31,6 +31,9 @@ export const useAppStore = defineStore("app", () => {
   /** 题库加载进度 0-100 */
   const loadingProgress = ref(0);
 
+  /** 应用初始化是否完成（WASM + 用户数据） */
+  const initialized = ref(false);
+
   /** 题库结构（自动发现） */
   const questionBankStructure = ref({});
 
@@ -559,45 +562,66 @@ export const useAppStore = defineStore("app", () => {
   // ========== 初始化 ==========
 
   /**
-   * 初始化所有数据
-   * 扫描已有缓存 → 全部已缓存则直接进入，否则不阻塞（用户手动下载）
+   * 初始化所有数据（非阻塞）
+   * Phase 1: 瞬间完成同步操作（bankMeta + 版本追踪）
+   * Phase 2: 后台异步加载 WASM + 用户数据 + 题库缓存
    */
-  async function init() {
-    try {
-      await userRepository.initUserRepository();
-      const currentUserId = userRepository.getCurrentUserId();
-      if (currentUserId) {
-        userRepository.setCurrentUser(currentUserId);
-      }
-    } catch (e) {
-      console.error("初始化用户仓库失败:", e);
-    }
-
+  function init() {
+    // Phase 1: 同步操作，瞬间完成，UI 立即可交互
     loadBankMeta();
-    await loadWrongBook();
-    await loadFavorites();
-    await loadPracticeProgress();
-    await loadPracticeHistory();
-    await loadExamPapers();
-    await loadExamPresets();
 
-    // 应用版本追踪
     const prevAppVer = storage.getItem(STORAGE_KEY.APP_VERSION);
     if (prevAppVer && prevAppVer !== APP_VERSION) {
       console.log(`应用版本更新: ${prevAppVer} → ${APP_VERSION}`);
     }
     storage.setItem(STORAGE_KEY.APP_VERSION, APP_VERSION);
 
-    // 扫描已有缓存，确定每个文件的状态
-    await initFileStatus();
+    // Phase 2: 后台异步初始化，不阻塞 UI
+    _initAsync();
+  }
 
+  /**
+   * 后台异步初始化（WASM + 用户数据 + 题库缓存）
+   * 不阻塞 UI，完成后标记 initialized = true
+   */
+  async function _initAsync() {
+    // 1. 并行启动：WASM 初始化 + 题库缓存状态扫描（互不依赖）
+    const initDbPromise = (async () => {
+      try {
+        await userRepository.initUserRepository();
+        const currentUserId = userRepository.getCurrentUserId();
+        if (currentUserId) {
+          userRepository.setCurrentUser(currentUserId);
+        }
+      } catch (e) {
+        console.error("初始化用户仓库失败:", e);
+      }
+    })();
+
+    const initFileStatusPromise = initFileStatus();
+
+    await Promise.all([initDbPromise, initFileStatusPromise]);
+
+    // 2. WASM 就绪后，并行加载所有用户数据（彼此独立）
+    await Promise.all([
+      loadWrongBook(),
+      loadFavorites(),
+      loadPracticeProgress(),
+      loadPracticeHistory(),
+      loadExamPapers(),
+      loadExamPresets(),
+    ]);
+
+    // 3. 标记初始化完成，UI 可完整交互
+    initialized.value = true;
+
+    // 4. 后台填充题库缓存（不阻塞 initialized）
     const manifest = API.getFileManifest();
     const allCached = manifest.every(
       (f) => fileStatus.value[f.filename] === "cached",
     );
 
     if (allCached) {
-      // 全部已缓存：填充内存缓存，后台检测更新
       populateCacheFromIndexedDB();
       checkForUpdatesInBackground();
     }
@@ -841,5 +865,6 @@ export const useAppStore = defineStore("app", () => {
 
     // 初始化
     init,
+    initialized,
   };
 });

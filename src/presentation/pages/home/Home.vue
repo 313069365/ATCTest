@@ -103,7 +103,7 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted, watch } from 'vue'
+import { ref, computed, watch } from 'vue'
 import { useRouter } from 'vue-router'
 import TopBar from '@/presentation/components/shared/TopBar.vue'
 import Icon from '@/presentation/components/ui/Icon.vue'
@@ -202,10 +202,10 @@ const pageTo = (path) => {
   router.push(path)
 }
 
-// 加载数据
-onMounted(() => {
-  pm.refresh()
-})
+// 初始化完成后刷新统计数据（避免与 init 重复加载）
+watch(() => store.initialized, (val) => {
+  if (val) pm.refresh()
+}, { immediate: true })
 
 
 </script>
