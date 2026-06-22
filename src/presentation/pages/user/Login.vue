@@ -5,11 +5,7 @@
     <main class="content">
       <div class="login-card">
         <!-- Tab 切换 -->
-        <SegmentedControl
-          v-model="activeTab"
-          :options="tabOptions"
-          class="tab-control"
-        />
+        <SegmentedControl v-model="activeTab" :options="tabOptions" class="tab-control" />
 
         <div class="avatar-container">
           <div class="avatar">
