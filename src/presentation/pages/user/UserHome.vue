@@ -17,22 +17,26 @@
           <div class="avatar">
             <img src="/logo.jpeg" alt="头像" />
           </div>
-        </div>
-        <div v-if="!isGuest" class="user-info">
-          <h2>{{ currentAccount?.nickname || currentAccount?.username || currentAccount?.username }}</h2>
-          <p>{{ currentAccount?.role }}</p>
+          <div v-if="isGuest" class="avatar-badge guest-badge">
+            <Icon name="person-outline" />
+          </div>
         </div>
 
-        <div v-if="isGuest" class="guest-action">
+        <div class="user-info">
+          <h2 v-if="!isGuest">{{ displayName }}</h2>
+          <p v-if="!isGuest" class="user-role">{{ currentAccount?.role || '用户' }}</p>
+          <p v-else class="user-role guest-role">游客模式</p>
+        </div>
+
+        <div v-if="isGuest" class="guest-action-area">
           <button @click="goToLogin" class="login-now-btn">
             <Icon name="login" />
             <span>去登录</span>
           </button>
-
-        </div>
-        <div v-if="isGuest" class="guest-banner">
-          <Icon name="info-outline" />
-          <span>登录后数据将保存在云端，多设备同步</span>
+          <p class="guest-hint">
+            <Icon name="info-outline" />
+            <span>登录后数据将保存在云端，多设备同步</span>
+          </p>
         </div>
       </section>
 
@@ -116,22 +120,26 @@ const store = useAppStore()
 
 const currentAccount = ref(null)
 const isGuest = ref(true)
+const displayName = ref('游客')
 
 onMounted(async () => {
   try {
     const currentId = userRepository.getCurrentUserId()
-    if (currentId && currentId !== 'guest') {
+    if (currentId && !currentId.startsWith('guest_')) {
       isGuest.value = false
       const account = await userRepository.getAccountById(currentId)
       currentAccount.value = account || { id: currentId, username: currentId }
+      displayName.value = account?.nickname || account?.username || currentId
     } else {
       isGuest.value = true
       currentAccount.value = null
+      displayName.value = '游客'
     }
   } catch (e) {
     console.error('加载账户信息失败:', e)
     isGuest.value = true
     currentAccount.value = null
+    displayName.value = '游客'
   }
 })
 
@@ -218,6 +226,28 @@ function goToSettings() {
   position: relative;
 }
 
+.avatar-badge {
+  position: absolute;
+  bottom: 4px;
+  right: 4px;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--color-card);
+}
+
+.guest-badge {
+  background: var(--color-muted);
+  color: var(--color-text-secondary);
+}
+
+.guest-badge svg {
+  font-size: var(--font-size-md);
+}
+
 .avatar {
   width: 128px;
   height: 128px;
@@ -247,32 +277,37 @@ function goToSettings() {
   color: var(--color-text);
 }
 
-.user-info p {
+.user-role {
   color: var(--color-text-secondary);
   font-weight: var(--font-weight-medium);
   margin-top: var(--space-xs);
 }
 
-.guest-banner {
+.guest-role {
+  color: var(--color-primary);
+  font-size: var(--font-size-sm);
+}
+
+.guest-action-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-top: var(--space-sm);
+  width: 100%;
+}
+
+.guest-hint {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: var(--space-xs);
-  padding: var(--space-sm);
-  background: var(--color-primary-light);
-  border-radius: var(--radius-md);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-tertiary);
+}
+
+.guest-hint svg {
   font-size: var(--font-size-sm);
-  color: var(--color-primary);
-}
-
-.guest-banner svg {
-  font-size: var(--font-size-lg);
-}
-
-.guest-action {
-  margin: var(--space-md) auto;
-  display: flex;
-  justify-content: center;
 }
 
 .login-now-btn {

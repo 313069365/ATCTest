@@ -55,9 +55,11 @@ import ConfirmDialog from '@/presentation/components/ui/ConfirmDialog.vue'
 import SegmentedControl from '@/presentation/components/shared/SegmentedControl.vue'
 import PaperCard from './components/PaperCard.vue'
 import { useConfirm } from '@/presentation/composables/useConfirm'
+import { useToast } from '@/presentation/composables/useToast'
 
 const router = useRouter()
 const store = useAppStore()
+const toast = useToast()
 const confirm = useConfirm()
 
 const activeFilter = ref('in-progress')
@@ -84,9 +86,9 @@ async function handleImport(event) {
 
   try {
     await store.importPaper(file)
-    alert(t('importSuccess') || '导入成功')
+    toast.success(t('importSuccess') || '导入成功')
   } catch (err) {
-    alert((t('importFailed') || '导入失败') + ': ' + err.message)
+    toast.error((t('importFailed') || '导入失败') + ': ' + err.message)
   }
 
   event.target.value = ''
@@ -115,9 +117,9 @@ async function sharePaper(paperId) {
   const text = `${paperId}`
   try {
     await navigator.clipboard.writeText(text)
-    alert('试卷ID已复制到剪贴板\n' + text)
+    toast.success('试卷ID已复制到剪贴板\n' + text)
   } catch {
-    alert(text)
+    toast.info(text)
   }
 }
 

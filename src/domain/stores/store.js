@@ -378,7 +378,7 @@ export const useAppStore = defineStore("app", () => {
     try {
       wrongBook.value = await userRepository.getWrongBook();
     } catch (e) {
-      console.error('加载错题本失败，降级到本地存储', e);
+      console.error("加载错题本失败，降级到本地存储", e);
       wrongBook.value = schemaRead(STORAGE_KEY.USER_WRONG_BOOK) || [];
     }
   }
@@ -391,7 +391,7 @@ export const useAppStore = defineStore("app", () => {
       await userRepository.addWrongQuestion(question);
       wrongBook.value = await userRepository.getWrongBook();
     } catch (e) {
-      console.error('添加错题失败，降级到本地存储', e);
+      console.error("添加错题失败，降级到本地存储", e);
       const exists = wrongBook.value.find((q) => q.id === question.id);
       if (exists) {
         exists.wrongCount = (exists.wrongCount || 1) + 1;
@@ -415,7 +415,7 @@ export const useAppStore = defineStore("app", () => {
       await userRepository.removeWrongQuestion(questionId);
       wrongBook.value = await userRepository.getWrongBook();
     } catch (e) {
-      console.error('移除错题失败，降级到本地存储', e);
+      console.error("移除错题失败，降级到本地存储", e);
       wrongBook.value = wrongBook.value.filter((q) => q.id !== questionId);
       schemaWrite(STORAGE_KEY.USER_WRONG_BOOK, wrongBook.value);
     }
@@ -430,7 +430,7 @@ export const useAppStore = defineStore("app", () => {
     try {
       favorites.value = await userRepository.getFavorites();
     } catch (e) {
-      console.error('加载收藏失败，降级到本地存储', e);
+      console.error("加载收藏失败，降级到本地存储", e);
       favorites.value = schemaRead(STORAGE_KEY.USER_FAVORITES) || [];
     }
   }
@@ -443,7 +443,7 @@ export const useAppStore = defineStore("app", () => {
       await userRepository.addFavorite(question);
       favorites.value = await userRepository.getFavorites();
     } catch (e) {
-      console.error('添加收藏失败，降级到本地存储', e);
+      console.error("添加收藏失败，降级到本地存储", e);
       const exists = favorites.value.find((q) => q.id === question.id);
       if (!exists) {
         favorites.value.push({
@@ -463,7 +463,7 @@ export const useAppStore = defineStore("app", () => {
       await userRepository.removeFavorite(questionId);
       favorites.value = await userRepository.getFavorites();
     } catch (e) {
-      console.error('移除收藏失败，降级到本地存储', e);
+      console.error("移除收藏失败，降级到本地存储", e);
       favorites.value = favorites.value.filter((q) => q.id !== questionId);
       schemaWrite(STORAGE_KEY.USER_FAVORITES, favorites.value);
     }
@@ -491,7 +491,7 @@ export const useAppStore = defineStore("app", () => {
       await userRepository.savePracticeProgress(key, progress);
       practiceProgress.value = await userRepository.getPracticeProgress();
     } catch (e) {
-      console.error('保存练习进度失败，降级到本地存储', e);
+      console.error("保存练习进度失败，降级到本地存储", e);
       practiceProgress.value[key] = progress;
       schemaWrite(STORAGE_KEY.PRACTICE_PROGRESS, practiceProgress.value);
     }
@@ -507,7 +507,7 @@ export const useAppStore = defineStore("app", () => {
       await userRepository.clearPracticeProgress(key);
       practiceProgress.value = await userRepository.getPracticeProgress();
     } catch (e) {
-      console.error('清除练习进度失败，降级到本地存储', e);
+      console.error("清除练习进度失败，降级到本地存储", e);
       delete practiceProgress.value[key];
       schemaWrite(STORAGE_KEY.PRACTICE_PROGRESS, practiceProgress.value);
     }
@@ -520,7 +520,7 @@ export const useAppStore = defineStore("app", () => {
     try {
       practiceProgress.value = await userRepository.getPracticeProgress();
     } catch (e) {
-      console.error('加载练习进度失败，降级到本地存储', e);
+      console.error("加载练习进度失败，降级到本地存储", e);
       practiceProgress.value = loadPracticeProgressFromUtil();
     }
   }
@@ -535,7 +535,7 @@ export const useAppStore = defineStore("app", () => {
       await userRepository.addPracticeHistory(history);
       practiceHistory.value = await userRepository.getPracticeHistory();
     } catch (e) {
-      console.error('添加练习历史失败，降级到本地存储', e);
+      console.error("添加练习历史失败，降级到本地存储", e);
       practiceHistory.value.unshift({
         ...history,
         timestamp: Date.now(),
@@ -551,7 +551,7 @@ export const useAppStore = defineStore("app", () => {
     try {
       practiceHistory.value = await userRepository.getPracticeHistory();
     } catch (e) {
-      console.error('加载练习历史失败，降级到本地存储', e);
+      console.error("加载练习历史失败，降级到本地存储", e);
       practiceHistory.value = schemaRead(STORAGE_KEY.PRACTICE_HISTORY) || [];
     }
   }
@@ -565,12 +565,14 @@ export const useAppStore = defineStore("app", () => {
   async function init() {
     try {
       await userRepository.initUserRepository();
-      const currentUserId = userRepository.getCurrentUserId() || 'guest';
-      userRepository.setCurrentUser(currentUserId);
+      const currentUserId = userRepository.getCurrentUserId();
+      if (currentUserId) {
+        userRepository.setCurrentUser(currentUserId);
+      }
     } catch (e) {
-      console.error('初始化用户仓库失败:', e);
+      console.error("初始化用户仓库失败:", e);
     }
-    
+
     loadBankMeta();
     await loadWrongBook();
     await loadFavorites();
@@ -609,7 +611,7 @@ export const useAppStore = defineStore("app", () => {
     try {
       examPapers.value = await userRepository.getExamPapers();
     } catch (e) {
-      console.error('加载试卷失败，降级到本地存储', e);
+      console.error("加载试卷失败，降级到本地存储", e);
       examPapers.value = schemaRead(STORAGE_KEY.EXAM_PAPERS) || [];
     }
   }
@@ -622,7 +624,7 @@ export const useAppStore = defineStore("app", () => {
       await userRepository.addExamPaper(paper);
       examPapers.value = await userRepository.getExamPapers();
     } catch (e) {
-      console.error('添加试卷失败，降级到本地存储', e);
+      console.error("添加试卷失败，降级到本地存储", e);
       examPapers.value.unshift(paper);
       schemaWrite(STORAGE_KEY.EXAM_PAPERS, examPapers.value);
     }
@@ -636,7 +638,7 @@ export const useAppStore = defineStore("app", () => {
       await userRepository.removeExamPaper(paperId);
       examPapers.value = await userRepository.getExamPapers();
     } catch (e) {
-      console.error('删除试卷失败，降级到本地存储', e);
+      console.error("删除试卷失败，降级到本地存储", e);
       examPapers.value = examPapers.value.filter((p) => p.id !== paperId);
       schemaWrite(STORAGE_KEY.EXAM_PAPERS, examPapers.value);
     }
@@ -649,7 +651,7 @@ export const useAppStore = defineStore("app", () => {
     try {
       examPresets.value = await userRepository.getExamPresets();
     } catch (e) {
-      console.error('加载预设失败，降级到本地存储', e);
+      console.error("加载预设失败，降级到本地存储", e);
       examPresets.value = schemaRead(STORAGE_KEY.EXAM_PRESETS) || [];
     }
   }
@@ -662,7 +664,7 @@ export const useAppStore = defineStore("app", () => {
       await userRepository.saveExamPreset(preset);
       examPresets.value = await userRepository.getExamPresets();
     } catch (e) {
-      console.error('保存预设失败，降级到本地存储', e);
+      console.error("保存预设失败，降级到本地存储", e);
       const existing = schemaRead(STORAGE_KEY.EXAM_PRESETS) || [];
       existing.push(preset);
       schemaWrite(STORAGE_KEY.EXAM_PRESETS, existing);
@@ -678,7 +680,7 @@ export const useAppStore = defineStore("app", () => {
       await userRepository.deleteExamPreset(presetId);
       examPresets.value = await userRepository.getExamPresets();
     } catch (e) {
-      console.error('删除预设失败，降级到本地存储', e);
+      console.error("删除预设失败，降级到本地存储", e);
       const existing = schemaRead(STORAGE_KEY.EXAM_PRESETS) || [];
       const filtered = existing.filter((p) => p.id !== presetId);
       schemaWrite(STORAGE_KEY.EXAM_PRESETS, filtered);

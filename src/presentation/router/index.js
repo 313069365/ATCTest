@@ -123,4 +123,25 @@ const router = createRouter({
   routes,
 });
 
+// 导航守卫：检测登录状态
+router.beforeEach((to, from) => {
+  const currentUserId = localStorage.getItem("current_user_id");
+  const isGuest = !currentUserId || currentUserId.startsWith("guest_");
+
+  if (to.path === "/login") {
+    // 正式用户访问 /login 时重定向到首页；游客可访问登录页
+    if (currentUserId && !isGuest) {
+      return "/";
+    }
+    return true;
+  }
+
+  // 未登录时跳转登录页
+  if (!currentUserId) {
+    return "/login";
+  }
+
+  return true;
+});
+
 export default router;

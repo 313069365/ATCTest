@@ -1,18 +1,15 @@
 <template>
   <div class="login-page">
-    <TopBar title="账户登录" />
+    <TopBar title="账户登录" :show-back="isGuestUser" @back="router.back()" />
 
     <main class="content">
       <div class="login-card">
         <!-- Tab 切换 -->
-        <div class="tab-container">
-          <button :class="['tab-btn', { active: activeTab === 'login' }]" @click="activeTab = 'login'">
-            登录
-          </button>
-          <button :class="['tab-btn', { active: activeTab === 'register' }]" @click="activeTab = 'register'">
-            注册
-          </button>
-        </div>
+        <SegmentedControl
+          v-model="activeTab"
+          :options="tabOptions"
+          class="tab-control"
+        />
 
         <div class="avatar-container">
           <div class="avatar">
@@ -38,7 +35,7 @@
             登录
           </button>
           <button @click="goToGuest" class="guest-btn">
-            以游客身份使用
+            {{ isGuestUser ? '返回' : '以游客身份使用' }}
           </button>
         </div>
 
@@ -74,14 +71,28 @@
 </template>
 
 <script setup>
-import { ref, reactive } from 'vue'
+import { ref, reactive, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import TopBar from '@/presentation/components/shared/TopBar.vue'
 import Icon from '@/presentation/components/ui/Icon.vue'
+import SegmentedControl from '@/presentation/components/shared/SegmentedControl.vue'
 import * as userRepository from '@/infrastructure/api/userRepository'
+import { useToast } from '@/presentation/composables/useToast'
 
 const router = useRouter()
+const { success, error, info } = useToast()
 const activeTab = ref('login')
+const tabOptions = [
+  { value: 'login', label: '登录' },
+  { value: 'register', label: '注册' },
+]
+
+// 游客身份进入时显示返回按钮
+const isGuestUser = ref(false)
+onMounted(() => {
+  const userId = localStorage.getItem('current_user_id')
+  isGuestUser.value = !!(userId && userId.startsWith('guest_'))
+})
 const loginForm = reactive({
   username: '',
   password: ''
@@ -92,32 +103,49 @@ const registerForm = reactive({
 })
 
 function handleLogin() {
-  alert('登录功能即将上线，请使用游客模式')
+  info('登录功能即将上线，请使用游客模式')
 }
 
 async function handleRegister() {
   if (!registerForm.username.trim()) {
-    alert('请输入用户名')
+    info('请输入用户名')
     return
   }
 
   try {
+    await userRepository.initUserRepository()
     const username = registerForm.username.trim().toLowerCase()
     const nickname = registerForm.nickname.trim() || registerForm.username.trim()
 
     await userRepository.createAccount(username, registerForm.username.trim(), nickname)
 
-    alert('注册成功！请登录')
+    success('注册成功！请登录')
     activeTab.value = 'login'
     registerForm.username = ''
     registerForm.nickname = ''
   } catch (e) {
-    alert('注册失败: ' + e.message)
+    error('注册失败: ' + e.message)
   }
 }
 
-function goToGuest() {
-  router.push('/')
+async function goToGuest() {
+  // 已是游客身份，直接返回
+  if (isGuestUser.value) {
+    router.back()
+    return
+  }
+  try {
+    await userRepository.initUserRepository()
+    const suffix = Date.now().toString(36)
+    const guestId = 'guest_' + suffix
+    const guestName = '游客_' + suffix
+    await userRepository.createAccount(guestId, guestName, '游客')
+    await userRepository.switchAccount(guestId)
+    router.replace('/')
+  } catch (e) {
+    console.error('游客登录失败:', e)
+    error('游客登录失败，请重试')
+  }
 }
 </script>
 
@@ -163,32 +191,8 @@ function goToGuest() {
   object-fit: cover;
 }
 
-.tab-container {
-  display: flex;
-  gap: var(--space-sm);
+.tab-control {
   margin-bottom: var(--space-lg);
-  background: var(--color-muted);
-  padding: var(--space-xs);
-  border-radius: var(--radius-md);
-}
-
-.tab-btn {
-  flex: 1;
-  padding: var(--space-sm) var(--space-md);
-  border: none;
-  background: transparent;
-  border-radius: var(--radius-sm);
-  font-size: var(--font-size-md);
-  font-weight: var(--font-weight-medium);
-  color: var(--color-text-secondary);
-  cursor: pointer;
-  transition: all 0.2s;
-}
-
-.tab-btn.active {
-  background: var(--color-card);
-  color: var(--color-primary);
-  box-shadow: var(--shadow-sm);
 }
 
 .title {

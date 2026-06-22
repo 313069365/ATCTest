@@ -220,10 +220,12 @@ import TopBar from '@/presentation/components/shared/TopBar.vue'
 import Icon from '@/presentation/components/ui/Icon.vue'
 import ConfirmDialog from '@/presentation/components/ui/ConfirmDialog.vue'
 import { useConfirm } from '@/presentation/composables/useConfirm'
+import { useToast } from '@/presentation/composables/useToast'
 
 const router = useRouter()
 const store = useAppStore()
 const confirm = useConfirm()
+const toast = useToast()
 
 const bankMeta = computed(() => store.bankMeta)
 const showBankModal = ref(false)
@@ -401,7 +403,7 @@ async function createPaper() {
     }
 
     await store.addExamPaper(paper)
-    alert(t('createPaperSuccess') || '试卷创建成功')
+    toast.success(t('createPaperSuccess') || '试卷创建成功')
     router.push('/exam')
 }
 </script>

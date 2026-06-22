@@ -11,23 +11,36 @@
     </div>
     <RouterView v-else />
     <HomeNav v-if="!store.loading && ['/', '/Home', '/exam', '/practice', '/profile'].includes(route.path)" />
+    <Toast :visible="toast.state.visible" :message="toast.state.message" :type="toast.state.type" />
   </div>
 </template>
 
 <script setup>
-import { onMounted } from 'vue'
+import { onMounted, watch } from 'vue'
 import { RouterView } from 'vue-router'
 import HomeNav from '@/presentation/components/shared/HomeNav.vue'
+import Toast from '@/presentation/components/ui/Toast.vue'
 import { useRoute } from 'vue-router'
 import { useAppStore } from '@/domain/stores/store'
+import { useToast } from '@/presentation/composables/useToast'
 const route = useRoute()
 
 const store = useAppStore()
+const toast = useToast()
 
 onMounted(() => {
-  store.init()
+  // 只在已登录时初始化数据
+  if (route.path !== '/login') {
+    store.init()
+  }
 })
 
+// 登录成功后从 /login 跳转过来时触发
+watch(() => route.path, (newPath) => {
+  if (newPath !== '/login' && store.loading === false && store.questionBanks.length === 0) {
+    store.init()
+  }
+})
 </script>
 
 <style scoped>
