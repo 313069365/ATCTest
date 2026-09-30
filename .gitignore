@@ -31,3 +31,4 @@ design/*
 .env*
 !.env.example
 scripts/generate-structure.cjs
+.*
