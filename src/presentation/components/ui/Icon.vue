@@ -4,12 +4,14 @@ import { computed } from 'vue'
 import IconAdd from "~icons/material-symbols/add"
 import IconAddCircleOutline from "~icons/material-symbols/add-circle-outline"
 import IconAir from "~icons/material-symbols/air"
+import IconAirplaneTicket from "~icons/material-symbols/airplane-ticket"
 import IconApartment from "~icons/material-symbols/apartment"
 import IconArrowBack from "~icons/material-symbols/arrow-back"
 import IconArrowForward from "~icons/material-symbols/arrow-forward"
 import IconAssignment from "~icons/material-symbols/assignment"
 import IconAssignmentOutline from "~icons/material-symbols/assignment-outline"
 import IconAssignmentTurnedInOutline from "~icons/material-symbols/assignment-turned-in-outline"
+import IconBadge from "~icons/material-symbols/badge"
 import IconBarChart from "~icons/material-symbols/bar-chart"
 import IconBookOutline from "~icons/material-symbols/book-outline"
 import IconBookmarkOutline from "~icons/material-symbols/bookmark-outline"
@@ -41,20 +43,25 @@ import IconGavel from "~icons/material-symbols/gavel"
 import IconGradeOutline from "~icons/material-symbols/grade-outline"
 import IconGridView from "~icons/material-symbols/grid-view"
 import IconGridViewOutline from "~icons/material-symbols/grid-view-outline"
+import IconHealthAndSafety from "~icons/material-symbols/health-and-safety"
 import IconHelicopter from "~icons/material-symbols/helicopter"
 import IconHistory from "~icons/material-symbols/history"
 import IconHome from "~icons/material-symbols/home"
 import IconHomeOutline from "~icons/material-symbols/home-outline"
 import IconHourglassTop from "~icons/material-symbols/hourglass-top"
+import IconHub from "~icons/material-symbols/hub"
 import IconInfo from "~icons/material-symbols/info"
+import IconInfoOutline from "~icons/material-symbols/info-outline"
 import IconKidStar from "~icons/material-symbols/kid-star"
 import IconKidStarOutline from "~icons/material-symbols/kid-star-outline"
 import IconLanguage from "~icons/material-symbols/language"
 import IconLightModeOutline from "~icons/material-symbols/light-mode-outline"
 import IconListAltOutline from "~icons/material-symbols/list-alt-outline"
 import IconLocalFireDepartmentOutline from "~icons/material-symbols/local-fire-department-outline"
+import IconLocalShipping from "~icons/material-symbols/local-shipping"
 import IconLogout from "~icons/material-symbols/logout"
 import IconMap from "~icons/material-symbols/map"
+import IconMedicalServices from "~icons/material-symbols/medical-services"
 import IconMenuBook from "~icons/material-symbols/menu-book"
 import IconMenuBookOutline from "~icons/material-symbols/menu-book-outline"
 import IconMonitorHeart from "~icons/material-symbols/monitor-heart"
@@ -71,9 +78,11 @@ import IconQuizOutline from "~icons/material-symbols/quiz-outline"
 import IconRadar from "~icons/material-symbols/radar"
 import IconRadioButtonChecked from "~icons/material-symbols/radio-button-checked"
 import IconRateReviewOutline from "~icons/material-symbols/rate-review-outline"
+import IconRecordVoiceOver from "~icons/material-symbols/record-voice-over"
 import IconRecordVoiceOverOutline from "~icons/material-symbols/record-voice-over-outline"
 import IconRefresh from "~icons/material-symbols/refresh"
 import IconRestartAlt from "~icons/material-symbols/restart-alt"
+import IconRule from "~icons/material-symbols/rule"
 import IconScheduleOutline from "~icons/material-symbols/schedule-outline"
 import IconSearch from "~icons/material-symbols/search"
 import IconSearchOff from "~icons/material-symbols/search-off"
@@ -83,6 +92,7 @@ import IconSettingsInputAntenna from "~icons/material-symbols/settings-input-ant
 import IconSettingsOutline from "~icons/material-symbols/settings-outline"
 import IconShareOutline from "~icons/material-symbols/share-outline"
 import IconShuffle from "~icons/material-symbols/shuffle"
+import IconScience from "~icons/material-symbols/science"
 import IconStar from "~icons/material-symbols/star"
 import IconStarOutline from "~icons/material-symbols/star-outline"
 import IconStorage from "~icons/material-symbols/storage"
@@ -93,6 +103,7 @@ import IconTimer from "~icons/material-symbols/timer"
 import IconTimerOutline from "~icons/material-symbols/timer-outline"
 import IconTrackChanges from "~icons/material-symbols/track-changes"
 import IconTranslate from "~icons/material-symbols/g-translate"
+import IconTravelExplore from "~icons/material-symbols/travel-explore"
 import IconTrendingUp from "~icons/material-symbols/trending-up"
 import IconTrophyOutline from "~icons/material-symbols/trophy-outline"
 import IconUpload from "~icons/material-symbols/upload"
@@ -115,12 +126,14 @@ const registry = {
   'add-circle-outline': IconAddCircleOutline,
   air: IconAir,
   login: IconLogin,
+  'airplane-ticket': IconAirplaneTicket,
   apartment: IconApartment,
   'arrow-back': IconArrowBack,
   'arrow-forward': IconArrowForward,
   assignment: IconAssignment,
   'assignment-outline': IconAssignmentOutline,
   'assignment-turned-in-outline': IconAssignmentTurnedInOutline,
+  badge: IconBadge,
   'bar-chart': IconBarChart,
   'book-outline': IconBookOutline,
   'bookmark-outline': IconBookmarkOutline,
@@ -153,20 +166,25 @@ const registry = {
   'grade-outline': IconGradeOutline,
   'grid-view': IconGridView,
   'grid-view-outline': IconGridViewOutline,
+  'health-and-safety': IconHealthAndSafety,
   helicopter: IconHelicopter,
   history: IconHistory,
   home: IconHome,
   'home-outline': IconHomeOutline,
   'hourglass-top': IconHourglassTop,
+  hub: IconHub,
   info: IconInfo,
+  'info-outline': IconInfoOutline,
   'kid-star': IconKidStar,
   'kid-star-outline': IconKidStarOutline,
   language: IconLanguage,
   'light-mode-outline': IconLightModeOutline,
   'list-alt-outline': IconListAltOutline,
   'local-fire-department-outline': IconLocalFireDepartmentOutline,
+  'local-shipping': IconLocalShipping,
   logout: IconLogout,
   map: IconMap,
+  'medical-services': IconMedicalServices,
   'menu-book': IconMenuBook,
   'menu-book-outline': IconMenuBookOutline,
   'monitor-heart': IconMonitorHeart,
@@ -183,9 +201,11 @@ const registry = {
   radar: IconRadar,
   'radio-button-checked': IconRadioButtonChecked,
   'rate-review-outline': IconRateReviewOutline,
+  'record-voice-over': IconRecordVoiceOver,
   'record-voice-over-outline': IconRecordVoiceOverOutline,
   refresh: IconRefresh,
   'restart-alt': IconRestartAlt,
+  rule: IconRule,
   'schedule-outline': IconScheduleOutline,
   search: IconSearch,
   'search-off': IconSearchOff,
@@ -195,6 +215,7 @@ const registry = {
   'settings-outline': IconSettingsOutline,
   'share-outline': IconShareOutline,
   shuffle: IconShuffle,
+  science: IconScience,
   star: IconStar,
   'star-outline': IconStarOutline,
   storage: IconStorage,
@@ -205,6 +226,7 @@ const registry = {
   'timer-outline': IconTimerOutline,
   'track-changes': IconTrackChanges,
   'g-translate': IconTranslate,
+  'travel-explore': IconTravelExplore,
   'trending-up': IconTrendingUp,
   'trophy-outline': IconTrophyOutline,
   upload: IconUpload,
