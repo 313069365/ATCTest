@@ -1,12 +1,21 @@
 {
-  "version": 2.7,
+  "version": 2.8,
   "files": [
     "atc/base.json",
     "atc/professional.json",
     "atc/english_translated.json",
     "atc/english_reading.json",
-    "airport/airport_base.json"
+    "airport/airport_base.json",
+    "airport/apron_skills.json"
   ],
+  "fileScopes": {
+    "atc/base.json": "base",
+    "atc/professional.json": "professional",
+    "atc/english_translated.json": "english",
+    "atc/english_reading.json": "english",
+    "airport/airport_base.json": "base",
+    "airport/apron_skills.json": "apronskills"
+  },
   "categories": {
     "atc": {
       "scopes": [
@@ -115,12 +124,61 @@
     },
     "airport": {
       "scopes": [
-        "base"
+        "base",
+        "apronskills"
       ],
       "subjects": {
         "RunwayIncursionPrevention": {
           "scope": "base",
           "count": 182
+        },
+        "safetyManagementSystem": {
+          "scope": "apronskills",
+          "count": 204
+        },
+        "flightSupportCoordination": {
+          "scope": "apronskills",
+          "count": 204
+        },
+        "apronOperationMgmt": {
+          "scope": "apronskills",
+          "count": 204
+        },
+        "atcRules": {
+          "scope": "apronskills",
+          "count": 306
+        },
+        "aircraftMarking": {
+          "scope": "apronskills",
+          "count": 204
+        },
+        "collaborativeOperations": {
+          "scope": "apronskills",
+          "count": 102
+        },
+        "atcLicenseManagement": {
+          "scope": "apronskills",
+          "count": 204
+        },
+        "accidentIncidentInvestigation": {
+          "scope": "apronskills",
+          "count": 102
+        },
+        "emergencyRescue": {
+          "scope": "apronskills",
+          "count": 102
+        },
+        "atcEnglish": {
+          "scope": "apronskills",
+          "count": 204
+        },
+        "aircraftPrinciples": {
+          "scope": "apronskills",
+          "count": 102
+        },
+        "airportBasicKnowledge": {
+          "scope": "apronskills",
+          "count": 102
         }
       }
     }

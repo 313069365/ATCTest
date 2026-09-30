@@ -45,6 +45,20 @@ const translations = {
     // airport
     RunwayIncursionPrevention: "Runway Incursion Prevention",
     basicCollection: "Basic Collection",
+    // airport / apronskills (机坪管制员大赛理论)
+    apronskills: "Apron Skills",
+    airportBasicKnowledge: "Airport Basic Knowledge",
+    atcLicenseManagement: "ATC License Management",
+    atcRules: "Air Traffic Management Rules",
+    atcEnglish: "Controller English",
+    aircraftMarking: "Aircraft Marking",
+    collaborativeOperations: "Collaborative Operations",
+    aircraftPrinciples: "Aircraft Principles",
+    apronOperationMgmt: "Apron Operation Management",
+    flightSupportCoordination: "Flight Support Coordination",
+    safetyManagementSystem: "Safety Management System",
+    emergencyRescue: "Emergency Rescue",
+    accidentIncidentInvestigation: "Accident Investigation",
     // category
     base: "Base",
     professional: "Professional",
@@ -304,6 +318,20 @@ const translations = {
     // airport
     RunwayIncursionPrevention: "跑道侵入防范",
     basicCollection: "基础合集",
+    // airport / apronskills (机坪管制员大赛理论)
+    apronskills: "机坪管制理论",
+    airportBasicKnowledge: "机场相关基础知识",
+    atcLicenseManagement: "管制员执照管理规定",
+    atcRules: "空中交通管理规定",
+    atcEnglish: "管制英语",
+    aircraftMarking: "民用航空器标识",
+    collaborativeOperations: "协同运行管理",
+    aircraftPrinciples: "航空器原理",
+    apronOperationMgmt: "机坪运行管理",
+    flightSupportCoordination: "航班保障与指挥协调",
+    safetyManagementSystem: "机场安全管理体系",
+    emergencyRescue: "机场应急救援",
+    accidentIncidentInvestigation: "事件征候调查",
     // category
     base: "基础题库",
     professional: "专业题库",

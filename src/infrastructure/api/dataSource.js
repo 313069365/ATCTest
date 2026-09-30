@@ -72,6 +72,8 @@ export function getQuestionBankInfo(category) {
 /**
  * 获取文件清单及其元信息
  * 从 structure.json 反推每个文件包含哪些 subjects
+ * scope 优先取 structure.fileScopes（文件名推不准：
+ * airport_base.json 会推成 "airport"、apron_skills.json 会推成 "apron"）
  * @returns {Array<{filename, category, scope, subjects: string[], questionCount: number}>}
  */
 export function getFileManifest() {
@@ -79,7 +81,8 @@ export function getFileManifest() {
     const parts = filename.split("/");
     const category = parts[0];
     const baseName = parts[1].replace(".json", "");
-    const scope = baseName.split("_")[0];
+    const scope =
+      structure.fileScopes?.[filename] || baseName.split("_")[0];
 
     const catData = structure.categories[category];
     const subjects = [];
