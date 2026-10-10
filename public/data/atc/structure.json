@@ -1,12 +1,13 @@
 {
-  "version": 2.8,
+  "version": 2.9,
   "files": [
     "atc/base.json",
     "atc/professional.json",
     "atc/english_translated.json",
     "atc/english_reading.json",
     "airport/airport_base.json",
-    "airport/apron_skills.json"
+    "airport/apron_skills.json",
+    "airport/apron_competition.json"
   ],
   "fileScopes": {
     "atc/base.json": "base",
@@ -14,7 +15,8 @@
     "atc/english_translated.json": "english",
     "atc/english_reading.json": "english",
     "airport/airport_base.json": "base",
-    "airport/apron_skills.json": "apronskills"
+    "airport/apron_skills.json": "apronskills",
+    "airport/apron_competition.json": "aproncompetition"
   },
   "categories": {
     "atc": {
@@ -125,7 +127,8 @@
     "airport": {
       "scopes": [
         "base",
-        "apronskills"
+        "apronskills",
+        "aproncompetition"
       ],
       "subjects": {
         "RunwayIncursionPrevention": {
@@ -179,6 +182,50 @@
         "airportBasicKnowledge": {
           "scope": "apronskills",
           "count": 102
+        },
+        "competitionAtcLicenseManagement": {
+          "scope": "aproncompetition",
+          "count": 214
+        },
+        "competitionAtcRules": {
+          "scope": "aproncompetition",
+          "count": 1032
+        },
+        "competitionApronOperationMgmt": {
+          "scope": "aproncompetition",
+          "count": 657
+        },
+        "competitionCollaborativeOperations": {
+          "scope": "aproncompetition",
+          "count": 481
+        },
+        "competitionFlightSupportCoordination": {
+          "scope": "aproncompetition",
+          "count": 223
+        },
+        "competitionSafetyManagementSystem": {
+          "scope": "aproncompetition",
+          "count": 386
+        },
+        "competitionEmergencyRescue": {
+          "scope": "aproncompetition",
+          "count": 134
+        },
+        "competitionAccidentIncidentInvestigation": {
+          "scope": "aproncompetition",
+          "count": 282
+        },
+        "competitionAirportBasics": {
+          "scope": "aproncompetition",
+          "count": 842
+        },
+        "competitionAtcEnglish": {
+          "scope": "aproncompetition",
+          "count": 419
+        },
+        "competitionAircraftMarking": {
+          "scope": "aproncompetition",
+          "count": 397
         }
       }
     }

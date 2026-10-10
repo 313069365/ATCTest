@@ -32,3 +32,4 @@ design/*
 !.env.example
 scripts/generate-structure.cjs
 .*
+scripts/import-apron-xlsx.py
