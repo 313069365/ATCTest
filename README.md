@@ -1,3 +1,2 @@
 
-www.wydzsnb.cn/aep
-2026.9.30 题库资源热加载：新的题库架构设计，采用直接上传 文件 （json），软件直接可以获取到新的题库。
+在线使用 www.wydzsnb.cn/aep
